@@ -1,0 +1,29 @@
+{
+  "quiz_id": "deep-learning-m5-t2-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Why is the Reparameterization Trick essential for training Variational Autoencoders?",
+      "options": [
+        "It separates the stochastic sampling process from the parameter nodes, shifting random noise to an external constant input so that backpropagation gradients can flow through the latent variables.",
+        "It maps the outputs of the encoder to positive values, replacing saturating activation functions.",
+        "It calculates the exact Kullback-Leibler divergence to regularize the loss function.",
+        "It doubles the latent spatial resolution using transpose convolutions."
+      ],
+      "correct_answer": "It separates the stochastic sampling process from the parameter nodes, shifting random noise to an external constant input so that backpropagation gradients can flow through the latent variables.",
+      "explanation": "Directly drawing samples from a distribution is a stochastic operation that lacks derivative formulas. The Reparameterization Trick models sampling as $\\mathbf{z} = \\boldsymbol{\\mu} + \\boldsymbol{\\sigma} \\odot \\boldsymbol{\\epsilon}$ where the random noise $\\boldsymbol{\\epsilon} \\sim \\mathcal{N}(\\mathbf{0}, \\mathbf{I})$ is treated as a constant input. This leaves the parameter pathways deterministic and fully differentiable, allowing gradients to flow back to the encoder."
+    },
+    {
+      "question_id": "q2",
+      "text": "In a VAE with a Gaussian latent space, what is the role of the Kullback-Leibler (KL) Divergence loss term?",
+      "options": [
+        "It regularizes the predicted mean and variance distributions, forcing them to match a standard normal prior distribution $\\mathcal{N}(\\mathbf{0}, \\mathbf{I})$ to ensure a continuous and structured latent space.",
+        "It scales the inputs to align with Batch Normalization layers.",
+        "It directly measures the pixel reconstruction error of the decoder.",
+        "It limits the learning rate of the optimizer to prevent gradient explosion."
+      ],
+      "correct_answer": "It regularizes the predicted mean and variance distributions, forcing them to match a standard normal prior distribution $\\mathcal{N}(\\mathbf{0}, \\mathbf{I})$ to ensure a continuous and structured latent space.",
+      "explanation": "Without the KL divergence, the encoder would map features to isolated coordinates, creating empty regions ('dead zones') in the latent space. Minimizing KL divergence forces predicted distributions to align with a standard normal prior, clustering all classes continuously around the origin so that we can stably sample new representations."
+    }
+  ]
+}

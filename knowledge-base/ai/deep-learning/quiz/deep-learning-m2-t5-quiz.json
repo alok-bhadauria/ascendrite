@@ -1,0 +1,29 @@
+{
+  "quiz_id": "deep-learning-m2-t5-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Why does initializing all weights in a hidden layer to a constant value prevent the network from learning effectively?",
+      "options": [
+        "It locks the neurons into a symmetric state where they compute identical outputs and receive identical gradient updates, preventing them from learning diverse features.",
+        "It causes the variance of the activations to explode immediately on the first forward pass, raising NaNs.",
+        "It disables the backpropagation pathway by setting the local derivatives of all activation functions to zero.",
+        "It prevents the validation loss from improving by over-regularizing the bias parameters."
+      ],
+      "correct_answer": "It locks the neurons into a symmetric state where they compute identical outputs and receive identical gradient updates, preventing them from learning diverse features.",
+      "explanation": "If all weights in a layer are initialized to the same constant, all hidden units receive the same input signals and compute the same activation. During backpropagation, they receive identical gradient updates. As a result, the neurons remain identical throughout training, failing to break symmetry."
+    },
+    {
+      "question_id": "q2",
+      "text": "What is the standard deviation used to draw weights from a normal distribution under He (Kaiming) initialization?",
+      "options": [
+        "sigma = sqrt(2 / n_in)",
+        "sigma = sqrt(2 / (n_in + n_out))",
+        "sigma = sqrt(6 / n_in)",
+        "sigma = sqrt(1 / n_in)"
+      ],
+      "correct_answer": "sigma = sqrt(2 / n_in)",
+      "explanation": "He initialization targets a weight variance of 2/n_in to compensate for the fact that ReLU activation functions zero out exactly half of their inputs on average. The standard deviation of the normal distribution is therefore the square root of the variance: sigma = sqrt(2 / n_in)."
+    }
+  ]
+}

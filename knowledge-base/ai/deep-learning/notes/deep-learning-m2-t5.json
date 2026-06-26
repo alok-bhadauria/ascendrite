@@ -1,0 +1,55 @@
+{
+  "topic_id": "deep-learning-m2-t5",
+  "title": "Weight Initialization",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Hard",
+    "estimated_hours": 5,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Explain the mathematical necessity of symmetry breaking in weight initialization.",
+    "Derive the variance matching proof for Xavier (Glorot) Initialization under linear activations.",
+    "Derive the variance matching proof for He (Kaiming) Initialization under ReLU activations."
+  ],
+  "content_sections": [
+    {
+      "title": "Symmetry Breaking & Constant Initialization Failure",
+      "content": "When designing a neural network, one of the first decisions is how to initialize the parameter matrices (weights and biases). A naive approach is to initialize all weights to zero or a constant value (e.g. 0.5).\n\n### The Symmetry Problem Math Proof\nSuppose we initialize all weights in a Multi-Layer Perceptron (MLP) to a constant $c$. Consider a hidden layer $l$ with activations from the previous layer $\\mathbf{a}^{(l-1)}$:\n\n$$z_i^{(l)} = \\sum_{j} W_{ij}^{(l)} a_j^{(l-1)} + b_i^{(l)}$$\n\nIf $W_{ij}^{(l)} = c$ and $b_i^{(l)} = 0$ for all $i, j$, then:\n\n$$z_i^{(l)} = c \\sum_{j} a_j^{(l-1)}$$\n\nNotice that the pre-activation $z_i^{(l)}$ is identical for every neuron $i$ in layer $l$. Consequently, the post-activation outputs will also be identical: $a_i^{(l)} = f(z_i^{(l)}) = a^{(l)}$ for all $i$.\n\nDuring backpropagation, we compute the gradient of the loss $J$ with respect to the weights $W_{ij}^{(l)}$:\n\n$$\\frac{\\partial J}{\\partial W_{ij}^{(l)}} = \\delta_i^{(l)} a_j^{(l-1)}$$\n\nBecause the pre-activations $z_i^{(l)}$ are identical, the error vectors $\\delta_i^{(l)}$ will be identical for every neuron $i$: $\\delta_i^{(l)} = \\delta^{(l)}$. Thus, the weight updates are:\n\n$$\\frac{\\partial J}{\\partial W_{ij}^{(l)}} = \\delta^{(l)} a_j^{(l-1)}$$\n\nThis update gradient depends only on the input index $j$, meaning all neurons $i$ in layer $l$ receive the exact same weight update. Even after many epochs of gradient descent, all neurons within the same layer will remain identical to each other, learning the exact same features. The network behaves as if each layer contains only a single neuron, losing its representation capacity. \n\n**Symmetry Breaking** requires initializing weights randomly, ensuring that different neurons learn different features.",
+      "callouts": [
+        {
+          "type": "Engineering Note",
+          "title": "Bias Initialization",
+          "content": "Unlike weights, it is standard and safe to initialize bias vectors $\\mathbf{b}$ to exactly zero. Symmetry breaking is accomplished entirely by the random weight matrices, and starting biases at zero avoids injecting arbitrary threshold shifts before the network begins learning."
+        }
+      ]
+    },
+    {
+      "title": "Xavier (Glorot) Initialization: Linear & Tanh Networks",
+      "content": "Even with random initialization, if the scale (variance) of the weights is too large, activations will blow up exponentially as they pass through deep layers. If the scale is too small, activations will shrink exponentially to zero. Xavier (Glorot) initialization matches the variance of inputs and outputs of each layer to stabilize signal flow.\n\n### Variance Matching Derivation\nConsider a linear layer with input dimension $n_{\\text{in}}$ and output dimension $n_{\\text{out}}$. The output $z$ of a single unit is:\n\n$$z = \\sum_{i=1}^{n_{\\text{in}}} w_i x_i$$\n\nAssume that:\n1.  The inputs $x_i$ are independent and identically distributed (i.i.d.) with zero mean ($E[x_i] = 0$) and variance $\\operatorname{Var}(x)$.\n2.  The weights $w_i$ are i.i.d. with zero mean ($E[w_i] = 0$) and variance $\\operatorname{Var}(w)$.\n3.  Inputs and weights are independent.\n\nWe calculate the variance of the output $z$ using the variance of the product of independent variables:\n\n$$\\operatorname{Var}(z) = \\operatorname{Var}\\left( \\sum_{i=1}^{n_{\\text{in}}} w_i x_i \\right) = \\sum_{i=1}^{n_{\\text{in}}} \\operatorname{Var}(w_i x_i)$$\n\nUsing the product variance formula $\\operatorname{Var}(A B) = E[A]^2\\operatorname{Var}(B) + E[B]^2\\operatorname{Var}(A) + \\operatorname{Var}(A)\\operatorname{Var}(B)$:\n\n$$\\operatorname{Var}(w_i x_i) = 0 \\cdot \\operatorname{Var}(x_i) + 0 \\cdot \\operatorname{Var}(w_i) + \\operatorname{Var}(w_i)\\operatorname{Var}(x_i) = \\operatorname{Var}(w)\\operatorname{Var}(x)$$\n\nSubstituting this back into the summation:\n\n$$\\operatorname{Var}(z) = n_{\\text{in}} \\operatorname{Var}(w)\\operatorname{Var}(x)$$\n\nTo prevent activations from expanding or shrinking, we want the variance of the output to equal the variance of the input: $\\operatorname{Var}(z) = \\operatorname{Var}(x)$. This requires:\n\n$$n_{\\text{in}} \\operatorname{Var}(w) = 1 \\implies \\operatorname{Var}(w) = \\frac{1}{n_{\\text{in}}}$$\n\nFollowing the same derivation for the backward pass to prevent gradient signals from exploding or vanishing yields:\n\n$$\\operatorname{Var}(w) = \\frac{1}{n_{\\text{out}}}$$\n\nTaking the average of these two constraints gives the Xavier variance target:\n\n$$\\operatorname{Var}(w) = \\frac{2}{n_{\\text{in}} + n_{\\text{out}}}$$\n\n*   **Normal Distribution:** Initialize weights as $W \\sim \\mathcal{N}\\left(0, \\frac{2}{n_{\\text{in}} + n_{\\text{out}}}\\right)$.\n*   **Uniform Distribution:** For $U(-r, r)$, the variance is $\\frac{r^2}{3}$. Equating this to the target variance yields: $r = \\sqrt{\\frac{6}{n_{\\text{in}} + n_{\\text{out}}}}$.",
+      "callouts": [
+        {
+          "type": "Student Trap",
+          "title": "Limitations on ReLU Activations",
+          "content": "Xavier initialization assumes the activation function is linear near the origin (such as Identity or Tanh). If applied to networks with Rectified Linear Unit (ReLU) activations, which zero out half of their inputs, the variance of the activations will halve on each layer, leading to vanishing signals in deep networks."
+        }
+      ]
+    },
+    {
+      "title": "He (Kaiming) Initialization: ReLU Networks",
+      "content": "To accommodate ReLU activation functions, He (Kaiming) initialization modifies the variance matching derivation to account for the asymmetric zero-clipping of ReLU.\n\n### Variance Matching Derivation for ReLU\nLet $y = \\operatorname{ReLU}(z) = \\max(0, z)$. If the pre-activation $z$ has a symmetric distribution around zero, then the ReLU function zeros out exactly half the distribution. The mean of the output $y$ is no longer zero, but we calculate its second moment.\n\nSince $E[z] = 0$ and the distribution is symmetric:\n\n$$E[y^2] = \\frac{1}{2} E[z^2] = \\frac{1}{2} \\operatorname{Var}(z)$$\n\nNow, let's write the variance of the pre-activation for layer $l$:\n\n$$\\operatorname{Var}(z^{(l)}) = n_{l-1} \\operatorname{Var}(w^{(l)}) E[(a^{(l-1)})^2]$$\n\nSince $a^{(l-1)} = \\operatorname{ReLU}(z^{(l-1)})$, we substitute $E[(a^{(l-1)})^2] = \\frac{1}{2} \\operatorname{Var}(z^{(l-1)})$:\n\n$$\\operatorname{Var}(z^{(l)}) = n_{l-1} \\operatorname{Var}(w^{(l)}) \\left( \\frac{1}{2} \\operatorname{Var}(z^{(l-1)}) \\right) = \\left( \\frac{1}{2} n_{l-1} \\operatorname{Var}(w^{(l)}) \\right) \\operatorname{Var}(z^{(l-1)})$$\n\nTo preserve the variance across layers ($\\operatorname{Var}(z^{(l)}) = \\operatorname{Var}(z^{(l-1)})$), we require the coefficient to equal 1:\n\n$$\\frac{1}{2} n_{l-1} \\operatorname{Var}(w^{(l)}) = 1 \\implies \\operatorname{Var}(w^{(l)}) = \\frac{2}{n_{l-1}}$$\n\n*   **Normal Distribution:** Initialize weights as $W \\sim \\mathcal{N}\\left(0, \\frac{2}{n_{\\text{in}}}\\right)$.\n*   **Uniform Distribution:** Initialize weights as $W \\sim U\\left(-\\sqrt{\\frac{6}{n_{\\text{in}}}}, \\sqrt{\\frac{6}{n_{\\text{in}}}}\\right)$."
+    }
+  ],
+  "example_refs": [
+    "deep-learning-m2-t5-ex1"
+  ],
+  "diagram_refs": [
+    "deep-learning-m2-t5-dia1"
+  ],
+  "practice_refs": [
+    "deep-learning-m2-t5-prac1"
+  ],
+  "quiz_refs": [
+    "deep-learning-m2-t5-quiz"
+  ]
+}

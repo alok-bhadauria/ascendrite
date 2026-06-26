@@ -1,0 +1,29 @@
+{
+  "quiz_id": "deep-learning-m4-t1-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Why do standard Feedforward Neural Networks (MLPs) struggle to model sequential data like sentences or time series?",
+      "options": [
+        "They assume all inputs are independent, require a fixed input size, and do not maintain state memory across time steps.",
+        "They use backpropagation, which is mathematically invalid for sequences.",
+        "Their hidden layers are restricted to using strictly linear activations.",
+        "They are unable to use weights and biases for sequential calculations."
+      ],
+      "correct_answer": "They assume all inputs are independent, require a fixed input size, and do not maintain state memory across time steps.",
+      "explanation": "Standard MLPs process inputs in isolation and assume that they are independent. They require inputs of a fixed size, meaning they cannot process varying sequence lengths without truncation or padding, and they lack a hidden recurrent memory state to pass context from one token to the next."
+    },
+    {
+      "question_id": "q2",
+      "text": "In an Elman RNN cell, if the input vector $\\mathbf{x}_t$ has dimension $d=64$ and the hidden state $\\mathbf{h}_t$ has dimension $h=128$, what are the shapes of the weight matrices $\\mathbf{W}_{xh}$ and $\\mathbf{W}_{hh}$?",
+      "options": [
+        "$\\mathbf{W}_{xh}$ is (128, 64) and $\\mathbf{W}_{hh}$ is (128, 128)",
+        "$\\mathbf{W}_{xh}$ is (64, 128) and $\\mathbf{W}_{hh}$ is (128, 128)",
+        "$\\mathbf{W}_{xh}$ is (128, 128) and $\\mathbf{W}_{hh}$ is (128, 64)",
+        "$\\mathbf{W}_{xh}$ is (128, 64) and $\\mathbf{W}_{hh}$ is (64, 64)"
+      ],
+      "correct_answer": "$\\mathbf{W}_{xh}$ is (128, 64) and $\\mathbf{W}_{hh}$ is (128, 128)",
+      "explanation": "The hidden state transition is computed as $\\mathbf{h}_t = \\tanh(\\mathbf{W}_{hh}\\mathbf{h}_{t-1} + \\mathbf{W}_{xh}\\mathbf{x}_t + \\mathbf{b}_h)$. Since the output hidden state size is $128$ and the input size is $64$, the input-to-hidden projection weight $\\mathbf{W}_{xh}$ must be of shape (128, 64) to multiply $\\mathbf{x}_t$ of size (64, 1). The recurrent weight matrix $\\mathbf{W}_{hh}$ must be of shape (128, 128) to multiply the previous state $\\mathbf{h}_{t-1}$ of size (128, 1)."
+    }
+  ]
+}

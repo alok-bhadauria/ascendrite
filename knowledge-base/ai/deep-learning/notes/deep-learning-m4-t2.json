@@ -1,0 +1,55 @@
+{
+  "topic_id": "deep-learning-m4-t2",
+  "title": "RNN Gradients",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Advanced",
+    "estimated_hours": 5,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Formulate the Backpropagation Through Time (BPTT) algorithm, tracing parameter gradients across temporal unfoldings.",
+    "Prove mathematically why recurrent networks suffer from vanishing and exploding gradients.",
+    "Implement gradient clipping by norm to mitigate gradient explosion in recurrent neural network training."
+  ],
+  "content_sections": [
+    {
+      "title": "Backpropagation Through Time (BPTT)",
+      "content": "To train Recurrent Neural Networks, we unfold the recurrent loop over the temporal steps of the sequence and apply standard backpropagation. This temporal formulation is known as **Backpropagation Through Time (BPTT)**.\n\n### 1. Unfolded Loss Computation\nLet the sequence loss $J$ be the sum of loss terms computed at each individual time step $t$:\n\n$$J = \\\\sum_{t=1}^T J_t$$\n\nBecause the recurrent parameters (such as $\\\\mathbf{W}_{hh}$) are shared across all steps, the total gradient of the loss with respect to a shared weight matrix is computed by summing the gradients calculated at each individual time step:\n\n$$\\\\frac{\\\\partial J}{\\\\partial \\\\mathbf{W}_{hh}} = \\\\sum_{t=1}^T \\\\frac{\\\\partial J_t}{\\\\partial \\\\mathbf{W}_{hh}}$$\n\n### 2. Temporal Chain Rule\nTo compute the gradient of the step loss $J_t$ with respect to the recurrent weights, we apply the chain rule. Since $\\\\mathbf{W}_{hh}$ affects the loss through all preceding states $\\\\mathbf{h}_t, \\\\mathbf{h}_{t-1}, \\\\dots, \\\\mathbf{h}_1$, we trace the computational dependency backward:\n\n$$\\\\frac{\\\\partial J_t}{\\\\partial \\\\mathbf{W}_{hh}} = \\\\sum_{k=1}^t \\\\frac{\\\\partial J_t}{\\\\partial \\\\mathbf{h}_t} \\\\cdot \\\\frac{\\\\partial \\\\mathbf{h}_t}{\\\\partial \\\\mathbf{h}_k} \\\\cdot \\\\frac{\\\\partial \\\\mathbf{h}_k}{\\\\partial \\\\mathbf{W}_{hh}}$$",
+      "callouts": [
+        {
+          "type": "Student Trap",
+          "title": "Clipping Does Not Solve Vanishing Gradients",
+          "content": "A common mistake is thinking that gradient clipping resolves both vanishing and exploding gradients. It does not. Gradient clipping only prevents gradients from growing too large (exploding). Vanishing gradients (decaying to zero) require structural changes like LSTM/GRU gating networks or orthogonal weight initialization."
+        }
+      ]
+    },
+    {
+      "title": "Vanishing & Exploding Gradients: Mathematical Proof",
+      "content": "The central mathematical challenge in RNN training lies in the term $\\\\frac{\\\\partial \\\\mathbf{h}_t}{\\\\partial \\\\mathbf{h}_k}$ from the BPTT equation, which represents the gradient flow from time step $t$ back to an earlier step $k$.\n\n### 1. The Recurrent Jacobian Product\nBy applying the chain rule sequentially across adjacent steps:\n\n$$\\\\frac{\\\\partial \\\\mathbf{h}_t}{\\\\partial \\\\mathbf{h}_k} = \\\\prod_{i=k+1}^t \\\\frac{\\\\partial \\\\mathbf{h}_i}{\\\\partial \\\\mathbf{h}_{i-1}}$$\n\nRecall the hidden state equation: $\\\\mathbf{h}_i = \\\\tanh(\\\\mathbf{z}_i)$ where $\\\\mathbf{z}_i = \\\\mathbf{W}_{hh} \\\\mathbf{h}_{i-1} + \\\\mathbf{W}_{xh} \\\\mathbf{x}_i + \\\\mathbf{b}_h$. The Jacobian matrix of step $i$ with respect to step $i-1$ is:\n\n$$\\\\frac{\\\\partial \\\\mathbf{h}_i}{\\\\partial \\\\mathbf{h}_{i-1}} = \\\\operatorname{diag}(1 - \\\\tanh^2(\\\\mathbf{z}_i)) \\\\cdot \\\\mathbf{W}_{hh}^{\\\\top}$$\n\nSubstituting this back into the product equation yields:\n\n$$\\\\frac{\\\\partial \\\\mathbf{h}_t}{\\\\partial \\\\mathbf{h}_k} = \\\\prod_{i=k+1}^t \\\\left( \\\\operatorname{diag}(1 - \\\\tanh^2(\\\\mathbf{z}_i)) \\\\cdot \\\\mathbf{W}_{hh}^{\\\\top} \\\\right)$$\n\n### 2. Numerical Convergence Limits\nLet $\\\\gamma$ be an upper bound on the derivative of the activation function (for tanh, $\\\\gamma \\\\le 1.0$). Taking the matrix norm of the product:\n\n$$\\\\left\\\\lVert \\\\frac{\\\\partial \\\\mathbf{h}_t}{\\\\partial \\\\mathbf{h}_k} \\\\right\\\\rVert \\\\le \\\\prod_{i=k+1}^t \\\\gamma \\\\lVert \\\\mathbf{W}_{hh} \\\\rVert = (\\\\gamma \\\\lVert \\\\mathbf{W}_{hh} \\\\rVert)^{t-k}$$\n\n*   **Vanishing Gradients:** If the largest eigenvalue (spectral radius) of $\\\\mathbf{W}_{hh}$ is less than 1 (or $\\\\gamma \\\\lVert \\\\mathbf{W}_{hh} \\\\rVert < 1$), the term $(\\\\gamma \\\\lVert \\\\mathbf{W}_{hh} \\\\rVert)^{t-k}$ approaches 0 exponentially as the temporal distance $(t - k)$ increases. The network loses long-term context because early step gradients decay to zero.\n*   **Exploding Gradients:** If the spectral radius of $\\\\mathbf{W}_{hh}$ is greater than 1, and the activations do not saturate, the term can grow exponentially, causing numerical overflow (NaNs) or unstable weight updates.",
+      "callouts": [
+        {
+          "type": "Engineering Note",
+          "title": "Gradient Scaling vs. Value Clamping",
+          "content": "Gradient clipping is preferred as scaling (clipping by norm) rather than element-wise clamping. Norm scaling preserves the relative direction of the gradient vector in parameter space, whereas element-wise clamping changes the vector's angle, which can distort optimization paths."
+        }
+      ]
+    },
+    {
+      "title": "Mitigation Strategy: Gradient Norm Clipping",
+      "content": "To prevent exploding gradients from destabilizing training, we scale down the gradient vector if its L2 norm exceeds a specified threshold.\n\n### 1. Mathematical Formulation\nLet $\\\\mathbf{g}$ be the flat gradient vector representing all network parameter gradients. Given a threshold parameter $\\\\theta > 0$, the gradient update vector $\\\\mathbf{g}_{\\\\text{clip}}$ is computed as:\n\n$$\\\\mathbf{g}_{\\\\text{clip}} = \\\\begin{cases} \\\\mathbf{g} & \\\\text{if } \\\\lVert \\\\mathbf{g} \\\\rVert_2 \\\\le \\\\theta \\\\\\\\ \\\\frac{\\\\theta}{\\\\lVert \\\\mathbf{g} \\\\rVert_2} \\\\mathbf{g} & \\\\text{if } \\\\lVert \\\\mathbf{g} \\\\rVert_2 > \\\\theta \\\\end{cases}$$\n\nWhich can be written compactly as:\n\n$$\\\\mathbf{g}_{\\\\text{clip}} = \\\\min\\\\left(1, \\\\frac{\\\\theta}{\\\\lVert \\\\mathbf{g} \\\\rVert_2}\\\\right) \\\\mathbf{g}$$\n\n### 2. Optimization Impact\nBy applying this scaling factor, the direction of the optimization step remains identical, but the step size is bounded to prevent numerical instability. This allows training to continue stably even when encountering steep coordinate valleys in the loss surface."
+    }
+  ],
+  "example_refs": [
+    "deep-learning-m4-t2-ex1"
+  ],
+  "diagram_refs": [
+    "deep-learning-m4-t2-dia1"
+  ],
+  "practice_refs": [
+    "deep-learning-m4-t2-prac1"
+  ],
+  "quiz_refs": [
+    "deep-learning-m4-t2-quiz"
+  ]
+}

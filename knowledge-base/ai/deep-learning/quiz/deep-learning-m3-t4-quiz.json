@@ -1,0 +1,29 @@
+{
+  "quiz_id": "deep-learning-m3-t4-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "What is the primary computational benefit of freezing earlier layers in a neural network during transfer learning?",
+      "options": [
+        "It avoids calculating gradients and performing backpropagation through the frozen layers, reducing backpropagation compute and memory requirements.",
+        "It increases the speed of the forward pass by bypassing activation functions.",
+        "It reduces the size of the input images because frozen layers require less spatial resolution.",
+        "It allows the model to train without requiring any target labels."
+      ],
+      "correct_answer": "It avoids calculating gradients and performing backpropagation through the frozen layers, reducing backpropagation compute and memory requirements.",
+      "explanation": "Freezing parameters (e.g., using requires_grad = False) tells the autograd engine that those variables do not require optimization. Consequently, the framework skips computing partial derivatives of the loss with respect to those parameters and their inputs, saving substantial backward pass memory and floating-point computations."
+    },
+    {
+      "question_id": "q2",
+      "text": "Why should Batch Normalization layers in a pre-trained backbone be set to evaluation mode (e.g. model.eval()) during fine-tuning on a small dataset?",
+      "options": [
+        "To prevent small or noisy target domain mini-batches from updating and distorting the pre-trained running statistics (mean and variance).",
+        "To force the Batch Normalization layers to act as linear activations, simplifying the network architecture.",
+        "To disable the scaling and shifting parameters, reducing the parameter count to zero.",
+        "To prevent gradient updates to the classification head's weights."
+      ],
+      "correct_answer": "To prevent small or noisy target domain mini-batches from updating and distorting the pre-trained running statistics (mean and variance).",
+      "explanation": "If left in training mode, BN layers continue to update their running mean and variance using the target mini-batches. If the target dataset is small or noisy, this will corrupt the stable, pre-trained statistics, causing feature scaling drift that degrades the performance of subsequent frozen layers."
+    }
+  ]
+}

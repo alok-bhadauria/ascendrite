@@ -1,0 +1,55 @@
+{
+  "topic_id": "deep-learning-m3-t1",
+  "title": "CNN Foundations",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Medium",
+    "estimated_hours": 5,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Explain the spatial representation of grayscale and RGB image pixel channels and how 3D tensor layouts encode image features.",
+    "Formulate the mathematical 2D cross-correlation and convolution operations and calculate their dimensional changes.",
+    "Derive the mathematical formula relating input dimensions, kernel size, stride, and padding to output feature map dimensions."
+  ],
+  "content_sections": [
+    {
+      "title": "Image Representation & Channel Dimensions",
+      "content": "Unlike flat, 1D vectors used in standard MLPs, images contain spatial grid structures where local patterns (such as edges, corners, and textures) are highly correlated. Processing images by flattening them into a 1D vector discards this spatial locality and results in parameter explosion.\n\n### 1. Grayscale and Color Tensors\nAn image is represented as a multidimensional tensor:\n*   **Grayscale Image:** Represented as a 2D matrix of shape $(H, W)$ where $H$ is height and $W$ is width. Each cell contains an intensity scalar value, typically scaled to $[0, 255]$ for integers or $[0.0, 1.0]$ for floats.\n*   **RGB Color Image:** Represented as a 3D tensor of shape $(C, H, W)$ or $(H, W, C)$, where the channel dimension $C = 3$, representing the Red, Green, and Blue light color intensity channels.\n\nIn deep convolutional networks, inputs are generalized as 3D feature tensors of shape $(C_{\\text{in}}, H, W)$. Here, $C_{\\text{in}}$ represents the number of input channels (e.g. 3 for raw RGB images, or 64 for intermediate feature maps created by preceding convolutional layers).\n\n### 2. Parameter Projections and Locality\nIf we process a color image of size $256 \\times 256 \\times 3$ using a fully connected layer with 1000 hidden units, the weight matrix has shape $(1000, 196608)$, requiring over $1.9 \\times 10^8$ parameters for a single layer. This capacity leads to massive overfitting. CNNs solve this by enforcing **local receptive fields** (each neuron only connects to a local patch of the input) and **shared weights** (the same kernel weights scan across the entire image), drastically reducing parameter counts.",
+      "callouts": [
+        {
+          "type": "Student Trap",
+          "title": "Tensor Channel Formats (NCHW vs. NHWC)",
+          "content": "A frequent source of shape errors when moving between frameworks is channel ordering. **PyTorch** defaults to the `NCHW` format (Batch, Channels, Height, Width), which aligns with vectorised memory access in GPUs. **TensorFlow/Keras** defaults to the `NHWC` format. Mixing these formats without explicit transposing (e.g. `np.transpose(X, (0, 3, 1, 2))`) will corrupt image feature computations."
+        }
+      ]
+    },
+    {
+      "title": "2D Convolution & Cross-Correlation Mathematics",
+      "content": "A convolutional layer applies a small weight matrix, known as a **kernel** or **filter**, across the input tensor. Although technically named a convolutional layer, deep learning frameworks implement the **cross-correlation** operation rather than true mathematical convolution.\n\n### 1. 2D Cross-Correlation vs. Convolution\n*   **Cross-Correlation:**\n    $$S(i, j) = (I * K)(i, j) = \\sum_{m=0}^{K_H-1} \\sum_{n=0}^{K_W-1} I(i + m, j + n) K(m, n)$$\n*   **Convolution (Flipped Kernel):**\n    $$S(i, j) = (I * K)(i, j) = \\sum_{m=0}^{K_H-1} \\sum_{n=0}^{K_W-1} I(i - m, j - n) K(m, n)$$\n\nIn mathematical analysis, flipping the kernel ensures that convolution is commutative: $I * K = K * I$. However, in deep learning, the weights of the kernel $K$ are learned from scratch, so flipping the kernel is redundant. Thus, frameworks use cross-correlation but refer to it as convolution.\n\n### 2. Multi-Channel Convolution\nWhen the input has multiple channels $C_{\\text{in}}$, the kernel must match this depth, forming a 3D tensor of shape $(C_{\\text{in}}, K_H, K_W)$. The convolution is performed independently per channel, and the resulting 2D matrices are summed element-wise, adding a scalar bias $b$ to produce a single 2D output feature map:\n\n$$Z(h, w) = \\sum_{c=1}^{C_{\\text{in}}} \\sum_{m=0}^{K_H-1} \\sum_{n=0}^{K_W-1} X(c, h + m, w + n) K(c, m, n) + b$$\n\nTo produce an output tensor with $C_{\\text{out}}$ channels, we apply $C_{\\text{out}}$ independent 3D kernels. The final weight parameter matrix of a convolutional layer has dimensions $(C_{\\text{out}}, C_{\\text{in}}, K_H, K_W)$.",
+      "callouts": [
+        {
+          "type": "Engineering Note",
+          "title": "Translation Invariance",
+          "content": "Sharing kernel weights across the entire spatial grid gives CNNs **Translation Invariance**. Because the same filter scans every region, a feature learned in the top-left corner of an image (such as an edge detector) can instantly be detected in the bottom-right corner without requiring separate parameters."
+        }
+      ]
+    },
+    {
+      "title": "Spatial Dimensionality Mathematics",
+      "content": "Every convolution operation changes the spatial height and width of the input tensor based on four hyperparameters: input dimensions, kernel size, padding, and stride.\n\n### 1. Spatial Modification Parameters\n*   **Input Dimension ($H_{\\text{in}}, W_{\\text{in}}$):** The spatial dimensions of the input tensor.\n*   **Kernel Size ($K_H, K_W$):** The spatial dimensions of the sliding filter.\n*   **Padding ($P_H, P_W$):** The number of rows and columns of zeros added symmetrically to the edges of the input tensor. This prevents spatial shrinkage and keeps border pixels from being under-represented.\n*   **Stride ($S_H, S_W$):** The step size (number of pixels) the filter slides on each step.\n\n### 2. The General Dimension Formula\nThe spatial height $H_{\\text{out}}$ and width $W_{\\text{out}}$ of the output feature map are derived as:\n\n$$H_{\\text{out}} = \\left\\lfloor \\frac{H_{\\text{in}} - K_H + 2P_H}{S_H} \\right\\rfloor + 1$$\n\n$$W_{\\text{out}} = \\left\\lfloor \\frac{W_{\\text{in}} - K_W + 2P_W}{S_W} \\right\\rfloor + 1$$\n\nwhere $\\lfloor \\cdot \\rfloor$ is the floor function, truncating fractional divisions when strides do not divide the spatial dimensions evenly.\n\n### 3. Special Boundary Configurations\n*   **Valid Convolution (No Padding):** $P=0, S=1$. The output size is:\n    $$H_{\\text{out}} = H_{\\text{in}} - K_H + 1$$\n*   **Same Convolution (Preserved Dimensions):** The padding $P$ is chosen to ensure $H_{\\text{out}} = H_{\\text{in}}$ under stride $S=1$. For an odd kernel size $K$, this requires:\n    $$P = \\frac{K - 1}{2}$$"
+    }
+  ],
+  "example_refs": [
+    "deep-learning-m3-t1-ex1"
+  ],
+  "diagram_refs": [
+    "deep-learning-m3-t1-dia1"
+  ],
+  "practice_refs": [
+    "deep-learning-m3-t1-prac1"
+  ],
+  "quiz_refs": [
+    "deep-learning-m3-t1-quiz"
+  ]
+}

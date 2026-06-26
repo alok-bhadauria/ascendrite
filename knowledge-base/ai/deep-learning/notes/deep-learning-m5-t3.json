@@ -1,0 +1,55 @@
+{
+  "topic_id": "deep-learning-m5-t3",
+  "title": "Generative Adversarial Networks (GANs)",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Advanced",
+    "estimated_hours": 6,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Formulate the minimax game framework between the Generator and Discriminator.",
+    "Derive the optimal discriminator formulation for a fixed generator.",
+    "Formulate the non-saturating heuristic objective and describe the mechanics of Mode Collapse."
+  ],
+  "content_sections": [
+    {
+      "title": "GAN Foundations & Minimax Objective",
+      "content": "Introduced by Ian Goodfellow et al. in 2014, **Generative Adversarial Networks (GANs)** frame generative modeling as a game-theoretic competition between two sub-networks:\n\n*   **Generator ($G$):** A network that takes a random noise vector $\\\\mathbf{z}$ sampled from a simple prior distribution $p_{\\\\mathbf{z}}(\\\\mathbf{z})$ (such as a standard normal prior) and projects it to generate realistic fake samples $G(\\\\mathbf{z})$. Its goal is to capture the data distribution and fool the discriminator.\n*   **Discriminator ($D$):** A binary classifier network that takes a sample (either a real data sample $\\\\mathbf{x}$ or a generated sample $G(\\\\mathbf{z})$) and estimates the probability that it is real (1.0) rather than fake (0.0).\n\n```mermaid\ngraph TD\n    Noise[Noise z] --> Gen[Generator G]\n    Gen --> Fake[Fake Sample G z]\n    Real[Real Sample x] --> Disc[Discriminator D]\n    Fake --> Disc\n    Disc --> Out[Prob Real: D x or D G z]\n```",
+      "callouts": [
+        {
+          "type": "Student Trap",
+          "title": "Discriminator is a Binary Classifier",
+          "content": "A common point of confusion is assuming the discriminator performs multi-class classification to label which category a generated image belongs to. It does not. The discriminator is strictly a binary classifier outputting a single probability value $D(\\\\mathbf{x}) \\\\in [0, 1]$ representing whether the input is a real sample (1.0) or generated/fake (0.0)."
+        }
+      ]
+    },
+    {
+      "title": "The Minimax Game Objective Formulation",
+      "content": "The competition between the Generator $G$ and Discriminator $D$ is mathematically formulated as a zero-sum minimax game with the value function $V(D, G)$:\n\n$$\\\\min_G \\\\max_D V(D, G) = \\\\mathbb{E}_{\\\\mathbf{x} \\\\sim p_{\\\\text{data}}(\\\\mathbf{x})} [\\\\log D(\\\\mathbf{x})] + \\\\mathbb{E}_{\\\\mathbf{z} \\\\sim p_{\\\\mathbf{z}}(\\\\mathbf{z})} [\\\\log (1 - D(G(\\\\mathbf{z})))]$$\n\n### 1. Optimizing the Discriminator\nFor a fixed generator $G$, we want to find the optimal discriminator $D^*_G$ that maximizes $V(D, G)$. We express the expectations as integrals over the data space, where $p_g$ is the distribution of generated samples:\n\n$$V(D, G) = \\\\int_{\\\\mathbf{x}} p_{\\\\text{data}}(\\\\mathbf{x}) \\\\log D(\\\\mathbf{x}) d\\\\mathbf{x} + \\\\int_{\\\\mathbf{z}} p_{\\\\mathbf{z}}(\\\\mathbf{z}) \\\\log (1 - D(G(\\\\mathbf{z}))) d\\\\mathbf{z}$$\n\nUsing the change of variables for the generated distribution:\n\n$$V(D, G) = \\\\int_{\\\\mathbf{x}} \\\\left( p_{\\\\text{data}}(\\\\mathbf{x}) \\\\log D(\\\\mathbf{x}) + p_g(\\\\mathbf{x}) \\\\log (1 - D(\\\\mathbf{x})) \\\\right) d\\\\mathbf{x}$$\n\nTo find the maximum, we compute the derivative of the integrand with respect to $D(\\\\mathbf{x})$ and set it to zero:\n\n$$\\\\frac{d}{d D(\\\\mathbf{x})} \\\\left( p_{\\\\text{data}}(\\\\mathbf{x}) \\\\log D(\\\\mathbf{x}) + p_g(\\\\mathbf{x}) \\\\log (1 - D(\\\\mathbf{x})) \\\\right) = \\\\frac{p_{\\\\text{data}}(\\\\mathbf{x})}{D(\\\\mathbf{x})} - \\\\frac{p_g(\\\\mathbf{x})}{1 - D(\\\\mathbf{x})} = 0$$\n\nSolving for $D(\\\\mathbf{x})$ yields the optimal discriminator formula:\n\n$$D^*_G(\\\\mathbf{x}) = \\\\frac{p_{\\\\text{data}}(\\\\mathbf{x})}{p_{\\\\text{data}}(\\\\mathbf{x}) + p_g(\\\\mathbf{x})}$$\n\nAt the Nash equilibrium where the generator is perfect ($p_g = p_{\\\\text{data}}$), the optimal discriminator outputs exactly $D^*_G(\\\\mathbf{x}) = 0.5$ everywhere, reflecting complete uncertainty.",
+      "callouts": [
+        {
+          "type": "Engineering Note",
+          "title": "Wasserstein GAN (WGAN) scaling",
+          "content": "To stabilize training, Wasserstein GAN replaces the Jenson-Shannon divergence of standard GANs with the Earth Mover's Distance. This removes the discriminator's output sigmoid and enforces a Lipschitz continuity constraint (using gradient penalties), ensuring stable gradients even when the distributions do not overlap."
+        }
+      ]
+    },
+    {
+      "title": "Mode Collapse & Training Traps",
+      "content": "GANs are notoriously difficult to optimize due to training instabilities.\n\n### 1. Vanishing Gradients (Heuristic Alternative)\nEarly in training, the generator is poor, so the discriminator easily classifies all generated samples as fake ($D(G(\\\\mathbf{z})) \\\\approx 0$). \n*   The generator's minimax objective is to minimize $\\\\log(1 - D(G(\\\\mathbf{z})))$. \n*   However, the derivative of $\\\\log(1 - a)$ near $a \\\\approx 0$ is very small, meaning the generator receives virtually no gradients, stalling training.\n*   **Solution (Non-Saturating Heuristic):** Instead of minimizing $\\\\log(1 - D(G(\\\\mathbf{z})))$, we train the generator by **maximizing** $\\\\log D(G(\\\\mathbf{z}))$. This provides large gradients early in training, accelerating convergence.\n\n### 2. Mode Collapse\n**Mode Collapse** is a failure state where the generator learns to produce samples from only a single or few categories (modes) of the dataset while ignoring the rest. \n*   For example, if trained on digit recognition, the generator might discover that producing a highly realistic digit '8' is sufficient to fool the discriminator. It will then output only '8's, completely ignoring the other digits.\n*   This occurs because the objective functions optimize independent coordinates without a diversity constraint, allowing the generator to collapse to a single point map."
+    }
+  ],
+  "example_refs": [
+    "deep-learning-m5-t3-ex1"
+  ],
+  "diagram_refs": [
+    "deep-learning-m5-t3-dia1"
+  ],
+  "practice_refs": [
+    "deep-learning-m5-t3-prac1"
+  ],
+  "quiz_refs": [
+    "deep-learning-m5-t3-quiz"
+  ]
+}

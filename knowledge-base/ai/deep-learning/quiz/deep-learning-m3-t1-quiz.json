@@ -1,0 +1,29 @@
+{
+  "quiz_id": "deep-learning-m3-t1-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Why do deep learning frameworks implement 2D cross-correlation rather than true mathematical convolution in convolutional layers?",
+      "options": [
+        "Because the kernels are learnable parameters, making the kernel-flipping step of true convolution redundant.",
+        "Because cross-correlation is commutative, which simplifies backpropagation gradient tracking.",
+        "Because convolution requires the input tensor channels to be powers of two.",
+        "Because cross-correlation does not require zero-padding on image borders."
+      ],
+      "correct_answer": "Because the kernels are learnable parameters, making the kernel-flipping step of true convolution redundant.",
+      "explanation": "True convolution flips the kernel vertically and horizontally. In deep learning, kernel elements are weights optimized from random initializations. The network simply learns the flipped orientation naturally, rendering explicit kernel flipping redundant."
+    },
+    {
+      "question_id": "q2",
+      "text": "An input tensor of spatial height 100 is processed by a 2D convolutional layer with kernel height 5, stride 2, and padding 3. What is the spatial height of the output tensor?",
+      "options": [
+        "51",
+        "50",
+        "49",
+        "52"
+      ],
+      "correct_answer": "51",
+      "explanation": "Using the spatial dimension formula: H_out = floor((H_in - K_H + 2 * P) / S) + 1 = floor((100 - 5 + 2 * 3) / 2) + 1 = floor(101 / 2) + 1 = floor(50.5) + 1 = 50 + 1 = 51."
+    }
+  ]
+}

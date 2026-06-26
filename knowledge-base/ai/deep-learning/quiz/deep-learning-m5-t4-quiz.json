@@ -1,0 +1,29 @@
+{
+  "quiz_id": "deep-learning-m5-t4-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Why is 'Loss Scaling' necessary when training neural networks using FP16 mixed precision, but not required when using BF16?",
+      "options": [
+        "Because FP16 has a narrow 5-bit exponent range causing small gradients to underflow to zero, whereas BF16 has an 8-bit exponent width matching FP32's dynamic range.",
+        "Because FP16 requires more GPU memory than BF16, making gradient accumulation unstable.",
+        "Because BF16 uses strictly integer values, which cannot underflow.",
+        "Because FP16 activations are non-linear, while BF16 activations are linear."
+      ],
+      "correct_answer": "Because FP16 has a narrow 5-bit exponent range causing small gradients to underflow to zero, whereas BF16 has an 8-bit exponent width matching FP32's dynamic range.",
+      "explanation": "FP16 allocates only 5 bits for the exponent, restricting its representable minimum positive value to $\\approx 6 \\times 10^{-5}$. Small gradients underflow to zero unless scaled up. BF16 allocates 8 bits for the exponent (matching FP32), allowing it to represent values down to $\\approx 1.2 \\times 10^{-38}$, making loss scaling unnecessary."
+    },
+    {
+      "question_id": "q2",
+      "text": "In mixed precision training, why are parameter weights maintained as an FP32 copy (master weights) during optimizer updates instead of updating in FP16 directly?",
+      "options": [
+        "To prevent small parameter updates (product of learning rate and gradients) from underflowing to zero due to FP16's limited fraction bit precision.",
+        "To satisfy CPU scheduling architectures which do not support 16-bit calculations.",
+        "To enforce the Jenson-Shannon divergence loss constraint on weight values.",
+        "To allow the network to train without requiring any backward pass calculations."
+      ],
+      "correct_answer": "To prevent small parameter updates (product of learning rate and gradients) from underflowing to zero due to FP16's limited fraction bit precision.",
+      "explanation": "Because learning rates and gradients are small, their product (the weight delta $\\eta \\mathbf{g}$) is extremely small. If weights were stored in FP16, adding this tiny update to a relatively large weight value (e.g. 1.0) would fail due to limited fraction precision (underflow). Maintaining FP32 master weights preserves these updates."
+    }
+  ]
+}

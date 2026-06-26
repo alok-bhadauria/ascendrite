@@ -1,0 +1,48 @@
+{
+  "topic_id": "deep-learning-m2-t2",
+  "title": "Adaptive Optimizers",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Hard",
+    "estimated_hours": 6,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Derive the update mechanics of AdaGrad and analyze how accumulative division dampens gradients for active parameters while amplifying sparse ones.",
+    "Formulate the mathematical updates of RMSprop and verify how exponentially decaying running averages resolve AdaGrad's premature learning rate decay.",
+    "Derive the Adam optimization equations (first/second moment estimates, bias correction math) and analyze why AdamW's decoupled weight decay differs from standard L2 regularization."
+  ],
+  "content_sections": [
+    {
+      "title": "AdaGrad & RMSprop: Scaling by Historical Gradients",
+      "content": "Standard optimization algorithms like SGD apply a uniform learning rate $\\eta$ to all parameters. However, in neural networks, some features or parameters receive gradients frequently and with large magnitudes, while others are sparse and receive gradients rarely. Enforcing a single scale causes fast-updating parameters to oscillate or diverge, while sparse parameters update too slowly.\n\n### 1. AdaGrad (Adaptive Gradient Algorithm)\nAdaGrad scales the learning rate of each parameter individually based on the sum of squares of its historical gradients. Let $\\mathbf{g}_t = \\nabla_{\\mathbf{\\theta}} \\mathcal{L}(\\mathbf{\\theta}_t)$ be the gradient at step $t$. The update equations are:\n\n$$\\mathbf{s}_t = \\mathbf{s}_{t-1} + \\mathbf{g}_t \\odot \\mathbf{g}_t$$\n\n$$\\mathbf{\\theta}_{t+1} = \\mathbf{\\theta}_t - \\frac{\\eta}{\\sqrt{\\mathbf{s}_t} + \\epsilon} \\odot \\mathbf{g}_t$$\n\nwhere $\\odot$ represents element-wise multiplication and $\\epsilon > 0$ (e.g., $10^{-8}$) is a smoothing term to prevent division by zero.\n\n*   **Behavior:** Parameters with historically large gradients have a large $s_{t,i}$, shrinking their effective learning rate. Parameters with small gradients have a small $s_{t,i}$, preserving their learning rate scale.\n*   **Drawback:** The sum $s_{t,i}$ is monotonic and non-decreasing. Over many steps, $s_{t,i}$ grows extremely large, causing the effective learning rate to shrink to zero, which terminates learning prematurely before the minimum is reached.\n\n### 2. RMSprop (Root Mean Squared Propagation)\nRMSprop resolves AdaGrad's premature decay by replacing the raw sum with an exponentially decaying running average of squared gradients, parameterized by a decay factor $\\beta \\in [0, 1)$ (typically $0.99$ or $0.999$):\n\n$$\\mathbf{s}_t = \\beta \\mathbf{s}_{t-1} + (1 - \\beta) \\mathbf{g}_t \\odot \\mathbf{g}_t$$\n\n$$\\mathbf{\\theta}_{t+1} = \\mathbf{\\theta}_t - \\frac{\\eta}{\\sqrt{\\mathbf{s}_t} + \\epsilon} \\odot \\mathbf{g}_t$$\n\n*   **Behavior:** By exponentially decaying historical gradients, $\\mathbf{s}_t$ only tracks the scale of gradients in a local window of the last $\\frac{1}{1-\\beta}$ steps. This prevents the learning rate from decaying to zero, allowing continuous convergence.",
+      "callouts": [
+        {
+          "type": "Student Trap",
+          "title": "Sensitivities of Epsilon Location",
+          "content": "A common mistake when implementing RMSprop or Adam is placing the smoothing term $\\epsilon$ outside the square root, i.e., writing $\\sqrt{\\mathbf{s}_t} + \\epsilon$, vs inside, i.e., $\\sqrt{\\mathbf{s}_t + \\epsilon}$. While mathematically similar, PyTorch and TensorFlow place $\\epsilon$ outside the root by default. This difference changes numerical behavior slightly in low-precision FP16 environments."
+        }
+      ]
+    },
+    {
+      "title": "The Adam Optimizer: Combining Momentum & Scale",
+      "content": "Adam (Adaptive Moment Estimation) combines the principles of **momentum** (scaling by the running average of past gradients) and **RMSprop** (scaling by the running average of past squared gradients).\n\n### 1. Mathematical Formulation\nAdam tracks both the first moment $\\mathbf{m}_t$ (the mean) and the uncentered second moment $\\mathbf{v}_t$ (the variance) of the gradients, using decay rates $\\beta_1$ (typically $0.9$) and $\\beta_2$ (typically $0.999$):\n\n$$\\mathbf{m}_t = \\beta_1 \\mathbf{m}_{t-1} + (1 - \\beta_1) \\mathbf{g}_t$$\n\n$$\\mathbf{v}_t = \\beta_2 \\mathbf{v}_{t-1} + (1 - \\beta_2) \\mathbf{g}_t \\odot \\mathbf{g}_t$$\n\n### 2. Bias Correction Derivation\nBecause $\\mathbf{m}_t$ and $\\mathbf{v}_t$ are typically initialized to zero vectors, they are biased toward zero, especially during early training iterations. To correct this, we derive the unbiased estimators.\n\nLet us expand $\\mathbf{m}_t$ assuming $\\mathbf{m}_0 = \\mathbf{0}$:\n\n$$\\mathbf{m}_t = (1 - \\beta_1) \\sum_{i=1}^t \\beta_1^{t-i} \\mathbf{g}_i$$\n\nTaking the mathematical expectation $E[\\mathbf{m}_t]$, and assuming the true gradient expectation $E[\\mathbf{g}_i]$ has converged to a constant $E[\\mathbf{g}]$:\n\n$$E[\\mathbf{m}_t] = E\\left[ (1 - \\beta_1) \\sum_{i=1}^t \\beta_1^{t-i} \\mathbf{g}_i \\right] = E[\\mathbf{g}] (1 - \\beta_1) \\sum_{i=1}^t \\beta_1^{t-i}$$\n\nThe summation is a finite geometric series: $\\sum_{i=1}^t \\beta_1^{t-i} = \\frac{1 - \\beta_1^t}{1 - \\beta_1}$. Substituting this back:\n\n$$E[\\mathbf{m}_t] = E[\\mathbf{g}] (1 - \\beta_1) \\left( \\frac{1 - \\beta_1^t}{1 - \\beta_1} \\right) = E[\\mathbf{g}] (1 - \\beta_1^t)$$\n\nTo ensure the estimator is unbiased (i.e. $E[\\hat{\\mathbf{m}}_t] = E[\\mathbf{g}]$), we must divide $\\mathbf{m}_t$ by the correction factor $(1 - \\beta_1^t)$. Following the same derivation for $\\mathbf{v}_t$ yields:\n\n$$\\hat{\\mathbf{m}}_t = \\frac{\\mathbf{m}_t}{1 - \\beta_1^t} \\quad \\text{and} \\quad \\hat{\\mathbf{v}}_t = \\frac{\\mathbf{v}_t}{1 - \\beta_2^t}$$\n\nFinally, parameters are updated as:\n\n$$\\mathbf{\\theta}_{t+1} = \\mathbf{\\theta}_t - \\frac{\\eta}{\\sqrt{\\hat{\\mathbf{v}}_t} + \\epsilon} \\odot \\hat{\\mathbf{m}}_t$$"
+    },
+    {
+      "title": "AdamW: Decoupled Weight Decay vs. L2 Regularization",
+      "content": "For standard SGD optimization, adding an L2 regularization penalty to the loss function ($\\mathcal{L}_{\\text{reg}} = \\mathcal{L} + \\frac{\\lambda}{2} \\lVert\\mathbf{\\theta}\\rVert_2^2$) is mathematically identical to applying weight decay (direct multiplication decay) during parameter updates.\n\nLet's trace this equivalence. The gradient of the regularized loss is:\n\n$$\\nabla_{\\mathbf{\\theta}} \\mathcal{L}_{\\text{reg}} = \\mathbf{g}_t + \\lambda \\mathbf{\\theta}_t$$\n\nSubstituting this into standard SGD:\n\n$$\\mathbf{\\theta}_{t+1} = \\mathbf{\\theta}_t - \\eta (\\mathbf{g}_t + \\lambda \\mathbf{\\theta}_t) = (1 - \\eta \\lambda) \\mathbf{\\theta}_t - \\eta \\mathbf{g}_t$$\n\n### The Breakdown in Adaptive Optimizers\nIn adaptive optimizers like Adam, L2 regularization is added directly to the gradient term before moments are calculated. The gradient term becomes $\\mathbf{g}_t + \\lambda \\mathbf{\\theta}_t$. During the update, this term is divided by the historical variance denominator $\\sqrt{\\hat{\\mathbf{v}}_t}$:\n\n$$\\mathbf{\\theta}_{t+1} = \\mathbf{\\theta}_t - \\frac{\\eta}{\\sqrt{\\hat{\\mathbf{v}}_t} + \\epsilon} \\odot (\\hat{\\mathbf{m}}_t + \\lambda \\mathbf{\\theta}_t)$$\n\nThis division changes the behavior of regularization:\n*   Parameters with historically large gradients receive *less* regularization than they should, because their $\\sqrt{\\hat{\\mathbf{v}}_t}$ is large, which scales down the decay term $\\lambda \\mathbf{\\theta}_t$.\n*   Parameters with small gradients receive *more* regularization, potentially causing them to decay to zero prematurely.\n\n### The AdamW Solution\nAdamW (decoupled weight decay) restores the original regularization behavior by applying the parameter decay step directly to the weights, bypassing the gradient moments entirely:\n\n$$\\mathbf{\\theta}_{t+1} = \\mathbf{\\theta}_t - \\eta \\lambda \\mathbf{\\theta}_t - \\frac{\\eta}{\\sqrt{\\hat{\\mathbf{v}}_t} + \\epsilon} \\odot \\hat{\\mathbf{m}}_t$$\n\nThis decoupled formulation ensures that all parameters decay at a rate proportional to their value, regardless of gradient scale. This significantly improves generalization and training stability in deep architectures like Transformers."
+    }
+  ],
+  "example_refs": [
+    "deep-learning-m2-t2-ex1"
+  ],
+  "diagram_refs": [
+    "deep-learning-m2-t2-dia1"
+  ],
+  "practice_refs": [
+    "deep-learning-m2-t2-prac1"
+  ],
+  "quiz_refs": [
+    "deep-learning-m2-t2-quiz"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "quiz_id": "deep-learning-m5-t3-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "For a fixed generator $G$, what is the mathematical formulation of the optimal discriminator $D^*_G(\\mathbf{x})$?",
+      "options": [
+        "$D^*_G(\\mathbf{x}) = \\frac{p_{\\text{data}}(\\mathbf{x})}{p_{\\text{data}}(\\mathbf{x}) + p_g(\\mathbf{x})}$",
+        "$D^*_G(\\mathbf{x}) = \\frac{p_g(\\mathbf{x})}{p_{\\text{data}}(\\mathbf{x}) + p_g(\\mathbf{x})}$",
+        "$D^*_G(\\mathbf{x}) = p_{\\text{data}}(\\mathbf{x}) \\cdot p_g(\\mathbf{x})$",
+        "$D^*_G(\\mathbf{x}) = \\tanh(p_{\\text{data}}(\\mathbf{x}) - p_g(\\mathbf{x}))$"
+      ],
+      "correct_answer": "$D^*_G(\\mathbf{x}) = \\frac{p_{\\text{data}}(\\mathbf{x})}{p_{\\text{data}}(\\mathbf{x}) + p_g(\\mathbf{x})}$",
+      "explanation": "By taking the derivative of the zero-sum value function integrand with respect to the discriminator outputs $D(\\mathbf{x})$ and setting it to 0, we derive that the optimal discriminator is the ratio of real data probability density to the sum of real and generated probability densities: $D^*_G(\\mathbf{x}) = \\frac{p_{\\text{data}}(\\mathbf{x})}{p_{\\text{data}}(\\mathbf{x}) + p_g(\\mathbf{x})}$."
+    },
+    {
+      "question_id": "q2",
+      "text": "Why is the generator's objective function typically changed from minimizing $\\log(1 - D(G(\\mathbf{z})))$ to maximizing $\\log D(G(\\mathbf{z}))$ early in training?",
+      "options": [
+        "Because early in training, the discriminator easily classifies generated samples as fake ($D(G(\\mathbf{z})) \\approx 0$), causing the gradient of the standard minimax loss to vanish, whereas the non-saturating heuristic loss provides large gradients.",
+        "Because maximizing $\\log D(G(\\mathbf{z}))$ is mathematically equivalent to minimizing the Kullback-Leibler divergence.",
+        "Because the non-saturating heuristic loss completely prevents the model from encountering Mode Collapse.",
+        "Because the minimax loss is computationally unstable on GPU hardware."
+      ],
+      "correct_answer": "Because early in training, the discriminator easily classifies generated samples as fake ($D(G(\\mathbf{z})) \\approx 0$), causing the gradient of the standard minimax loss to vanish, whereas the non-saturating heuristic loss provides large gradients.",
+      "explanation": "Early in training, the discriminator is much stronger than the generator, meaning $D(G(\\mathbf{z})) \\approx 0$. The derivative of the minimax loss $\\log(1-a)$ near $0$ is near $-1.0$, but because the discriminator's activations are highly saturated, backpropagated gradients vanish. The non-saturating loss $-\\log(a)$ has derivative $-1/a$, which approaches infinity as $a \\to 0$, providing strong learning signals early on."
+    }
+  ]
+}

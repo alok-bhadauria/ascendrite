@@ -1,0 +1,55 @@
+{
+  "topic_id": "deep-learning-m4-t1",
+  "title": "Sequential Data",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Easy",
+    "estimated_hours": 4,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Explain the constraints of feedforward neural networks when processing sequential, variable-length inputs.",
+    "Formulate the hidden state update equation of an Elman RNN, identifying parameters and activation behaviors.",
+    "Verify the principle of weight sharing across temporal steps and describe output state projections."
+  ],
+  "content_sections": [
+    {
+      "title": "Sequential Representations & Temporal Dependencies",
+      "content": "Standard feedforward neural networks (MLPs) assume that all input samples are independent of one another. However, many real-world tasks process sequential data where context determines meaning.\n\n### 1. Limits of Feedforward Networks\nIf we try to process sequential data (like text, speech, or time-series) using an MLP:\n*   **Fixed Input Sizing:** MLPs require a fixed-size input vector. They cannot naturally handle sequences of varying lengths (e.g. sentences with different numbers of words) without truncation or padding.\n*   **Loss of Order/Position:** Flat representations (like bag-of-words) lose the temporal order of features. In sequential data, order is critical (e.g., 'not bad, actually good' vs. 'bad, not actually good').\n*   **Lack of State Memory:** MLPs do not carry state information from one input sample to the next; they process each token in isolation.\n\n### 2. Temporal Dependencies\nSequential representations model data as a sequence of vectors $\\\\mathbf{x}_1, \\\\mathbf{x}_2, \\\\dots, \\\\mathbf{x}_T$, where $T$ is the sequence length. The probability of a token at step $t$ depends on all preceding tokens:\n\n$$P(\\\\mathbf{x}_t | \\\\mathbf{x}_{t-1}, \\\\mathbf{x}_{t-2}, \\\\dots, \\\\mathbf{x}_1)$$\n\nRecurrent Neural Networks address this by maintaining a hidden memory state that updates at each time step.",
+      "callouts": [
+        {
+          "type": "Student Trap",
+          "title": "Hidden State Size vs. Sequence Length",
+          "content": "A common mistake is assuming the size of the hidden state vector $\\\\mathbf{h}_t$ must match the sequence length $T$. They are completely independent. The hidden state size $D_h$ is a network hyperparameter representing feature channel capacity. The sequence length $T$ simply dictates the number of times the state updates recurrently."
+        }
+      ]
+    },
+    {
+      "title": "Recurrent Neural Networks (RNN) Hidden State Equations",
+      "content": "An **Elman RNN** processes an input sequence step-by-step, maintaining an internal hidden state vector $\\\\mathbf{h}_t$ that acts as a summary of the sequence history up to time $t$.\n\n### 1. Hidden State Update Equation\nAt each time step $t$, the new hidden state $\\\\mathbf{h}_t$ is computed using the previous hidden state $\\\\mathbf{h}_{t-1}$ and the current input token $\\\\mathbf{x}_t$:\n\n$$\\\\mathbf{h}_t = \\\\tanh(\\\\mathbf{W}_{hh} \\\\mathbf{h}_{t-1} + \\\\mathbf{W}_{xh} \\\\mathbf{x}_t + \\\\mathbf{b}_h)$$\n\nWhere:\n*   \\\\(\\mathbf{x}_t \\\\in \\\\mathbb{R}^{d}\\\\): Input vector at step $t$ (e.g., word embedding of size $d$).\n*   \\\\(\\\\mathbf{h}_t \\\\in \\\\mathbb{R}^{h_d}\\\\): Hidden state vector at step $t$ of size $h_d$.\n*   \\\\(\\\\mathbf{W}_{hh} \\\\in \\\\mathbb{R}^{h_d \\\\times h_d}\\\\): Recurrent weight matrix mapping previous hidden state to new hidden state.\n*   \\\\(\\\\mathbf{W}_{xh} \\\\in \\\\mathbb{R}^{h_d \\\\times d}\\\\): Input weight matrix mapping input to hidden state.\n*   \\\\(\\\\mathbf{b}_h \\\\in \\\\mathbb{R}^{h_d}\\\\): Bias vector.\n*   **Activation function:** The hyperbolic tangent (tanh) activation maps values to the range $[-1, 1]$, centering the features and stabilizing scaling over deep recurrent rollouts.\n\n### 2. State Initialization\nAt time step $t=1$, the equation requires a previous state $\\\\mathbf{h}_0$. Typically, $\\\\mathbf{h}_0$ is initialized as a vector of zeros, or learned as a parameter of the model.",
+      "callouts": [
+        {
+          "type": "Engineering Note",
+          "title": "Padding and Masking",
+          "content": "To train recurrent networks in mini-batches, shorter sequences are padded with zeros to match the longest sequence. To prevent these padding tokens from affecting the hidden state and loss calculations, frameworks use masking to skip updates and loss accumulation on pad indices."
+        }
+      ]
+    },
+    {
+      "title": "Temporal Projections & Parameter Sharing",
+      "content": "The defining characteristic of an RNN is **parameter sharing**: the weight matrices $\\\\mathbf{W}_{hh}$, $\\\\mathbf{W}_{xh}$, and bias $\\\\mathbf{b}_h$ are identical at every time step $t=1 \\\\dots T$.\n\n### 1. Purpose of Parameter Sharing\nIf we used different weights at different steps, we would restrict the model to a fixed sequence length, and the parameter count would grow linearly with sequence size. Sharing weights enables the model to generalize to arbitrary sequence lengths and apply learned sequential patterns at any position in the sequence.\n\n### 2. Output Projection Equations\nIf a task requires predictions at each time step (e.g., part-of-speech tagging or token prediction), the hidden state is projected to an output classification vector $\\\\hat{\\\\mathbf{y}}_t$:\n\n$$\\\\hat{\\\\mathbf{y}}_t = \\\\operatorname{softmax}(\\\\mathbf{W}_{hy} \\\\mathbf{h}_t + \\\\mathbf{b}_y)$$\n\nWhere:\n*   \\\\(\\\\mathbf{W}_{hy} \\\\in \\\\mathbb{R}^{C \\\\times h_d}\\\\): Output projection matrix, mapping hidden dimension to the number of classes $C$.\n*   \\\\(\\\\mathbf{b}_y \\\\in \\\\mathbb{R}^{C}\\\\): Output bias vector."
+    }
+  ],
+  "example_refs": [
+    "deep-learning-m4-t1-ex1"
+  ],
+  "diagram_refs": [
+    "deep-learning-m4-t1-dia1"
+  ],
+  "practice_refs": [
+    "deep-learning-m4-t1-prac1"
+  ],
+  "quiz_refs": [
+    "deep-learning-m4-t1-quiz"
+  ]
+}

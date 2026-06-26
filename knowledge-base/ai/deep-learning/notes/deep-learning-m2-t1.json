@@ -1,0 +1,55 @@
+{
+  "topic_id": "deep-learning-m2-t1",
+  "title": "Optimization Algorithms",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Medium",
+    "estimated_hours": 5,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Formulate Batch, Stochastic, and Mini-batch Gradient Descent algorithms and analyze their convergence and computational complexity trade-offs.",
+    "Derive the mathematical formulation of momentum-based gradient descent and show how physical inertia accelerates optimization in low-curvature directions.",
+    "Derive the mathematical equations for popular learning rate scheduling strategies, including step decay, exponential decay, and cosine annealing."
+  ],
+  "content_sections": [
+    {
+      "title": "Gradient Descent Taxonomy: Batch, SGD, and Mini-Batch",
+      "content": "Gradient descent is the baseline optimization method for training parameter matrices in neural networks. Given a dataset $\\mathcal{D}$ and a loss function $\\mathcal{L}(\\mathbf{\\theta})$, we locate a parameter vector $\\mathbf{\\theta} \\in \\mathbb{R}^d$ that minimizes $\\mathcal{L}$. The optimization variants differ in the number of samples used to calculate the gradient step.\n\n### 1. Batch Gradient Descent\nBatch Gradient Descent computes the gradient of the loss function over the entire dataset $\\mathcal{D}$ containing $N$ samples:\n\n$$\\mathbf{\\theta}_{t+1} = \\mathbf{\\theta}_t - \\eta \\nabla_{\\mathbf{\\theta}} \\mathcal{L}(\\mathbf{\\theta}_t) = \\mathbf{\\theta}_t - \\frac{\\eta}{N} \\sum_{i=1}^N \\nabla_{\\mathbf{\\theta}} \\mathcal{L}_i(\\mathbf{\\theta}_t)$$\n\n*   **Pros:** The gradient estimation is deterministic, minimizing variance and guaranteeing convergence to a local minimum (or global minimum for convex problems) under a suitable learning rate $\\eta$.\n*   **Cons:** Extremely slow and memory-intensive for large datasets, as it requires passing the entire dataset through the network before performing a single parameter update. It cannot perform online updates.\n\n### 2. Stochastic Gradient Descent (SGD)\nStochastic Gradient Descent approximates the true gradient by computing the loss and gradient with respect to a single randomly selected sample $(\\mathbf{x}_i, y_i)$:\n\n$$\\mathbf{\\theta}_{t+1} = \\mathbf{\\theta}_t - \\eta \\nabla_{\\mathbf{\\theta}} \\mathcal{L}_i(\\mathbf{\\theta}_t)$$\n\n*   **Pros:** Extremely fast per step; requires minimal memory. The stochastic variance acts as regularizing noise, helping the optimizer escape shallow local minima and saddle points.\n*   **Cons:** The gradient estimate is highly noisy, leading to heavy fluctuations in the loss trajectory. SGD never converges to a stable point unless the learning rate is gradually decayed to zero.\n\n### 3. Mini-Batch Gradient Descent\nMini-Batch Gradient Descent balances the two extremes by partitioning the dataset into small batches $\\mathcal{B}$ of size $B$ (typically powers of two, such as 32, 64, or 256, to align with GPU memory architecture):\n\n$$\\mathbf{\\theta}_{t+1} = \\mathbf{\\theta}_t - \\frac{\\eta}{B} \\sum_{i \\in \\mathcal{B}} \\nabla_{\\mathbf{\\theta}} \\mathcal{L}_i(\\mathbf{\\theta}_t)$$\n\n*   **Pros:** Reduces the variance of the gradient updates compared to pure SGD, leading to more stable convergence. It exploits vectorization capabilities of GPUs to process batches in parallel, optimizing execution speed.\n*   **Cons:** Introduces hyperparameter tuning overhead, specifically selecting the mini-batch size $B$ and aligning it with the learning rate $\\eta$.",
+      "callouts": [
+        {
+          "type": "Student Trap",
+          "title": "Scaling Learning Rate with Batch Size",
+          "content": "When scaling the mini-batch size $B$, the learning rate $\\eta$ must also be adjusted. A common practice is the **Linear Scaling Rule**: if you increase the batch size by a factor of $k$, you should scale the learning rate by $k$. Alternatively, some systems apply a **Square Root Scaling Rule** (scaling $\\eta$ by $\\sqrt{k}$) to prevent optimization divergence when scaling to massive batches."
+        }
+      ]
+    },
+    {
+      "title": "Momentum Acceleration & Physical Analogy",
+      "content": "A major limitation of standard SGD is navigating functions with anisotropic curvature—regions where the surface slopes much more steeply in one direction than another (commonly forming a narrow valley or ravine). In these conditions, standard SGD oscillates wildly across the high-curvature valley walls while making slow progress along the low-curvature valley floor toward the optimum.\n\n### 1. Momentum Formulation\nMomentum addresses this by introducing a velocity vector $\\mathbf{v}_t \\in \\mathbb{R}^d$ that builds inertia based on past gradients. The update equations are:\n\n$$\\mathbf{v}_{t+1} = \\beta \\mathbf{v}_t + \\eta \\nabla_{\\mathbf{\\theta}} \\mathcal{L}(\\mathbf{\\theta}_t)$$\n\n$$\\mathbf{\\theta}_{t+1} = \\mathbf{\\theta}_t - \\mathbf{v}_{t+1}$$\n\nwhere $\\beta \\in [0, 1)$ is the momentum decay factor (typically set to $0.9$). \n\n*   **Physical Analogy:** Think of a heavy ball rolling down a hill. The ball accumulates kinetic energy from gravity (the gradient), allowing it to roll past small bumps (local minima) and accelerating along flat valleys.\n*   **Mathematical Behavior:** In oscillating directions, the gradients change sign frequently. The velocity update sums these alternating signs, dampening the oscillations. In consistent directions, the gradients point in the same direction, causing the velocity to compound and accelerating progress.\n\n### 2. Nesterov Accelerated Gradient (NAG)\nNesterov Momentum improves upon standard momentum by calculating the gradient not at the current parameter position $\\mathbf{\\theta}_t$, but at a predicted look-ahead position $\\mathbf{\\theta}_t - \\beta \\mathbf{v}_t$:\n\n$$\\mathbf{v}_{t+1} = \\beta \\mathbf{v}_t + \\eta \\nabla_{\\mathbf{\\theta}} \\mathcal{L}(\\mathbf{\\theta}_t - \\beta \\mathbf{v}_t)$$\n\n$$\\mathbf{\\theta}_{t+1} = \\mathbf{\\theta}_t - \\mathbf{v}_{t+1}$$\n\nBy calculating the gradient at the look-ahead point, the optimizer acts with a 'prescient' damping force. If the momentum is carrying the parameters up a steep slope ahead, the gradient calculated at the look-ahead point will point back down, applying a braking force to damp the momentum and prevent overshooting.",
+      "callouts": [
+        {
+          "type": "Engineering Note",
+          "title": "Nesterov Look-Ahead Implementation",
+          "content": "Directly implementing PyTorch's Nesterov momentum requires a change of variables to avoid calculating gradients at $\\mathbf{\\theta}_t - \\beta \\mathbf{v}_t$ directly, which would complicate standard autograd pipelines. PyTorch implements an algebraically equivalent formulation that evaluates the gradient at the standard parameters but applies the look-ahead correction to the parameter update step."
+        }
+      ]
+    },
+    {
+      "title": "Learning Rate Scheduling Paradigms",
+      "content": "Selecting a static learning rate $\\eta$ is a difficult trade-off: a rate that is too high causes the optimizer to diverge, while a rate that is too low results in slow training and risk of stalling in poor local minima. Learning rate scheduling decays the learning rate over time to optimize convergence.\n\n### 1. Step Decay and Exponential Decay\n*   **Step Decay:** Decays the learning rate by a multiplicative factor $\\gamma < 1$ every $k$ epochs:\n    $$\\eta_t = \\eta_0 \\cdot \\gamma^{\\lfloor t/k \\rfloor}$$\n*   **Exponential Decay:** Smoothly decreases the learning rate exponentially:\n    $$\\eta_t = \\eta_0 \\cdot e^{-kt}$$\n\n### 2. Cosine Annealing\nCosine Annealing varies the learning rate according to a cosine curve. Let $\\eta_{\\max}$ be the initial learning rate, $\\eta_{\\min}$ be the minimum learning rate, $T_{\\text{cur}}$ be the current epoch, and $T_{\\text{max}}$ be the maximum number of epochs:\n\n$$\\eta_t = \\eta_{\\min} + \\frac{1}{2}(\\eta_{\\max} - \\eta_{\\min})\\left(1 + \\cos\\left(\\frac{T_{\\text{cur}}}{T_{\\text{max}}}\\pi\\right)\\right)$$\n\nThis schedule starts with a slow decay at the beginning, accelerates decay in the middle, and flattens out to a slow decay near the minimum value at the end of training.\n\n### 3. Learning Rate Warm-Up\nDuring the initial epochs of training, the weights are randomly initialized, and gradients can be extremely large. To prevent optimization instability, we use a **linear warm-up phase**. The learning rate is scaled linearly from 0 to $\\eta_{\\max}$ over the first $W$ epochs before applying the primary decay schedule:\n\n$$\\eta_t = \\frac{t}{W} \\eta_{\\max} \\quad \\text{for } t \\le W$$"
+    }
+  ],
+  "example_refs": [
+    "deep-learning-m2-t1-ex1"
+  ],
+  "diagram_refs": [
+    "deep-learning-m2-t1-dia1"
+  ],
+  "practice_refs": [
+    "deep-learning-m2-t1-prac1"
+  ],
+  "quiz_refs": [
+    "deep-learning-m2-t1-quiz"
+  ]
+}

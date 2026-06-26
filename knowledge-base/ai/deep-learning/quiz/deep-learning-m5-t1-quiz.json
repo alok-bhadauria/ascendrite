@@ -1,0 +1,29 @@
+{
+  "quiz_id": "deep-learning-m5-t1-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "What is the primary role of the dimensional bottleneck in an undercomplete autoencoder?",
+      "options": [
+        "It forces the network to compress the input, discarding noise and redundant features to learn the most salient manifold components.",
+        "It increases the parameter counts to prevent the network from memorizing simple patterns.",
+        "It allows the model to map data directly to a high-dimensional linear classifier.",
+        "It speeds up the forward pass by bypassing all activation functions."
+      ],
+      "correct_answer": "It forces the network to compress the input, discarding noise and redundant features to learn the most salient manifold components.",
+      "explanation": "Because the latent space dimension is smaller than the input space dimension ($d < D$), the model cannot simply learn a copy mapping. It must compress the features, discarding noise and retaining only the most critical generative details of the data distribution."
+    },
+    {
+      "question_id": "q2",
+      "text": "At convergence, what mathematical relationship exists between a linear autoencoder optimized with Mean Squared Error (MSE) loss and Principal Component Analysis (PCA)?",
+      "options": [
+        "The linear autoencoder learns weight parameters that project the inputs onto the same subspace as that spanned by the first $d$ principal components of PCA.",
+        "The linear autoencoder weights are exactly identical and orthogonal to the load matrices of PCA.",
+        "The linear autoencoder is mathematically unable to approximate any PCA subspace.",
+        "The linear autoencoder behaves as a non-linear classifier, making it completely different from PCA."
+      ],
+      "correct_answer": "The linear autoencoder learns weight parameters that project the inputs onto the same subspace as that spanned by the first $d$ principal components of PCA.",
+      "explanation": "Minimizing MSE reconstruction loss on zero-mean inputs in a linear autoencoder represents a low-rank matrix approximation. By SVD theorems, this projects data onto the subspace spanned by the first $d$ principal eigenvectors of the covariance matrix, making it equivalent to PCA. However, the weight matrices themselves are not necessarily orthogonal because any invertible transformation between encoder and decoder projects onto the same subspace."
+    }
+  ]
+}

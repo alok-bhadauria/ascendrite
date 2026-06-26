@@ -1,0 +1,29 @@
+{
+  "quiz_id": "deep-learning-m5-t5-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "What is the optimal communication volume sent per GPU during a complete Ring AllReduce operation of a gradient array of size $M$ across $P$ GPUs?",
+      "options": [
+        "$2 \\frac{P - 1}{P} M$",
+        "$2 P M$",
+        "$\\frac{M}{P}$",
+        "$(P - 1) M$"
+      ],
+      "correct_answer": "$2 \\frac{P - 1}{P} M$",
+      "explanation": "Ring AllReduce partitions the gradient array into $P$ chunks. During the Scatter-Reduce phase, each GPU sends $P-1$ times a chunk of size $M/P$. During the AllGather phase, it sends another $P-1$ times a chunk of size $M/P$. Total communication volume sent per GPU is $2(P-1) \\cdot \\frac{M}{P} = 2 \\frac{P-1}{P} M$. As $P \\to \\infty$, this volume converges to $2M$, which is independent of $P$, enabling scalable distributed training."
+    },
+    {
+      "question_id": "q2",
+      "text": "In Tensor Parallelism, how are weight matrices and communications handled in a Column-Parallel linear layer?",
+      "options": [
+        "The weight matrix is split vertically into columns, each GPU multiplies the entire input by its weight slice independently, and the final outputs are concatenated with no communication during matrix multiplication.",
+        "The weight matrix is split horizontally into rows, requiring an AllReduce sum step before multiplication.",
+        "The input activations are split along channels, while the weight matrix is replicated, requiring a pipeline schedule.",
+        "The layers are sequentially split across GPUs, requiring micro-batching to keep GPUs active."
+      ],
+      "correct_answer": "The weight matrix is split vertically into columns, each GPU multiplies the entire input by its weight slice independently, and the final outputs are concatenated with no communication during matrix multiplication.",
+      "explanation": "A Column-Parallel linear layer splits the weights $\\mathbf{W}$ vertically into column slices $[\\mathbf{W}_1, \\dots, \\mathbf{W}_K]$. Since each GPU receives the full input $\\mathbf{X}$, they can compute the products $\\mathbf{Y}_i = \\mathbf{X}\\mathbf{W}_i$ in parallel with zero communication. The outputs are concatenated at the end of the layer, making it highly efficient."
+    }
+  ]
+}

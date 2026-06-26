@@ -1,0 +1,55 @@
+{
+  "topic_id": "deep-learning-m4-t5",
+  "title": "Sequence-to-Sequence (Seq2Seq)",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Advanced",
+    "estimated_hours": 6,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Formulate the Encoder-Decoder framework and explain the role of the bottleneck context vector.",
+    "Formulate the Teacher Forcing training strategy and trace its exposure bias limitations during inference.",
+    "Compare Luong (multiplicative) and Bahdanau (additive) attention alignment calculations mathematically."
+  ],
+  "content_sections": [
+    {
+      "title": "The Encoder-Decoder Framework & Teacher Forcing",
+      "content": "The **Sequence-to-Sequence (Seq2Seq)** framework maps a variable-length input sequence $\\\\mathbf{x}_1 \\\\dots \\\\mathbf{x}_{T_x}$ to a variable-length output sequence $\\\\mathbf{y}_1 \\\\dots \\\\mathbf{y}_{T_y}$ (e.g. machine translation or summarization).\n\n### 1. The Bottleneck Problem\n*   **Encoder:** An RNN processes the input sequence and summarizes it into a single fixed-size **context vector** $\\\\mathbf{v}$ (typically the final hidden state $\\\\mathbf{h}_{T_x}$).\n*   **Decoder:** Another RNN takes the context vector $\\\\mathbf{v}$ as its initial hidden state $\\\\mathbf{s}_0$ and generates the output sequence token-by-token.\n*   **The Bottleneck:** Compressing an entire sentence of arbitrary length into a single fixed-size vector $\\\\mathbf{v}$ creates an information bottleneck, leading to rapid degradation on long sequences.\n\n### 2. Teacher Forcing Training Protocol\nDuring training, the decoder generates tokens sequentially. If we feed the decoder's own predicted token $\\\\hat{\\\\mathbf{y}}_{t-1}$ as the input for step $t$, early errors will propagate, causing training to be slow and unstable.\n*   **Teacher Forcing:** We bypass the decoder's predictions during training. Instead, we feed the **ground-truth target token** $\\\\mathbf{y}_{t-1}$ directly as the input for step $t$:\n\n$$\\\\mathbf{s}_t = \\\\operatorname{RNNCell}(\\\\mathbf{y}_{t-1}, \\\\mathbf{s}_{t-1})$$\n\nThis keeps the training trajectory aligned, accelerating convergence.",
+      "callouts": [
+        {
+          "type": "Student Trap",
+          "title": "Exposure Bias in Teacher Forcing",
+          "content": "Teacher forcing creates a mismatch between training and inference. During training, the decoder always receives perfect ground-truth inputs. During inference, ground truth is unavailable, so the decoder must run autoregressively (feeding its own predictions $\\\\hat{\\\\mathbf{y}}_{t-1}$ as inputs). If it makes a single error, the state drifts into regions of parameter space it never encountered during training, causing cascading errors. This phenomenon is known as **exposure bias**."
+        }
+      ]
+    },
+    {
+      "title": "Recurrent Attention: Luong vs. Bahdanau Alignment",
+      "content": "To resolve the bottleneck problem, Bahdanau et al. (2015) introduced the **Attention Mechanism**. Instead of compressing the input into a single vector $\\\\mathbf{v}$, the encoder outputs all hidden states $\\\\mathbf{h}_1 \\\\dots \\\\mathbf{h}_{T_x}$. The decoder dynamically selects which encoder states to focus on at each step.\n\nLet $\\\\mathbf{s}_t$ be the current decoder hidden state, and $\\\\mathbf{h}_i^{\\\\text{enc}}$ be the encoder hidden state at step $i$.\n\n### 1. Luong (Multiplicative) Attention\nLuong attention computes the alignment score between the current decoder state $\\\\mathbf{s}_t$ and each encoder state $\\\\mathbf{h}_i^{\\\\text{enc}}$ using a matrix multiplication:\n\n$$s_{\\\\text{Luong}}(\\\\mathbf{s}_t, \\\\mathbf{h}_i^{\\\\text{enc}}) = \\\\mathbf{s}_t^{\\\\top} \\\\mathbf{W}_a \\\\mathbf{h}_i^{\\\\text{enc}}$$\n\nWhere $\\\\mathbf{W}_a \\\\in \\\\mathbb{R}^{h \\\\times h}$ is a learnable parameter matrix.\n\n### 2. Bahdanau (Additive) Attention\nBahdanau attention computes alignment scores using a feedforward layer with a tanh activation. It uses the *previous* decoder state $\\\\mathbf{s}_{t-1}$:\n\n$$s_{\\\\text{Bahdanau}}(\\\\mathbf{s}_{t-1}, \\\\mathbf{h}_i^{\\\\text{enc}}) = \\\\mathbf{v}_a^{\\\\top} \\\\tanh(\\\\mathbf{W}_a \\\\mathbf{s}_{t-1} + \\\\mathbf{U}_a \\\\mathbf{h}_i^{\\\\text{enc}})$$\n\nWhere $\\\\mathbf{W}_a$ and $\\\\mathbf{U}_a$ are weight matrices, and $\\\\mathbf{v}_a$ is a projection vector.",
+      "callouts": [
+        {
+          "type": "Engineering Note",
+          "title": "Attention Speed Bottlenecks",
+          "content": "Luong Multiplicative Attention is faster and more memory-efficient than Bahdanau Additive Attention. It can be implemented as a single highly optimized matrix multiplication: $\\\\mathbf{S}^{\\\\top} \\\\mathbf{W}_a \\\\mathbf{H}$. Bahdanau attention requires intermediate addition and activation calculations, which consume more memory and slow down training on large vocabularies."
+        }
+      ]
+    },
+    {
+      "title": "Context Vector Aggregation & Projections",
+      "content": "Once the alignment scores are calculated, we normalize them to get attention weights.\n\n### 1. Softmax Normalization\nWe apply the softmax function to normalize the alignment scores into a probability distribution over the encoder steps:\n\n$$\\\\alpha_{t, i} = \\\\frac{e^{s(\\\\mathbf{s}_t, \\\\mathbf{h}_i^{\\\\text{enc}})}}{\\\\sum_{j=1}^{T_x} e^{s(\\\\mathbf{s}_t, \\\\mathbf{h}_j^{\\\\text{enc}})}}$$\n\nWhere $\\\\alpha_{t, i}$ is the attention weight reflecting the relevance of the $i$-th encoder token to the current decoder step $t$.\n\n### 2. Context Vector Calculation\nThe context vector $\\\\mathbf{c}_t$ is computed as the weighted sum of all encoder hidden states:\n\n$$\\\\mathbf{c}_t = \\\\sum_{i=1}^{T_x} \\\\alpha_{t, i} \\\\mathbf{h}_i^{\\\\text{enc}}$$\n\n### 3. Attentional Hidden State\nFinally, we concatenate the context vector $\\\\mathbf{c}_t$ and the current decoder hidden state $\\\\mathbf{s}_t$, and pass them through a linear layer and tanh activation to get the attentional hidden state vector $\\\\tilde{\\\\mathbf{s}}_t$:\n\n$$\\\\tilde{\\\\mathbf{s}}_t = \\\\tanh(\\\\mathbf{W}_c [\\\\mathbf{c}_t ; \\\\mathbf{s}_t] + \\\\mathbf{b}_c)$$\n\nThis vector is then projected to the vocabulary classes to predict the output token."
+    }
+  ],
+  "example_refs": [
+    "deep-learning-m4-t5-ex1"
+  ],
+  "diagram_refs": [
+    "deep-learning-m4-t5-dia1"
+  ],
+  "practice_refs": [
+    "deep-learning-m4-t5-prac1"
+  ],
+  "quiz_refs": [
+    "deep-learning-m4-t5-quiz"
+  ]
+}

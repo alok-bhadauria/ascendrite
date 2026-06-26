@@ -1,0 +1,55 @@
+{
+  "topic_id": "deep-learning-m4-t3",
+  "title": "Long Short-Term Memory (LSTM)",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Medium",
+    "estimated_hours": 5,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Formulate the mathematical role of the cell state and hidden state in LSTMs.",
+    "Derive the gating equations for the forget, input, and output gates.",
+    "Prove how the additive update of the cell state prevents vanishing gradients during backpropagation."
+  ],
+  "content_sections": [
+    {
+      "title": "The Architecture of LSTMs: Dual-State Representation",
+      "content": "To solve the vanishing gradient problem, **Long Short-Term Memory (LSTM)** networks split the recurrent hidden memory representation into two distinct vectors:\n\n*   **Cell State ($\\mathbf{c}_t$):** The internal cell state acts as an analog memory highway. It runs straight down the entire temporal chain, with only minor linear interactions. This allows information to flow backward over many steps without scaling distortion.\n*   **Hidden State ($\\mathbf{h}_t$):** The external hidden state acts as the short-term working memory. It is exposed to subsequent layers and is computed by filtering the cell state through the output gate.\n\nThis separation of concerns enables LSTMs to preserve long-term historical context while outputting highly dynamic task predictions.",
+      "callouts": [
+        {
+          "type": "Engineering Note",
+          "title": "Forget Gate Bias Initialization",
+          "content": "At the beginning of training, weights are initialized near zero, which causes the sigmoid activations of the gates to output values near $0.5$. A forget gate value of $0.5$ means information is halved at each step, causing gradients to vanish. To mitigate this, we initialize the forget gate bias vector $\\mathbf{b}_f$ to a high value (like $1.0$ or $2.0$), keeping the forget gate open and ensuring long-range gradient flow."
+        }
+      ]
+    },
+    {
+      "title": "Mathematical Gate Formulations",
+      "content": "LSTMs regulate the flow of information into and out of the cell state using three multiplicative **gating channels**. At each time step $t$, given input $\\\\mathbf{x}_t$ and previous hidden state $\\\\mathbf{h}_{t-1}$:\n\n### 1. Forget Gate ($f_t$)\nDecides what percentage of the previous cell state memory $\\\\mathbf{c}_{t-1}$ should be discarded:\n\n$$\\\\mathbf{f}_t = \\\\sigma(\\\\mathbf{W}_{xf} \\\\mathbf{x}_t + \\\\mathbf{W}_{hf} \\\\mathbf{h}_{t-1} + \\\\mathbf{b}_f)$$\n\n### 2. Input Gate ($i_t$)\nDecides which new input details should be written to the cell state:\n\n$$\\\\mathbf{i}_t = \\\\sigma(\\\\mathbf{W}_{xi} \\\\mathbf{x}_t + \\\\mathbf{W}_{hi} \\\\mathbf{h}_{t-1} + \\\\mathbf{b}_i)$$\n\n### 3. Candidate Cell State ($\\tilde{c}_t$)\nGenerates a vector of new candidate values that can be added to the cell state:\n\n$$\\\\tilde{\\\\mathbf{c}}_t = \\\\tanh(\\\\mathbf{W}_{xc} \\\\mathbf{x}_t + \\\\mathbf{W}_{hc} \\\\mathbf{h}_{t-1} + \\\\mathbf{b}_c)$$\n\n### 4. Output Gate ($o_t$)\nDecides what information from the updated cell state should be exposed in the hidden state:\n\n$$\\\\mathbf{o}_t = \\\\sigma(\\\\mathbf{W}_{xo} \\\\mathbf{x}_t + \\\\mathbf{W}_{ho} \\\\mathbf{h}_{t-1} + \\\\mathbf{b}_o)$$\n\nWhere $\\\\sigma(z) = \\\\frac{1}{1 + e^{-z}}$ is the logistic sigmoid function, mapping values to $[0, 1]$.",
+      "callouts": [
+        {
+          "type": "Student Trap",
+          "title": "Gating Activations are Fixed",
+          "content": "Do not swap the activation functions of the gates. The gates (forget, input, output) must use the sigmoid function $\\sigma$ because its output range $[0, 1]$ represents a probability mask (open vs. closed gate). The candidate cell state $\\tilde{\\mathbf{c}}_t$ and the output hidden state use $\\tanh$ because its range $[-1, 1]$ allows activations to increase or decrease the cell memory state."
+        }
+      ]
+    },
+    {
+      "title": "Cell State and Hidden State Updates",
+      "content": "Once the gates are computed, the states are updated for the next time step.\n\n### 1. Cell State Update Equation\nThe new cell state $\\\\mathbf{c}_t$ is computed by applying the forget gate element-wise to the previous state, and adding the candidate values modulated by the input gate:\n\n$$\\\\mathbf{c}_t = \\\\mathbf{f}_t \\\\odot \\\\mathbf{c}_{t-1} + \\\\mathbf{i}_t \\\\odot \\\\tilde{\\\\mathbf{c}}_t$$\n\nWhere $\\\\odot$ represents the Hadamard (element-wise) product.\n\n### 2. Hidden State Update Equation\nThe hidden state $\\\\mathbf{h}_t$ is computed by passing the updated cell state through $\\\\tanh$ and gating it with the output gate:\n\n$$\\\\mathbf{h}_t = \\\\mathbf{o}_t \\\\odot \\\\tanh(\\\\mathbf{c}_t)$$\n\n### 3. Gradient Flow Advantage Proof\nDuring backpropagation, the gradient of the loss at step $t$ with respect to the previous cell state $\\\\mathbf{c}_{t-1}$ is:\n\n$$\\\\frac{\\\\partial J}{\\\\partial \\\\mathbf{c}_{t-1}} = \\\\frac{\\\\partial J}{\\\\partial \\\\mathbf{c}_t} \\\\cdot \\\\frac{\\\\partial \\\\mathbf{c}_t}{\\\\partial \\\\mathbf{c}_{t-1}} = \\\\frac{\\\\partial J}{\\\\partial \\\\mathbf{c}_t} \\\\cdot \\\\left( \\\\mathbf{f}_t + \\\\mathbf{c}_{t-1} \\\\odot \\\\frac{\\\\partial \\\\mathbf{f}_t}{\\\\partial \\\\mathbf{c}_{t-1}} + \\\\tilde{\\\\mathbf{c}}_t \\\\odot \\\\frac{\\\\partial \\\\mathbf{i}_t}{\\\\partial \\\\mathbf{c}_{t-1}} + \\\\mathbf{i}_t \\\\odot \\\\frac{\\\\partial \\\\tilde{\\\\mathbf{c}}_t}{\\\\partial \\\\mathbf{c}_{t-1}} \\\\right)$$\n\n*   **The Additive Highway:** Unlike standard RNNs where the step Jacobian requires matrix multiplication by $\\\\mathbf{W}_{hh}^{\\\\top}$, the LSTM Jacobian has a direct additive path scaled by the forget gate $\\\\mathbf{f}_t$.\n*   If the network learns to keep the forget gate open ($\\\\mathbf{f}_t \\\\approx \\\\mathbf{1}$), the gradient propagates backward through time without decay, solving the vanishing gradient problem."
+    }
+  ],
+  "example_refs": [
+    "deep-learning-m4-t3-ex1"
+  ],
+  "diagram_refs": [
+    "deep-learning-m4-t3-dia1"
+  ],
+  "practice_refs": [
+    "deep-learning-m4-t3-prac1"
+  ],
+  "quiz_refs": [
+    "deep-learning-m4-t3-quiz"
+  ]
+}

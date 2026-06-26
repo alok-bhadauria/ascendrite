@@ -1,0 +1,55 @@
+{
+  "topic_id": "deep-learning-m4-t4",
+  "title": "Gated Recurrent Units (GRU)",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Medium",
+    "estimated_hours": 4,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Compare the structural complexity and parameter footprint of GRUs and LSTMs.",
+    "Formulate the reset gate and update gate equations of a GRU cell.",
+    "Formulate the linear interpolation update of the hidden state and trace its gradient pathway."
+  ],
+  "content_sections": [
+    {
+      "title": "Gated Recurrent Units (GRU) vs. LSTMs",
+      "content": "The **Gated Recurrent Unit (GRU)**, introduced by Cho et al. in 2014, is a simplified variation of the LSTM. While LSTMs are highly effective, they are structurally complex and computationally expensive. GRUs address this by optimizing the gate layout.\n\n### 1. Structural Simplifications\n*   **Single-State Representation:** Unlike the LSTM which maintains both a cell state $\\\\mathbf{c}_t$ and a hidden state $\\\\mathbf{h}_t$, the GRU collapses them into a single hidden state vector $\\\\mathbf{h}_t$.\n*   **Two Gates instead of Three:** GRUs eliminate the separate forget and input gates, replacing them with a single **update gate**. They also eliminate the separate output gate, replacing it with a **reset gate**.\n\n### 2. Parameter Footprint\nAn LSTM requires four sets of weight matrices (forget, input, candidate, output), whereas a GRU requires only three (reset, update, candidate). Consequently, a GRU uses about **25% fewer parameters** than an LSTM of the same hidden dimension. This reduces memory footprint, mitigates overfitting risks on smaller datasets, and accelerates training loops.",
+      "callouts": [
+        {
+          "type": "Engineering Note",
+          "title": "GRU vs. LSTM Trade-off",
+          "content": "Due to having fewer parameters, GRUs train faster and can outperform LSTMs on smaller or medium-sized datasets. However, on massive datasets with extremely complex, long-range dependencies, the expressive capacity of the dual-state LSTM can yield superior final accuracy."
+        }
+      ]
+    },
+    {
+      "title": "Gating Formulations in GRUs",
+      "content": "At each time step $t$, given input $\\mathbf{x}_t$ and previous hidden state $\\mathbf{h}_{t-1}$, the GRU computes two gating masks and a candidate state:\n\n### 1. Reset Gate ($r_t$)\nDetermines how much of the historical hidden state memory $\\\\mathbf{h}_{t-1}$ should be ignored when computing the new candidate state:\n\n$$\\\\mathbf{r}_t = \\\\sigma(\\\\mathbf{W}_{xr} \\\\mathbf{x}_t + \\\\mathbf{W}_{hr} \\\\mathbf{h}_{t-1} + \\\\mathbf{b}_r)$$\n\nIf $\\\\mathbf{r}_t \\\\approx \\\\mathbf{0}$, the model resets the past history and acts as if reading the first token of a sequence.\n\n### 2. Update Gate ($z_t$)\nDecides what percentage of the previous hidden state to keep, and what percentage of new candidate activations to write. It acts as a combined forget and input gate:\n\n$$\\\\mathbf{z}_t = \\\\sigma(\\\\mathbf{W}_{xz} \\\\mathbf{x}_t + \\\\mathbf{W}_{hz} \\\\mathbf{h}_{t-1} + \\\\mathbf{b}_z)$$\n\n### 3. Candidate Hidden State ($\\tilde{h}_t$)\nComputes new candidate activations, where the reset gate scales the influence of the previous hidden state:\n\n$$\\\\tilde{\\\\mathbf{h}}_t = \\\\tanh(\\\\mathbf{W}_{xh} \\\\mathbf{x}_t + \\\\mathbf{r}_t \\\\odot (\\\\mathbf{W}_{hh} \\\\mathbf{h}_{t-1}) + \\\\mathbf{b}_h)$$\n\nNote that the recurrent weight multiplication is applied *after* gating the hidden state.",
+      "callouts": [
+        {
+          "type": "Student Trap",
+          "title": "Reset Gate Modulates History, Not Input",
+          "content": "A common mistake is applying the reset gate $\\\\mathbf{r}_t$ to the current input token $\\\\mathbf{x}_t$ or to the sum of terms. The reset gate modulates only the previous hidden state $\\\\mathbf{h}_{t-1}$ to filter which past details are mixed into the new candidate state $\\\\tilde{\\\\mathbf{h}}_t$."
+        }
+      ]
+    },
+    {
+      "title": "Hidden State Update & Linear Interpolation",
+      "content": "Once the gates and candidate state are calculated, the new hidden state $\\mathbf{h}_t$ is computed using a **linear interpolation** modulated by the update gate $\\mathbf{z}_t$.\n\n### 1. Update Equation\n\n$$\\\\mathbf{h}_t = (1 - \\\\mathbf{z}_t) \\\\odot \\\\mathbf{h}_{t-1} + \\\\mathbf{z}_t \\\\odot \\\\tilde{\\\\mathbf{h}}_t$$\n\n*   If the update gate $\\\\mathbf{z}_t \\\\approx \\\\mathbf{0}$, the hidden state remains unchanged: $\\\\mathbf{h}_t \\\\approx \\\\mathbf{h}_{t-1}$. This allows information to be copied forward across many steps without modification.\n*   If $\\\\mathbf{z}_t \\\\approx \\\\mathbf{1}$, the hidden state is overwritten by the candidate: $\\\\mathbf{h}_t \\\\approx \\\\tilde{\\\\mathbf{h}}_t$.\n\n### 2. Gradient Flow Path\nLike the LSTM cell state, the GRU hidden state update is additive. The derivative of $\\\\mathbf{h}_t$ with respect to $\\\\mathbf{h}_{t-1}$ contains the term $(1 - \\\\mathbf{z}_t)$. If the network learns to keep the update gate closed ($1 - \\\\mathbf{z}_t \\\\approx \\\\mathbf{1}$), the gradient propagates backward through time without decay, mitigating vanishing gradients."
+    }
+  ],
+  "example_refs": [
+    "deep-learning-m4-t4-ex1"
+  ],
+  "diagram_refs": [
+    "deep-learning-m4-t4-dia1"
+  ],
+  "practice_refs": [
+    "deep-learning-m4-t4-prac1"
+  ],
+  "quiz_refs": [
+    "deep-learning-m4-t4-quiz"
+  ]
+}

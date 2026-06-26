@@ -1,0 +1,55 @@
+{
+  "topic_id": "deep-learning-m5-t4",
+  "title": "Mixed Precision & Mixed Training",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Advanced",
+    "estimated_hours": 5,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Compare the bit layouts, dynamic ranges, and precision limits of FP32, FP16, and BF16.",
+    "Formulate the loss scaling mathematics and explain how it prevents gradient underflow.",
+    "Design the dynamic loss scaling algorithm, incorporating gradient checks for NaNs and Infs."
+  ],
+  "content_sections": [
+    {
+      "title": "FP16/BF16 Mixed Precision Foundations",
+      "content": "Deep learning models traditionally train using single-precision floating-point formats (**FP32**, 32 bits). To accelerate computation and reduce GPU memory consumption, modern architectures use half-precision formats (**FP16** or **BF16**, 16 bits).\n\n### 1. Bit Layouts and Formats\n*   **FP32:** 1 sign bit, 8 exponent bits, 23 fraction (mantissa) bits.\n*   **FP16:** 1 sign bit, 5 exponent bits, 10 fraction bits.\n    *   *Range:* Bounded range of approximately $[6 \\\\times 10^{-5}, 65504]$. \n    *   *Problem:* The narrow exponent range means that small values underflow to zero, and large values overflow to infinity.\n*   **BF16 (Brain Float 16):** 1 sign bit, 8 exponent bits, 7 fraction bits.\n    *   *Range:* Matches the exponent range of FP32, preventing underflow and overflow issues. However, the smaller fraction width (7 bits vs 10 bits in FP16) means it has lower numerical precision.",
+      "callouts": [
+        {
+          "type": "Student Trap",
+          "title": "Master Weights Stored in FP32",
+          "content": "A common mistake is assuming that mixed-precision training stores and updates all parameters strictly in 16-bit format. This is incorrect. Weight updates (e.g. $\\\\mathbf{W} \\\\leftarrow \\\\mathbf{W} - \\\\eta \\\\mathbf{g}$) accumulate very small increments. If stored in FP16, these updates can underflow and have no effect. Therefore, we maintain a copy of the weights in **FP32** (the 'master weights') for the optimizer update step, and project them to FP16 only for forward and backward passes."
+        }
+      ]
+    },
+    {
+      "title": "Loss Scaling Math & Gradient Underflow",
+      "content": "During backpropagation in deep networks, gradients tend to become very small. In FP16 training, a large portion of these gradients fall below the minimum representable value ($6 \\\\times 10^{-5}$) and underflow to exactly zero, preventing the network from learning.\n\n### 1. Loss Scaling Principle\nTo prevent underflow, we scale up the loss by a factor $S$ (e.g. $1024$) before starting backpropagation. By the linearity of derivatives, scaling the loss scales all activations and parameter gradients: \n\n$$\\\\mathbf{g}_{\\\\text{scaled}} = \\\\frac{\\\\partial (S \\\\cdot J)}{\\\\partial \\\\mathbf{W}} = S \\\\cdot \\\\frac{\\\\partial J}{\\\\partial \\\\mathbf{W}} = S \\\\cdot \\\\mathbf{g}$$\n\nThis multiplication shifts the gradients to the right, placing them inside the representable range of FP16.\n\n### 2. Unscaling Gradients\nBefore the optimizer updates the parameters, we must reverse this scaling to prevent the weights from receiving inflated steps. We divide the gradients by the scale factor $S$:\n\n$$\\\\mathbf{g}_{\\\\text{unscaled}} = \\\\frac{\\\\mathbf{g}_{\\\\text{scaled}}}{S}$$\n\nThis unscaling step is performed in FP32 master weights space before the optimizer step.",
+      "callouts": [
+        {
+          "type": "Engineering Note",
+          "title": "BF16 Does Not Require Loss Scaling",
+          "content": "Because BF16 shares the same 8-bit exponent layout as FP32, it can represent values down to $1.17 \\\\times 10^{-38}$. This prevents gradient underflow completely, rendering loss scaling redundant. If hardware supports BF16 (e.g. NVIDIA Ampere+), it is highly preferred over FP16."
+        }
+      ]
+    },
+    {
+      "title": "Dynamic Loss Scaling Algorithm",
+      "content": "If we select a static scale factor $S$ that is too large, gradients will overflow to infinity (Inf), creating NaN values that destroy training stability. Therefore, we must dynamically adjust the scale factor.\n\n### 1. Dynamic Scaling Protocol\n1.  Initialize the scale factor $S$ to a large value (e.g. $2^{16} = 65536$).\n2.  Compute the forward pass, scale the loss by $S$, and run backpropagation to get the scaled gradients $\\\\mathbf{g}_{\\\\text{scaled}}$ in FP16.\n3.  **Gradient Check:** Check if any gradient value in $\\\\mathbf{g}_{\\\\text{scaled}}$ contains NaN or Inf:\n    *   **Overflow Detected:** If any NaN/Inf exists, discard the optimizer step (do not update weights), decrease the scale factor:\n        $$S \\\\leftarrow S \\\\cdot 0.5$$\n    *   **No Overflow:** Unscale the gradients $\\\\mathbf{g}_{\\\\text{unscaled}} = \\\\frac{\\\\mathbf{g}_{\\\\text{scaled}}}{S}$, convert them to FP32, and update the master weights. \n4.  **Scale Expansion:** If the gradients remain clean (no NaN/Inf) for a specified number of consecutive steps (e.g., $N_{\\\\text{steps}} = 2000$), we attempt to increase the scale factor to prevent underflow of even smaller values:\n    $$S \\\\leftarrow S \\\\cdot 2.0$$"
+    }
+  ],
+  "example_refs": [
+    "deep-learning-m5-t4-ex1"
+  ],
+  "diagram_refs": [
+    "deep-learning-m5-t4-dia1"
+  ],
+  "practice_refs": [
+    "deep-learning-m5-t4-prac1"
+  ],
+  "quiz_refs": [
+    "deep-learning-m5-t4-quiz"
+  ]
+}

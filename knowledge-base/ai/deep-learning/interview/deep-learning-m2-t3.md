@@ -1,0 +1,60 @@
+# Ascendrite Interview Prep: Regularization Techniques
+
+## Q1: Why does L1 regularization encourage weight sparsity (forcing weights to exactly zero) whereas L2 regularization only shrinks weights without setting them to zero?
+
+### Standard Answer
+We analyze this behavior by examining the gradient updates of both regularization methods.
+
+**1. Gradient Analysis:**
+Under L2 regularization, the update rule for a weight $w$ is:
+$$w_{t+1} = (1 - \eta \lambda) w_t - \eta \nabla_w \mathcal{L}_0(w_t)$$
+The decay force $\eta \lambda w_t$ is directly proportional to the size of the weight. As the weight $w_t$ becomes extremely small, the decay force approaches zero. Consequently, L2 regularization alone can never pull a non-zero weight to exactly zero in finite steps.
+
+Under L1 regularization, the update rule is:
+$$w_{t+1} = w_t - \eta \lambda \operatorname{sgn}(w_t) - \eta \nabla_w \mathcal{L}_0(w_t)$$
+The decay force is constant: $\eta \lambda$ (scaled only by the sign of the weight). Even if the weight $w_t$ is tiny (e.g. $10^{-5}$), the decay force remains $\eta \lambda$. If $\eta \lambda > |w_t|$, the update step will cross zero. To prevent oscillation across zero, optimizer implementations clip the weight to exactly zero when the update crosses zero. This is known as **soft-thresholding**, which drives parameters to exactly zero.
+
+**2. Geometric Interpretation:**
+In a 2D parameter space, the constraint boundary of L2 regularization is a circle ($w_1^2 + w_2^2 \le C$), while the boundary of L1 is a diamond ($|w_1| + |w_2| \le C$). The contours of the unregularized loss function $\mathcal{L}_0$ expand outward. The optimum regularized solution occurs at the intersection of the loss contours and the constraint boundary. Because the L1 diamond has sharp corners located exactly on the axes (where one parameter is zero), expanding loss contours are highly likely to hit these corners first, resulting in sparse weights.
+
+---
+
+## Q2: Prove why the scaling factor $\frac{1}{1-p}$ is necessary in Inverted Dropout during training, and derive its backward pass gradient.
+
+### Standard Answer
+**1. Expectation Normalization Proof:**
+Let $a$ be the activation output of a neuron prior to Dropout. During training with dropout probability $p$, we multiply $a$ by a random Bernoulli variable $r \sim \operatorname{Bernoulli}(1-p)$.
+
+Without scaling, the training activation is $a_{\text{train}} = r \cdot a$. The expectation of the activation during training is:
+$$E[a_{\text{train}}] = E[r \cdot a] = a \cdot E[r] = a \cdot (1 - p)$$
+
+During inference, Dropout is deactivated, so the activation is $a_{\text{test}} = a$. The expectation is:
+$$E[a_{\text{test}}] = a$$
+
+This creates a mismatch: the expected activation scale during training is scaled down by $(1-p)$ compared to inference, disrupting downstream layers. To resolve this, we normalize the training activation by dividing by $(1-p)$, which is the **Inverted Dropout** formulation:
+$$a_{\text{train}}^{\text{inv}} = \frac{r}{1 - p} \cdot a$$
+
+Taking the expectation of this modified training activation:
+$$E[a_{\text{train}}^{\text{inv}}] = E\left[ \frac{r}{1 - p} \cdot a \right] = \frac{a}{1 - p} E[r] = \frac{a}{1 - p} (1 - p) = a$$
+
+Since $E[a_{\text{train}}^{\text{inv}}] = E[a_{\text{test}}] = a$, the expected scale is identical across both phases. No modifications or scaling factors are needed during the inference pass.
+
+**2. Backward Pass Gradient Derivation:**
+During training, the forward pass is $y = \frac{r}{1 - p} x$, where $r \in \{0, 1\}$. 
+Let $\frac{\partial J}{\partial y}$ be the incoming gradient. By the chain rule, the gradient with respect to the input $x$ is:
+$$\frac{\partial J}{\partial x} = \frac{\partial J}{\partial y} \frac{\partial y}{\partial x} = \frac{\partial J}{\partial y} \left( \frac{r}{1 - p} \right)$$
+Only the unmasked active elements ($r = 1$) propagate gradients, and they are scaled by $\frac{1}{1-p}$.
+
+---
+
+## Q3: Is Early Stopping considered an optimization method or a regularization method? Discuss its trade-offs.
+
+### Standard Answer
+Early stopping acts as both, but it is primarily classified as a **regularization method** because it restricts the effective capacity of the network by limiting the optimization trajectory.
+
+**1. Regularization Effect:**
+By stopping training before the validation loss rises, early stopping limits the parameters to a compact volume of parameter space centered around the initial random weights $\mathbf{\theta}_0$. Mathematically, this acts similarly to L2 regularization (weight decay), as it prevents the parameters from growing excessively large to fit noise in the training set.
+
+**2. Trade-offs:**
+*   **Pros:** It is computationally cheap and simple to implement. Unlike L1/L2 or dropout, it does not require computing extra gradient terms or masks, and it actually *saves* computation by terminating training early.
+*   **Cons:** It breaks the **separation of concerns** between optimization and regularization. Ideally, we want an optimizer that can minimize training loss as much as possible, and a regularizer that prevents overfitting independently. Early stopping couples these tasks, meaning we cannot optimize the training loss to its absolute limit.

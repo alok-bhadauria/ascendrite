@@ -1,0 +1,29 @@
+{
+  "quiz_id": "deep-learning-m1-t4-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "What is the correct mathematical recurrence relation to compute the intermediate error vector (delta) of a hidden layer l from the error vector of the subsequent layer l+1?",
+      "options": [
+        "delta^(l) = (W^(l+1).T @ delta^(l+1)) * f^(l)'(z^(l))",
+        "delta^(l) = (W^(l).T @ delta^(l+1)) * f^(l)'(z^(l))",
+        "delta^(l) = (W^(l+1) @ delta^(l+1)) * f^(l+1)'(z^(l+1))",
+        "delta^(l) = (W^(l+1).T @ delta^(l+1)) @ f^(l)'(z^(l))"
+      ],
+      "correct_answer": "delta^(l) = (W^(l+1).T @ delta^(l+1)) * f^(l)'(z^(l))",
+      "explanation": "Applying the multivariate chain rule shows that the error at layer l is the product of the transposed weight matrix of the next layer W^(l+1).T and the next error vector delta^(l+1), multiplied element-wise by the activation derivative of the current pre-activation vector z^(l)."
+    },
+    {
+      "question_id": "q2",
+      "text": "For a weight matrix W^(l) of shape (d_l, d_{l-1}), an error vector delta^(l) of shape (d_l, 1), and a preceding activation vector a^(l-1) of shape (d_{l-1}, 1), what is the correct formula and dimension for the gradient of the loss with respect to W^(l)?",
+      "options": [
+        "dW^(l) = delta^(l) @ (a^(l-1)).T with shape (d_l, d_{l-1})",
+        "dW^(l) = (a^(l-1)) @ (delta^(l)).T with shape (d_{l-1}, d_l)",
+        "dW^(l) = delta^(l) * (a^(l-1)).T with shape (d_l, 1)",
+        "dW^(l) = W^(l).T @ delta^(l) with shape (d_{l-1}, 1)"
+      ],
+      "correct_answer": "dW^(l) = delta^(l) @ (a^(l-1)).T with shape (d_l, d_{l-1})",
+      "explanation": "The gradient of the loss with respect to a weight parameter is the outer product of the error vector (delta) of the target layer and the transposed activation vector of the input layer. The dimensions are (d_l, 1) @ (1, d_{l-1}), yielding the shape (d_l, d_{l-1}) which matches W^(l)."
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "quiz_id": "deep-learning-m2-t4-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "What is the correct analytical gradient formula for the learnable scale parameter gamma in a Batch Normalization layer?",
+      "options": [
+        "dgamma = sum_{i=1}^B (grad_output_i * X_hat_i)",
+        "dgamma = sum_{i=1}^B grad_output_i",
+        "dgamma = grad_output * gamma",
+        "dgamma = (grad_output * X_hat) / B"
+      ],
+      "correct_answer": "dgamma = sum_{i=1}^B (grad_output_i * X_hat_i)",
+      "explanation": "The output of BatchNorm is y_i = gamma * X_hat_i + beta. The derivative with respect to gamma for a single sample is grad_output_i * X_hat_i. Summing over the mini-batch yields the total gradient dgamma = sum_{i=1}^B (grad_output_i * X_hat_i)."
+    },
+    {
+      "question_id": "q2",
+      "text": "Which normalization layer calculates mean and variance statistics independently for each sample across all features, making its behavior completely independent of batch size?",
+      "options": [
+        "Layer Normalization",
+        "Batch Normalization",
+        "Instance Normalization",
+        "Group Normalization"
+      ],
+      "correct_answer": "Layer Normalization",
+      "explanation": "Layer Normalization computes statistics across the feature dimensions for each individual sample, making it independent of batch size and suitable for variable-length sequence models like Transformers."
+    }
+  ]
+}
