@@ -1,0 +1,41 @@
+{
+  "quiz_id": "machine-learning-m3-t5-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Under severe class imbalance where the negative class size $N_{\\text{neg}}$ is several orders of magnitude larger than the positive class size $N_{\\text{pos}}$, why does ROC-AUC often remain high (e.g. $>0.95$) while the model's actual precision is poor?",
+      "options": [
+        "ROC-AUC calculations rely on log-transformed probabilities, which dampens the impact of False Positives.",
+        "The denominator of the False Positive Rate (FPR) includes True Negatives, making the FPR extremely small and insensitive to a high absolute number of False Positives.",
+        "The Area Under the Curve is invariant to class distribution changes only when the positive class is the majority class.",
+        "ROC curves exclude False Negatives entirely, preventing them from penalizing incorrect majority predictions."
+      ],
+      "correct_answer": "The denominator of the False Positive Rate (FPR) includes True Negatives, making the FPR extremely small and insensitive to a high absolute number of False Positives.",
+      "explanation": "The False Positive Rate is defined as $\\text{FPR} = \\frac{\\text{FP}}{\\text{FP} + \\text{TN}}$. When $N_{\\text{neg}} = \\text{FP} + \\text{TN}$ is extremely large, the FPR remains close to zero even if the absolute number of False Positives (FPs) is substantial. Since the ROC curve plots TPR vs. FPR, it appears highly optimized. Precision-Recall curves avoid this because Precision ($P = \\frac{\\text{TP}}{\\text{TP} + \\text{FP}}$) does not include True Negatives, revealing the drop in performance."
+    },
+    {
+      "question_id": "q2",
+      "text": "What is the primary cause of target leakage when using the Synthetic Minority Over-sampling Technique (SMOTE) to balance a dataset?",
+      "options": [
+        "Applying SMOTE to the training set before standardizing the features, which shifts the global mean.",
+        "Performing SMOTE on the entire dataset before splitting it into training and test partitions, which derives synthetic test samples from training data.",
+        "Limiting the nearest neighbor count $k$ to a value smaller than 5, causing the generator to repeat identical training coordinates.",
+        "Allowing the interpolation factor $\\lambda$ to exceed 1, placing synthetic points outside the coordinate bounds."
+      ],
+      "correct_answer": "Performing SMOTE on the entire dataset before splitting it into training and test partitions, which derives synthetic test samples from training data.",
+      "explanation": "If SMOTE is applied to the global dataset before partitioning, the synthetic samples generated for the validation or test splits will be computed as interpolations between minority samples that end up in the training split. This leaks training labels and structure directly into the evaluation set, leading to artificially inflated validation metrics."
+    },
+    {
+      "question_id": "q3",
+      "text": "How does setting the focusing parameter $\\gamma > 0$ in the Focal Loss function $\\text{FL}(p_t) = -\\alpha_t (1 - p_t)^{\\gamma} \\log(p_t)$ alter model optimization compared to standard Cross-Entropy?",
+      "options": [
+        "It eliminates the gradient for all positive samples ($y_i = 1$) to prioritize learning negative space.",
+        "It scales down the loss and gradient contributions of easy-to-classify examples (where $p_t \\to 1$), forcing the model to focus on hard, misclassified instances.",
+        "It forces the loss function to become non-convex, allowing gradient descent to escape flat saddle points.",
+        "It adds a constant L2 penalty to the weights that is proportional to the prediction confidence."
+      ],
+      "correct_answer": "It scales down the loss and gradient contributions of easy-to-classify examples (where $p_t \\to 1$), forcing the model to focus on hard, misclassified instances.",
+      "explanation": "Focal Loss introduces the modulating factor $(1 - p_t)^{\\gamma}$. For easily classified examples, the probability of the correct class $p_t$ is close to 1, causing the term $(1 - p_t)^{\\gamma}$ to approach 0. This severely suppresses the loss and corresponding gradient updates for these easy observations. For hard or misclassified examples ($p_t$ is small), the factor remains close to 1, preserving their influence on gradient updates."
+    }
+  ]
+}

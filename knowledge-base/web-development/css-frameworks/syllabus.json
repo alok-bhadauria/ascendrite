@@ -1,0 +1,211 @@
+{
+  "subject_id": "css-frameworks",
+  "name": "CSS Frameworks",
+  "category": "web-development",
+  "modules": [
+    {
+      "name": "Module 1: Utility CSS, Tailwind Config & Compiler CLI",
+      "topics": [
+        {
+          "id": "css-frameworks-m1-t1",
+          "title": "Utility-First Paradigm",
+          "subtopics": [
+            "Utility classes vs custom CSS stylesheets maintenance comparison, design constraints"
+          ]
+        },
+        {
+          "id": "css-frameworks-m1-t2",
+          "title": "Tailwind Configuration",
+          "subtopics": [
+            "Tailwind.config.js theme custom configurations, variants, plugins bindings"
+          ]
+        },
+        {
+          "id": "css-frameworks-m1-t3",
+          "title": "Tailwind PostCSS",
+          "subtopics": [
+            "PostCSS build processes, tailwind directive compilation steps"
+          ]
+        },
+        {
+          "id": "css-frameworks-m1-t4",
+          "title": "Core Utilities",
+          "subtopics": [
+            "Flexbox/Grid tailwind wrappers, box layout units spacing, alignments configurations"
+          ]
+        },
+        {
+          "id": "css-frameworks-m1-t5",
+          "title": "Typography & Colors",
+          "subtopics": [
+            "Custom font family settings, color palette palettes, opacity helpers"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 2: Responsive Tailwind, Modifiers & Dark Modes",
+      "topics": [
+        {
+          "id": "css-frameworks-m2-t1",
+          "title": "Responsive Layouts",
+          "subtopics": [
+            "Tailwind screens breakpoints modifiers (sm, md, lg, xl, 2xl) application rules"
+          ]
+        },
+        {
+          "id": "css-frameworks-m2-t2",
+          "title": "State Modifiers",
+          "subtopics": [
+            "Hover, focus, active utility prefix modifiers, group and peer state bindings"
+          ]
+        },
+        {
+          "id": "css-frameworks-m2-t3",
+          "title": "Dark Mode Config",
+          "subtopics": [
+            "Class strategy vs media query preferences, dark utility prefix configurations"
+          ]
+        },
+        {
+          "id": "css-frameworks-m2-t4",
+          "title": "Layout Components",
+          "subtopics": [
+            "Responsive containers, flex rows alignments, aspect ratio modifiers"
+          ]
+        },
+        {
+          "id": "css-frameworks-m2-t5",
+          "title": "Transitions & Animations",
+          "subtopics": [
+            "Tailwind transition durations, custom transform animations definitions"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 3: Tailwind Customizations, Directives & CSS-in-JS",
+      "topics": [
+        {
+          "id": "css-frameworks-m3-t1",
+          "title": "Directives & @apply",
+          "subtopics": [
+            "Base styles overriding, component class extraction, utility layer constraints"
+          ]
+        },
+        {
+          "id": "css-frameworks-m3-t2",
+          "title": "Custom Plugins",
+          "subtopics": [
+            "Tailwind inline custom plugins definitions, utility modifiers API registration"
+          ]
+        },
+        {
+          "id": "css-frameworks-m3-t3",
+          "title": "CSS-in-JS Systems",
+          "subtopics": [
+            "Styled Components vs Emotion, performance trade-offs, dynamic styling attributes"
+          ]
+        },
+        {
+          "id": "css-frameworks-m3-t4",
+          "title": "Tailwind vs CSS-in-JS",
+          "subtopics": [
+            "Build-time CSS extraction speedups vs runtime style rendering overheads comparison"
+          ]
+        },
+        {
+          "id": "css-frameworks-m3-t5",
+          "title": "Production Purging",
+          "subtopics": [
+            "Unused CSS utilities purging configuration, Tailwind v4 compiler improvements"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 4: Preprocessors, Sass nesting & UI Library Integrations",
+      "topics": [
+        {
+          "id": "css-frameworks-m4-t1",
+          "title": "CSS Preprocessors",
+          "subtopics": [
+            "Sass compiler integrations, nesting selector rules, parent selector references"
+          ]
+        },
+        {
+          "id": "css-frameworks-m4-t2",
+          "title": "Sass Mixins & Functions",
+          "subtopics": [
+            "Mixins input parameters, custom functions math returns, @extend limits"
+          ]
+        },
+        {
+          "id": "css-frameworks-m4-t3",
+          "title": "UI Libraries",
+          "subtopics": [
+            "HeadlessUI component integrations, dynamic tailwind transitions bindings"
+          ]
+        },
+        {
+          "id": "css-frameworks-m4-t4",
+          "title": "Component Libraries",
+          "subtopics": [
+            "Radix UI primitives styling, class merge helpers (tailwind-merge, clsx)"
+          ]
+        },
+        {
+          "id": "css-frameworks-m4-t5",
+          "title": "Design Systems",
+          "subtopics": [
+            "Theme design tokens mapping, CSS custom properties integration"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 5: CSS Performance, Critical CSS & Custom Builds",
+      "topics": [
+        {
+          "id": "css-frameworks-m5-t1",
+          "title": "CSS Bundling",
+          "subtopics": [
+            "Minification, CSS imports concatenation, bundle size budgets validation"
+          ]
+        },
+        {
+          "id": "css-frameworks-m5-t2",
+          "title": "Critical CSS Extraction",
+          "subtopics": [
+            "Build-time above-the-fold CSS extraction, asynchronous stylesheet loading"
+          ]
+        },
+        {
+          "id": "css-frameworks-m5-t3",
+          "title": "Performance Audits",
+          "subtopics": [
+            "Lighthouse performance metrics, unused CSS audits diagnostics"
+          ]
+        },
+        {
+          "id": "css-frameworks-m5-t4",
+          "title": "CSS-in-JS SSR",
+          "subtopics": [
+            "Server-side style sheet collection layouts, hydration matching rules"
+          ]
+        },
+        {
+          "id": "css-frameworks-m5-t5",
+          "title": "Modern Layouts",
+          "subtopics": [
+            "Container queries (@container) configuration, subgrid alignments implementation"
+          ]
+        }
+      ]
+    }
+  ],
+  "revision": [],
+  "interview": [],
+  "examples": [],
+  "diagrams": []
+}

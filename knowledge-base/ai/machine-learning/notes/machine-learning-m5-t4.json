@@ -1,0 +1,73 @@
+{
+  "topic_id": "machine-learning-m5-t4",
+  "title": "Explainable AI (XAI) Mathematics",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Hard",
+    "estimated_hours": 6,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Formulate the Shapley value equation from cooperative game theory and prove how it satisfies the four core axioms of explainability.",
+    "Derive the SHAP (SHapley Additive exPlanations) Kernel equations and show their connection to weighted linear regression.",
+    "Formulate the LIME (Local Interpretable Model-agnostic Explanations) optimization objective and analyze the role of the exponential similarity kernel."
+  ],
+  "content_sections": [
+    {
+      "title": "Shapley Values and Cooperative Game Theory Axioms",
+      "content": "To explain the predictions of complex, non-linear machine learning models, we look to cooperative game theory. Under this framework, a model's prediction is treated as the payout of a game, and the input features are modeled as players cooperating to achieve this payout. The goal is to distribute the payout fairly among the features.\n\nLet $F$ be the set of all features, and let $S \\subseteq F \\setminus \\{i\\}$ be a subset of features that excludes feature $i$. We define a characteristic function $v(S)$ representing the expected model prediction given only the features in $S$. The **Shapley value** $\\phi_i(v)$ measures the marginal contribution of feature $i$ to the prediction, formulated as:\n\n$$\\phi_i(v) = \\sum_{S \\subseteq F \\setminus \\{i\\}} \\frac{|S|! (|F| - |S| - 1)!}{|F|!} \\left[ v(S \\cup \\{i\\}) - v(S) \\right]$$\n\nThis formula evaluates a weighted sum of marginal contributions $v(S \\cup \\{i\\}) - v(S)$ across all possible subsets $S$ of features. The weight represents the probability that feature $i$ enters coalition $S$ when the features are introduced in a random permutation order.\n\n### The Four Core Axioms of Explainability\nThe Shapley value is the unique attribution method that satisfies the following four axioms, ensuring fair and consistent explanations:\n\n1.  **Efficiency:** The sum of all feature attributions equals the difference between the model's prediction $v(F)$ and the baseline expected prediction $v(\\emptyset)$:\n    $$\\sum_{i \\in F} \\phi_i(v) = v(F) - v(\\emptyset)$$\n2.  **Symmetry:** If features $i$ and $j$ make identical marginal contributions to all coalitions, their attributions must be equal:\n    $$\\text{If } v(S \\cup \\{i\\}) = v(S \\cup \\{j\\}) \\quad \\forall S \\subseteq F \\setminus \\{i, j\\}, \\quad \\text{then } \\phi_i(v) = \\phi_j(v)$$\n3.  **Dummy (Null Player):** If feature $i$ makes zero marginal contribution to all coalitions, its attribution is zero:\n    $$\\text{If } v(S \\cup \\{i\\}) = v(S) \\quad \\forall S \\subseteq F \\setminus \\{i\\}, \\quad \\text{then } \\phi_i(v) = 0$$\n4.  **Additivity:** For any two independent models (games) $v$ and $w$, the attributions sum linearly:\n    $$\\phi_i(v + w) = \\phi_i(v) + \\phi_i(w)$$\n\nNo other attribution method satisfies all four axioms.",
+      "callouts": [
+        {
+          "type": "Student Trap",
+          "title": "Exponential Complexity of Shapley Values",
+          "content": "A common student error is attempting to calculate exact Shapley values on datasets with many features. The summation requires evaluating the characteristic function $v(S)$ over all $2^{|F|}$ possible feature subsets. For a model with 30 features, this takes $2^{30} \\approx 10^9$ model evaluations, which is computationally prohibitive in production. Real-world systems use approximations like KernelSHAP or model-specific estimators like TreeSHAP."
+        }
+      ]
+    },
+    {
+      "title": "KernelSHAP and Weighted Linear Regression",
+      "content": "**SHAP (SHapley Additive exPlanations)** frames Shapley value estimation as a local linear explanation model. Given a query sample $\\mathbf{x}$, the explanation model $g(z')$ is defined as:\n\n$$g(z') = \\phi_0 + \\sum_{i=1}^M \\phi_i z'_i$$\n\nwhere $z' \\in \\{0, 1\\}^M$ is a binary coalition vector representing feature presence (1) or absence (0), and $\\phi_i$ are the Shapley values. \n\n### KernelSHAP Formulation\n**KernelSHAP** estimates these values by solving a weighted linear regression problem over a set of perturbed coalition samples $Z'$:\n\n$$\\operatorname{argmin}_{\\phi_0, \\dots, \\phi_M} \\sum_{z' \\in Z'} \\left[ f(h_{\\mathbf{x}}(z')) - g(z') \\right]^2 \\pi_{\\mathbf{x}}(z')$$\n\nwhere $f(h_{\\mathbf{x}}(z'))$ is the model's prediction on the coalition mapping, and $\\pi_{\\mathbf{x}}(z')$ is the **SHAP Kernel**:\n\n$$\\pi_{\\mathbf{x}}(z') = \\frac{M - 1}{\\binom{M}{|z'|} |z'| (M - |z'|)}$$\n\nwhere $M$ is the maximum coalition size (number of features), and $|z'| = \\sum_{i=1}^M z'_i$ is the number of active features in the coalition.\n\nThis specific kernel weight enforces the Shapley axioms during the regression. The kernel assigns infinite weights to empty coalitions ($|z'|=0$) and full coalitions ($|z'|=M$), guaranteeing that the efficiency axiom holds by forcing the model to fit $v(\\emptyset)$ and $v(F)$ exactly.",
+      "callouts": [
+        {
+          "type": "Engineering Note",
+          "title": "TreeSHAP Efficiency Optimization",
+          "content": "For tree-based models (such as Random Forests and XGBoost), the KernelSHAP sampling step is replaced by **TreeSHAP**. TreeSHAP computes exact Shapley values in polynomial time $\\mathcal{O}(T \\cdot L \\cdot D^2)$ (where $T$ is the number of trees, $L$ is the maximum number of leaves, and $D$ is the maximum tree depth) by recursively tracking the proportion of samples that follow different decision paths, eliminating the need to run exponential model evaluations."
+        }
+      ]
+    },
+    {
+      "title": "LIME and Local Linear Perturbations",
+      "content": "**LIME (Local Interpretable Model-agnostic Explanations)** is a local explanation framework. It approximates the decision boundary of a complex model $f$ around a query point $\\mathbf{x}$ using an interpretable surrogate model $g \\in G$ (e.g. a sparse linear model).\n\nLIME solves the optimization problem:\n\n$$\\xi(\\mathbf{x}) = \\operatorname{argmin}_{g \\in G} \\mathcal{L}(f, g, \\pi_{\\mathbf{x}}) + \\Omega(g)$$\n\nwhere:\n*   $\\mathcal{L}(f, g, \\pi_{\\mathbf{x}})$ is the local loss measuring how closely the surrogate model $g$ matches the complex model $f$ predictions over perturbed samples $z \\in Z$:\n    $$\\mathcal{L}(f, g, \\pi_{\\mathbf{x}}) = \\sum_{z, z' \\in Z} \\pi_{\\mathbf{x}}(z) \\left( f(z) - g(z') \\right)^2$$\n*   $\\pi_{\\mathbf{x}}(z)$ is an exponential similarity kernel defining the local neighborhood width $\\sigma > 0$ around $\\mathbf{x}$:\n    $$\\pi_{\\mathbf{x}}(z) = \\exp\\left( -\\frac{D(\\mathbf{x}, z)^2}{\\sigma^2} \\right)$$\n    where $D(\\mathbf{x}, z)$ is the distance (e.g., Euclidean distance) between the query point and the perturbation.\n*   $\\Omega(g)$ is the complexity penalty (e.g. forcing the linear model to select only a small subset of features using LASSO regularization).",
+      "callouts": [
+        {
+          "type": "Common Misconception",
+          "title": "LIME and SHAP Consistency",
+          "content": "A common misconception is that LIME and SHAP are mathematically equivalent and will produce identical feature attributions. While both construct local linear surrogates, LIME uses a heuristic distance-based exponential kernel, whereas SHAP uses the game-theoretic SHAP kernel. Because LIME's similarity kernel is heuristic, its attributions violate key Shapley axioms (such as consistency and efficiency) and are sensitive to the chosen neighborhood width $\\sigma$."
+        }
+      ]
+    },
+    {
+      "title": "Professional Practice and XAI Debugging",
+      "content": "In production machine learning systems, explainability tools are used for diagnostic debugging:\n\n1.  **Feature Leakage Detection:** If a feature exhibits a disproportionately high SHAP value (e.g., an internal database transaction ID that is highly correlated with the target by chance), it indicates target leakage that must be removed.\n2.  **Model Bias Audit:** Group SHAP values by demographic keys (e.g. age or zip code) to audit whether the model is using protected attributes to generate predictions, violating fairness constraints.\n\n### Model-Agnostic vs. Model-Specific Explainers\n*   **Model-Agnostic (KernelSHAP, LIME):** Treat the model as a black-box, only querying inputs and outputs. They can explain any architecture but are slow due to sampling.\n*   **Model-Specific (TreeSHAP, Integrated Gradients):** Leverage internal model structures (tree paths or gradients) to calculate exact attributions in polynomial time.",
+      "callouts": [
+        {
+          "type": "Interview Tip",
+          "title": "The Interpretability vs. Accuracy Trade-Off",
+          "content": "If asked about the trade-off between interpretability and model accuracy, explain that complex models (like Deep Neural Networks or Boosting Ensembles) achieve high accuracy by learning non-linear feature interactions, making them hard to interpret. Surrogate methods (like LIME and SHAP) bridge this gap by approximating these models locally using simple, interpretable linear models without sacrificing the complex model's global accuracy."
+        }
+      ]
+    }
+  ],
+  "example_refs": [
+    "machine-learning-m5-t4-ex1"
+  ],
+  "diagram_refs": [
+    "machine-learning-m5-t4-dia1"
+  ],
+  "practice_refs": [
+    "machine-learning-m5-t4-prac1"
+  ],
+  "quiz_refs": [
+    "machine-learning-m5-t4-quiz"
+  ]
+}

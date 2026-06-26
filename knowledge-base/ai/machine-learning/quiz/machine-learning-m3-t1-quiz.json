@@ -1,0 +1,29 @@
+{
+  "quiz_id": "machine-learning-m3-t1-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "What is the closed-form matrix solution for Ordinary Least Squares (OLS) regression, assuming the feature matrix X has full column rank?",
+      "options": [
+        "w = (X * X^T)^-1 * X * y",
+        "w = (X^T * X)^-1 * X^T * y",
+        "w = X^T * (X * X^T)^-1 * y",
+        "w = (X^T * X + lambda * I)^-1 * X^T * y"
+      ],
+      "correct_answer": "w = (X^T * X)^-1 * X^T * y",
+      "explanation": "Setting the gradient of the sum of squared residuals to zero yields the normal equations X^T * X * w = X^T * y. Inverting X^T * X yields the OLS weight vector."
+    },
+    {
+      "question_id": "q2",
+      "text": "Maximizing the posterior probability (MAP) of a linear regression model under the assumption of independent, zero-mean Laplace priors on the weights is equivalent to which regularization scheme?",
+      "options": [
+        "L2 Regularization (Ridge)",
+        "L1 Regularization (LASSO)",
+        "ElasticNet Regularization",
+        "Dropout Regularization"
+      ],
+      "correct_answer": "L1 Regularization (LASSO)",
+      "explanation": "A Laplace distribution prior contains an absolute value term |w_j| in its exponent. Taking the negative logarithm converts this multiplication into the sum of absolute values, which corresponds exactly to the L1 norm penalty used in LASSO regression."
+    }
+  ]
+}

@@ -1,0 +1,276 @@
+{
+  "subject_id": "machine-learning",
+  "name": "Machine Learning",
+  "category": "ai",
+  "modules": [
+    {
+      "name": "Module 1: Mathematical Foundations & Optimization for ML Engineers",
+      "topics": [
+        {
+          "id": "machine-learning-m1-t1",
+          "title": "Linear Algebra & Matrix Decompositions",
+          "subtopics": [
+            "Vector spaces, basis, span, and projections",
+            "Eigendecomposition equations and spectral theorem for symmetric matrices",
+            "Singular Value Decomposition (SVD) matrix products derivation",
+            "Low-rank matrix approximation and SVD applications in Collaborative Filtering and Latent Semantic Analysis (LSA)"
+          ]
+        },
+        {
+          "id": "machine-learning-m1-t2",
+          "title": "Vector & Matrix Calculus",
+          "subtopics": [
+            "Partial derivatives, multivariable gradients, directional derivatives",
+            "Jacobian matrix of first-order vector outputs",
+            "Hessian matrix of second-order curvatures",
+            "Taylor series expansion of multivariable functions, positive definiteness criteria"
+          ]
+        },
+        {
+          "id": "machine-learning-m1-t3",
+          "title": "Probability & Information Theory",
+          "subtopics": [
+            "Conditional probability, joint probability, and Bayes' Theorem",
+            "Maximum Likelihood Estimation (MLE) vs Maximum A Posteriori (MAP) derivation",
+            "Shannon Entropy, Cross-Entropy, and Kullback-Leibler (KL) Divergence math",
+            "KL penalty evaluation criteria in probabilistic models"
+          ]
+        },
+        {
+          "id": "machine-learning-m1-t4",
+          "title": "Numerical Optimization & Convergence",
+          "subtopics": [
+            "Convex vs non-convex optimization, local vs global minima",
+            "Gradient Descent and Stochastic Gradient Descent (SGD) with momentum",
+            "Adaptive learning rates (Adam optimizer bias-correction derivations)",
+            "Second-order optimization (Newton-Raphson method and Hessian costs)"
+          ]
+        },
+        {
+          "id": "machine-learning-m1-t5",
+          "title": "Numerical Stability & Mixed Precision",
+          "subtopics": [
+            "IEEE 754 float32 representation vs half-precision FP16 and BF16",
+            "Underflow and overflow anomalies in deep backpropagations",
+            "Mixed-precision training steps and dynamic loss scaling math",
+            "Gradient clipping methods (L2 norm boundaries)"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 2: High-Performance Data Engineering & Feature Processing",
+      "topics": [
+        {
+          "id": "machine-learning-m2-t1",
+          "title": "NumPy Internals & Vectorization",
+          "subtopics": [
+            "Contiguous memory blocks (C vs Fortran contiguous layout)",
+            "Strides, indexing math, and broadcasting rules",
+            "SIMD CPU instructions and vectorized execution benefits"
+          ]
+        },
+        {
+          "id": "machine-learning-m2-t2",
+          "title": "Scalable Data Wrangling with Pandas",
+          "subtopics": [
+            "Memory footprints downcasting and columns optimizing",
+            "Chunking large datasets during data loads",
+            "PyArrow engine integrations and Parquet columnar layouts vs CSV"
+          ]
+        },
+        {
+          "id": "machine-learning-m2-t3",
+          "title": "Data Quality & Advanced Imputation",
+          "subtopics": [
+            "Missingness Mechanism Diagnostics: MCAR (Missing Completely at Random), MAR (Missing at Random), MNAR (Missing Not at Random)",
+            "Numerical Imputation: Mean, Median, Mode, Constant, and regression-based predictions",
+            "Categorical Imputation: Mode, Constant, and new category indicator insertions",
+            "Nominal vs Ordinal Variable Handling: Cardinality reductions, target dependencies",
+            "Advanced Imputation: KNN Imputation (distance-weighted k-nearest neighbors)",
+            "Iterative Imputation: Multivariate Imputation by Chained Equations (MICE) mathematics",
+            "Out-of-Distribution (OOD) Detection: Mahalanobis distance, Isolation Forest outlier thresholds"
+          ]
+        },
+        {
+          "id": "machine-learning-m2-t4",
+          "title": "Exploratory Data Analysis & Target Leakage",
+          "subtopics": [
+            "VIF (Variance Inflation Factor) for multicollinearity diagnostics",
+            "Timeline-based target leakage diagnostics (cross-validation score leaks)",
+            "Correlation collinearity vs causality"
+          ]
+        },
+        {
+          "id": "machine-learning-m2-t5",
+          "title": "Production Feature Engineering",
+          "subtopics": [
+            "Target encoding with smoothing, one-hot, ordinal encoders",
+            "Feature selection via Mutual Information scores",
+            "L1 LASSO regularization selection boundaries",
+            "UMAP vs t-SNE vs PCA projections"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 3: Core Supervised Algorithms & Mathematical Derivations",
+      "topics": [
+        {
+          "id": "machine-learning-m3-t1",
+          "title": "Linear & Regularized Regression",
+          "subtopics": [
+            "Ordinary Least Squares (OLS) closed-form matrix derivation",
+            "Ridge (L2) vs LASSO (L1) regularization geometric boundaries",
+            "Gaussian vs Laplace priors in regression models"
+          ]
+        },
+        {
+          "id": "machine-learning-m3-t2",
+          "title": "Logistic Regression & Log-Loss",
+          "subtopics": [
+            "Log-loss (binary cross-entropy) derivation from Bernoulli likelihood",
+            "Sigmoid gradient mathematical derivation",
+            "Newton-Raphson (Iteratively Reweighted Least Squares) optimizer vs GD"
+          ]
+        },
+        {
+          "id": "machine-learning-m3-t3",
+          "title": "K-Nearest Neighbors (KNN) & Naive Bayes Algorithms",
+          "subtopics": [
+            "KNN algorithm mechanics, distance metrics (Euclidean, Manhattan, Minkowski)",
+            "Curse of Dimensionality in high-dimensional vector spaces",
+            "KD-Trees and Ball-Trees for accelerated nearest neighbors search",
+            "Naive Bayes classifier mathematical formulation (conditional independence assumption)",
+            "Laplace smoothing derivation, Gaussian vs Multinomial vs Bernoulli Naive Bayes"
+          ]
+        },
+        {
+          "id": "machine-learning-m3-t4",
+          "title": "Support Vector Machines (SVM)",
+          "subtopics": [
+            "Primal vs Dual formulation and margins math",
+            "Karush-Kuhn-Tucker (KKT) conditions under soft-margins",
+            "Mercer's Kernel Theorem, and RBF kernel projection mechanics"
+          ]
+        },
+        {
+          "id": "machine-learning-m3-t5",
+          "title": "Model Evaluation & Class Imbalance Mitigation",
+          "subtopics": [
+            "ROC-AUC vs PR-AUC curves under severe class imbalance",
+            "F-beta score selection for asymmetrical costs",
+            "Macro vs micro vs weighted averages evaluations",
+            "SMOTE nearest neighbors math interpolation algorithm",
+            "Class-weighted loss functions",
+            "Focal Loss derivation (down-weighting easy examples)"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 4: Model Generalization, Selection & Ensemble Architectures",
+      "topics": [
+        {
+          "id": "machine-learning-m4-t1",
+          "title": "Generalization Theory & Overfitting",
+          "subtopics": [
+            "Overfitting/Underfitting deep diagnostics",
+            "Bias-Variance Decomposition mathematical proof",
+            "VC Dimension, and Rademacher Complexity bounds"
+          ]
+        },
+        {
+          "id": "machine-learning-m4-t2",
+          "title": "Advanced Cross-Validation Protocols",
+          "subtopics": [
+            "Nested cross-validation (hyperparameter tuning without leakage)",
+            "Stratified Group K-Fold (avoiding leakage across grouping keys)",
+            "Time-series split structures"
+          ]
+        },
+        {
+          "id": "machine-learning-m4-t3",
+          "title": "Decision Trees Mathematics",
+          "subtopics": [
+            "Shannon Entropy and Gini Impurity math proofs",
+            "Information Gain and variance reduction",
+            "Cost-complexity pruning algorithms (weakest-link pruning)"
+          ]
+        },
+        {
+          "id": "machine-learning-m4-t4",
+          "title": "Bagging & Random Forests",
+          "subtopics": [
+            "Bootstrap aggregation math",
+            "Out-of-bag (OOB) error estimation and feature subspace sampling de-correlation"
+          ]
+        },
+        {
+          "id": "machine-learning-m4-t5",
+          "title": "Boosting Algorithms & Tree Libraries",
+          "subtopics": [
+            "Functional gradient descent derivation, AdaBoost exponential loss",
+            "XGBoost second-order Taylor expansion optimization math",
+            "LightGBM leaf-wise growth vs CatBoost symmetric structures"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 5: Unsupervised Learning, Explainability & Production MLOps",
+      "topics": [
+        {
+          "id": "machine-learning-m5-t1",
+          "title": "Clustering Mechanics & Convergence",
+          "subtopics": [
+            "K-Means convergence proof and K-Means++ initialization math",
+            "Silhouette coefficient and DBSCAN density connectivity rules",
+            "Hierarchical linkages"
+          ]
+        },
+        {
+          "id": "machine-learning-m5-t2",
+          "title": "Dimensionality Reduction Derivations",
+          "subtopics": [
+            "PCA derivation via covariance eigendecomposition",
+            "SVD PCA formulation",
+            "t-SNE probability mapping and Student-t distribution heavy-tail resolution"
+          ]
+        },
+        {
+          "id": "machine-learning-m5-t3",
+          "title": "Anomaly Detection & Time Series",
+          "subtopics": [
+            "Isolation Forest path length math, One-Class SVM boundaries",
+            "Autoencoder reconstruction thresholds",
+            "Time Series stationarity (ADF test), ARIMA"
+          ]
+        },
+        {
+          "id": "machine-learning-m5-t4",
+          "title": "Explainable AI (XAI) Mathematics",
+          "subtopics": [
+            "Shapley value cooperative game theory axioms",
+            "SHAP kernels math, LIME local perturbation linear models"
+          ]
+        },
+        {
+          "id": "machine-learning-m5-t5",
+          "title": "Enterprise MLOps & Serving Pipelines",
+          "subtopics": [
+            "Model quantization (PTQ vs QAT math and zero-point scaling)",
+            "ONNX runtime compilation and Triton routing configurations",
+            "Concept/Data drift metrics (Kolmogorov-Smirnov test, Population Stability Index)"
+          ]
+        }
+      ]
+    }
+  ],
+  "revision": [],
+  "interview": [],
+  "examples": [],
+  "diagrams": [],
+  "version": "1.0.0",
+  "last_updated": "2026-06-25"
+}

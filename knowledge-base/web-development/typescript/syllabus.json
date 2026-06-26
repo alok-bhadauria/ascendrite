@@ -1,0 +1,211 @@
+{
+  "subject_id": "typescript",
+  "name": "TypeScript",
+  "category": "web-development",
+  "modules": [
+    {
+      "name": "Module 1: TS Compiler, Type Inference & Type Assertion Traps",
+      "topics": [
+        {
+          "id": "typescript-m1-t1",
+          "title": "TS Compiler",
+          "subtopics": [
+            "Tsconfig.json compile options (strict: true, target, module resolution), AST compilation"
+          ]
+        },
+        {
+          "id": "typescript-m1-t2",
+          "title": "Type Inference",
+          "subtopics": [
+            "Implicit type evaluations, const assertions (as const), literal type widenings"
+          ]
+        },
+        {
+          "id": "typescript-m1-t3",
+          "title": "Type Assertions",
+          "subtopics": [
+            "Type assertion (as Type) compile bypass traps, any type compromises, unknown type safety"
+          ]
+        },
+        {
+          "id": "typescript-m1-t4",
+          "title": "Union & Intersection",
+          "subtopics": [
+            "Union types (|), Intersection types (&), logical constraints matching"
+          ]
+        },
+        {
+          "id": "typescript-m1-t5",
+          "title": "Type Guards",
+          "subtopics": [
+            "Typeof guards, instanceof class validations, custom type guard assertions (is Type)"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 2: Generics Constraints, Mapped Types & Utility Types",
+      "topics": [
+        {
+          "id": "typescript-m2-t1",
+          "title": "Generics",
+          "subtopics": [
+            "Generics syntax parameters, bounded generic constraints (<T extends Constraint>)"
+          ]
+        },
+        {
+          "id": "typescript-m2-t2",
+          "title": "Keyof Operator",
+          "subtopics": [
+            "Object key types query (keyof T), mapped types attributes transformations"
+          ]
+        },
+        {
+          "id": "typescript-m2-t3",
+          "title": "Conditional Types",
+          "subtopics": [
+            "Conditional types evaluations (T extends U ? X : Y), type infer keywords"
+          ]
+        },
+        {
+          "id": "typescript-m2-t4",
+          "title": "Utility Types",
+          "subtopics": [
+            "Partial, Required, Readonly, Pick, Record, Omit type transformations under the hood"
+          ]
+        },
+        {
+          "id": "typescript-m2-t5",
+          "title": "Mapped Types Modifiers",
+          "subtopics": [
+            "Readonly/Optional modifiers removals (-readonly, -?) mapping algorithms"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 3: Type Covariance, Contravariance & Declaration Merging",
+      "topics": [
+        {
+          "id": "typescript-m3-t1",
+          "title": "Variance",
+          "subtopics": [
+            "Covariance types conversions, Contravariance function parameters constraints, Bivariance traps"
+          ]
+        },
+        {
+          "id": "typescript-m3-t2",
+          "title": "Declaration Merging",
+          "subtopics": [
+            "Interface declarations merging rules, namespace merging, module augmentations"
+          ]
+        },
+        {
+          "id": "typescript-m3-t3",
+          "title": "Function Overloads",
+          "subtopics": [
+            "Multi-signature declarations, compiler checks, single implement logic validations"
+          ]
+        },
+        {
+          "id": "typescript-m3-t4",
+          "title": "Type Aliases vs Interfaces",
+          "subtopics": [
+            "Extensibility, compile error outputs readability, interface inheritance rules"
+          ]
+        },
+        {
+          "id": "typescript-m3-t5",
+          "title": "TS Decorators",
+          "subtopics": [
+            "Experimental decorators execution stages, metadata reflection configurations"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 4: TS DOM Types, Event Handling & API Validations",
+      "topics": [
+        {
+          "id": "typescript-m4-t1",
+          "title": "DOM Type Casts",
+          "subtopics": [
+            "HTMLElement conversions, HTMLInputElement attribute castings, window types extension"
+          ]
+        },
+        {
+          "id": "typescript-m4-t2",
+          "title": "Event Handling Types",
+          "subtopics": [
+            "React.ChangeEvent typing, MouseEvent parameters, callback types signatures"
+          ]
+        },
+        {
+          "id": "typescript-m4-t3",
+          "title": "API Schema Validations",
+          "subtopics": [
+            "Zod schema definitions inference, runtime validation mappings to TS types"
+          ]
+        },
+        {
+          "id": "typescript-m4-t4",
+          "title": "Utility Types Creation",
+          "subtopics": [
+            "Custom conditional utility types, deep partial types, pick-by-value helpers"
+          ]
+        },
+        {
+          "id": "typescript-m4-t5",
+          "title": "Template Literal Types",
+          "subtopics": [
+            "String type permutations (type Route = `/user/${id}`), string transformations"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 5: Monorepo TS setups, Compiler Chunks & Tree-Shaking",
+      "topics": [
+        {
+          "id": "typescript-m5-t1",
+          "title": "Monorepo Setup",
+          "subtopics": [
+            "TS project references, path alias mappings, tsc build compilation chains"
+          ]
+        },
+        {
+          "id": "typescript-m5-t2",
+          "title": "Declaration Files",
+          "subtopics": [
+            "d.ts files generations, module declarations definitions mappings, external library types override"
+          ]
+        },
+        {
+          "id": "typescript-m5-t3",
+          "title": "Compiler Performance",
+          "subtopics": [
+            "Incremental compilation configurations, skipLibCheck optimizations, build diagnostics"
+          ]
+        },
+        {
+          "id": "typescript-m5-t4",
+          "title": "Tree-Shaking TS",
+          "subtopics": [
+            "Enum compilation footprints vs const enum compiler optimizations, unused import trees"
+          ]
+        },
+        {
+          "id": "typescript-m5-t5",
+          "title": "TS Utility Configurations",
+          "subtopics": [
+            "Strict null checks validations, noImplicitAny overrides, strict bind call apply validations"
+          ]
+        }
+      ]
+    }
+  ],
+  "revision": [],
+  "interview": [],
+  "examples": [],
+  "diagrams": []
+}

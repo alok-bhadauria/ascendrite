@@ -1,0 +1,27 @@
+{
+  "subject_id": "machine-learning",
+  "name": "Machine Learning",
+  "category": "ai",
+  "difficulty": "Advanced",
+  "estimated_learning_hours": 120,
+  "prerequisites": [
+    "Python Programming",
+    "Linear Algebra Foundations",
+    "Probability and Statistics"
+  ],
+  "tags": [
+    "Machine Learning",
+    "Supervised Learning",
+    "Unsupervised Learning",
+    "Optimization",
+    "Matrix Calculus"
+  ],
+  "subject_theme_colors": {
+    "primary": "#4F46E5",
+    "secondary": "#818CF8",
+    "accent": "#F59E0B",
+    "neutral": "#1F2937"
+  },
+  "version": "1.0.0",
+  "last_updated": "2026-06-25"
+}

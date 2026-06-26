@@ -1,0 +1,55 @@
+{
+  "glossary": [
+    {
+      "term": "Vector Space",
+      "definition": "A mathematical structure formed by a collection of elements called vectors, which may be added together and multiplied by numbers (scalars), satisfying closure, associativity, commutativity, and distributivity axioms."
+    },
+    {
+      "term": "Orthonormal Basis",
+      "definition": "A basis for a vector space where all basis vectors are mutually orthogonal (perpendicular) and have unit length (norm of 1)."
+    },
+    {
+      "term": "Singular Value",
+      "definition": "The square root of a non-zero eigenvalue of the matrix product A^T * A or A * A^T, representing the scaling factor of a matrix transformation along its principal axes."
+    }
+  ],
+  "references": [
+    {
+      "title": "Introduction to Linear Algebra",
+      "author": "Gilbert Strang",
+      "publisher": "Wellesley-Cambridge Press",
+      "year": 2016
+    },
+    {
+      "title": "The Elements of Statistical Learning",
+      "author": "Trevor Hastie, Robert Tibshirani, Jerome Friedman",
+      "publisher": "Springer",
+      "year": 2009
+    }
+  ],
+  "further_reading": [
+    {
+      "title": "Pattern Recognition and Machine Learning",
+      "author": "Christopher Bishop",
+      "publisher": "Springer",
+      "year": 2006
+    },
+    {
+      "title": "Linear Algebra and Learning from Data",
+      "author": "Gilbert Strang",
+      "publisher": "Wellesley-Cambridge Press",
+      "year": 2019
+    }
+  ],
+  "research_papers": [
+    {
+      "title": "Matrix Factorization Techniques for Recommender Systems",
+      "authors": "Yehuda Koren, Robert Bell, Chris Volinsky",
+      "journal": "IEEE Computer",
+      "year": 2009,
+      "url": "https://doi.org/10.1109/MC.2009.263"
+    }
+  ],
+  "version": "1.0.0",
+  "last_updated": "2026-06-25"
+}

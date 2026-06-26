@@ -1,0 +1,73 @@
+{
+  "topic_id": "machine-learning-m4-t4",
+  "title": "Bagging & Random Forests",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Medium",
+    "estimated_hours": 5,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Explain the mathematical formulation of Bootstrap Aggregation (Bagging) and prove how bagging reduces variance while keeping bias unchanged.",
+    "Formulate the probability of a sample being excluded from a bootstrap dataset and derive the Out-of-Bag (OOB) error estimation protocol.",
+    "Analyze the mathematical de-correlation of trees via Random Forests feature subspace sampling and quantify its impact on ensemble variance."
+  ],
+  "content_sections": [
+    {
+      "title": "Bootstrap Aggregation and Variance Reduction Math",
+      "content": "To reduce the generalization error of high-variance estimators like fully grown decision trees, we implement **Bootstrap Aggregation (Bagging)**. Given a training dataset $\\mathcal{D}$ of size $N$, we generate $B$ bootstrap samples $\\mathcal{D}_1, \\dots, \\mathcal{D}_B$ by drawing $N$ samples from $\\mathcal{D}$ uniformly at random with replacement. We train a separate model $h_b(\\mathbf{x})$ on each bootstrap sample $\\mathcal{D}_b$. The bagged ensemble prediction is:\n\n*   **Regression:** $h_{\\text{bag}}(\\mathbf{x}) = \\frac{1}{B} \\sum_{b=1}^B h_b(\\\\mathbf{x})$\n*   **Classification:** Majority vote over $\\\\{h_b(\\mathbf{x})\\\\}_{b=1}^B$\n\n### Variance Reduction Proof\nLet $X_1, \\dots, X_B$ be identically distributed random variables representing predictions of individual models, each with variance $\\sigma^2$ and positive pairwise correlation $\\rho > 0$ (due to structural similarities in the training samples). The ensemble prediction is $Y = \\frac{1}{B} \\sum_{i=1}^B X_i$. We compute the variance of $Y$:\n\n$$\\text{Var}(Y) = \\text{Var}\\left( \\frac{1}{B} \\sum_{i=1}^B X_i \\right) = \\frac{1}{B^2} \\text{Var}\\left( \\sum_{i=1}^B X_i \\right)$$\n\nUsing the expansion of the variance of a sum of random variables:\n\n$$\\text{Var}(Y) = \\frac{1}{B^2} \\left[ \\sum_{i=1}^B \\text{Var}(X_i) + \\sum_{i=1}^B \\sum_{j \\neq i}^B \\text{Cov}(X_i, X_j) \\right]$$\n\nSince $\\text{Var}(X_i) = \\sigma^2$ and $\\text{Cov}(X_i, X_j) = \\rho \\sigma^2$:\n\n$$\\text{Var}(Y) = \\frac{1}{B^2} \\left[ B \\sigma^2 + B(B - 1) \\rho \\sigma^2 \\right] = \\frac{\\sigma^2}{B} + \\frac{B - 1}{B} \\rho \\sigma^2$$\n\n$$\\text{Var}(Y) = \\rho \\sigma^2 + \\frac{1 - \\rho}{B} \\sigma^2$$\n\nAs the number of bootstrap models $B \\to \\infty$, the second term approaches zero, yielding the variance limit:\n\n$$\\lim_{B \\to \\infty} \\text{Var}(Y) = \\rho \\sigma^2$$\n\nThis proves that the ensemble's variance is bounded by the product of the individual model variance $\\sigma^2$ and the correlation $\\rho$ between models. To minimize ensemble variance, we must de-correlate the individual models to minimize $\\rho$.",
+      "callouts": [
+        {
+          "type": "Student Trap",
+          "title": "Bagging and Bias Limits",
+          "content": "A common mistake is assuming that bagging reduces both bias and variance. Bagging only reduces variance. The bias of the bagged ensemble is mathematically identical to the bias of a single model trained on a bootstrap sample. In fact, because a bootstrap sample contains only a subset of the unique observations, individual bootstrap models are slightly underfitted, causing the ensemble bias to be slightly higher than that of a single model trained on the entire dataset."
+        }
+      ]
+    },
+    {
+      "title": "Out-of-Bag (OOB) Error Estimation",
+      "content": "Because bootstrap sampling is performed with replacement, some observations are selected multiple times in a single fold, while others are omitted completely. We can derive the exact probability of an observation being left out.\n\nFor a dataset of size $N$, the probability of not selecting a specific sample $\\mathbf{x}_i$ in a single random draw is $1 - \\frac{1}{N}$. Since a bootstrap sample requires $N$ independent draws, the probability that $\\mathbf{x}_i$ is never selected is:\n\n$$p = \\left( 1 - \\frac{1}{N} \\right)^N$$\n\nTaking the limit of this expression as the dataset size $N \\to \\infty$ yields:\n\n$$\\lim_{N \\to \\infty} \\left( 1 - \\frac{1}{N} \\right)^N = e^{-1} \\approx 0.368$$\n\nThis mathematical limit proves that approximately 36.8% of the observations are excluded from any given bootstrap dataset. These are the **Out-of-Bag (OOB)** samples. The remaining 63.2% of unique samples are in-bag.\n\n### Out-of-Bag Error Protocol\nWe can use OOB samples to construct a cross-validation proxy without splitting the dataset. For each observation $\\mathbf{x}_i$ in the original training set $\\mathcal{D}$:\n1.  Identify the subset of bootstrap models $\\{h_b\\}$ that were trained on datasets $\\mathcal{D}_b$ that do not contain $\\mathbf{x}_i$.\n2.  Compute the ensemble prediction for $\\mathbf{x}_i$ using only this subset of models.\n3.  Calculate the loss between this prediction and the true label $y_i$.\n\nThe average loss computed across all observations is the **OOB Error**. Since the models used to predict $\\mathbf{x}_i$ never saw that sample during training, OOB error is an unbiased estimate of the model's true generalization performance.",
+      "callouts": [
+        {
+          "type": "Performance Note",
+          "title": "Unbiased Validation for Free",
+          "content": "OOB error estimation provides validation metrics without sacrificing any training data or running costly cross-validation loops. It is computationally free because the tracking of in-bag indices is completed during the sampling phase."
+        }
+      ]
+    },
+    {
+      "title": "Feature Subspace Sampling (Random Forests)",
+      "content": "Standard bagging reduces variance but is limited by the correlation $\\rho$ between trees. If a dataset contains a few highly dominant predictive features, all bagged trees will select those features for splits near their roots, resulting in structurally similar trees with high correlation $\\rho$.\n\n**Random Forests** solves this bottleneck by introducing **feature subspace sampling**. At each node split during the construction of a tree:\n1.  The algorithm randomly selects a subset of $m$ features from the total $d$ features.\n2.  The split is searched and executed strictly within this subset of $m$ features.\n\nBy default, we set $m = \\sqrt{d}$ for classification trees and $m = \\frac{d}{3}$ for regression trees.\n\n### Mathematical Impact of Feature Sampling\nBy restricting the split candidate space, we force trees to split on less dominant features, generating structurally diverse trees. This drastically reduces the pairwise correlation $\\rho$ between trees in the ensemble. \n\nRecalling our variance limit $\\lim_{B \\to \\infty} \\text{Var}(Y) = \\rho \\sigma^2$, reducing $\\rho$ directly lowers the lower bound of the ensemble's variance, making Random Forests significantly more robust and accurate than standard bagged trees.",
+      "callouts": [
+        {
+          "type": "Common Misconception",
+          "title": "Overfitting and Ensemble Size",
+          "content": "A common misconception is that adding too many trees to a Random Forest causes overfitting. Adding more trees $B$ only reduces the term $\\frac{1 - \\rho}{B} \\sigma^2$, causing the ensemble variance to converge monotonically to its limit $\\rho \\sigma^2$. It does not increase model capacity or cause overfitting. The generalization limit of a Random Forest is governed entirely by the capacity of its individual trees (e.g. `max_depth` and `min_samples_leaf`)."
+        }
+      ]
+    },
+    {
+      "title": "Professional Practice and Tuning Parameters",
+      "content": "When configuring a Random Forest in production, we balance performance and computational efficiency using three core hyperparameters:\n\n1.  **`n_estimators` ($B$):** The number of trees. Set this as high as computationally feasible; performance will plateau once the variance term converges, but training time scales linearly $\\mathcal{O}(B)$.\n2.  **`max_features` ($m$):** The size of the random feature subsets. Decreasing $m$ de-correlates trees (reducing $\\rho$) but increases the bias of individual trees (increasing $\\sigma^2$). This is a critical hyperparameter to tune.\n3.  **`max_depth` / `min_samples_leaf`:** Controls the growth of individual trees. Trees in a Random Forest should be grown deep (low bias, high variance) because the ensemble aggregation step is designed to reduce the variance.",
+      "callouts": [
+        {
+          "type": "Interview Tip",
+          "title": "OOB vs. Cross-Validation",
+          "content": "If asked whether OOB error is always identical to K-Fold cross-validation error, explain that while they are both unbiased estimators of generalization performance, they can differ slightly on small datasets. On small samples, the OOB predictor for any point uses approximately $0.368 \\times B$ trees, whereas K-Fold models are trained on $(K-1)/K$ of the full dataset, which can make the K-Fold estimate slightly more stable."
+        }
+      ]
+    }
+  ],
+  "example_refs": [
+    "machine-learning-m4-t4-ex1"
+  ],
+  "diagram_refs": [
+    "machine-learning-m4-t4-dia1"
+  ],
+  "practice_refs": [
+    "machine-learning-m4-t4-prac1"
+  ],
+  "quiz_refs": [
+    "machine-learning-m4-t4-quiz"
+  ]
+}

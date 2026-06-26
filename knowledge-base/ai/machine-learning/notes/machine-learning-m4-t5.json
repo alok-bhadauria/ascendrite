@@ -1,0 +1,73 @@
+{
+  "topic_id": "machine-learning-m4-t5",
+  "title": "Boosting Algorithms & Tree Libraries",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Hard",
+    "estimated_hours": 7,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Derive AdaBoost weight updates from the minimization of Exponential Loss under functional gradient descent.",
+    "Derive the second-order Taylor expansion objective of Gradient Boosting and formulate the optimal split gain mathematical equation used by XGBoost.",
+    "Contrast the algorithmic structures of LightGBM (leaf-wise growth and histogram bins) and CatBoost (symmetric oblivious trees and ordered boosting)."
+  ],
+  "content_sections": [
+    {
+      "title": "Functional Gradient Descent and AdaBoost Derivation",
+      "content": "Unlike bagging methods that build estimators in parallel, boosting algorithms train weak learners sequentially. Each new model is added to target the errors committed by the cumulative ensemble. This process can be formulated as **functional gradient descent** in an additive function space, minimizing a loss function:\n\n$$\\min_{F} \\sum_{i=1}^N \\mathcal{L}(y_i, F(\\mathbf{x}_i))$$\n\nwhere $F(\\mathbf{x}) = \\sum_{b=1}^B \\beta_b h_b(\\mathbf{x})$ and each $h_b$ is a weak base classifier.\n\n### AdaBoost and Exponential Loss\n**AdaBoost** minimizes the **Exponential Loss** for binary labels $y_i \\in \\{-1, 1\\}$ and predictions $h_b(\\mathbf{x}) \\in \\{-1, 1\\}$:\n\n$$\\mathcal{L}_{\\text{exp}}(y, F(\\mathbf{x})) = e^{-y F(\\mathbf{x})}$$\n\nSuppose we have constructed the ensemble up to step $m-1$, giving predictor $F_{m-1}(\\mathbf{x})$. At step $m$, we add a new weak learner $\\beta_m h_m(\\mathbf{x})$ to minimize the total loss:\n\n$$\\mathcal{L} = \\sum_{i=1}^N e^{-y_i \\left( F_{m-1}(\\mathbf{x}_i) + \\beta_m h_m(\\mathbf{x}_i) \\right)} = \\sum_{i=1}^N w_i^{(m)} e^{-y_i \\beta_m h_m(\\mathbf{x}_i)}$$\n\nwhere $w_i^{(m)} = e^{-y_i F_{m-1}(\\mathbf{x}_i)}$ is the sample weight at step $m$. We partition the sum based on whether the weak learner predicts correctly ($y_i h_m(\\mathbf{x}_i) = 1$) or incorrectly ($y_i h_m(\\mathbf{x}_i) = -1$):\n\n$$\\mathcal{L} = \\sum_{y_i = h_m(\\mathbf{x}_i)} w_i^{(m)} e^{-\\beta_m} + \\sum_{y_i \\neq h_m(\\mathbf{x}_i)} w_i^{(m)} e^{\\beta_m}$$\n\nAdding and subtracting $e^{-\\beta_m} \\sum_{y_i \\neq h_m(\\mathbf{x}_i)} w_i^{(m)}$ allows us to write this in terms of the total weight sum:\n\n$$\\mathcal{L} = e^{-\\beta_m} \\sum_{i=1}^N w_i^{(m)} + (e^{\\beta_m} - e^{-\\beta_m}) \\sum_{i=1}^N w_i^{(m)} \\mathbb{I}(y_i \\neq h_m(\\mathbf{x}_i))$$\n\nTo minimize this loss with respect to $h_m$, the second summation must be minimized. This proves that the optimal weak learner $h_m^*$ is the one that minimizes the weighted error rate:\n\n$$\\epsilon_m = \\frac{\\sum_{i=1}^N w_i^{(m)} \\mathbb{I}(y_i \\neq h_m(\\mathbf{x}_i))}{\\sum_{i=1}^N w_i^{(m)}}$$\n\nTo find the optimal step size $\\beta_m$, we take the derivative of $\\mathcal{L}$ with respect to $\\beta_m$, set it to zero, and solve:\n\n$$\\frac{d \\mathcal{L}}{d \\beta_m} = -e^{-\\beta_m} \\sum_{i=1}^N w_i^{(m)} + (e^{\\beta_m} + e^{-\\beta_m}) \\sum_{i=1}^N w_i^{(m)} \\mathbb{I}(y_i \\neq h_m(\\mathbf{x}_i)) = 0$$\n\nDividing by $e^{-\\beta_m} \\sum_{i=1}^N w_i^{(m)}$ and replacing the error rate term with $\\epsilon_m$ yields:\n\n$$-1 + (e^{2\\beta_m} + 1) \\epsilon_m = 0 \\implies e^{2\\beta_m} = \\frac{1 - \\epsilon_m}{\\epsilon_m} \\implies \\beta_m = \\frac{1}{2} \\log\\left( \\frac{1 - \\epsilon_m}{\\epsilon_m} \\right)$$\n\nThis defines the optimal contribution coefficient for the new learner. Sample weights are updated for the next iteration as: $w_i^{(m+1)} = w_i^{(m)} e^{-y_i \\beta_m h_m(\\mathbf{x}_i)}$.",
+      "callouts": [
+        {
+          "type": "Student Trap",
+          "title": "Outliers and Exponential Loss Stability",
+          "content": "While exponential loss yields clean algebraic closed-form derivations, it is highly sensitive to noisy labels and outliers. If a sample is misclassified with high confidence ($y_i F(\\mathbf{x}_i) \\ll -1$), the loss $e^{-y_i F(\\mathbf{x}_i)}$ grows exponentially, causing the boosting algorithm to focus almost all its capacity on fitting these outliers. For robust production modeling, use loss functions with linear growth rates for large errors, such as Huber loss or log-loss."
+        }
+      ]
+    },
+    {
+      "title": "Gradient Boosting and the XGBoost Optimization Math",
+      "content": "Standard gradient boosting fits new trees to the first-order residuals (gradients) of the loss function. **XGBoost (Extreme Gradient Boosting)** improves on this by using a second-order Taylor expansion to approximate the loss, incorporating Hessian curvature information for rapid convergence.\n\nLet $F_t(\\mathbf{x}_i) = F_{t-1}(\\mathbf{x}_i) + f_t(\\mathbf{x}_i)$ be the prediction at iteration $t$, where $f_t$ is a new regression tree. The objective function at step $t$ regularized by leaf constraints is:\n\n$$\\mathcal{L}^{(t)} = \\sum_{i=1}^N \\mathcal{L}(y_i, F_{t-1}(\\mathbf{x}_i) + f_t(\\mathbf{x}_i)) + \\Omega(f_t)$$\n\nwhere $\\Omega(f_t) = \\gamma T + \\frac{1}{2} \\lambda \\sum_{j=1}^T w_j^2$ limits complexity, $T$ is the number of terminal leaves, and $w_j$ is the weight of leaf $j$. Approximating the loss using a second-order Taylor expansion around the previous prediction $F_{t-1}(\\mathbf{x}_i)$:\n\n$$\\mathcal{L}^{(t)} \\approx \\sum_{i=1}^N \\left[ \\mathcal{L}(y_i, F_{t-1}(\\mathbf{x}_i)) + g_i f_t(\\mathbf{x}_i) + \\frac{1}{2} h_i f_t^2(\\mathbf{x}_i) \\right] + \\gamma T + \\frac{1}{2} \\lambda \\sum_{j=1}^T w_j^2$$\n\nwhere $g_i = \\frac{\\partial \\mathcal{L}(y_i, \\hat{y}^{(t-1)})}{\\partial \\hat{y}^{(t-1)}}$ is the gradient, and $h_i = \\frac{\\partial^2 \\mathcal{L}(y_i, \\hat{y}^{(t-1)})}{\\partial (\\hat{y}^{(t-1)})^2}$ is the Hessian. Removing the constant term $\\mathcal{L}(y_i, F_{t-1}(\\mathbf{x}_i))$ and grouping the samples by the leaf node $j$ they land in ($I_j = \\{i \\mid q(\\mathbf{x}_i) = j\\}$):\n\n$$\\tilde{\\mathcal{L}}^{(t)} = \\sum_{j=1}^T \\left[ \\left( \\sum_{i \\in I_j} g_i \\right) w_j + \\frac{1}{2} \\left( \\sum_{i \\in I_j} h_i + \\lambda \\right) w_j^2 \\right] + \\gamma T$$\n\nFor a fixed tree structure, the optimal weight $w_j^*$ for leaf $j$ is found by differentiating $\\tilde{\\mathcal{L}}^{(t)}$ with respect to $w_j$ and setting to zero:\n\n$$w_j^* = -\\frac{\\sum_{i \\in I_j} g_i}{\\sum_{i \\in I_j} h_i + \\lambda} = -\\frac{G_j}{H_j + \\lambda}$$\n\nwhere $G_j = \\sum_{i \\in I_j} g_i$ and $H_j = \\sum_{i \\in I_j} h_i$. Substituting $w_j^*$ back into the objective yields the optimal objective value (structure score):\n\n$$\\tilde{\\mathcal{L}}^{(t)}(q) = -\\frac{1}{2} \\sum_{j=1}^T \\frac{G_j^2}{H_j + \\lambda} + \\gamma T$$\n\n### Split Evaluation Gain\nDuring tree growth, the gain of a candidate split partitioning parent $P$ into left child $L$ and right child $R$ is:\n\n$$\\text{Gain} = \\frac{1}{2} \\left[ \\frac{G_L^2}{H_L + \\lambda} + \\frac{G_R^2}{H_R + \\lambda} - \\frac{G_P^2}{H_P + \\lambda} \\right] - \\gamma$$\n\nWe only execute the split if $\\text{Gain} > 0$. The $\\gamma$ parameter acts as a threshold for pruning.",
+      "callouts": [
+        {
+          "type": "Engineering Note",
+          "title": "Hessian Stability under Log-Loss",
+          "content": "For binary classification using Log-Loss, the Hessian is $h_i = p_i(1 - p_i)$, where $p_i = \\sigma(z_i)$. Since $p_i \\in (0, 1)$, $h_i$ is strictly positive, ensuring the Hessian sum $H_j + \\lambda$ is positive definite. This guarantees that the optimal leaf weights and split gains are numerically stable."
+        }
+      ]
+    },
+    {
+      "title": "LightGBM vs. CatBoost Architectural Divergence",
+      "content": "Modern gradient boosting frameworks optimize the training speeds and categorical handling of classical GBM. The two dominant libraries, LightGBM and CatBoost, utilize completely divergent tree-growth and data-processing architectures:\n\n### LightGBM (Leaf-Wise Growth & Histograms)\n1.  **Leaf-Wise Tree Growth:** Classical trees grow level-wise (layer by layer). LightGBM grows leaf-wise, splitting the single node that maximizes loss reduction, regardless of depth constraints. This creates deeper, highly asymmetric trees that converge faster but require careful regularizers (e.g. `max_depth`, `min_data_in_leaf`) to prevent overfitting.\n2.  **Histogram-Based Splitting:** Continuous features are binned into discrete integer bins (typically 256). Splits are searched over these bins, reducing split-scan complexity from $\\mathcal{O}(N \\log N)$ to $\\mathcal{O}(N_{\\text{bins}})$.\n3.  **GOSS (Gradient-based One-Side Sampling):** Retains samples with large gradients (high errors) and randomly samples a subset of samples with small gradients, speeding up training.\n\n### CatBoost (Symmetric Oblivious Trees & Ordered Boosting)\n1.  **Symmetric (Oblivious) Trees:** Splitting conditions are identical across an entire level of the tree. This makes the tree structure balanced and highly symmetric. Inference is extremely fast because predictions can be calculated using bitwise index lookups, avoiding CPU branch mispredictions.\n2.  **Ordered Boosting:** Standard boosting calculates gradients on the same training samples used to build the tree, introducing prediction shift (a form of target leakage). CatBoost solves this by training multiple models on random permutations of the dataset, evaluating gradients on samples independent of the tree construction.\n3.  **Symmetric Target Encoding:** Integrates smoothed target encoding for categorical features directly into tree split evaluation.",
+      "callouts": [
+        {
+          "type": "Common Misconception",
+          "title": "Universally Superior Boosting Library",
+          "content": "There is no single best boosting library. LightGBM is generally preferred for massive, sparse datasets due to its sub-minute training speeds and low memory consumption. CatBoost is preferred for tabular datasets containing many high-cardinality categorical features, as its internal symmetric target encoding prevents overfitting and requires minimal pre-processing."
+        }
+      ]
+    },
+    {
+      "title": "Professional Practice and Tuning Mappings",
+      "content": "When tuning boosting models, we mitigate overfitting by applying **shrinkage**: scaling new tree contributions by learning rate $\\eta \\in (0, 0.1]$: $F_t(\\mathbf{x}) = F_{t-1}(\\mathbf{x}) + \\eta f_t(\\mathbf{x})$.\n\n### Mappings Across Libraries\n*   **Learning Rate:** `learning_rate` in XGBoost/LightGBM; `eta` in CatBoost.\n*   **Regularization L2:** `reg_lambda` in XGBoost/LightGBM; `l2_leaf_reg` in CatBoost.\n*   **Max Leaves:** `max_leaves` in XGBoost; `num_leaves` in LightGBM (not applicable to CatBoost oblivious trees which split symmetrically).",
+      "callouts": [
+        {
+          "type": "Interview Tip",
+          "title": "Functional vs. Parametric Gradient Descent",
+          "content": "If asked about the difference between standard Gradient Descent (GD) and Boosting, explain that GD updates a fixed set of parameters $\\mathbf{w}$ in parameter space, whereas Boosting updates the model $F(\\mathbf{x})$ in function space by adding new weak functions: $F_t(\\mathbf{x}) = F_{t-1}(\\mathbf{x}) - \\eta \\nabla_{F} \\mathcal{L}$."
+        }
+      ]
+    }
+  ],
+  "example_refs": [
+    "machine-learning-m4-t5-ex1"
+  ],
+  "diagram_refs": [
+    "machine-learning-m4-t5-dia1"
+  ],
+  "practice_refs": [
+    "machine-learning-m4-t5-prac1"
+  ],
+  "quiz_refs": [
+    "machine-learning-m4-t5-quiz"
+  ]
+}

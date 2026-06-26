@@ -1,0 +1,252 @@
+{
+  "subject_id": "quantitative-aptitude",
+  "name": "Quantitative Aptitude",
+  "category": "aptitude",
+  "modules": [
+    {
+      "name": "Module 1: Number Systems, LCM-HCF & Arithmetic Progressions",
+      "topics": [
+        {
+          "id": "quantitative-aptitude-m1-t1",
+          "title": "Number Systems",
+          "subtopics": [
+            "Classification of numbers (reals, rationals, integers, primes)",
+            "Divisibility rules and modular applications",
+            "Unit digit calculation patterns under power cycles"
+          ]
+        },
+        {
+          "id": "quantitative-aptitude-m1-t2",
+          "title": "Factors & Remainders",
+          "subtopics": [
+            "Factor theorem, sum and count of factors",
+            "Euler's totient function and totient remainder theorem",
+            "Chinese Remainder Theorem logic applications"
+          ]
+        },
+        {
+          "id": "quantitative-aptitude-m1-t3",
+          "title": "LCM & HCF",
+          "subtopics": [
+            "Division algorithms",
+            "Linear combinations (B\u00e9zout's identity)",
+            "Applications in circular track runs and synchronization problems"
+          ]
+        },
+        {
+          "id": "quantitative-aptitude-m1-t4",
+          "title": "Progressions",
+          "subtopics": [
+            "Arithmetic Progressions (AP) sums and term relations",
+            "Geometric Progressions (GP) ratios and infinite sums",
+            "Harmonic Progressions (HP) relations"
+          ]
+        },
+        {
+          "id": "quantitative-aptitude-m1-t5",
+          "title": "Simplifications",
+          "subtopics": [
+            "Indices and surds properties",
+            "Algebraic identity derivations",
+            "Approximations techniques under square roots"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 2: Averages, Mixtures & Percentage Adjustments",
+      "topics": [
+        {
+          "id": "quantitative-aptitude-m2-t1",
+          "title": "Averages & Mixtures",
+          "subtopics": [
+            "Simple averages vs weighted averages",
+            "Alligation ratios calculations in mixtures",
+            "Replacement loops in liquids"
+          ]
+        },
+        {
+          "id": "quantitative-aptitude-m2-t2",
+          "title": "Percentages",
+          "subtopics": [
+            "Successive percentage changes",
+            "Product consistency rules ($A \\times B = C$ adjustments)",
+            "Fraction-to-percentage conversions speed-tables"
+          ]
+        },
+        {
+          "id": "quantitative-aptitude-m2-t3",
+          "title": "Profit, Loss & Discount",
+          "subtopics": [
+            "Cost/selling price relations",
+            "Marked price and successive discounts",
+            "Dishonest dealer weight manipulation math"
+          ]
+        },
+        {
+          "id": "quantitative-aptitude-m2-t4",
+          "title": "Simple & Compound Interest",
+          "subtopics": [
+            "SI vs CI formulas derivations",
+            "CI compounding periods (semi-annual, quarterly)",
+            "CI installment plans calculations"
+          ]
+        },
+        {
+          "id": "quantitative-aptitude-m2-t5",
+          "title": "Ratio & Proportion",
+          "subtopics": [
+            "Direct and inverse variations",
+            "Partnerships capital-time distributions",
+            "Mixture replacements equations"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 3: Time and Work, Ratios & Pipe Cisterns",
+      "topics": [
+        {
+          "id": "quantitative-aptitude-m3-t1",
+          "title": "Time & Work",
+          "subtopics": [
+            "Efficiency ratios",
+            "Work rate formulas ($W = R \\times T$)",
+            "Alternate-day schedule calculations and group work"
+          ]
+        },
+        {
+          "id": "quantitative-aptitude-m3-t2",
+          "title": "Work & Wages",
+          "subtopics": [
+            "Wage division based on relative capacity",
+            "Total work contribution calculations"
+          ]
+        },
+        {
+          "id": "quantitative-aptitude-m3-t3",
+          "title": "Pipes & Cisterns",
+          "subtopics": [
+            "Inlet and outlet flow rates",
+            "Negative work of leaks",
+            "Pipe openings loops"
+          ]
+        },
+        {
+          "id": "quantitative-aptitude-m3-t4",
+          "title": "Ratio Variations",
+          "subtopics": [
+            "Joint variation applications in time-work",
+            "Chain rules computations"
+          ]
+        },
+        {
+          "id": "quantitative-aptitude-m3-t5",
+          "title": "Linear Equations",
+          "subtopics": [
+            "Formulating word problems into systems of linear variables",
+            "Integer constraints constraints (Diophantine equations)"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 4: Permutations, Combinations & Probability Bounds",
+      "topics": [
+        {
+          "id": "quantitative-aptitude-m4-t1",
+          "title": "Permutations",
+          "subtopics": [
+            "Fundamental counting principle",
+            "Arrangements under constraints (grouping, separation)",
+            "Circular permutations formulas"
+          ]
+        },
+        {
+          "id": "quantitative-aptitude-m4-t2",
+          "title": "Combinations",
+          "subtopics": [
+            "Selection formula properties ($^nC_r$)",
+            "Grid path problems, partitions/distributions math (stars and bars)"
+          ]
+        },
+        {
+          "id": "quantitative-aptitude-m4-t3",
+          "title": "Probability Basics",
+          "subtopics": [
+            "Sample space identification",
+            "Probability axioms",
+            "Independent vs mutually exclusive events bounds"
+          ]
+        },
+        {
+          "id": "quantitative-aptitude-m4-t4",
+          "title": "Conditional Probability",
+          "subtopics": [
+            "Bayes' Theorem applications in diagnostic traps",
+            "Cards/dice distribution probabilities"
+          ]
+        },
+        {
+          "id": "quantitative-aptitude-m4-t5",
+          "title": "Geometry & Mensuration",
+          "subtopics": [
+            "Basic 2D shapes area (triangles, polygons)",
+            "3D volume derivations (cones, cylinders, spheres, frustums)"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 5: Algebraic Equations, Data Interpretation & Kinematics",
+      "topics": [
+        {
+          "id": "quantitative-aptitude-m5-t1",
+          "title": "Quadratic Equations",
+          "subtopics": [
+            "Discriminants properties, roots relations",
+            "Maxima/minima bounds of parabolas"
+          ]
+        },
+        {
+          "id": "quantitative-aptitude-m5-t2",
+          "title": "Logarithms",
+          "subtopics": [
+            "Logs identities, base changes, compounding scaling bounds"
+          ]
+        },
+        {
+          "id": "quantitative-aptitude-m5-t3",
+          "title": "Data Interpretation",
+          "subtopics": [
+            "Bar graphs, line charts, pie charts analysis",
+            "Tabular data conversions calculation speed, ratio and percentage charts"
+          ]
+        },
+        {
+          "id": "quantitative-aptitude-m5-t4",
+          "title": "Clocks & Calendars",
+          "subtopics": [
+            "Hand angle formulas",
+            "Calendar leap years cycles, and odd days modular arithmetic"
+          ]
+        },
+        {
+          "id": "quantitative-aptitude-m5-t5",
+          "title": "Distance, Time and Speed",
+          "subtopics": [
+            "Relative speed conversions (opposite/same direction parameters)",
+            "Train crossings (crossing platform, crossing moving objects calculations)",
+            "Upstream and downstream boat speeds relative to stream",
+            "Circular tracks meeting points (first time, starting point)",
+            "Average speed calculations (harmonic mean derivations under constant distances)"
+          ]
+        }
+      ]
+    }
+  ],
+  "revision": [],
+  "interview": [],
+  "examples": [],
+  "diagrams": []
+}

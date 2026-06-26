@@ -1,0 +1,87 @@
+# Ascendrite Interview Prep: Loss Functions
+
+## Q1: Derive Mean Squared Error (MSE) from the perspective of Maximum Likelihood Estimation (MLE), explaining the underlying noise assumptions.
+
+### Standard Answer
+To derive Mean Squared Error (MSE) from Maximum Likelihood Estimation (MLE), we assume that the target variable $y_i$ is related to the input features $\mathbf{x}_i$ via a deterministic neural network mapping $f(\mathbf{x}_i; \mathbf{w})$ and an additive random noise term $\epsilon_i$:
+$$y_i = f(\mathbf{x}_i; \mathbf{w}) + \epsilon_i$$
+
+#### 1. Statistical Noise Assumption
+We assume the noise terms $\epsilon_i$ are independent and identically distributed (i.i.d.) Gaussian random variables with zero mean and variance $\sigma^2$:
+$$\epsilon_i \sim \mathcal{N}(0, \sigma^2)$$
+This implies that the conditional distribution of $y_i$ given $\mathbf{x}_i$ and model parameters $\mathbf{w}$ is also Gaussian:
+$$y_i \mid \mathbf{x}_i; \mathbf{w} \sim \mathcal{N}(f(\mathbf{x}_i; \mathbf{w}), \sigma^2)$$
+The probability density function (PDF) for a single observation is:
+$$p(y_i \mid \mathbf{x}_i; \mathbf{w}) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left( -\frac{(y_i - f(\mathbf{x}_i; \mathbf{w}))^2}{2\sigma^2} \right)$$
+
+#### 2. Likelihood and Log-Likelihood Formulations
+For $N$ independent observations, the likelihood function $L(\mathbf{w})$ is the product of the individual probabilities:
+$$L(\mathbf{w}) = \prod_{i=1}^N p(y_i \mid \mathbf{x}_i; \mathbf{w}) = \prod_{i=1}^N \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left( -\frac{(y_i - f(\mathbf{x}_i; \mathbf{w}))^2}{2\sigma^2} \right)$$
+Taking the natural logarithm to obtain the log-likelihood:
+$$\ln L(\mathbf{w}) = \sum_{i=1}^N \ln \left[ \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left( -\frac{(y_i - f(\mathbf{x}_i; \mathbf{w}))^2}{2\sigma^2} \right) \right]$$
+$$\ln L(\mathbf{w}) = \sum_{i=1}^N \left[ -\frac{1}{2}\ln(2\pi\sigma^2) - \frac{(y_i - f(\mathbf{x}_i; \mathbf{w}))^2}{2\sigma^2} \right] = -\frac{N}{2}\ln(2\pi\sigma^2) - \frac{1}{2\sigma^2} \sum_{i=1}^N (y_i - f(\mathbf{x}_i; \mathbf{w}))^2$$
+
+#### 3. Maximization step
+To find parameters $\mathbf{w}$ that maximize $\ln L(\mathbf{w})$, we omit terms that are constant with respect to $\mathbf{w}$:
+$$\mathbf{w}_{\text{MLE}} = \operatorname{argmax}_{\mathbf{w}} \left( -\frac{1}{2\sigma^2} \sum_{i=1}^N (y_i - f(\mathbf{x}_i; \mathbf{w}))^2 \right)$$
+Multiplying by the constant scaling factor $\frac{2\sigma^2}{N}$ and converting the maximization to a minimization problem by changing signs:
+$$\mathbf{w}_{\text{MLE}} = \operatorname{argmin}_{\mathbf{w}} \left( \frac{1}{N} \sum_{i=1}^N (y_i - f(\mathbf{x}_i; \mathbf{w}))^2 \right) = \operatorname{argmin}_{\mathbf{w}} \mathcal{L}_{\text{MSE}}$$
+This proves that under Gaussian noise assumptions, minimizing the MSE is mathematically identical to finding the maximum likelihood parameter configuration.
+
+---
+
+## Q2: Derive the Binary Cross-Entropy (BCE) loss from a Bernoulli likelihood model. How do production frameworks like PyTorch avoid numerical instability issues (like underflow/overflow) when implementing this loss?
+
+### Standard Answer
+For binary classification, labels are $y_i \in \{0, 1\}$ and predicted probabilities are $\hat{y}_i \in [0, 1]$.
+
+#### 1. Bernoulli Likelihood Derivation
+We model target occurrence using a Bernoulli distribution:
+$$P(Y=y_i \mid \mathbf{x}_i) = \hat{y}_i^{y_i} (1 - \hat{y}_i)^{1-y_i}$$
+The joint likelihood $L(\mathbf{w})$ over $N$ independent samples is:
+$$L(\mathbf{w}) = \prod_{i=1}^N \hat{y}_i^{y_i} (1 - \hat{y}_i)^{1-y_i}$$
+Taking the log-likelihood:
+$$\ln L(\mathbf{w}) = \sum_{i=1}^N \left[ y_i \ln(\hat{y}_i) + (1 - y_i) \ln(1 - \hat{y}_i) \right]$$
+To find the parameters, we minimize the negative log-likelihood normalized by sample size, yielding BCE:
+$$\mathcal{L}_{\text{BCE}} = -\frac{1}{N} \sum_{i=1}^N \left[ y_i \ln(\hat{y}_i) + (1 - y_i) \ln(1 - \hat{y}_i) \right]$$
+
+#### 2. Numerical Instability and Production Mitigation
+If $\hat{y}_i$ is computed via Sigmoid $\hat{y}_i = \frac{1}{1 + e^{-z_i}}$ and passed directly to the BCE equation, two problems arise:
+1.  **Underflow:** If $y_i = 1$ and $z_i \ll 0$ (very negative), the Sigmoid output is $\hat{y}_i \approx 0.0$. Evaluating $\ln(0)$ yields $-\infty$, halting optimization.
+2.  **Overflow:** If $y_i = 0$ and $z_i \gg 0$ (very positive), $\hat{y}_i \approx 1.0$, making $\ln(1 - \hat{y}_i) = \ln(0) = -\infty$.
+
+Production frameworks resolve this using a single integrated layer (e.g. `BCEWithLogitsLoss` in PyTorch) that operates directly on the pre-activation logit $z_i$ instead of the output probability $\hat{y}_i$.
+Substituting $\hat{y}_i = \sigma(z_i)$ into a single BCE term:
+$$- [y \ln(\sigma(z)) + (1-y)\ln(1-\sigma(z))] = - [y \ln\left( \frac{1}{1+e^{-z}} \right) + (1-y)\ln\left( \frac{e^{-z}}{1+e^{-z}} \right)]$$
+$$= - [-y \ln(1+e^{-z}) - (1-y)z - (1-y)\ln(1+e^{-z})] = (1-y)z + \ln(1+e^{-z})$$
+$$= z - yz + \ln(1+e^{-z})$$
+For numerical stability across both positive and negative ranges, this is reformulating to use the $\max$ function to prevent large exponentials:
+$$\mathcal{L}_{\text{stable}} = \max(z, 0) - yz + \ln(1 + e^{-|z|})$$
+If $z$ is highly positive, $e^{-|z|} \to 0$ and the log term is stable. If $z$ is highly negative, $\max(z,0) = 0$ and $e^{-|z|} = e^z \to 0$, avoiding overflow.
+
+---
+
+## Q3: Prove that minimizing Categorical Cross-Entropy (CCE) is mathematically equivalent to minimizing the Kullback-Leibler (KL) divergence between true and predicted distributions. How does the behavior of Forward KL differ from Reverse KL?
+
+### Standard Answer
+
+#### 1. Proof of Equivalence
+Let $P(x)$ be the true target probability distribution (e.g. one-hot target classes) and $\hat{P}(x)$ be the predicted probability distribution. The KL divergence is defined as:
+$$D_{\text{KL}}(P \parallel \hat{P}) = \sum_{x \in \mathcal{X}} P(x) \ln\left( \frac{P(x)}{\hat{P}(x)} \right) = \sum_{x \in \mathcal{X}} P(x) \ln P(x) - \sum_{x \in \mathcal{X}} P(x) \ln \hat{P}(x)$$
+The first term is the negative of the Shannon Entropy of $P$:
+$$-H(P) = \sum_{x \in \mathcal{X}} P(x) \ln P(x)$$
+The second term is the definition of Cross-Entropy $H(P, \hat{P})$:
+$$H(P, \hat{P}) = -\sum_{x \in \mathcal{X}} P(x) \ln \hat{P}(x)$$
+Substituting these definitions:
+$$D_{\text{KL}}(P \parallel \hat{P}) = -H(P) + H(P, \hat{P}) \implies H(P, \hat{P}) = H(P) + D_{\text{KL}}(P \parallel \hat{P})$$
+Because the true target distribution $P(x)$ is constant during model optimization, its entropy $H(P)$ is constant. Therefore, the parameter gradient is:
+$$\nabla_{\mathbf{w}} H(P, \hat{P}) = \nabla_{\mathbf{w}} D_{\text{KL}}(P \parallel \hat{P})$$
+Minimizing the Categorical Cross-Entropy loss is mathematically equivalent to minimizing the KL divergence.
+
+#### 2. Forward KL vs. Reverse KL Behaviors
+*   **Forward KL ($D_{\text{KL}}(P \parallel Q)$):**
+    $$D_{\text{KL}}(P \parallel Q) = \sum_{x} P(x) \ln\left( \frac{P(x)}{Q(x)} \right)$$
+    If $P(x) > 0$, we must have $Q(x) > 0$ to avoid infinite divergence. This is **zero-avoiding** behavior. If the true distribution $P$ is multi-modal, the approximation $Q$ will stretch to cover all modes, yielding a broad, high-entropy distribution (mean-seeking).
+*   **Reverse KL ($D_{\text{KL}}(Q \parallel P)$):**
+    $$D_{\text{KL}}(Q \parallel P) = \sum_{x} Q(x) \ln\left( \frac{Q(x)}{P(x)} \right)$$
+    If $P(x) = 0$, we must have $Q(x) = 0$ to avoid infinite divergence. This is **zero-forcing** behavior. The approximation $Q$ will select a single mode of $P$ and focus all its probability density there, ignoring other modes to maintain low variance (mode-seeking, widely used in Variational Autoencoders and RL policy optimization).

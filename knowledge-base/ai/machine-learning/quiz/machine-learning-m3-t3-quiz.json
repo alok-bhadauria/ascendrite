@@ -1,0 +1,41 @@
+{
+  "quiz_id": "machine-learning-m3-t3-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "As the feature dimension $d \\to \\infty$, what is the geometric behavior of distances between points in a dataset, and what is its effect on the K-Nearest Neighbors (KNN) algorithm?",
+      "options": [
+        "The ratio of the distance to the nearest neighbor and the furthest neighbor approaches 1, making all points equidistant and rendering nearest neighbor search ineffective.",
+        "The distance between points decreases to exactly zero, collapsing the space into a single point.",
+        "The data points cluster tightly in the center of the hypercube, reducing the variance of distance computations.",
+        "Euclidean distances become infinite while Manhattan distances remain constant, forcing KNN to only function with $p=1$."
+      ],
+      "correct_answer": "The ratio of the distance to the nearest neighbor and the furthest neighbor approaches 1, making all points equidistant and rendering nearest neighbor search ineffective.",
+      "explanation": "Due to the Curse of Dimensionality, as $d$ increases, the volume of the space grows exponentially and the points become extremely sparse. Geometrically, the difference between the maximum and minimum distances between any two points relative to the minimum distance approaches 0: $\\lim_{d \\to \\infty} \\frac{D_{\\max} - D_{\\min}}{D_{\\min}} = 0$. Consequently, distance-based classification loses its discriminative power."
+    },
+    {
+      "question_id": "q2",
+      "text": "Why does the query time complexity of a standard $k$-dimensional tree (KD-Tree) degrade from $\\mathcal{O}(\\log N \\cdot d)$ to $\\mathcal{O}(N \\cdot d)$ in high-dimensional spaces?",
+      "options": [
+        "The height of the KD-Tree grows exponentially with the number of dimensions, increasing stack frames during traversal.",
+        "KD-Trees are unbalanced binary trees by design, causing splits to always produce single-element leaf nodes.",
+        "The query point lies close to many splitting hyperplanes, forcing the search algorithm to backtrack through almost all branches of the tree.",
+        "High-dimensional vectors cannot be split using axis-aligned hyperplanes, causing the split operator to fail and default to linear scan."
+      ],
+      "correct_answer": "The query point lies close to many splitting hyperplanes, forcing the search algorithm to backtrack through almost all branches of the tree.",
+      "explanation": "In high-dimensional spaces, a query point is highly likely to be close to the axis-aligned splitting hyperplanes of the KD-Tree. When checking if a hypersphere around the query point intersects a splitting hyperplane, the condition is frequently met, forcing the algorithm to search both children. This backtracking propagates up the tree, visiting nearly all nodes and degrading query time to a linear scan."
+    },
+    {
+      "question_id": "q3",
+      "text": "Under the conditional independence assumption of Naive Bayes, what is the simplified formulation of the joint likelihood $P(\\mathbf{x} \\mid Y = c_k)$ for a feature vector $\\mathbf{x} = [x_1, \\dots, x_d]^{\\top}$?",
+      "options": [
+        "$P(\\mathbf{x} \\mid Y = c_k) = \\sum_{i=1}^d P(x_i \\mid Y = c_k)$",
+        "$P(\\mathbf{x} \\mid Y = c_k) = \\prod_{i=1}^d P(x_i \\mid Y = c_k)$",
+        "$P(\\mathbf{x} \\mid Y = c_k) = \\frac{\\prod_{i=1}^d P(Y = c_k \\mid x_i)}{P(\\mathbf{x})}$",
+        "$P(\\mathbf{x} \\mid Y = c_k) = \\prod_{i=1}^d P(x_i \\mid Y = c_k) + P(Y = c_k)$"
+      ],
+      "correct_answer": "$P(\\mathbf{x} \\mid Y = c_k) = \\prod_{i=1}^d P(x_i \\mid Y = c_k)$",
+      "explanation": "The Naive Bayes conditional independence assumption states that all features are conditionally independent of each other given the class label $Y$. Therefore, the joint probability decomposes directly into the product of the individual marginal conditional probabilities: $P(x_1, \\dots, x_d \\mid Y = c_k) = \\prod_{i=1}^d P(x_i \\mid Y = c_k)$."
+    }
+  ]
+}

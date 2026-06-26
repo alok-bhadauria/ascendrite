@@ -1,0 +1,62 @@
+{
+  "topic_id": "deep-learning-m1-t2",
+  "title": "Activation Functions",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Easy",
+    "estimated_hours": 3,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Formulate the equations and derivatives for Sigmoid and Tanh activation functions and analyze their saturation limits.",
+    "Explain the mathematical cause of the dying ReLU problem and evaluate how Leaky ReLU and Parametric ReLU mitigate it.",
+    "Derive the Softmax activation function and prove its translation-invariance property for numerical stability."
+  ],
+  "content_sections": [
+    {
+      "title": "Sigmoid and Tanh Activation Functions",
+      "content": "Sigmoid and Tanh are classical non-linear activation functions that squash input values into a bounded range. \n\n### 1. The Sigmoid Function\nThe Sigmoid activation function $\\sigma(z)$ maps any real value to the interval $(0, 1)$:\n\n$$\\sigma(z) = \\frac{1}{1 + e^{-z}}$$\n\nIts derivative with respect to $z$ is formulated as:\n\n$$\\sigma'(z) = \\frac{e^{-z}}{(1 + e^{-z})^2} = \\left(\\frac{1}{1 + e^{-z}}\\right)\\left(\\frac{e^{-z}}{1 + e^{-z}}\\right) = \\sigma(z)(1 - \\sigma(z))$$\n\nBecause the maximum value of $\\sigma'(z)$ is $0.25$ (at $z=0$), backpropagating through many Sigmoid layers causes gradients to shrink by at least a factor of $4$ at each step, leading to the **vanishing gradient** problem.\n\n### 2. The Hyperbolic Tangent (Tanh) Function\nThe Tanh function squashes inputs to the interval $(-1, 1)$:\n\n$$\\tanh(z) = \\frac{e^z - e^{-z}}{e^z + e^{-z}} = 2\\sigma(2z) - 1$$\n\nIts derivative is derived as:\n\n$$\\tanh'(z) = 1 - \\tanh^2(z)$$\n\n### Saturation & Zero-Centering\n*   **Saturation:** As $|z| \\to \\infty$, both $\\sigma'(z) \\to 0$ and $\\tanh'(z) \\to 0$. The neuron saturates, halting weight updates.\n*   **Zero-Centering:** Sigmoid outputs are strictly positive. During backpropagation, the gradients for the weights of a Sigmoid neuron will all share the same sign as the output gradient, forcing weights to update in a restricted 'zig-zag' path. Tanh outputs are zero-centered, allowing gradients to update weights in different directions and accelerating optimization convergence.",
+      "callouts": [
+        {
+          "type": "Student Trap",
+          "title": "Sigmoid in Hidden Layers",
+          "content": "A common mistake in network design is using Sigmoid activations in the hidden layers of deep networks. Due to gradient saturation and non-zero-centered outputs, networks with more than a few Sigmoid hidden layers will fail to train efficiently. Sigmoid should generally be restricted to the output layer for binary classification tasks."
+        }
+      ]
+    },
+    {
+      "title": "ReLU & Dying Neurons Mitigation",
+      "content": "The **Rectified Linear Unit (ReLU)** is the standard activation function for hidden layers. It is defined as:\n\n$$f(z) = \\max(0, z)$$\n\nIts derivative is:\n\n$$f'(z) = \\begin{cases} 1 & \\text{if } z > 0 \\\\ 0 & \\text{if } z < 0 \\end{cases}$$\n\nAt $z=0$, the function is non-differentiable, but in practice, a subgradient value of $0.0$ or $1.0$ is assigned.\n\n### The Dying ReLU Problem\nIf a neuron receives an input such that $z < 0$, its activation output is $0$ and its gradient is $0.0$. If a large gradient update shifts the bias of a neuron such that it is negative for all samples in the dataset, its gradient remains permanently zero. The weight updates halt, and the neuron becomes **dead**. \n\n### Alternatives: Leaky ReLU & PReLU\nTo prevent the dying ReLU problem, we introduce a small, non-zero slope for negative inputs:\n1.  **Leaky ReLU:** Uses a fixed slope parameter $\\alpha \\approx 0.01$:\n    $$f(z) = \\max(\\alpha z, z)$$\n    $$f'(z) = \\begin{cases} 1 & \\text{if } z > 0 \\\\ \\alpha & \\text{if } z < 0 \\end{cases}$$\n2.  **Parametric ReLU (PReLU):** Treats $\\alpha$ as a learnable parameter optimized via backpropagation:\n    $$f(z) = \\max(\\alpha_i z, z)$$\n    where $\\alpha_i$ is learned for each channel $i$. This allows the network to dynamically choose linear or rectified characteristics.",
+      "callouts": [
+        {
+          "type": "Engineering Note",
+          "title": "Computational Simplicity of ReLU",
+          "content": "Unlike Sigmoid and Tanh, which require expensive exponential calculations, ReLU only requires a simple threshold comparison. This computational efficiency significantly reduces training and inference latency in large convolutional and dense models."
+        }
+      ]
+    },
+    {
+      "title": "Softmax and Numerical Stability Math",
+      "content": "For multi-class classification, we map a vector of raw prediction scores (logits) $\\mathbf{z} = [z_1, \\dots, z_K]^{\\top} \\in \\mathbb{R}^K$ to a probability distribution $\\mathbf{a} = [a_1, \\dots, a_K]^{\\top}$ using the **Softmax** function:\n\n$$a_i = \\operatorname{softmax}(\\mathbf{z})_i = \\frac{e^{z_i}}{\\sum_{j=1}^K e^{z_j}}$$\n\nBy construction, $a_i > 0$ and $\\sum_{i=1}^K a_i = 1.0$, satisfying the axioms of probability.\n\n### Proof of Translation Invariance\nTo prevent numerical overflow when computing exponentiations of large logits, we utilize the translation-invariance property of Softmax. Let $c \\in \\mathbb{R}$ be an arbitrary scalar constant:\n\n$$\\operatorname{softmax}(\\mathbf{z} + c\\mathbf{1})_i = \\frac{e^{z_i + c}}{\\sum_{j=1}^K e^{z_j + c}} = \\frac{e^c \\cdot e^{z_i}}{\\sum_{j=1}^K e^c \\cdot e^{z_j}} = \\frac{e^c \\cdot e^{z_i}}{e^c \\cdot \\sum_{j=1}^K e^{z_j}} = \\frac{e^{z_i}}{\\sum_{j=1}^K e^{z_j}} = \\operatorname{softmax}(\\mathbf{z})_i$$\n\nThis proof shows that adding or subtracting a constant to all inputs does not alter the output probability values.\n\n### Application to Numerical Stability\nIf a logit $z_i \\approx 1000$, computing $e^{1000}$ results in floating-point overflow (`inf`). To prevent this, we set $c = -\\max_j z_j$. The shifted logits $\\tilde{z}_i = z_i - \\max_j z_j$ are all non-positive ($\\tilde{z}_i \\le 0$). Thus, the maximum exponentiated value is $e^0 = 1.0$, preventing overflow while keeping the mathematical outputs identical.",
+      "callouts": [
+        {
+          "type": "Interview Tip",
+          "title": "Softmax vs. Sigmoid Connection",
+          "content": "If asked about the relationship between Softmax and Sigmoid in an interview, prove that for $K=2$, Softmax is mathematically equivalent to the Sigmoid function. Let $\\mathbf{z} = [z_1, z_2]^{\\top}$. Then: $a_1 = \\frac{e^{z_1}}{e^{z_1} + e^{z_2}} = \\frac{1}{1 + e^{-(z_1 - z_2)}} = \\sigma(z_1 - z_2)$."
+        }
+      ]
+    }
+  ],
+  "example_refs": [
+    "deep-learning-m1-t2-ex1"
+  ],
+  "diagram_refs": [
+    "deep-learning-m1-t2-dia1"
+  ],
+  "practice_refs": [
+    "deep-learning-m1-t2-prac1"
+  ],
+  "quiz_refs": [
+    "deep-learning-m1-t2-quiz"
+  ]
+}

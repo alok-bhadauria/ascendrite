@@ -1,0 +1,73 @@
+{
+  "topic_id": "machine-learning-m5-t2",
+  "title": "Dimensionality Reduction Derivations",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Hard",
+    "estimated_hours": 6,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Derive Principal Component Analysis (PCA) via maximization of variance (constrained optimization using Lagrange multipliers) and prove its equivalence to covariance matrix Eigendecomposition.",
+    "Formulate the Singular Value Decomposition (SVD) representation of PCA and prove why it is computationally preferred over explicit covariance matrix construction.",
+    "Formulate the probability mappings of t-Distributed Stochastic Neighbor Embedding (t-SNE) and explain how the Student-t distribution resolves the crowding problem."
+  ],
+  "content_sections": [
+    {
+      "title": "PCA Derivation via Variance Maximization",
+      "content": "Principal Component Analysis (PCA) is a linear dimensionality reduction technique that projects data onto a lower-dimensional orthogonal subspace while maximizing the variance of the projected coordinates. \n\nLet the design matrix be $\\mathbf{X} \\in \\mathbb{R}^{N \\times d}$, which we assume has been zero-mean centered column-wise (i.e., $\\sum_{i=1}^N \\mathbf{x}_i = \\mathbf{0}$). Let $\\mathbf{u} \\in \\mathbb{R}^d$ be a unit vector normal to the projection hyperplane, satisfying the constraint $\\mathbf{u}^{\\top}\\mathbf{u} = 1$. The scalar projection of an observation $\\mathbf{x}_i$ onto the direction defined by $\\mathbf{u}$ is $\\mathbf{x}_i^{\\top}\\mathbf{u}$.\n\nSince the data is centered, the mean of the projected points is also zero. The empirical variance of the projected data points is:\n\n$$\\sigma^2_{\\mathbf{u}} = \\frac{1}{N} \\sum_{i=1}^N \\left( \\mathbf{x}_i^{\\top}\\mathbf{u} - 0 \\right)^2 = \\frac{1}{N} \\sum_{i=1}^N \\mathbf{u}^{\\top}\\mathbf{x}_i\\mathbf{x}_i^{\\top}\\mathbf{u} = \\mathbf{u}^{\\top} \\left( \\frac{1}{N} \\mathbf{X}^{\\top}\\mathbf{X} \\right) \\mathbf{u} = \\mathbf{u}^{\\top} \\boldsymbol{\\Sigma} \\mathbf{u}$$\n\nwhere $\\boldsymbol{\\Sigma} = \\frac{1}{N} \\mathbf{X}^{\\top}\\mathbf{X}$ is the $d \\times d$ empirical covariance matrix of the dataset.\n\nTo find the direction $\\mathbf{u}$ that maximizes the projected variance subject to the unit length constraint, we formulate the constrained optimization problem using a Lagrange multiplier $\\lambda$:\n\n$$\\mathcal{L}(\\mathbf{u}, \\lambda) = \\mathbf{u}^{\\top} \\boldsymbol{\\Sigma} \\mathbf{u} - \\lambda \\left( \\mathbf{u}^{\\top}\\mathbf{u} - 1 \\right)$$\n\nWe take the gradient of the Lagrangian with respect to the projection vector $\\mathbf{u}$ and set it to zero:\n\n$$\\nabla_{\\mathbf{u}} \\mathcal{L} = 2 \\boldsymbol{\\Sigma} \\mathbf{u} - 2 \\lambda \\mathbf{u} = 0 \\implies \\boldsymbol{\\Sigma} \\mathbf{u} = \\lambda \\mathbf{u}$$\n\nThis is the classic **eigenvalue equation**. It proves that the projection vector $\\mathbf{u}$ must be an eigenvector of the covariance matrix $\\boldsymbol{\\Sigma}$, and the multiplier $\\lambda$ is its corresponding eigenvalue.\n\nLeft-multiplying this equation by $\\mathbf{u}^{\\top}$ yields:\n\n$$\\mathbf{u}^{\\top} \\boldsymbol{\\Sigma} \\mathbf{u} = \\lambda \\mathbf{u}^{\\top}\\mathbf{u} = \\lambda$$\n\nBecause $\\mathbf{u}^{\\top} \\boldsymbol{\\Sigma} \\mathbf{u}$ is the projected variance, the variance along the direction of the eigenvector $\\mathbf{u}$ is exactly the eigenvalue $\\lambda$. To maximize variance, we choose the eigenvector corresponding to the largest eigenvalue $\\lambda_1$. This vector is the first principal component.",
+      "callouts": [
+        {
+          "type": "Student Trap",
+          "title": "Centering Data Before PCA Projection",
+          "content": "A critical student error is running PCA on raw, uncentered data. If the column-wise mean is not zero, the term $\\frac{1}{N} \\mathbf{X}^{\\top}\\mathbf{X}$ does not equal the covariance matrix $\\boldsymbol{\\Sigma}$, and the projection direction will align with the vector from the coordinate origin to the dataset centroid, rather than along the axis of maximum internal variance. Always subtract the mean vector from each sample before computing projections."
+        }
+      ]
+    },
+    {
+      "title": "Singular Value Decomposition (SVD) PCA Formulation",
+      "content": "Explicitly computing the $d \\times d$ covariance matrix $\\boldsymbol{\\Sigma} = \\frac{1}{N}\\mathbf{X}^{\\top}\\mathbf{X}$ takes $\\mathcal{O}(N \\cdot d^2)$ operations. For high-dimensional datasets (e.g. $d > 50,000$ in genetics or text processing), this is computationally expensive and numerically unstable. We bypass this bottleneck by using the **Singular Value Decomposition (SVD)** of the centered data matrix $\\mathbf{X}$ directly:\n\n$$\\mathbf{X} = \\mathbf{U} \\mathbf{S} \\mathbf{V}^{\\top}$$\n\nwhere:\n*   $\\mathbf{U} \\in \\mathbb{R}^{N \\times N}$ is an orthogonal matrix whose columns are the left singular vectors of $\\mathbf{X}$.\n*   $\\mathbf{S} \\in \\mathbb{R}^{N \\times d}$ is a diagonal matrix containing the singular values $\\sigma_1 \\ge \\sigma_2 \\ge \\dots \\ge 0$.\n*   $\\mathbf{V} \\in \\mathbb{R}^{d \\times d}$ is an orthogonal matrix whose columns are the right singular vectors.\n\nLet's evaluate the covariance matrix product using this SVD representation:\n\n$$\\boldsymbol{\\Sigma} = \\frac{1}{N} \\mathbf{X}^{\\top}\\mathbf{X} = \\frac{1}{N} \\left( \\mathbf{U} \\mathbf{S} \\mathbf{V}^{\\top} \\right)^{\\top} \\left( \\mathbf{U} \\mathbf{S} \\mathbf{V}^{\\top} \\right) = \\frac{1}{N} \\mathbf{V} \\mathbf{S}^{\\top} \\mathbf{U}^{\\top} \\mathbf{U} \\mathbf{S} \\mathbf{V}^{\\top}$$\n\nSince $\\mathbf{U}$ is orthogonal, $\\mathbf{U}^{\\top}\\mathbf{U} = \\mathbf{I}$:\n\n$$\\boldsymbol{\\Sigma} = \\mathbf{V} \\left( \\frac{1}{N} \\mathbf{S}^2 \\right) \\mathbf{V}^{\\top}$$\n\nThis is the spectral decomposition of the covariance matrix $\\boldsymbol{\\Sigma} = \\mathbf{V} \\boldsymbol{\\Lambda} \\mathbf{V}^{\\top}$. Comparing the formulations proves that:\n1.  The right singular vectors (columns of $\\mathbf{V}$) are exactly the eigenvectors of $\\boldsymbol{\\Sigma}$. They define the principal component directions.\n2.  The eigenvalues $\\lambda_i$ of $\\boldsymbol{\\Sigma}$ are related to the singular values $\\sigma_i$ of $\\mathbf{X}$ by:\n    $$\\lambda_i = \\frac{\\sigma_i^2}{N}$$\n\nUsing SVD, we extract the principal components directly from the data matrix $\\mathbf{X}$, avoiding the numerical errors and memory cost of computing $\\mathbf{X}^{\\top}\\mathbf{X}$ explicitly.",
+      "callouts": [
+        {
+          "type": "Engineering Note",
+          "title": "Truncated SVD and Iterative Algorithms",
+          "content": "In production systems, we rarely compute the full SVD of $\\mathbf{X}$. Since we only need the top $k$ principal components ($k \\ll d$), we apply iterative solvers like the Lanczos algorithm or randomized SVD. These extract the top $k$ singular vectors in $\\mathcal{O}(N \\cdot d \\cdot k)$ time, bypassing the full decomposition and saving significant computational resources."
+        }
+      ]
+    },
+    {
+      "title": "t-SNE Probability Mapping and the Crowding Problem",
+      "content": "PCA is a linear technique and fails to capture complex non-linear manifolds. **t-Distributed Stochastic Neighbor Embedding (t-SNE)** is a non-linear dimensionality reduction algorithm that projects high-dimensional data points $\\mathbf{x}_i$ into low-dimensional coordinates $\\mathbf{y}_i \\in \\mathbb{R}^2$ by preserving local neighborhood probabilities.\n\n### High-Dimensional Space Probabilities\nIn the high-dimensional space, the probability that point $\\mathbf{x}_i$ selects $\\mathbf{x}_j$ as its neighbor under a Gaussian distribution is:\n\n$$p_{j \\mid i} = \\frac{\\exp\\left(-\\|\\mathbf{x}_i - \\mathbf{x}_j\\|_2^2 / 2\\sigma_i^2\\right)}{\\sum_{k \\neq i} \\exp\\left(-\\|\\mathbf{x}_i - \\mathbf{x}_k\\|_2^2 / 2\\sigma_i^2\\right)}$$\n\nwhere $\\sigma_i$ is determined dynamically using a user-defined perplexity. Symmetrized joint probabilities are defined as:\n\n$$p_{ij} = \\frac{p_{j \\mid i} + p_{i \\mid j}}{2N}, \\quad p_{ii} = 0$$\n\n### Low-Dimensional Space Probabilities (Student-t)\nIn the low-dimensional space, mapping using a Gaussian distribution introduces the **Crowding Problem**: the volume of a sphere in $d$ dimensions scales exponentially with $d$. A set of points equidistant in high-dimensional space cannot be mapped to a 2D space without placing them far apart. If we model low-dimensional probabilities using a thin-tailed Gaussian, points must crowd together in a dense mass at the center of the map to maintain representative high-dimensional probabilities.\n\nt-SNE resolves this by using a heavy-tailed **Student-t distribution** (with 1 degree of freedom, equivalent to a Cauchy distribution) in the low-dimensional space:\n\n$$q_{ij} = \\frac{\\left(1 + \\|\\mathbf{y}_i - \\mathbf{y}_j\\|_2^2\\right)^{-1}}{\\sum_{k} \\sum_{l \\neq k} \\left(1 + \\|\\mathbf{y}_k - \\mathbf{y}_l\\|_2^2\\right)^{-1}}, \\quad q_{ii} = 0$$\n\nBecause $(1 + d^2)^{-1}$ has a much heavier tail than $\\exp(-d^2)$, points can be placed much further apart in the low-dimensional space while maintaining representative probabilities, dispersing the clusters and resolving the crowding problem.\n\nThe low-dimensional coordinates $\\mathbf{y}_i$ are optimized by minimizing the Kullback-Leibler (KL) divergence using gradient descent:\n\n$$\\text{KL}(P \\parallel Q) = \\sum_{i} \\sum_{j} p_{ij} \\log \\frac{p_{ij}}{q_{ij}}$$",
+      "callouts": [
+        {
+          "type": "Common Misconception",
+          "title": "t-SNE as a Parametric Feature Extractor",
+          "content": "A common misconception is treating t-SNE like PCA or Autoencoders for online inference. t-SNE is a non-parametric visualization technique. It optimizes the coordinates $\\mathbf{y}_i$ directly via gradient descent on the specific training dataset. It does not learn a mapping function $\\Phi(\\mathbf{x}) = \\mathbf{y}$. Consequently, you cannot use a trained t-SNE model to transform new test samples. New test samples require running the optimization over the combined dataset from scratch."
+        }
+      ]
+    },
+    {
+      "title": "Professional Practice and Tuning Protocols",
+      "content": "When evaluating linear versus non-linear projections, consider the following trade-offs:\n\n1.  **Global vs. Local Structure:** PCA preserves global distances (maximizing overall variance), placing distant clusters in true geometric relation to each other. t-SNE preserves local neighborhoods, meaning the relative distances between separated clusters are arbitrary and should not be interpreted.\n2.  **Perplexity Tuning:** t-SNE is highly sensitive to the `perplexity` parameter (conceptually related to the number of nearest neighbors). If perplexity is set too low, the visualization forms small, disconnected clumps. If set too high, the local structure is lost, merging distinct clusters.\n3.  **Variance Explained:** In PCA, the percentage of total variance explained by the top $k$ principal components is computed as:\n    $$\\text{Ratio} = \\frac{\\sum_{i=1}^k \\lambda_i}{\\sum_{j=1}^d \\lambda_j}$$\n    This allows for deterministic thresholding (e.g. choosing $k$ to preserve $95\\%$ of total variance).",
+      "callouts": [
+        {
+          "type": "Interview Tip",
+          "title": "SVD vs. Eigendecomposition Complexity",
+          "content": "If asked to compare the SVD and Eigendecomposition approaches for PCA, explain that SVD operates directly on $\\mathbf{X}$ (shape $N \\times d$), whereas Eigendecomposition requires computing $\\mathbf{X}^{\\top}\\mathbf{X}$ (shape $d \\times d$). If $N$ is massive and $d$ is small, Eigendecomposition is fast. If $d$ is massive, SVD combined with random projections is significantly faster and avoids floating-point precision loss."
+        }
+      ]
+    }
+  ],
+  "example_refs": [
+    "machine-learning-m5-t2-ex1"
+  ],
+  "diagram_refs": [
+    "machine-learning-m5-t2-dia1"
+  ],
+  "practice_refs": [
+    "machine-learning-m5-t2-prac1"
+  ],
+  "quiz_refs": [
+    "machine-learning-m5-t2-quiz"
+  ]
+}

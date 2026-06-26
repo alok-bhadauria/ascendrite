@@ -1,0 +1,41 @@
+{
+  "quiz_id": "machine-learning-m5-t5-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "For a real-valued weight interval of $[-2.5, 7.5]$ being quantized to an unsigned 8-bit integer range of $[0, 255]$, what are the calculated scale $S$ and zero-point $Z$ parameters?",
+      "options": [
+        "$S \\approx 0.0392, \\quad Z = 64$",
+        "$S \\approx 0.0392, \\quad Z = 0$",
+        "$S \\approx 0.0294, \\quad Z = 128$",
+        "$S \\approx 0.0196, \\quad Z = 255$"
+      ],
+      "correct_answer": "$S \\approx 0.0392, \\quad Z = 64$",
+      "explanation": "Using the formulas: $S = \\frac{r_{\\max} - r_{\\min}}{q_{\\max} - q_{\\min}} = \\frac{7.5 - (-2.5)}{255 - 0} = \\frac{10.0}{255} \\approx 0.0392157$. The zero-point is $Z = \\operatorname{round}\\left(\\frac{-r_{\\min}}{S}\\right) + q_{\\min} = \\operatorname{round}\\left(\\frac{-(-2.5)}{0.0392157}\\right) + 0 = \\operatorname{round}(63.75) = 64$. Therefore, $S \\approx 0.0392$ and $Z = 64$ is correct."
+    },
+    {
+      "question_id": "q2",
+      "text": "Why is the Straight-Through Estimator (STE) required when training neural networks with Quantization-Aware Training (QAT)?",
+      "options": [
+        "The derivative of the uniform quantization rounding function is zero almost everywhere, which would block backpropagation gradients from updating high-precision weights.",
+        "The rounding operator increases the computational complexity of the backward pass from linear to exponential time.",
+        "The STE projects the weights into an orthogonal space to prevent gradient explosion at the output layer.",
+        "The STE dynamically scales the learning rate of integer parameters to prevent integer overflow."
+      ],
+      "correct_answer": "The derivative of the uniform quantization rounding function is zero almost everywhere, which would block backpropagation gradients from updating high-precision weights.",
+      "explanation": "Uniform quantization relies on a rounding operator $\\operatorname{round}(x)$, which has a derivative of zero everywhere except at half-integers, where it is undefined. Standard backpropagation would result in zero gradients, preventing weight updates. The Straight-Through Estimator (STE) solves this by approximating the derivative of the rounding function as $1.0$ during the backward pass, allowing gradients to flow directly to high-precision weights."
+    },
+    {
+      "question_id": "q3",
+      "text": "What is the mathematical relationship between the Population Stability Index (PSI) and the Kullback-Leibler (KL) Divergence?",
+      "options": [
+        "PSI is the sum of the forward and reverse KL divergences between the target and baseline distributions, making it a symmetric distance measure.",
+        "PSI is the square root of the KL divergence, ensuring that the metric satisfies the triangle inequality.",
+        "PSI is the negative gradient of the KL divergence with respect to the bin width parameter.",
+        "PSI represents the KL divergence of the baseline distribution relative to a uniform distribution."
+      ],
+      "correct_answer": "PSI is the sum of the forward and reverse KL divergences between the target and baseline distributions, making it a symmetric distance measure.",
+      "explanation": "The Population Stability Index is formulated as $\\text{PSI} = \\sum (T_b - A_b) \\cdot \\ln(T_b / A_b)$. Expanding this expression yields $\\sum T_b \\ln(T_b / A_b) + \\sum A_b \\ln(A_b / T_b)$, which is exactly the sum of the forward KL divergence $D_{\\text{KL}}(T \\parallel A)$ and the reverse KL divergence $D_{\\text{KL}}(A \\parallel T)$. This makes PSI a symmetric measure of divergence, unlike the standard KL divergence which is asymmetric."
+    }
+  ]
+}

@@ -1,0 +1,223 @@
+{
+  "subject_id": "nlp",
+  "name": "NLP",
+  "category": "ai",
+  "modules": [
+    {
+      "name": "Module 1: Preprocessing pipelines, Topic Modeling & NER",
+      "topics": [
+        {
+          "id": "nlp-m1-t1",
+          "title": "NLP Foundations",
+          "subtopics": [
+            "Text corpus, documents, tokenizations",
+            "Topic Modeling via Latent Dirichlet Allocation (LDA)"
+          ]
+        },
+        {
+          "id": "nlp-m1-t2",
+          "title": "Text Preprocessing",
+          "subtopics": [
+            "Regex tokenization, stopword removal",
+            "Stemming (Porter vs Lancaster) vs Lemmatization POS tags"
+          ]
+        },
+        {
+          "id": "nlp-m1-t3",
+          "title": "Text Analytics",
+          "subtopics": [
+            "Sentiment Analysis algorithms, lexicon-based vs classification-based"
+          ]
+        },
+        {
+          "id": "nlp-m1-t4",
+          "title": "Named Entity Recognition (NER)",
+          "subtopics": [
+            "Sequence labeling, transition probabilities, NER modeling frameworks"
+          ]
+        },
+        {
+          "id": "nlp-m1-t5",
+          "title": "NLP Pipelines",
+          "subtopics": [
+            "Preprocessing, feature extraction, modeling, post-processing, and evaluation metrics"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 2: Vector Space Models, TF-IDF & Language Model Perplexities",
+      "topics": [
+        {
+          "id": "nlp-m2-t1",
+          "title": "Text Vectorization",
+          "subtopics": [
+            "Bag of Words (BoW), binary occurrence vectors, N-Grams bounds"
+          ]
+        },
+        {
+          "id": "nlp-m2-t2",
+          "title": "TF-IDF Mathematics",
+          "subtopics": [
+            "Term Frequency equations, Inverse Document Frequency formulas, scale normalization"
+          ]
+        },
+        {
+          "id": "nlp-m2-t3",
+          "title": "Semantic Space",
+          "subtopics": [
+            "High-dimensional vector spaces, document similarity, word-co-occurrence matrix calculations"
+          ]
+        },
+        {
+          "id": "nlp-m2-t4",
+          "title": "Similarity Metrics",
+          "subtopics": [
+            "Cosine Similarity equations, Jaccard Similarity, and Euclidean Distance comparisons"
+          ]
+        },
+        {
+          "id": "nlp-m2-t5",
+          "title": "Language Modeling",
+          "subtopics": [
+            "N-Gram language models, maximum likelihood estimation, perplexity evaluation equations"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 3: Static Embeddings, Word2Vec & Seq2Seq NLP Networks",
+      "topics": [
+        {
+          "id": "nlp-m3-t1",
+          "title": "Word2Vec",
+          "subtopics": [
+            "Continuous Bag of Words (CBOW) vs Skip-Gram architecture details",
+            "Hierarchical Softmax, and Negative Sampling math"
+          ]
+        },
+        {
+          "id": "nlp-m3-t2",
+          "title": "Advanced Static Embeddings",
+          "subtopics": [
+            "GloVe global co-occurrence statistics",
+            "FastText subwords arrays, out-of-vocabulary handling"
+          ]
+        },
+        {
+          "id": "nlp-m3-t3",
+          "title": "NLP Sequence Models",
+          "subtopics": [
+            "Recurrent models (RNN, LSTM, GRU) for text representation",
+            "Sequence-to-sequence translations"
+          ]
+        },
+        {
+          "id": "nlp-m3-t4",
+          "title": "Attention in NLP",
+          "subtopics": [
+            "Scaled Dot-Product Attention in sequence models, alignments math, and context vectors"
+          ]
+        },
+        {
+          "id": "nlp-m3-t5",
+          "title": "Seq2Seq Translations",
+          "subtopics": [
+            "Search decoders (Greedy vs Beam search widths)",
+            "Translation metrics (BLEU, ROUGE)"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 4: Transformer Architecture, Self-Attention & Pre-training",
+      "topics": [
+        {
+          "id": "nlp-m4-t1",
+          "title": "Self-Attention Mechanics",
+          "subtopics": [
+            "Query, Key, Value vectors; self-attention matrix scaling factor (d_k) justification"
+          ]
+        },
+        {
+          "id": "nlp-m4-t2",
+          "title": "Multi-Head Attention",
+          "subtopics": [
+            "Parallel projection layers, concatenated heads output dimension mappings math"
+          ]
+        },
+        {
+          "id": "nlp-m4-t3",
+          "title": "Transformer Encoder",
+          "subtopics": [
+            "Layer normalization offsets (Pre-LN vs Post-LN stability)",
+            "Feed-forward networks, and Positional Encodings formulas"
+          ]
+        },
+        {
+          "id": "nlp-m4-t4",
+          "title": "Transformer Decoder",
+          "subtopics": [
+            "Masked self-attention (causal masking)",
+            "Cross-attention mappings from encoder outputs"
+          ]
+        },
+        {
+          "id": "nlp-m4-t5",
+          "title": "Transformer Pre-training",
+          "subtopics": [
+            "BERT Masked Language Modeling (MLM)",
+            "Next Sentence Prediction (NSP) objectives",
+            "GPT causal language model pre-training"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 5: Fine-Tuning Transformers, Dense Retrieval & Vector DB Search",
+      "topics": [
+        {
+          "id": "nlp-m5-t1",
+          "title": "Sentence Embeddings",
+          "subtopics": [
+            "Sentence Transformers, bi-encoders vs cross-encoders, and embedding extract layouts"
+          ]
+        },
+        {
+          "id": "nlp-m5-t2",
+          "title": "Information Retrieval",
+          "subtopics": [
+            "Sparse retrieval (TF-IDF, BM25 metrics) vs Dense retrieval (vector search maps)"
+          ]
+        },
+        {
+          "id": "nlp-m5-t3",
+          "title": "Semantic Search",
+          "subtopics": [
+            "Vector indexing algorithms (HNSW, IVF-PQ), cosine search metrics",
+            "Reranking models"
+          ]
+        },
+        {
+          "id": "nlp-m5-t4",
+          "title": "Text Summarization & Q&A",
+          "subtopics": [
+            "Extractive vs abstractive summarizations",
+            "Span-prediction architectures for Q&A"
+          ]
+        },
+        {
+          "id": "nlp-m5-t5",
+          "title": "NLP Applications",
+          "subtopics": [
+            "Topic modeling LDA integration, NER evaluation metrics, and chatbots intent mappings"
+          ]
+        }
+      ]
+    }
+  ],
+  "revision": [],
+  "interview": [],
+  "examples": [],
+  "diagrams": []
+}

@@ -1,0 +1,41 @@
+{
+  "quiz_id": "deep-learning-m1-t1-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Under the Perceptron Convergence Theorem, if the training dataset is linearly separable with margin $\\gamma > 0$ relative to a separating unit vector $\\mathbf{w}^*$ (i.e. $y_i(\\mathbf{w}^{*\\top}\\mathbf{x}_i) \\ge \\gamma$), and all samples are bounded such that $\\lVert\\mathbf{x}_i\\rVert_2 \\le R$, what is the upper bound on the number of weight updates $k$ before convergence?",
+      "options": [
+        "$k \\le \\frac{R}{\\gamma}$",
+        "$k \\le \\frac{R^2}{\\gamma^2}$",
+        "$k \\le e^{\\frac{R}{\\gamma}}$",
+        "$k \\le \\log\\left(\\frac{R}{\\gamma}\\right)$"
+      ],
+      "correct_answer": "$k \\le \\frac{R^2}{\\gamma^2}$",
+      "explanation": "The Perceptron Convergence Theorem states that the maximum number of weight updates $k$ is bounded by $k \\le \\frac{R^2}{\\gamma^2}$. This is derived by proving that after $k$ updates, the lower bound of the weight vector norm is $\\lVert\\mathbf{w}^{(k)}\\rVert_2 \\ge k\\gamma$ (from the margin constraint) and the upper bound is $\\lVert\\mathbf{w}^{(k)}\\rVert_2^2 \\le k R^2$ (from the misclassification update property). Squaring the lower bound and comparing it to the upper bound yields $k^2 \\gamma^2 \\le k R^2$, which simplifies to $k \\le \\frac{R^2}{\\gamma^2}$."
+    },
+    {
+      "question_id": "q2",
+      "text": "If a neural network consists of $L$ hidden layers but all activations are strictly linear (e.g. $f(z) = z$), what is the mathematical effect on the network's capacity?",
+      "options": [
+        "The network collapses into a single affine mapping $\\mathbf{W}^{\\text{eff}}\\mathbf{x} + \\mathbf{b}^{\\text{eff}}$, rendering the hidden layers redundant.",
+        "The network can still model arbitrary non-linear boundaries but requires twice as many training epochs.",
+        "The network is restricted to representing only periodic functions like sine and cosine.",
+        "The backpropagation gradients will exponentially explode, causing immediate floating-point overflow."
+      ],
+      "correct_answer": "The network collapses into a single affine mapping $\\mathbf{W}^{\\text{eff}}\\mathbf{x} + \\mathbf{b}^{\\text{eff}}$, rendering the hidden layers redundant.",
+      "explanation": "Because the composition of multiple linear functions is itself a linear function, substituting the forward propagation equations of each layer sequentially reveals that the output is simply an affine transformation of the input: $\\mathbf{a}^{(L)} = \\mathbf{W}^{\\text{eff}}\\mathbf{x} + \\mathbf{b}^{\\text{eff}}$, where $\\mathbf{W}^{\\text{eff}} = \\mathbf{W}^{(L)} \\dots \\mathbf{W}^{(1)}$. This means the hidden layers add no representational capacity over a single-layer linear model."
+    },
+    {
+      "question_id": "q3",
+      "text": "Why is a single-layer perceptron mathematically unable to solve the XOR classification problem?",
+      "options": [
+        "The system of linear inequalities representing the XOR inputs and outputs yields a mathematical contradiction, meaning no separating hyperplane exists in the original 2D input space.",
+        "The weights of a single-layer perceptron are bounded in the range $[-1, 1]$, which is too narrow for the XOR output scale.",
+        "The XOR function requires a softmax activation to represent probabilities, which single-layer perceptrons do not support.",
+        "The learning rate must decay to zero to fit the XOR outputs, which causes training to freeze."
+      ],
+      "correct_answer": "The system of linear inequalities representing the XOR inputs and outputs yields a mathematical contradiction, meaning no separating hyperplane exists in the original 2D input space.",
+      "explanation": "Evaluating the linear inequalities for the XOR coordinates $((0,0) \\to y=0, (0,1) \\to y=1, (1,0) \\to y=1, (1,1) \\to y=0)$ under a single decision boundary $\\mathbf{w}^{\\top}\\mathbf{x} + b$ yields the system: $b < 0$, $w_2+b \\ge 0$, $w_1+b \\ge 0$, and $w_1+w_2+b < 0$. Summing the middle two yields $w_1+w_2+2b \\ge 0$, which contradicts the first and fourth inequalities since $b < 0$ implies $w_1+w_2+b > w_1+w_2+2b \\ge 0$. This contradiction proves that the XOR points cannot be linearly separated."
+    }
+  ]
+}

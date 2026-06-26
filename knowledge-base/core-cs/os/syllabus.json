@@ -1,0 +1,237 @@
+{
+  "subject_id": "os",
+  "name": "OS",
+  "category": "core-cs",
+  "modules": [
+    {
+      "name": "Module 1: OS Architecture, System Calls & CPU context switching",
+      "topics": [
+        {
+          "id": "os-m1-t1",
+          "title": "OS Kernels",
+          "subtopics": [
+            "Monolithic kernels (Linux) vs Microkernels (Mach) system boundaries"
+          ]
+        },
+        {
+          "id": "os-m1-t2",
+          "title": "Privilege Rings",
+          "subtopics": [
+            "User Mode (Ring 3) vs Kernel Mode (Ring 0) execution controls",
+            "System interrupts"
+          ]
+        },
+        {
+          "id": "os-m1-t3",
+          "title": "System Calls",
+          "subtopics": [
+            "Trap instructions execution",
+            "Parameter passing interfaces",
+            "Hardware execution context switches"
+          ]
+        },
+        {
+          "id": "os-m1-t4",
+          "title": "Process Lifecycle",
+          "subtopics": [
+            "Process creation (fork, exec)",
+            "States transition (Ready, Running, Blocked)",
+            "PCB (Process Control Block) contents"
+          ]
+        },
+        {
+          "id": "os-m1-t5",
+          "title": "Context Switching Cost",
+          "subtopics": [
+            "PCB save/restore operations",
+            "Registers swapping",
+            "CPU caches invalidation and TLB flushing"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 2: CPU Scheduling, Priorities & Deadlocks Prevention",
+      "topics": [
+        {
+          "id": "os-m2-t1",
+          "title": "CPU Schedulers",
+          "subtopics": [
+            "Long-term, medium-term, and short-term scheduler algorithms selection"
+          ]
+        },
+        {
+          "id": "os-m2-t2",
+          "title": "Scheduling Algorithms",
+          "subtopics": [
+            "FCFS, SJF, Priority, Round Robin time slice",
+            "Multi-Level Feedback Queue configurations"
+          ]
+        },
+        {
+          "id": "os-m2-t3",
+          "title": "Priority Inversion",
+          "subtopics": [
+            "Priority inheritance protocols",
+            "Resolving priority inversion (Mars Pathfinder bug)"
+          ]
+        },
+        {
+          "id": "os-m2-t4",
+          "title": "Deadlock Conditions",
+          "subtopics": [
+            "Mutual exclusion, hold-and-wait, no-preemption, and circular wait conditions"
+          ]
+        },
+        {
+          "id": "os-m2-t5",
+          "title": "Deadlock Mitigation",
+          "subtopics": [
+            "Banker's Algorithm verification logic",
+            "Deadlock detection",
+            "Transaction recovery"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 3: Memory Virtualization, Page Tables & TLB Hits",
+      "topics": [
+        {
+          "id": "os-m3-t1",
+          "title": "Virtual Memory",
+          "subtopics": [
+            "MMU address translation flow",
+            "Base and limit registers partitions"
+          ]
+        },
+        {
+          "id": "os-m3-t2",
+          "title": "Paging Internals",
+          "subtopics": [
+            "Page tables structures, virtual-to-physical mapping",
+            "Multi-level page tables space savings"
+          ]
+        },
+        {
+          "id": "os-m3-t3",
+          "title": "TLB Hardware",
+          "subtopics": [
+            "Translation Lookaside Buffer",
+            "Cache lookup hit/miss ratios",
+            "TLB shootdown overheads"
+          ]
+        },
+        {
+          "id": "os-m3-t4",
+          "title": "Page Faults",
+          "subtopics": [
+            "Page fault trap processing",
+            "Disk swappers page load",
+            "Dirty pages writebacks"
+          ]
+        },
+        {
+          "id": "os-m3-t5",
+          "title": "Page Replacement Algorithms",
+          "subtopics": [
+            "FIFO, LRU approximation",
+            "Optimal replacement algorithm",
+            "Thrashing and Belady's Anomaly bounds"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 4: Thread Synchronization, Mutexes & Cache Thrashing",
+      "topics": [
+        {
+          "id": "os-m4-t1",
+          "title": "Concurrency",
+          "subtopics": [
+            "Kernel-level threads vs User-level green threads",
+            "Thread contexts swapping costs"
+          ]
+        },
+        {
+          "id": "os-m4-t2",
+          "title": "Critical Section",
+          "subtopics": [
+            "Mutual exclusion verification",
+            "Peterson's solution constraints",
+            "Hardware Test-And-Set"
+          ]
+        },
+        {
+          "id": "os-m4-t3",
+          "title": "Synchronization Primitives",
+          "subtopics": [
+            "Semaphores (counting/binary), Mutexes, Spinlocks, and condition variables"
+          ]
+        },
+        {
+          "id": "os-m4-t4",
+          "title": "Cache Thrashing",
+          "subtopics": [
+            "Threads synchronization cache invalidation loops",
+            "False sharing resolution"
+          ]
+        },
+        {
+          "id": "os-m4-t5",
+          "title": "Inter-Process Communication (IPC)",
+          "subtopics": [
+            "Shared memory arrays, Message passing, Pipes, and Sockets buffers"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 5: Storage Architectures, File Systems & Containers Foundation",
+      "topics": [
+        {
+          "id": "os-m5-t1",
+          "title": "Disk Scheduling",
+          "subtopics": [
+            "FCFS, SSTF, SCAN, C-SCAN head movement optimizations"
+          ]
+        },
+        {
+          "id": "os-m5-t2",
+          "title": "File System Layouts",
+          "subtopics": [
+            "Inodes structures",
+            "Direct/indirect data pointers, and directories mappings"
+          ]
+        },
+        {
+          "id": "os-m5-t3",
+          "title": "Journaling",
+          "subtopics": [
+            "Write-ahead file commits logging",
+            "Crash consistency restoration algorithms"
+          ]
+        },
+        {
+          "id": "os-m5-t4",
+          "title": "RAID Configurations",
+          "subtopics": [
+            "RAID 0 stripe, RAID 1 mirror, RAID 5 parity, RAID 10 hybrid setups"
+          ]
+        },
+        {
+          "id": "os-m5-t5",
+          "title": "Containers Foundation",
+          "subtopics": [
+            "Linux namespaces isolates (PID, net, mount)",
+            "cgroups resource controls, and virtualization layers"
+          ]
+        }
+      ]
+    }
+  ],
+  "revision": [],
+  "interview": [],
+  "examples": [],
+  "diagrams": []
+}

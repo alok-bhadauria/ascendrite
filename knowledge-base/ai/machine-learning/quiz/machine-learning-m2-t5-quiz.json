@@ -1,0 +1,29 @@
+{
+  "quiz_id": "machine-learning-m2-t5-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Why must target encoding be calculated strictly inside cross-validation folds instead of globally across the entire dataset?",
+      "options": [
+        "Computing it globally introduces target leakage, resulting in validation metrics that are artificially inflated.",
+        "Target encoding is mathematically unstable if computed over more than 10,000 observations.",
+        "Downstream models can only ingest categories if they are split into fold blocks.",
+        "Laplace smoothing weight functions require K-Fold divisions to compute counts."
+      ],
+      "correct_answer": "Computing it globally introduces target leakage, resulting in validation metrics that are artificially inflated.",
+      "explanation": "Because target encoding uses the target label to calculate values for the categorical columns, computing the category averages globally allows validation fold label information to leak into the training features, leading to severe overfitting."
+    },
+    {
+      "question_id": "q2",
+      "text": "What is the primary visual and mathematical constraint of PCA compared to non-linear dimensionality reductions like t-SNE or UMAP?",
+      "options": [
+        "PCA can only be calculated on binary classification matrices.",
+        "PCA performs a linear projection, rotating the coordinate axes along directions of maximum variance, meaning it cannot capture complex non-linear manifolds.",
+        "PCA does not support projecting new samples.",
+        "PCA requires computing inverse covariance matrices at each iteration, making it slow."
+      ],
+      "correct_answer": "PCA performs a linear projection, rotating the coordinate axes along directions of maximum variance, meaning it cannot capture complex non-linear manifolds.",
+      "explanation": "PCA is a linear transformation technique that rotates the feature space. While efficient and preserving global structure, it cannot unfold or capture non-linear relationships, which is where methods like t-SNE or UMAP excel."
+    }
+  ]
+}

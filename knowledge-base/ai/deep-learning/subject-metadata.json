@@ -1,0 +1,30 @@
+{
+  "subject_id": "deep-learning",
+  "name": "Deep Learning",
+  "category": "ai",
+  "difficulty": "Advanced",
+  "estimated_learning_hours": 120,
+  "prerequisites": [
+    "Machine Learning",
+    "Linear Algebra Foundations",
+    "Vector & Matrix Calculus",
+    "Numerical Optimization"
+  ],
+  "tags": [
+    "Neural Networks",
+    "Backpropagation",
+    "CNNs",
+    "RNNs & LSTMs",
+    "Generative Models",
+    "PyTorch",
+    "Model Scaling"
+  ],
+  "subject_theme_colors": {
+    "primary": "#3B82F6",
+    "secondary": "#60A5FA",
+    "accent": "#10B981",
+    "neutral": "#1F2937"
+  },
+  "version": "1.0.0",
+  "last_updated": "2026-06-26"
+}

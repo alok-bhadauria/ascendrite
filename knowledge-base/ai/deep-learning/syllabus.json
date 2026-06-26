@@ -1,0 +1,241 @@
+{
+  "subject_id": "deep-learning",
+  "name": "Deep Learning",
+  "category": "ai",
+  "modules": [
+    {
+      "name": "Module 1: Neural Networks, Activation Functions & Backpropagation Math",
+      "topics": [
+        {
+          "id": "deep-learning-m1-t1",
+          "title": "Neural Foundations",
+          "subtopics": [
+            "Biological vs Artificial Neuron structures",
+            "Perceptron Convergence Theorem math",
+            "Multi-Layer Perceptron (MLP) architectures"
+          ]
+        },
+        {
+          "id": "deep-learning-m1-t2",
+          "title": "Activation Functions",
+          "subtopics": [
+            "Sigmoid saturation math, Tanh scaling",
+            "ReLU dying neurons issues, Leaky ReLU, and Softmax probability distributions"
+          ]
+        },
+        {
+          "id": "deep-learning-m1-t3",
+          "title": "Loss Functions",
+          "subtopics": [
+            "Mean Squared Error (MSE), Binary Cross-Entropy derivation",
+            "Categorical Cross-Entropy, and KL divergence loss"
+          ]
+        },
+        {
+          "id": "deep-learning-m1-t4",
+          "title": "Backpropagation Calculus",
+          "subtopics": [
+            "Forward propagation matrices",
+            "Backward propagation vector chain rule calculus",
+            "Weight updates derivations"
+          ]
+        },
+        {
+          "id": "deep-learning-m1-t5",
+          "title": "Deep Learning Frameworks",
+          "subtopics": [
+            "PyTorch execution graphs, static graphs (TensorFlow) vs dynamic graphs (PyTorch)",
+            "Custom autograd functions"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 2: Advanced Optimization, Regularization & Weights Initialization",
+      "topics": [
+        {
+          "id": "deep-learning-m2-t1",
+          "title": "Optimization Algorithms",
+          "subtopics": [
+            "Batch Gradient Descent, SGD, SGD with momentum",
+            "Learning rate schedulers"
+          ]
+        },
+        {
+          "id": "deep-learning-m2-t2",
+          "title": "Adaptive Optimizers",
+          "subtopics": [
+            "RMSprop, Adam optimizer weight update math",
+            "AdamW weight decay correction details"
+          ]
+        },
+        {
+          "id": "deep-learning-m2-t3",
+          "title": "Regularization Techniques",
+          "subtopics": [
+            "L1 & L2 weight decay, Dropout forward-backward scaling math",
+            "Early stopping rules"
+          ]
+        },
+        {
+          "id": "deep-learning-m2-t4",
+          "title": "Normalization Layers",
+          "subtopics": [
+            "Batch Normalization scale/shift derivation",
+            "Layer Normalization, Group Normalization",
+            "Internal Covariate Shift debates"
+          ]
+        },
+        {
+          "id": "deep-learning-m2-t5",
+          "title": "Weight Initialization",
+          "subtopics": [
+            "Symmetry breaking parameters",
+            "Xavier initialization variance matching",
+            "He (Kaiming) initialization for ReLU networks"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 3: Convolutional Neural Networks (CNN) & Computer Vision Tasks",
+      "topics": [
+        {
+          "id": "deep-learning-m3-t1",
+          "title": "CNN Foundations",
+          "subtopics": [
+            "Image pixel channels RGB/Grayscale",
+            "2D convolution operation, kernels, stride, and padding math"
+          ]
+        },
+        {
+          "id": "deep-learning-m3-t2",
+          "title": "CNN Layers",
+          "subtopics": [
+            "Pooling operations (Max, Average)",
+            "Feature maps dimensions math",
+            "Flattening layer mechanics"
+          ]
+        },
+        {
+          "id": "deep-learning-m3-t3",
+          "title": "CNN Architectures",
+          "subtopics": [
+            "LeNet-5, AlexNet, VGG networks",
+            "ResNet skip connections mathematical gradient flow"
+          ]
+        },
+        {
+          "id": "deep-learning-m3-t4",
+          "title": "Transfer Learning",
+          "subtopics": [
+            "Feature extraction vs fine-tuning",
+            "Freeze layers, custom head adaptation"
+          ]
+        },
+        {
+          "id": "deep-learning-m3-t5",
+          "title": "Computer Vision Tasks",
+          "subtopics": [
+            "Object Detection (YOLO bounding box regression, anchor boxes)",
+            "Semantic Segmentation (U-Net layouts)"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 4: Recurrent Neural Networks (RNN), LSTMs & Seq2Seq Models",
+      "topics": [
+        {
+          "id": "deep-learning-m4-t1",
+          "title": "Sequential Data",
+          "subtopics": [
+            "Sequence representations, temporal dependencies",
+            "Recurrent Neural Networks (RNN) hidden state equations"
+          ]
+        },
+        {
+          "id": "deep-learning-m4-t2",
+          "title": "RNN Gradients",
+          "subtopics": [
+            "Backpropagation Through Time (BPTT)",
+            "Vanishing vs exploding gradients mathematical proof"
+          ]
+        },
+        {
+          "id": "deep-learning-m4-t3",
+          "title": "Long Short-Term Memory (LSTM)",
+          "subtopics": [
+            "Forget gate, Input gate, Output gate, and Cell state update equations"
+          ]
+        },
+        {
+          "id": "deep-learning-m4-t4",
+          "title": "Gated Recurrent Units (GRU)",
+          "subtopics": [
+            "Reset gate, Update gate, and hidden state merge equations"
+          ]
+        },
+        {
+          "id": "deep-learning-m4-t5",
+          "title": "Sequence-to-Sequence (Seq2Seq)",
+          "subtopics": [
+            "Encoder-Decoder framework mapping, teacher forcing training loops",
+            "Recurrent attention alignments calculations (Luong multiplicative vs Bahdanau additive models)"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 5: Generative Networks, Autoencoders & High-Performance Scaling",
+      "topics": [
+        {
+          "id": "deep-learning-m5-t1",
+          "title": "Autoencoders (AE)",
+          "subtopics": [
+            "Latent space bottlenecks, Reconstruction loss optimization",
+            "Undercomplete autoencoders"
+          ]
+        },
+        {
+          "id": "deep-learning-m5-t2",
+          "title": "Variational Autoencoders (VAE)",
+          "subtopics": [
+            "Generative latent space, KL Divergence regularization math",
+            "Reparameterization trick solutions"
+          ]
+        },
+        {
+          "id": "deep-learning-m5-t3",
+          "title": "Generative Adversarial Networks (GANs)",
+          "subtopics": [
+            "Generator vs Discriminator minimax game mathematical objective",
+            "Mode Collapse traps"
+          ]
+        },
+        {
+          "id": "deep-learning-m5-t4",
+          "title": "Mixed Precision & Mixed Training",
+          "subtopics": [
+            "FP16/BF16 mixed precision, Tensor Cores layouts",
+            "Loss scaling math"
+          ]
+        },
+        {
+          "id": "deep-learning-m5-t5",
+          "title": "High-Performance Scaling",
+          "subtopics": [
+            "Distributed Data Parallel (DDP) communication",
+            "Tensor parallelism, and pipeline parallelism algorithms"
+          ]
+        }
+      ]
+    }
+  ],
+  "revision": [],
+  "interview": [],
+  "examples": [],
+  "diagrams": [],
+  "version": "1.0.0",
+  "last_updated": "2026-06-26"
+}

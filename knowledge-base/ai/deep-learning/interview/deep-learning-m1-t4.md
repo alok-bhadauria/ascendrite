@@ -1,0 +1,47 @@
+# Ascendrite Interview Prep: Backpropagation Calculus
+
+## Q1: Derive the backpropagation equations for a hidden layer weight matrix $\mathbf{W}^{(l)}$ from first principles.
+
+### Standard Answer
+To compute the gradient of the scalar loss $J$ with respect to the weight matrix $\mathbf{W}^{(l)}$ mapping layer $l-1$ to layer $l$, we first apply the multivariate chain rule.
+
+Let the pre-activation vector of layer $l$ be $\mathbf{z}^{(l)} = \mathbf{W}^{(l)}\mathbf{a}^{(l-1)} + \mathbf{b}^{(l)}$. The activation vector is $\mathbf{a}^{(l)} = f^{(l)}(\mathbf{z}^{(l)})$.
+
+We define the intermediate error vector $\boldsymbol{\delta}^{(l)}$ as:
+$$\boldsymbol{\delta}^{(l)} = \frac{\partial J}{\partial \mathbf{z}^{(l)}} \in \mathbb{R}^{d_l}$$
+
+By the chain rule, the derivative with respect to a single element $W_{ij}^{(l)}$ is:
+$$\frac{\partial J}{\partial W_{ij}^{(l)}} = \sum_{k=1}^{d_l} \frac{\partial J}{\partial z_k^{(l)}} \frac{\partial z_k^{(l)}}{\partial W_{ij}^{(l)}}$$
+
+Since $z_k^{(l)} = \sum_{m=1}^{d_{l-1}} W_{km}^{(l)} a_m^{(l-1)} + b_k^{(l)}$, the partial derivative $\frac{\partial z_k^{(l)}}{\partial W_{ij}^{(l)}}$ is non-zero only when $k=i$. Specifically:
+$$\frac{\partial z_k^{(l)}}{\partial W_{ij}^{(l)}} = \begin{cases} a_j^{(l-1)} & \text{if } k = i \\ 0 & \text{otherwise} \end{cases}$$
+
+Substituting this back into the sum, we get:
+$$\frac{\partial J}{\partial W_{ij}^{(l)}} = \frac{\partial J}{\partial z_i^{(l)}} a_j^{(l-1)} = \delta_i^{(l)} a_j^{(l-1)}$$
+
+Expressing this element-wise outer product in matrix form yields:
+$$\frac{\partial J}{\partial \mathbf{W}^{(l)}} = \boldsymbol{\delta}^{(l)} (\mathbf{a}^{(l-1)})^{\top}$$
+
+---
+
+## Q2: Explain the memory overhead of backpropagation during training and the role of forward caching.
+
+### Standard Answer
+During the forward pass of a neural network, the pre-activations $\mathbf{z}^{(l)}$ and post-activations $\mathbf{a}^{(l)}$ are computed sequentially. During the backward pass, these values are required to compute the gradients:
+1.  The activation of the preceding layer $\mathbf{a}^{(l-1)}$ is needed to calculate the weight gradient: $\frac{\partial J}{\partial \mathbf{W}^{(l)}} = \boldsymbol{\delta}^{(l)} (\mathbf{a}^{(l-1)})^{\top}$.
+2.  The pre-activation $\mathbf{z}^{(l)}$ is needed to calculate the activation derivative $f^{(l)\prime}(\mathbf{z}^{(l)})$, which is used in computing $\boldsymbol{\delta}^{(l)}$.
+
+Consequently, all intermediate activations and pre-activations for every layer must be stored in memory (cached) during the forward pass. This creates a memory complexity of $\mathcal{O}(L \cdot d \cdot N)$ where $L$ is the number of layers, $d$ is the layer width, and $N$ is the batch size. In contrast, during inference, these intermediate activations do not need to be cached and can be discarded immediately after the subsequent layer's activations are computed, reducing memory complexity to $\mathcal{O}(d \cdot N)$.
+
+---
+
+## Q3: What is the mathematical explanation for the vanishing gradient problem during backpropagation through multiple layers?
+
+### Standard Answer
+The error vector for a hidden layer $l$ is calculated recursively from the error vector of the subsequent layer $l+1$:
+$$\boldsymbol{\delta}^{(l)} = \left( \mathbf{W}^{(l+1)\top} \boldsymbol{\delta}^{(l+1)} \right) \odot f^{(l)\prime}(\mathbf{z}^{(l)})$$
+
+Expanding this relation recursively from layer $l$ to the output layer $L$:
+$$\boldsymbol{\delta}^{(l)} = \left[ \prod_{k=l}^{L-1} \mathbf{W}^{(k+1)\top} \operatorname{diag}\left( f^{(k)\prime}(\mathbf{z}^{(k)}) \right) \right] \boldsymbol{\delta}^{(L)}$$
+
+If the weights in $\mathbf{W}$ are initialized such that their spectral radius (maximum eigenvalue magnitude) is less than 1, or if the activation function derivatives $f^{(k)\prime}(\mathbf{z}^{(k)})$ are bound below 1 (for instance, the Sigmoid function derivative is bounded by $0.25$, and Tanh by $1.0$), the product of these matrices shrinks exponentially with the number of layers $(L - l)$. As a result, the gradients of the loss with respect to parameters in the early layers of a deep network approach zero, stopping them from updating effectively.

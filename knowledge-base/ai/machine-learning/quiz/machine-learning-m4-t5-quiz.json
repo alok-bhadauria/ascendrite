@@ -1,0 +1,41 @@
+{
+  "quiz_id": "machine-learning-m4-t5-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "During AdaBoost optimization minimizing Exponential Loss, if a weak learner achieves a weighted training error rate of $\\epsilon_m = 0.20$, what is its optimal step size coefficient $\\beta_m$ (ignoring learning rate scaling)?",
+      "options": [
+        "$\\beta_m = \\log(4) \\approx 1.386$",
+        "$\\beta_m = 0.5 \\log(4) \\approx 0.693$",
+        "$\\beta_m = 0.5 \\log(0.25) \\approx -0.693$",
+        "$\\beta_m = 0.80$"
+      ],
+      "correct_answer": "$\\beta_m = 0.5 \\log(4) \\approx 0.693$",
+      "explanation": "The optimal step size coefficient formula in AdaBoost is $\\beta_m = \\frac{1}{2} \\log\\left(\\frac{1-\\epsilon_m}{\\epsilon_m}\\right)$. Substituting $\\epsilon_m = 0.20$ gives $\\beta_m = 0.5 \\log\\left(\\frac{0.80}{0.20}\\right) = 0.5 \\log(4) \\approx 0.693$."
+    },
+    {
+      "question_id": "q2",
+      "text": "In the XGBoost optimization objective regularized by L2 parameter $\\lambda$, how is the optimal weight $w_j^*$ of leaf node $j$ formulated in terms of sum of gradients $G_j$ and sum of Hessians $H_j$?",
+      "options": [
+        "$w_j^* = -\\frac{G_j^2}{H_j + \\lambda}$",
+        "$w_j^* = -\\frac{G_j}{H_j + \\lambda}$",
+        "$w_j^* = -\\frac{G_j}{2 H_j + \\lambda}$",
+        "$w_j^* = \\frac{H_j}{G_j + \\lambda}$"
+      ],
+      "correct_answer": "$w_j^* = -\\frac{G_j}{H_j + \\lambda}$",
+      "explanation": "Grouping the second-order Taylor expansion by leaf $j$ yields the local quadratic objective $G_j w_j + \\frac{1}{2}(H_j + \\lambda)w_j^2$. Differentiating this with respect to the leaf weight $w_j$ and setting to zero yields the optimal weight $w_j^* = -\\frac{G_j}{H_j + \\lambda}$."
+    },
+    {
+      "question_id": "q3",
+      "text": "What is the primary computational benefit of CatBoost's oblivious (symmetric) tree structure during inference?",
+      "options": [
+        "Symmetric trees require no feature values to evaluate splits.",
+        "Symmetric trees can be evaluated at hardware speeds using bitwise index mappings, preventing CPU branch mispredictions.",
+        "Symmetric trees grow leaf-wise to minimize depth, reducing memory fetches.",
+        "Oblivious trees automatically convert categorical strings into float tensors before execution."
+      ],
+      "correct_answer": "Symmetric trees can be evaluated at hardware speeds using bitwise index mappings, preventing CPU branch mispredictions.",
+      "explanation": "Because symmetric trees use the identical splitting condition across all nodes at each level, the evaluation of any sample maps to a simple path of binary decisions (0 or 1) at each level. This sequence of splits can be encoded as a binary index. We can evaluate predictions by fetching from a flat array using bitwise operations, bypassing traditional tree traversal pointers and avoiding CPU branch mispredictions, which speeds up real-time serving latency."
+    }
+  ]
+}

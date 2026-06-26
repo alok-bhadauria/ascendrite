@@ -1,0 +1,224 @@
+{
+  "subject_id": "ai-agents",
+  "name": "AI Agents",
+  "category": "ai",
+  "modules": [
+    {
+      "name": "Module 1: Agent Philosophies, ReAct Paradigm & Functions Schema",
+      "topics": [
+        {
+          "id": "ai-agents-m1-t1",
+          "title": "Agent Philosophy",
+          "subtopics": [
+            "Autonomous agents vs passive generation",
+            "Execution loops, and tool dependency chains"
+          ]
+        },
+        {
+          "id": "ai-agents-m1-t2",
+          "title": "ReAct Paradigm",
+          "subtopics": [
+            "Thought-Action-Observation loop traces, parsing agent decisions",
+            "Loop timeout constraints"
+          ]
+        },
+        {
+          "id": "ai-agents-m1-t3",
+          "title": "Goal Decomposition",
+          "subtopics": [
+            "Recursive planning, sub-goal generation (BabyAGI pattern)",
+            "Task scheduling"
+          ]
+        },
+        {
+          "id": "ai-agents-m1-t4",
+          "title": "Function Calling",
+          "subtopics": [
+            "JSON Schema declarations, API argument specifications",
+            "Tool return formats"
+          ]
+        },
+        {
+          "id": "ai-agents-m1-t5",
+          "title": "Structured Arguments Mapping",
+          "subtopics": [
+            "Parsing agent decisions, validation schema checks",
+            "Fallback execution handlers"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 2: Short-Term Memory, Conversational Window & RAG Integrations",
+      "topics": [
+        {
+          "id": "ai-agents-m2-t1",
+          "title": "Short-Term Memory",
+          "subtopics": [
+            "In-memory session buffers, conversational window limits",
+            "Context compression"
+          ]
+        },
+        {
+          "id": "ai-agents-m2-t2",
+          "title": "Long-Term Memory",
+          "subtopics": [
+            "Vector DB semantic search integration, metadata filtering",
+            "Episodic memory loops"
+          ]
+        },
+        {
+          "id": "ai-agents-m2-t3",
+          "title": "RAG Integrations",
+          "subtopics": [
+            "Document loaders, embedding models, semantic chunk splits",
+            "Retrieval routes"
+          ]
+        },
+        {
+          "id": "ai-agents-m2-t4",
+          "title": "Context Engineering",
+          "subtopics": [
+            "Prompt context window limits, Lost in the Middle metrics",
+            "Context pruning"
+          ]
+        },
+        {
+          "id": "ai-agents-m2-t5",
+          "title": "Memory Updates",
+          "subtopics": [
+            "Dynamic state updates, summarization loops, and pruning old memories"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 3: Advanced LangChain, Custom Tools & Agent Workflows",
+      "topics": [
+        {
+          "id": "ai-agents-m3-t1",
+          "title": "LangChain Chains",
+          "subtopics": [
+            "Sequential chains, router chains, and custom executable chains"
+          ]
+        },
+        {
+          "id": "ai-agents-m3-t2",
+          "title": "Custom Tools",
+          "subtopics": [
+            "@tool decorators, argument annotations, and error handling inside tools"
+          ]
+        },
+        {
+          "id": "ai-agents-m3-t3",
+          "title": "Agent Executors",
+          "subtopics": [
+            "Default agent executor loop configurations, early stopping, and max iterations parameters"
+          ]
+        },
+        {
+          "id": "ai-agents-m3-t4",
+          "title": "LangGraph States",
+          "subtopics": [
+            "Workflows, nodes, conditional edges, and state updates compilation"
+          ]
+        },
+        {
+          "id": "ai-agents-m3-t5",
+          "title": "Workflows Design",
+          "subtopics": [
+            "Plan-and-Solve patterns, self-correction loops, and human-in-the-loop steps"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 4: Multi-Agent Systems, Supervisor Routing & MCP Protocols",
+      "topics": [
+        {
+          "id": "ai-agents-m4-t1",
+          "title": "Multi-Agent Coordination",
+          "subtopics": [
+            "Supervisor routing, peer-to-peer messaging, and graph states sharing"
+          ]
+        },
+        {
+          "id": "ai-agents-m4-t2",
+          "title": "Agent Roles",
+          "subtopics": [
+            "Specialist agents (analyst, coder, tester)",
+            "Responsibility segregation"
+          ]
+        },
+        {
+          "id": "ai-agents-m4-t3",
+          "title": "Model Context Protocol (MCP)",
+          "subtopics": [
+            "Tool calling server bindings, resource endpoints, and client configurations"
+          ]
+        },
+        {
+          "id": "ai-agents-m4-t4",
+          "title": "MCP Tool Calling",
+          "subtopics": [
+            "Structured argument mapping, parameter schema checks, and error loop correction"
+          ]
+        },
+        {
+          "id": "ai-agents-m4-t5",
+          "title": "Agent Protocols",
+          "subtopics": [
+            "Agent-to-Agent communication, synchronization primitives, and state resolution"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 5: Fine-Tuning PEFT, RLHF Alignment & MLOps Serving",
+      "topics": [
+        {
+          "id": "ai-agents-m5-t1",
+          "title": "Fine-Tuning PEFT",
+          "subtopics": [
+            "LoRA weight adapters matrices ranks (r) and scaling alpha",
+            "QLoRA double quantization"
+          ]
+        },
+        {
+          "id": "ai-agents-m5-t2",
+          "title": "Alignment Reward Loops",
+          "subtopics": [
+            "RLHF PPO reward model feedbacks vs DPO direct preference optimization calculations"
+          ]
+        },
+        {
+          "id": "ai-agents-m5-t3",
+          "title": "Quantization Formats",
+          "subtopics": [
+            "Model weight reductions (GPTQ, AWQ, GGUF)",
+            "Hardware compatibility constraints"
+          ]
+        },
+        {
+          "id": "ai-agents-m5-t4",
+          "title": "LLMOps Serving",
+          "subtopics": [
+            "Inference optimizations (PagedAttention, vLLM)",
+            "Triton routing, latency SLA bounds, and guardrails API validation"
+          ]
+        },
+        {
+          "id": "ai-agents-m5-t5",
+          "title": "Multimodal Systems",
+          "subtopics": [
+            "Image-text alignment models (CLIP), autonomous workflows, and agent execution safety"
+          ]
+        }
+      ]
+    }
+  ],
+  "revision": [],
+  "interview": [],
+  "examples": [],
+  "diagrams": []
+}

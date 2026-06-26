@@ -1,0 +1,73 @@
+{
+  "topic_id": "machine-learning-m3-t4",
+  "title": "Support Vector Machines (SVM)",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Hard",
+    "estimated_hours": 7,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Derive the primal and dual mathematical formulations of soft-margin SVM and show the margin width formulation.",
+    "Formulate the Karush-Kuhn-Tucker (KKT) complementary slackness conditions and explain their physical relationship to support vectors.",
+    "Explain Mercer's Theorem and analyze the mathematical projection of the Radial Basis Function (RBF) kernel into infinite-dimensional Hilbert spaces."
+  ],
+  "content_sections": [
+    {
+      "title": "Primal Formulation and Support Vector Geometry",
+      "content": "A Support Vector Machine (SVM) is a supervised learning algorithm that constructs an optimal separating hyperplane in a high-dimensional space. For a binary classification dataset with $y_i \\in \\{-1, 1\\}$ and features $\\mathbf{x}_i \\in \\mathbb{R}^d$, the hyperplane is defined as:\n\n$$\\mathbf{w}^{\\top}\\mathbf{x} + b = 0$$\n\nwhere $\\mathbf{w}$ is the weight vector normal to the hyperplane, and $b$ is the bias. The perpendicular distance from any sample $\\mathbf{x}_i$ to this hyperplane is:\n\n$$d_i = \\frac{|\\mathbf{w}^{\\top}\\mathbf{x}_i + b|}{\\|\\mathbf{w}\\|_2}$$\n\nTo find the optimal hyperplane, we seek to maximize the margin, which is the distance to the closest data points. We scale $\\mathbf{w}$ and $b$ such that the functional margin of the closest points is exactly 1, meaning $y_i(\\mathbf{w}^{\\top}\\mathbf{x}_i + b) \\ge 1$ for all observations. Under this normalization, the distance from the closest points to the hyperplane is $\\frac{1}{\\|\\mathbf{w}\\|_2}$, yielding a total margin width of $\\frac{2}{\\|\\mathbf{w}\\|_2}$. Maximizing the margin is equivalent to minimizing the squared $L_2$ norm of $\\mathbf{w}$. This gives the **primal optimization problem** for a hard-margin SVM:\n\n$$\\min_{\\mathbf{w}, b} \\frac{1}{2} \\|\\mathbf{w}\\|_2^2 \\quad \\text{subject to} \\quad y_i(\\mathbf{w}^{\\top}\\mathbf{x}_i + b) \\ge 1, \\quad \\forall i \\in \\{1, \\dots, N\\}$$\n\n### Soft-Margin SVM\nTo handle non-separable data and build resistance to noise, we introduce non-negative slack variables $\\xi_i \\ge 0$, which represent the distance by which a point violates the margin. The objective function balances margin maximization and violation penalties controlled by a regularization parameter $C > 0$:\n\n$$\\min_{\\mathbf{w}, b, \\boldsymbol{\\xi}} \\frac{1}{2} \\|\\mathbf{w}\\|_2^2 + C \\sum_{i=1}^N \\xi_i$$\n\n$$\\text{subject to} \\quad y_i(\\mathbf{w}^{\\top}\\mathbf{x}_i + b) \\ge 1 - \\xi_i \\quad \\text{and} \\quad \\xi_i \\ge 0, \\quad \\forall i \\in \\{1, \\dots, N\\}$$\n\nThis formulation is a convex quadratic programming problem with linear constraints, guaranteeing a unique global minimum.",
+      "callouts": [
+        {
+          "type": "Student Trap",
+          "title": "The Regularization Parameter C and Margin Bounds",
+          "content": "A common student error is misinterpreting the role of $C$. The parameter $C$ acts as an inverse regularization parameter. A very large $C$ forces slack variables $\\xi_i$ close to zero, prioritizing minimal training errors. This results in a narrower margin that is highly sensitive to individual outliers, risking high variance. Conversely, a small $C$ permits larger margin violations, widening the margin to reduce variance at the expense of higher training bias."
+        }
+      ]
+    },
+    {
+      "title": "The Dual Formulation and KKT Conditions",
+      "content": "To solve the soft-margin primal problem, we construct the primal Lagrangian by introducing Lagrange multipliers $\\lambda_i \\ge 0$ for the margin constraints and $\\mu_i \\ge 0$ for the slack constraints:\n\n$$\\mathcal{L}(\\mathbf{w}, b, \\boldsymbol{\\xi}, \\boldsymbol{\\lambda}, \\boldsymbol{\\mu}) = \\frac{1}{2} \\|\\mathbf{w}\\|_2^2 + C \\sum_{i=1}^N \\xi_i - \\sum_{i=1}^N \\lambda_i \\left( y_i(\\mathbf{w}^{\\top}\\mathbf{x}_i + b) - 1 + \\xi_i \\right) - \\sum_{i=1}^N \\mu_i \\xi_i$$\n\nTo find the dual formulation, we take the partial derivatives of $\\mathcal{L}$ with respect to the primal variables $\\mathbf{w}$, $b$, and $\\xi_i$ and set them to zero:\n\n1.  $\\nabla_{\\mathbf{w}} \\mathcal{L} = \\mathbf{w} - \\sum_{i=1}^N \\lambda_i y_i \\mathbf{x}_i = 0 \\implies \\mathbf{w} = \\sum_{i=1}^N \\lambda_i y_i \\mathbf{x}_i$\n2.  $\\frac{\\partial \\mathcal{L}}{\\partial b} = \\sum_{i=1}^N \\lambda_i y_i = 0$\n3.  $\\frac{\\partial \\mathcal{L}}{\\partial \\xi_i} = C - \\lambda_i - \\mu_i = 0 \\implies \\lambda_i + \\mu_i = C$\n\nSubstituting these relations back into the primal Lagrangian eliminates the primal variables, resulting in the **dual optimization problem**:\n\n$$\\max_{\\boldsymbol{\\lambda}} \\sum_{i=1}^N \\lambda_i - \\frac{1}{2} \\sum_{i=1}^N \\sum_{j=1}^N \\lambda_i \\lambda_j y_i y_j \\mathbf{x}_i^{\top}\\mathbf{x}_j$$\n\n$$\\text{subject to} \\quad \\sum_{i=1}^N \\lambda_i y_i = 0 \\quad \\text{and} \\quad 0 \\le \\lambda_i \\le C, \\quad \\forall i \\in \\{1, \\dots, N\\}$$\n\n### KKT Complementary Slackness Conditions\nThe optimal solution must satisfy the **Karush-Kuhn-Tucker (KKT)** conditions, which dictate the relationship between support vectors and constraints:\n\n$$\\lambda_i \\left( y_i(\\mathbf{w}^{\\top}\\mathbf{x}_i + b) - 1 + \\xi_i \\right) = 0$$\n\n$$\\mu_i \\xi_i = 0 \\implies (C - \\lambda_i)\\xi_i = 0$$\n\nThese conditions partition the training dataset into three distinct regions based on the Lagrange multipliers:\n1.  $\\lambda_i = 0$: The point lies strictly outside the margin boundary. It has no influence on the weight vector $\\mathbf{w}$ or bias $b$.\n2.  $0 < \\lambda_i < C$: The point lies exactly on the margin boundary. The KKT conditions enforce $\\xi_i = 0$, meaning the point satisfies $y_i(\\mathbf{w}^{\\top}\\mathbf{x}_i + b) = 1$. These points are margin support vectors.\n3.  $\\lambda_i = C$: The point violates the margin boundary, resulting in $\\xi_i > 0$. The point either lies within the margin or is misclassified.",
+      "callouts": [
+        {
+          "type": "Engineering Note",
+          "title": "Sparse Representation and Scalability",
+          "content": "Because the final weight vector is a linear combination of only those points where $\\lambda_i > 0$, the SVM decision boundary is entirely defined by a small subset of the training data (the support vectors). This sparsity means that once training is complete, the rest of the dataset can be discarded. However, solving the dual problem requires computing and storing the $N \\times N$ Gram matrix, making standard SVMs difficult to scale to datasets with $N > 100,000$ without chunking algorithms like Sequential Minimal Optimization (SMO)."
+        }
+      ]
+    },
+    {
+      "title": "Kernel Trick and Mercer's Theorem",
+      "content": "The dual formulation depends on the features only through their inner product: $\\mathbf{x}_i^{\\top}\\mathbf{x}_j$. If the data is non-linearly separable, we map the input features into a higher-dimensional space using a mapping function $\\Phi(\\mathbf{x}) \\in \\mathcal{H}$. Rather than explicitly computing this high-dimensional projection, we replace the inner product with a kernel function:\n\n$$K(\\mathbf{x}_i, \\mathbf{x}_j) = \\Phi(\\mathbf{x}_i)^{\\top}\\Phi(\\mathbf{x}_j)$$\n\nThis is known as the **kernel trick**. Under **Mercer's Theorem**, a continuous symmetric function $K(\\mathbf{x}, \\mathbf{z})$ is a valid kernel (i.e. corresponds to an inner product in some Hilbert space) if and only if for any finite set of points, the Gram matrix $\\mathbf{K}_{ij} = K(\\mathbf{x}_i, \\mathbf{x}_j)$ is positive semi-definite.\n\n### The Radial Basis Function (RBF) Kernel\nThe most common non-linear kernel is the Radial Basis Function (RBF) or Gaussian kernel, defined as:\n\n$$K(\\mathbf{x}_i, \\mathbf{x}_j) = \\exp\\left(-\\gamma \\|\\mathbf{x}_i - \\mathbf{x}_j\\|_2^2\\right)$$\n\nwhere $\\gamma > 0$ determines the width of the kernel function. By writing out the Taylor expansion of the exponential term, we can prove that the RBF kernel maps features into an infinite-dimensional feature space. Let $d=1$ and $\\gamma=1$:\n\n$$K(x_i, x_j) = e^{-(x_i-x_j)^2} = e^{-x_i^2} e^{-x_j^2} e^{2x_i x_j} = e^{-x_i^2} e^{-x_j^2} \\sum_{k=0}^{\\infty} \\frac{2^k x_i^k x_j^k}{k!}$$\n\nThis infinite sum represents the inner product of infinite-dimensional feature vectors:\n\n$$\\Phi(x) = e^{-x^2} \\left[ 1, \\sqrt{\\frac{2}{1!}}x, \\sqrt{\\frac{2^2}{2!}}x^2, \\dots, \\sqrt{\\frac{2^k}{k!}}x^k, \\dots \\right]^{\\top}$$\n\nThus, the RBF kernel constructs non-linear decision boundaries by projecting data into an infinite-dimensional Hilbert space, where the data becomes linearly separable.",
+      "callouts": [
+        {
+          "type": "Common Misconception",
+          "title": "Infinite Dimensionality and Overfitting",
+          "content": "A common misconception is that mapping to an infinite-dimensional space guarantees severe overfitting. While the capacity of the model is theoretically infinite, SVMs prevent overfitting by explicitly maximizing the margin (minimizing $\\|\\mathbf{w}\\|_2$). The complexity of the boundary is regulated by $C$ and $\\gamma$. If $\\gamma$ is set too high, the kernel width becomes very small, and the decision boundary will form isolated 'islands' around individual training points, causing overfitting."
+        }
+      ]
+    },
+    {
+      "title": "Professional Practice and Interview Insights",
+      "content": "SVM and Logistic Regression are both fundamental linear classifiers, but their core principles differ:\n\n1.  **Loss Function (Hinge vs. Log-Loss):** SVM optimizes the Hinge Loss: $\\mathcal{L}_{\\text{hinge}}(z) = \\max(0, 1 - yz)$. Hinge loss becomes exactly zero for points that are correctly classified and lie outside the margin ($yz \\ge 1$). This creates sparsity in the dual parameters $\\lambda_i$. Logistic regression optimizes Log-Loss, which asymptotically approaches zero but is never exactly zero; consequently, every data point contributes to the final parameters.\n2.  **Robustness to Outliers:** Once trained, SVM is robust to outliers that lie far from the separating hyperplane since they are not support vectors. Logistic regression remains sensitive to all data points because they influence the probability estimates.\n\n### Kernel Choice Guidelines\n*   Use **Linear Kernel** when the number of features is much larger than the number of samples ($d \\gg N$), e.g., text classification. In this setting, the data is already likely to be linearly separable, and projecting to higher dimensions is unnecessary and prone to overfitting.\n*   Use **RBF Kernel** when the number of samples is larger than the number of features ($N > d$) and the relationship is non-linear.",
+      "callouts": [
+        {
+          "type": "Interview Tip",
+          "title": "Solving the Dual vs. Primal",
+          "content": "If asked when to solve the primal versus the dual SVM, explain that the primal operates in weight space (dimension $d$), while the dual operates in sample space (dimension $N$). When using non-linear kernels, the primal weights $\\mathbf{w}$ cannot be computed directly since $\\Phi(\\mathbf{x})$ is high or infinite-dimensional. In this case, we must solve the dual problem. If we are using a linear kernel and $N$ is massive, solving the primal using stochastic gradient descent (as in Pegasos SVM) is far more efficient."
+        }
+      ]
+    }
+  ],
+  "example_refs": [
+    "machine-learning-m3-t4-ex1"
+  ],
+  "diagram_refs": [
+    "machine-learning-m3-t4-dia1"
+  ],
+  "practice_refs": [
+    "machine-learning-m3-t4-prac1"
+  ],
+  "quiz_refs": [
+    "machine-learning-m3-t4-quiz"
+  ]
+}

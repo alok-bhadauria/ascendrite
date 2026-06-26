@@ -1,0 +1,222 @@
+{
+  "subject_id": "cn",
+  "name": "CN",
+  "category": "core-cs",
+  "modules": [
+    {
+      "name": "Module 1: Networking Models, Physical Signals & Layer Transmissions",
+      "topics": [
+        {
+          "id": "cn-m1-t1",
+          "title": "Networking Architectures",
+          "subtopics": [
+            "OSI 7-layer model vs TCP/IP protocol suite boundary mappings"
+          ]
+        },
+        {
+          "id": "cn-m1-t2",
+          "title": "Physical Signalings",
+          "subtopics": [
+            "Guided media types",
+            "Nyquist and Shannon channel capacity limits equations"
+          ]
+        },
+        {
+          "id": "cn-m1-t3",
+          "title": "Layer Transmissions",
+          "subtopics": [
+            "Framing algorithms",
+            "Bit stuffing, and Cyclic Redundancy Check (CRC) error detection math"
+          ]
+        },
+        {
+          "id": "cn-m1-t4",
+          "title": "MAC Sublayer",
+          "subtopics": [
+            "Carrier Sense Multiple Access (CSMA/CD) collisions",
+            "Backoff algorithms math under congestion"
+          ]
+        },
+        {
+          "id": "cn-m1-t5",
+          "title": "Ethernet Switches",
+          "subtopics": [
+            "MAC table learning loops",
+            "VLAN tagging protocols, and collision domains segregation"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 2: Network Layer Routing, IP Subnetting & CIDR",
+      "topics": [
+        {
+          "id": "cn-m2-t1",
+          "title": "IP Protocol",
+          "subtopics": [
+            "IPv4 header structures",
+            "IP packet fragmentation bounds, and IPv6 migration updates"
+          ]
+        },
+        {
+          "id": "cn-m2-t2",
+          "title": "IP Subnetting",
+          "subtopics": [
+            "Classless Inter-Domain Routing (CIDR) subnet masks calculations",
+            "IP address allocations"
+          ]
+        },
+        {
+          "id": "cn-m2-t3",
+          "title": "Routing Algorithms",
+          "subtopics": [
+            "Link State (OSPF Dijkstra) vs Distance Vector (RIP Bellman-Ford count-to-infinity)"
+          ]
+        },
+        {
+          "id": "cn-m2-t4",
+          "title": "Internet Routing",
+          "subtopics": [
+            "Border Gateway Protocol (BGP) path-vector evaluations",
+            "Autonomous Systems paths"
+          ]
+        },
+        {
+          "id": "cn-m2-t5",
+          "title": "Translation & Config",
+          "subtopics": [
+            "Network Address Translation (NAT) table bindings",
+            "ARP table resolution",
+            "DHCP handshakes"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 3: Transport Layer Protocols, TCP Connections & Congestion Loops",
+      "topics": [
+        {
+          "id": "cn-m3-t1",
+          "title": "Transport Services",
+          "subtopics": [
+            "UDP stateless multiplexing vs TCP stateful byte-stream deliveries comparison"
+          ]
+        },
+        {
+          "id": "cn-m3-t2",
+          "title": "TCP Connection",
+          "subtopics": [
+            "Three-way handshake, sequence numbers synchronization, and 4-step connection teardown"
+          ]
+        },
+        {
+          "id": "cn-m3-t3",
+          "title": "Sliding Window",
+          "subtopics": [
+            "TCP flow control sliding window, sender/receiver buffers calculations, and Silly Window Syndrome"
+          ]
+        },
+        {
+          "id": "cn-m3-t4",
+          "title": "TCP Congestion Control",
+          "subtopics": [
+            "Slow Start thresholds, Congestion Avoidance increments, Fast Retransmit, and Fast Recovery states"
+          ]
+        },
+        {
+          "id": "cn-m3-t5",
+          "title": "Connection Timeouts",
+          "subtopics": [
+            "Round-Trip Time (RTT) estimations equations, and exponential backoff timeouts calculations"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 4: Application Layer Protocols, DNS Resolvers & Web Connections",
+      "topics": [
+        {
+          "id": "cn-m4-t1",
+          "title": "DNS Internals",
+          "subtopics": [
+            "Recursive vs Iterative DNS query paths, TLD root servers, and DNS caching TTL bounds"
+          ]
+        },
+        {
+          "id": "cn-m4-t2",
+          "title": "HTTP Protocol",
+          "subtopics": [
+            "HTTP/1.1 pipelining HOL blocking, HTTP/2 connection multiplexing, and HTTP/3 QUIC UDP migrations"
+          ]
+        },
+        {
+          "id": "cn-m4-t3",
+          "title": "Mail & Files",
+          "subtopics": [
+            "SMTP protocol relays, POP3 vs IMAP states, and FTP control/data streams"
+          ]
+        },
+        {
+          "id": "cn-m4-t4",
+          "title": "Web Caches",
+          "subtopics": [
+            "Reverse proxy servers (Nginx), HTTP cache headers validation rules (ETag, Cache-Control)"
+          ]
+        },
+        {
+          "id": "cn-m4-t5",
+          "title": "Content Delivery (CDN)",
+          "subtopics": [
+            "CDNs geo-routing DNS resolutions, static file edge servers, and origin shields"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 5: Network Security, Cryptographic Handshakes & Firewalls",
+      "topics": [
+        {
+          "id": "cn-m5-t1",
+          "title": "Symmetric/Asymmetric Encryption",
+          "subtopics": [
+            "Public/Private key pairs mathematical foundations",
+            "RSA algorithms"
+          ]
+        },
+        {
+          "id": "cn-m5-t2",
+          "title": "TLS Handshake",
+          "subtopics": [
+            "TLS 1.3 key exchange (ECDHE) protocol, cipher suites negotiation, and session resumption"
+          ]
+        },
+        {
+          "id": "cn-m5-t3",
+          "title": "Digital Certificates",
+          "subtopics": [
+            "Public Key Infrastructure (PKI), Certification Authorities (CA) chain verification loops"
+          ]
+        },
+        {
+          "id": "cn-m5-t4",
+          "title": "Network Firewalls",
+          "subtopics": [
+            "Packet filtering rules (stateless vs stateful firewalls)",
+            "DDoS mitigation techniques"
+          ]
+        },
+        {
+          "id": "cn-m5-t5",
+          "title": "IPSec & VPNs",
+          "subtopics": [
+            "Encapsulating Security Payload (ESP) headers, tunnel vs transport modes, and secure routing"
+          ]
+        }
+      ]
+    }
+  ],
+  "revision": [],
+  "interview": [],
+  "examples": [],
+  "diagrams": []
+}

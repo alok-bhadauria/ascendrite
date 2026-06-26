@@ -1,0 +1,41 @@
+{
+  "topic_id": "deep-learning-m1-t4",
+  "title": "Backpropagation Calculus",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Hard",
+    "estimated_hours": 6,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Formulate forward propagation in matrix form and detail the dimensions of weights, biases, and activation vectors.",
+    "Derive the backward propagation equations using multivariate vector chain rule calculus from first principles.",
+    "Derive the gradient equations for weights and biases and verify their dimensional alignment with parameter matrices."
+  ],
+  "content_sections": [
+    {
+      "title": "Forward Propagation Matrix Layouts",
+      "content": "To execute forward propagation in a Multi-Layer Perceptron (MLP), inputs are passed sequentially through a series of layer transformations. \n\nLet $L$ be the total number of layers. For each layer $l \\in \\{1, \\dots, L\\}$:\n*   $d_l$ is the number of neurons in layer $l$, where $d_0$ is the input feature dimension.\n*   $\\mathbf{a}^{(l-1)} \\in \\mathbb{R}^{d_{l-1}}$ is the activation vector from the previous layer (with $\\mathbf{a}^{(0)} = \\mathbf{x}$ as input).\n*   $\\mathbf{W}^{(l)} \\in \\mathbb{R}^{d_l \\times d_{l-1}}$ is the weight matrix mapping dimensions from layer $l-1$ to layer $l$.\n*   $\\mathbf{b}^{(l)} \\in \\mathbb{R}^{d_l}$ is the bias vector.\n*   $\\mathbf{z}^{(l)} \\in \\mathbb{R}^{d_l}$ is the pre-activation vector.\n*   $\\mathbf{a}^{(l)} \\in \\mathbb{R}^{d_l}$ is the post-activation output vector of layer $l$.\n\nForward propagation is computed element-wise and vector-wise as:\n\n$$\\mathbf{z}^{(l)} = \\mathbf{W}^{(l)} \\mathbf{a}^{(l-1)} + \\mathbf{b}^{(l)}$$\n\n$$\\mathbf{a}^{(l)} = f^{(l)}(\\mathbf{z}^{(l)})$$\n\nwhere $f^{(l)}$ is the activation function of layer $l$, applied element-wise. For a batch of $N$ samples, inputs become a matrix $\\mathbf{X} \\in \\mathbb{R}^{N \\times d_0}$ and activations are processed in parallel: $\\mathbf{Z}^{(l)} \\in \\mathbb{R}^{d_l \\times N}$ and $\\mathbf{A}^{(l)} \\in \\mathbb{R}^{d_l \\times N}$."
+    },
+    {
+      "title": "Backward Propagation and Vector Chain Rule Calculus",
+      "content": "Backpropagation calculates the gradient of a scalar loss function $J$ with respect to the network weights. We derive the recursive relation of the gradients using the **multivariate chain rule**.\n\nWe define the intermediate error vector (or 'delta') of layer $l$ as the partial derivative of the loss $J$ with respect to the pre-activation vector $\\mathbf{z}^{(l)}$:\n\n$$\\boldsymbol{\\delta}^{(l)} = \\frac{\\partial J}{\\partial \\mathbf{z}^{(l)}} \\in \\mathbb{R}^{d_l}$$\n\n#### 1. Derivation for the Output Layer $L$\nUsing the chain rule, the error at the output layer is:\n\n$$\\delta_i^{(L)} = \\frac{\\partial J}{\\partial z_i^{(L)}} = \\frac{\\partial J}{\\partial a_i^{(L)}} \\frac{\\partial a_i^{(L)}}{\\partial z_i^{(L)}} = \\frac{\\partial J}{\\partial a_i^{(L)}} f^{(L)\\prime}(z_i^{(L)})$$\n\nConverting to vector notation (where $\\odot$ represents the Hadamard element-wise product):\n\n$$\\boldsymbol{\\delta}^{(L)} = \\frac{\\partial J}{\\partial \\mathbf{a}^{(L)}} \\odot f^{(L)\\prime}(\\mathbf{z}^{(L)})$$\n\n#### 2. Derivation for Hidden Layers $l < L$\nTo find the error at a hidden layer $l$, we express it in terms of the error at the subsequent layer $l+1$. By the multivariate chain rule:\n\n$$\\delta_j^{(l)} = \\frac{\\partial J}{\\partial z_j^{(l)}} = \\sum_{k=1}^{d_{l+1}} \\frac{\\partial J}{\\partial z_k^{(l+1)}} \\frac{\\partial z_k^{(l+1)}}{\\partial z_j^{(l)}} = \\sum_{k=1}^{d_{l+1}} \\delta_k^{(l+1)} \\frac{\\partial z_k^{(l+1)}}{\\partial z_j^{(l)}}$$\n\nSince $z_k^{(l+1)} = \\sum_{m=1}^{d_l} W_{km}^{(l+1)} a_m^{(l)} + b_k^{(l+1)}$ and $a_m^{(l)} = f^{(l)}(z_m^{(l)})$, we calculate the partial derivative:\n\n$$\\frac{\\partial z_k^{(l+1)}}{\\partial z_j^{(l)}} = \\frac{\\partial z_k^{(l+1)}}{\\partial a_j^{(l)}} \\frac{\\partial a_j^{(l)}}{\\partial z_j^{(l)}} = W_{kj}^{(l+1)} f^{(l)\\prime}(z_j^{(l)})$$\n\nSubstituting this back into the summation:\n\n$$\\delta_j^{(l)} = \\sum_{k=1}^{d_{l+1}} \\delta_k^{(l+1)} W_{kj}^{(l+1)} f^{(l)\\prime}(z_j^{(l)}) = \\left( \\sum_{k=1}^{d_{l+1}} W_{kj}^{(l+1)} \\delta_k^{(l+1)} \\right) f^{(l)\\prime}(z_j^{(l)})$$\n\nConverting this sum of products into vector-matrix notation:\n\n$$\\boldsymbol{\\delta}^{(l)} = \\left( \\mathbf{W}^{(l+1)\\top} \\boldsymbol{\\delta}^{(l+1)} \\right) \\odot f^{(l)\\prime}(\\mathbf{z}^{(l)})$$\n\nThis recursive formulation allows us to compute the error vectors $\\boldsymbol{\\delta}$ backward from layer $L$ to layer $1$."
+    },
+    {
+      "title": "Parameter Gradient & Dimensional Verification",
+      "content": "Once the error vectors $\\boldsymbol{\\delta}^{(l)}$ are computed, we calculate the gradients of the loss function $J$ with respect to the parameters $\\mathbf{W}^{(l)}$ and $\\mathbf{b}^{(l)}$.\n\n### 1. Weights Gradient Derivation\nUsing the chain rule, the derivative with respect to a single weight element $W_{ij}^{(l)}$ is:\n\n$$\\frac{\\partial J}{\\partial W_{ij}^{(l)}} = \\frac{\\partial J}{\\partial z_i^{(l)}} \\frac{\\partial z_i^{(l)}}{\\partial W_{ij}^{(l)}} = \\delta_i^{(l)} a_j^{(l-1)}$$\n\nConverting this outer product relationship into matrix form:\n\n$$\\frac{\\partial J}{\\partial \\mathbf{W}^{(l)}} = \\boldsymbol{\\delta}^{(l)} (\\mathbf{a}^{(l-1)})^{\\top}$$\n\n### 2. Biases Gradient Derivation\nFor the bias parameter $b_i^{(l)}$:\n\n$$\\frac{\\partial J}{\\partial b_i^{(l)}} = \\frac{\\partial J}{\\partial z_i^{(l)}} \\frac{\\partial z_i^{(l)}}{\\partial b_i^{(l)}} = \\delta_i^{(l)} \\cdot 1 = \\delta_i^{(l)}$$\n\n$$\\frac{\\partial J}{\\partial \\mathbf{b}^{(l)}} = \\boldsymbol{\\delta}^{(l)}$$\n\n### 3. Dimensional Consistency Audit\nWe verify that the gradient matrices match the shapes of the parameters they update:\n*   $\\mathbf{W}^{(l)} \\in \\mathbb{R}^{d_l \\times d_{l-1}}$: The gradient is $\\boldsymbol{\\delta}^{(l)} (\\mathbf{a}^{(l-1)})^{\\top}$. Since $\\boldsymbol{\\delta}^{(l)} \\in \\mathbb{R}^{d_l \\times 1}$ and $(\\mathbf{a}^{(l-1)})^{\\top} \\in \\mathbb{R}^{1 \\times d_{l-1}}$, their outer product yields shape $(d_l \\times 1) \times (1 \\times d_{l-1}) = d_l \\times d_{l-1}$. Dimensions match.\n*   $\\mathbf{b}^{(l)} \\in \\mathbb{R}^{d_l \\times 1}$: The gradient is $\\boldsymbol{\\delta}^{(l)} \\in \\mathbb{R}^{d_l \\times 1}$. Dimensions match."
+    }
+  ],
+  "example_refs": [
+    "deep-learning-m1-t4-ex1"
+  ],
+  "diagram_refs": [
+    "deep-learning-m1-t4-dia1"
+  ],
+  "practice_refs": [
+    "deep-learning-m1-t4-prac1"
+  ],
+  "quiz_refs": [
+    "deep-learning-m1-t4-quiz"
+  ]
+}

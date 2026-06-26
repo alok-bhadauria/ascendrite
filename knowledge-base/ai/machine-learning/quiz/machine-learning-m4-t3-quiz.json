@@ -1,0 +1,41 @@
+{
+  "quiz_id": "machine-learning-m4-t3-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "For a binary classification task where the classes are distributed uniformly ($p=0.5$), what are the maximum values of Gini Impurity ($H_{\\text{Gini}}$) and Shannon Entropy ($H_{\\text{Ent}}$), respectively?",
+      "options": [
+        "$H_{\\text{Gini}} = 0.5$ and $H_{\\text{Ent}} = 0.5$",
+        "$H_{\\text{Gini}} = 1.0$ and $H_{\\text{Ent}} = 1.0$",
+        "$H_{\\text{Gini}} = 0.5$ and $H_{\\text{Ent}} = 1.0$",
+        "$H_{\\text{Gini}} = 0.25$ and $H_{\\text{Ent}} = 0.5$"
+      ],
+      "correct_answer": "$H_{\\text{Gini}} = 0.5$ and $H_{\\text{Ent}} = 1.0$",
+      "explanation": "For binary classification, Gini is formulated as $2p(1-p)$. At $p=0.5$, $H_{\\text{Gini}} = 2(0.5)(0.5) = 0.5$. Shannon Entropy is $-p \\log_2(p) - (1-p) \\log_2(1-p)$. At $p=0.5$, $H_{\\text{Ent}} = -0.5(-1) - 0.5(-1) = 1.0$. Thus, Gini is bounded within $[0, 0.5]$ and Entropy within $[0, 1.0]$."
+    },
+    {
+      "question_id": "q2",
+      "text": "Why can pre-pruning techniques (such as halting splits when Information Gain falls below a threshold) fail to produce optimal trees, whereas post-pruning handles this effectively?",
+      "options": [
+        "Pre-pruning increases training variance, forcing the tree to grow asymmetric branches.",
+        "Pre-pruning splits are non-greedy, which prevents the algorithm from finding local minima.",
+        "Pre-pruning can stop early and miss multi-feature interaction effects, where a low information gain split is necessary to enable highly informative splits downstream.",
+        "Post-pruning transforms continuous features into binary flags, bypassing the sorting bottleneck."
+      ],
+      "correct_answer": "Pre-pruning can stop early and miss multi-feature interaction effects, where a low information gain split is necessary to enable highly informative splits downstream.",
+      "explanation": "Because tree split selection is greedy, pre-pruning halts splits if the immediate Information Gain is low. However, some features only yield predictive power when combined (e.g., the XOR problem). Post-pruning grows the tree fully to capture these interactions, then evaluates the global cost-complexity trade-off to collapse branches that do not generalize."
+    },
+    {
+      "question_id": "q3",
+      "text": "In Cost-Complexity Pruning, what does the weakest-link metric $g(t) = \\frac{R(t) - R(T_t)}{|T_t| - 1}$ represent for an internal node $t$?",
+      "options": [
+        "The classification accuracy of the subtree $T_t$ divided by its maximum depth.",
+        "The rate of increase in training impurity per leaf node removed if the branch $T_t$ is collapsed into leaf $t$.",
+        "The ratio of Gini impurity to Shannon entropy at the parent node.",
+        "The computation time required to update the feature importances of the branch."
+      ],
+      "correct_answer": "The rate of increase in training impurity per leaf node removed if the branch $T_t$ is collapsed into leaf $t$.",
+      "explanation": "The term $R(t) - R(T_t)$ represents the increase in training error (impurity) when the subtree $T_t$ is pruned into the single leaf $t$. The term $|T_t| - 1$ is the number of terminal leaves eliminated by this pruning step. Therefore, the ratio $g(t)$ is the increase in training error per leaf removed. The node with the smallest $g(t)$ represents the least cost-effective branch and is pruned first."
+    }
+  ]
+}

@@ -1,0 +1,214 @@
+{
+  "subject_id": "reactjs",
+  "name": "ReactJS",
+  "category": "web-development",
+  "modules": [
+    {
+      "name": "Module 1: React Fiber Architecture, Reconciliation & Virtual DOM",
+      "topics": [
+        {
+          "id": "reactjs-m1-t1",
+          "title": "React Fiber",
+          "subtopics": [
+            "Reconciler execution phases (Render phase vs Commit phase)",
+            "Asynchronous rendering pauses, work loop execution"
+          ]
+        },
+        {
+          "id": "reactjs-m1-t2",
+          "title": "Reconciliation & Diffing",
+          "subtopics": [
+            "Virtual DOM tree comparisons",
+            "Element keys index matching rules to prevent state resets",
+            "O(N) heuristic algorithm boundaries"
+          ]
+        },
+        {
+          "id": "reactjs-m1-t3",
+          "title": "JSX Compilation",
+          "subtopics": [
+            "React.createElement translation tree, element immutable nodes structures"
+          ]
+        },
+        {
+          "id": "reactjs-m1-t4",
+          "title": "Virtual DOM vs Real DOM",
+          "subtopics": [
+            "Hydration phase details, React updates commits mapping, layout recalculations overheads"
+          ]
+        },
+        {
+          "id": "reactjs-m1-t5",
+          "title": "Concurrent React",
+          "subtopics": [
+            "Transition API, useTransition non-blocking rendering, concurrent mode loops"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 2: React Hooks Closures, Memoization & Custom Hooks",
+      "topics": [
+        {
+          "id": "reactjs-m2-t1",
+          "title": "React State Hook",
+          "subtopics": [
+            "useState execution closure queues, batched state updates mechanics in updates"
+          ]
+        },
+        {
+          "id": "reactjs-m2-t2",
+          "title": "Effect Hook",
+          "subtopics": [
+            "useEffect cleanup callbacks timings, dependency arrays reference comparison traps"
+          ]
+        },
+        {
+          "id": "reactjs-m2-t3",
+          "title": "Hooks Closures",
+          "subtopics": [
+            "Stale closures in effects loops, functional state updates, useRef memory references"
+          ]
+        },
+        {
+          "id": "reactjs-m2-t4",
+          "title": "Memoization",
+          "subtopics": [
+            "useMemo calculations caching, useCallback function memory allocations caching, React.memo props diffs"
+          ]
+        },
+        {
+          "id": "reactjs-m2-t5",
+          "title": "Custom Hooks",
+          "subtopics": [
+            "Code reuse layouts, encapsulating state logic, returning custom values hooks"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 3: React Routing, Global State & Performance",
+      "topics": [
+        {
+          "id": "reactjs-m3-t1",
+          "title": "Routing",
+          "subtopics": [
+            "Single Page Application (SPA) routing, React Router configurations, lazy routing code splitting"
+          ]
+        },
+        {
+          "id": "reactjs-m3-t2",
+          "title": "Global State",
+          "subtopics": [
+            "Context API provider wrappers, prop drilling solutions, context value memoization"
+          ]
+        },
+        {
+          "id": "reactjs-m3-t3",
+          "title": "State Libraries",
+          "subtopics": [
+            "Zustand/Redux-Toolkit configurations, select state updates optimization, unidirectional dispatch loops"
+          ]
+        },
+        {
+          "id": "reactjs-m3-t4",
+          "title": "Performance Profiling",
+          "subtopics": [
+            "React DevTools profiler flame charts, identifying unnecessary component re-renders"
+          ]
+        },
+        {
+          "id": "reactjs-m3-t5",
+          "title": "Windowing",
+          "subtopics": [
+            "Large lists virtual window rendering (React Window), viewport boundary layouts"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 4: Forms Handling, Advanced Patterns & Hydration",
+      "topics": [
+        {
+          "id": "reactjs-m4-t1",
+          "title": "Controlled vs Uncontrolled",
+          "subtopics": [
+            "Controlled inputs state bindings vs useRef DOM access, performance trade-offs"
+          ]
+        },
+        {
+          "id": "reactjs-m4-t2",
+          "title": "Higher-Order Components",
+          "subtopics": [
+            "HOC wrapper patterns, custom props injections, class wrapper equivalents"
+          ]
+        },
+        {
+          "id": "reactjs-m4-t3",
+          "title": "Render Props & Portals",
+          "subtopics": [
+            "Dynamic rendering functions callbacks, DOM portals overlays target injection"
+          ]
+        },
+        {
+          "id": "reactjs-m4-t4",
+          "title": "Hydration Pitfalls",
+          "subtopics": [
+            "Server vs Client HTML mismatches diagnostics, window object references checks"
+          ]
+        },
+        {
+          "id": "reactjs-m4-t5",
+          "title": "Error Boundaries",
+          "subtopics": [
+            "Component DidCatch lifecycle methods, custom fallbacks rendering boundaries"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 5: Server Components, Hydration & Modern Server Routing",
+      "topics": [
+        {
+          "id": "reactjs-m5-t1",
+          "title": "React Server Components",
+          "subtopics": [
+            "RSC serializable network formats, zero bundle size server integrations"
+          ]
+        },
+        {
+          "id": "reactjs-m5-t2",
+          "title": "Suspense Boundaries",
+          "subtopics": [
+            "Stream rendering, fallback layouts display during data fetch loops"
+          ]
+        },
+        {
+          "id": "reactjs-m5-t3",
+          "title": "Server Actions",
+          "subtopics": [
+            "Form actions integrations, remote server database mutations triggers"
+          ]
+        },
+        {
+          "id": "reactjs-m5-t4",
+          "title": "Edge Runtime",
+          "subtopics": [
+            "Serverless edge function executions, routing database queries speeds"
+          ]
+        },
+        {
+          "id": "reactjs-m5-t5",
+          "title": "React Hydration Architecture",
+          "subtopics": [
+            "Streaming HTML hydration, selective hydration scheduling"
+          ]
+        }
+      ]
+    }
+  ],
+  "revision": [],
+  "interview": [],
+  "examples": [],
+  "diagrams": []
+}

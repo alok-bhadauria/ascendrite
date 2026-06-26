@@ -1,0 +1,60 @@
+{
+  "glossary": [
+    {
+      "term": "Multi-Layer Perceptron (MLP)",
+      "definition": "A class of feedforward artificial neural network consisting of at least three layers of nodes: an input layer, a hidden layer, and an output layer, where each node except the inputs uses a non-linear activation function."
+    },
+    {
+      "term": "Backpropagation",
+      "definition": "A supervised learning algorithm for training artificial neural networks that calculates the gradient of the loss function with respect to the network's weights using the chain rule of calculus."
+    },
+    {
+      "term": "Xavier (Glorot) Initialization",
+      "definition": "A weight initialization method designed to keep the variance of the activations and gradients constant across layers by drawing weights from a distribution scaled by the input and output dimensions."
+    },
+    {
+      "term": "Batch Normalization",
+      "definition": "A layer optimization technique that standardizes the inputs to a layer for each mini-batch, accelerating training by reducing internal covariate shift."
+    }
+  ],
+  "references": [
+    {
+      "title": "Deep Learning",
+      "author": "Ian Goodfellow, Yoshua Bengio, Aaron Courville",
+      "publisher": "MIT Press",
+      "year": 2016
+    },
+    {
+      "title": "Neural Networks and Deep Learning",
+      "author": "Michael Nielsen",
+      "publisher": "Determination Press",
+      "year": 2015
+    }
+  ],
+  "further_reading": [
+    {
+      "title": "Dive into Deep Learning",
+      "author": "Aston Zhang, Zack C. Lipton, Mu Li, Alexander J. Smola",
+      "publisher": "Cambridge University Press",
+      "year": 2023
+    }
+  ],
+  "research_papers": [
+    {
+      "title": "Deep Residual Learning for Image Recognition",
+      "authors": "Kaiming He, Xiangyu Zhang, Shaoqing Ren, Jian Sun",
+      "journal": "CVPR",
+      "year": 2016,
+      "url": "https://arxiv.org/abs/1512.03385"
+    },
+    {
+      "title": "Adam: A Method for Stochastic Optimization",
+      "authors": "Diederik P. Kingma, Jimmy Ba",
+      "journal": "ICLR",
+      "year": 2015,
+      "url": "https://arxiv.org/abs/1412.6980"
+    }
+  ],
+  "version": "1.0.0",
+  "last_updated": "2026-06-26"
+}

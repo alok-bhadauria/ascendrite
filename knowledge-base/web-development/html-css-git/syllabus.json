@@ -1,0 +1,212 @@
+{
+  "subject_id": "html-css-git",
+  "name": "HTML CSS Git",
+  "category": "web-development",
+  "modules": [
+    {
+      "name": "Module 1: Semantic HTML, Web Accessibility & SEO",
+      "topics": [
+        {
+          "id": "html-css-git-m1-t1",
+          "title": "Semantic Markup",
+          "subtopics": [
+            "HTML5 semantic tags (header, section, article, aside, footer) vs generic div blocks",
+            "Document outlines"
+          ]
+        },
+        {
+          "id": "html-css-git-m1-t2",
+          "title": "Accessibility (a11y)",
+          "subtopics": [
+            "ARIA roles, alt text attributes, keyboard focus states, screen readers tags"
+          ]
+        },
+        {
+          "id": "html-css-git-m1-t3",
+          "title": "SEO Foundations",
+          "subtopics": [
+            "Meta tags configurations, title tags structure, heading hierarchies, semantic linkages"
+          ]
+        },
+        {
+          "id": "html-css-git-m1-t4",
+          "title": "Forms & Validations",
+          "subtopics": [
+            "Input fields types, custom form tags attributes, regex validations, constraints"
+          ]
+        },
+        {
+          "id": "html-css-git-m1-t5",
+          "title": "Performance Optimization",
+          "subtopics": [
+            "Image loading optimizations (lazy loading, srcset), responsive media formats"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 2: CSS Cascade, Box Model & Specificity Calculations",
+      "topics": [
+        {
+          "id": "html-css-git-m2-t1",
+          "title": "CSS Specificity",
+          "subtopics": [
+            "Selector weights calculations (inline, ID, class, element, !important) priority overrides"
+          ]
+        },
+        {
+          "id": "html-css-git-m2-t2",
+          "title": "CSS Box Model",
+          "subtopics": [
+            "Content, padding, border, margins math, and box-sizing: border-box boundaries"
+          ]
+        },
+        {
+          "id": "html-css-git-m2-t3",
+          "title": "CSS Positioning",
+          "subtopics": [
+            "Static, relative, absolute, fixed, sticky layouts coordinate offsets constraints"
+          ]
+        },
+        {
+          "id": "html-css-git-m2-t4",
+          "title": "Flexbox Layout",
+          "subtopics": [
+            "Main axis vs cross axis alignments, flex-shrink/grow ratios, wrapping structures"
+          ]
+        },
+        {
+          "id": "html-css-git-m2-t5",
+          "title": "Grid Layout",
+          "subtopics": [
+            "Explicit vs implicit grids, grid template areas, track sizes math (minmax, fr)"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 3: Advanced Layouts, Variables & Responsive Design",
+      "topics": [
+        {
+          "id": "html-css-git-m3-t1",
+          "title": "Media Queries",
+          "subtopics": [
+            "Breakpoints selection strategies, mobile-first design, adaptive screen layouts"
+          ]
+        },
+        {
+          "id": "html-css-git-m3-t2",
+          "title": "CSS Custom Properties",
+          "subtopics": [
+            "Variables declarations, scopes dynamic runtime variations, fallbacks"
+          ]
+        },
+        {
+          "id": "html-css-git-m3-t3",
+          "title": "Transitions & Animations",
+          "subtopics": [
+            "Keyframes timing functions (cubic-bezier), hardware acceleration transform parameters"
+          ]
+        },
+        {
+          "id": "html-css-git-m3-t4",
+          "title": "Typography & Units",
+          "subtopics": [
+            "Absolute vs relative units (px vs rem, em, ch, vw/vh), font-loading layouts"
+          ]
+        },
+        {
+          "id": "html-css-git-m3-t5",
+          "title": "Browser Compatibility",
+          "subtopics": [
+            "Vendor prefixes, feature queries (@supports), polyfills integrations"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 4: Git Fundamentals, Branching & Merge Conflicts",
+      "topics": [
+        {
+          "id": "html-css-git-m4-t1",
+          "title": "Version Control",
+          "subtopics": [
+            "Working directory, staging index, and git commit history structures"
+          ]
+        },
+        {
+          "id": "html-css-git-m4-t2",
+          "title": "Branching & Merging",
+          "subtopics": [
+            "Git branch topologies, fast-forward merges, three-way merge commits"
+          ]
+        },
+        {
+          "id": "html-css-git-m4-t3",
+          "title": "Merge Conflicts",
+          "subtopics": [
+            "Code conflicts indicators analysis, manual resolution, and git merge continue"
+          ]
+        },
+        {
+          "id": "html-css-git-m4-t4",
+          "title": "Git Remote",
+          "subtopics": [
+            "Remote repository sync commands, git fetch vs pull, upstream tracking branch"
+          ]
+        },
+        {
+          "id": "html-css-git-m4-t5",
+          "title": "Git Stash & Checkouts",
+          "subtopics": [
+            "Stashing modifications, git log commits checkout, detached HEAD resolution"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 5: Advanced Git Workflows, Rebase & Cherry-Pick",
+      "topics": [
+        {
+          "id": "html-css-git-m5-t1",
+          "title": "Git Rebase",
+          "subtopics": [
+            "Commits rebasing vs standard merges, interactive rebase squash and rewrite history"
+          ]
+        },
+        {
+          "id": "html-css-git-m5-t2",
+          "title": "Git Cherry-Pick",
+          "subtopics": [
+            "Porting specific commits across feature branches, commits hashes mapping"
+          ]
+        },
+        {
+          "id": "html-css-git-m5-t3",
+          "title": "Git Reset vs Revert",
+          "subtopics": [
+            "Soft/hard reset scopes vs git revert commit creations, restore command"
+          ]
+        },
+        {
+          "id": "html-css-git-m5-t4",
+          "title": "Git Hooks",
+          "subtopics": [
+            "Client-side hooks (pre-commit, commit-msg), Husky configurations, lint validations"
+          ]
+        },
+        {
+          "id": "html-css-git-m5-t5",
+          "title": "Collaborative Workflows",
+          "subtopics": [
+            "Git Flow vs GitHub Flow, Pull Request reviews process, tag releases"
+          ]
+        }
+      ]
+    }
+  ],
+  "revision": [],
+  "interview": [],
+  "examples": [],
+  "diagrams": []
+}

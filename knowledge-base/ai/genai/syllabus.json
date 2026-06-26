@@ -1,0 +1,233 @@
+{
+  "subject_id": "genai",
+  "name": "GenAI",
+  "category": "ai",
+  "modules": [
+    {
+      "name": "Module 1: LLM Architecture, Decoding Parameters & Prompting Axioms",
+      "topics": [
+        {
+          "id": "genai-m1-t1",
+          "title": "LLM Architectures & Transformer Systems",
+          "subtopics": [
+            "Tokenization algorithms (Byte-Pair Encoding, WordPiece, SentencePiece)",
+            "Embedding layers and Decoder-only transformer stack layouts",
+            "Self-Attention mechanism mathematical formulation (Queries, Keys, Values projection matrices, causal attention mask)",
+            "Multi-Head Attention (MHA), Multi-Query Attention (MQA), and Grouped-Query Attention (GQA) optimizations",
+            "Positional Encodings: Absolute sinusoidal embeddings vs Rotary Position Embeddings (RoPE) and ALiBi",
+            "Transformer System blocks: Pre-LN vs Post-LN layer normalization, RMSNorm, and SwiGLU activations"
+          ]
+        },
+        {
+          "id": "genai-m1-t2",
+          "title": "LLM Decoding Strategies",
+          "subtopics": [
+            "Beam search widths, Greedy search repetitions loops",
+            "Top-K/Top-P temperature sampling math"
+          ]
+        },
+        {
+          "id": "genai-m1-t3",
+          "title": "Foundation Models",
+          "subtopics": [
+            "GPT-4, LLaMA-3, Claude-3",
+            "Mixture of Experts (MoE) routing gating mechanics"
+          ]
+        },
+        {
+          "id": "genai-m1-t4",
+          "title": "Prompt Engineering",
+          "subtopics": [
+            "Zero-shot/Few-shot prompts validation",
+            "System Prompts boundaries, and prompt injection exploits"
+          ]
+        },
+        {
+          "id": "genai-m1-t5",
+          "title": "Advanced Prompting",
+          "subtopics": [
+            "Structured outputs parsing, Chain of Thought (CoT) logical splits, ReAct loops"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 2: RAG Pipeline Mechanics, Chunking & Evaluation Metrics",
+      "topics": [
+        {
+          "id": "genai-m2-t1",
+          "title": "Vector Embeddings",
+          "subtopics": [
+            "Chunking strategies (Fixed-size, overlap, semantic chunking)",
+            "Vector indexing configurations"
+          ]
+        },
+        {
+          "id": "genai-m2-t2",
+          "title": "Vector Databases",
+          "subtopics": [
+            "FAISS flat index, ChromaDB, Pinecone metadata filtering",
+            "Weaviate hybrid searches"
+          ]
+        },
+        {
+          "id": "genai-m2-t3",
+          "title": "RAG Foundations",
+          "subtopics": [
+            "Text chunking, overlap calculations, Dense vector retrieval",
+            "Prompt context injections"
+          ]
+        },
+        {
+          "id": "genai-m2-t4",
+          "title": "Context Engineering",
+          "subtopics": [
+            "Context window limits, Lost in the Middle phenomena",
+            "Prompt context compression"
+          ]
+        },
+        {
+          "id": "genai-m2-t5",
+          "title": "RAG Evaluation Metrics",
+          "subtopics": [
+            "Faithfulness validations, answer relevance metrics",
+            "Context recall checks using Ragas/TruLens"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 3: Advanced RAG, LangChain Cores & ReAct Agent Loops",
+      "topics": [
+        {
+          "id": "genai-m3-t1",
+          "title": "Advanced RAG",
+          "subtopics": [
+            "Sparse + Dense hybrid search, Reciprocal Rank Fusion (RRF)",
+            "Cross-encoder Reranking models"
+          ]
+        },
+        {
+          "id": "genai-m3-t2",
+          "title": "LangChain Core",
+          "subtopics": [
+            "Prompt Templates configurations, LLMChain execution, and dynamic routing chains"
+          ]
+        },
+        {
+          "id": "genai-m3-t3",
+          "title": "LangChain Memory Systems",
+          "subtopics": [
+            "ConversationBufferMemory window limits, ConversationSummaryMemory",
+            "Redis persistence"
+          ]
+        },
+        {
+          "id": "genai-m3-t4",
+          "title": "LangChain Integrations",
+          "subtopics": [
+            "Custom tools definitions schema mappings, document loaders, and vector store retrievers"
+          ]
+        },
+        {
+          "id": "genai-m3-t5",
+          "title": "LangChain Agents",
+          "subtopics": [
+            "ReAct loop reasoning cycle, observation parsing, tool execution handlers, and routing"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 4: LangGraph States Workflows, Agent Architectures & MCP Protocols",
+      "topics": [
+        {
+          "id": "genai-m4-t1",
+          "title": "LangGraph Core",
+          "subtopics": [
+            "State management, nodes definition, conditional edges routing",
+            "Graph compile/execution loops"
+          ]
+        },
+        {
+          "id": "genai-m4-t2",
+          "title": "Agent Architectures",
+          "subtopics": [
+            "Goal decomposition, Planning (Plan-and-Solve), Reflection, and memory systems integration"
+          ]
+        },
+        {
+          "id": "genai-m4-t3",
+          "title": "Tool Calling",
+          "subtopics": [
+            "Function calling JSON schemas, argument extraction parameters, and validation checks"
+          ]
+        },
+        {
+          "id": "genai-m4-t4",
+          "title": "Agent Protocols",
+          "subtopics": [
+            "Model Context Protocol (MCP) server bindings, tool declarations, and resource endpoints"
+          ]
+        },
+        {
+          "id": "genai-m4-t5",
+          "title": "Orchestration Models",
+          "subtopics": [
+            "Single-Agent vs Multi-Agent coordination, supervisor agent configurations, and state sharing"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 5: Fine-Tuning PEFT, RLHF Alignment & MLOps Serving",
+      "topics": [
+        {
+          "id": "genai-m5-t1",
+          "title": "Fine-Tuning PEFT",
+          "subtopics": [
+            "Parameter-Efficient Fine-Tuning (PEFT) configurations",
+            "LoRA weight adapters matrices ranks (r) and scaling alpha",
+            "QLoRA double quantization",
+            "Prompt tuning, Prefix tuning, and bottleneck adapters",
+            "Fine-tuning memory optimizations (gradient checkpointing)"
+          ]
+        },
+        {
+          "id": "genai-m5-t2",
+          "title": "Alignment Reward Loops",
+          "subtopics": [
+            "RLHF PPO reward model feedbacks vs DPO direct preference optimization calculations"
+          ]
+        },
+        {
+          "id": "genai-m5-t3",
+          "title": "Quantization Formats",
+          "subtopics": [
+            "Model weight reductions (GPTQ, AWQ, GGUF)",
+            "Hardware compatibility constraints"
+          ]
+        },
+        {
+          "id": "genai-m5-t4",
+          "title": "LLMOps Serving",
+          "subtopics": [
+            "Inference optimizations (PagedAttention, vLLM)",
+            "Triton routing, latency SLA bounds, and guardrails API validation"
+          ]
+        },
+        {
+          "id": "genai-m5-t5",
+          "title": "Multimodal Systems",
+          "subtopics": [
+            "Image-text alignment models (CLIP), autonomous workflows, and agent execution safety"
+          ]
+        }
+      ]
+    }
+  ],
+  "revision": [],
+  "interview": [],
+  "examples": [],
+  "diagrams": []
+}

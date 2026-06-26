@@ -1,0 +1,264 @@
+{
+  "subject_id": "java",
+  "name": "Java",
+  "category": "software-engineering",
+  "modules": [
+    {
+      "name": "Module 1: JVM Architecture & Core Execution Mechanics",
+      "topics": [
+        {
+          "id": "java-m1-t1",
+          "title": "javac Compiler vs Execution Flow",
+          "subtopics": [
+            "Source code compilation steps and bytecode format (.class files)",
+            "JVM execution engine components (Interpreter and JIT Compiler)",
+            "JIT compiler profiling and HotSpot optimizations (c1/c2 compilers)",
+            "Bytecode Verifier security rules (buffer overflow prevention)"
+          ]
+        },
+        {
+          "id": "java-m1-t2",
+          "title": "JVM Memory Architecture",
+          "subtopics": [
+            "Heap memory blocks (Eden, Survivor spaces, Tenured generation)",
+            "Stack frames push/pop execution paths (local variables table, operand stack)",
+            "Method Area to Metaspace native OS memory migration in Java 8+",
+            "PC Registers, Native Method Stacks, and thread private vs shared spaces"
+          ]
+        },
+        {
+          "id": "java-m1-t3",
+          "title": "String Constant Pool (SCP)",
+          "subtopics": [
+            "SCP Heap memory allocations and literal caching mechanics",
+            "String Immutability reasoning, security (hash keys), and thread-safety",
+            "String intern() method caching traps and heap allocations",
+            "StringBuilder concatenation in loops and compiler optimizations"
+          ]
+        },
+        {
+          "id": "java-m1-t4",
+          "title": "Variables & Scope",
+          "subtopics": [
+            "Primitive vs Reference types stack-heap mappings",
+            "Implicit/explicit narrowing casting and promotion rules",
+            "Precision loss rules in floating-point assignments"
+          ]
+        },
+        {
+          "id": "java-m1-t5",
+          "title": "Operators & Control Flow",
+          "subtopics": [
+            "Label break and continue control shifts in nested loops",
+            "Bitwise operators logic and masking",
+            "Ternary evaluation precedence and auto-unboxing traps"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 2: Advanced OOP, Generics & Collections Internals",
+      "topics": [
+        {
+          "id": "java-m2-t1",
+          "title": "Constructors & Initializers",
+          "subtopics": [
+            "Constructor Chaining via super() and this() call sequences",
+            "Static vs Instance initializer blocks execution order rules",
+            "final keyword compiler optimization and thread-safety implications"
+          ]
+        },
+        {
+          "id": "java-m2-t2",
+          "title": "Access Modifiers & Encapsulation",
+          "subtopics": [
+            "Private/protected package boundaries and access levels",
+            "Designing strictly immutable classes (defensive copying of mutables)",
+            "Accessor/mutator invariant validations"
+          ]
+        },
+        {
+          "id": "java-m2-t3",
+          "title": "Polymorphism",
+          "subtopics": [
+            "Method Overloading vs Overriding resolution precedence",
+            "Dynamic method dispatch execution under method overrides",
+            "Static vs dynamic binding compiler steps and virtual tables"
+          ]
+        },
+        {
+          "id": "java-m2-t4",
+          "title": "Generics",
+          "subtopics": [
+            "Type safety and generics compilation (checked vs unchecked casting)",
+            "Bounded wildcards (? extends T vs ? super T PECS rule)",
+            "Type Erasure boundaries and runtime checks limitations"
+          ]
+        },
+        {
+          "id": "java-m2-t5",
+          "title": "Collections Internals",
+          "subtopics": [
+            "ArrayList resizing amortized cost and structural arrays",
+            "HashMap collision treeification (Red-Black Trees threshold limits)",
+            "ConcurrentHashMap lock striping, volatile buckets, and CAS updates"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 3: Exception Handling, I/O & Custom Serialization",
+      "topics": [
+        {
+          "id": "java-m3-t1",
+          "title": "Throwable Hierarchy",
+          "subtopics": [
+            "Throwable, Error, Exception classifications",
+            "Checked vs unchecked exceptions compiler checks and designs",
+            "Exception propagation rules through call stacks"
+          ]
+        },
+        {
+          "id": "java-m3-t2",
+          "title": "Exception Control Flow",
+          "subtopics": [
+            "try-catch-finally control flow return value traps",
+            "Exception masking and suppression in nested catch blocks",
+            "Custom exceptions design and serializability"
+          ]
+        },
+        {
+          "id": "java-m3-t3",
+          "title": "Try-with-resources",
+          "subtopics": [
+            "AutoCloseable interface requirements and close() signatures",
+            "Compiler-generated close() calls and nested try catches",
+            "Resource leaks prevention (sockets, database connections)"
+          ]
+        },
+        {
+          "id": "java-m3-t4",
+          "title": "Java I/O Streams",
+          "subtopics": [
+            "Byte streams vs Character streams (Reader/Writer layouts)",
+            "Buffered streams performance optimizations and flush rules",
+            "NIO File Channels and non-blocking file read boundaries"
+          ]
+        },
+        {
+          "id": "java-m3-t5",
+          "title": "Serialization",
+          "subtopics": [
+            "Serializable interface constraints and transient fields",
+            "serialVersionUID verification and custom hooks (writeObject, readObject)",
+            "Preventing serialization bypass and singleton vulnerabilities"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 4: Functional Programming & Streams API Pipeline",
+      "topics": [
+        {
+          "id": "java-m4-t1",
+          "title": "Lambda Expressions",
+          "subtopics": [
+            "Lambda syntax and functional interfaces compiler targets",
+            "Lexical scoping closures and capturing effectively final local variables",
+            "Scope rules and serialization of lambdas"
+          ]
+        },
+        {
+          "id": "java-m4-t2",
+          "title": "Functional Interfaces",
+          "subtopics": [
+            "@FunctionalInterface annotation validations",
+            "Predicate, Consumer, Supplier, Function, and BiFunction implementations",
+            "Primitive variants (IntConsumer, ToDoubleFunction) memory benefits"
+          ]
+        },
+        {
+          "id": "java-m4-t3",
+          "title": "Method References",
+          "subtopics": [
+            "ClassName::methodName syntax classifications",
+            "Instance methods binding and constructor references",
+            "Type inference in method references arguments matching"
+          ]
+        },
+        {
+          "id": "java-m4-t4",
+          "title": "Streams API Intermediate",
+          "subtopics": [
+            "Pipeline lazy evaluation and short-circuiting intermediate steps",
+            "filter, map, flatMap mapping transformations",
+            "sorted, distinct stateful operations complexity bounds"
+          ]
+        },
+        {
+          "id": "java-m4-t5",
+          "title": "Streams API Terminal",
+          "subtopics": [
+            "collect, reduce, forEach, count terminal execution triggers",
+            "Optional anti-patterns (avoiding get() without checks)",
+            "LocalDate/Time thread-safety updates (JSR-310 API vs Date)"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 5: Concurrency, Thread Synchronization & Advanced JVM",
+      "topics": [
+        {
+          "id": "java-m5-t1",
+          "title": "Concurrency",
+          "subtopics": [
+            "Process vs Thread resources allocation, thread stacks",
+            "Thread lifecycle states transitions (New, Runnable, Blocked, Waiting)",
+            "Runnable vs Callable vs Future interfaces and Executing pools"
+          ]
+        },
+        {
+          "id": "java-m5-t2",
+          "title": "Java Memory Model (JMM)",
+          "subtopics": [
+            "Happens-Before relationship rules and cache coherence",
+            "Memory visibility, instruction reordering, and volatile memory barriers",
+            "Atomic operations vs thread scheduling"
+          ]
+        },
+        {
+          "id": "java-m5-t3",
+          "title": "Synchronization & Locks",
+          "subtopics": [
+            "Synchronized monitors, lock flags, and reentrant execution",
+            "ReentrantLock, ReadWriteLock, and condition variables",
+            "Deadlocks prevention, detection, and lock-free atomic structures (CAS)"
+          ]
+        },
+        {
+          "id": "java-m5-t4",
+          "title": "JVM Class Loading Lifecycle",
+          "subtopics": [
+            "Load, Link (verify, prepare, resolve), and Initialize stages",
+            "ClassLoader hierarchy delegation model (Bootstrap, Extension, Application)",
+            "Custom ClassLoaders creation and dependency isolation overrides"
+          ]
+        },
+        {
+          "id": "java-m5-t5",
+          "title": "Garbage Collection",
+          "subtopics": [
+            "Minor vs Major vs Full GC definitions and pause triggers",
+            "G1GC regional marking phases and young/old generation splits",
+            "ZGC colored pointers, load barriers, and low-latency concurrent pauses"
+          ]
+        }
+      ]
+    }
+  ],
+  "revision": [],
+  "interview": [],
+  "examples": [],
+  "diagrams": []
+}

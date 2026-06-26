@@ -1,0 +1,74 @@
+{
+  "topic_id": "machine-learning-m3-t5",
+  "title": "Model Evaluation & Class Imbalance Mitigation",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Medium",
+    "estimated_hours": 5,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Differentiate between ROC-AUC and PR-AUC performance under severe class imbalance conditions.",
+    "Formulate and compute the F-beta score to satisfy asymmetrical recall and precision requirements.",
+    "Contrast macro, micro, and weighted multi-class averaging schemas and formulate the SMOTE interpolation algorithm.",
+    "Derive the Focal Loss function and analyze how the focusing parameter dynamically scales gradients for easy vs. hard training observations."
+  ],
+  "content_sections": [
+    {
+      "title": "ROC-AUC vs. PR-AUC and F-beta Selection",
+      "content": "Evaluating models on imbalanced datasets using standard classification accuracy is misleading; a model predicting the majority class for a 99% imbalanced dataset trivially achieves 99% accuracy while failing completely. We require metrics that decouple performance from class frequencies.\n\n### ROC-AUC vs. PR-AUC\nThe **Receiver Operating Characteristic (ROC)** curve plots the True Positive Rate (TPR) against the False Positive Rate (FPR):\n\n$$\\text{TPR} = \\frac{\\text{TP}}{\\text{TP} + \\text{FN}}, \\quad \\text{FPR} = \\frac{\\text{FP}}{\\text{FP} + \\text{TN}}$$\n\nUnder severe class imbalance where the negative class is massive ($N_{\\text{neg}} \\gg N_{\\text{pos}}$), the denominator for FPR (which includes TN) is exceptionally large. Consequently, a substantial absolute number of False Positives yields only a tiny increase in FPR. This causes the ROC curve to appear highly optimistic, maintaining a high Area Under the Curve (ROC-AUC) even when the model makes many incorrect positive predictions.\n\nThe **Precision-Recall (PR)** curve plots Precision against Recall (TPR):\n\n$$\\text{Precision} = \\frac{\\text{TP}}{\\text{TP} + \\text{FP}}, \\quad \\text{Recall} = \\frac{\\text{TP}}{\\text{TP} + \\text{FN}}$$\n\nBecause Precision focuses strictly on positive predictions, the PR curve is highly sensitive to False Positives and is independent of TN. Thus, PR-AUC is the preferred metric for evaluating model performance in highly skewed distributions.\n\n### F-beta Score\nThe **$F_\\beta$ score** generalizes the $F_1$ score by introducing a positive parameter $\\beta$ to control the relative importance of Precision and Recall:\n\n$$F_\\beta = (1 + \\beta^2) \\frac{\\text{Precision} \\times \\text{Recall}}{\\beta^2 \\text{Precision} + \\text{Recall}}$$\n\n*   $\\beta = 1$: $F_1$ score, representing the harmonic mean of Precision and Recall.\n*   $\\beta > 1$: Places higher weight on Recall. For example, $\\beta = 2$ indicates Recall is twice as important as Precision (common in medical diagnostics where False Negatives must be minimized).\n*   $\\beta < 1$: Places higher weight on Precision (common in spam filters where False Positives are highly disruptive).",
+      "callouts": [
+        {
+          "type": "Student Trap",
+          "title": "The F-beta Parameter Interpretation",
+          "content": "A common point of confusion is the role of $\\beta$. Remember that $\\beta$ weights Recall, not Precision. If an application demands that Precision be favored, select a fractional value like $\\beta = 0.5$. Setting $\\beta = 2.0$ shifts focus heavily toward Recall."
+        }
+      ]
+    },
+    {
+      "title": "Averaging Schemas in Multi-Class Settings",
+      "content": "To evaluate multi-class classification models, we aggregate class-specific metrics using three primary averaging schemas:\n\n1.  **Macro Average:** Computes the metric for each class independently and calculates the unweighted arithmetic mean: $\\text{Macro} = \\frac{1}{K} \\sum_{k=1}^K M_k$, where $M_k$ is the metric for class $k$. This treats all classes equally, regardless of their size, making it highly sensitive to drops in minority class performance.\n2.  **Micro Average:** Aggregates the global counts of True Positives, False Positives, and False Negatives across all classes, and computes the metric once: $\\text{Micro} = f(\\sum \\text{TP}_k, \\sum \\text{FP}_k, \\sum \\text{FN}_k)$. This is dominated by the majority class performance.\n3.  **Weighted Average:** Computes the metric for each class and calculates the average weighted by the support (number of samples) of each class: $\\text{Weighted} = \\sum_{k=1}^K \\frac{N_k}{N} M_k$. This accounts for class frequency but can mask poor performance on small minority classes.",
+      "callouts": [
+        {
+          "type": "Engineering Note",
+          "title": "Metric Choice for Production Class Monitoring",
+          "content": "In multi-class pipelines with high class skew, monitor both Macro and Weighted averages. If the Macro F1 drop is significantly larger than the Weighted F1 drop, the model is failing on rare but potentially critical minority classes while maintaining high performance on the majority class."
+        }
+      ]
+    },
+    {
+      "title": "Data-Level Mitigation: SMOTE Interpolation",
+      "content": "To balance class distributions at the data level, we use the **Synthetic Minority Over-sampling Technique (SMOTE)**. Rather than duplicating minority class observations (which leads to overfitting), SMOTE interpolates new synthetic samples. Given a minority class observation $\\mathbf{x}_i$:\n\n1.  Identify the $k$-nearest neighbors of $\\mathbf{x}_i$ within the minority class.\n2.  Select one neighbor $\\mathbf{x}_{nn}$ at random.\n3.  Generate a synthetic observation $\\mathbf{x}_{\\text{new}}$ along the line segment connecting the two samples:\n\n$$\\mathbf{x}_{\\text{new}} = \\mathbf{x}_i + \\lambda (\\mathbf{x}_{nn} - \\mathbf{x}_i)$$\n\nwhere $\\lambda \\sim \\text{Uniform}(0, 1)$. This expands the decision region of the minority class, helping classifiers learn broader decision boundaries rather than memorizing individual points.",
+      "callouts": [
+        {
+          "type": "Common Misconception",
+          "title": "SMOTE Before Splitting and Target Leakage",
+          "content": "Applying SMOTE to the entire dataset prior to performing a train-test split is a critical error. This creates severe target leakage because synthetic samples in the test split are generated from neighbors in the training split. This artificially inflates evaluation metrics. Always perform the train-test split first, and apply SMOTE strictly to the training partition."
+        }
+      ]
+    },
+    {
+      "title": "Algorithmic Mitigation: Focal Loss Derivation",
+      "content": "Algorithmic mitigation approaches modify the loss function during optimization. The simplest approach is a **class-weighted loss**, which scales the loss contribution of each sample by the inverse frequency of its class: $w_k \\propto \\frac{N}{N_k}$.\n\nFor extreme imbalances (e.g. 1:1000 in anomaly detection), class weighting is often insufficient because the massive volume of easy-to-classify negative samples still dominates the gradient during training. To address this, we use **Focal Loss**.\n\nDefine the probability of the correct class $p_t$ as:\n\n$$p_t = \\begin{cases} p & \\text{if } y = 1 \\\\ 1 - p & \\text{if } y = 0 \\end{cases}$$\n\nwhere $p = \\sigma(z)$ is the model's predicted probability. The standard binary cross-entropy (CE) loss is:\n\n$$\\text{CE}(p_t) = -\\log(p_t)$$\n\nFocal Loss modifies this objective by introducing a modulating factor $(1 - p_t)^{\\gamma}$ with a focusing parameter $\\gamma \\ge 0$:\n\n$$\\text{FL}(p_t) = -\\alpha_t (1 - p_t)^{\\gamma} \\log(p_t)$$\n\nwhere $\\alpha_t$ is a class-balancing parameter. When a sample is easily classified ($p_t \\to 1$), the modulating factor $(1 - p_t)^{\\gamma}$ approaches 0, down-weighting the loss contribution of that sample. For hard or misclassified samples ($p_t$ is small), the modulating factor is close to 1, preserving the loss value. This dynamically scales the gradients, preventing easy negative samples from dominating training.",
+      "callouts": [
+        {
+          "type": "Interview Tip",
+          "title": "The Focusing Parameter Gamma",
+          "content": "Explain that when $\\gamma = 0$, Focal Loss is mathematically equivalent to standard Cross-Entropy. As $\\gamma$ increases (typically $\\gamma = 2$ in practice), the model penalizes confident but incorrect predictions relatively more, while completely ignoring easy examples. This focuses the model's updates on boundary examples."
+        }
+      ]
+    }
+  ],
+  "example_refs": [
+    "machine-learning-m3-t5-ex1"
+  ],
+  "diagram_refs": [
+    "machine-learning-m3-t5-dia1"
+  ],
+  "practice_refs": [
+    "machine-learning-m3-t5-prac1"
+  ],
+  "quiz_refs": [
+    "machine-learning-m3-t5-quiz"
+  ]
+}

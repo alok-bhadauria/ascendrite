@@ -1,0 +1,29 @@
+{
+  "quiz_id": "machine-learning-m3-t2-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "What is the derivative of the logistic sigmoid function, σ'(z), expressed directly in terms of the function value σ(z)?",
+      "options": [
+        "σ'(z) = 1 - σ(z)",
+        "σ'(z) = σ(z) * (1 - σ(z))",
+        "σ'(z) = σ(z)^2",
+        "σ'(z) = σ(z) * (1 + σ(z))"
+      ],
+      "correct_answer": "σ'(z) = σ(z) * (1 - σ(z))",
+      "explanation": "Applying the quotient rule to the sigmoid function yields the expression e^-z / (1 + e^-z)^2. Rearranging terms matches the factorization σ(z) * (1 - σ(z))."
+    },
+    {
+      "question_id": "q2",
+      "text": "Why does using Mean Squared Error (MSE) instead of Log-Loss to optimize a Sigmoid-activated classification model lead to slower convergence for highly incorrect predictions?",
+      "options": [
+        "MSE loss functions cannot be calculated in spaces with dimensions greater than three.",
+        "The MSE gradient contains a sigmoid derivative term σ'(z) which saturates to zero when predictions are highly incorrect (p_i close to 1 when y_i is 0), eliminating updates.",
+        "MSE requires calculating the inverse Hessian at each step, stalling the optimizer.",
+        "Convexity forces MSE updates to proceed strictly in the positive weight quadrant."
+      ],
+      "correct_answer": "The MSE gradient contains a sigmoid derivative term σ'(z) which saturates to zero when predictions are highly incorrect (p_i close to 1 when y_i is 0), eliminating updates.",
+      "explanation": "The MSE gradient includes the term p_i(1 - p_i). If the prediction is confidently incorrect (e.g. p_i = 1 when the true target y_i = 0), this term is zero, making the gradient vanish. Under Log-Loss, this term cancels out, allowing the gradient to remain proportional to the prediction error (p_i - y_i)."
+    }
+  ]
+}
