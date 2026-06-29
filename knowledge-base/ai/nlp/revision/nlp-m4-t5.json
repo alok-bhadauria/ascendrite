@@ -1,0 +1,6 @@
+{
+  "topic_id": "nlp-m4-t5",
+  "title": "Pre-training Objectives",
+  "version": "1.0.0",
+  "content": "# Pre-training Objectives\n\n*   **BERT MLM:** Predicts masked tokens using bidirectional contexts: $\\mathcal{L} = -\\sum_{i \\in M} \\log P(x_i \\mid \\mathbf{x}_{\\setminus M})$\n*   **GPT CLM:** Autoregressive generation predicting the next token using causal context: $\\mathcal{L} = -\\sum_{t=1}^T \\log P(x_t \\mid x_1 \\dots x_{t-1})$\n"
+}

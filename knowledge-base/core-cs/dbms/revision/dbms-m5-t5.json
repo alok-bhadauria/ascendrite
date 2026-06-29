@@ -1,0 +1,6 @@
+{
+  "topic_id": "dbms-m5-t5",
+  "title": "NoSQL Scaling",
+  "version": "1.0.0",
+  "content": "# DBMS Revision\n\n*   **Slotted Page:** Header slots store offsets to records; defragmentation changes offsets but preserves RIDs.\n*   **B+ Tree Fan-out:** $F \\le \\frac{P + K}{D + K}$. Fan-out determines tree height and disk I/O reads.\n*   **ARIES recovery:** Analysis $\\to$ Redo (repeats history) $\\to$ Undo (rolls back active transactions, logging CLRs).\n\n\n*   **NoSQL Scaling Checklist:** Verify input ranges and clear caches.\n"
+}

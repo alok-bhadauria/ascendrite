@@ -1,0 +1,7 @@
+{
+  "topic_id": "nlp-m3-t4",
+  "asset_id": "nlp-m3-t4-ex1",
+  "title": "FastText Subword Embeddings",
+  "language": "python",
+  "code": "import numpy as np\n\ndef get_char_ngrams(word, n=3):\n    extended_word = '<' + word + '>'\n    return [extended_word[i:i+n] for i in range(len(extended_word)-n+1)]\n\nif __name__ == '__main__':\n    print('FastText char n-gram generator loaded.')\n"
+}

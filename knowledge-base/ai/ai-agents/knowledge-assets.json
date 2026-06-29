@@ -1,0 +1,61 @@
+{
+  "glossary": [
+    {
+      "term": "ReAct Loop",
+      "definition": "An agent execution loop that interleaves reasoning (Thought) and actions (Action) to produce observation updates from the environment, enabling dynamic goal resolution."
+    },
+    {
+      "term": "State Reducer",
+      "definition": "A function that takes an existing state and a sequence of state updates, combining them to return the new integrated state of an execution graph."
+    },
+    {
+      "term": "Model Context Protocol (MCP)",
+      "definition": "An open standard client-server protocol enabling secure integrations of external data resources and tools into language models."
+    },
+    {
+      "term": "Plan-and-Solve Paradigm",
+      "definition": "A prompting and execution strategy where an agent generates a global execution plan first and then systematically executes each step to avoid local reasoning traps."
+    }
+  ],
+  "references": [
+    {
+      "title": "Designing Autonomous Agents",
+      "author": "Pattie Maes",
+      "publisher": "MIT Press",
+      "year": 1990
+    }
+  ],
+  "further_reading": [
+    {
+      "title": "Introduction to Multi-Agent Systems",
+      "author": "Michael Wooldridge",
+      "publisher": "Wiley",
+      "year": 2009
+    }
+  ],
+  "research_papers": [
+    {
+      "title": "ReAct: Synergizing Reasoning and Acting in Language Models",
+      "authors": "Shunyu Yao, Jeffrey Zhao, Dian Yu, Nan Du, Izhak Shafran, Karthik Narasimhan, Yuan Cao",
+      "journal": "ICLR",
+      "year": 2023,
+      "url": "https://arxiv.org/abs/2210.03629"
+    },
+    {
+      "title": "Tree of Thoughts: Deliberate Problem Solving with Large Language Models",
+      "authors": "Shunyu Yao, Dian Yu, Jeffrey Zhao, Izhak Shafran, Thomas L. Griffiths, Yuan Cao, Karthik Narasimhan",
+      "journal": "NeurIPS",
+      "year": 2023,
+      "url": "https://arxiv.org/abs/2305.10601"
+    },
+    {
+      "title": "Model Context Protocol Specification",
+      "authors": "Anthropic PBC",
+      "journal": "Technical Specification",
+      "year": 2024,
+      "url": "https://modelcontextprotocol.io"
+    }
+  ],
+  "version": "1.0.0",
+  "last_updated": "2026-06-29"
+}

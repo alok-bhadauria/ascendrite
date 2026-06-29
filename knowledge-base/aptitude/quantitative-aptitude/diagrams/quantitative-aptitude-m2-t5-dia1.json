@@ -1,0 +1,7 @@
+{
+  "topic_id": "quantitative-aptitude-m2-t5",
+  "diagram_id": "quantitative-aptitude-m2-t5-dia1",
+  "title": "Ratio & Proportion Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Ratio & Proportion\"]\n  Process --> End"
+}

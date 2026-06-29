@@ -1,0 +1,7 @@
+{
+  "topic_id": "genai-m2-t5",
+  "asset_id": "genai-m2-t5-prac1",
+  "title": "Prompt Compression",
+  "language": "python",
+  "code": "def compress_tokens(tokens, self_entropies, threshold=1.0):\n    return [t for i, t in enumerate(tokens) if self_entropies[i] > threshold]\n\ndef run_practice():\n    tokens = ['the', 'anomaly', 'detected']\n    entropies = [0.1, 2.5, 3.0]\n    compressed = compress_tokens(tokens, entropies, 1.0)\n    assert 'the' not in compressed\n    assert 'anomaly' in compressed\n    print('[PASS] Token entropy compression checks passed.')\n\nif __name__ == '__main__':\n    run_practice()\n"
+}

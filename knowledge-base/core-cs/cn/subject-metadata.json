@@ -1,0 +1,26 @@
+{
+  "subject_id": "cn",
+  "name": "CN",
+  "category": "core-cs",
+  "difficulty": "Medium",
+  "estimated_learning_hours": 80,
+  "prerequisites": [
+    "Operating Systems Basics"
+  ],
+  "tags": [
+    "Computer Networks",
+    "TCP/IP",
+    "Routing",
+    "Congestion Control",
+    "HTTP",
+    "TLS"
+  ],
+  "subject_theme_colors": {
+    "primary": "#7C3AED",
+    "secondary": "#A78BFA",
+    "accent": "#EC4899",
+    "neutral": "#1F2937"
+  },
+  "version": "1.0.0",
+  "last_updated": "2026-06-29"
+}

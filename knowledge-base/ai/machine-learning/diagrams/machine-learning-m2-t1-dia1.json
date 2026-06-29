@@ -1,0 +1,7 @@
+{
+  "topic_id": "machine-learning-m2-t1",
+  "diagram_id": "machine-learning-m2-t1-dia1",
+  "title": "NumPy Internals & Vectorization Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process NumPy Internals & Vectorization\"]\n  Process --> End"
+}

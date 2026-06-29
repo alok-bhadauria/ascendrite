@@ -1,0 +1,7 @@
+{
+  "topic_id": "quantitative-aptitude-m3-t1",
+  "diagram_id": "quantitative-aptitude-m3-t1-dia1",
+  "title": "Time & Work Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Time & Work\"]\n  Process --> End"
+}

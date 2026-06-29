@@ -1,0 +1,7 @@
+{
+  "topic_id": "quantitative-aptitude-m2-t4",
+  "diagram_id": "quantitative-aptitude-m2-t4-dia1",
+  "title": "Simple & Compound Interest Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Simple & Compound Interest\"]\n  Process --> End"
+}

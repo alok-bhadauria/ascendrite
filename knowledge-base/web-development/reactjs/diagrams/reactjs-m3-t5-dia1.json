@@ -1,0 +1,7 @@
+{
+  "topic_id": "reactjs-m3-t5",
+  "diagram_id": "reactjs-m3-t5-dia1",
+  "title": "Windowing Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Windowing\"]\n  Process --> End"
+}

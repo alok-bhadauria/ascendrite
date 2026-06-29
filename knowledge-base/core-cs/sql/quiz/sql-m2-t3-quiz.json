@@ -1,0 +1,17 @@
+{
+  "quiz_id": "sql-m2-t3-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which of the following describes a key bottleneck related to Value Functions?",
+      "options": [
+        "Inefficient scaling of LEAD(), LAG() offset lookbehinds.",
+        "Hardware is completely offline.",
+        "Lack of database files.",
+        "Syntax compilation errors."
+      ],
+      "correct_answer": "Inefficient scaling of LEAD(), LAG() offset lookbehinds.",
+      "explanation": "The topic covers how LEAD(), LAG() offset lookbehinds scales under concurrent workloads, which represents the primary bottlenecks."
+    }
+  ]
+}

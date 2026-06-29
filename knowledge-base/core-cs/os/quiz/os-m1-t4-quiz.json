@@ -1,0 +1,17 @@
+{
+  "quiz_id": "os-m1-t4-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which of the following describes a key bottleneck related to Process Lifecycle?",
+      "options": [
+        "Inefficient scaling of Process creation (fork, exec).",
+        "Hardware is completely offline.",
+        "Lack of database files.",
+        "Syntax compilation errors."
+      ],
+      "correct_answer": "Inefficient scaling of Process creation (fork, exec).",
+      "explanation": "The topic covers how Process creation (fork, exec) scales under concurrent workloads, which represents the primary bottlenecks."
+    }
+  ]
+}

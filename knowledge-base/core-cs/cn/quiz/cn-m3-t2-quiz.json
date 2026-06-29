@@ -1,0 +1,17 @@
+{
+  "quiz_id": "cn-m3-t2-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which of the following describes a key bottleneck related to TCP Connection?",
+      "options": [
+        "Inefficient scaling of Three-way handshake, sequence numbers synchronization, and 4-step connection teardown.",
+        "Hardware is completely offline.",
+        "Lack of database files.",
+        "Syntax compilation errors."
+      ],
+      "correct_answer": "Inefficient scaling of Three-way handshake, sequence numbers synchronization, and 4-step connection teardown.",
+      "explanation": "The topic covers how Three-way handshake, sequence numbers synchronization, and 4-step connection teardown scales under concurrent workloads, which represents the primary bottlenecks."
+    }
+  ]
+}

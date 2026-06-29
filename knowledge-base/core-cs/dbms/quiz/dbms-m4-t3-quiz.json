@@ -1,0 +1,17 @@
+{
+  "quiz_id": "dbms-m4-t3-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which of the following describes a key bottleneck related to Cost Estimation?",
+      "options": [
+        "Inefficient scaling of Disk I/O cost modeling.",
+        "Hardware is completely offline.",
+        "Lack of database files.",
+        "Syntax compilation errors."
+      ],
+      "correct_answer": "Inefficient scaling of Disk I/O cost modeling.",
+      "explanation": "The topic covers how Disk I/O cost modeling scales under concurrent workloads, which represents the primary bottlenecks."
+    }
+  ]
+}

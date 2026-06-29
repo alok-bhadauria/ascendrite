@@ -1,0 +1,7 @@
+{
+  "topic_id": "nodejs-expressjs-m3-t1",
+  "diagram_id": "nodejs-expressjs-m3-t1-dia1",
+  "title": "MongoDB Integration Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process MongoDB Integration\"]\n  Process --> End"
+}

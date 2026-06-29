@@ -1,0 +1,7 @@
+{
+  "topic_id": "system-design-m2-t1",
+  "diagram_id": "system-design-m2-t1-dia1",
+  "title": "Communication Models Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Communication Models\"]\n  Process --> End"
+}

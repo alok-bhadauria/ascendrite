@@ -1,0 +1,7 @@
+{
+  "topic_id": "verbal-aptitude-m1-t1",
+  "diagram_id": "verbal-aptitude-m1-t1-dia1",
+  "title": "Parts of Speech Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Parts of Speech\"]\n  Process --> End"
+}

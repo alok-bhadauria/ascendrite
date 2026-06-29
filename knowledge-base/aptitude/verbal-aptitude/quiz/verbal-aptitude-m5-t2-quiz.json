@@ -1,0 +1,17 @@
+{
+  "quiz_id": "verbal-aptitude-m5-t2-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "What is the key optimization criteria for Arguments Analysis?",
+      "options": [
+        "Minimizing complexity bounds.",
+        "Increasing CPU utilization.",
+        "Static heap allocation.",
+        "Syntax execution bypass."
+      ],
+      "correct_answer": "Minimizing complexity bounds.",
+      "explanation": "The primary goal in designing Arguments Analysis is minimizing asymptotic and memory complexities."
+    }
+  ]
+}

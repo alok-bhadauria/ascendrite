@@ -1,0 +1,44 @@
+{
+  "topic_id": "dbms-m3-t4",
+  "title": "Compensation Log Records",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Hard",
+    "estimated_hours": 6,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Describe structural characteristics of Compensation Log Records.",
+    "Derive mathematical and programmatic bounds for CLR logging during rollback execution, Nested aborts prevention."
+  ],
+  "content_sections": [
+    {
+      "title": "Compensation Log Records",
+      "content": "### DBMS Architecture and Transaction Execution\nDatabases operate on structured page models. The storage engine coordinates buffer pools and physical reads/writes, while the query processor compiles relational algebra into execution plans.\n\n#### Slotted Page Offset Math\nRecords are of variable length. The page header stores slot directory arrays mapping slot index to page offsets:\n$$\\text{Offset}_{i} = \\text{PageSize} - \\sum_{k=1}^i \\text{Len}(R_k)$$\nThis layout allows page defragmentation (shuffling records and updating offset vectors) without changing record IDs (RIDs) which represent (PageNum, SlotNum).\n\n#### B+ Tree Node Fan-out\nLeaves contain data, and internal nodes store search keys. The maximum fan-out $F$ of an internal node on a page of size $P$ with key size $K$ and pointer size $D$ is bounded by:\n$$F \\times D + (F - 1) \\times K \\le P \\implies F \\le \\frac{P + K}{D + K}$$\n\n#### ARIES Recovery Logic\nARIES recovery logs all database changes using Write-Ahead Logging (WAL) and executes three recovery phases:\n1.  **Analysis Phase:** Scans WAL forward from the last checkpoint to rebuild the Transaction Table and Dirty Page Table (DPT).\n2.  **Redo Phase:** Replays history forward from the minimum `RecLSN` in the DPT to restore the state before crash.\n3.  **Undo Phase:** Rolls back uncommitted transactions active at the time of crash by scanning backwards using `PrevLSN` pointers and logging Compensation Log Records (CLRs) to prevent infinite loops during nested aborts.\n\n### Depth Analysis: Compensation Log Records\nIn production configurations, we analyze how CLR logging during rollback execution, Nested aborts prevention affects performance parameters. We evaluate memory layouts and consensus thresholds.",
+      "callouts": [
+        {
+          "type": "Student Trap",
+          "title": "Common Trap in Compensation Log Records",
+          "content": "A common mistake when analyzing Compensation Log Records is ignoring latency bounds and boundary edge cases during concurrent executions."
+        },
+        {
+          "type": "Engineering Note",
+          "title": "Production Scaling for Compensation Log Records",
+          "content": "Production servers implement strict resource isolation and cache alignments to prevent performance regressions when running Compensation Log Records loops."
+        }
+      ]
+    }
+  ],
+  "example_refs": [
+    "dbms-m3-t4-ex1"
+  ],
+  "diagram_refs": [
+    "dbms-m3-t4-dia1"
+  ],
+  "practice_refs": [
+    "dbms-m3-t4-prac1"
+  ],
+  "quiz_refs": [
+    "dbms-m3-t4-quiz"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "quiz_id": "cn-m3-t1-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which of the following describes a key bottleneck related to Transport Services?",
+      "options": [
+        "Inefficient scaling of UDP stateless multiplexing vs TCP stateful byte-stream deliveries comparison.",
+        "Hardware is completely offline.",
+        "Lack of database files.",
+        "Syntax compilation errors."
+      ],
+      "correct_answer": "Inefficient scaling of UDP stateless multiplexing vs TCP stateful byte-stream deliveries comparison.",
+      "explanation": "The topic covers how UDP stateless multiplexing vs TCP stateful byte-stream deliveries comparison scales under concurrent workloads, which represents the primary bottlenecks."
+    }
+  ]
+}

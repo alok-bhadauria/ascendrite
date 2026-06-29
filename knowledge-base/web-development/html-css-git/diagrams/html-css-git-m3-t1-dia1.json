@@ -1,0 +1,7 @@
+{
+  "topic_id": "html-css-git-m3-t1",
+  "diagram_id": "html-css-git-m3-t1-dia1",
+  "title": "Media Queries Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Media Queries\"]\n  Process --> End"
+}

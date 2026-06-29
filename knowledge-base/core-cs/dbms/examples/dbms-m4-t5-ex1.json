@@ -1,0 +1,7 @@
+{
+  "topic_id": "dbms-m4-t5",
+  "asset_id": "dbms-m4-t5-ex1",
+  "title": "Execution Plans",
+  "language": "python",
+  "code": "if __name__ == '__main__':\n    print('Example pass for Execution Plans')\n"
+}

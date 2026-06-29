@@ -1,0 +1,7 @@
+{
+  "topic_id": "dbms-m2-t4",
+  "diagram_id": "dbms-m2-t4-dia1",
+  "title": "Locking Mechanisms Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Locking Mechanisms\"]\n  Process --> End"
+}

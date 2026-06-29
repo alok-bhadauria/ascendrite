@@ -1,0 +1,6 @@
+{
+  "topic_id": "sql-m3-t3",
+  "title": "Subqueries",
+  "version": "1.0.0",
+  "content": "# SQL Interview Prep\n\n## Q1: Explain why a query filtering on columns B and C cannot use a composite index defined on (A, B, C).\n\n### Standard Answer\nA composite index stores keys sorted lexicographically: first by column A, then by column B, then by column C. Because keys are sorted by A first, the index structure contains multiple disjoint blocks of B and C sorted lists. Without specifying column A in the query filter, the database engine cannot perform a binary search or index seek. It is forced to perform a full index scan or a table scan.\n\n\n## Q2: How does the system handle concurrent throughput anomalies under Subqueries?\n\n### Standard Answer\nThe system uses dynamic resource pools and queue-backoff throttles to maintain throughput boundaries, avoiding thread starvation.\n"
+}

@@ -1,0 +1,7 @@
+{
+  "topic_id": "typescript-m2-t3",
+  "diagram_id": "typescript-m2-t3-dia1",
+  "title": "Conditional Types Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Conditional Types\"]\n  Process --> End"
+}

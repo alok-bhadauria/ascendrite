@@ -1,0 +1,7 @@
+{
+  "topic_id": "deep-learning-m2-t2",
+  "diagram_id": "deep-learning-m2-t2-dia1",
+  "title": "Adaptive Optimizers Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Adaptive Optimizers\"]\n  Process --> End"
+}

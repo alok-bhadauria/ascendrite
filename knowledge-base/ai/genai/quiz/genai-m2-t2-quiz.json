@@ -1,0 +1,17 @@
+{
+  "quiz_id": "genai-m2-t2-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "What is the core mathematical mechanism behind Self-Consistency in prompting?",
+      "options": [
+        "Majority voting over multiple generated reasoning path endpoints.",
+        "Dynamic learning rate shifts.",
+        "Applying a causal mask.",
+        "Enforcing cross-entropy limits."
+      ],
+      "correct_answer": "Majority voting over multiple generated reasoning path endpoints.",
+      "explanation": "Self-consistency samples a set of reasoning outputs and applies a majority vote to pick the most frequent answer."
+    }
+  ]
+}

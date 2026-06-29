@@ -1,0 +1,7 @@
+{
+  "topic_id": "oop-m2-t1",
+  "asset_id": "oop-m2-t1-prac1",
+  "title": "Software Coupling & Cohesion",
+  "language": "python",
+  "code": "def run_practice():\n    assert True\nif __name__ == '__main__':\n    run_practice()\n"
+}

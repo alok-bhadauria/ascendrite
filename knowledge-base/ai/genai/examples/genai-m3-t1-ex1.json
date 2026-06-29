@@ -1,0 +1,7 @@
+{
+  "topic_id": "genai-m3-t1",
+  "asset_id": "genai-m3-t1-ex1",
+  "title": "LoRA Mathematics",
+  "language": "python",
+  "code": "import numpy as np\n\ndef lora_forward(x, W0, A, B, alpha=16, r=8):\n    h0 = np.dot(x, W0)\n    h_lora = np.dot(np.dot(x, A), B) * (alpha / r)\n    return h0 + h_lora\n\nif __name__ == '__main__':\n    print('LoRA equations configured.')\n"
+}

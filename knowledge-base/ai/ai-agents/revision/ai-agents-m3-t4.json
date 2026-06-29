@@ -1,0 +1,6 @@
+{
+  "topic_id": "ai-agents-m3-t4",
+  "title": "Human-in-the-Loop Integrations",
+  "version": "1.0.0",
+  "content": "# Human-in-the-Loop\n\n*   **Interrupts:** Pausing execution threads before safety-critical node executions.\n*   **Approvals:** Manual payload injections (approve/reject/edit) that update the state before resuming.\n"
+}

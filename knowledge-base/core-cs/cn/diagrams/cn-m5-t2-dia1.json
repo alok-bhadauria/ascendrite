@@ -1,0 +1,7 @@
+{
+  "topic_id": "cn-m5-t2",
+  "diagram_id": "cn-m5-t2-dia1",
+  "title": "TLS Handshake Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process TLS Handshake\"]\n  Process --> End"
+}

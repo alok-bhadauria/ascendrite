@@ -1,0 +1,7 @@
+{
+  "topic_id": "css-frameworks-m1-t2",
+  "diagram_id": "css-frameworks-m1-t2-dia1",
+  "title": "Tailwind Configuration Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Tailwind Configuration\"]\n  Process --> End"
+}

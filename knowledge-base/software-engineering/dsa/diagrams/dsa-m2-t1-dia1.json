@@ -1,0 +1,7 @@
+{
+  "topic_id": "dsa-m2-t1",
+  "diagram_id": "dsa-m2-t1-dia1",
+  "title": "Searching Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Searching\"]\n  Process --> End"
+}

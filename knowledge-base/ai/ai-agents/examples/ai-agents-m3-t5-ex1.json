@@ -1,0 +1,7 @@
+{
+  "topic_id": "ai-agents-m3-t5",
+  "asset_id": "ai-agents-m3-t5-ex1",
+  "title": "Self-Correction Loops",
+  "language": "python",
+  "code": "def validate_output_length(text, min_len=5):\n    return len(text) >= min_len\n\nif __name__ == '__main__':\n    print('Linter modules ready.')\n"
+}

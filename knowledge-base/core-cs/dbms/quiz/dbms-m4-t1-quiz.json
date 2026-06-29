@@ -1,0 +1,17 @@
+{
+  "quiz_id": "dbms-m4-t1-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which of the following describes a key bottleneck related to Query Parsing & Rewriting?",
+      "options": [
+        "Inefficient scaling of Relational Algebra translations.",
+        "Hardware is completely offline.",
+        "Lack of database files.",
+        "Syntax compilation errors."
+      ],
+      "correct_answer": "Inefficient scaling of Relational Algebra translations.",
+      "explanation": "The topic covers how Relational Algebra translations scales under concurrent workloads, which represents the primary bottlenecks."
+    }
+  ]
+}

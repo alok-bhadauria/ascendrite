@@ -1,0 +1,7 @@
+{
+  "topic_id": "sql-m1-t5",
+  "asset_id": "sql-m1-t5-ex1",
+  "title": "Data Types",
+  "language": "python",
+  "code": "if __name__ == '__main__':\n    print('Example pass for Data Types')\n"
+}

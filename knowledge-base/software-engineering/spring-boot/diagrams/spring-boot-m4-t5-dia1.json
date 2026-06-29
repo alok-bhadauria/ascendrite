@@ -1,0 +1,7 @@
+{
+  "topic_id": "spring-boot-m4-t5",
+  "diagram_id": "spring-boot-m4-t5-dia1",
+  "title": "Security Hardening Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Security Hardening\"]\n  Process --> End"
+}

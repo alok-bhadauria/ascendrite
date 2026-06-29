@@ -1,0 +1,7 @@
+{
+  "topic_id": "css-frameworks-m3-t2",
+  "diagram_id": "css-frameworks-m3-t2-dia1",
+  "title": "Custom Plugins Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Custom Plugins\"]\n  Process --> End"
+}

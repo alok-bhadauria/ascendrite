@@ -1,0 +1,7 @@
+{
+  "topic_id": "nlp-m5-t1",
+  "diagram_id": "nlp-m5-t1-dia1",
+  "title": "Sentence Embeddings Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Sentence Embeddings\"]\n  Process --> End"
+}

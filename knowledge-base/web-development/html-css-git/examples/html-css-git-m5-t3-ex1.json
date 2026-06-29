@@ -1,0 +1,7 @@
+{
+  "topic_id": "html-css-git-m5-t3",
+  "asset_id": "html-css-git-m5-t3-ex1",
+  "title": "Git Reset vs Revert",
+  "language": "python",
+  "code": "if __name__ == '__main__':\n    print('Example code execution.')\n"
+}

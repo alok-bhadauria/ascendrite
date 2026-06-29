@@ -1,0 +1,7 @@
+{
+  "topic_id": "os-m3-t1",
+  "asset_id": "os-m3-t1-ex1",
+  "title": "Virtual Memory",
+  "language": "python",
+  "code": "if __name__ == '__main__':\n    print('Example pass for Virtual Memory')\n"
+}

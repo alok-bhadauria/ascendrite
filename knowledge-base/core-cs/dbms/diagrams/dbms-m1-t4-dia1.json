@@ -1,0 +1,7 @@
+{
+  "topic_id": "dbms-m1-t4",
+  "diagram_id": "dbms-m1-t4-dia1",
+  "title": "Hash-Based Indexing Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Hash-Based Indexing\"]\n  Process --> End"
+}

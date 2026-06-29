@@ -1,0 +1,7 @@
+{
+  "topic_id": "oop-m1-t4",
+  "diagram_id": "oop-m1-t4-dia1",
+  "title": "Inheritance & Polymorphism Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Inheritance & Polymorphism\"]\n  Process --> End"
+}

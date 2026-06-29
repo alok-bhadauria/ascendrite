@@ -1,0 +1,7 @@
+{
+  "topic_id": "reactjs-m2-t4",
+  "diagram_id": "reactjs-m2-t4-dia1",
+  "title": "Memoization Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Memoization\"]\n  Process --> End"
+}

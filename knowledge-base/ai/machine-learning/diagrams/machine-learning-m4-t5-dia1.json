@@ -1,0 +1,7 @@
+{
+  "topic_id": "machine-learning-m4-t5",
+  "diagram_id": "machine-learning-m4-t5-dia1",
+  "title": "Boosting Algorithms & Tree Libraries Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Boosting Algorithms & Tree Libraries\"]\n  Process --> End"
+}

@@ -1,0 +1,17 @@
+{
+  "quiz_id": "sql-m3-t5-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which of the following describes a key bottleneck related to Temporary Storage?",
+      "options": [
+        "Inefficient scaling of Session temp tables, global temp tables, CTEs, and materialization optimizations.",
+        "Hardware is completely offline.",
+        "Lack of database files.",
+        "Syntax compilation errors."
+      ],
+      "correct_answer": "Inefficient scaling of Session temp tables, global temp tables, CTEs, and materialization optimizations.",
+      "explanation": "The topic covers how Session temp tables, global temp tables, CTEs, and materialization optimizations scales under concurrent workloads, which represents the primary bottlenecks."
+    }
+  ]
+}

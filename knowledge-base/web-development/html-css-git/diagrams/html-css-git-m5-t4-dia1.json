@@ -1,0 +1,7 @@
+{
+  "topic_id": "html-css-git-m5-t4",
+  "diagram_id": "html-css-git-m5-t4-dia1",
+  "title": "Git Hooks Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Git Hooks\"]\n  Process --> End"
+}

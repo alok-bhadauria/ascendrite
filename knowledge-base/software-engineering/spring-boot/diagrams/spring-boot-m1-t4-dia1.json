@@ -1,0 +1,7 @@
+{
+  "topic_id": "spring-boot-m1-t4",
+  "diagram_id": "spring-boot-m1-t4-dia1",
+  "title": "Spring Boot Foundations Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Spring Boot Foundations\"]\n  Process --> End"
+}

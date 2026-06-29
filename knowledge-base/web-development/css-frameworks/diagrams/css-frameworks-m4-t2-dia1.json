@@ -1,0 +1,7 @@
+{
+  "topic_id": "css-frameworks-m4-t2",
+  "diagram_id": "css-frameworks-m4-t2-dia1",
+  "title": "Sass Mixins & Functions Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Sass Mixins & Functions\"]\n  Process --> End"
+}

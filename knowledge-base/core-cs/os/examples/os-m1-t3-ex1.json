@@ -1,0 +1,7 @@
+{
+  "topic_id": "os-m1-t3",
+  "asset_id": "os-m1-t3-ex1",
+  "title": "System Calls",
+  "language": "python",
+  "code": "if __name__ == '__main__':\n    print('Example pass for System Calls')\n"
+}

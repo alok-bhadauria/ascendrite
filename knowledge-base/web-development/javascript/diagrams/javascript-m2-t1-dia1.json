@@ -1,0 +1,7 @@
+{
+  "topic_id": "javascript-m2-t1",
+  "diagram_id": "javascript-m2-t1-dia1",
+  "title": "This Context Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process This Context\"]\n  Process --> End"
+}

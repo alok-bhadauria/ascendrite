@@ -1,0 +1,7 @@
+{
+  "topic_id": "genai-m2-t4",
+  "asset_id": "genai-m2-t4-ex1",
+  "title": "Context Window Constraints",
+  "language": "python",
+  "code": "import numpy as np\n\ndef simulate_u_shape_accuracy(position):\n    return 0.95 - 0.4 * (1.0 - (2.0 * position - 1.0)**2)\n\nif __name__ == '__main__':\n    print('U-shape simulator initialized.')\n"
+}

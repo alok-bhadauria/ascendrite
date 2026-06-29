@@ -1,0 +1,7 @@
+{
+  "topic_id": "sql-m2-t1",
+  "diagram_id": "sql-m2-t1-dia1",
+  "title": "Window Functions Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Window Functions\"]\n  Process --> End"
+}

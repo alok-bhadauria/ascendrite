@@ -1,0 +1,259 @@
+{
+  "subject_id": "oop",
+  "name": "OOP",
+  "category": "software-engineering",
+  "modules": [
+    {
+      "name": "Module 1: Programming Paradigms & Robust Class Design",
+      "topics": [
+        {
+          "id": "oop-m1-t1",
+          "title": "Programming Paradigms",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "oop-m1-t2",
+          "title": "Abstraction",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "oop-m1-t3",
+          "title": "Encapsulation Boundaries",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "oop-m1-t4",
+          "title": "Inheritance & Polymorphism",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "oop-m1-t5",
+          "title": "Object Relationships",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        }
+      ]
+    },
+    {
+      "name": "Module 2: Coupling, Cohesion & SOLID Design Principles",
+      "topics": [
+        {
+          "id": "oop-m2-t1",
+          "title": "Software Coupling & Cohesion",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "oop-m2-t2",
+          "title": "Dependency Injection (DI)",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "oop-m2-t3",
+          "title": "SOLID Principles (Part 1)",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "oop-m2-t4",
+          "title": "SOLID Principles (Part 2)",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "oop-m2-t5",
+          "title": "Design Idioms",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        }
+      ]
+    },
+    {
+      "name": "Module 3: Creational & Structural Design Patterns",
+      "topics": [
+        {
+          "id": "oop-m3-t1",
+          "title": "Pattern Philosophy",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "oop-m3-t2",
+          "title": "Creational - Singleton",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "oop-m3-t3",
+          "title": "Creational - Factory Method & Abstract Factory",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "oop-m3-t4",
+          "title": "Creational - Builder",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "oop-m3-t5",
+          "title": "Structural - Adapter & Decorator",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        }
+      ]
+    },
+    {
+      "name": "Module 4: Structural & Behavioral Design Patterns",
+      "topics": [
+        {
+          "id": "oop-m4-t1",
+          "title": "Structural - Proxy",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "oop-m4-t2",
+          "title": "Behavioral - Strategy",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "oop-m4-t3",
+          "title": "Behavioral - Observer",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "oop-m4-t4",
+          "title": "Behavioral - Template Method",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "oop-m4-t5",
+          "title": "Behavioral - Command & State",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        }
+      ]
+    },
+    {
+      "name": "Module 5: Code Smells, UML & Low-Level Design (LLD) Case Studies",
+      "topics": [
+        {
+          "id": "oop-m5-t1",
+          "title": "Code Smells & Refactoring",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "oop-m5-t2",
+          "title": "UML Modeling",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "oop-m5-t3",
+          "title": "Domain-Driven Design (DDD)",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "oop-m5-t4",
+          "title": "LLD Case Study (Library/Parking)",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "oop-m5-t5",
+          "title": "LLD Case Study (Food/Movie)",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        }
+      ]
+    }
+  ],
+  "version": "1.0.0",
+  "last_updated": "2026-06-29"
+}

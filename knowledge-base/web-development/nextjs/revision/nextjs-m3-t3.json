@@ -1,0 +1,6 @@
+{
+  "topic_id": "nextjs-m3-t3",
+  "title": "Action Security",
+  "version": "1.0.0",
+  "content": "# NextJS Revision\n\n*   **RSC:** Default server components that do not ship JS code to the browser.\n*   **Caching Layers:** Request Deduplication, Data Cache, Full Route Cache, Router Cache.\n*   **PPR:** Combines static page shells with streaming dynamic components inside Suspense.\n\n\n*   **Action Security Checklist:** Verify input ranges and clear caches.\n"
+}

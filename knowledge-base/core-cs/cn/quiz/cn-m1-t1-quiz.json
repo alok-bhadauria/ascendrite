@@ -1,0 +1,17 @@
+{
+  "quiz_id": "cn-m1-t1-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which of the following describes a key bottleneck related to Networking Architectures?",
+      "options": [
+        "Inefficient scaling of OSI 7-layer model vs TCP/IP protocol suite boundary mappings.",
+        "Hardware is completely offline.",
+        "Lack of database files.",
+        "Syntax compilation errors."
+      ],
+      "correct_answer": "Inefficient scaling of OSI 7-layer model vs TCP/IP protocol suite boundary mappings.",
+      "explanation": "The topic covers how OSI 7-layer model vs TCP/IP protocol suite boundary mappings scales under concurrent workloads, which represents the primary bottlenecks."
+    }
+  ]
+}

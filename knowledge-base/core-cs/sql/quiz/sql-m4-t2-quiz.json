@@ -1,0 +1,17 @@
+{
+  "quiz_id": "sql-m4-t2-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which of the following describes a key bottleneck related to Explain Plans?",
+      "options": [
+        "Inefficient scaling of EXPLAIN output tree analysis.",
+        "Hardware is completely offline.",
+        "Lack of database files.",
+        "Syntax compilation errors."
+      ],
+      "correct_answer": "Inefficient scaling of EXPLAIN output tree analysis.",
+      "explanation": "The topic covers how EXPLAIN output tree analysis scales under concurrent workloads, which represents the primary bottlenecks."
+    }
+  ]
+}

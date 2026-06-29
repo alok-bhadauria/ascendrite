@@ -1,0 +1,7 @@
+{
+  "topic_id": "deep-learning-m2-t5",
+  "diagram_id": "deep-learning-m2-t5-dia1",
+  "title": "Weight Initialization Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Weight Initialization\"]\n  Process --> End"
+}

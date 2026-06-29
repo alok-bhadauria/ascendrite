@@ -1,0 +1,6 @@
+{
+  "topic_id": "typescript-m2-t2",
+  "title": "Keyof Operator",
+  "version": "1.0.0",
+  "content": "# TypeScript Interview Prep\n\n## Q1: What is the difference between standard Interface merging and Type aliases?\n\n### Standard Answer\nInterfaces support **Declaration Merging**: if you declare two interfaces with the same name in the same scope, the TS compiler automatically merges their members. This is useful for extending library modules. Type aliases do not support declaration merging; attempting to declare two types with identical identifiers in the same scope throws compile-time errors.\n\n\n## Q2: How does the system handle concurrent throughput anomalies under Keyof Operator?\n\n### Standard Answer\nThe system uses dynamic resource pools and queue-backoff throttles to maintain throughput boundaries, avoiding thread starvation.\n"
+}

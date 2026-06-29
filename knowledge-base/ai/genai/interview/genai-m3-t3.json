@@ -1,0 +1,6 @@
+{
+  "topic_id": "genai-m3-t3",
+  "title": "Prompt & Prefix Tuning",
+  "version": "1.0.0",
+  "content": "# Interview Prep: Prefix Tuning\n\n## Q1: How does Prefix Tuning bypass context window limits compared to standard prompting?\n\n### Standard Answer\nIn standard prompting, virtual tokens are passed as inputs, consuming space in the context window. In prefix tuning, the prefixes are injected directly into the attention layers, bypassing the context window constraint.\n"
+}

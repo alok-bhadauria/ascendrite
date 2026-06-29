@@ -1,0 +1,31 @@
+{
+  "topic_id": "genai-m3-t4",
+  "title": "Bottleneck Adapters",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Medium",
+    "estimated_hours": 5,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Explain residual bottleneck adapter configurations.",
+    "Formulate latency scaling equations."
+  ],
+  "content_sections": [
+    {
+      "title": "Bottleneck Projection Layers",
+      "content": "Bottleneck adapters are small feedforward networks inserted after multi-head self-attention and MLP blocks. They project activations $\\mathbf{h}$ to a low-dimensional bottleneck space using down-projection weights $\\mathbf{W}_D \\in \\mathbb{R}^{d \\times m}$ (where $m \\ll d$), apply a non-linear activation, and project them back using up-projection weights $\\mathbf{W}_U \\in \\mathbb{R}^{m \\times d}$, adding a residual connection:\n\n$$\\mathbf{h}_{new} = \\mathbf{h} + f(\\mathbf{h}\\mathbf{W}_D)\\mathbf{W}_U$$",
+      "callouts": []
+    }
+  ],
+  "example_refs": [
+    "genai-m3-t4-ex1"
+  ],
+  "diagram_refs": [],
+  "practice_refs": [
+    "genai-m3-t4-prac1"
+  ],
+  "quiz_refs": [
+    "genai-m3-t4-quiz"
+  ]
+}

@@ -35,7 +35,7 @@
         "Density-connected requires the distance between points to be exactly zero, whereas directly density-reachable allows distances up to $\\text{MinPts} \\times \\epsilon$."
       ],
       "correct_answer": "Directly density-reachable requires the source point to be a core point and the destination to be within radius $\\epsilon$, whereas density-connected is a symmetric relationship where both points are density-reachable from a common core point.",
-      "explanation": "Directly density-reachable is asymmetric: $\\mathbf{q}$ is directly reachable from $\\mathbf{p}$ if $\|\\mathbf{q} - \\mathbf{p}\|_2 \\le \\epsilon$ and $\\mathbf{p}$ is a core point. If $\\mathbf{q}$ is a border point, $\\mathbf{p}$ is not reachable from $\\mathbf{q}$. Density-connected is a symmetric relation: $\\mathbf{p}$ and $\\mathbf{q}$ are density-connected if there exists a core point $\\mathbf{o}$ from which both $\\mathbf{p}$ and $\\mathbf{q}$ are density-reachable. This defines the overall cluster boundaries."
+      "explanation": "Directly density-reachable is asymmetric: $\\mathbf{q}$ is directly reachable from $\\mathbf{p}$ if $\\|\\mathbf{q} - \\mathbf{p}\\|_2 \\le \\epsilon$ and $\\mathbf{p}$ is a core point. If $\\mathbf{q}$ is a border point, $\\mathbf{p}$ is not reachable from $\\mathbf{q}$. Density-connected is a symmetric relation: $\\mathbf{p}$ and $\\mathbf{q}$ are density-connected if there exists a core point $\\mathbf{o}$ from which both $\\mathbf{p}$ and $\\mathbf{q}$ are density-reachable. This defines the overall cluster boundaries."
     }
   ]
 }

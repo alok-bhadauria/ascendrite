@@ -1,0 +1,7 @@
+{
+  "topic_id": "oop-m4-t1",
+  "diagram_id": "oop-m4-t1-dia1",
+  "title": "Structural - Proxy Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Structural - Proxy\"]\n  Process --> End"
+}

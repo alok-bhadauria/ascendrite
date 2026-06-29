@@ -1,0 +1,7 @@
+{
+  "topic_id": "deep-learning-m5-t3",
+  "asset_id": "deep-learning-m5-t3-prac1",
+  "title": "Generative Adversarial Networks (GANs)",
+  "language": "python",
+  "code": "import numpy as np\n\n\ndef compute_discriminator_bce(D_real: np.ndarray, D_fake: np.ndarray) -> float:\n    \"\"\"Calculates the binary cross-entropy loss for the discriminator.\n\n    L = - (1 / N) * sum_i ( log(D_real_i) + log(1 - D_fake_i) )\n    \"\"\"\n    N = len(D_real)\n    # Binary cross entropy terms for real (target=1) and fake (target=0)\n    loss = -np.mean(np.log(D_real) + np.log(1.0 - D_fake))\n    return float(loss)\n\n\nif __name__ == \"__main__\":\n    print(\"--- Running GAN Loss Calculation Practice ---\")\n\n    D_real = np.array([0.8, 0.9])\n    D_fake = np.array([0.2, 0.1])\n\n    # Log calculations:\n    # log(D_real) = [log(0.8), log(0.9)] = [-0.22314355, -0.10536052]\n    # log(1 - D_fake) = [log(0.8), log(0.9)] = [-0.22314355, -0.10536052]\n    # Sum of terms = 2 * (-0.22314355 - 0.10536052) = -0.65700814\n    # Mean (divided by N=2) = -0.32850407\n    # Loss = -(-0.32850407) = 0.32850407\n    loss = compute_discriminator_bce(D_real, D_fake)\n    print(\"Calculated discriminator loss:\", loss)\n\n    expected = -np.mean(np.log(D_real) + np.log(1.0 - D_fake))\n    assert np.isclose(loss, expected)\n    print(\"Discriminator loss matches expected manual calculation.\")\n\n    print(\"\\n  [PASS] Discriminator loss practice verified successfully.\")\n"
+}

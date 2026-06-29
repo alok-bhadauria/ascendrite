@@ -1,0 +1,6 @@
+{
+  "topic_id": "nextjs-m1-t2",
+  "title": "Client Components",
+  "version": "1.0.0",
+  "content": "# NextJS Interview Prep\n\n## Q1: Explain how Incremental Static Regeneration (ISR) handles stale-while-revalidate cache updates.\n\n### Standard Answer\nWhen a request is made for an ISR route after the revalidation duration has expired, the CDN serves the cached stale static page. Simultaneously, the server triggers an asynchronous background regeneration. Once compilation completes, the server writes the new static page to the cache. Subsequent requests receive the updated page.\n\n\n## Q2: How does the system handle concurrent throughput anomalies under Client Components?\n\n### Standard Answer\nThe system uses dynamic resource pools and queue-backoff throttles to maintain throughput boundaries, avoiding thread starvation.\n"
+}

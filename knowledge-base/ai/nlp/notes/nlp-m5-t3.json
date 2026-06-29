@@ -1,0 +1,36 @@
+{
+  "topic_id": "nlp-m5-t3",
+  "title": "Vector Databases & Search",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Medium",
+    "estimated_hours": 5,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Explain HNSW skip-list graph traversal mechanics.",
+    "Formulate Inverted File Product Quantization (IVF-PQ) memory compression steps."
+  ],
+  "content_sections": [
+    {
+      "title": "Hierarchical Navigable Small World (HNSW) Graphs",
+      "content": "To query high-dimensional embeddings efficiently, vector databases implement Approximate Nearest Neighbors (ANN) indices. \n\n**HNSW** is a multi-layer graph based on skip-lists. Top layers have sparse connections for fast coarse routing across large distances, while bottom layers have dense connections for fine-grained search. Traversing down the hierarchy achieves $\\mathcal{O}(\\log N)$ search complexity.",
+      "callouts": []
+    },
+    {
+      "title": "Inverted File Product Quantization (IVF-PQ) Compression",
+      "content": "Storing raw float embeddings requires significant memory. **IVF-PQ** optimizes this storage footprint:\n\n1.  **Inverted File (IVF):** Groups vectors into Voronoi cells using K-Means. During query retrieval, the search is restricted to the closest centroids, reducing the search space.\n2.  **Product Quantization (PQ):** Compresses high-dimensional vectors. It splits a $d$-dimensional vector into $m$ sub-vectors of dimension $d/m$. It clusters each sub-space independently using K-Means to build a codebook. Each sub-vector is then replaced by its nearest centroid index. This compresses a 1024-byte float vector to a small sequence of 8-bit cluster indices, reducing memory usage by 90% or more.",
+      "callouts": []
+    }
+  ],
+  "example_refs": [
+    "nlp-m5-t3-ex1"
+  ],
+  "diagram_refs": [],
+  "practice_refs": [
+    "nlp-m5-t3-prac1"
+  ],
+  "quiz_refs": [
+    "nlp-m5-t3-quiz"
+  ]
+}

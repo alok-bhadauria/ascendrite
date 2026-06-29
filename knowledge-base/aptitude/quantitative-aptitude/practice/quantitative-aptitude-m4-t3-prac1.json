@@ -1,0 +1,7 @@
+{
+  "topic_id": "quantitative-aptitude-m4-t3",
+  "asset_id": "quantitative-aptitude-m4-t3-prac1",
+  "title": "Probability Basics",
+  "language": "python",
+  "code": "def run_practice():\n    assert True\nif __name__ == '__main__':\n    run_practice()\n"
+}

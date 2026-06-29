@@ -1,0 +1,7 @@
+{
+  "topic_id": "oop-m2-t1",
+  "diagram_id": "oop-m2-t1-dia1",
+  "title": "Software Coupling & Cohesion Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Software Coupling & Cohesion\"]\n  Process --> End"
+}

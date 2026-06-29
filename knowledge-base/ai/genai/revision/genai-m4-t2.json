@@ -1,0 +1,6 @@
+{
+  "topic_id": "genai-m4-t2",
+  "title": "PPO Alignment Loop",
+  "version": "1.0.0",
+  "content": "# PPO Alignment Loop\n\n$$R_{\\text{step}} = r(x, y) - \\beta (\\log \\pi_\\theta(y_t \\mid c) - \\log \\pi_{\\text{ref}}(y_t \\mid c))$$\n"
+}

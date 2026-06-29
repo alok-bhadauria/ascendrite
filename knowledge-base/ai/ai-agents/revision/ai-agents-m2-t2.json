@@ -1,0 +1,6 @@
+{
+  "topic_id": "ai-agents-m2-t2",
+  "title": "Context Window Management",
+  "version": "1.0.0",
+  "content": "# Context Window Management\n\n*   **Summarization Loops:** Condensing historical message lists into a single summary block.\n*   **Context Budgets:** Allocating specific context spaces to system instructions, tools, and history.\n"
+}

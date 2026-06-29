@@ -1,0 +1,7 @@
+{
+  "topic_id": "java-m3-t5",
+  "diagram_id": "java-m3-t5-dia1",
+  "title": "Serialization Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Serialization\"]\n  Process --> End"
+}

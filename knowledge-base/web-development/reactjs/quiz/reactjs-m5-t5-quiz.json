@@ -1,0 +1,17 @@
+{
+  "quiz_id": "reactjs-m5-t5-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "What is the key optimization criteria for React Hydration Architecture?",
+      "options": [
+        "Minimizing complexity bounds.",
+        "Increasing CPU utilization.",
+        "Static heap allocation.",
+        "Syntax execution bypass."
+      ],
+      "correct_answer": "Minimizing complexity bounds.",
+      "explanation": "The primary goal in designing React Hydration Architecture is minimizing asymptotic and memory complexities."
+    }
+  ]
+}

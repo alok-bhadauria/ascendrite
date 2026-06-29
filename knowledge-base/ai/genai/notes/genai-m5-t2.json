@@ -1,0 +1,31 @@
+{
+  "topic_id": "genai-m5-t2",
+  "title": "PagedAttention & vLLM",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Medium",
+    "estimated_hours": 5,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Explain PagedAttention virtual memory block maps.",
+    "Formulate KV Cache block allocation equations."
+  ],
+  "content_sections": [
+    {
+      "title": "KV Cache Fragmentation and PagedAttention",
+      "content": "Traditional KV Cache allocation requires continuous memory blocks allocated for the maximum sequence length. This leads to severe memory fragmentation (wasting up to 60-80% of RAM). \n\n**PagedAttention** solves this by partitioning the KV Cache into fixed-size physical blocks, mapping them to virtual blocks using a page table. This eliminates fragmentation and allows KV caches to be shared across requests.",
+      "callouts": []
+    }
+  ],
+  "example_refs": [
+    "genai-m5-t2-ex1"
+  ],
+  "diagram_refs": [],
+  "practice_refs": [
+    "genai-m5-t2-prac1"
+  ],
+  "quiz_refs": [
+    "genai-m5-t2-quiz"
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "topic_id": "cn-m4-t5",
+  "diagram_id": "cn-m4-t5-dia1",
+  "title": "Content Delivery (CDN) Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Content Delivery (CDN)\"]\n  Process --> End"
+}

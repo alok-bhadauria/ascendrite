@@ -1,0 +1,31 @@
+{
+  "topic_id": "genai-m4-t2",
+  "title": "PPO Alignment Loop",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Medium",
+    "estimated_hours": 5,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Trace Proximal Policy Optimization (PPO) model update loops.",
+    "Formulate KL divergence penalty constraints."
+  ],
+  "content_sections": [
+    {
+      "title": "The RLHF PPO Alignment Objective",
+      "content": "In RLHF, we optimize the active policy $\\pi_\\theta$ using reinforcement learning. To prevent the policy from exploiting the reward model (reward hacking) and generating garbage outputs, we add a Kullback-Leibler (KL) divergence constraint penalty to the reward:\n\n$$R_{\\text{pen}}(\\mathbf{x}, \\mathbf{y}) = r_\\psi(\\mathbf{x}, \\mathbf{y}) - \\beta D_{KL}(\\pi_\\theta(\\mathbf{y} \\mid \\mathbf{x}) \\parallel \\pi_{ref}(\\mathbf{y} \\mid \\mathbf{x}))$$\n\nwhere $\\pi_{ref}$ is the frozen initial pre-trained model, and $\\beta$ is a hyperparameter scaling the penalty. The token-level KL penalty is computed as:\n\n$$D_{KL} = \\ln \\pi_\\theta(y_t \\mid \\mathbf{x}, y_{<t}) - \\ln \\pi_{ref}(y_t \\mid \\mathbf{x}, y_{<t})$$",
+      "callouts": []
+    }
+  ],
+  "example_refs": [
+    "genai-m4-t2-ex1"
+  ],
+  "diagram_refs": [],
+  "practice_refs": [
+    "genai-m4-t2-prac1"
+  ],
+  "quiz_refs": [
+    "genai-m4-t2-quiz"
+  ]
+}

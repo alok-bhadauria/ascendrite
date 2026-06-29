@@ -1,0 +1,7 @@
+{
+  "topic_id": "ai-agents-m3-t4",
+  "diagram_id": "ai-agents-m3-t4-dia1",
+  "title": "Human-in-the-Loop Integrations Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Human-in-the-Loop Integrations\"]\n  Process --> End"
+}

@@ -1,0 +1,7 @@
+{
+  "topic_id": "ai-agents-m2-t4",
+  "asset_id": "ai-agents-m2-t4-prac1",
+  "title": "Custom Tool Definitions",
+  "language": "python",
+  "code": "def get_tool_schema(name, desc, params):\n    return {\n        \"name\": name,\n        \"description\": desc,\n        \"parameters\": params\n    }\n\ndef run_practice():\n    schema = get_tool_schema('Calculator', 'Math tool', {'type': 'object'})\n    assert schema['name'] == 'Calculator'\n    assert schema['parameters']['type'] == 'object'\n    print('[PASS] Tool schema extraction validated.')\n\nif __name__ == '__main__':\n    run_practice()\n"
+}

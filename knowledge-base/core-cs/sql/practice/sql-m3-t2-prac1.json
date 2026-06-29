@@ -1,0 +1,7 @@
+{
+  "topic_id": "sql-m3-t2",
+  "asset_id": "sql-m3-t2-prac1",
+  "title": "Recursive CTE",
+  "language": "python",
+  "code": "def run_practice():\n    assert True\nif __name__ == '__main__':\n    run_practice()\n"
+}

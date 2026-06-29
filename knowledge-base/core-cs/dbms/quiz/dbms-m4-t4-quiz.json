@@ -1,0 +1,17 @@
+{
+  "quiz_id": "dbms-m4-t4-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which of the following describes a key bottleneck related to Join Execution Algorithms?",
+      "options": [
+        "Inefficient scaling of Nested Loop Joins, Block Nested Loop, Index Nested Loop.",
+        "Hardware is completely offline.",
+        "Lack of database files.",
+        "Syntax compilation errors."
+      ],
+      "correct_answer": "Inefficient scaling of Nested Loop Joins, Block Nested Loop, Index Nested Loop.",
+      "explanation": "The topic covers how Nested Loop Joins, Block Nested Loop, Index Nested Loop scales under concurrent workloads, which represents the primary bottlenecks."
+    }
+  ]
+}

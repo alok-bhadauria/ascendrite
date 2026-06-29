@@ -1,0 +1,7 @@
+{
+  "topic_id": "system-design-m5-t3",
+  "diagram_id": "system-design-m5-t3-dia1",
+  "title": "Case Study: Video Streaming Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Case Study: Video Streaming\"]\n  Process --> End"
+}

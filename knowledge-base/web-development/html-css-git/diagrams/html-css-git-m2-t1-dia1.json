@@ -1,0 +1,7 @@
+{
+  "topic_id": "html-css-git-m2-t1",
+  "diagram_id": "html-css-git-m2-t1-dia1",
+  "title": "CSS Specificity Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process CSS Specificity\"]\n  Process --> End"
+}

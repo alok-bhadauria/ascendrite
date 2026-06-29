@@ -1,0 +1,7 @@
+{
+  "topic_id": "os-m1-t3",
+  "diagram_id": "os-m1-t3-dia1",
+  "title": "System Calls Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process System Calls\"]\n  Process --> End"
+}

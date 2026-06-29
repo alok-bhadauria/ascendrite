@@ -1,0 +1,7 @@
+{
+  "topic_id": "sql-m5-t1",
+  "diagram_id": "sql-m5-t1-dia1",
+  "title": "Stored Procedures Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Stored Procedures\"]\n  Process --> End"
+}

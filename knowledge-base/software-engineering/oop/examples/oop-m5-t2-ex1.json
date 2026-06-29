@@ -1,0 +1,7 @@
+{
+  "topic_id": "oop-m5-t2",
+  "asset_id": "oop-m5-t2-ex1",
+  "title": "UML Modeling",
+  "language": "python",
+  "code": "if __name__ == '__main__':\n    print('Example code execution.')\n"
+}

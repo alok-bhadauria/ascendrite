@@ -1,0 +1,43 @@
+{
+  "topic_id": "ai-agents-m1-t2",
+  "title": "ReAct Reasoning Framework",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Medium",
+    "estimated_hours": 5,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Explain the ReAct (Reasoning + Acting) execution sequence.",
+    "Formulate Thought-Action-Observation regex parsing boundaries.",
+    "Define loop termination parameters to prevent infinite executions."
+  ],
+  "content_sections": [
+    {
+      "title": "The ReAct Execution Loop",
+      "content": "The **ReAct (Reasoning and Acting)** framework integrates reasoning token generations and action execution steps in a tight loop. For each iteration, the agent generates a structured trace:\n\n1.  **Thought:** The model analyzes the current goal and observations, planning its next action.\n2.  **Action:** The model selects a tool and outputs formatted arguments (e.g. `Action: Search[quantum physics]`).\n3.  **Observation:** The system executes the tool and appends the result to the prompt context, letting the model process the feedback in the next iteration.",
+      "callouts": [
+        {
+          "type": "Student Trap",
+          "title": "Parsing Ambiguities",
+          "content": "If the model outputs 'Thought' and 'Action' in a single turn, the inference engine must stop generation immediately after the 'Action' token. If it continues generating the 'Observation' itself, it will hallucinate tool outputs, breaking the loop integration."
+        }
+      ]
+    },
+    {
+      "title": "Infinite Loop Mitigations",
+      "content": "To prevent runaway costs and infinite execution loops (where the agent keeps executing the same failing action), systems enforce termination parameters:\n*   `max_iterations`: Hard limit on the number of loop iterations (typically 10-15).\n*   `timeout_seconds`: Hard wall-clock execution time limit.\n*   *Stop Sequences*: Stop generation immediately on `Observation:` tags to hand control back to the parser.",
+      "callouts": []
+    }
+  ],
+  "example_refs": [
+    "ai-agents-m1-t2-ex1"
+  ],
+  "diagram_refs": [],
+  "practice_refs": [
+    "ai-agents-m1-t2-prac1"
+  ],
+  "quiz_refs": [
+    "ai-agents-m1-t2-quiz"
+  ]
+}

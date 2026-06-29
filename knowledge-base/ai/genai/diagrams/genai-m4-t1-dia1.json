@@ -1,0 +1,7 @@
+{
+  "topic_id": "genai-m4-t1",
+  "diagram_id": "genai-m4-t1-dia1",
+  "title": "Reward Model Training Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Reward Model Training\"]\n  Process --> End"
+}

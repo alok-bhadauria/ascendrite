@@ -1,0 +1,17 @@
+{
+  "quiz_id": "nlp-m3-t4-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "What is the primary advantage of FastText over standard Word2Vec?",
+      "options": [
+        "It can generate semantic vector representations for unseen (OOV) words by aggregating subword n-gram embeddings.",
+        "It has a smaller dictionary size.",
+        "It uses a deep feedforward network.",
+        "It uses recurrent states."
+      ],
+      "correct_answer": "It can generate semantic vector representations for unseen (OOV) words by aggregating subword n-gram embeddings.",
+      "explanation": "Because it builds vectors from character-level chunks, FastText retains the ability to represent morphologically similar OOV tokens."
+    }
+  ]
+}

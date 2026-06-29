@@ -1,0 +1,7 @@
+{
+  "topic_id": "system-design-m2-t3",
+  "asset_id": "system-design-m2-t3-prac1",
+  "title": "Caching Patterns",
+  "language": "python",
+  "code": "def run_practice():\n    assert True\nif __name__ == '__main__':\n    run_practice()\n"
+}

@@ -1,0 +1,17 @@
+{
+  "quiz_id": "genai-m3-t3-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which vectors are modified in Prefix Tuning?",
+      "options": [
+        "Key and Value vectors in the attention computation.",
+        "Query vectors only.",
+        "Vocabulary indices.",
+        "Loss function scale factors."
+      ],
+      "correct_answer": "Key and Value vectors in the attention computation.",
+      "explanation": "Prefix tuning prepends learnable prefix vectors to the key (K) and value (V) matrices at every layer of the network."
+    }
+  ]
+}

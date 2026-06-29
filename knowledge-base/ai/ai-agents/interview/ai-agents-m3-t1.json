@@ -1,0 +1,6 @@
+{
+  "topic_id": "ai-agents-m3-t1",
+  "title": "LangGraph Architecture",
+  "version": "1.0.0",
+  "content": "# Interview Prep: LangGraph\n\n## Q1: How do state reducers prevent concurrent write conflicts in graph executions?\n\n### Standard Answer\nReducers define conflict resolution rules (e.g., list append, dictionary merge, or custom math overrides). When parallel nodes complete execution, their updates are processed sequentially by the reducer, maintaining state consistency.\n"
+}

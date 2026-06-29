@@ -1,0 +1,6 @@
+{
+  "topic_id": "genai-m5-t1",
+  "title": "Continuous Batching & Speculative Decoding",
+  "version": "1.0.0",
+  "content": "# Speculative Decoding\n\n*   **Core Principle:** Draft model generates candidate tokens; target model validates them in a single batch forward pass.\n*   **Acceptance Probability:** \n    \n    $$\\alpha = \\min\\left(1.0, \\frac{P_{\\text{target}}(x)}{P_{\\text{draft}}(x)}\\right)$$\n"
+}

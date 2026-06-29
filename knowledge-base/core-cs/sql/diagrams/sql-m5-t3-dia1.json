@@ -1,0 +1,7 @@
+{
+  "topic_id": "sql-m5-t3",
+  "diagram_id": "sql-m5-t3-dia1",
+  "title": "Transaction Control Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Transaction Control\"]\n  Process --> End"
+}

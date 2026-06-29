@@ -1,0 +1,6 @@
+{
+  "topic_id": "nlp-m5-t5",
+  "title": "Summarization & Translation Metrics",
+  "version": "1.0.0",
+  "content": "# Translation Metrics\n\n## 1. BLEU Equation\n$$\\text{BLEU} = \\text{BP} \\cdot \\exp\\left( \\sum_{n=1}^N w_n \\ln p_n \\right)$$\n\n## 2. Brevity Penalty (BP)\n$$\\text{BP} = \\exp(1 - r/c) \\quad (\\text{for } c \\le r)$$\n*   Penalizes short, high-precision candidate sentences.\n"
+}

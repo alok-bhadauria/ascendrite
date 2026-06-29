@@ -1,0 +1,17 @@
+{
+  "quiz_id": "system-design-m2-t3-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "What is the key optimization criteria for Caching Patterns?",
+      "options": [
+        "Minimizing complexity bounds.",
+        "Increasing CPU utilization.",
+        "Static heap allocation.",
+        "Syntax execution bypass."
+      ],
+      "correct_answer": "Minimizing complexity bounds.",
+      "explanation": "The primary goal in designing Caching Patterns is minimizing asymptotic and memory complexities."
+    }
+  ]
+}

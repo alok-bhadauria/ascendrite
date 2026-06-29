@@ -1,0 +1,7 @@
+{
+  "topic_id": "javascript-m4-t3",
+  "diagram_id": "javascript-m4-t3-dia1",
+  "title": "Event Delegation Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Event Delegation\"]\n  Process --> End"
+}

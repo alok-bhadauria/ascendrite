@@ -1,0 +1,17 @@
+{
+  "quiz_id": "genai-m5-t1-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "What is the primary constraint governing continuous batching schedules?",
+      "options": [
+        "Iteration-level (token-level) job insertion and deletion, preventing idle resource waits.",
+        "Static padding rules.",
+        "Removing positional embeddings.",
+        "The learning rate shape."
+      ],
+      "correct_answer": "Iteration-level (token-level) job insertion and deletion, preventing idle resource waits.",
+      "explanation": "Continuous batching schedules execution steps dynamically at each token step, bypassing block boundaries."
+    }
+  ]
+}

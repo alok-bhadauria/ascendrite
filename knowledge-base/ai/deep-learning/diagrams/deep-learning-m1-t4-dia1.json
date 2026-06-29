@@ -1,0 +1,7 @@
+{
+  "topic_id": "deep-learning-m1-t4",
+  "diagram_id": "deep-learning-m1-t4-dia1",
+  "title": "Backpropagation Calculus Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Backpropagation Calculus\"]\n  Process --> End"
+}

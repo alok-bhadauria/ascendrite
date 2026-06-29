@@ -1,0 +1,7 @@
+{
+  "topic_id": "genai-m5-t3",
+  "asset_id": "genai-m5-t3-prac1",
+  "title": "Post-Training Quantization",
+  "language": "python",
+  "code": "import numpy as np\n\ndef compute_awq_scale(weights, activation_magnitudes, alpha=0.5):\n    return weights * (activation_magnitudes ** alpha)\n\ndef run_practice():\n    w = np.array([1.0, 1.0])\n    m = np.array([4.0, 1.0])\n    scale = compute_awq_scale(w, m, 0.5)\n    assert np.allclose(scale, np.array([2.0, 1.0]))\n    print('[PASS] AWQ scaling calculations verified.')\n\nif __name__ == '__main__':\n    run_practice()\n"
+}

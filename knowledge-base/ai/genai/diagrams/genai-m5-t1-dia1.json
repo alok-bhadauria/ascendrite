@@ -1,0 +1,7 @@
+{
+  "topic_id": "genai-m5-t1",
+  "diagram_id": "genai-m5-t1-dia1",
+  "title": "Continuous Batching & Speculative Decoding Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Continuous Batching & Speculative Decoding\"]\n  Process --> End"
+}

@@ -1,0 +1,6 @@
+{
+  "topic_id": "ai-agents-m2-t4",
+  "title": "Custom Tool Definitions",
+  "version": "1.0.0",
+  "content": "# Interview Prep: Tool Definitions\n\n## Q1: Why are detailed parameter descriptions critical in tool definitions?\n\n### Standard Answer\nTool descriptions are injected directly into the model's system context. The model relies on these descriptions to select the correct tool and construct valid arguments. Vague descriptions lead to incorrect tool selections and invalid arguments.\n"
+}

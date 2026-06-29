@@ -1,0 +1,7 @@
+{
+  "topic_id": "reactjs-m2-t1",
+  "diagram_id": "reactjs-m2-t1-dia1",
+  "title": "React State Hook Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process React State Hook\"]\n  Process --> End"
+}

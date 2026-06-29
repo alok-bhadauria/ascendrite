@@ -1,0 +1,7 @@
+{
+  "topic_id": "javascript-m4-t5",
+  "asset_id": "javascript-m4-t5-ex1",
+  "title": "Browser Storage",
+  "language": "python",
+  "code": "if __name__ == '__main__':\n    print('Example code execution.')\n"
+}

@@ -1,0 +1,17 @@
+{
+  "quiz_id": "ai-agents-m5-t1-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "What is the standard transport protocol used by local processes to communicate in the Model Context Protocol?",
+      "options": [
+        "stdio (standard input/output pipes)",
+        "gRPC only",
+        "FTP",
+        "WebSockets only"
+      ],
+      "correct_answer": "stdio (standard input/output pipes)",
+      "explanation": "Local MCP integrations leverage stdio pipes for inter-process communication, avoiding network overhead."
+    }
+  ]
+}

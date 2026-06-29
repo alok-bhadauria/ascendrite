@@ -1,0 +1,7 @@
+{
+  "topic_id": "genai-m3-t3",
+  "diagram_id": "genai-m3-t3-dia1",
+  "title": "Prompt & Prefix Tuning Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Prompt & Prefix Tuning\"]\n  Process --> End"
+}

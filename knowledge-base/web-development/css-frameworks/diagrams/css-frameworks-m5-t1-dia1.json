@@ -1,0 +1,7 @@
+{
+  "topic_id": "css-frameworks-m5-t1",
+  "diagram_id": "css-frameworks-m5-t1-dia1",
+  "title": "CSS Bundling Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process CSS Bundling\"]\n  Process --> End"
+}

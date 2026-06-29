@@ -1,0 +1,7 @@
+{
+  "topic_id": "genai-m1-t2",
+  "asset_id": "genai-m1-t2-ex1",
+  "title": "Attention Optimizations",
+  "language": "python",
+  "code": "import numpy as np\n\ndef repeat_kv(kv_heads, n_rep):\n    return np.repeat(kv_heads, n_rep, axis=2)\n\nif __name__ == '__main__':\n    print('GQA repeat function ready.')\n"
+}

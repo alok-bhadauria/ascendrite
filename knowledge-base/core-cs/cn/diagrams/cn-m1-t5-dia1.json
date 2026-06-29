@@ -1,0 +1,7 @@
+{
+  "topic_id": "cn-m1-t5",
+  "diagram_id": "cn-m1-t5-dia1",
+  "title": "Ethernet Switches Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Ethernet Switches\"]\n  Process --> End"
+}

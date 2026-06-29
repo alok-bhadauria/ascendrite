@@ -1,0 +1,44 @@
+{
+  "topic_id": "javascript-m4-t2",
+  "title": "Event Propagation",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Hard",
+    "estimated_hours": 6,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Describe structural characteristics of Event Propagation.",
+    "Derive mathematical and programmatic bounds for Event bubbling phase, and capturing phase (trickling), target elements, stopPropagation calls."
+  ],
+  "content_sections": [
+    {
+      "title": "Event Propagation",
+      "content": "### V8 Engine Execution, Event Loop & Closures\nJavaScript is a single-threaded execution runtime running asynchronous loops.\n\n#### V8 Call Stack & Memory Heap\n*   **Call Stack:** Tracks execution frames synchronously.\n*   **Memory Heap:** Stores unstructured object allocations.\n*   *Hoisting:* During compilation, V8 moves function declarations and `var` variables to the top of their scope. Variables declared with `let`/`const` are hoisted but placed in the **Temporal Dead Zone (TDZ)**, triggering runtime reference errors if read before initialization.\n\n#### The Event Loop Queue\nTo execute asynchronous code, the browser runtime delegates blocking tasks to Web APIs and coordinates execution via queues:\n1.  **Call Stack:** Executes synchronous functions.\n2.  **Microtask Queue:** Processes high-priority callbacks (`Promise.then`, `MutationObserver`). The event loop flushes this queue completely before moving to the task queue.\n3.  **Macrotask Queue (Task Queue):** Processes low-priority callbacks (`setTimeout`, `setInterval`, network requests).\n\n#### Prototype Chains\nEvery JS object holds a private link (`__proto__`) to its prototype constructor. When reading a property, JS traverses the prototype chain until it locates the key or encounters `null`.\n\n### Depth Analysis: Event Propagation\nIn production configurations, we analyze how Event bubbling phase, and capturing phase (trickling), target elements, stopPropagation calls affects performance parameters. We evaluate memory layouts and consensus thresholds.",
+      "callouts": [
+        {
+          "type": "Student Trap",
+          "title": "Common Trap in Event Propagation",
+          "content": "A common mistake when analyzing Event Propagation is ignoring latency bounds and boundary edge cases during concurrent executions."
+        },
+        {
+          "type": "Engineering Note",
+          "title": "Production Scaling for Event Propagation",
+          "content": "Production servers implement strict resource isolation and cache alignments to prevent performance regressions when running Event Propagation loops."
+        }
+      ]
+    }
+  ],
+  "example_refs": [
+    "javascript-m4-t2-ex1"
+  ],
+  "diagram_refs": [
+    "javascript-m4-t2-dia1"
+  ],
+  "practice_refs": [
+    "javascript-m4-t2-prac1"
+  ],
+  "quiz_refs": [
+    "javascript-m4-t2-quiz"
+  ]
+}

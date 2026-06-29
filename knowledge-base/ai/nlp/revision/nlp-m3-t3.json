@@ -1,0 +1,6 @@
+{
+  "topic_id": "nlp-m3-t3",
+  "title": "Global Vectors (GloVe)",
+  "version": "1.0.0",
+  "content": "# GloVe Mechanics\n\n## 1. Objective Function\n$$J = \\sum_{i,j=1}^V f(X_{ij}) (\\mathbf{w}_i^{\\top} \\tilde{\\mathbf{w}}_j + b_i + \\tilde{b}_j - \\ln X_{ij})^2$$\n\n## 2. Weighting Function\n$$f(x) = (x / x_{\\max})^\\alpha \\quad (\\text{for } x < x_{\\max})$$\n*   Ensures that rare co-occurrences are not weighted heavily, and frequent co-occurrences do not dominate gradients.\n"
+}

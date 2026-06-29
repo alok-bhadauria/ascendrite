@@ -1,0 +1,6 @@
+{
+  "topic_id": "ai-agents-m5-t5",
+  "title": "Sandbox Execution Environments",
+  "version": "1.0.0",
+  "content": "# Interview Prep: Sandboxing\n\n## Q1: How do you prevent a malicious python script executed by an agent from consuming all host CPU resources?\n\n### Standard Answer\nWe configure container-level resource limits (e.g. Docker cgroups), restricting the sandbox process to a single CPU core and a fixed RAM allocation (e.g. 512MB), and enforce execution timeout bounds.\n"
+}

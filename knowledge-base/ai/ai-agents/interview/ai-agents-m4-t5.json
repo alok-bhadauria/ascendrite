@@ -1,0 +1,6 @@
+{
+  "topic_id": "ai-agents-m4-t5",
+  "title": "Scalability & Parallel Execution",
+  "version": "1.0.0",
+  "content": "# Interview Prep: Parallel Execution\n\n## Q1: How do you handle dependency resolution when scheduling parallel agent tasks?\n\n### Standard Answer\nWe construct a Directed Acyclic Graph (DAG) of task dependencies. The scheduler executes tasks in topological order, starting tasks only after all their prerequisite parent tasks have completed successfully.\n"
+}

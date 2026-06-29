@@ -1,0 +1,17 @@
+{
+  "quiz_id": "ai-agents-m1-t3-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "What is the primary advantage of the Plan-and-Solve approach over recursive task-queue planning?",
+      "options": [
+        "It reduces intermediate replanning token costs by establishing a structured execution blueprint upfront.",
+        "It is immune to logical errors.",
+        "It eliminates the need for tool declarations.",
+        "It uses less context memory."
+      ],
+      "correct_answer": "It reduces intermediate replanning token costs by establishing a structured execution blueprint upfront.",
+      "explanation": "Plan-and-Solve drafts a static list of actions first, avoiding the overhead of running planning prompts at every single loop iteration."
+    }
+  ]
+}

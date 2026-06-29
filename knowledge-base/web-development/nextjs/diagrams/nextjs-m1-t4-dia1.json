@@ -1,0 +1,7 @@
+{
+  "topic_id": "nextjs-m1-t4",
+  "diagram_id": "nextjs-m1-t4-dia1",
+  "title": "Data Fetching Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Data Fetching\"]\n  Process --> End"
+}

@@ -1,0 +1,17 @@
+{
+  "quiz_id": "dbms-m5-t4-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which of the following describes a key bottleneck related to Distributed Commit?",
+      "options": [
+        "Inefficient scaling of Two-Phase Commit (2PC) coordinator failures.",
+        "Hardware is completely offline.",
+        "Lack of database files.",
+        "Syntax compilation errors."
+      ],
+      "correct_answer": "Inefficient scaling of Two-Phase Commit (2PC) coordinator failures.",
+      "explanation": "The topic covers how Two-Phase Commit (2PC) coordinator failures scales under concurrent workloads, which represents the primary bottlenecks."
+    }
+  ]
+}

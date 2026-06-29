@@ -1,0 +1,7 @@
+{
+  "topic_id": "typescript-m3-t5",
+  "diagram_id": "typescript-m3-t5-dia1",
+  "title": "TS Decorators Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process TS Decorators\"]\n  Process --> End"
+}

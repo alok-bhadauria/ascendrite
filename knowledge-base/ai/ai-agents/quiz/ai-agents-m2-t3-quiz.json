@@ -1,0 +1,17 @@
+{
+  "quiz_id": "ai-agents-m2-t3-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "How do agents retrieve episodic memories from long-term storage?",
+      "options": [
+        "By performing a vector similarity search on the active query against the memory database.",
+        "By scanning database tables sequentially.",
+        "By reloading the base model weights.",
+        "By applying regex matching only."
+      ],
+      "correct_answer": "By performing a vector similarity search on the active query against the memory database.",
+      "explanation": "Episodic memories are retrieved by converting the active query to an embedding and searching a vector database for similar past observations."
+    }
+  ]
+}

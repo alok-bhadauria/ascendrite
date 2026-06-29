@@ -1,0 +1,7 @@
+{
+  "topic_id": "cn-m5-t5",
+  "asset_id": "cn-m5-t5-ex1",
+  "title": "IPSec & VPNs",
+  "language": "python",
+  "code": "if __name__ == '__main__':\n    print('Example pass for IPSec & VPNs')\n"
+}

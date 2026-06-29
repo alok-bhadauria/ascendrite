@@ -1,0 +1,7 @@
+{
+  "topic_id": "spring-boot-m5-t3",
+  "diagram_id": "spring-boot-m5-t3-dia1",
+  "title": "Configuration & Logging Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Configuration & Logging\"]\n  Process --> End"
+}

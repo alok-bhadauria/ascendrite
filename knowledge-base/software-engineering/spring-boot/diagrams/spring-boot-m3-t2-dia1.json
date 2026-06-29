@@ -1,0 +1,7 @@
+{
+  "topic_id": "spring-boot-m3-t2",
+  "diagram_id": "spring-boot-m3-t2-dia1",
+  "title": "Entity Mapping Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Entity Mapping\"]\n  Process --> End"
+}

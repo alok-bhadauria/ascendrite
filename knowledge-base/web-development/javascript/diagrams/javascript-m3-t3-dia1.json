@@ -1,0 +1,7 @@
+{
+  "topic_id": "javascript-m3-t3",
+  "diagram_id": "javascript-m3-t3-dia1",
+  "title": "Async/Await Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Async/Await\"]\n  Process --> End"
+}

@@ -1,0 +1,17 @@
+{
+  "quiz_id": "cn-m2-t2-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which of the following describes a key bottleneck related to IP Subnetting?",
+      "options": [
+        "Inefficient scaling of Classless Inter-Domain Routing (CIDR) subnet masks calculations.",
+        "Hardware is completely offline.",
+        "Lack of database files.",
+        "Syntax compilation errors."
+      ],
+      "correct_answer": "Inefficient scaling of Classless Inter-Domain Routing (CIDR) subnet masks calculations.",
+      "explanation": "The topic covers how Classless Inter-Domain Routing (CIDR) subnet masks calculations scales under concurrent workloads, which represents the primary bottlenecks."
+    }
+  ]
+}

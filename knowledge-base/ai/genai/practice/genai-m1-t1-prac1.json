@@ -1,0 +1,7 @@
+{
+  "topic_id": "genai-m1-t1",
+  "asset_id": "genai-m1-t1-prac1",
+  "title": "Generative Model Taxonomies",
+  "language": "python",
+  "code": "import numpy as np\n\ndef rmsnorm(x, g, eps=1e-6):\n    rms = np.sqrt(np.mean(x**2, axis=-1, keepdims=True) + eps)\n    return (x / rms) * g\n\ndef run_practice():\n    x = np.array([[1.0, 1.0]])\n    g = np.array([2.0, 2.0])\n    out = rmsnorm(x, g)\n    assert np.allclose(out, np.array([[2.0, 2.0]]))\n    print('[PASS] RMSNorm checks completed.')\n\nif __name__ == '__main__':\n    run_practice()\n"
+}

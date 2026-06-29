@@ -1,0 +1,7 @@
+{
+  "topic_id": "typescript-m1-t4",
+  "diagram_id": "typescript-m1-t4-dia1",
+  "title": "Union & Intersection Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Union & Intersection\"]\n  Process --> End"
+}

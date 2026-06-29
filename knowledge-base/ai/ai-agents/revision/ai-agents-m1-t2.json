@@ -1,0 +1,6 @@
+{
+  "topic_id": "ai-agents-m1-t2",
+  "title": "ReAct Reasoning Framework",
+  "version": "1.0.0",
+  "content": "# ReAct Reasoning Framework\n\n## 1. Execution Sequence\n`Thought` $\\to$ `Action` $\\to$ `Observation` $\\to$ `Thought` ...\n\n## 2. Termination Safeguards\n*   Enforce `max_iterations` limits.\n*   Register `Observation:` as a hard stop sequence during model generation.\n"
+}

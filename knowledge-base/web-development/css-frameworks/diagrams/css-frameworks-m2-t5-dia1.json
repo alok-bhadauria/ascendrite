@@ -1,0 +1,7 @@
+{
+  "topic_id": "css-frameworks-m2-t5",
+  "diagram_id": "css-frameworks-m2-t5-dia1",
+  "title": "Transitions & Animations Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Transitions & Animations\"]\n  Process --> End"
+}

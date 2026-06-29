@@ -1,0 +1,17 @@
+{
+  "quiz_id": "os-m2-t5-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which of the following describes a key bottleneck related to Deadlock Mitigation?",
+      "options": [
+        "Inefficient scaling of Banker's Algorithm verification logic.",
+        "Hardware is completely offline.",
+        "Lack of database files.",
+        "Syntax compilation errors."
+      ],
+      "correct_answer": "Inefficient scaling of Banker's Algorithm verification logic.",
+      "explanation": "The topic covers how Banker's Algorithm verification logic scales under concurrent workloads, which represents the primary bottlenecks."
+    }
+  ]
+}

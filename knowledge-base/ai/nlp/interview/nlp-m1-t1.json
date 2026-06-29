@@ -1,0 +1,6 @@
+{
+  "topic_id": "nlp-m1-t1",
+  "title": "Text Corpora & Normalization",
+  "version": "1.0.0",
+  "content": "# Interview Prep: Preprocessing & Normalization\n\n## Q1: Prove mathematically how to estimate the normalization constant C in Zipf's law for a vocabulary of size V.\n\n### Standard Answer\nUnder Zipf's law with exponent $s=1$, the frequency of a word at rank $r$ is $f(r) = \\frac{C}{r}$. The sum of frequencies of all words in the vocabulary must equal the total number of tokens $N$ in the corpus:\n\n$$\\sum_{r=1}^V f(r) = \\sum_{r=1}^V \\frac{C}{r} = C \\sum_{r=1}^V \\frac{1}{r} = N$$\n\nThe term $\\sum_{r=1}^V \\frac{1}{r}$ is the harmonic number $H_V$, which can be approximated as $\\ln V + \\gamma$ (where $\\gamma \\approx 0.5772$ is the Euler-Mascheroni constant). Thus, we can estimate $C$ as:\n\n$$C = \\frac{N}{H_V} \\approx \\frac{N}{\\ln V + \\gamma}$$\n\n|INTERVIEW TRAP: Zipfian Tails and Sparsity For a large vocabulary, Zipf's law predicts that words with rank $r > V/2$ will have theoretical frequencies of less than 1. This math reflects the reality of natural language corpora: a large fraction of the vocabulary appears exactly once (hapax legomena). Statistical models that do not account for this sparsity will suffer from severe variance issues.|\n|---|\n"
+}

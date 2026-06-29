@@ -1,0 +1,25 @@
+{
+  "subject_id": "sql",
+  "name": "SQL",
+  "category": "core-cs",
+  "difficulty": "Medium",
+  "estimated_learning_hours": 60,
+  "prerequisites": [
+    "Basic DBMS concepts"
+  ],
+  "tags": [
+    "SQL",
+    "Query Processing",
+    "Window Functions",
+    "Explain Plans",
+    "Prepared Statements"
+  ],
+  "subject_theme_colors": {
+    "primary": "#059669",
+    "secondary": "#34D399",
+    "accent": "#F59E0B",
+    "neutral": "#1F2937"
+  },
+  "version": "1.0.0",
+  "last_updated": "2026-06-29"
+}

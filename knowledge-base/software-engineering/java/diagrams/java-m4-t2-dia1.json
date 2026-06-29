@@ -1,0 +1,7 @@
+{
+  "topic_id": "java-m4-t2",
+  "diagram_id": "java-m4-t2-dia1",
+  "title": "Functional Interfaces Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Functional Interfaces\"]\n  Process --> End"
+}

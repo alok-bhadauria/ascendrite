@@ -1,0 +1,6 @@
+{
+  "topic_id": "reactjs-m2-t3",
+  "title": "Hooks Closures",
+  "version": "1.0.0",
+  "content": "# ReactJS Interview Prep\n\n## Q1: Why does using index counters as key props in dynamic lists cause state mapping bugs?\n\n### Standard Answer\nReact uses key props to track component instances across renders. If you use index keys (`key={index}`) and insert or delete elements, the indices of subsequent elements shift. React maps the existing component instance state to the new matching index rather than the logical item instance, causing input field resets and state corruption bugs. Always use stable, unique identifiers.\n\n\n## Q2: How does the system handle concurrent throughput anomalies under Hooks Closures?\n\n### Standard Answer\nThe system uses dynamic resource pools and queue-backoff throttles to maintain throughput boundaries, avoiding thread starvation.\n"
+}

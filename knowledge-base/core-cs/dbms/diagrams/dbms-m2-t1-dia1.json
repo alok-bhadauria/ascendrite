@@ -1,0 +1,7 @@
+{
+  "topic_id": "dbms-m2-t1",
+  "diagram_id": "dbms-m2-t1-dia1",
+  "title": "Transaction Concepts Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Transaction Concepts\"]\n  Process --> End"
+}

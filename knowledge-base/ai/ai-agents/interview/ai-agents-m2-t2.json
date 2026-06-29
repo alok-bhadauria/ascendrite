@@ -1,0 +1,6 @@
+{
+  "topic_id": "ai-agents-m2-t2",
+  "title": "Context Window Management",
+  "version": "1.0.0",
+  "content": "# Interview Prep: Context Management\n\n## Q1: How do we prevent token count tracking errors in production agent pipelines?\n\n### Standard Answer\nProduction systems must use exact tokenizer calculations (e.g. tiktoken for GPT models) rather than character heuristics. If token counts are underestimated, the prompt will exceed the model's hard limits, triggering API errors and crashing the loop.\n"
+}

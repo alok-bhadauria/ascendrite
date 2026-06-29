@@ -1,0 +1,6 @@
+{
+  "topic_id": "ai-agents-m1-t2",
+  "title": "ReAct Reasoning Framework",
+  "version": "1.0.0",
+  "content": "# Interview Prep: ReAct Framework\n\n## Q1: Why do we force the LLM to write a 'Thought' block before outputting an 'Action' block in ReAct loops?\n\n### Standard Answer\nWriting a 'Thought' block forces the model to allocate computation steps (tokens) to reasoning before selecting an action. Because LLMs are autoregressive, generating the thought tokens builds a contextual path that guides the model to select a more appropriate tool and construct valid arguments, reducing reasoning errors.\n"
+}

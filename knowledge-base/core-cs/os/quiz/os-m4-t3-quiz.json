@@ -1,0 +1,17 @@
+{
+  "quiz_id": "os-m4-t3-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which of the following describes a key bottleneck related to Synchronization Primitives?",
+      "options": [
+        "Inefficient scaling of Semaphores (counting/binary), Mutexes, Spinlocks, and condition variables.",
+        "Hardware is completely offline.",
+        "Lack of database files.",
+        "Syntax compilation errors."
+      ],
+      "correct_answer": "Inefficient scaling of Semaphores (counting/binary), Mutexes, Spinlocks, and condition variables.",
+      "explanation": "The topic covers how Semaphores (counting/binary), Mutexes, Spinlocks, and condition variables scales under concurrent workloads, which represents the primary bottlenecks."
+    }
+  ]
+}

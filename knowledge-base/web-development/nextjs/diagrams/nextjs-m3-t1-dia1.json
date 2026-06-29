@@ -1,0 +1,7 @@
+{
+  "topic_id": "nextjs-m3-t1",
+  "diagram_id": "nextjs-m3-t1-dia1",
+  "title": "Server Actions Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Server Actions\"]\n  Process --> End"
+}

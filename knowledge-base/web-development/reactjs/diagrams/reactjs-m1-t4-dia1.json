@@ -1,0 +1,7 @@
+{
+  "topic_id": "reactjs-m1-t4",
+  "diagram_id": "reactjs-m1-t4-dia1",
+  "title": "Virtual DOM vs Real DOM Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Virtual DOM vs Real DOM\"]\n  Process --> End"
+}

@@ -1,0 +1,7 @@
+{
+  "topic_id": "html-css-git-m3-t2",
+  "diagram_id": "html-css-git-m3-t2-dia1",
+  "title": "CSS Custom Properties Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process CSS Custom Properties\"]\n  Process --> End"
+}

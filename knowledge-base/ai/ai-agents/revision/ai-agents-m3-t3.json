@@ -1,0 +1,6 @@
+{
+  "topic_id": "ai-agents-m3-t3",
+  "title": "Persistence & State Rewinding",
+  "version": "1.0.0",
+  "content": "# Persistence & Checkpointing\n\n*   **Thread Checkpointing:** Saving state snapshots to a database at each execution step.\n*   **Time-Travel Debugging:** Rolling back state to a past checkpoint ID to inspect or fork execution paths.\n"
+}

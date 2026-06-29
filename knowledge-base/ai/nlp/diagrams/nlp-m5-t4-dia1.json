@@ -1,0 +1,7 @@
+{
+  "topic_id": "nlp-m5-t4",
+  "diagram_id": "nlp-m5-t4-dia1",
+  "title": "Hybrid Search Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Hybrid Search\"]\n  Process --> End"
+}

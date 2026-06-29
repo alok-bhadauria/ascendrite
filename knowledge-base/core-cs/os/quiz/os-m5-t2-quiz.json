@@ -1,0 +1,17 @@
+{
+  "quiz_id": "os-m5-t2-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which of the following describes a key bottleneck related to File System Layouts?",
+      "options": [
+        "Inefficient scaling of Inodes structures.",
+        "Hardware is completely offline.",
+        "Lack of database files.",
+        "Syntax compilation errors."
+      ],
+      "correct_answer": "Inefficient scaling of Inodes structures.",
+      "explanation": "The topic covers how Inodes structures scales under concurrent workloads, which represents the primary bottlenecks."
+    }
+  ]
+}

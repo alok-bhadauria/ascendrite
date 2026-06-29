@@ -1,0 +1,7 @@
+{
+  "topic_id": "javascript-m5-t3",
+  "diagram_id": "javascript-m5-t3-dia1",
+  "title": "Errors Handling Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Errors Handling\"]\n  Process --> End"
+}

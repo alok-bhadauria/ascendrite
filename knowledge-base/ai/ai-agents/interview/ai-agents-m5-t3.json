@@ -1,0 +1,6 @@
+{
+  "topic_id": "ai-agents-m5-t3",
+  "title": "Agent Evaluation Frameworks",
+  "version": "1.0.0",
+  "content": "# Interview Prep: Agent Evals\n\n## Q1: Why are standard output-matching tests insufficient for evaluating autonomous agents?\n\n### Standard Answer\nAgents can arrive at the correct output via highly inefficient or risky paths (e.g. executing redundant database scans or trying to access restricted files). Trajectory evaluation audits the intermediate steps to ensure safety, efficiency, and compliance.\n"
+}

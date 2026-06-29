@@ -1,0 +1,7 @@
+{
+  "topic_id": "css-frameworks-m2-t3",
+  "asset_id": "css-frameworks-m2-t3-ex1",
+  "title": "Dark Mode Config",
+  "language": "python",
+  "code": "if __name__ == '__main__':\n    print('Example code execution.')\n"
+}

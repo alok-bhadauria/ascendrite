@@ -1,0 +1,7 @@
+{
+  "topic_id": "typescript-m4-t4",
+  "diagram_id": "typescript-m4-t4-dia1",
+  "title": "Utility Types Creation Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Utility Types Creation\"]\n  Process --> End"
+}

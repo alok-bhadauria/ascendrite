@@ -1,0 +1,7 @@
+{
+  "topic_id": "nextjs-m3-t3",
+  "diagram_id": "nextjs-m3-t3-dia1",
+  "title": "Action Security Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Action Security\"]\n  Process --> End"
+}

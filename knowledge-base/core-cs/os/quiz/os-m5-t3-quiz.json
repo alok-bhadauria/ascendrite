@@ -1,0 +1,17 @@
+{
+  "quiz_id": "os-m5-t3-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which of the following describes a key bottleneck related to Journaling?",
+      "options": [
+        "Inefficient scaling of Write-ahead file commits logging.",
+        "Hardware is completely offline.",
+        "Lack of database files.",
+        "Syntax compilation errors."
+      ],
+      "correct_answer": "Inefficient scaling of Write-ahead file commits logging.",
+      "explanation": "The topic covers how Write-ahead file commits logging scales under concurrent workloads, which represents the primary bottlenecks."
+    }
+  ]
+}

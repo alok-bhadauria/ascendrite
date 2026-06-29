@@ -1,0 +1,7 @@
+{
+  "topic_id": "typescript-m3-t4",
+  "diagram_id": "typescript-m3-t4-dia1",
+  "title": "Type Aliases vs Interfaces Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Type Aliases vs Interfaces\"]\n  Process --> End"
+}

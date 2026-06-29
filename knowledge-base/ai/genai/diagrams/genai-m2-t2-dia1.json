@@ -1,0 +1,7 @@
+{
+  "topic_id": "genai-m2-t2",
+  "diagram_id": "genai-m2-t2-dia1",
+  "title": "Chain of Thought Prompting Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Chain of Thought Prompting\"]\n  Process --> End"
+}

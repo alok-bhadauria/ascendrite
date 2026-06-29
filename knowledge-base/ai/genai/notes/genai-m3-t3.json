@@ -1,0 +1,31 @@
+{
+  "topic_id": "genai-m3-t3",
+  "title": "Prompt & Prefix Tuning",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Medium",
+    "estimated_hours": 5,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Compare virtual token prefix insertion with LoRA.",
+    "Formulate attention matrix modifications."
+  ],
+  "content_sections": [
+    {
+      "title": "Prompt Tuning and Prefix Tuning",
+      "content": "Prompt Tuning and Prefix Tuning are early parameter-efficient fine-tuning architectures:\n\n*   **Prompt Tuning:** Prepends $K$ trainable continuous embedding vectors ('virtual tokens') directly to the input sequence embeddings: $\\mathbf{X}_{tuned} = [\\mathbf{P}_{embed}; \\mathbf{X}]$. Only these prefix tokens are updated during training. While simple, prompt tuning struggles to converge for models under 10 billion parameters.\n*   **Prefix Tuning:** Prepends trainable key ($\\mathbf{P}_K$) and value ($\\mathbf{P}_V$) activations to the attention matrices at every transformer layer, modifying the attention calculation directly:\n\n$$\\text{Attention}(\\mathbf{Q}, [\\mathbf{P}_K; \\mathbf{K}], [\\mathbf{P}_V; \\mathbf{V}])$$\n\nThis provides more stable training convergence across various model scales.",
+      "callouts": []
+    }
+  ],
+  "example_refs": [
+    "genai-m3-t3-ex1"
+  ],
+  "diagram_refs": [],
+  "practice_refs": [
+    "genai-m3-t3-prac1"
+  ],
+  "quiz_refs": [
+    "genai-m3-t3-quiz"
+  ]
+}

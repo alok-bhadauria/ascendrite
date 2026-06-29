@@ -1,0 +1,7 @@
+{
+  "topic_id": "nlp-m1-t1",
+  "diagram_id": "nlp-m1-t1-dia1",
+  "title": "Text Corpora & Normalization Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Text Corpora & Normalization\"]\n  Process --> End"
+}

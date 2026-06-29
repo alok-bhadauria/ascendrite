@@ -1,0 +1,7 @@
+{
+  "topic_id": "dbms-m4-t1",
+  "diagram_id": "dbms-m4-t1-dia1",
+  "title": "Query Parsing & Rewriting Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Query Parsing & Rewriting\"]\n  Process --> End"
+}

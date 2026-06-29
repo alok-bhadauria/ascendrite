@@ -1,0 +1,17 @@
+{
+  "quiz_id": "ai-agents-m1-t2-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "What is the primary risk of omitting stop sequences for the 'Observation:' tag in a ReAct loop?",
+      "options": [
+        "The model will hallucinate the tool's observation itself instead of allowing the system to run the actual tool.",
+        "The model will output binary codes.",
+        "The context window will shrink.",
+        "The learning rate will decay."
+      ],
+      "correct_answer": "The model will hallucinate the tool's observation itself instead of allowing the system to run the actual tool.",
+      "explanation": "If the model does not stop generating at the 'Observation' boundary, it will write its own imaginary observation data, bypassing the external tool."
+    }
+  ]
+}

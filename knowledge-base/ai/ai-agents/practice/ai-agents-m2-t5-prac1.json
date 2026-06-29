@@ -1,0 +1,7 @@
+{
+  "topic_id": "ai-agents-m2-t5",
+  "asset_id": "ai-agents-m2-t5-prac1",
+  "title": "Error Handling & Recovery Loops",
+  "language": "python",
+  "code": "def safe_tool_execute(tool_func, args):\n    try:\n        return tool_func(**args)\n    except Exception as e:\n        return f\"Error during execution: {str(e)}\"\n\ndef run_practice():\n    def failing_tool():\n        raise ValueError(\"Connection failed\")\n    res = safe_tool_execute(failing_tool, {})\n    assert \"ValueError\" in res or \"Connection\" in res\n    print('[PASS] Exception capture safety checks validated.')\n\nif __name__ == '__main__':\n    run_practice()\n"
+}

@@ -1,0 +1,6 @@
+{
+  "topic_id": "oop-m4-t3",
+  "title": "Behavioral - Observer",
+  "version": "1.0.0",
+  "content": "# OOP Revision\n\n*   **vTables:** Array tables mapping method signatures to memory addresses for dynamic dispatch.\n*   **Composition vs Inheritance:** Prefer composition to avoid base class coupling.\n*   **SOLID:** Single responsibility, Open/closed, Liskov substitution, Interface segregation, Dependency inversion.\n\n\n*   **Behavioral - Observer Checklist:** Verify input ranges and clear caches.\n"
+}

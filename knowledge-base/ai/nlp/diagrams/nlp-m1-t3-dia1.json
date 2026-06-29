@@ -1,0 +1,7 @@
+{
+  "topic_id": "nlp-m1-t3",
+  "diagram_id": "nlp-m1-t3-dia1",
+  "title": "POS Tagging & Named Entity Recognition Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process POS Tagging & Named Entity Recognition\"]\n  Process --> End"
+}

@@ -1,0 +1,7 @@
+{
+  "topic_id": "ai-agents-m2-t3",
+  "asset_id": "ai-agents-m2-t3-ex1",
+  "title": "Episodic & Semantic Long-Term Memory",
+  "language": "python",
+  "code": "def retrieve_long_term_memories(query, vector_db, k=3):\n    # Mock retrieval helper\n    return vector_db.get('docs', [])[:k]\n\nif __name__ == '__main__':\n    print('Long-term memory module configured.')\n"
+}

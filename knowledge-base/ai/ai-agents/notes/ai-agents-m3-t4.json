@@ -1,0 +1,31 @@
+{
+  "topic_id": "ai-agents-m3-t4",
+  "title": "Human-in-the-Loop Integrations",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Medium",
+    "estimated_hours": 5,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Explain execution interruption mechanics and manual payload injections.",
+    "Formulate approval checkpoint handlers."
+  ],
+  "content_sections": [
+    {
+      "title": "Execution Interruption and Approval Checkpoints",
+      "content": "For safety-critical actions (e.g. sending emails or executing financial transfers), agents must not operate autonomously. We insert **human-in-the-loop checkpoints** that pause the execution thread before executing specific nodes. The system awaits manual review, resuming execution only after receiving approval or modification payloads.",
+      "callouts": []
+    }
+  ],
+  "example_refs": [
+    "ai-agents-m3-t4-ex1"
+  ],
+  "diagram_refs": [],
+  "practice_refs": [
+    "ai-agents-m3-t4-prac1"
+  ],
+  "quiz_refs": [
+    "ai-agents-m3-t4-quiz"
+  ]
+}

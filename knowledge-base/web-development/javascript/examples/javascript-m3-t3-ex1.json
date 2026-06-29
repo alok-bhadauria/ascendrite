@@ -1,0 +1,7 @@
+{
+  "topic_id": "javascript-m3-t3",
+  "asset_id": "javascript-m3-t3-ex1",
+  "title": "Async/Await",
+  "language": "python",
+  "code": "if __name__ == '__main__':\n    print('Example code execution.')\n"
+}

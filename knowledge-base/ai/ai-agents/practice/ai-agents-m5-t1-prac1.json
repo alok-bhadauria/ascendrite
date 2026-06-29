@@ -1,0 +1,7 @@
+{
+  "topic_id": "ai-agents-m5-t1",
+  "asset_id": "ai-agents-m5-t1-prac1",
+  "title": "MCP Architecture",
+  "language": "python",
+  "code": "def make_jsonrpc_request(method, params, request_id):\n    return {\n        \"jsonrpc\": \"2.0\",\n        \"method\": method,\n        \"params\": params,\n        \"id\": request_id\n    }\n\ndef run_practice():\n    req = make_jsonrpc_request('tools/list', {}, 1)\n    assert req['jsonrpc'] == '2.0'\n    assert req['method'] == 'tools/list'\n    assert req['id'] == 1\n    print('[PASS] JSON-RPC request structures verified.')\n\nif __name__ == '__main__':\n    run_practice()\n"
+}

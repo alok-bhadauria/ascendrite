@@ -1,0 +1,17 @@
+{
+  "quiz_id": "genai-m5-t2-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "What is the primary memory waste category resolved by PagedAttention?",
+      "options": [
+        "Internal and external physical block memory fragmentation.",
+        "Embedding matrix footprint size.",
+        "The gradient scaling factor.",
+        "Causal masking matrices."
+      ],
+      "correct_answer": "Internal and external physical block memory fragmentation.",
+      "explanation": "By breaking cache allocation into small, non-contiguous blocks, PagedAttention eliminates the need for continuous allocation."
+    }
+  ]
+}

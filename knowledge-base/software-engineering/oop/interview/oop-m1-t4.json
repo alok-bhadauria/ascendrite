@@ -1,0 +1,6 @@
+{
+  "topic_id": "oop-m1-t4",
+  "title": "Inheritance & Polymorphism",
+  "version": "1.0.0",
+  "content": "# OOP Interview Prep\n\n## Q1: Explain Liskov Substitution Principle (LSP) and show how violating it breaks client applications.\n\n### Standard Answer\nLSP states that objects of a superclass should be replaceable with objects of a subclass without affecting application correctness. If a subclass overrides a base class method to throw `UnsupportedOperationException`, it violates LSP. The client, expecting the base class behavior, will crash at runtime because of the unexpected exception.\n\n\n## Q2: How does the system handle concurrent throughput anomalies under Inheritance & Polymorphism?\n\n### Standard Answer\nThe system uses dynamic resource pools and queue-backoff throttles to maintain throughput boundaries, avoiding thread starvation.\n"
+}

@@ -1,0 +1,7 @@
+{
+  "topic_id": "java-m5-t3",
+  "diagram_id": "java-m5-t3-dia1",
+  "title": "Synchronization & Locks Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Synchronization & Locks\"]\n  Process --> End"
+}

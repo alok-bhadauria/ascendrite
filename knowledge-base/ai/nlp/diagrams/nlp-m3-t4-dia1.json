@@ -1,0 +1,7 @@
+{
+  "topic_id": "nlp-m3-t4",
+  "diagram_id": "nlp-m3-t4-dia1",
+  "title": "FastText Subword Embeddings Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process FastText Subword Embeddings\"]\n  Process --> End"
+}

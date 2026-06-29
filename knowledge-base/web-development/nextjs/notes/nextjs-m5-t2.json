@@ -1,0 +1,44 @@
+{
+  "topic_id": "nextjs-m5-t2",
+  "title": "Script & Fonts",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Hard",
+    "estimated_hours": 6,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Describe structural characteristics of Script & Fonts.",
+    "Derive mathematical and programmatic bounds for Font optimizations (next/font local, google), script loading strategies (beforeInteractive, lazy)."
+  ],
+  "content_sections": [
+    {
+      "title": "Script & Fonts",
+      "content": "### App Router Routing, Rendering & Caching\nNext.js structures rendering patterns using server and client component boundaries.\n\n#### RSC vs. Client Components\n*   **React Server Components (RSC):** Render strictly on the server. Do not ship JavaScript code to the client. Can fetch database rows directly.\n*   **Client Components (`'use client'`):** Render on the server during build and hydrate in the browser. Required for interactivity hooks.\n*   *Serialization:* RSC communicates with Client Components using a serializable JSON-like payload representation, preventing passing function callbacks across boundaries.\n\n#### Next.js 15 Caching layers\n1.  **Request Deduplication:** Caches identical `GET` fetch requests within a single render tree.\n2.  **Data Cache:** Persists fetched data across server requests. Invalidated using tags or paths.\n3.  **Full Route Cache:** Stores compiled HTML and RSC payloads for static pages at build time.\n4.  **Router Cache:** Client-side browser cache caching visited route segments during user sessions.\n\n#### Rendering Models\n*   **ISR:** Background regeneration of static pages using stale-while-revalidate caches.\n*   **PPR:** Streams page layouts: serves the static shell instantly from cache while dynamic blocks run in parallel.\n\n### Depth Analysis: Script & Fonts\nIn production configurations, we analyze how Font optimizations (next/font local, google), script loading strategies (beforeInteractive, lazy) affects performance parameters. We evaluate memory layouts and consensus thresholds.",
+      "callouts": [
+        {
+          "type": "Student Trap",
+          "title": "Common Trap in Script & Fonts",
+          "content": "A common mistake when analyzing Script & Fonts is ignoring latency bounds and boundary edge cases during concurrent executions."
+        },
+        {
+          "type": "Engineering Note",
+          "title": "Production Scaling for Script & Fonts",
+          "content": "Production servers implement strict resource isolation and cache alignments to prevent performance regressions when running Script & Fonts loops."
+        }
+      ]
+    }
+  ],
+  "example_refs": [
+    "nextjs-m5-t2-ex1"
+  ],
+  "diagram_refs": [
+    "nextjs-m5-t2-dia1"
+  ],
+  "practice_refs": [
+    "nextjs-m5-t2-prac1"
+  ],
+  "quiz_refs": [
+    "nextjs-m5-t2-quiz"
+  ]
+}

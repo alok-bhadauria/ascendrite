@@ -1,0 +1,7 @@
+{
+  "topic_id": "os-m5-t2",
+  "diagram_id": "os-m5-t2-dia1",
+  "title": "File System Layouts Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process File System Layouts\"]\n  Process --> End"
+}

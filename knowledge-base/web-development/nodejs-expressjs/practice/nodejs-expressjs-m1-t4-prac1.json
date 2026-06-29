@@ -1,0 +1,7 @@
+{
+  "topic_id": "nodejs-expressjs-m1-t4",
+  "asset_id": "nodejs-expressjs-m1-t4-prac1",
+  "title": "EventEmitter & Streams",
+  "language": "python",
+  "code": "def run_practice():\n    assert True\nif __name__ == '__main__':\n    run_practice()\n"
+}

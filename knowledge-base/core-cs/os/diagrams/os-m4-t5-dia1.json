@@ -1,0 +1,7 @@
+{
+  "topic_id": "os-m4-t5",
+  "diagram_id": "os-m4-t5-dia1",
+  "title": "Inter-Process Communication (IPC) Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Inter-Process Communication (IPC)\"]\n  Process --> End"
+}

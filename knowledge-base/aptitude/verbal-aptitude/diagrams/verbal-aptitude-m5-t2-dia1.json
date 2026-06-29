@@ -1,0 +1,7 @@
+{
+  "topic_id": "verbal-aptitude-m5-t2",
+  "diagram_id": "verbal-aptitude-m5-t2-dia1",
+  "title": "Arguments Analysis Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Arguments Analysis\"]\n  Process --> End"
+}

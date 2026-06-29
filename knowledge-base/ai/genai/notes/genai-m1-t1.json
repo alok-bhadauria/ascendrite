@@ -1,0 +1,37 @@
+{
+  "topic_id": "genai-m1-t1",
+  "title": "Generative Model Taxonomies",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Medium",
+    "estimated_hours": 5,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Compare autoregressive decoder-only architectures with encoder-decoder configurations.",
+    "Formulate RMSNorm mathematical steps and contrast them with standard LayerNorm.",
+    "Derive SwiGLU activation function formulations."
+  ],
+  "content_sections": [
+    {
+      "title": "Generative Architecture Configurations",
+      "content": "Large Language Models generally follow either a decoder-only (e.g. GPT, LLaMA) or encoder-decoder (e.g. T5, BART) configuration.\n\n*   **Decoder-only Models:** Focus strictly on left-to-right next-token probability prediction (autoregressive), utilizing causal masking to block queries from looking ahead. They are highly optimized for generative text completion tasks.\n*   **Encoder-decoder Models:** Encode the full bidirectional context first and pass it to a causal decoder via cross-attention. This is useful for sequence-to-sequence translation, summarization, and comprehension tasks where the full input context must be analyzed bidirectional before generation starts.",
+      "callouts": []
+    },
+    {
+      "title": "RMSNorm and SwiGLU Derivations",
+      "content": "To optimize inference latency, modern architectures replace standard LayerNorm with **Root Mean Square Normalization (RMSNorm)**. RMSNorm scales activation vectors by their root mean square value, bypassing mean subtraction computation steps:\n\n$$\\text{RMSNorm}(\\mathbf{a}) = \\frac{\\mathbf{a}}{\\text{RMS}(\\mathbf{a})} \\odot \\mathbf{g}$$\n\nwhere $\\text{RMS}(\\mathbf{a}) = \\sqrt{\\frac{1}{d} \\sum_{i=1}^d a_i^2 + \\epsilon}$ and $\\mathbf{g}$ is a learnable scaling vector. This reduces memory bandwidth overhead by avoiding two sequential passes over data.\n\nAdditionally, feedforward blocks replace ReLU with **SwiGLU** activation functions. SwiGLU is a Gated Linear Unit (GLU) variation:\n\n$$\\text{SwiGLU}(\\mathbf{x}) = \\left( \\mathbf{x}\\mathbf{W}_1 \\odot \\text{swish}(\\mathbf{x}\\mathbf{W}_2) \\right) \\mathbf{W}_3$$\n\nwhere $\\text{swish}(\\mathbf{z}) = \\mathbf{z} \\odot \\sigma(\\beta \\mathbf{z})$ is the Swish activation. The gate mechanism improves optimization convergence during gradient updates.",
+      "callouts": []
+    }
+  ],
+  "example_refs": [
+    "genai-m1-t1-ex1"
+  ],
+  "diagram_refs": [],
+  "practice_refs": [
+    "genai-m1-t1-prac1"
+  ],
+  "quiz_refs": [
+    "genai-m1-t1-quiz"
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "topic_id": "os-m2-t2",
+  "diagram_id": "os-m2-t2-dia1",
+  "title": "Scheduling Algorithms Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Scheduling Algorithms\"]\n  Process --> End"
+}

@@ -1,0 +1,6 @@
+{
+  "topic_id": "ai-agents-m5-t3",
+  "title": "Agent Evaluation Frameworks",
+  "version": "1.0.0",
+  "content": "# Agent Evaluations\n\n*   **Trajectory Log:** Database records storing every step (thought-action-observation) of the execution loop.\n*   **Metrics:** Tracking success rate, token efficiency, and error recovery rates.\n"
+}

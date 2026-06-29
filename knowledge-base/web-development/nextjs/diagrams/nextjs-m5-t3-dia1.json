@@ -1,0 +1,7 @@
+{
+  "topic_id": "nextjs-m5-t3",
+  "diagram_id": "nextjs-m5-t3-dia1",
+  "title": "Bundle Analysis Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Bundle Analysis\"]\n  Process --> End"
+}

@@ -1,0 +1,7 @@
+{
+  "topic_id": "dbms-m5-t4",
+  "diagram_id": "dbms-m5-t4-dia1",
+  "title": "Distributed Commit Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Distributed Commit\"]\n  Process --> End"
+}

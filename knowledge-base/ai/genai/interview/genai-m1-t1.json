@@ -1,0 +1,6 @@
+{
+  "topic_id": "genai-m1-t1",
+  "title": "Generative Model Taxonomies",
+  "version": "1.0.0",
+  "content": "# Interview Prep: Generative Taxonomies\n\n## Q1: Why does RMSNorm perform faster in training and inference loops than standard LayerNorm?\n\n### Standard Answer\nLayerNorm requires calculating both the mean and variance of activation vectors, which requires two passes over the data (mean pass and variance pass). RMSNorm assumes a mean of zero, requiring only a single pass to compute the root mean square, which saves memory bandwidth and GPU core cycles.\n"
+}

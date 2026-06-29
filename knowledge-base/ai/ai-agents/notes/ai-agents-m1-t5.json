@@ -1,0 +1,31 @@
+{
+  "topic_id": "ai-agents-m1-t5",
+  "title": "Structured Argument Extraction",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Medium",
+    "estimated_hours": 5,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Explain JSON Schema constraints in tool calling.",
+    "Formulate logit bias modifications for argument syntax."
+  ],
+  "content_sections": [
+    {
+      "title": "JSON Schema Constraints",
+      "content": "To interface with external APIs, agents must extract structured arguments from text. This is configured by passing a JSON Schema defining parameter names, types, and constraint rules. The model output is parsed into these fields, validating argument types before execution.",
+      "callouts": []
+    }
+  ],
+  "example_refs": [
+    "ai-agents-m1-t5-ex1"
+  ],
+  "diagram_refs": [],
+  "practice_refs": [
+    "ai-agents-m1-t5-prac1"
+  ],
+  "quiz_refs": [
+    "ai-agents-m1-t5-quiz"
+  ]
+}

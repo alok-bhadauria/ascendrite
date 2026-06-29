@@ -1,0 +1,7 @@
+{
+  "topic_id": "nlp-m1-t1",
+  "asset_id": "nlp-m1-t1-ex1",
+  "title": "Text Corpora & Normalization",
+  "language": "python",
+  "code": "import re\n\ndef clean_text(text):\n    # Lowercasing and cleaning\n    text = text.lower()\n    # Simple word tokenization\n    tokens = re.findall(r'\\b\\w+\\b', text)\n    return tokens\n\nif __name__ == '__main__':\n    print(clean_text('The quick brown fox jumps over the lazy dog.'))\n"
+}

@@ -1,0 +1,7 @@
+{
+  "topic_id": "system-design-m2-t2",
+  "diagram_id": "system-design-m2-t2-dia1",
+  "title": "Caching Basics Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Caching Basics\"]\n  Process --> End"
+}

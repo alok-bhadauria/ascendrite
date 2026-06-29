@@ -1,0 +1,7 @@
+{
+  "topic_id": "genai-m3-t2",
+  "asset_id": "genai-m3-t2-ex1",
+  "title": "QLoRA & Double Quantization",
+  "language": "python",
+  "code": "import numpy as np\n\ndef quantize_nf4(w, scale):\n    return w / scale\n\nif __name__ == '__main__':\n    print('QLoRA helpers active.')\n"
+}

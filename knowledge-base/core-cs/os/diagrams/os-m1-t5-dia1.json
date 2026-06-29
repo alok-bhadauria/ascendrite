@@ -1,0 +1,7 @@
+{
+  "topic_id": "os-m1-t5",
+  "diagram_id": "os-m1-t5-dia1",
+  "title": "Context Switching Cost Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Context Switching Cost\"]\n  Process --> End"
+}

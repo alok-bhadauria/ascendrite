@@ -1,0 +1,7 @@
+{
+  "topic_id": "spring-boot-m1-t2",
+  "diagram_id": "spring-boot-m1-t2-dia1",
+  "title": "Spring Core IoC & Dependency Injection Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Spring Core IoC & Dependency Injection\"]\n  Process --> End"
+}

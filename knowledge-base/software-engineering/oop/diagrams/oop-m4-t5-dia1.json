@@ -1,0 +1,7 @@
+{
+  "topic_id": "oop-m4-t5",
+  "diagram_id": "oop-m4-t5-dia1",
+  "title": "Behavioral - Command & State Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Behavioral - Command & State\"]\n  Process --> End"
+}

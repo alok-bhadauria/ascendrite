@@ -1,0 +1,7 @@
+{
+  "topic_id": "dbms-m2-t2",
+  "diagram_id": "dbms-m2-t2-dia1",
+  "title": "Concurrency Anomalies Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Concurrency Anomalies\"]\n  Process --> End"
+}

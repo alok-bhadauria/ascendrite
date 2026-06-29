@@ -1,0 +1,7 @@
+{
+  "topic_id": "cn-m2-t4",
+  "diagram_id": "cn-m2-t4-dia1",
+  "title": "Internet Routing Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Internet Routing\"]\n  Process --> End"
+}

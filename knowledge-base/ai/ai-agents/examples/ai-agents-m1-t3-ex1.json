@@ -1,0 +1,7 @@
+{
+  "topic_id": "ai-agents-m1-t3",
+  "asset_id": "ai-agents-m1-t3-ex1",
+  "title": "Planning & Goal Decomposition",
+  "language": "python",
+  "code": "class TaskQueue:\n    def __init__(self):\n        self.tasks = []\n    def add_task(self, name):\n        self.tasks.append(name)\n    def pop_task(self):\n        return self.tasks.pop(0) if self.tasks else None\n\nif __name__ == '__main__':\n    print('TaskQueue module compiled.')\n"
+}

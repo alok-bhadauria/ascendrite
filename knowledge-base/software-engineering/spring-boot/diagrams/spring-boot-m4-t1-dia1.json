@@ -1,0 +1,7 @@
+{
+  "topic_id": "spring-boot-m4-t1",
+  "diagram_id": "spring-boot-m4-t1-dia1",
+  "title": "Spring Security Foundations Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Spring Security Foundations\"]\n  Process --> End"
+}

@@ -1,0 +1,7 @@
+{
+  "topic_id": "nlp-m5-t2",
+  "asset_id": "nlp-m5-t2-prac1",
+  "title": "Information Retrieval & BM25",
+  "language": "python",
+  "code": "import numpy as np\n\ndef compute_bm25_term(tf, idf, doc_len, avg_len, k1=1.5, b=0.75):\n    numerator = tf * (k1 + 1.0)\n    denominator = tf + k1 * (1.0 - b + b * (doc_len / avg_len))\n    return idf * (numerator / denominator)\n\ndef run_practice():\n    score = compute_bm25_term(0.0, 1.0, 100, 100)\n    assert score == 0.0\n    print('[PASS] BM25 zero tf check validated.')\n\nif __name__ == '__main__':\n    run_practice()\n"
+}

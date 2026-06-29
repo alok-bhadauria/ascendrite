@@ -1,0 +1,7 @@
+{
+  "topic_id": "verbal-aptitude-m2-t5",
+  "diagram_id": "verbal-aptitude-m2-t5-dia1",
+  "title": "Punctuation Rules Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Punctuation Rules\"]\n  Process --> End"
+}

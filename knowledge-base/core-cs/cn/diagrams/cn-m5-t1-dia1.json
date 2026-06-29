@@ -1,0 +1,7 @@
+{
+  "topic_id": "cn-m5-t1",
+  "diagram_id": "cn-m5-t1-dia1",
+  "title": "Symmetric/Asymmetric Encryption Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Symmetric/Asymmetric Encryption\"]\n  Process --> End"
+}

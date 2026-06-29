@@ -1,0 +1,7 @@
+{
+  "topic_id": "oop-m5-t4",
+  "asset_id": "oop-m5-t4-ex1",
+  "title": "LLD Case Study (Library/Parking)",
+  "language": "python",
+  "code": "if __name__ == '__main__':\n    print('Example code execution.')\n"
+}

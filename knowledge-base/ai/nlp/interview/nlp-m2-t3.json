@@ -1,0 +1,6 @@
+{
+  "topic_id": "nlp-m2-t3",
+  "title": "Vector Similarity Metrics",
+  "version": "1.0.0",
+  "content": "# Interview Prep: Similarity Metrics\n\n## Q1: Explain why Euclidean distance is inadequate for document similarity checks on raw term frequencies. Show how L2 normalization resolves this.\n\n### Standard Answer\nEuclidean distance measures the straight-line distance between coordinates:\n\n$$d(\\mathbf{u}, \\mathbf{v}) = \\sqrt{\\sum (u_i - v_i)^2}$$\n\nIf two documents have the same term distribution but one is twice as long as the other, their raw frequency vectors will point in the same direction but have different magnitudes. The Euclidean distance between them will be large, indicating they are dissimilar. Cosine similarity evaluates only the angle, correctly identifying them as identical in content.\n\nApplying L2 normalization maps both vectors to unit length (norm = 1.0). Once normalized, the squared Euclidean distance is $2 - 2\\cos(\\theta)$, aligning the two metrics.\n"
+}

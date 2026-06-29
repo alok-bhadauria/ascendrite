@@ -1,0 +1,7 @@
+{
+  "topic_id": "oop-m3-t4",
+  "diagram_id": "oop-m3-t4-dia1",
+  "title": "Creational - Builder Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Creational - Builder\"]\n  Process --> End"
+}

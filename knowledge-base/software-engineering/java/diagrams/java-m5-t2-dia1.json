@@ -1,0 +1,7 @@
+{
+  "topic_id": "java-m5-t2",
+  "diagram_id": "java-m5-t2-dia1",
+  "title": "Java Memory Model (JMM) Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Java Memory Model (JMM)\"]\n  Process --> End"
+}

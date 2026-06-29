@@ -1,0 +1,7 @@
+{
+  "topic_id": "system-design-m5-t4",
+  "asset_id": "system-design-m5-t4-prac1",
+  "title": "AI System Design",
+  "language": "python",
+  "code": "def run_practice():\n    assert True\nif __name__ == '__main__':\n    run_practice()\n"
+}

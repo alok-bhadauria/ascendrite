@@ -1,0 +1,7 @@
+{
+  "topic_id": "ai-agents-m2-t2",
+  "diagram_id": "ai-agents-m2-t2-dia1",
+  "title": "Context Window Management Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Context Window Management\"]\n  Process --> End"
+}

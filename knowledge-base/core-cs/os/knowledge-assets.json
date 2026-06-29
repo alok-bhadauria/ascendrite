@@ -1,0 +1,28 @@
+{
+  "glossary": [
+    {
+      "term": "Privilege Ring",
+      "definition": "Hardware-enforced execution protection rings separating kernel-mode Ring 0 from user-mode Ring 3 code execution."
+    },
+    {
+      "term": "Priority Inversion",
+      "definition": "A real-time scheduling failure where a high-priority task is blocked by a low-priority task holding a shared resource."
+    },
+    {
+      "term": "False Sharing",
+      "definition": "A cache thrashing bottleneck where multiple threads update independent variables located on the same CPU cache line."
+    }
+  ],
+  "references": [
+    {
+      "title": "Operating System Concepts",
+      "author": "Silberschatz, Galvin, Gagne",
+      "publisher": "Wiley",
+      "year": 2018
+    }
+  ],
+  "further_reading": [],
+  "research_papers": [],
+  "version": "1.0.0",
+  "last_updated": "2026-06-29"
+}

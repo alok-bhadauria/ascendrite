@@ -1,226 +1,229 @@
 {
   "subject_id": "genai",
-  "name": "GenAI",
+  "name": "Generative AI",
   "category": "ai",
   "modules": [
     {
-      "name": "Module 1: LLM Architecture, Decoding Parameters & Prompting Axioms",
+      "name": "Module 1: LLM Foundations, KV Caching & Decoding Mechanics",
       "topics": [
         {
           "id": "genai-m1-t1",
-          "title": "LLM Architectures & Transformer Systems",
+          "title": "Generative Model Taxonomies",
           "subtopics": [
-            "Tokenization algorithms (Byte-Pair Encoding, WordPiece, SentencePiece)",
-            "Embedding layers and Decoder-only transformer stack layouts",
-            "Self-Attention mechanism mathematical formulation (Queries, Keys, Values projection matrices, causal attention mask)",
-            "Multi-Head Attention (MHA), Multi-Query Attention (MQA), and Grouped-Query Attention (GQA) optimizations",
-            "Positional Encodings: Absolute sinusoidal embeddings vs Rotary Position Embeddings (RoPE) and ALiBi",
-            "Transformer System blocks: Pre-LN vs Post-LN layer normalization, RMSNorm, and SwiGLU activations"
+            "Autoregressive decoder-only models vs Encoder-Decoder frameworks",
+            "Refinements: RMSNorm, SwiGLU activation functions, and RoPE positional representations"
           ]
         },
         {
           "id": "genai-m1-t2",
-          "title": "LLM Decoding Strategies",
+          "title": "Attention Optimizations",
           "subtopics": [
-            "Beam search widths, Greedy search repetitions loops",
-            "Top-K/Top-P temperature sampling math"
+            "Multi-Query Attention (MQA) and Grouped-Query Attention (GQA) projections",
+            "Key-Value (KV) Cache memory footprint equations and read-write bounds"
           ]
         },
         {
           "id": "genai-m1-t3",
-          "title": "Foundation Models",
+          "title": "LLM Decoding Mathematics",
           "subtopics": [
-            "GPT-4, LLaMA-3, Claude-3",
-            "Mixture of Experts (MoE) routing gating mechanics"
+            "Greedy search, Beam search width scaling",
+            "Top-K and Top-P (nucleus) temperature sampling probability adjustments"
           ]
         },
         {
           "id": "genai-m1-t4",
-          "title": "Prompt Engineering",
+          "title": "Mixture of Experts",
           "subtopics": [
-            "Zero-shot/Few-shot prompts validation",
-            "System Prompts boundaries, and prompt injection exploits"
+            "Sparse Mixture of Experts (MoE) routing gating mechanics",
+            "Top-K expert selection, load balancing loss functions"
           ]
         },
         {
           "id": "genai-m1-t5",
-          "title": "Advanced Prompting",
+          "title": "Multimodal Tokenization",
           "subtopics": [
-            "Structured outputs parsing, Chain of Thought (CoT) logical splits, ReAct loops"
+            "Cross-modal alignments: CLIP text-image contrastive embedding bridges",
+            "Visual token projection layers and autoregressive multimodal outputs"
           ]
         }
       ]
     },
     {
-      "name": "Module 2: RAG Pipeline Mechanics, Chunking & Evaluation Metrics",
+      "name": "Module 2: Prompt Engineering, Context Management & Compression",
       "topics": [
         {
           "id": "genai-m2-t1",
-          "title": "Vector Embeddings",
+          "title": "Prompting Mechanics & In-Context Learning",
           "subtopics": [
-            "Chunking strategies (Fixed-size, overlap, semantic chunking)",
-            "Vector indexing configurations"
+            "Zero-shot vs N-shot prompt demonstration distributions",
+            "System prompts boundary alignment and prompt injection vulnerability patterns"
           ]
         },
         {
           "id": "genai-m2-t2",
-          "title": "Vector Databases",
+          "title": "Chain of Thought Prompting",
           "subtopics": [
-            "FAISS flat index, ChromaDB, Pinecone metadata filtering",
-            "Weaviate hybrid searches"
+            "Chain of Thought (CoT) logical splits and self-consistency paths voting math",
+            "ReAct prompting reasoning loops"
           ]
         },
         {
           "id": "genai-m2-t3",
-          "title": "RAG Foundations",
+          "title": "Structured Outputs",
           "subtopics": [
-            "Text chunking, overlap calculations, Dense vector retrieval",
-            "Prompt context injections"
+            "Regex and JSON Schema constraint validation during generation",
+            "Logit bias modifications for syntax enforcement"
           ]
         },
         {
           "id": "genai-m2-t4",
-          "title": "Context Engineering",
+          "title": "Context Window Constraints",
           "subtopics": [
-            "Context window limits, Lost in the Middle phenomena",
-            "Prompt context compression"
+            "Context window limits and Lost in the Middle phenomena",
+            "Attention decay profiles over long contexts"
           ]
         },
         {
           "id": "genai-m2-t5",
-          "title": "RAG Evaluation Metrics",
+          "title": "Prompt Compression",
           "subtopics": [
-            "Faithfulness validations, answer relevance metrics",
-            "Context recall checks using Ragas/TruLens"
+            "Context compression algorithms (LLMLingua entropy metrics)",
+            "Token drop heuristic evaluations"
           ]
         }
       ]
     },
     {
-      "name": "Module 3: Advanced RAG, LangChain Cores & ReAct Agent Loops",
+      "name": "Module 3: Parameter-Efficient Fine-Tuning (PEFT) & LoRA",
       "topics": [
         {
           "id": "genai-m3-t1",
-          "title": "Advanced RAG",
+          "title": "LoRA Mathematics",
           "subtopics": [
-            "Sparse + Dense hybrid search, Reciprocal Rank Fusion (RRF)",
-            "Cross-encoder Reranking models"
+            "Low-Rank Adaptation (LoRA) weight matrices decomposition math: W + deltaW",
+            "Rank (r) selection scaling and alpha constant adjustments"
           ]
         },
         {
           "id": "genai-m3-t2",
-          "title": "LangChain Core",
+          "title": "QLoRA & Double Quantization",
           "subtopics": [
-            "Prompt Templates configurations, LLMChain execution, and dynamic routing chains"
+            "Quantized LoRA (QLoRA) NormalFloat4 (NF4) quantization equations",
+            "Double quantization memory footprint reductions"
           ]
         },
         {
           "id": "genai-m3-t3",
-          "title": "LangChain Memory Systems",
+          "title": "Prompt & Prefix Tuning",
           "subtopics": [
-            "ConversationBufferMemory window limits, ConversationSummaryMemory",
-            "Redis persistence"
+            "Prefix tuning key-value insertions vs Prompt tuning virtual tokens optimization",
+            "Parameter efficiency boundaries vs LoRA adapters"
           ]
         },
         {
           "id": "genai-m3-t4",
-          "title": "LangChain Integrations",
+          "title": "Bottleneck Adapters",
           "subtopics": [
-            "Custom tools definitions schema mappings, document loaders, and vector store retrievers"
+            "Bottleneck layers and residual adapter additions in Transformer layers",
+            "Inference latency trade-offs of sequential adapter routing"
           ]
         },
         {
           "id": "genai-m3-t5",
-          "title": "LangChain Agents",
+          "title": "Memory Optimization in Fine-Tuning",
           "subtopics": [
-            "ReAct loop reasoning cycle, observation parsing, tool execution handlers, and routing"
+            "Gradient Checkpointing memory-compute trade-offs",
+            "Mixed-precision adapters training"
           ]
         }
       ]
     },
     {
-      "name": "Module 4: LangGraph States Workflows, Agent Architectures & MCP Protocols",
+      "name": "Module 4: RLHF, DPO & Reward Loop Optimization",
       "topics": [
         {
           "id": "genai-m4-t1",
-          "title": "LangGraph Core",
+          "title": "Reward Model Training",
           "subtopics": [
-            "State management, nodes definition, conditional edges routing",
-            "Graph compile/execution loops"
+            "RLHF Reward model preference loss function optimizations",
+            "Pairwise ranking objective math"
           ]
         },
         {
           "id": "genai-m4-t2",
-          "title": "Agent Architectures",
+          "title": "PPO Alignment Loop",
           "subtopics": [
-            "Goal decomposition, Planning (Plan-and-Solve), Reflection, and memory systems integration"
+            "Proximal Policy Optimization (PPO) training loop stages in alignment",
+            "KL-divergence penalty constraint math: D_KL(pi || pi_ref)"
           ]
         },
         {
           "id": "genai-m4-t3",
-          "title": "Tool Calling",
+          "title": "Direct Preference Optimization",
           "subtopics": [
-            "Function calling JSON schemas, argument extraction parameters, and validation checks"
+            "Direct Preference Optimization (DPO) loss formulation derivation",
+            "DPO actor model optimization without separate reward network"
           ]
         },
         {
           "id": "genai-m4-t4",
-          "title": "Agent Protocols",
+          "title": "KTO Optimization",
           "subtopics": [
-            "Model Context Protocol (MCP) server bindings, tool declarations, and resource endpoints"
+            "Kahneman-Tversky Optimization (KTO) utility math",
+            "Binary label preferences optimization"
           ]
         },
         {
           "id": "genai-m4-t5",
-          "title": "Orchestration Models",
+          "title": "Alignment Tax & Evaluation",
           "subtopics": [
-            "Single-Agent vs Multi-Agent coordination, supervisor agent configurations, and state sharing"
+            "Alignment tax and generalization capabilities reduction",
+            "MT-Bench and AlpacaEval benchmarking layouts"
           ]
         }
       ]
     },
     {
-      "name": "Module 5: Fine-Tuning PEFT, RLHF Alignment & MLOps Serving",
+      "name": "Module 5: Inference Optimizations, Quantization & Serving",
       "topics": [
         {
           "id": "genai-m5-t1",
-          "title": "Fine-Tuning PEFT",
+          "title": "Continuous Batching & Speculative Decoding",
           "subtopics": [
-            "Parameter-Efficient Fine-Tuning (PEFT) configurations",
-            "LoRA weight adapters matrices ranks (r) and scaling alpha",
-            "QLoRA double quantization",
-            "Prompt tuning, Prefix tuning, and bottleneck adapters",
-            "Fine-tuning memory optimizations (gradient checkpointing)"
+            "Continuous Batching iteration-level scheduling",
+            "Speculative Decoding draft-target model verification math"
           ]
         },
         {
           "id": "genai-m5-t2",
-          "title": "Alignment Reward Loops",
+          "title": "PagedAttention & vLLM",
           "subtopics": [
-            "RLHF PPO reward model feedbacks vs DPO direct preference optimization calculations"
+            "PagedAttention virtual memory allocation protocols",
+            "KV Cache fragmentation elimination in vLLM serving"
           ]
         },
         {
           "id": "genai-m5-t3",
-          "title": "Quantization Formats",
+          "title": "Post-Training Quantization",
           "subtopics": [
-            "Model weight reductions (GPTQ, AWQ, GGUF)",
-            "Hardware compatibility constraints"
+            "GPTQ second-order Taylor expansion quantization math",
+            "AWQ activation-aware scaling, GGUF/GGML quantization boundaries"
           ]
         },
         {
           "id": "genai-m5-t4",
-          "title": "LLMOps Serving",
+          "title": "Triton Inference Server",
           "subtopics": [
-            "Inference optimizations (PagedAttention, vLLM)",
-            "Triton routing, latency SLA bounds, and guardrails API validation"
+            "Triton routing configurations, concurrent model execution, and dynamic batching",
+            "API routing and SLA latencies"
           ]
         },
         {
           "id": "genai-m5-t5",
-          "title": "Multimodal Systems",
+          "title": "Guardrails & Safety Serving",
           "subtopics": [
-            "Image-text alignment models (CLIP), autonomous workflows, and agent execution safety"
+            "LlamaGuard classifier routing and toxicity logit validations",
+            "System alignment boundaries"
           ]
         }
       ]
@@ -229,5 +232,7 @@
   "revision": [],
   "interview": [],
   "examples": [],
-  "diagrams": []
+  "diagrams": [],
+  "version": "1.0.0",
+  "last_updated": "2026-06-29"
 }

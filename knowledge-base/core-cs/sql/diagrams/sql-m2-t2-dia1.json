@@ -1,0 +1,7 @@
+{
+  "topic_id": "sql-m2-t2",
+  "diagram_id": "sql-m2-t2-dia1",
+  "title": "Ranking Functions Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Ranking Functions\"]\n  Process --> End"
+}

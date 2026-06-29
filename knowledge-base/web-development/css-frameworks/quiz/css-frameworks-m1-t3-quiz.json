@@ -1,0 +1,17 @@
+{
+  "quiz_id": "css-frameworks-m1-t3-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "What is the key optimization criteria for Tailwind PostCSS?",
+      "options": [
+        "Minimizing complexity bounds.",
+        "Increasing CPU utilization.",
+        "Static heap allocation.",
+        "Syntax execution bypass."
+      ],
+      "correct_answer": "Minimizing complexity bounds.",
+      "explanation": "The primary goal in designing Tailwind PostCSS is minimizing asymptotic and memory complexities."
+    }
+  ]
+}

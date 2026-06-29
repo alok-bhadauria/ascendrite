@@ -1,0 +1,7 @@
+{
+  "topic_id": "cn-m3-t5",
+  "diagram_id": "cn-m3-t5-dia1",
+  "title": "Connection Timeouts Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Connection Timeouts\"]\n  Process --> End"
+}

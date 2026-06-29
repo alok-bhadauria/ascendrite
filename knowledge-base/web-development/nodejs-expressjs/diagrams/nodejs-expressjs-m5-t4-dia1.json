@@ -1,0 +1,7 @@
+{
+  "topic_id": "nodejs-expressjs-m5-t4",
+  "diagram_id": "nodejs-expressjs-m5-t4-dia1",
+  "title": "CI/CD Deployment Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process CI/CD Deployment\"]\n  Process --> End"
+}

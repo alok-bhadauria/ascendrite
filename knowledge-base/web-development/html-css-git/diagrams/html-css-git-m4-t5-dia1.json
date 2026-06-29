@@ -1,0 +1,7 @@
+{
+  "topic_id": "html-css-git-m4-t5",
+  "diagram_id": "html-css-git-m4-t5-dia1",
+  "title": "Git Stash & Checkouts Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Git Stash & Checkouts\"]\n  Process --> End"
+}

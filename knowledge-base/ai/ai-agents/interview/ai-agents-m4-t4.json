@@ -1,0 +1,6 @@
+{
+  "topic_id": "ai-agents-m4-t4",
+  "title": "Conflict Resolution & Consensus",
+  "version": "1.0.0",
+  "content": "# Interview Prep: Consensus Loops\n\n## Q1: How does a multi-agent debate loop prevent reasoning deadlock?\n\n### Standard Answer\nWe implement a turn limit (e.g., max 3 debate rounds). If consensus is not reached by the limit, control is passed to a tie-breaker coordinator or a human operator to resolve the deadlock.\n"
+}

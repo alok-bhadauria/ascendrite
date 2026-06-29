@@ -1,0 +1,7 @@
+{
+  "topic_id": "cn-m1-t1",
+  "asset_id": "cn-m1-t1-ex1",
+  "title": "Networking Architectures",
+  "language": "python",
+  "code": "if __name__ == '__main__':\n    print('Example pass for Networking Architectures')\n"
+}

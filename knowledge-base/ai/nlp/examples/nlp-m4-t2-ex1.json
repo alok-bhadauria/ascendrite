@@ -1,0 +1,7 @@
+{
+  "topic_id": "nlp-m4-t2",
+  "asset_id": "nlp-m4-t2-ex1",
+  "title": "Multi-Head Attention",
+  "language": "python",
+  "code": "import numpy as np\n\ndef concat_heads(heads):\n    return np.concatenate(heads, axis=-1)\n\nif __name__ == '__main__':\n    print('MHA concatenation helper loaded.')\n"
+}

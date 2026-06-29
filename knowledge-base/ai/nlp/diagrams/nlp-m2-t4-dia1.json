@@ -1,0 +1,7 @@
+{
+  "topic_id": "nlp-m2-t4",
+  "diagram_id": "nlp-m2-t4-dia1",
+  "title": "N-Gram Language Models Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process N-Gram Language Models\"]\n  Process --> End"
+}

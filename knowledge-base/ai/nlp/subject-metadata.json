@@ -1,0 +1,27 @@
+{
+  "subject_id": "nlp",
+  "name": "Natural Language Processing",
+  "category": "ai",
+  "difficulty": "Advanced",
+  "estimated_learning_hours": 100,
+  "prerequisites": [
+    "Python Programming",
+    "Deep Learning Foundations",
+    "Probability and Statistics"
+  ],
+  "tags": [
+    "NLP",
+    "Transformers",
+    "Word Embeddings",
+    "Information Retrieval",
+    "Vector Databases"
+  ],
+  "subject_theme_colors": {
+    "primary": "#0D9488",
+    "secondary": "#2DD4BF",
+    "accent": "#F59E0B",
+    "neutral": "#1F2937"
+  },
+  "version": "1.0.0",
+  "last_updated": "2026-06-29"
+}

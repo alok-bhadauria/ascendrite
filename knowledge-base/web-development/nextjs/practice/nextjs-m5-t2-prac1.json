@@ -1,0 +1,7 @@
+{
+  "topic_id": "nextjs-m5-t2",
+  "asset_id": "nextjs-m5-t2-prac1",
+  "title": "Script & Fonts",
+  "language": "python",
+  "code": "def run_practice():\n    assert True\nif __name__ == '__main__':\n    run_practice()\n"
+}

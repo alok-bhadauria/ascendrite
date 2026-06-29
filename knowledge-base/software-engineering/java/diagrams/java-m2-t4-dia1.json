@@ -1,0 +1,7 @@
+{
+  "topic_id": "java-m2-t4",
+  "diagram_id": "java-m2-t4-dia1",
+  "title": "Generics Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Generics\"]\n  Process --> End"
+}

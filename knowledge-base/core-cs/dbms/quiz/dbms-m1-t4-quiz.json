@@ -1,0 +1,17 @@
+{
+  "quiz_id": "dbms-m1-t4-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which of the following describes a key bottleneck related to Hash-Based Indexing?",
+      "options": [
+        "Inefficient scaling of Extendible Hashing, Linear Hashing bucket splits.",
+        "Hardware is completely offline.",
+        "Lack of database files.",
+        "Syntax compilation errors."
+      ],
+      "correct_answer": "Inefficient scaling of Extendible Hashing, Linear Hashing bucket splits.",
+      "explanation": "The topic covers how Extendible Hashing, Linear Hashing bucket splits scales under concurrent workloads, which represents the primary bottlenecks."
+    }
+  ]
+}

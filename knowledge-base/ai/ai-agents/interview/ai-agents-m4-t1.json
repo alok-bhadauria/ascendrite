@@ -1,0 +1,6 @@
+{
+  "topic_id": "ai-agents-m4-t1",
+  "title": "Multi-Agent Topologies",
+  "version": "1.0.0",
+  "content": "# Interview Prep: Multi-Agent Topologies\n\n## Q1: Why do hierarchical topologies scale better than peer-to-peer message buses for complex software development tasks?\n\n### Standard Answer\nIn P2P systems, every agent can message any other agent, creating high communication overhead and prompt context clutter (chattering). Hierarchical topologies restrict communication paths: workers report results back to the supervisor, who acts as a filter, reducing context bloat and coordinating execution steps.\n"
+}

@@ -1,0 +1,7 @@
+{
+  "topic_id": "html-css-git-m2-t5",
+  "diagram_id": "html-css-git-m2-t5-dia1",
+  "title": "Grid Layout Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Grid Layout\"]\n  Process --> End"
+}

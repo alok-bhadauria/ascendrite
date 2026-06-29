@@ -1,0 +1,7 @@
+{
+  "topic_id": "ai-agents-m1-t5",
+  "asset_id": "ai-agents-m1-t5-ex1",
+  "title": "Structured Argument Extraction",
+  "language": "python",
+  "code": "import json\n\ndef parse_tool_args(json_str):\n    try:\n        return json.loads(json_str), True\n    except ValueError:\n        return {}, False\n\nif __name__ == '__main__':\n    print('Schema validator ready.')\n"
+}

@@ -1,0 +1,7 @@
+{
+  "topic_id": "ai-agents-m4-t2",
+  "asset_id": "ai-agents-m4-t2-prac1",
+  "title": "State Sharing & Message Formats",
+  "language": "python",
+  "code": "import json\n\ndef parse_envelope(envelope_json):\n    return json.loads(envelope_json)\n\ndef run_practice():\n    env = '{\"sender\": \"agent_1\", \"body\": \"hello\"}'\n    parsed = parse_envelope(env)\n    assert parsed['sender'] == 'agent_1'\n    print('[PASS] Envelope parser checks passed.')\n\nif __name__ == '__main__':\n    run_practice()\n"
+}

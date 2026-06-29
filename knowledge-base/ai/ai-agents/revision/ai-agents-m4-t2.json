@@ -1,0 +1,6 @@
+{
+  "topic_id": "ai-agents-m4-t2",
+  "title": "State Sharing & Message Formats",
+  "version": "1.0.0",
+  "content": "# State Sharing & Messages\n\n*   **Global Shared State:** All agents read and write to a centralized state database.\n*   **Message-Passing Envelopes:** Agents communicate by exchanging structured JSON objects containing message parameters.\n"
+}

@@ -1,0 +1,7 @@
+{
+  "topic_id": "nlp-m4-t5",
+  "asset_id": "nlp-m4-t5-ex1",
+  "title": "Pre-training Objectives",
+  "language": "python",
+  "code": "import numpy as np\n\ndef sample_mlm_mask(seq_len, mask_prob=0.15):\n    return np.random.rand(seq_len) < mask_prob\n\nif __name__ == '__main__':\n    print('MLM mask helper loaded.')\n"
+}

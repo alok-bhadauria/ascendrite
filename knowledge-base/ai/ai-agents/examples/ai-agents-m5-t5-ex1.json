@@ -1,0 +1,7 @@
+{
+  "topic_id": "ai-agents-m5-t5",
+  "asset_id": "ai-agents-m5-t5-ex1",
+  "title": "Sandbox Execution Environments",
+  "language": "python",
+  "code": "def validate_sandbox_path(path, sandbox_dir):\n    # Simple check if path is within sandbox directory\n    import os\n    abs_sandbox = os.path.abspath(sandbox_dir)\n    abs_target = os.path.abspath(path)\n    return abs_target.startswith(abs_sandbox)\n\nif __name__ == '__main__':\n    print('Path bounds validation systems loaded.')\n"
+}

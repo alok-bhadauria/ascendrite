@@ -1,0 +1,6 @@
+{
+  "topic_id": "genai-m2-t2",
+  "title": "Chain of Thought Prompting",
+  "version": "1.0.0",
+  "content": "# Interview Prep: CoT\n\n## Q1: Why does Chain of Thought (CoT) prompting improve performance on logical tasks?\n\n### Standard Answer\nAutoregressive models generate tokens from left to right. When forced to output an answer immediately, the model can allocate only a single forward pass to compute it. CoT forces the model to generate reasoning tokens, allowing the attention layers to compute intermediate states across more tokens.\n"
+}

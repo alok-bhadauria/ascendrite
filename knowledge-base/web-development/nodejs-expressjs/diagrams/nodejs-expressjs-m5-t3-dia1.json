@@ -1,0 +1,7 @@
+{
+  "topic_id": "nodejs-expressjs-m5-t3",
+  "diagram_id": "nodejs-expressjs-m5-t3-dia1",
+  "title": "Docker Containerization Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Docker Containerization\"]\n  Process --> End"
+}

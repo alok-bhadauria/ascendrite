@@ -1,0 +1,6 @@
+{
+  "topic_id": "ai-agents-m3-t5",
+  "title": "Self-Correction Loops",
+  "version": "1.0.0",
+  "content": "# Interview Prep: Self-Correction\n\n## Q1: How does a compiler-guided self-correction loop prevent the model from repeating syntax errors?\n\n### Standard Answer\nThe linter output (or traceback) must be accompanied by instructions asking the model to explain the syntax error before correcting it. This forces the model to generate reasoning tokens, guiding it to write syntactically valid code.\n"
+}

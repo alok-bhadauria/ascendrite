@@ -1,0 +1,7 @@
+{
+  "topic_id": "dbms-m5-t1",
+  "diagram_id": "dbms-m5-t1-dia1",
+  "title": "Distributed Scaling Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Distributed Scaling\"]\n  Process --> End"
+}

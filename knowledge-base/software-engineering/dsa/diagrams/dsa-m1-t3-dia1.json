@@ -1,0 +1,7 @@
+{
+  "topic_id": "dsa-m1-t3",
+  "diagram_id": "dsa-m1-t3-dia1",
+  "title": "Bit Manipulation Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Bit Manipulation\"]\n  Process --> End"
+}

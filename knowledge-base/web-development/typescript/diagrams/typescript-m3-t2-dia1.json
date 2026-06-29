@@ -1,0 +1,7 @@
+{
+  "topic_id": "typescript-m3-t2",
+  "diagram_id": "typescript-m3-t2-dia1",
+  "title": "Declaration Merging Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Declaration Merging\"]\n  Process --> End"
+}

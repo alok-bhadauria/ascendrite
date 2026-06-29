@@ -1,0 +1,7 @@
+{
+  "topic_id": "quantitative-aptitude-m1-t3",
+  "diagram_id": "quantitative-aptitude-m1-t3-dia1",
+  "title": "LCM & HCF Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process LCM & HCF\"]\n  Process --> End"
+}

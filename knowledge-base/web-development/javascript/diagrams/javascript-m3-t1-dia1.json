@@ -1,0 +1,7 @@
+{
+  "topic_id": "javascript-m3-t1",
+  "diagram_id": "javascript-m3-t1-dia1",
+  "title": "Callbacks & Hell Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Callbacks & Hell\"]\n  Process --> End"
+}

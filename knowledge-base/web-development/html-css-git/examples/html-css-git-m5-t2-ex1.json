@@ -1,0 +1,7 @@
+{
+  "topic_id": "html-css-git-m5-t2",
+  "asset_id": "html-css-git-m5-t2-ex1",
+  "title": "Git Cherry-Pick",
+  "language": "python",
+  "code": "if __name__ == '__main__':\n    print('Example code execution.')\n"
+}

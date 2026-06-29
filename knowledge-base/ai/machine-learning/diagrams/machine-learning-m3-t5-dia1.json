@@ -1,0 +1,7 @@
+{
+  "topic_id": "machine-learning-m3-t5",
+  "diagram_id": "machine-learning-m3-t5-dia1",
+  "title": "Model Evaluation & Class Imbalance Mitigation Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Model Evaluation & Class Imbalance Mitigation\"]\n  Process --> End"
+}

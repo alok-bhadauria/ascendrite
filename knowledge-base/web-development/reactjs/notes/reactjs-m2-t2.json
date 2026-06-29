@@ -1,0 +1,44 @@
+{
+  "topic_id": "reactjs-m2-t2",
+  "title": "Effect Hook",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Hard",
+    "estimated_hours": 6,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Describe structural characteristics of Effect Hook.",
+    "Derive mathematical and programmatic bounds for useEffect cleanup callbacks timings, dependency arrays reference comparison traps."
+  ],
+  "content_sections": [
+    {
+      "title": "Effect Hook",
+      "content": "### Fiber Reconciler, Diffing & State Batches\nReact structures UI components using virtual representation states.\n\n#### Reconciler Execution Phases\nReconciliation runs in two phases:\n1.  **Render Phase:** Asynchronous and interruptible. React builds a work-in-progress Fiber tree, computes element updates, and generates a side-effects list. The scheduler can suspend this phase to handle high-priority user actions.\n2.  **Commit Phase:** Synchronous and non-interruptible. React commits the side-effects list to the DOM. Executed synchronously to prevent visual UI inconsistencies.\n\n#### Virtual DOM Diffing Heuristics\nComparing trees has a complexity of $O(N^3)$. React reduces this to $O(N)$ using two heuristics:\n*   Two elements of different types will generate different trees, forcing React to rebuild the component subtree.\n*   Developer-provided `key` props match elements across renders. Index keys (`key={index}`) cause state mapping bugs when elements are sorted or deleted.\n\n#### State Batches & Closure Queues\nState updates are batched within event loops to prevent duplicate renders. When calling state updates, React schedules task items in an update queue. Functional parameters (`setCount(c => c + 1)`) resolve queue values sequentially, preventing stale closures.\n\n### Depth Analysis: Effect Hook\nIn production configurations, we analyze how useEffect cleanup callbacks timings, dependency arrays reference comparison traps affects performance parameters. We evaluate memory layouts and consensus thresholds.",
+      "callouts": [
+        {
+          "type": "Student Trap",
+          "title": "Common Trap in Effect Hook",
+          "content": "A common mistake when analyzing Effect Hook is ignoring latency bounds and boundary edge cases during concurrent executions."
+        },
+        {
+          "type": "Engineering Note",
+          "title": "Production Scaling for Effect Hook",
+          "content": "Production servers implement strict resource isolation and cache alignments to prevent performance regressions when running Effect Hook loops."
+        }
+      ]
+    }
+  ],
+  "example_refs": [
+    "reactjs-m2-t2-ex1"
+  ],
+  "diagram_refs": [
+    "reactjs-m2-t2-dia1"
+  ],
+  "practice_refs": [
+    "reactjs-m2-t2-prac1"
+  ],
+  "quiz_refs": [
+    "reactjs-m2-t2-quiz"
+  ]
+}

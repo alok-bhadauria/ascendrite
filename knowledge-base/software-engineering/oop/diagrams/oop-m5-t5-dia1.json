@@ -1,0 +1,7 @@
+{
+  "topic_id": "oop-m5-t5",
+  "diagram_id": "oop-m5-t5-dia1",
+  "title": "LLD Case Study (Food/Movie) Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process LLD Case Study (Food/Movie)\"]\n  Process --> End"
+}

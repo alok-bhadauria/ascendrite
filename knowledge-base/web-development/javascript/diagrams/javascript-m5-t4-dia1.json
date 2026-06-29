@@ -1,0 +1,7 @@
+{
+  "topic_id": "javascript-m5-t4",
+  "diagram_id": "javascript-m5-t4-dia1",
+  "title": "Performance Profiling Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Performance Profiling\"]\n  Process --> End"
+}

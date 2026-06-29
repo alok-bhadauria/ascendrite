@@ -1,0 +1,44 @@
+{
+  "topic_id": "javascript-m1-t4",
+  "title": "Hoisting & Temporal Dead Zone (TDZ)",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Hard",
+    "estimated_hours": 6,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Describe structural characteristics of Hoisting & Temporal Dead Zone (TDZ).",
+    "Derive mathematical and programmatic bounds for var variable hoisting vs let/const lexical bounds, functions hoisting."
+  ],
+  "content_sections": [
+    {
+      "title": "Hoisting & Temporal Dead Zone (TDZ)",
+      "content": "### V8 Engine Execution, Event Loop & Closures\nJavaScript is a single-threaded execution runtime running asynchronous loops.\n\n#### V8 Call Stack & Memory Heap\n*   **Call Stack:** Tracks execution frames synchronously.\n*   **Memory Heap:** Stores unstructured object allocations.\n*   *Hoisting:* During compilation, V8 moves function declarations and `var` variables to the top of their scope. Variables declared with `let`/`const` are hoisted but placed in the **Temporal Dead Zone (TDZ)**, triggering runtime reference errors if read before initialization.\n\n#### The Event Loop Queue\nTo execute asynchronous code, the browser runtime delegates blocking tasks to Web APIs and coordinates execution via queues:\n1.  **Call Stack:** Executes synchronous functions.\n2.  **Microtask Queue:** Processes high-priority callbacks (`Promise.then`, `MutationObserver`). The event loop flushes this queue completely before moving to the task queue.\n3.  **Macrotask Queue (Task Queue):** Processes low-priority callbacks (`setTimeout`, `setInterval`, network requests).\n\n#### Prototype Chains\nEvery JS object holds a private link (`__proto__`) to its prototype constructor. When reading a property, JS traverses the prototype chain until it locates the key or encounters `null`.\n\n### Depth Analysis: Hoisting & Temporal Dead Zone (TDZ)\nIn production configurations, we analyze how var variable hoisting vs let/const lexical bounds, functions hoisting affects performance parameters. We evaluate memory layouts and consensus thresholds.",
+      "callouts": [
+        {
+          "type": "Student Trap",
+          "title": "Common Trap in Hoisting & Temporal Dead Zone (TDZ)",
+          "content": "A common mistake when analyzing Hoisting & Temporal Dead Zone (TDZ) is ignoring latency bounds and boundary edge cases during concurrent executions."
+        },
+        {
+          "type": "Engineering Note",
+          "title": "Production Scaling for Hoisting & Temporal Dead Zone (TDZ)",
+          "content": "Production servers implement strict resource isolation and cache alignments to prevent performance regressions when running Hoisting & Temporal Dead Zone (TDZ) loops."
+        }
+      ]
+    }
+  ],
+  "example_refs": [
+    "javascript-m1-t4-ex1"
+  ],
+  "diagram_refs": [
+    "javascript-m1-t4-dia1"
+  ],
+  "practice_refs": [
+    "javascript-m1-t4-prac1"
+  ],
+  "quiz_refs": [
+    "javascript-m1-t4-quiz"
+  ]
+}

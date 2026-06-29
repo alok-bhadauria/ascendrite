@@ -1,0 +1,7 @@
+{
+  "topic_id": "nodejs-expressjs-m3-t3",
+  "diagram_id": "nodejs-expressjs-m3-t3-dia1",
+  "title": "Relational DB Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Relational DB\"]\n  Process --> End"
+}

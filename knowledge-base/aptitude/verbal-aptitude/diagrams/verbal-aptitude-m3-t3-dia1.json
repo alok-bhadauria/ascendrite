@@ -1,0 +1,7 @@
+{
+  "topic_id": "verbal-aptitude-m3-t3",
+  "diagram_id": "verbal-aptitude-m3-t3-dia1",
+  "title": "Idioms & Phrases Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Idioms & Phrases\"]\n  Process --> End"
+}

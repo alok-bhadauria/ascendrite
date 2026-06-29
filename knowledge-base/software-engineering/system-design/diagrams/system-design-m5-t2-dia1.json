@@ -1,0 +1,7 @@
+{
+  "topic_id": "system-design-m5-t2",
+  "diagram_id": "system-design-m5-t2-dia1",
+  "title": "Case Study: Chat System Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Case Study: Chat System\"]\n  Process --> End"
+}

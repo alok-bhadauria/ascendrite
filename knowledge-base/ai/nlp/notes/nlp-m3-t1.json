@@ -1,0 +1,37 @@
+{
+  "topic_id": "nlp-m3-t1",
+  "title": "Word2Vec Framework",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Medium",
+    "estimated_hours": 5,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Compare CBOW and Skip-Gram neural architectures.",
+    "Formulate projection layer representations and output softmax equations.",
+    "Explain why the projection layer is linear."
+  ],
+  "content_sections": [
+    {
+      "title": "Word2Vec Architectural Taxonomies",
+      "content": "Word2Vec maps words to dense vector representations by training a shallow neural network on context window occurrences. It offers two architectures:\n\n1.  **Skip-Gram:** Predicts surrounding context words given a target word $w_t$. Skip-gram works well with small training datasets and represents rare words effectively.\n2.  **Continuous Bag of Words (CBOW):** Predicts a target word $w_t$ given its surrounding context words. CBOW is faster to train and shows slightly better performance on frequent words.",
+      "callouts": []
+    },
+    {
+      "title": "Projection and Softmax Derivations",
+      "content": "In both models, words are represented as one-hot vectors $\\mathbf{x} \\in \\mathbb{R}^{V}$. The input projection matrix is $\\mathbf{W} \\in \\mathbb{R}^{V \\times d}$, and the output matrix is $\\mathbf{W}' \\in \\mathbb{R}^{d \\times V}$.\n\nIn the **Skip-Gram** model, given target word index $i$, the projected vector is:\n\n$$\\mathbf{v}_{w_i} = \\mathbf{W}_{i, :}$$\n\nTo predict context word $w_o$, we compute the score $z = \\mathbf{v}'^{\\top}_{w_o} \\mathbf{v}_{w_i}$ and pass it to a Softmax layer:\n\n$$P(w_o \\mid w_i) = \\frac{\\exp(\\mathbf{v}'^{\\top}_{w_o} \\mathbf{v}_{w_i})}{\\sum_{w=1}^V \\exp(\\mathbf{v}'^{\\top}_{w} \\mathbf{v}_{w_i})}$$\n\nThe projection layer contains no non-linear activation functions (it is linear). This is because the projection step acts as a simple lookup table, mapping sparse one-hot vectors to dense embeddings. Adding non-linear activations would slow down training without yielding better representations.",
+      "callouts": []
+    }
+  ],
+  "example_refs": [
+    "nlp-m3-t1-ex1"
+  ],
+  "diagram_refs": [],
+  "practice_refs": [
+    "nlp-m3-t1-prac1"
+  ],
+  "quiz_refs": [
+    "nlp-m3-t1-quiz"
+  ]
+}

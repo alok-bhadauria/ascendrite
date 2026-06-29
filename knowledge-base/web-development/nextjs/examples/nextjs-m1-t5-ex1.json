@@ -1,0 +1,7 @@
+{
+  "topic_id": "nextjs-m1-t5",
+  "asset_id": "nextjs-m1-t5-ex1",
+  "title": "Streaming HTML",
+  "language": "python",
+  "code": "if __name__ == '__main__':\n    print('Example code execution.')\n"
+}

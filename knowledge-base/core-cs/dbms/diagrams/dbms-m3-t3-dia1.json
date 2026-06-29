@@ -1,0 +1,7 @@
+{
+  "topic_id": "dbms-m3-t3",
+  "diagram_id": "dbms-m3-t3-dia1",
+  "title": "ARIES Recovery Algorithm Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process ARIES Recovery Algorithm\"]\n  Process --> End"
+}

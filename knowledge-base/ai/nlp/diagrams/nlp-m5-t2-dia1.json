@@ -1,0 +1,7 @@
+{
+  "topic_id": "nlp-m5-t2",
+  "diagram_id": "nlp-m5-t2-dia1",
+  "title": "Information Retrieval & BM25 Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Information Retrieval & BM25\"]\n  Process --> End"
+}

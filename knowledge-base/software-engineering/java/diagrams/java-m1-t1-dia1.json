@@ -1,0 +1,7 @@
+{
+  "topic_id": "java-m1-t1",
+  "diagram_id": "java-m1-t1-dia1",
+  "title": "javac Compiler vs Execution Flow Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process javac Compiler vs Execution Flow\"]\n  Process --> End"
+}

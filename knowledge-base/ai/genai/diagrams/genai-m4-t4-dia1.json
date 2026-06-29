@@ -1,0 +1,7 @@
+{
+  "topic_id": "genai-m4-t4",
+  "diagram_id": "genai-m4-t4-dia1",
+  "title": "KTO Optimization Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process KTO Optimization\"]\n  Process --> End"
+}

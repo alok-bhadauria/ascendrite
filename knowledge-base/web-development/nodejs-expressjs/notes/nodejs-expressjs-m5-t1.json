@@ -1,0 +1,44 @@
+{
+  "topic_id": "nodejs-expressjs-m5-t1",
+  "title": "Node Cluster",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Hard",
+    "estimated_hours": 6,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Describe structural characteristics of Node Cluster.",
+    "Derive mathematical and programmatic bounds for Cluster module master-worker thread forks, CPU multi-core scaling."
+  ],
+  "content_sections": [
+    {
+      "title": "Node Cluster",
+      "content": "### Event Loops, Threads & Express Middlewares\nNodeJS executes JavaScript on server runtimes using event-driven architectures.\n\n#### Libuv Event Loop Phases\nNodeJS runs single-threaded code using **libuv** event loop phases:\n1.  **Timers:** Executes expired `setTimeout` and `setInterval` callbacks.\n2.  **Pending Callbacks:** Executes deferred I/O callbacks.\n3.  **Poll:** Polls for new I/O events, blocking if call stack is empty.\n4.  **Check:** Executes `setImmediate` callbacks.\n5.  **Close Callbacks:** Executes socket/stream close handles.\n*Worker Pool:* libuv delegates blocking tasks (cryptography, file I/O, DNS lookups) to a background C++ thread pool (default 4 threads).\n\n#### Express Error Handler Middleware Arity\nStandard Express middleware has arity 3 `(req, res, next)`. An Express Error handler middleware MUST declare arity 4 `(err, req, res, next)`. Express uses reflection (`fn.length`) to identify error handlers; omitting `next` prevents Express from registering the function as an error handler, causing exceptions to bypass it.\n\n#### Mongoose Connection Pool\nDatabase connection establishment has high latency. Mongoose maintains a **Connection Pool** of active connections. Reusing active connections bypasses handshake latency, accelerating query executions.\n\n### Depth Analysis: Node Cluster\nIn production configurations, we analyze how Cluster module master-worker thread forks, CPU multi-core scaling affects performance parameters. We evaluate memory layouts and consensus thresholds.",
+      "callouts": [
+        {
+          "type": "Student Trap",
+          "title": "Common Trap in Node Cluster",
+          "content": "A common mistake when analyzing Node Cluster is ignoring latency bounds and boundary edge cases during concurrent executions."
+        },
+        {
+          "type": "Engineering Note",
+          "title": "Production Scaling for Node Cluster",
+          "content": "Production servers implement strict resource isolation and cache alignments to prevent performance regressions when running Node Cluster loops."
+        }
+      ]
+    }
+  ],
+  "example_refs": [
+    "nodejs-expressjs-m5-t1-ex1"
+  ],
+  "diagram_refs": [
+    "nodejs-expressjs-m5-t1-dia1"
+  ],
+  "practice_refs": [
+    "nodejs-expressjs-m5-t1-prac1"
+  ],
+  "quiz_refs": [
+    "nodejs-expressjs-m5-t1-quiz"
+  ]
+}

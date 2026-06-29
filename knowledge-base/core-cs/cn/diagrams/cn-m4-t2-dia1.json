@@ -1,0 +1,7 @@
+{
+  "topic_id": "cn-m4-t2",
+  "diagram_id": "cn-m4-t2-dia1",
+  "title": "HTTP Protocol Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process HTTP Protocol\"]\n  Process --> End"
+}

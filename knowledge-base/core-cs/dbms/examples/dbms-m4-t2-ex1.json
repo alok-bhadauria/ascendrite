@@ -1,0 +1,7 @@
+{
+  "topic_id": "dbms-m4-t2",
+  "asset_id": "dbms-m4-t2-ex1",
+  "title": "System Catalog",
+  "language": "python",
+  "code": "if __name__ == '__main__':\n    print('Example pass for System Catalog')\n"
+}

@@ -1,0 +1,17 @@
+{
+  "quiz_id": "dbms-m2-t4-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which of the following describes a key bottleneck related to Locking Mechanisms?",
+      "options": [
+        "Inefficient scaling of Shared (S) vs Exclusive (X) locks.",
+        "Hardware is completely offline.",
+        "Lack of database files.",
+        "Syntax compilation errors."
+      ],
+      "correct_answer": "Inefficient scaling of Shared (S) vs Exclusive (X) locks.",
+      "explanation": "The topic covers how Shared (S) vs Exclusive (X) locks scales under concurrent workloads, which represents the primary bottlenecks."
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "topic_id": "genai-m4-t2",
+  "asset_id": "genai-m4-t2-prac1",
+  "title": "PPO Alignment Loop",
+  "language": "python",
+  "code": "import numpy as np\n\ndef compute_kl_penalty(log_p_actor, log_p_ref, beta=0.1):\n    return beta * (log_p_actor - log_p_ref)\n\ndef run_practice():\n    pen = compute_kl_penalty(np.log(0.5), np.log(0.25), 0.1)\n    assert np.allclose(pen, 0.0693147)\n    print('[PASS] KL penalty calculations verified.')\n\nif __name__ == '__main__':\n    run_practice()\n"
+}

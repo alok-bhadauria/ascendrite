@@ -1,0 +1,17 @@
+{
+  "quiz_id": "typescript-m5-t3-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "What is the key optimization criteria for Compiler Performance?",
+      "options": [
+        "Minimizing complexity bounds.",
+        "Increasing CPU utilization.",
+        "Static heap allocation.",
+        "Syntax execution bypass."
+      ],
+      "correct_answer": "Minimizing complexity bounds.",
+      "explanation": "The primary goal in designing Compiler Performance is minimizing asymptotic and memory complexities."
+    }
+  ]
+}

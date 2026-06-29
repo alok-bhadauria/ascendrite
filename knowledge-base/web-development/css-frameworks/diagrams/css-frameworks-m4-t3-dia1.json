@@ -1,0 +1,7 @@
+{
+  "topic_id": "css-frameworks-m4-t3",
+  "diagram_id": "css-frameworks-m4-t3-dia1",
+  "title": "UI Libraries Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process UI Libraries\"]\n  Process --> End"
+}

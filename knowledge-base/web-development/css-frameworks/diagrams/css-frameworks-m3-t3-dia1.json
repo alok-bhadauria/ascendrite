@@ -1,0 +1,7 @@
+{
+  "topic_id": "css-frameworks-m3-t3",
+  "diagram_id": "css-frameworks-m3-t3-dia1",
+  "title": "CSS-in-JS Systems Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process CSS-in-JS Systems\"]\n  Process --> End"
+}

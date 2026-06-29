@@ -1,0 +1,26 @@
+{
+  "subject_id": "os",
+  "name": "OS",
+  "category": "core-cs",
+  "difficulty": "Advanced",
+  "estimated_learning_hours": 100,
+  "prerequisites": [
+    "Computer Organization",
+    "C/C++ Programming"
+  ],
+  "tags": [
+    "Operating Systems",
+    "Scheduling",
+    "Memory Virtualization",
+    "Concurrency",
+    "File Systems"
+  ],
+  "subject_theme_colors": {
+    "primary": "#DC2626",
+    "secondary": "#F87171",
+    "accent": "#4F46E5",
+    "neutral": "#1F2937"
+  },
+  "version": "1.0.0",
+  "last_updated": "2026-06-29"
+}

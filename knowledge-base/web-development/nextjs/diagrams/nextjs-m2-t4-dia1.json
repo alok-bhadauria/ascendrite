@@ -1,0 +1,7 @@
+{
+  "topic_id": "nextjs-m2-t4",
+  "diagram_id": "nextjs-m2-t4-dia1",
+  "title": "Edge Runtime & Serverless Functions Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Edge Runtime & Serverless Functions\"]\n  Process --> End"
+}

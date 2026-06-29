@@ -1,0 +1,6 @@
+{
+  "topic_id": "ai-agents-m1-t3",
+  "title": "Planning & Goal Decomposition",
+  "version": "1.0.0",
+  "content": "# Planning & Goal Decomposition\n\n*   **Recursive Planning (BabyAGI):** Dynamic task queue creation, prioritization, and execution loops.\n*   **Plan-and-Solve:** Static multi-step task list generation followed by execution, minimizing intermediate reasoning loops.\n"
+}

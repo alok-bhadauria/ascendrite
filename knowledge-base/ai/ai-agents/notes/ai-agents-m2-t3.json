@@ -1,0 +1,31 @@
+{
+  "topic_id": "ai-agents-m2-t3",
+  "title": "Episodic & Semantic Long-Term Memory",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Medium",
+    "estimated_hours": 5,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Formulate vector database long-term memory integrations.",
+    "Apply memory retrieval and pruning routing rules."
+  ],
+  "content_sections": [
+    {
+      "title": "Long-Term Memory and Vector Databases",
+      "content": "To access information from past sessions, agents implement **long-term memory**. The system vectorizes observations and logs them into a vector database. At query time, the agent performs a similarity search, retrieving relevant past interactions and injecting them into the context as 'Episodic Memory'.",
+      "callouts": []
+    }
+  ],
+  "example_refs": [
+    "ai-agents-m2-t3-ex1"
+  ],
+  "diagram_refs": [],
+  "practice_refs": [
+    "ai-agents-m2-t3-prac1"
+  ],
+  "quiz_refs": [
+    "ai-agents-m2-t3-quiz"
+  ]
+}

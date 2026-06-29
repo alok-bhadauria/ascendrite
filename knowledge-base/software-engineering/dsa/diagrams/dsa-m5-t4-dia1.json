@@ -1,0 +1,7 @@
+{
+  "topic_id": "dsa-m5-t4",
+  "diagram_id": "dsa-m5-t4-dia1",
+  "title": "Dynamic Programming (DP) Basics Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Dynamic Programming (DP) Basics\"]\n  Process --> End"
+}

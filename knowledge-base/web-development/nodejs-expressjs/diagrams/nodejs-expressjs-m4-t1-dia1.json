@@ -1,0 +1,7 @@
+{
+  "topic_id": "nodejs-expressjs-m4-t1",
+  "diagram_id": "nodejs-expressjs-m4-t1-dia1",
+  "title": "API Rate Limiting Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process API Rate Limiting\"]\n  Process --> End"
+}

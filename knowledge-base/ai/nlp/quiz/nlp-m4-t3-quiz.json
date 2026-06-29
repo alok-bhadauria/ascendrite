@@ -1,0 +1,17 @@
+{
+  "quiz_id": "nlp-m4-t3-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "What is the key advantage of Rotary Position Embeddings (RoPE) over absolute sinusoidal encodings?",
+      "options": [
+        "It encodes relative distance properties naturally when calculating Query-Key dot products.",
+        "It reduces parameter counts.",
+        "It replaces LayerNorm.",
+        "It functions only in the log domain."
+      ],
+      "correct_answer": "It encodes relative distance properties naturally when calculating Query-Key dot products.",
+      "explanation": "Because RoPE rotates the 2D slices of key and query vectors, the dot product of two rotated vectors depends only on their relative distance (m - n)."
+    }
+  ]
+}

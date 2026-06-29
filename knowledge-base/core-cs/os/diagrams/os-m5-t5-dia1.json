@@ -1,0 +1,7 @@
+{
+  "topic_id": "os-m5-t5",
+  "diagram_id": "os-m5-t5-dia1",
+  "title": "Containers Foundation Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Containers Foundation\"]\n  Process --> End"
+}

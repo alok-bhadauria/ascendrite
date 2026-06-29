@@ -1,0 +1,7 @@
+{
+  "topic_id": "dsa-m2-t5",
+  "diagram_id": "dsa-m2-t5-dia1",
+  "title": "Linked Lists Patterns Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Linked Lists Patterns\"]\n  Process --> End"
+}

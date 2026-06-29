@@ -1,0 +1,7 @@
+{
+  "topic_id": "quantitative-aptitude-m3-t5",
+  "diagram_id": "quantitative-aptitude-m3-t5-dia1",
+  "title": "Linear Equations Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Linear Equations\"]\n  Process --> End"
+}

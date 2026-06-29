@@ -1,0 +1,19 @@
+{
+  "subject_id": "nextjs",
+  "name": "NextJS",
+  "category": "web-development",
+  "difficulty": "Medium",
+  "estimated_learning_hours": 80,
+  "prerequisites": [],
+  "tags": [
+    "NextJS"
+  ],
+  "subject_theme_colors": {
+    "primary": "#3B82F6",
+    "secondary": "#60A5FA",
+    "accent": "#10B981",
+    "neutral": "#1F2937"
+  },
+  "version": "1.0.0",
+  "last_updated": "2026-06-29"
+}

@@ -1,0 +1,313 @@
+{
+  "subject_id": "genai",
+  "name": "Generative AI",
+  "category": "ai",
+  "modules": [
+    {
+      "name": "Module 1: LLM Foundations, KV Caching & Decoding Mechanics",
+      "topics": [
+        {
+          "id": "genai-m1-t1",
+          "title": "Generative Model Taxonomies",
+          "difficulty": "Medium",
+          "estimated_hours": 4,
+          "importance": "High",
+          "prerequisites": [
+            "Deep Learning Foundations"
+          ],
+          "depends_on": []
+        },
+        {
+          "id": "genai-m1-t2",
+          "title": "Attention Optimizations",
+          "difficulty": "Hard",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": [
+            "genai-m1-t1"
+          ]
+        },
+        {
+          "id": "genai-m1-t3",
+          "title": "LLM Decoding Mathematics",
+          "difficulty": "Medium",
+          "estimated_hours": 4,
+          "importance": "High",
+          "prerequisites": [
+            "Probability and Statistics"
+          ],
+          "depends_on": [
+            "genai-m1-t1"
+          ]
+        },
+        {
+          "id": "genai-m1-t4",
+          "title": "Mixture of Experts",
+          "difficulty": "Hard",
+          "estimated_hours": 6,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": [
+            "genai-m1-t2"
+          ]
+        },
+        {
+          "id": "genai-m1-t5",
+          "title": "Multimodal Tokenization",
+          "difficulty": "Medium",
+          "estimated_hours": 4,
+          "importance": "Medium",
+          "prerequisites": [],
+          "depends_on": [
+            "genai-m1-t1"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 2: Prompt Engineering, Context Management & Compression",
+      "topics": [
+        {
+          "id": "genai-m2-t1",
+          "title": "Prompting Mechanics & In-Context Learning",
+          "difficulty": "Easy",
+          "estimated_hours": 3,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": [
+            "genai-m1-t1"
+          ]
+        },
+        {
+          "id": "genai-m2-t2",
+          "title": "Chain of Thought Prompting",
+          "difficulty": "Medium",
+          "estimated_hours": 4,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": [
+            "genai-m2-t1"
+          ]
+        },
+        {
+          "id": "genai-m2-t3",
+          "title": "Structured Outputs",
+          "difficulty": "Medium",
+          "estimated_hours": 4,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": [
+            "genai-m1-t3"
+          ]
+        },
+        {
+          "id": "genai-m2-t4",
+          "title": "Context Window Constraints",
+          "difficulty": "Medium",
+          "estimated_hours": 3,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": [
+            "genai-m1-t2"
+          ]
+        },
+        {
+          "id": "genai-m2-t5",
+          "title": "Prompt Compression",
+          "difficulty": "Hard",
+          "estimated_hours": 4,
+          "importance": "Medium",
+          "prerequisites": [],
+          "depends_on": [
+            "genai-m2-t4"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 3: Parameter-Efficient Fine-Tuning (PEFT) & LoRA",
+      "topics": [
+        {
+          "id": "genai-m3-t1",
+          "title": "LoRA Mathematics",
+          "difficulty": "Hard",
+          "estimated_hours": 6,
+          "importance": "High",
+          "prerequisites": [
+            "Matrix Calculus"
+          ],
+          "depends_on": [
+            "genai-m1-t1"
+          ]
+        },
+        {
+          "id": "genai-m3-t2",
+          "title": "QLoRA & Double Quantization",
+          "difficulty": "Hard",
+          "estimated_hours": 6,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": [
+            "genai-m3-t1"
+          ]
+        },
+        {
+          "id": "genai-m3-t3",
+          "title": "Prompt & Prefix Tuning",
+          "difficulty": "Medium",
+          "estimated_hours": 4,
+          "importance": "Medium",
+          "prerequisites": [],
+          "depends_on": [
+            "genai-m3-t1"
+          ]
+        },
+        {
+          "id": "genai-m3-t4",
+          "title": "Bottleneck Adapters",
+          "difficulty": "Medium",
+          "estimated_hours": 4,
+          "importance": "Medium",
+          "prerequisites": [],
+          "depends_on": [
+            "genai-m3-t1"
+          ]
+        },
+        {
+          "id": "genai-m3-t5",
+          "title": "Memory Optimization in Fine-Tuning",
+          "difficulty": "Hard",
+          "estimated_hours": 4,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": [
+            "genai-m3-t1"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 4: RLHF, DPO & Reward Loop Optimization",
+      "topics": [
+        {
+          "id": "genai-m4-t1",
+          "title": "Reward Model Training",
+          "difficulty": "Hard",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": [
+            "genai-m1-t1"
+          ]
+        },
+        {
+          "id": "genai-m4-t2",
+          "title": "PPO Alignment Loop",
+          "difficulty": "Hard",
+          "estimated_hours": 6,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": [
+            "genai-m4-t1"
+          ]
+        },
+        {
+          "id": "genai-m4-t3",
+          "title": "Direct Preference Optimization",
+          "difficulty": "Hard",
+          "estimated_hours": 6,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": [
+            "genai-m4-t2"
+          ]
+        },
+        {
+          "id": "genai-m4-t4",
+          "title": "KTO Optimization",
+          "difficulty": "Hard",
+          "estimated_hours": 5,
+          "importance": "Medium",
+          "prerequisites": [],
+          "depends_on": [
+            "genai-m4-t3"
+          ]
+        },
+        {
+          "id": "genai-m4-t5",
+          "title": "Alignment Tax & Evaluation",
+          "difficulty": "Medium",
+          "estimated_hours": 4,
+          "importance": "Medium",
+          "prerequisites": [],
+          "depends_on": [
+            "genai-m4-t2"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Module 5: Inference Optimizations, Quantization & Serving",
+      "topics": [
+        {
+          "id": "genai-m5-t1",
+          "title": "Continuous Batching & Speculative Decoding",
+          "difficulty": "Hard",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": [
+            "genai-m1-t3"
+          ]
+        },
+        {
+          "id": "genai-m5-t2",
+          "title": "PagedAttention & vLLM",
+          "difficulty": "Hard",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": [
+            "genai-m1-t2"
+          ]
+        },
+        {
+          "id": "genai-m5-t3",
+          "title": "Post-Training Quantization",
+          "difficulty": "Hard",
+          "estimated_hours": 6,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": [
+            "genai-m1-t1"
+          ]
+        },
+        {
+          "id": "genai-m5-t4",
+          "title": "Triton Inference Server",
+          "difficulty": "Medium",
+          "estimated_hours": 4,
+          "importance": "Medium",
+          "prerequisites": [],
+          "depends_on": [
+            "genai-m5-t1"
+          ]
+        },
+        {
+          "id": "genai-m5-t5",
+          "title": "Guardrails & Safety Serving",
+          "difficulty": "Medium",
+          "estimated_hours": 4,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": [
+            "genai-m5-t4"
+          ]
+        }
+      ]
+    }
+  ],
+  "version": "1.0.0",
+  "last_updated": "2026-06-29"
+}

@@ -1,0 +1,7 @@
+{
+  "topic_id": "sql-m2-t5",
+  "diagram_id": "sql-m2-t5-dia1",
+  "title": "Execution Mechanics Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Execution Mechanics\"]\n  Process --> End"
+}

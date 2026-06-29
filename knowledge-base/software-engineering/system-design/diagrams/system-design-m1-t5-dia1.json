@@ -1,0 +1,7 @@
+{
+  "topic_id": "system-design-m1-t5",
+  "diagram_id": "system-design-m1-t5-dia1",
+  "title": "Microservices Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Microservices\"]\n  Process --> End"
+}

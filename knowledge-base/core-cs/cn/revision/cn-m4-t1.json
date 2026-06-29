@@ -1,0 +1,6 @@
+{
+  "topic_id": "cn-m4-t1",
+  "title": "DNS Internals",
+  "version": "1.0.0",
+  "content": "# CN Revision\n\n*   **Nyquist vs Shannon:** Nyquist limits noiseless channels ($2B \\log_2 L$); Shannon limits noisy channels ($B \\log_2(1 + S/N)$).\n*   **TCP Congestion Control:** Slow Start (exponential growth) $\\to$ Congestion Avoidance (linear growth) $\\to$ Fast Recovery.\n*   **TLS 1.3:** Complete handshake in 1 RTT using ECDHE keys in ClientHello.\n\n\n*   **DNS Internals Checklist:** Verify input ranges and clear caches.\n"
+}

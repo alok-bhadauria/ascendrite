@@ -1,0 +1,7 @@
+{
+  "topic_id": "ai-agents-m4-t1",
+  "asset_id": "ai-agents-m4-t1-ex1",
+  "title": "Multi-Agent Topologies",
+  "language": "python",
+  "code": "def route_to_agent(state):\n    task = state.get('next_task')\n    if 'code' in task:\n        return 'coder_agent'\n    return 'tester_agent'\n\nif __name__ == '__main__':\n    print('Supervisor routing matrix loaded.')\n"
+}

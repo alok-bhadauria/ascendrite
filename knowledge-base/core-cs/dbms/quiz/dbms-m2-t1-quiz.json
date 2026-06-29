@@ -1,0 +1,17 @@
+{
+  "quiz_id": "dbms-m2-t1-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which of the following describes a key bottleneck related to Transaction Concepts?",
+      "options": [
+        "Inefficient scaling of ACID properties boundaries.",
+        "Hardware is completely offline.",
+        "Lack of database files.",
+        "Syntax compilation errors."
+      ],
+      "correct_answer": "Inefficient scaling of ACID properties boundaries.",
+      "explanation": "The topic covers how ACID properties boundaries scales under concurrent workloads, which represents the primary bottlenecks."
+    }
+  ]
+}

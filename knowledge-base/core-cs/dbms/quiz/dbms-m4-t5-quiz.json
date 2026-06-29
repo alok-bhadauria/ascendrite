@@ -1,0 +1,17 @@
+{
+  "quiz_id": "dbms-m4-t5-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which of the following describes a key bottleneck related to Execution Plans?",
+      "options": [
+        "Inefficient scaling of Reading EXPLAIN logs.",
+        "Hardware is completely offline.",
+        "Lack of database files.",
+        "Syntax compilation errors."
+      ],
+      "correct_answer": "Inefficient scaling of Reading EXPLAIN logs.",
+      "explanation": "The topic covers how Reading EXPLAIN logs scales under concurrent workloads, which represents the primary bottlenecks."
+    }
+  ]
+}

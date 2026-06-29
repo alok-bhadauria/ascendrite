@@ -1,0 +1,7 @@
+{
+  "topic_id": "oop-m4-t3",
+  "diagram_id": "oop-m4-t3-dia1",
+  "title": "Behavioral - Observer Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Behavioral - Observer\"]\n  Process --> End"
+}

@@ -1,0 +1,7 @@
+{
+  "topic_id": "javascript-m4-t4",
+  "diagram_id": "javascript-m4-t4-dia1",
+  "title": "Input Optimization Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Input Optimization\"]\n  Process --> End"
+}

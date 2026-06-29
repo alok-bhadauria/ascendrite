@@ -1,0 +1,7 @@
+{
+  "topic_id": "cn-m1-t4",
+  "diagram_id": "cn-m1-t4-dia1",
+  "title": "MAC Sublayer Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process MAC Sublayer\"]\n  Process --> End"
+}

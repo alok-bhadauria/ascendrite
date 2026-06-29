@@ -1,0 +1,6 @@
+{
+  "topic_id": "ai-agents-m4-t1",
+  "title": "Multi-Agent Topologies",
+  "version": "1.0.0",
+  "content": "# Multi-Agent Topologies\n\n*   **Hierarchical:** Coordinator supervisor delegates tasks to workers, maintaining centralized control.\n*   **Peer-to-Peer:** Collaborative agents route tasks and share updates directly over a common message bus.\n"
+}

@@ -1,0 +1,259 @@
+{
+  "subject_id": "java",
+  "name": "Java",
+  "category": "software-engineering",
+  "modules": [
+    {
+      "name": "Module 1: JVM Architecture & Core Execution Mechanics",
+      "topics": [
+        {
+          "id": "java-m1-t1",
+          "title": "javac Compiler vs Execution Flow",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "java-m1-t2",
+          "title": "JVM Memory Architecture",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "java-m1-t3",
+          "title": "String Constant Pool (SCP)",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "java-m1-t4",
+          "title": "Variables & Scope",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "java-m1-t5",
+          "title": "Operators & Control Flow",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        }
+      ]
+    },
+    {
+      "name": "Module 2: Advanced OOP, Generics & Collections Internals",
+      "topics": [
+        {
+          "id": "java-m2-t1",
+          "title": "Constructors & Initializers",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "java-m2-t2",
+          "title": "Access Modifiers & Encapsulation",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "java-m2-t3",
+          "title": "Polymorphism",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "java-m2-t4",
+          "title": "Generics",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "java-m2-t5",
+          "title": "Collections Internals",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        }
+      ]
+    },
+    {
+      "name": "Module 3: Exception Handling, I/O & Custom Serialization",
+      "topics": [
+        {
+          "id": "java-m3-t1",
+          "title": "Throwable Hierarchy",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "java-m3-t2",
+          "title": "Exception Control Flow",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "java-m3-t3",
+          "title": "Try-with-resources",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "java-m3-t4",
+          "title": "Java I/O Streams",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "java-m3-t5",
+          "title": "Serialization",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        }
+      ]
+    },
+    {
+      "name": "Module 4: Functional Programming & Streams API Pipeline",
+      "topics": [
+        {
+          "id": "java-m4-t1",
+          "title": "Lambda Expressions",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "java-m4-t2",
+          "title": "Functional Interfaces",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "java-m4-t3",
+          "title": "Method References",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "java-m4-t4",
+          "title": "Streams API Intermediate",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "java-m4-t5",
+          "title": "Streams API Terminal",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        }
+      ]
+    },
+    {
+      "name": "Module 5: Concurrency, Thread Synchronization & Advanced JVM",
+      "topics": [
+        {
+          "id": "java-m5-t1",
+          "title": "Concurrency",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "java-m5-t2",
+          "title": "Java Memory Model (JMM)",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "java-m5-t3",
+          "title": "Synchronization & Locks",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "java-m5-t4",
+          "title": "JVM Class Loading Lifecycle",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "java-m5-t5",
+          "title": "Garbage Collection",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        }
+      ]
+    }
+  ],
+  "version": "1.0.0",
+  "last_updated": "2026-06-29"
+}

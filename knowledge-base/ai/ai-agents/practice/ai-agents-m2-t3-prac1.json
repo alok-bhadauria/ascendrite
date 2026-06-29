@@ -1,0 +1,7 @@
+{
+  "topic_id": "ai-agents-m2-t3",
+  "asset_id": "ai-agents-m2-t3-prac1",
+  "title": "Episodic & Semantic Long-Term Memory",
+  "language": "python",
+  "code": "def retrieve_long_term_memories(query, vector_db, k=3):\n    return vector_db.get('docs', [])[:k]\n\ndef run_practice():\n    db = {'docs': ['Memory 1', 'Memory 2']}\n    res = retrieve_long_term_memories('test', db, 1)\n    assert res == ['Memory 1']\n    print('[PASS] Long-term memory retrieval validated.')\n\nif __name__ == '__main__':\n    run_practice()\n"
+}

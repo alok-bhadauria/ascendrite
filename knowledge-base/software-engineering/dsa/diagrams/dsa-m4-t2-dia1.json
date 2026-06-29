@@ -1,0 +1,7 @@
+{
+  "topic_id": "dsa-m4-t2",
+  "diagram_id": "dsa-m4-t2-dia1",
+  "title": "Graphs Representation Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Graphs Representation\"]\n  Process --> End"
+}

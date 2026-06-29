@@ -1,0 +1,7 @@
+{
+  "topic_id": "system-design-m2-t5",
+  "diagram_id": "system-design-m2-t5-dia1",
+  "title": "Reliability Patterns Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Reliability Patterns\"]\n  Process --> End"
+}

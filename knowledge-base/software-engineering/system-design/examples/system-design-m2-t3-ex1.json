@@ -1,0 +1,7 @@
+{
+  "topic_id": "system-design-m2-t3",
+  "asset_id": "system-design-m2-t3-ex1",
+  "title": "Caching Patterns",
+  "language": "python",
+  "code": "if __name__ == '__main__':\n    print('Example code execution.')\n"
+}

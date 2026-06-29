@@ -1,0 +1,7 @@
+{
+  "topic_id": "os-m5-t3",
+  "diagram_id": "os-m5-t3-dia1",
+  "title": "Journaling Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Journaling\"]\n  Process --> End"
+}

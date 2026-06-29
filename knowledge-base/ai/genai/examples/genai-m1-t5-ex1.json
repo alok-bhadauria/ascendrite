@@ -1,0 +1,7 @@
+{
+  "topic_id": "genai-m1-t5",
+  "asset_id": "genai-m1-t5-ex1",
+  "title": "Multimodal Tokenization",
+  "language": "python",
+  "code": "import numpy as np\n\ndef clip_contrastive_logits(image_embeds, text_embeds, temperature=0.07):\n    I = image_embeds / np.linalg.norm(image_embeds, axis=-1, keepdims=True)\n    T = text_embeds / np.linalg.norm(text_embeds, axis=-1, keepdims=True)\n    return np.matmul(I, T.T) / temperature\n\nif __name__ == '__main__':\n    print('CLIP contrastive logits configured.')\n"
+}

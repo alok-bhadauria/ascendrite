@@ -1,0 +1,7 @@
+{
+  "topic_id": "ai-agents-m2-t4",
+  "diagram_id": "ai-agents-m2-t4-dia1",
+  "title": "Custom Tool Definitions Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Custom Tool Definitions\"]\n  Process --> End"
+}

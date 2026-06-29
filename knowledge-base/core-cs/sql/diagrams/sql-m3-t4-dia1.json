@@ -1,0 +1,7 @@
+{
+  "topic_id": "sql-m3-t4",
+  "diagram_id": "sql-m3-t4-dia1",
+  "title": "Exists vs In Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Exists vs In\"]\n  Process --> End"
+}

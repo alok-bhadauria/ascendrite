@@ -1,0 +1,7 @@
+{
+  "topic_id": "os-m3-t2",
+  "diagram_id": "os-m3-t2-dia1",
+  "title": "Paging Internals Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Paging Internals\"]\n  Process --> End"
+}

@@ -1,0 +1,6 @@
+{
+  "topic_id": "ai-agents-m5-t2",
+  "title": "MCP Tool & Resource Declarations",
+  "version": "1.0.0",
+  "content": "# MCP Capabilities\n\n*   **Tools:** Executable functions defined by JSON schemas.\n*   **Resources:** Read-only URIs exposing datasets or logs directly to the model context.\n"
+}

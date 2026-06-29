@@ -1,0 +1,48 @@
+{
+  "topic_id": "nlp-m1-t4",
+  "title": "Topic Modeling",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Medium",
+    "estimated_hours": 5,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Formulate Latent Dirichlet Allocation (LDA) probabilistic model parameters.",
+    "Explain Dirichlet priors and their impact on topic sparsity.",
+    "Trace Gibbs sampling iterations for parameter estimations."
+  ],
+  "content_sections": [
+    {
+      "title": "Latent Dirichlet Allocation (LDA)",
+      "content": "Latent Dirichlet Allocation (LDA) is a generative model for identifying topics within a text corpus. Under LDA, each document is modeled as a mixture of latent topics, and each topic is modeled as a distribution over words. The Dirichlet distribution serves as a prior for the multinomial topic and word distributions, simplifying posterior inference.",
+      "callouts": [
+        {
+          "type": "Student Trap",
+          "title": "Unsupervised Topic Labels",
+          "content": "LDA does not name topics. It output word probability distributions (e.g. topic 1 has high probability for 'bank', 'finance', 'money'). Labelling these topics requires manual domain validation."
+        }
+      ]
+    },
+    {
+      "title": "Dirichlet Priors and Hyperparameter Impact",
+      "content": "The Dirichlet distribution with parameter vector $\\boldsymbol{\\alpha}$ has the probability density function:\n\n$$p(\\boldsymbol{\\theta} \\mid \\boldsymbol{\\alpha}) = \\frac{\\Gamma(\\sum_{k=1}^K \\alpha_k)}{\\prod_{k=1}^K \\Gamma(\\alpha_k)} \\prod_{k=1}^K \\theta_k^{\\alpha_k - 1}$$\n\nwhere $\\boldsymbol{\\theta}$ lies on a simplex (i.e. $\\sum_k \\theta_k = 1, \\theta_k \\ge 0$). In LDA, we use two Dirichlet priors:\n\n1.  **$\\alpha$:** Hyperparameter controlling the document-topic distribution $\\boldsymbol{\\theta}_d$.\n2.  **$\\beta$:** Hyperparameter controlling the topic-word distribution $\\boldsymbol{\\phi}_k$.\n\nSetting $\\alpha < 1$ and $\\beta < 1$ forces the distributions to be sparse (concentrated at the vertices of the simplex). This reflects the reality that documents typically cover only a few topics, and topics are defined by a small set of terms.",
+      "callouts": []
+    },
+    {
+      "title": "Parameter Estimation via Gibbs Sampling",
+      "content": "Because the exact posterior distribution of LDA is intractable to compute, we use approximate inference algorithms like **Gibbs Sampling**. Gibbs sampling iteratively updates the topic assignment $z_i$ of each word $w_i$, conditional on the assignments of all other words:\n\n$$P(z_i = k \\mid \\mathbf{z}_{-i}, \\mathbf{w}, \\alpha, \\beta) \\propto \\frac{n_{k,-i}^{(v)} + \\beta}{\\sum_{v=1}^V (n_{k,-i}^{(v)} + \\beta)} \\times \\frac{n_{d,-i}^{(k)} + \\alpha}{\\sum_{k'=1}^K (n_{d,-i}^{(k')} + \\alpha)}$$\n\nwhere $n_{k,-i}^{(v)}$ is the count of word $v$ assigned to topic $k$ excluding the current token, and $n_{d,-i}^{(k)}$ is the count of topic $k$ occurrences in document $d$ excluding the current token.",
+      "callouts": []
+    }
+  ],
+  "example_refs": [
+    "nlp-m1-t4-ex1"
+  ],
+  "diagram_refs": [],
+  "practice_refs": [
+    "nlp-m1-t4-prac1"
+  ],
+  "quiz_refs": [
+    "nlp-m1-t4-quiz"
+  ]
+}

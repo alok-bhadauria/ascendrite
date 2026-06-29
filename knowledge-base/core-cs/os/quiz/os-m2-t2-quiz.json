@@ -1,0 +1,17 @@
+{
+  "quiz_id": "os-m2-t2-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which of the following describes a key bottleneck related to Scheduling Algorithms?",
+      "options": [
+        "Inefficient scaling of FCFS, SJF, Priority, Round Robin time slice.",
+        "Hardware is completely offline.",
+        "Lack of database files.",
+        "Syntax compilation errors."
+      ],
+      "correct_answer": "Inefficient scaling of FCFS, SJF, Priority, Round Robin time slice.",
+      "explanation": "The topic covers how FCFS, SJF, Priority, Round Robin time slice scales under concurrent workloads, which represents the primary bottlenecks."
+    }
+  ]
+}

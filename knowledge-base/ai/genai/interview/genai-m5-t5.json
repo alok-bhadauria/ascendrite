@@ -1,0 +1,6 @@
+{
+  "topic_id": "genai-m5-t5",
+  "title": "Guardrails & Safety Serving",
+  "version": "1.0.0",
+  "content": "# Interview Prep: Guardrails\n\n## Q1: Why are guardrail models preferred over simple string regex filters for safety validation?\n\n### Standard Answer\nRegex filters check for exact substring matches, which are easily bypassed by character modifications or subtle phrasing. Guardrail models leverage semantic representation capabilities to detect implicit toxicity and adversarial prompts.\n"
+}

@@ -1,0 +1,17 @@
+{
+  "quiz_id": "ai-agents-m2-t5-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "How does an agent recover from a tool execution exception in a ReAct loop?",
+      "options": [
+        "By analyzing the formatted error string returned as an Observation and correcting its arguments in the next step.",
+        "By halting execution immediately.",
+        "By reloading the base weights.",
+        "By calling another model."
+      ],
+      "correct_answer": "By analyzing the formatted error string returned as an Observation and correcting its arguments in the next step.",
+      "explanation": "Injecting the error message back into the model's context as an observation allows the model to analyze the failure and generate a corrected action."
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "topic_id": "ai-agents-m5-t2",
+  "title": "MCP Tool & Resource Declarations",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Medium",
+    "estimated_hours": 5,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Explain MCP tool capability and resource declarations.",
+    "Formulate dynamic client-side discovery loops."
+  ],
+  "content_sections": [
+    {
+      "title": "Dynamic Discovery, Tools, and Resources",
+      "content": "Under MCP, servers declare their capabilities dynamically during process handshakes:\n\n1.  **Tools:** Executable functions that perform actions (e.g. executing code or querying APIs). Servers return JSON schemas describing parameters.\n2.  **Resources:** Read-only data sources (e.g. database schemas, log files) exposed as URI structures (e.g. `postgres://db/table`).\n\nThe client queries these definitions using standard requests (like `tools/list` or `resources/list`), dynamically configuring the agent's tool set.",
+      "callouts": []
+    }
+  ],
+  "example_refs": [
+    "ai-agents-m5-t2-ex1"
+  ],
+  "diagram_refs": [],
+  "practice_refs": [
+    "ai-agents-m5-t2-prac1"
+  ],
+  "quiz_refs": [
+    "ai-agents-m5-t2-quiz"
+  ]
+}

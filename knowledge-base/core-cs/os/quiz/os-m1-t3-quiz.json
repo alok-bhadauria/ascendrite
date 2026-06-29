@@ -1,0 +1,17 @@
+{
+  "quiz_id": "os-m1-t3-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which of the following describes a key bottleneck related to System Calls?",
+      "options": [
+        "Inefficient scaling of Trap instructions execution.",
+        "Hardware is completely offline.",
+        "Lack of database files.",
+        "Syntax compilation errors."
+      ],
+      "correct_answer": "Inefficient scaling of Trap instructions execution.",
+      "explanation": "The topic covers how Trap instructions execution scales under concurrent workloads, which represents the primary bottlenecks."
+    }
+  ]
+}

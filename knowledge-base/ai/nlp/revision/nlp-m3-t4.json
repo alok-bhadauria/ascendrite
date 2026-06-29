@@ -1,0 +1,6 @@
+{
+  "topic_id": "nlp-m3-t4",
+  "title": "FastText Subword Embeddings",
+  "version": "1.0.0",
+  "content": "# FastText Subword Embeddings\n\n$$\\mathbf{v}(w) = \\sum_{g \\in \\mathcal{G}_w} \\mathbf{v}_g$$\n*   Represents words as sums of character n-gram embeddings.\n*   Enables generating vectors for unseen tokens by aggregating subword pieces.\n"
+}

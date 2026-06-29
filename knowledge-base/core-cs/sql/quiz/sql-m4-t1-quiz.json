@@ -1,0 +1,17 @@
+{
+  "quiz_id": "sql-m4-t1-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which of the following describes a key bottleneck related to Index Selection?",
+      "options": [
+        "Inefficient scaling of Composite Index column ordering rules (left-most prefix rules).",
+        "Hardware is completely offline.",
+        "Lack of database files.",
+        "Syntax compilation errors."
+      ],
+      "correct_answer": "Inefficient scaling of Composite Index column ordering rules (left-most prefix rules).",
+      "explanation": "The topic covers how Composite Index column ordering rules (left-most prefix rules) scales under concurrent workloads, which represents the primary bottlenecks."
+    }
+  ]
+}

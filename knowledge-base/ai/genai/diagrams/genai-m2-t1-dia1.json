@@ -1,0 +1,7 @@
+{
+  "topic_id": "genai-m2-t1",
+  "diagram_id": "genai-m2-t1-dia1",
+  "title": "Prompting Mechanics & In-Context Learning Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Prompting Mechanics & In-Context Learning\"]\n  Process --> End"
+}

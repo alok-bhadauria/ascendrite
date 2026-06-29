@@ -1,0 +1,7 @@
+{
+  "topic_id": "java-m2-t2",
+  "diagram_id": "java-m2-t2-dia1",
+  "title": "Access Modifiers & Encapsulation Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Access Modifiers & Encapsulation\"]\n  Process --> End"
+}

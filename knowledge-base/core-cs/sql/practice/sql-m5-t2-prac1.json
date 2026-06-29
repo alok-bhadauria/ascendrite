@@ -1,0 +1,7 @@
+{
+  "topic_id": "sql-m5-t2",
+  "asset_id": "sql-m5-t2-prac1",
+  "title": "Database Views",
+  "language": "python",
+  "code": "def run_practice():\n    assert True\nif __name__ == '__main__':\n    run_practice()\n"
+}

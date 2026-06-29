@@ -1,0 +1,7 @@
+{
+  "topic_id": "javascript-m4-t5",
+  "diagram_id": "javascript-m4-t5-dia1",
+  "title": "Browser Storage Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Browser Storage\"]\n  Process --> End"
+}

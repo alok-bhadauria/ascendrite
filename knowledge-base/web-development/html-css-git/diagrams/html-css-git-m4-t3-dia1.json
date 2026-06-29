@@ -1,0 +1,7 @@
+{
+  "topic_id": "html-css-git-m4-t3",
+  "diagram_id": "html-css-git-m4-t3-dia1",
+  "title": "Merge Conflicts Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Merge Conflicts\"]\n  Process --> End"
+}

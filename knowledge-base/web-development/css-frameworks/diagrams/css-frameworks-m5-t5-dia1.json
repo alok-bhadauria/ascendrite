@@ -1,0 +1,7 @@
+{
+  "topic_id": "css-frameworks-m5-t5",
+  "diagram_id": "css-frameworks-m5-t5-dia1",
+  "title": "Modern Layouts Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Modern Layouts\"]\n  Process --> End"
+}

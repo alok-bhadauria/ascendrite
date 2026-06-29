@@ -1,0 +1,7 @@
+{
+  "topic_id": "verbal-aptitude-m1-t3",
+  "diagram_id": "verbal-aptitude-m1-t3-dia1",
+  "title": "Modifiers Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Modifiers\"]\n  Process --> End"
+}

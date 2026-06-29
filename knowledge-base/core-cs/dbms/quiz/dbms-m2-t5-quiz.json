@@ -1,0 +1,17 @@
+{
+  "quiz_id": "dbms-m2-t5-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which of the following describes a key bottleneck related to Lock Concurrency?",
+      "options": [
+        "Inefficient scaling of Optimistic vs Pessimistic concurrency controls.",
+        "Hardware is completely offline.",
+        "Lack of database files.",
+        "Syntax compilation errors."
+      ],
+      "correct_answer": "Inefficient scaling of Optimistic vs Pessimistic concurrency controls.",
+      "explanation": "The topic covers how Optimistic vs Pessimistic concurrency controls scales under concurrent workloads, which represents the primary bottlenecks."
+    }
+  ]
+}

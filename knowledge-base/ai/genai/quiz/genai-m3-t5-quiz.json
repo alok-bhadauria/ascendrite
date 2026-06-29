@@ -1,0 +1,17 @@
+{
+  "quiz_id": "genai-m3-t5-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "What is the primary trade-off when enabling Gradient Checkpointing during fine-tuning?",
+      "options": [
+        "It reduces peak memory usage but increases total compute time by approximately 30%.",
+        "It increases memory footprint.",
+        "It restricts the model to 2 heads.",
+        "It requires retraining the base tokenizer."
+      ],
+      "correct_answer": "It reduces peak memory usage but increases total compute time by approximately 30%.",
+      "explanation": "Because missing activations must be re-computed during the backward pass, the compute overhead increases by roughly 30%."
+    }
+  ]
+}

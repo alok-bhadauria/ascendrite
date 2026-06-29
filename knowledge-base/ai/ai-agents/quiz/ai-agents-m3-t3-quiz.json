@@ -1,0 +1,17 @@
+{
+  "quiz_id": "ai-agents-m3-t3-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "What is the primary benefit of time-travel debugging in stateful agent graphs?",
+      "options": [
+        "To roll back execution state to any past checkpoint step to inspect variables or fork execution paths.",
+        "To compress context databases.",
+        "To speed up token generation rates.",
+        "To train the tokenizer."
+      ],
+      "correct_answer": "To roll back execution state to any past checkpoint step to inspect variables or fork execution paths.",
+      "explanation": "Time-travel debugging loads past checkpoint IDs, allowing developers to inspect or resume execution from previous states."
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "topic_id": "nlp-m5-t4",
+  "asset_id": "nlp-m5-t4-prac1",
+  "title": "Hybrid Search",
+  "language": "python",
+  "code": "import numpy as np\n\ndef compute_rrf_score(rank_sparse, rank_dense, k=60):\n    return 1.0 / (k + rank_sparse) + 1.0 / (k + rank_dense)\n\ndef run_practice():\n    score = compute_rrf_score(1, 1, 60)\n    assert np.allclose(score, 2.0 / 61.0)\n    print('[PASS] RRF score computations verified.')\n\nif __name__ == '__main__':\n    run_practice()\n"
+}

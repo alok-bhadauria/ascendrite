@@ -1,0 +1,7 @@
+{
+  "topic_id": "os-m4-t4",
+  "diagram_id": "os-m4-t4-dia1",
+  "title": "Cache Thrashing Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Cache Thrashing\"]\n  Process --> End"
+}

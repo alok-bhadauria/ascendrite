@@ -1,0 +1,7 @@
+{
+  "topic_id": "reactjs-m5-t2",
+  "diagram_id": "reactjs-m5-t2-dia1",
+  "title": "Suspense Boundaries Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Suspense Boundaries\"]\n  Process --> End"
+}

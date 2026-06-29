@@ -1,0 +1,7 @@
+{
+  "topic_id": "javascript-m2-t2",
+  "diagram_id": "javascript-m2-t2-dia1",
+  "title": "Prototypes Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Prototypes\"]\n  Process --> End"
+}

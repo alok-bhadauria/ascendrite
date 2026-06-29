@@ -1,0 +1,7 @@
+{
+  "topic_id": "deep-learning-m1-t3",
+  "asset_id": "deep-learning-m1-t3-prac1",
+  "title": "Loss Functions",
+  "language": "python",
+  "code": "import numpy as np\n\n\ndef compute_mse(y_true: np.ndarray, y_pred: np.ndarray) -> float:\n    \"\"\"Computes the Mean Squared Error (MSE) loss.\n\n    Formula:\n        loss = (1 / N) * sum((y_true - y_pred)^2)\n    \"\"\"\n    return float(np.mean((y_true - y_pred) ** 2))\n\n\ndef compute_mse_gradient(y_true: np.ndarray, y_pred: np.ndarray) -> np.ndarray:\n    \"\"\"Computes the gradient of the MSE loss with respect to predictions.\n\n    Formula:\n        d_loss/d_ypred = (2 / N) * (y_pred - y_true)\n    \"\"\"\n    n = y_true.size\n    return (2.0 / n) * (y_pred - y_true)\n\n\ndef compute_bce_logits(y_true: np.ndarray, logits: np.ndarray) -> float:\n    \"\"\"Computes numerically stable Binary Cross-Entropy loss from logits.\n\n    Formula:\n        loss = (1 / N) * sum(max(logits, 0) - y_true * logits + ln(1 + exp(-|logits|)))\n    \"\"\"\n    loss = np.maximum(logits, 0.0) - y_true * logits + np.log(1.0 + np.exp(-np.abs(logits)))\n    return float(np.mean(loss))\n\n\ndef compute_bce_logits_gradient(y_true: np.ndarray, logits: np.ndarray) -> np.ndarray:\n    \"\"\"Computes the gradient of stable BCE loss with respect to logits.\n\n    Formula:\n        d_loss/d_logits = (1 / N) * (sigmoid(logits) - y_true)\n    \"\"\"\n    n = y_true.size\n    # Compute Sigmoid: 1 / (1 + exp(-logits))\n    sig = 1.0 / (1.0 + np.exp(-np.clip(logits, -500, 500)))\n    return (sig - y_true) / n\n"
+}

@@ -1,0 +1,17 @@
+{
+  "quiz_id": "ai-agents-m3-t4-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "What happens when an agent graph encounters a configured breakpoint?",
+      "options": [
+        "Execution pauses, and the current state is serialized, waiting for an external resume signal.",
+        "The program crashes.",
+        "The context is deleted.",
+        "The model is retrained."
+      ],
+      "correct_answer": "Execution pauses, and the current state is serialized, waiting for an external resume signal.",
+      "explanation": "Breakpoints pause execution, serializing the state to database checkpoints while waiting for external inputs or approval signals."
+    }
+  ]
+}

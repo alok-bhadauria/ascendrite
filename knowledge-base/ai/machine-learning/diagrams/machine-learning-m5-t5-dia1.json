@@ -1,0 +1,7 @@
+{
+  "topic_id": "machine-learning-m5-t5",
+  "diagram_id": "machine-learning-m5-t5-dia1",
+  "title": "Enterprise MLOps & Serving Pipelines Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Enterprise MLOps & Serving Pipelines\"]\n  Process --> End"
+}

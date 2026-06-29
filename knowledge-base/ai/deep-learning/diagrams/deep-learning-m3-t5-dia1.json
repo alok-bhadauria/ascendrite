@@ -1,0 +1,7 @@
+{
+  "topic_id": "deep-learning-m3-t5",
+  "diagram_id": "deep-learning-m3-t5-dia1",
+  "title": "Computer Vision Tasks Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Computer Vision Tasks\"]\n  Process --> End"
+}

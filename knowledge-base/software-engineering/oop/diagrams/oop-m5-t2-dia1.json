@@ -1,0 +1,7 @@
+{
+  "topic_id": "oop-m5-t2",
+  "diagram_id": "oop-m5-t2-dia1",
+  "title": "UML Modeling Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process UML Modeling\"]\n  Process --> End"
+}

@@ -1,0 +1,7 @@
+{
+  "topic_id": "quantitative-aptitude-m2-t1",
+  "diagram_id": "quantitative-aptitude-m2-t1-dia1",
+  "title": "Averages & Mixtures Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Averages & Mixtures\"]\n  Process --> End"
+}

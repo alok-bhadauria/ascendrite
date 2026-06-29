@@ -1,0 +1,7 @@
+{
+  "topic_id": "nodejs-expressjs-m2-t1",
+  "diagram_id": "nodejs-expressjs-m2-t1-dia1",
+  "title": "Express Foundations Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Express Foundations\"]\n  Process --> End"
+}

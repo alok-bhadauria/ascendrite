@@ -1,0 +1,7 @@
+{
+  "topic_id": "ai-agents-m2-t5",
+  "diagram_id": "ai-agents-m2-t5-dia1",
+  "title": "Error Handling & Recovery Loops Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Error Handling & Recovery Loops\"]\n  Process --> End"
+}

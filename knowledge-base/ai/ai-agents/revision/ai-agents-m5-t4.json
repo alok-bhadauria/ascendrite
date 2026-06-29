@@ -1,0 +1,6 @@
+{
+  "topic_id": "ai-agents-m5-t4",
+  "title": "Production Safety Guardrails",
+  "version": "1.0.0",
+  "content": "# Production Safety\n\n*   **Input Guardrails:** Sanitizing user prompts to block injections.\n*   **Rate Limits:** Bounding iterations and tokens per session to control costs.\n"
+}

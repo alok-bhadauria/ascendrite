@@ -1,0 +1,17 @@
+{
+  "quiz_id": "os-m2-t1-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which of the following describes a key bottleneck related to CPU Schedulers?",
+      "options": [
+        "Inefficient scaling of Long-term, medium-term, and short-term scheduler algorithms selection.",
+        "Hardware is completely offline.",
+        "Lack of database files.",
+        "Syntax compilation errors."
+      ],
+      "correct_answer": "Inefficient scaling of Long-term, medium-term, and short-term scheduler algorithms selection.",
+      "explanation": "The topic covers how Long-term, medium-term, and short-term scheduler algorithms selection scales under concurrent workloads, which represents the primary bottlenecks."
+    }
+  ]
+}

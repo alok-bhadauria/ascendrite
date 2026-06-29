@@ -1,0 +1,7 @@
+{
+  "topic_id": "ai-agents-m1-t2",
+  "asset_id": "ai-agents-m1-t2-prac1",
+  "title": "ReAct Reasoning Framework",
+  "language": "python",
+  "code": "import re\n\ndef parse_react_action(text):\n    match = re.search(r'Action:\\s*(\\w+)\\[(.*)\\]', text)\n    if match:\n        return match.group(1), match.group(2)\n    return None, None\n\ndef run_practice():\n    trace = \"Thought: I need to find the result. Action: Search[Llama 3 paper]\"\n    tool, arg = parse_react_action(trace)\n    assert tool == 'Search'\n    assert arg == 'Llama 3 paper'\n    print('[PASS] ReAct regex parser verified.')\n\nif __name__ == '__main__':\n    run_practice()\n"
+}

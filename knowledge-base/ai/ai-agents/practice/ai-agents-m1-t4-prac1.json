@@ -1,0 +1,7 @@
+{
+  "topic_id": "ai-agents-m1-t4",
+  "asset_id": "ai-agents-m1-t4-prac1",
+  "title": "Advanced Reasoning Paths",
+  "language": "python",
+  "code": "def dfs_backtrack_sim(node, visited):\n    visited.append(node)\n    return visited\n\ndef run_practice():\n    vis = []\n    res = dfs_backtrack_sim('root', vis)\n    assert res == ['root']\n    print('[PASS] DFS search simulation validated.')\n\nif __name__ == '__main__':\n    run_practice()\n"
+}

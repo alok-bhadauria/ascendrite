@@ -1,0 +1,7 @@
+{
+  "topic_id": "reactjs-m4-t4",
+  "diagram_id": "reactjs-m4-t4-dia1",
+  "title": "Hydration Pitfalls Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Hydration Pitfalls\"]\n  Process --> End"
+}

@@ -1,0 +1,7 @@
+{
+  "topic_id": "typescript-m5-t3",
+  "diagram_id": "typescript-m5-t3-dia1",
+  "title": "Compiler Performance Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Compiler Performance\"]\n  Process --> End"
+}

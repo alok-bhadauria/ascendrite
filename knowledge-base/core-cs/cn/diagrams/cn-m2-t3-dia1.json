@@ -1,0 +1,7 @@
+{
+  "topic_id": "cn-m2-t3",
+  "diagram_id": "cn-m2-t3-dia1",
+  "title": "Routing Algorithms Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Routing Algorithms\"]\n  Process --> End"
+}

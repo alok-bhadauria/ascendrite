@@ -1,0 +1,7 @@
+{
+  "topic_id": "os-m3-t3",
+  "diagram_id": "os-m3-t3-dia1",
+  "title": "TLB Hardware Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process TLB Hardware\"]\n  Process --> End"
+}

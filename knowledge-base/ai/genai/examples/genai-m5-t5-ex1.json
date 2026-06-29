@@ -1,0 +1,7 @@
+{
+  "topic_id": "genai-m5-t5",
+  "asset_id": "genai-m5-t5-ex1",
+  "title": "Guardrails & Safety Serving",
+  "language": "python",
+  "code": "def evaluate_safety_logits(logits, toxic_indices, threshold=0.5):\n    toxic_activation = logits[toxic_indices]\n    return 'unsafe' if np.any(toxic_activation > threshold) else 'safe'\n\nif __name__ == '__main__':\n    print('Safety logit checks configured.')\n"
+}

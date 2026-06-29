@@ -1,0 +1,17 @@
+{
+  "quiz_id": "nlp-m3-t2-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "What is the primary computational benefit of using Hierarchical Softmax instead of a full Softmax output layer?",
+      "options": [
+        "It reduces output complexity from O(V) to O(log V) using a binary Huffman tree.",
+        "It eliminates the need for any backpropagation.",
+        "It makes embedding vectors orthogonal.",
+        "It dynamically prunes the vocabulary during model execution."
+      ],
+      "correct_answer": "It reduces output complexity from O(V) to O(log V) using a binary Huffman tree.",
+      "explanation": "Hierarchical Softmax structures words in a binary tree where path selections act as a series of sigmoid splits, dropping complexity to O(log V)."
+    }
+  ]
+}

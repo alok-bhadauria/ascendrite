@@ -1,0 +1,6 @@
+{
+  "topic_id": "nlp-m5-t3",
+  "title": "Vector Databases & Search",
+  "version": "1.0.0",
+  "content": "# Interview Prep: Vector DBs\n\n## Q1: How does Product Quantization (PQ) compress vector embedding datasets?\n\n### Standard Answer\nPQ splits a $d$-dimensional vector into $m$ sub-vectors of dimension $d/m$. It clusters each sub-space independently using K-Means to build a codebook. Each sub-vector is then replaced by its nearest centroid index. This compresses a 1024-byte float vector to a small sequence of 8-bit cluster indices, reducing memory usage by 90% or more.\n"
+}

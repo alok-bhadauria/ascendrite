@@ -1,0 +1,7 @@
+{
+  "topic_id": "typescript-m1-t5",
+  "diagram_id": "typescript-m1-t5-dia1",
+  "title": "Type Guards Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Type Guards\"]\n  Process --> End"
+}

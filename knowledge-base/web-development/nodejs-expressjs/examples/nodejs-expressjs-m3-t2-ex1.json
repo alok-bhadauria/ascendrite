@@ -1,0 +1,7 @@
+{
+  "topic_id": "nodejs-expressjs-m3-t2",
+  "asset_id": "nodejs-expressjs-m3-t2-ex1",
+  "title": "Connection Pooling",
+  "language": "python",
+  "code": "if __name__ == '__main__':\n    print('Example code execution.')\n"
+}

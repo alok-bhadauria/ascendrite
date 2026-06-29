@@ -1,0 +1,7 @@
+{
+  "topic_id": "system-design-m5-t4",
+  "diagram_id": "system-design-m5-t4-dia1",
+  "title": "AI System Design Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process AI System Design\"]\n  Process --> End"
+}

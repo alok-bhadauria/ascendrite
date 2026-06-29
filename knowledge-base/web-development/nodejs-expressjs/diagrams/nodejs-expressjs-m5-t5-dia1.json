@@ -1,0 +1,7 @@
+{
+  "topic_id": "nodejs-expressjs-m5-t5",
+  "diagram_id": "nodejs-expressjs-m5-t5-dia1",
+  "title": "Observability Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Observability\"]\n  Process --> End"
+}

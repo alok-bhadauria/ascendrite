@@ -1,0 +1,6 @@
+{
+  "topic_id": "genai-m4-t1",
+  "title": "Reward Model Training",
+  "version": "1.0.0",
+  "content": "# Reward Model Training\n\n$$\\mathcal{L} = -\\ln \\sigma(r(x, y_w) - r(x, y_l))$$\n"
+}

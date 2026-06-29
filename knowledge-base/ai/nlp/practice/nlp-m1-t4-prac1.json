@@ -1,0 +1,7 @@
+{
+  "topic_id": "nlp-m1-t4",
+  "asset_id": "nlp-m1-t4-prac1",
+  "title": "Topic Modeling",
+  "language": "python",
+  "code": "import numpy as np\n\ndef run_practice():\n    t1 = 5.1 / 101.0\n    t2 = 2.1 / 10.2\n    expected = t1 * t2\n    assert np.allclose(expected, 0.01039, atol=1e-4)\n    print('[PASS] Gibbs math checks validated.')\n\nif __name__ == '__main__':\n    run_practice()\n"
+}

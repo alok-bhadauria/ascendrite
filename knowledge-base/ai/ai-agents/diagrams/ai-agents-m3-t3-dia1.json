@@ -1,0 +1,7 @@
+{
+  "topic_id": "ai-agents-m3-t3",
+  "diagram_id": "ai-agents-m3-t3-dia1",
+  "title": "Persistence & State Rewinding Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Persistence & State Rewinding\"]\n  Process --> End"
+}

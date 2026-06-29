@@ -1,0 +1,7 @@
+{
+  "topic_id": "os-m4-t2",
+  "diagram_id": "os-m4-t2-dia1",
+  "title": "Critical Section Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Critical Section\"]\n  Process --> End"
+}

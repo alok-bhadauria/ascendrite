@@ -1,0 +1,7 @@
+{
+  "topic_id": "os-m3-t1",
+  "diagram_id": "os-m3-t1-dia1",
+  "title": "Virtual Memory Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Virtual Memory\"]\n  Process --> End"
+}

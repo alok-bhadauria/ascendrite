@@ -1,0 +1,7 @@
+{
+  "topic_id": "machine-learning-m5-t1",
+  "diagram_id": "machine-learning-m5-t1-dia1",
+  "title": "Clustering Mechanics & Convergence Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Clustering Mechanics & Convergence\"]\n  Process --> End"
+}

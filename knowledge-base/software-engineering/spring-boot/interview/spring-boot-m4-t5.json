@@ -1,0 +1,6 @@
+{
+  "topic_id": "spring-boot-m4-t5",
+  "title": "Security Hardening",
+  "version": "1.0.0",
+  "content": "# Spring Boot Interview Prep\n\n## Q1: Explain how the Spring IoC container resolves circular dependencies between singleton beans using the 3-Level Cache.\n\n### Standard Answer\nWhen instantiating Bean A, Spring places an ObjectFactory for A in the third cache (`singletonFactories`). During property injection, Spring notices A requires Bean B. It pauses A's creation and attempts to instantiate B. B requires A, so Spring checks caches. It finds A's factory in the third cache, generates a partially initialized reference to A, moves it to the second cache (`earlySingletonObjects`), and injects it into B. B completes initialization and is placed in the first cache (`singletonObjects`), allowing A's creation to complete.\n\n\n## Q2: How does the system handle concurrent throughput anomalies under Security Hardening?\n\n### Standard Answer\nThe system uses dynamic resource pools and queue-backoff throttles to maintain throughput boundaries, avoiding thread starvation.\n"
+}

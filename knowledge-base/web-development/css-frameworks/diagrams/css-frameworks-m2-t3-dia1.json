@@ -1,0 +1,7 @@
+{
+  "topic_id": "css-frameworks-m2-t3",
+  "diagram_id": "css-frameworks-m2-t3-dia1",
+  "title": "Dark Mode Config Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Dark Mode Config\"]\n  Process --> End"
+}

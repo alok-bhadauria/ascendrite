@@ -1,0 +1,6 @@
+{
+  "topic_id": "css-frameworks-m1-t5",
+  "title": "Typography & Colors",
+  "version": "1.0.0",
+  "content": "# CSS Frameworks Interview Prep\n\n## Q1: Why do static class names like 'text-red-500' compile successfully while dynamic class builders fail?\n\n### Standard Answer\nCSS frameworks scan codebase files statically using string parsing regex engines. They do not run the JS code at build time. A string like `bg-${color}-600` is parsed as a literal token, which does not match any output utilities. Consequently, the utility class is excluded from the compilation bundle. Always write complete utility class names inside template files.\n\n\n## Q2: How does the system handle concurrent throughput anomalies under Typography & Colors?\n\n### Standard Answer\nThe system uses dynamic resource pools and queue-backoff throttles to maintain throughput boundaries, avoiding thread starvation.\n"
+}

@@ -1,0 +1,6 @@
+{
+  "topic_id": "verbal-aptitude-m3-t3",
+  "title": "Idioms & Phrases",
+  "version": "1.0.0",
+  "content": "# Verbal-Aptitude Prep\n\n## Q1: How do dangling modifiers distort semantic meaning, and how do you resolve them?\n\n### Standard Answer\nA dangling modifier occurs when a modifying phrase lacks an explicit target noun to modify, causing the reader to associate it with the nearest subject. For example, in \"Walking into the room, the database failed,\" the modifier \"Walking into the room\" is incorrectly attached to the subject \"the database\". To resolve it, insert the active subject into the clause: \"As the engineer walked into the room, the database failed.\"\n\n\n## Q2: How does the system handle concurrent throughput anomalies under Idioms & Phrases?\n\n### Standard Answer\nThe system uses dynamic resource pools and queue-backoff throttles to maintain throughput boundaries, avoiding thread starvation.\n"
+}

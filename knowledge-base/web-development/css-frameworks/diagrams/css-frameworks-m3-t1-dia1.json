@@ -1,0 +1,7 @@
+{
+  "topic_id": "css-frameworks-m3-t1",
+  "diagram_id": "css-frameworks-m3-t1-dia1",
+  "title": "Directives & @apply Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Directives & @apply\"]\n  Process --> End"
+}

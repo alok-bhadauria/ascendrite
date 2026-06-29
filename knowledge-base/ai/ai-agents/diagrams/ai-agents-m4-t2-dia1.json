@@ -1,0 +1,7 @@
+{
+  "topic_id": "ai-agents-m4-t2",
+  "diagram_id": "ai-agents-m4-t2-dia1",
+  "title": "State Sharing & Message Formats Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process State Sharing & Message Formats\"]\n  Process --> End"
+}

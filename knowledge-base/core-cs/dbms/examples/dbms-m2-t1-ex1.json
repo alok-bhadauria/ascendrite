@@ -1,0 +1,7 @@
+{
+  "topic_id": "dbms-m2-t1",
+  "asset_id": "dbms-m2-t1-ex1",
+  "title": "Transaction Concepts",
+  "language": "python",
+  "code": "if __name__ == '__main__':\n    print('Example pass for Transaction Concepts')\n"
+}

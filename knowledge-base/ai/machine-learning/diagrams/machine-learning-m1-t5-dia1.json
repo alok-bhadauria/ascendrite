@@ -1,0 +1,7 @@
+{
+  "topic_id": "machine-learning-m1-t5",
+  "diagram_id": "machine-learning-m1-t5-dia1",
+  "title": "Numerical Stability & Mixed Precision Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Numerical Stability & Mixed Precision\"]\n  Process --> End"
+}

@@ -1,0 +1,7 @@
+{
+  "topic_id": "spring-boot-m3-t4",
+  "asset_id": "spring-boot-m3-t4-ex1",
+  "title": "Transaction Management",
+  "language": "python",
+  "code": "if __name__ == '__main__':\n    print('Example code execution.')\n"
+}

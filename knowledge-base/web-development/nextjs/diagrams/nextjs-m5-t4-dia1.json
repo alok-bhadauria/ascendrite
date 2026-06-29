@@ -1,0 +1,7 @@
+{
+  "topic_id": "nextjs-m5-t4",
+  "diagram_id": "nextjs-m5-t4-dia1",
+  "title": "Production Deployment Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Production Deployment\"]\n  Process --> End"
+}

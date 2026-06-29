@@ -1,0 +1,7 @@
+{
+  "topic_id": "java-m5-t1",
+  "diagram_id": "java-m5-t1-dia1",
+  "title": "Concurrency Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Concurrency\"]\n  Process --> End"
+}

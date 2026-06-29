@@ -1,0 +1,7 @@
+{
+  "topic_id": "spring-boot-m2-t2",
+  "diagram_id": "spring-boot-m2-t2-dia1",
+  "title": "Controller Layer Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Controller Layer\"]\n  Process --> End"
+}

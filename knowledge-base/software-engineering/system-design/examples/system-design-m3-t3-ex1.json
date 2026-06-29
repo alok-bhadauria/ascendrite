@@ -1,0 +1,7 @@
+{
+  "topic_id": "system-design-m3-t3",
+  "asset_id": "system-design-m3-t3-ex1",
+  "title": "Database Indexing",
+  "language": "python",
+  "code": "if __name__ == '__main__':\n    print('Example code execution.')\n"
+}

@@ -1,0 +1,6 @@
+{
+  "topic_id": "nlp-m5-t2",
+  "title": "Information Retrieval & BM25",
+  "version": "1.0.0",
+  "content": "# BM25 Model\n\n## 1. Mathematical Equation\n$$\\text{Score}(D, Q) = \\sum_{q_i \\in Q} \\text{IDF}(q_i) \\frac{f(q_i, D) (k_1 + 1)}{f(q_i, D) + k_1 (1 - b + b \\frac{|D|}{\\text{avgdl}})}$$\n\n## 2. Hyperparameter Defaults\n*   $k_1 \\approx 1.5$: Term frequency saturation parameter.\n*   $b \\approx 0.75$: Document length normalization parameter.\n"
+}

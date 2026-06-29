@@ -1,0 +1,7 @@
+{
+  "topic_id": "java-m3-t2",
+  "diagram_id": "java-m3-t2-dia1",
+  "title": "Exception Control Flow Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Exception Control Flow\"]\n  Process --> End"
+}

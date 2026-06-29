@@ -1,0 +1,7 @@
+{
+  "topic_id": "os-m5-t1",
+  "diagram_id": "os-m5-t1-dia1",
+  "title": "Disk Scheduling Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Disk Scheduling\"]\n  Process --> End"
+}

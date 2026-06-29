@@ -1,0 +1,7 @@
+{
+  "topic_id": "dsa-m4-t1",
+  "asset_id": "dsa-m4-t1-ex1",
+  "title": "Heaps",
+  "language": "python",
+  "code": "if __name__ == '__main__':\n    print('Example code execution.')\n"
+}

@@ -1,0 +1,17 @@
+{
+  "quiz_id": "os-m1-t1-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which of the following describes a key bottleneck related to OS Kernels?",
+      "options": [
+        "Inefficient scaling of Monolithic kernels (Linux) vs Microkernels (Mach) system boundaries.",
+        "Hardware is completely offline.",
+        "Lack of database files.",
+        "Syntax compilation errors."
+      ],
+      "correct_answer": "Inefficient scaling of Monolithic kernels (Linux) vs Microkernels (Mach) system boundaries.",
+      "explanation": "The topic covers how Monolithic kernels (Linux) vs Microkernels (Mach) system boundaries scales under concurrent workloads, which represents the primary bottlenecks."
+    }
+  ]
+}

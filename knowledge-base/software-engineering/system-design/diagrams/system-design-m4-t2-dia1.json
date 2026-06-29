@@ -1,0 +1,7 @@
+{
+  "topic_id": "system-design-m4-t2",
+  "diagram_id": "system-design-m4-t2-dia1",
+  "title": "Distributed Log Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Distributed Log\"]\n  Process --> End"
+}

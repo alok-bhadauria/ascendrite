@@ -1,0 +1,17 @@
+{
+  "quiz_id": "sql-m4-t4-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which of the following describes a key bottleneck related to Join Optimization?",
+      "options": [
+        "Inefficient scaling of Nested Loop vs Hash Join selections.",
+        "Hardware is completely offline.",
+        "Lack of database files.",
+        "Syntax compilation errors."
+      ],
+      "correct_answer": "Inefficient scaling of Nested Loop vs Hash Join selections.",
+      "explanation": "The topic covers how Nested Loop vs Hash Join selections scales under concurrent workloads, which represents the primary bottlenecks."
+    }
+  ]
+}

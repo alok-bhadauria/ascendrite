@@ -1,0 +1,7 @@
+{
+  "topic_id": "ai-agents-m4-t3",
+  "diagram_id": "ai-agents-m4-t3-dia1",
+  "title": "Agent Specialists & Segregation Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Agent Specialists & Segregation\"]\n  Process --> End"
+}

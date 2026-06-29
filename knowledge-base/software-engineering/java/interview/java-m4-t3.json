@@ -1,0 +1,6 @@
+{
+  "topic_id": "java-m4-t3",
+  "title": "Method References",
+  "version": "1.0.0",
+  "content": "# Java Interview Prep\n\n## Q1: Explain why the Java Memory Model (JMM) Happen-Before relationship is critical for volatile variables.\n\n### Standard Answer\nWithout volatile, compilers and multi-core CPUs reorder instructions and cache variables locally to optimize throughput. The JMM guarantees that a write to a volatile field happens-before every subsequent read of that same field. This forces thread reads and writes directly to main memory and inserts memory barriers to prevent compiler and CPU reorderings, ensuring thread visibility.\n\n\n## Q2: How does the system handle concurrent throughput anomalies under Method References?\n\n### Standard Answer\nThe system uses dynamic resource pools and queue-backoff throttles to maintain throughput boundaries, avoiding thread starvation.\n"
+}

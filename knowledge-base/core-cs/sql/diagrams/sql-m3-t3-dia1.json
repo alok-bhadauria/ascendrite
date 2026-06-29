@@ -1,0 +1,7 @@
+{
+  "topic_id": "sql-m3-t3",
+  "diagram_id": "sql-m3-t3-dia1",
+  "title": "Subqueries Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Subqueries\"]\n  Process --> End"
+}

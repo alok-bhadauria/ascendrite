@@ -1,0 +1,6 @@
+{
+  "topic_id": "ai-agents-m5-t5",
+  "title": "Sandbox Execution Environments",
+  "version": "1.0.0",
+  "content": "# Sandboxed Execution\n\n*   **Sandboxes:** Isolated runtimes (e.g. Docker containers) that execute agent-generated code without risking the host.\n*   **Path Boundaries:** Restricting file read/write operations to a specific temporary sandbox directory.\n"
+}

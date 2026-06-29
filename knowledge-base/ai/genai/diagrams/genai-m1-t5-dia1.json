@@ -1,0 +1,7 @@
+{
+  "topic_id": "genai-m1-t5",
+  "diagram_id": "genai-m1-t5-dia1",
+  "title": "Multimodal Tokenization Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Multimodal Tokenization\"]\n  Process --> End"
+}

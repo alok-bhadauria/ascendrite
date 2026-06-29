@@ -1,0 +1,17 @@
+{
+  "quiz_id": "sql-m3-t3-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which of the following describes a key bottleneck related to Subqueries?",
+      "options": [
+        "Inefficient scaling of Scalar subqueries, multi-row subqueries (IN, ANY, ALL).",
+        "Hardware is completely offline.",
+        "Lack of database files.",
+        "Syntax compilation errors."
+      ],
+      "correct_answer": "Inefficient scaling of Scalar subqueries, multi-row subqueries (IN, ANY, ALL).",
+      "explanation": "The topic covers how Scalar subqueries, multi-row subqueries (IN, ANY, ALL) scales under concurrent workloads, which represents the primary bottlenecks."
+    }
+  ]
+}

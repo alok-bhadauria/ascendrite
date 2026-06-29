@@ -1,0 +1,7 @@
+{
+  "topic_id": "html-css-git-m1-t4",
+  "diagram_id": "html-css-git-m1-t4-dia1",
+  "title": "Forms & Validations Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Forms & Validations\"]\n  Process --> End"
+}

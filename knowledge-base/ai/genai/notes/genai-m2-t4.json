@@ -1,0 +1,36 @@
+{
+  "topic_id": "genai-m2-t4",
+  "title": "Context Window Constraints",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Medium",
+    "estimated_hours": 5,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Explain the 'Lost in the Middle' retrieval accuracy drop.",
+    "Trace positional decay attention profiles."
+  ],
+  "content_sections": [
+    {
+      "title": "Lost in the Middle",
+      "content": "As prompt contexts grow longer, decoder retrieval performance degrades. Studies show that models locate details at the beginning or end of the context window with high accuracy, but fail to retrieve information located in the middle. This is known as the **'Lost in the Middle'** phenomenon, forming a U-shaped retrieval accuracy curve.",
+      "callouts": []
+    },
+    {
+      "title": "Attention Decay Profiles",
+      "content": "This degradation is driven by the attention weight distribution characteristics of causal decoders. At large sequence lengths, attention weights decay over distance, making it difficult for the query token to attend to keys buried in the middle of long contexts. Mitigations include placing critical information at the beginning or end of the prompt.",
+      "callouts": []
+    }
+  ],
+  "example_refs": [
+    "genai-m2-t4-ex1"
+  ],
+  "diagram_refs": [],
+  "practice_refs": [
+    "genai-m2-t4-prac1"
+  ],
+  "quiz_refs": [
+    "genai-m2-t4-quiz"
+  ]
+}

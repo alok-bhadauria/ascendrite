@@ -1,0 +1,7 @@
+{
+  "topic_id": "nextjs-m1-t2",
+  "diagram_id": "nextjs-m1-t2-dia1",
+  "title": "Client Components Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Client Components\"]\n  Process --> End"
+}

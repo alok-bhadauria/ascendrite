@@ -1,0 +1,36 @@
+{
+  "topic_id": "nlp-m5-t5",
+  "title": "Summarization & Translation Metrics",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Medium",
+    "estimated_hours": 5,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Derive the Bilingual Evaluation Understudy (BLEU) metric equations and explain the brevity penalty.",
+    "Formulate ROUGE evaluation metrics and distinguish ROUGE-N from ROUGE-L."
+  ],
+  "content_sections": [
+    {
+      "title": "BLEU Score and Brevity Penalty",
+      "content": "To evaluate language generation tasks automatically, we compare candidate generations against human reference translations.\n\n**BLEU (Bilingual Evaluation Understudy)** measures n-gram precision with a brevity penalty. The precision $p_n$ is computed as the fraction of candidate n-grams that appear in the reference. The final score is:\n\n$$\\text{BLEU} = \\text{BP} \\cdot \\exp\\left( \\sum_{n=1}^N w_n \\ln p_n \\right)$$\n\nwhere $w_n = 1/N$ are weights. The **Brevity Penalty (BP)** scales the score down if the candidate translation length $c$ is shorter than the reference translation length $r$:\n\n$$\\text{BP} = \\begin{cases} 1 & \\text{if } c > r \\\\ \\exp\\left( 1 - \\frac{r}{c} \\right) & \\text{if } c \\le r \\end{cases}$$\n\nWithout BP, a model could generate extremely short outputs containing only high-confidence words (e.g. 'the') to achieve perfect precision.",
+      "callouts": []
+    },
+    {
+      "title": "ROUGE: Recall-Based Evaluation",
+      "content": "While BLEU focuses on precision, **ROUGE (Recall-Oriented Understudy for Gisting Evaluation)** focuses on recall, measuring how much of the reference translation is captured by the candidate:\n\n1.  **ROUGE-N:** Measures n-gram recall:\n\n$$\\text{ROUGE-N} = \\frac{\\sum_{S \\in \\text{References}} \\sum_{\\text{gram}_n \\in S} \\text{Count}_{match}(\\text{gram}_n)}{\\sum_{S \\in \\text{References}} \\sum_{\\text{gram}_n \\in S} \\text{Count}(\\text{gram}_n)}$$\n\n2.  **ROUGE-L:** Evaluates the **Longest Common Subsequence (LCS)** alignment, capturing structural similarity without requiring consecutive n-gram matches.",
+      "callouts": []
+    }
+  ],
+  "example_refs": [
+    "nlp-m5-t5-ex1"
+  ],
+  "diagram_refs": [],
+  "practice_refs": [
+    "nlp-m5-t5-prac1"
+  ],
+  "quiz_refs": [
+    "nlp-m5-t5-quiz"
+  ]
+}

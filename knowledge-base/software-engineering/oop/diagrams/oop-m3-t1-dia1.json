@@ -1,0 +1,7 @@
+{
+  "topic_id": "oop-m3-t1",
+  "diagram_id": "oop-m3-t1-dia1",
+  "title": "Pattern Philosophy Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Pattern Philosophy\"]\n  Process --> End"
+}

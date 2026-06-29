@@ -1,0 +1,37 @@
+{
+  "topic_id": "nlp-m3-t2",
+  "title": "Word2Vec Optimization",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Medium",
+    "estimated_hours": 5,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Derive the computational bottleneck of the standard Softmax denominator.",
+    "Derive Negative Sampling (NEG) loss functions from binary logistic regressions.",
+    "Explain Hierarchical Softmax binary Huffman tree path routing."
+  ],
+  "content_sections": [
+    {
+      "title": "The Softmax Bottleneck and Negative Sampling",
+      "content": "Evaluating the standard Softmax denominator $\\sum_{w=1}^V \\exp(\\mathbf{v}'^{\\top}_{w} \\mathbf{v}_{w_i})$ requires a summation over the entire vocabulary $V$ at each step. This is computationally expensive for large vocabularies ($V > 100,000$).\n\n**Negative Sampling (NEG)** resolves this by converting the multinomial classification problem into a set of binary classification tasks. The objective is to distinguish the target context word $w_O$ from $k$ randomly sampled noise words (negative samples). The loss function is:\n\n$$\\mathcal{L}_{NEG} = -\\ln \\sigma(\\mathbf{v}'^{\\top}_{w_O} \\mathbf{v}_{w_I}) - \\sum_{i=1}^k \\ln \\sigma(-\\mathbf{v}'^{\\top}_{w_i} \\mathbf{v}_{w_I})$$\n\nwhere $\\sigma(x) = \\frac{1}{1 + e^{-x}}$. The negative samples are drawn from a unigram distribution raised to the 3/4 power: $P_n(w) \\propto U(w)^{0.75}$. This increases the probability of selecting rare words as negative samples, preventing highly frequent words (like 'the') from dominating the updates.",
+      "callouts": []
+    },
+    {
+      "title": "Hierarchical Softmax Mechanics",
+      "content": "An alternative optimization is **Hierarchical Softmax**. It structures the vocabulary as the leaf nodes of a binary Huffman tree. The path from the root node to a word $w$ is defined by a sequence of left/right choices. The probability of selecting word $w$ is the product of the probabilities of these branching choices:\n\n$$P(w \\mid w_I) = \\prod_{j=1}^{L(w)-1} \\sigma\\left( \\text{sign}(n(w, j)) \\cdot \\mathbf{v}'^{\\top}_{n(w, j)} \\mathbf{v}_{w_I} \\right)$$\n\nwhere $L(w)$ is the path length, and $n(w, j)$ is the $j$-th node on the path. This reduces the computational complexity from $\\mathcal{O}(V)$ to $\\mathcal{O}(\\log V)$.",
+      "callouts": []
+    }
+  ],
+  "example_refs": [
+    "nlp-m3-t2-ex1"
+  ],
+  "diagram_refs": [],
+  "practice_refs": [
+    "nlp-m3-t2-prac1"
+  ],
+  "quiz_refs": [
+    "nlp-m3-t2-quiz"
+  ]
+}

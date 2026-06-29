@@ -1,0 +1,7 @@
+{
+  "topic_id": "nlp-m4-t5",
+  "diagram_id": "nlp-m4-t5-dia1",
+  "title": "Pre-training Objectives Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Pre-training Objectives\"]\n  Process --> End"
+}

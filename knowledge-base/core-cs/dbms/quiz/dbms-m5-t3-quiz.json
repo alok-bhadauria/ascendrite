@@ -1,0 +1,17 @@
+{
+  "quiz_id": "dbms-m5-t3-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which of the following describes a key bottleneck related to Consistency Models?",
+      "options": [
+        "Inefficient scaling of Strong consistency vs Eventual consistency.",
+        "Hardware is completely offline.",
+        "Lack of database files.",
+        "Syntax compilation errors."
+      ],
+      "correct_answer": "Inefficient scaling of Strong consistency vs Eventual consistency.",
+      "explanation": "The topic covers how Strong consistency vs Eventual consistency scales under concurrent workloads, which represents the primary bottlenecks."
+    }
+  ]
+}

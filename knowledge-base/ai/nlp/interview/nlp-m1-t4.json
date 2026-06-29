@@ -1,0 +1,6 @@
+{
+  "topic_id": "nlp-m1-t4",
+  "title": "Topic Modeling",
+  "version": "1.0.0",
+  "content": "# Interview Prep: Topic Modeling\n\n## Q1: Explain why the Dirichlet distribution is used as a prior for the multinomial distribution in LDA.\n\n### Standard Answer\nThe Dirichlet distribution is the **conjugate prior** of the multinomial distribution. This means that if the prior distribution of a variable is Dirichlet and the likelihood is multinomial, the posterior distribution is also a Dirichlet distribution. This property allows us to compute posterior distributions analytically, simplifying parameter estimation in algorithms like Gibbs sampling.\n"
+}

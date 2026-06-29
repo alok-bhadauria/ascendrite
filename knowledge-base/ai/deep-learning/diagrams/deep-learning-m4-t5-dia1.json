@@ -1,0 +1,7 @@
+{
+  "topic_id": "deep-learning-m4-t5",
+  "diagram_id": "deep-learning-m4-t5-dia1",
+  "title": "Sequence-to-Sequence (Seq2Seq) Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Sequence-to-Sequence (Seq2Seq)\"]\n  Process --> End"
+}

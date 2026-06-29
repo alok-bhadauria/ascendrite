@@ -1,0 +1,17 @@
+{
+  "quiz_id": "cn-m1-t2-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which of the following describes a key bottleneck related to Physical Signalings?",
+      "options": [
+        "Inefficient scaling of Guided media types.",
+        "Hardware is completely offline.",
+        "Lack of database files.",
+        "Syntax compilation errors."
+      ],
+      "correct_answer": "Inefficient scaling of Guided media types.",
+      "explanation": "The topic covers how Guided media types scales under concurrent workloads, which represents the primary bottlenecks."
+    }
+  ]
+}

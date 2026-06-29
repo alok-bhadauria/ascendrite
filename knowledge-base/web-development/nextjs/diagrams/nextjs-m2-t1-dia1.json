@@ -1,0 +1,7 @@
+{
+  "topic_id": "nextjs-m2-t1",
+  "diagram_id": "nextjs-m2-t1-dia1",
+  "title": "App Router Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process App Router\"]\n  Process --> End"
+}

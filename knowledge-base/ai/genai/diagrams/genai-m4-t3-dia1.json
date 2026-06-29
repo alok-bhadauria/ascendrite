@@ -1,0 +1,7 @@
+{
+  "topic_id": "genai-m4-t3",
+  "diagram_id": "genai-m4-t3-dia1",
+  "title": "Direct Preference Optimization Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Direct Preference Optimization\"]\n  Process --> End"
+}

@@ -1,0 +1,7 @@
+{
+  "topic_id": "oop-m5-t4",
+  "diagram_id": "oop-m5-t4-dia1",
+  "title": "LLD Case Study (Library/Parking) Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process LLD Case Study (Library/Parking)\"]\n  Process --> End"
+}

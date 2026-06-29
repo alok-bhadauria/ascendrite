@@ -1,0 +1,17 @@
+{
+  "quiz_id": "genai-m2-t3-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "What is the primary implementation step of guided decoding schemas?",
+      "options": [
+        "Modifying the logits of vocabulary tokens at each generation step based on state constraints.",
+        "Retraining the model weights.",
+        "Updating attention maps.",
+        "Lowering the vocabulary size."
+      ],
+      "correct_answer": "Modifying the logits of vocabulary tokens at each generation step based on state constraints.",
+      "explanation": "Guided decoding checks candidates against state constraints, masking out invalid tokens before the softmax step."
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "topic_id": "ai-agents-m3-t5",
+  "title": "Self-Correction Loops",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Medium",
+    "estimated_hours": 5,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Explain iterative execution check validation structures.",
+    "Formulate compiler error self-correction loops."
+  ],
+  "content_sections": [
+    {
+      "title": "Compiler Feedback and Self-Correction",
+      "content": "For code generation or data transformations, agents can evaluate their outputs using validation tools (e.g. running a python interpreter or JSON linter). If compilation or validation fails, the traceback errors are passed back to the model as context. The model generates corrections, looping until the output compiles successfully.",
+      "callouts": []
+    }
+  ],
+  "example_refs": [
+    "ai-agents-m3-t5-ex1"
+  ],
+  "diagram_refs": [],
+  "practice_refs": [
+    "ai-agents-m3-t5-prac1"
+  ],
+  "quiz_refs": [
+    "ai-agents-m3-t5-quiz"
+  ]
+}

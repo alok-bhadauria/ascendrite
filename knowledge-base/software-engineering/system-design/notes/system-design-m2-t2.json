@@ -1,0 +1,44 @@
+{
+  "topic_id": "system-design-m2-t2",
+  "title": "Caching Basics",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Hard",
+    "estimated_hours": 6,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Describe structural characteristics of Caching Basics.",
+    "Derive mathematical and programmatic bounds for Cache Hit vs Miss, Cache Eviction (LRU, LFU), and Cache Invalidation."
+  ],
+  "content_sections": [
+    {
+      "title": "Caching Basics",
+      "content": "### Scaling distributed Systems & Consensus\nSystem Design focuses on scaling resources while maintaining data consistency and availability.\n\n#### Consistent Hashing with Virtual Nodes\nIn standard hashing ($hash(key) \\pmod N$), changing server count $N$ forces re-mapping almost all keys. Consistent Hashing maps both keys and servers to a $360^\\circ$ hash ring. A key is assigned to the first server encountered moving clockwise. To prevent unbalanced key distributions (hotspots), servers are mapped to multiple **Virtual Nodes** across the ring, distributing keys evenly.\n\n#### Rate Limiting Heuristics\n*   **Token Bucket:** Replenishes tokens at a set rate. Supports request bursts; throttles when empty.\n*   **Leaky Bucket:** Places requests in a queue and processes them at a constant rate. Smooths outbound traffic.\n*   **Sliding Window Log:** Stores timestamps of requests. High accuracy, but memory intensive.\n\n#### Circuit Breaker Pattern\nProtects systems from cascade failure by wrapping external calls in a state machine:\n*   `Closed`: Normal operation; forwards requests.\n*   `Open`: Fails immediately on threshold consecutive failures to prevent resource exhaustion.\n*   `Half-Open`: Forwards a subset of requests to test if the remote service has recovered, transitioning back to Closed or Open.\n\n### Depth Analysis: Caching Basics\nIn production configurations, we analyze how Cache Hit vs Miss, Cache Eviction (LRU, LFU), and Cache Invalidation affects performance parameters. We evaluate memory layouts and consensus thresholds.",
+      "callouts": [
+        {
+          "type": "Student Trap",
+          "title": "Common Trap in Caching Basics",
+          "content": "A common mistake when analyzing Caching Basics is ignoring latency bounds and boundary edge cases during concurrent executions."
+        },
+        {
+          "type": "Engineering Note",
+          "title": "Production Scaling for Caching Basics",
+          "content": "Production servers implement strict resource isolation and cache alignments to prevent performance regressions when running Caching Basics loops."
+        }
+      ]
+    }
+  ],
+  "example_refs": [
+    "system-design-m2-t2-ex1"
+  ],
+  "diagram_refs": [
+    "system-design-m2-t2-dia1"
+  ],
+  "practice_refs": [
+    "system-design-m2-t2-prac1"
+  ],
+  "quiz_refs": [
+    "system-design-m2-t2-quiz"
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "topic_id": "reactjs-m1-t1",
+  "title": "React Fiber",
+  "version": "1.0.0",
+  "content": "# ReactJS Revision\n\n*   **Render vs Commit:** Render phase builds tree changes (interruptible); Commit phase writes changes to DOM (synchronous).\n*   **Diffing Heuristics:** $O(N)$ complexity based on component type mapping and stable key checks.\n*   **State Batches:** Combines state calls in a single render sweep; update queue resolves updates sequentially.\n\n\n*   **React Fiber Checklist:** Verify input ranges and clear caches.\n"
+}

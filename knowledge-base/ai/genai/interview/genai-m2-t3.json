@@ -1,0 +1,6 @@
+{
+  "topic_id": "genai-m2-t3",
+  "title": "Structured Outputs",
+  "version": "1.0.0",
+  "content": "# Interview Prep: Structured Outputs\n\n## Q1: How does logit bias injection differ from post-generation regex validation?\n\n### Standard Answer\nPost-generation regex validation acts as a filter, rejecting invalid outputs after they are fully generated, which wastes compute. Logit bias injection constraints generation during decoding, preventing the model from ever generating invalid syntax.\n"
+}

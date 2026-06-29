@@ -1,0 +1,31 @@
+{
+  "topic_id": "ai-agents-m2-t4",
+  "title": "Custom Tool Definitions",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Medium",
+    "estimated_hours": 5,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Formulate function declaration schemas for tool call interfaces.",
+    "Explain return serialization mapping."
+  ],
+  "content_sections": [
+    {
+      "title": "Tool Declarations and Schema Formats",
+      "content": "To enable tool execution, agents must declare their interfaces to the model. This is structured as a list of tool declarations containing the function name, description, and parameter types formatted as JSON schemas. This schema allows the model to understand the tool's usage, inputs, and constraints.",
+      "callouts": []
+    }
+  ],
+  "example_refs": [
+    "ai-agents-m2-t4-ex1"
+  ],
+  "diagram_refs": [],
+  "practice_refs": [
+    "ai-agents-m2-t4-prac1"
+  ],
+  "quiz_refs": [
+    "ai-agents-m2-t4-quiz"
+  ]
+}

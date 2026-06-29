@@ -1,0 +1,7 @@
+{
+  "topic_id": "html-css-git-m2-t3",
+  "diagram_id": "html-css-git-m2-t3-dia1",
+  "title": "CSS Positioning Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process CSS Positioning\"]\n  Process --> End"
+}

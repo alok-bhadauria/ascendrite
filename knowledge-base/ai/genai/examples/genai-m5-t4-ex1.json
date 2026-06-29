@@ -1,0 +1,7 @@
+{
+  "topic_id": "genai-m5-t4",
+  "asset_id": "genai-m5-t4-ex1",
+  "title": "Triton Inference Server",
+  "language": "python",
+  "code": "class TritonScheduler:\n    def __init__(self, max_batch=4):\n        self.queue = []\n        self.max_batch = max_batch\n    def add_request(self, req):\n        self.queue.append(req)\n    def get_batch(self):\n        batch = self.queue[:self.max_batch]\n        self.queue = self.queue[self.max_batch:]\n        return batch\n\nif __name__ == '__main__':\n    print('Triton simulation scheduler configured.')\n"
+}

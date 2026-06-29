@@ -1,0 +1,7 @@
+{
+  "topic_id": "quantitative-aptitude-m1-t5",
+  "diagram_id": "quantitative-aptitude-m1-t5-dia1",
+  "title": "Simplifications Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Simplifications\"]\n  Process --> End"
+}

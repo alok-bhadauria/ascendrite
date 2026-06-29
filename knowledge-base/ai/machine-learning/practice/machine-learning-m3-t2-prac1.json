@@ -1,0 +1,7 @@
+{
+  "topic_id": "machine-learning-m3-t2",
+  "asset_id": "machine-learning-m3-t2-prac1",
+  "title": "Logistic Regression & Log-Loss",
+  "language": "python",
+  "code": "import numpy as np\n\n\ndef compute_log_loss_and_grad(\n    X: np.ndarray, y: np.ndarray, w: np.ndarray\n) -> tuple[float, np.ndarray]:\n    \"\"\"Computes the binary cross-entropy (Log-Loss) and its gradient\n\n    with respect to weight vector w.\n\n    Ensure:\n    1. Numerical stability: clip predictions inside [1e-15, 1 - 1e-15] before\n       calculating logarithms to prevent NaN results.\n    2. The return is a tuple: (scalar_loss, gradient_vector).\n    \"\"\"\n    n_samples = X.shape[0]\n\n    # Calculate probabilities\n    z = X @ w\n    p = 1.0 / (1.0 + np.exp(-np.clip(z, -250, 250)))\n\n    # Clip probabilities for numerical stability\n    p_clipped = np.clip(p, 1e-15, 1 - 1e-15)\n\n    # Compute Log-Loss\n    loss = -np.mean(y * np.log(p_clipped) + (1.0 - y) * np.log(1.0 - p_clipped))\n\n    # Compute Gradient vector\n    grad = (X.T @ (p - y)) / n_samples\n\n    return loss, grad\n"
+}

@@ -1,0 +1,7 @@
+{
+  "topic_id": "verbal-aptitude-m3-t4",
+  "diagram_id": "verbal-aptitude-m3-t4-dia1",
+  "title": "One-Word Substitution Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process One-Word Substitution\"]\n  Process --> End"
+}

@@ -1,0 +1,259 @@
+{
+  "subject_id": "javascript",
+  "name": "JavaScript",
+  "category": "web-development",
+  "modules": [
+    {
+      "name": "Module 1: JS Engine, Event Loop Execution & Scope Closures",
+      "topics": [
+        {
+          "id": "javascript-m1-t1",
+          "title": "JS Engine",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "javascript-m1-t2",
+          "title": "Event Loop",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "javascript-m1-t3",
+          "title": "Closures & Scope",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "javascript-m1-t4",
+          "title": "Hoisting & Temporal Dead Zone (TDZ)",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "javascript-m1-t5",
+          "title": "Data Types & Coercion",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        }
+      ]
+    },
+    {
+      "name": "Module 2: Context Bindings, Prototypes & OOP Javascript",
+      "topics": [
+        {
+          "id": "javascript-m2-t1",
+          "title": "This Context",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "javascript-m2-t2",
+          "title": "Prototypes",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "javascript-m2-t3",
+          "title": "ES6 Classes",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "javascript-m2-t4",
+          "title": "Iterators & Generators",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "javascript-m2-t5",
+          "title": "Strict Mode & Linters",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        }
+      ]
+    },
+    {
+      "name": "Module 3: Asynchronous JS, Promises & Concurrent Executions",
+      "topics": [
+        {
+          "id": "javascript-m3-t1",
+          "title": "Callbacks & Hell",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "javascript-m3-t2",
+          "title": "Promises API",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "javascript-m3-t3",
+          "title": "Async/Await",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "javascript-m3-t4",
+          "title": "Concurrent Promises",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "javascript-m3-t5",
+          "title": "Timers & Performance",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        }
+      ]
+    },
+    {
+      "name": "Module 4: DOM Manipulations, Event Propagation & Optimization",
+      "topics": [
+        {
+          "id": "javascript-m4-t1",
+          "title": "DOM Tree Operations",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "javascript-m4-t2",
+          "title": "Event Propagation",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "javascript-m4-t3",
+          "title": "Event Delegation",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "javascript-m4-t4",
+          "title": "Input Optimization",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "javascript-m4-t5",
+          "title": "Browser Storage",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        }
+      ]
+    },
+    {
+      "name": "Module 5: ES Modules, Dynamic Imports & Build Optimizations",
+      "topics": [
+        {
+          "id": "javascript-m5-t1",
+          "title": "Module Systems",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "javascript-m5-t2",
+          "title": "Dynamic Imports",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "javascript-m5-t3",
+          "title": "Errors Handling",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "javascript-m5-t4",
+          "title": "Performance Profiling",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "javascript-m5-t5",
+          "title": "Build Bundling",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        }
+      ]
+    }
+  ],
+  "version": "1.0.0",
+  "last_updated": "2026-06-29"
+}

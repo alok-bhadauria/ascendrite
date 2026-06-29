@@ -1,0 +1,6 @@
+{
+  "topic_id": "ai-agents-m2-t3",
+  "title": "Episodic & Semantic Long-Term Memory",
+  "version": "1.0.0",
+  "content": "# Interview Prep: Long-Term Memory\n\n## Q1: How does long-term retrieval routing prevent irrelevant memories from polluting the context window?\n\n### Standard Answer\nWe apply distance thresholds (e.g. cosine distance < 0.35) and limit retrieval size ($K=3$). This prevents low-similarity, irrelevant memories from cluttering the context window.\n"
+}

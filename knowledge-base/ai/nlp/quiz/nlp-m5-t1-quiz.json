@@ -1,0 +1,17 @@
+{
+  "quiz_id": "nlp-m5-t1-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "What is the primary trade-off when selecting a Cross-Encoder over a Bi-Encoder?",
+      "options": [
+        "Cross-encoders have higher accuracy but cannot compute offline index embeddings, leading to high latency.",
+        "Cross-encoders have smaller parameter counts.",
+        "Cross-encoders only support English.",
+        "Bi-encoders require GPU clusters for inference."
+      ],
+      "correct_answer": "Cross-encoders have higher accuracy but cannot compute offline index embeddings, leading to high latency.",
+      "explanation": "Because Cross-encoders require input pair concatenation during the forward pass, we cannot pre-index document vectors."
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "topic_id": "reactjs-m5-t3",
+  "diagram_id": "reactjs-m5-t3-dia1",
+  "title": "Server Actions Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Server Actions\"]\n  Process --> End"
+}

@@ -1,0 +1,7 @@
+{
+  "topic_id": "machine-learning-m2-t5",
+  "asset_id": "machine-learning-m2-t5-prac1",
+  "title": "Production Feature Engineering",
+  "language": "python",
+  "code": "import pandas as pd\n\n\ndef custom_target_encoder(\n    train_df: pd.DataFrame,\n    val_df: pd.DataFrame,\n    cat_col: str,\n    target_col: str,\n    smoothing: float,\n) -> tuple[pd.Series, pd.Series]:\n    \"\"\"Applies target encoding with Laplace smoothing to training and validation sets.\n\n    Crucial:\n    1. Statistics must be fit ONLY on train_df to prevent leakage.\n    2. Categories in val_df not present in train_df must fall back to the\n       global train target mean.\n    \"\"\"\n    global_mean = train_df[target_col].mean()\n\n    # Calculate statistics from training set\n    stats = train_df.groupby(cat_col)[target_col].agg([\"count\", \"mean\"])\n    counts = stats[\"count\"]\n    means = stats[\"mean\"]\n\n    # Compute weights and smoothed mapping\n    weights = counts / (counts + smoothing)\n    smoothed_mapping = weights * means + (1 - weights) * global_mean\n\n    # Transform training and validation data\n    train_encoded = train_df[cat_col].map(smoothed_mapping).fillna(global_mean)\n    val_encoded = val_df[cat_col].map(smoothed_mapping).fillna(global_mean)\n\n    return train_encoded, val_encoded\n"
+}

@@ -1,0 +1,6 @@
+{
+  "topic_id": "genai-m1-t5",
+  "title": "Multimodal Tokenization",
+  "version": "1.0.0",
+  "content": "# Interview Prep: Multimodal\n\n## Q1: How does CLIP's contrastive learning loss function optimize text-image similarity scales?\n\n### Standard Answer\nCLIP computes a similarity matrix $\\mathbf{S} = \\mathbf{I} \\mathbf{T}^{\\top}$ scaled by a learnable temperature $\\tau$. Cross-entropy loss is applied along both columns and rows to maximize diagonal alignment (correct pairs) relative to all other indices in the batch.\n"
+}

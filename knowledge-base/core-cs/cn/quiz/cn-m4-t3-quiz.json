@@ -1,0 +1,17 @@
+{
+  "quiz_id": "cn-m4-t3-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which of the following describes a key bottleneck related to Mail & Files?",
+      "options": [
+        "Inefficient scaling of SMTP protocol relays, POP3 vs IMAP states, and FTP control/data streams.",
+        "Hardware is completely offline.",
+        "Lack of database files.",
+        "Syntax compilation errors."
+      ],
+      "correct_answer": "Inefficient scaling of SMTP protocol relays, POP3 vs IMAP states, and FTP control/data streams.",
+      "explanation": "The topic covers how SMTP protocol relays, POP3 vs IMAP states, and FTP control/data streams scales under concurrent workloads, which represents the primary bottlenecks."
+    }
+  ]
+}

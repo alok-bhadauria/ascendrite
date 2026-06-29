@@ -1,0 +1,43 @@
+{
+  "topic_id": "nlp-m3-t5",
+  "title": "Semantic Analogies",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Medium",
+    "estimated_hours": 5,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Formulate vector arithmetic calculations for analogies.",
+    "Apply cosine similarity projections.",
+    "Explain the 3CosMul equation."
+  ],
+  "content_sections": [
+    {
+      "title": "Vector Arithmetic and Projections",
+      "content": "Word embeddings capture relational semantics through linear structural translations. The classical relation 'king - man + woman = queen' is solved by searching for the vocabulary token that maximizes cosine similarity:\n\n$$\\mathbf{w}^* = \\arg\\max_{\\mathbf{w} \\in \\mathcal{V} \\setminus \\{a, b, c\\}} \\text{sim}(\\mathbf{w}, \\mathbf{v}_b - \\mathbf{v}_a + \\mathbf{v}_c)$$\n\nwhere $\\mathbf{v}_a, \\mathbf{v}_b, \\mathbf{v}_c$ are the vectors for 'man', 'king', and 'woman' respectively.",
+      "callouts": [
+        {
+          "type": "Student Trap",
+          "title": "Dominance of Similarity Terms",
+          "content": "The linear formulation (3CosAdd) can be dominated by a single term that has high similarity to the target vector. For example, if a word is highly similar to $\\mathbf{v}_c$, it can be selected even if it does not satisfy the analogy relationship. To resolve this, use the multiplicative formulation (3CosMul) instead."
+        }
+      ]
+    },
+    {
+      "title": "The 3CosMul Formulation",
+      "content": "To prevent a single term from dominating the analogy search, Levy and Goldberg introduced **3CosMul**:\n\n$$\\mathbf{w}^* = \\arg\\max_{\\mathbf{w} \\in \\mathcal{V} \\setminus \\{a, b, c\\}} \\frac{\\text{sim}(\\mathbf{w}, \\mathbf{v}_b) \\times \\text{sim}(\\mathbf{w}, \\mathbf{v}_c)}{\\text{sim}(\\mathbf{w}, \\mathbf{v}_a) + \\epsilon}$$\n\nwhere $\\epsilon = 0.001$ prevents division by zero. This balances the similarities multiplicatively, requiring candidate tokens to have high similarity to both positive terms ($b$ and $c$) while keeping similarity to the negative term ($a$) low.",
+      "callouts": []
+    }
+  ],
+  "example_refs": [
+    "nlp-m3-t5-ex1"
+  ],
+  "diagram_refs": [],
+  "practice_refs": [
+    "nlp-m3-t5-prac1"
+  ],
+  "quiz_refs": [
+    "nlp-m3-t5-quiz"
+  ]
+}

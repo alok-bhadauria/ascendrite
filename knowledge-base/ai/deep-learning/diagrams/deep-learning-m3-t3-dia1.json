@@ -1,0 +1,7 @@
+{
+  "topic_id": "deep-learning-m3-t3",
+  "diagram_id": "deep-learning-m3-t3-dia1",
+  "title": "CNN Architectures Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process CNN Architectures\"]\n  Process --> End"
+}

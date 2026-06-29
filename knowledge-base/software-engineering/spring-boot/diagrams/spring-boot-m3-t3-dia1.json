@@ -1,0 +1,7 @@
+{
+  "topic_id": "spring-boot-m3-t3",
+  "diagram_id": "spring-boot-m3-t3-dia1",
+  "title": "Relationships Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Relationships\"]\n  Process --> End"
+}

@@ -1,0 +1,17 @@
+{
+  "quiz_id": "dbms-m3-t3-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which of the following describes a key bottleneck related to ARIES Recovery Algorithm?",
+      "options": [
+        "Inefficient scaling of Analysis phase (dirty page table, transaction table).",
+        "Hardware is completely offline.",
+        "Lack of database files.",
+        "Syntax compilation errors."
+      ],
+      "correct_answer": "Inefficient scaling of Analysis phase (dirty page table, transaction table).",
+      "explanation": "The topic covers how Analysis phase (dirty page table, transaction table) scales under concurrent workloads, which represents the primary bottlenecks."
+    }
+  ]
+}

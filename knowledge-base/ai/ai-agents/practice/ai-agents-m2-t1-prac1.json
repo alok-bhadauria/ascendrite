@@ -1,0 +1,7 @@
+{
+  "topic_id": "ai-agents-m2-t1",
+  "asset_id": "ai-agents-m2-t1-prac1",
+  "title": "Short-Term Memory Systems",
+  "language": "python",
+  "code": "def prune_messages(messages, max_tokens):\n    # Assumes each message is 10 tokens\n    while len(messages) * 10 > max_tokens and len(messages) > 1:\n        messages.pop(0)\n    return messages\n\ndef run_practice():\n    msg = ['m1', 'm2', 'm3']\n    pruned = prune_messages(msg, 20)\n    assert pruned == ['m2', 'm3']\n    print('[PASS] Message list pruning validated.')\n\nif __name__ == '__main__':\n    run_practice()\n"
+}

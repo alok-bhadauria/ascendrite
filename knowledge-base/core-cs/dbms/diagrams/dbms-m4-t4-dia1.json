@@ -1,0 +1,7 @@
+{
+  "topic_id": "dbms-m4-t4",
+  "diagram_id": "dbms-m4-t4-dia1",
+  "title": "Join Execution Algorithms Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Join Execution Algorithms\"]\n  Process --> End"
+}

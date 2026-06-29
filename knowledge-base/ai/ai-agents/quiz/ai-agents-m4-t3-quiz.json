@@ -1,0 +1,17 @@
+{
+  "quiz_id": "ai-agents-m4-t3-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "What is the primary objective of prompt-based role segregation in multi-agent systems?",
+      "options": [
+        "To define clear behavioral boundaries and prevent confirmation bias during complex tasks.",
+        "To speed up token generation rates.",
+        "To compress context databases.",
+        "To replace long-term memory databases."
+      ],
+      "correct_answer": "To define clear behavioral boundaries and prevent confirmation bias during complex tasks.",
+      "explanation": "Segregating roles ensures agents focus on their specific tasks (e.g. coding vs testing), mitigating bias and improving quality."
+    }
+  ]
+}

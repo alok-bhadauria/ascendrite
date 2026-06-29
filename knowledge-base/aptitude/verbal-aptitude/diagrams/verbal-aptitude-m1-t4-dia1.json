@@ -1,0 +1,7 @@
+{
+  "topic_id": "verbal-aptitude-m1-t4",
+  "diagram_id": "verbal-aptitude-m1-t4-dia1",
+  "title": "Parallel Structure Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Parallel Structure\"]\n  Process --> End"
+}

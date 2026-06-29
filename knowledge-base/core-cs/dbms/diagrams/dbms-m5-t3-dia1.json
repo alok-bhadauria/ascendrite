@@ -1,0 +1,7 @@
+{
+  "topic_id": "dbms-m5-t3",
+  "diagram_id": "dbms-m5-t3-dia1",
+  "title": "Consistency Models Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Consistency Models\"]\n  Process --> End"
+}

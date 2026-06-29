@@ -1,0 +1,7 @@
+{
+  "topic_id": "sql-m1-t4",
+  "asset_id": "sql-m1-t4-ex1",
+  "title": "Set Operations",
+  "language": "python",
+  "code": "if __name__ == '__main__':\n    print('Example pass for Set Operations')\n"
+}

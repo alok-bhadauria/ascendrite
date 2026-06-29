@@ -1,0 +1,7 @@
+{
+  "topic_id": "dbms-m5-t2",
+  "diagram_id": "dbms-m5-t2-dia1",
+  "title": "Database Replication Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Database Replication\"]\n  Process --> End"
+}

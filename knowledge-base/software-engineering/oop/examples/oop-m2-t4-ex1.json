@@ -1,0 +1,7 @@
+{
+  "topic_id": "oop-m2-t4",
+  "asset_id": "oop-m2-t4-ex1",
+  "title": "SOLID Principles (Part 2)",
+  "language": "python",
+  "code": "if __name__ == '__main__':\n    print('Example code execution.')\n"
+}

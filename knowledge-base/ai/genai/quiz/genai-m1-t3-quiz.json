@@ -1,0 +1,17 @@
+{
+  "quiz_id": "genai-m1-t3-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "What is the effect of setting temperature parameter T very close to 0 (e.g., T = 0.01)?",
+      "options": [
+        "The generation becomes highly deterministic, approaching greedy search.",
+        "All tokens become equally probable.",
+        "The generation process diverges and crashes.",
+        "The context window decreases to zero."
+      ],
+      "correct_answer": "The generation becomes highly deterministic, approaching greedy search.",
+      "explanation": "As T approaches 0, the probability mass concentrates almost entirely on the token with the highest logit value, making generation deterministic."
+    }
+  ]
+}

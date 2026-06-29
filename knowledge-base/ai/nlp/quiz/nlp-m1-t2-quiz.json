@@ -1,0 +1,17 @@
+{
+  "quiz_id": "nlp-m1-t2-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which subword tokenization algorithm merges adjacent pairs by maximizing the pointwise mutual information score rather than raw frequency?",
+      "options": [
+        "WordPiece",
+        "Byte Pair Encoding",
+        "Unigram LM",
+        "Lancaster Stemmer"
+      ],
+      "correct_answer": "WordPiece",
+      "explanation": "WordPiece merges pairs by maximizing count(AB) / (count(A) * count(B)), which is proportional to the pointwise mutual information (PMI)."
+    }
+  ]
+}

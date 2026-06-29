@@ -1,0 +1,6 @@
+{
+  "topic_id": "genai-m5-t2",
+  "title": "PagedAttention & vLLM",
+  "version": "1.0.0",
+  "content": "# Interview Prep: PagedAttention\n\n## Q1: Explain how PagedAttention enables memory sharing during parallel generation tasks (like beam search).\n\n### Standard Answer\nDuring beam search, different candidate paths share a common prefix. PagedAttention maps the logical blocks of these paths to the same physical memory block. The block is duplicated only when a write operation occurs (Copy-on-Write), saving memory.\n"
+}

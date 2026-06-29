@@ -1,0 +1,7 @@
+{
+  "topic_id": "nextjs-m1-t3",
+  "diagram_id": "nextjs-m1-t3-dia1",
+  "title": "Hydration Mismatch Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Hydration Mismatch\"]\n  Process --> End"
+}

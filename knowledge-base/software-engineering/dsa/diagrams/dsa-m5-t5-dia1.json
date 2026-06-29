@@ -1,0 +1,7 @@
+{
+  "topic_id": "dsa-m5-t5",
+  "diagram_id": "dsa-m5-t5-dia1",
+  "title": "Classic DP Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Classic DP\"]\n  Process --> End"
+}

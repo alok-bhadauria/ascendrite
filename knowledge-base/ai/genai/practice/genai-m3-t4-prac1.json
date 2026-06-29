@@ -1,0 +1,7 @@
+{
+  "topic_id": "genai-m3-t4",
+  "asset_id": "genai-m3-t4-prac1",
+  "title": "Bottleneck Adapters",
+  "language": "python",
+  "code": "import numpy as np\n\ndef bottleneck_adapter(h, W_down, W_up):\n    down = np.dot(h, W_down)\n    activated = np.maximum(0.0, down)\n    return h + np.dot(activated, W_up)\n\ndef run_practice():\n    h = np.array([1.0, 1.0])\n    W_down = np.zeros((2, 1))\n    W_up = np.zeros((1, 2))\n    out = bottleneck_adapter(h, W_down, W_up)\n    assert np.allclose(out, h)\n    print('[PASS] Bottleneck zero projection verified.')\n\nif __name__ == '__main__':\n    run_practice()\n"
+}

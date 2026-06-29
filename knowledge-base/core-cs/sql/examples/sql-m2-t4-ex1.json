@@ -1,0 +1,7 @@
+{
+  "topic_id": "sql-m2-t4",
+  "asset_id": "sql-m2-t4-ex1",
+  "title": "Aggregates Window",
+  "language": "python",
+  "code": "if __name__ == '__main__':\n    print('Example pass for Aggregates Window')\n"
+}

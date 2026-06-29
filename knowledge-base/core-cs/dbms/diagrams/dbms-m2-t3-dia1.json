@@ -1,0 +1,7 @@
+{
+  "topic_id": "dbms-m2-t3",
+  "diagram_id": "dbms-m2-t3-dia1",
+  "title": "SQL Isolation Levels Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process SQL Isolation Levels\"]\n  Process --> End"
+}

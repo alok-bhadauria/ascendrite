@@ -1,0 +1,6 @@
+{
+  "topic_id": "nlp-m5-t1",
+  "title": "Sentence Embeddings",
+  "version": "1.0.0",
+  "content": "# Sentence Embeddings\n\n## 1. Bi-Encoder vs Cross-Encoder\n*   **Bi-Encoder:** $\\text{sim}(s_1, s_2) = \\cos(f(s_1), f(s_2))$\n*   **Cross-Encoder:** $\\text{score} = f(s_1 || s_2)$\n\n## 2. InfoNCE Contrastive Loss\n$$\\mathcal{L} = -\\ln \\frac{\\exp(\\cos(\\mathbf{u}, \\mathbf{v}) / \\tau)}{\\sum_{i=1}^B \\exp(\\cos(\\mathbf{u}, \\mathbf{v}_i) / \\tau)}$$\n"
+}

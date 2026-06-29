@@ -1,0 +1,259 @@
+{
+  "subject_id": "reactjs",
+  "name": "ReactJS",
+  "category": "web-development",
+  "modules": [
+    {
+      "name": "Module 1: React Fiber Architecture, Reconciliation & Virtual DOM",
+      "topics": [
+        {
+          "id": "reactjs-m1-t1",
+          "title": "React Fiber",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "reactjs-m1-t2",
+          "title": "Reconciliation & Diffing",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "reactjs-m1-t3",
+          "title": "JSX Compilation",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "reactjs-m1-t4",
+          "title": "Virtual DOM vs Real DOM",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "reactjs-m1-t5",
+          "title": "Concurrent React",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        }
+      ]
+    },
+    {
+      "name": "Module 2: React Hooks Closures, Memoization & Custom Hooks",
+      "topics": [
+        {
+          "id": "reactjs-m2-t1",
+          "title": "React State Hook",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "reactjs-m2-t2",
+          "title": "Effect Hook",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "reactjs-m2-t3",
+          "title": "Hooks Closures",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "reactjs-m2-t4",
+          "title": "Memoization",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "reactjs-m2-t5",
+          "title": "Custom Hooks",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        }
+      ]
+    },
+    {
+      "name": "Module 3: React Routing, Global State & Performance",
+      "topics": [
+        {
+          "id": "reactjs-m3-t1",
+          "title": "Routing",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "reactjs-m3-t2",
+          "title": "Global State",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "reactjs-m3-t3",
+          "title": "State Libraries",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "reactjs-m3-t4",
+          "title": "Performance Profiling",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "reactjs-m3-t5",
+          "title": "Windowing",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        }
+      ]
+    },
+    {
+      "name": "Module 4: Forms Handling, Advanced Patterns & Hydration",
+      "topics": [
+        {
+          "id": "reactjs-m4-t1",
+          "title": "Controlled vs Uncontrolled",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "reactjs-m4-t2",
+          "title": "Higher-Order Components",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "reactjs-m4-t3",
+          "title": "Render Props & Portals",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "reactjs-m4-t4",
+          "title": "Hydration Pitfalls",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "reactjs-m4-t5",
+          "title": "Error Boundaries",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        }
+      ]
+    },
+    {
+      "name": "Module 5: Server Components, Hydration & Modern Server Routing",
+      "topics": [
+        {
+          "id": "reactjs-m5-t1",
+          "title": "React Server Components",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "reactjs-m5-t2",
+          "title": "Suspense Boundaries",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "reactjs-m5-t3",
+          "title": "Server Actions",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "reactjs-m5-t4",
+          "title": "Edge Runtime",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "reactjs-m5-t5",
+          "title": "React Hydration Architecture",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        }
+      ]
+    }
+  ],
+  "version": "1.0.0",
+  "last_updated": "2026-06-29"
+}

@@ -1,0 +1,7 @@
+{
+  "topic_id": "nodejs-expressjs-m5-t1",
+  "diagram_id": "nodejs-expressjs-m5-t1-dia1",
+  "title": "Node Cluster Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Node Cluster\"]\n  Process --> End"
+}

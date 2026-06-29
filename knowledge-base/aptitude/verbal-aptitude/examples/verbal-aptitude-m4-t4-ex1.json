@@ -1,0 +1,7 @@
+{
+  "topic_id": "verbal-aptitude-m4-t4",
+  "asset_id": "verbal-aptitude-m4-t4-ex1",
+  "title": "Fact-Based Questions",
+  "language": "python",
+  "code": "if __name__ == '__main__':\n    print('Example code execution.')\n"
+}

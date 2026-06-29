@@ -1,0 +1,17 @@
+{
+  "quiz_id": "dbms-m1-t3-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which of the following describes a key bottleneck related to B+ Tree Indexing?",
+      "options": [
+        "Inefficient scaling of Node formats, fan-out equations.",
+        "Hardware is completely offline.",
+        "Lack of database files.",
+        "Syntax compilation errors."
+      ],
+      "correct_answer": "Inefficient scaling of Node formats, fan-out equations.",
+      "explanation": "The topic covers how Node formats, fan-out equations scales under concurrent workloads, which represents the primary bottlenecks."
+    }
+  ]
+}

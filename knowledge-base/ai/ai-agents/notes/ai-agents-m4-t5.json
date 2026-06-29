@@ -1,0 +1,31 @@
+{
+  "topic_id": "ai-agents-m4-t5",
+  "title": "Scalability & Parallel Execution",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Medium",
+    "estimated_hours": 5,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Explain asynchronous multi-agent worker scheduling.",
+    "Formulate concurrent state consolidation."
+  ],
+  "content_sections": [
+    {
+      "title": "Asynchronous Workers and Concurrency Limits",
+      "content": "To scale multi-agent systems, agents must execute tasks in parallel. An asynchronous scheduler manages worker pools, distributing independent sub-tasks across threads. Once workers complete, their updates are merged into the global state using thread-safe consolidation reducers.",
+      "callouts": []
+    }
+  ],
+  "example_refs": [
+    "ai-agents-m4-t5-ex1"
+  ],
+  "diagram_refs": [],
+  "practice_refs": [
+    "ai-agents-m4-t5-prac1"
+  ],
+  "quiz_refs": [
+    "ai-agents-m4-t5-quiz"
+  ]
+}

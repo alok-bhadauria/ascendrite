@@ -1,0 +1,7 @@
+{
+  "topic_id": "deep-learning-m5-t2",
+  "diagram_id": "deep-learning-m5-t2-dia1",
+  "title": "Variational Autoencoders (VAE) Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Variational Autoencoders (VAE)\"]\n  Process --> End"
+}

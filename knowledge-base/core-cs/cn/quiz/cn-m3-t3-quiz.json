@@ -1,0 +1,17 @@
+{
+  "quiz_id": "cn-m3-t3-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which of the following describes a key bottleneck related to Sliding Window?",
+      "options": [
+        "Inefficient scaling of TCP flow control sliding window, sender/receiver buffers calculations, and Silly Window Syndrome.",
+        "Hardware is completely offline.",
+        "Lack of database files.",
+        "Syntax compilation errors."
+      ],
+      "correct_answer": "Inefficient scaling of TCP flow control sliding window, sender/receiver buffers calculations, and Silly Window Syndrome.",
+      "explanation": "The topic covers how TCP flow control sliding window, sender/receiver buffers calculations, and Silly Window Syndrome scales under concurrent workloads, which represents the primary bottlenecks."
+    }
+  ]
+}

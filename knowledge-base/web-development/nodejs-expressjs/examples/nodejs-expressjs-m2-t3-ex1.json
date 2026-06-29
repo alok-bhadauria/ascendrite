@@ -1,0 +1,7 @@
+{
+  "topic_id": "nodejs-expressjs-m2-t3",
+  "asset_id": "nodejs-expressjs-m2-t3-ex1",
+  "title": "Error Middleware",
+  "language": "python",
+  "code": "if __name__ == '__main__':\n    print('Example code execution.')\n"
+}

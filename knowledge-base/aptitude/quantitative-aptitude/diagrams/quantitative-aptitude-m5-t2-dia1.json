@@ -1,0 +1,7 @@
+{
+  "topic_id": "quantitative-aptitude-m5-t2",
+  "diagram_id": "quantitative-aptitude-m5-t2-dia1",
+  "title": "Logarithms Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Logarithms\"]\n  Process --> End"
+}

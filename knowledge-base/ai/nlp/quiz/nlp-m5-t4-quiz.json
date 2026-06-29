@@ -1,0 +1,17 @@
+{
+  "quiz_id": "nlp-m5-t4-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "What is the typical default value configured for parameter k in the RRF equation?",
+      "options": [
+        "60",
+        "0",
+        "1",
+        "1000"
+      ],
+      "correct_answer": "60",
+      "explanation": "A default value of 60 is widely used to prevent top-ranked documents from dominating the scoring metrics."
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "topic_id": "reactjs-m1-t3",
+  "diagram_id": "reactjs-m1-t3-dia1",
+  "title": "JSX Compilation Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process JSX Compilation\"]\n  Process --> End"
+}

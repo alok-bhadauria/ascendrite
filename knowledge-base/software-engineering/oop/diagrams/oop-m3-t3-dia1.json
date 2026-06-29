@@ -1,0 +1,7 @@
+{
+  "topic_id": "oop-m3-t3",
+  "diagram_id": "oop-m3-t3-dia1",
+  "title": "Creational - Factory Method & Abstract Factory Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Creational - Factory Method & Abstract Factory\"]\n  Process --> End"
+}

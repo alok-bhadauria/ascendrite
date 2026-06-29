@@ -1,0 +1,7 @@
+{
+  "topic_id": "ai-agents-m1-t2",
+  "diagram_id": "ai-agents-m1-t2-dia1",
+  "title": "ReAct Reasoning Framework Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process ReAct Reasoning Framework\"]\n  Process --> End"
+}

@@ -1,0 +1,7 @@
+{
+  "topic_id": "nodejs-expressjs-m1-t5",
+  "diagram_id": "nodejs-expressjs-m1-t5-dia1",
+  "title": "Process Management Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Process Management\"]\n  Process --> End"
+}

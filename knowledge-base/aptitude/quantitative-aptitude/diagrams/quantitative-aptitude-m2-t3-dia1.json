@@ -1,0 +1,7 @@
+{
+  "topic_id": "quantitative-aptitude-m2-t3",
+  "diagram_id": "quantitative-aptitude-m2-t3-dia1",
+  "title": "Profit, Loss & Discount Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Profit, Loss & Discount\"]\n  Process --> End"
+}

@@ -1,0 +1,7 @@
+{
+  "topic_id": "verbal-aptitude-m4-t2",
+  "diagram_id": "verbal-aptitude-m4-t2-dia1",
+  "title": "Inference and Tone Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Inference and Tone\"]\n  Process --> End"
+}

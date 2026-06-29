@@ -1,0 +1,7 @@
+{
+  "topic_id": "dbms-m3-t5",
+  "diagram_id": "dbms-m3-t5-dia1",
+  "title": "Media Recovery Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Media Recovery\"]\n  Process --> End"
+}

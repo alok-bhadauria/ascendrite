@@ -1,0 +1,17 @@
+{
+  "quiz_id": "ai-agents-m1-t4-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "What is the role of self-reflection loops in agentic systems?",
+      "options": [
+        "To review output quality and correct mistakes before returning the final answer.",
+        "To compress context databases.",
+        "To select the next token.",
+        "To speed up token generation rates."
+      ],
+      "correct_answer": "To review output quality and correct mistakes before returning the final answer.",
+      "explanation": "Self-reflection runs checks on candidate responses, identifying flaws and rewriting sections to ensure accuracy."
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "topic_id": "ai-agents-m2-t5",
+  "asset_id": "ai-agents-m2-t5-ex1",
+  "title": "Error Handling & Recovery Loops",
+  "language": "python",
+  "code": "def safe_tool_execute(tool_func, args):\n    try:\n        return tool_func(**args)\n    except Exception as e:\n        return f\"Error during execution: {str(e)}\"\n\nif __name__ == '__main__':\n    print('Safe executor module initialized.')\n"
+}

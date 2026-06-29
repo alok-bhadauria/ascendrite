@@ -1,0 +1,7 @@
+{
+  "topic_id": "java-m2-t3",
+  "diagram_id": "java-m2-t3-dia1",
+  "title": "Polymorphism Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Polymorphism\"]\n  Process --> End"
+}

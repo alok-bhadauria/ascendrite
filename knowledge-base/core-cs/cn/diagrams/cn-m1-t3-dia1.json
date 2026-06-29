@@ -1,0 +1,7 @@
+{
+  "topic_id": "cn-m1-t3",
+  "diagram_id": "cn-m1-t3-dia1",
+  "title": "Layer Transmissions Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Layer Transmissions\"]\n  Process --> End"
+}

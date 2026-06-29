@@ -1,0 +1,7 @@
+{
+  "topic_id": "nodejs-expressjs-m3-t5",
+  "diagram_id": "nodejs-expressjs-m3-t5-dia1",
+  "title": "Transactions Control Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Transactions Control\"]\n  Process --> End"
+}

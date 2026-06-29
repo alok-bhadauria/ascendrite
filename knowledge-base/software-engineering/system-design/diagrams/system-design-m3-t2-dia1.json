@@ -1,0 +1,7 @@
+{
+  "topic_id": "system-design-m3-t2",
+  "diagram_id": "system-design-m3-t2-dia1",
+  "title": "Concurrency Anomalies Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Concurrency Anomalies\"]\n  Process --> End"
+}

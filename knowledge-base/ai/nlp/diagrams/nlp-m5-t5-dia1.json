@@ -1,0 +1,7 @@
+{
+  "topic_id": "nlp-m5-t5",
+  "diagram_id": "nlp-m5-t5-dia1",
+  "title": "Summarization & Translation Metrics Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Summarization & Translation Metrics\"]\n  Process --> End"
+}

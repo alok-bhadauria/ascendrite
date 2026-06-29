@@ -1,0 +1,17 @@
+{
+  "quiz_id": "ai-agents-m5-t4-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "What is the primary function of an action approval gate in an agentic safety pipeline?",
+      "options": [
+        "To intercept sensitive actions (e.g. file writes) and require human verification before execution.",
+        "To speed up token generation rates.",
+        "To encrypt data.",
+        "To run PPO loops."
+      ],
+      "correct_answer": "To intercept sensitive actions (e.g. file writes) and require human verification before execution.",
+      "explanation": "Approval gates intercept high-risk actions, requiring human authorization before the system executes them."
+    }
+  ]
+}

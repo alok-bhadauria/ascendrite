@@ -1,0 +1,7 @@
+{
+  "topic_id": "system-design-m5-t1",
+  "diagram_id": "system-design-m5-t1-dia1",
+  "title": "Case Study: URL Shortener design Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Case Study: URL Shortener design\"]\n  Process --> End"
+}

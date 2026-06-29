@@ -1,0 +1,17 @@
+{
+  "quiz_id": "cn-m4-t4-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which of the following describes a key bottleneck related to Web Caches?",
+      "options": [
+        "Inefficient scaling of Reverse proxy servers (Nginx), HTTP cache headers validation rules (ETag, Cache-Control).",
+        "Hardware is completely offline.",
+        "Lack of database files.",
+        "Syntax compilation errors."
+      ],
+      "correct_answer": "Inefficient scaling of Reverse proxy servers (Nginx), HTTP cache headers validation rules (ETag, Cache-Control).",
+      "explanation": "The topic covers how Reverse proxy servers (Nginx), HTTP cache headers validation rules (ETag, Cache-Control) scales under concurrent workloads, which represents the primary bottlenecks."
+    }
+  ]
+}

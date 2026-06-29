@@ -1,0 +1,7 @@
+{
+  "topic_id": "spring-boot-m2-t4",
+  "diagram_id": "spring-boot-m2-t4-dia1",
+  "title": "Request Validation Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Request Validation\"]\n  Process --> End"
+}

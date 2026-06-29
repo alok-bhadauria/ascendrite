@@ -1,0 +1,7 @@
+{
+  "topic_id": "ai-agents-m5-t4",
+  "diagram_id": "ai-agents-m5-t4-dia1",
+  "title": "Production Safety Guardrails Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Production Safety Guardrails\"]\n  Process --> End"
+}

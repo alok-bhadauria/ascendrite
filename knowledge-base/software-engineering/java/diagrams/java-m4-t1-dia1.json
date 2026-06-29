@@ -1,0 +1,7 @@
+{
+  "topic_id": "java-m4-t1",
+  "diagram_id": "java-m4-t1-dia1",
+  "title": "Lambda Expressions Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Lambda Expressions\"]\n  Process --> End"
+}

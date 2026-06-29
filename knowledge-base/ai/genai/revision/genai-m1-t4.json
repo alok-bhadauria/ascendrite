@@ -1,0 +1,6 @@
+{
+  "topic_id": "genai-m1-t4",
+  "title": "Mixture of Experts",
+  "version": "1.0.0",
+  "content": "# Mixture of Experts\n\n## 1. Gating Selection\n$$y = \\sum_{i=1}^E G(\\mathbf{x})_i E_i(\\mathbf{x})$$\n\n## 2. Load-Balancing Loss\n$$\\mathcal{L}_{aux} = E \\sum_{i=1}^E f_i P_i$$\n*   Minimizing this prevents router collapse to a single expert.\n"
+}

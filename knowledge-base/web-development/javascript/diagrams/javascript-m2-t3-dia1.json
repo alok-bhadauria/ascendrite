@@ -1,0 +1,7 @@
+{
+  "topic_id": "javascript-m2-t3",
+  "diagram_id": "javascript-m2-t3-dia1",
+  "title": "ES6 Classes Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process ES6 Classes\"]\n  Process --> End"
+}

@@ -1,0 +1,7 @@
+{
+  "topic_id": "genai-m3-t2",
+  "asset_id": "genai-m3-t2-prac1",
+  "title": "QLoRA & Double Quantization",
+  "language": "python",
+  "code": "import numpy as np\n\ndef quantize_nf4(w, scale):\n    return w / scale\n\ndef run_practice():\n    assert quantize_nf4(10.0, 5.0) == 2.0\n    print('[PASS] NF4 scaling checks completed.')\n\nif __name__ == '__main__':\n    run_practice()\n"
+}

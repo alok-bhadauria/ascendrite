@@ -1,0 +1,44 @@
+{
+  "topic_id": "spring-boot-m1-t3",
+  "title": "Bean Lifecycle",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Hard",
+    "estimated_hours": 6,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Describe structural characteristics of Bean Lifecycle.",
+    "Derive mathematical and programmatic bounds for Instantiation, initialization callbacks, Destruction callbacks, Resolving circular dependencies under the hood."
+  ],
+  "content_sections": [
+    {
+      "title": "Bean Lifecycle",
+      "content": "### Spring Dependency Injection & Transactional Loops\nSpring Boot manages object lifecycles and transactions through IoC container injection.\n\n#### IoC Lifecycle & Bean Scopes\nSpring manages beans under defined scopes (Singleton, Prototype, Request, Session). The container initializes and resolves dependencies. To handle circular dependencies (e.g. Bean A depends on B, B on A), Spring uses a **3-Level Cache**:\n1.  `singletonObjects`: Fully initialized singleton beans.\n2.  `earlySingletonObjects`: Partially initialized beans (instantiated but no fields injected yet).\n3.  `singletonFactories`: Bean creation factories that generate early references (including proxies).\n\n#### AOP Self-Invocation Trap\nSpring Transactions (`@Transactional`) use proxy wrappers. When a client invokes a method, the proxy intercepts the call to manage database connections and commit/rollback boundaries. *Trap:* If a method inside Bean A calls another `@Transactional` method inside the same Bean A using self-invocation (e.g. `this.helperMethod()`), the call bypasses the proxy, executing without transaction context.\n\n#### JPA N+1 Select Bottleneck\nOccurs when fetching parent entities with lazy-loaded children. Spring runs 1 query to fetch $N$ parents, then executes $N$ additional queries to fetch children of each parent. *Mitigation:* Use `JOIN FETCH` queries or Entity Graphs to load parent and child rows in a single DB round-trip.\n\n### Depth Analysis: Bean Lifecycle\nIn production configurations, we analyze how Instantiation, initialization callbacks, Destruction callbacks, Resolving circular dependencies under the hood affects performance parameters. We evaluate memory layouts and consensus thresholds.",
+      "callouts": [
+        {
+          "type": "Student Trap",
+          "title": "Common Trap in Bean Lifecycle",
+          "content": "A common mistake when analyzing Bean Lifecycle is ignoring latency bounds and boundary edge cases during concurrent executions."
+        },
+        {
+          "type": "Engineering Note",
+          "title": "Production Scaling for Bean Lifecycle",
+          "content": "Production servers implement strict resource isolation and cache alignments to prevent performance regressions when running Bean Lifecycle loops."
+        }
+      ]
+    }
+  ],
+  "example_refs": [
+    "spring-boot-m1-t3-ex1"
+  ],
+  "diagram_refs": [
+    "spring-boot-m1-t3-dia1"
+  ],
+  "practice_refs": [
+    "spring-boot-m1-t3-prac1"
+  ],
+  "quiz_refs": [
+    "spring-boot-m1-t3-quiz"
+  ]
+}

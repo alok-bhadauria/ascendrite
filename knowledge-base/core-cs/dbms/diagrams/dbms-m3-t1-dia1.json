@@ -1,0 +1,7 @@
+{
+  "topic_id": "dbms-m3-t1",
+  "diagram_id": "dbms-m3-t1-dia1",
+  "title": "Database Crash Recovery Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Database Crash Recovery\"]\n  Process --> End"
+}

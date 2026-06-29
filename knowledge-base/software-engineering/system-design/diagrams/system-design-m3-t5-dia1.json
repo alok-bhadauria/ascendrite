@@ -1,0 +1,7 @@
+{
+  "topic_id": "system-design-m3-t5",
+  "diagram_id": "system-design-m3-t5-dia1",
+  "title": "Distributed Transactions Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Distributed Transactions\"]\n  Process --> End"
+}

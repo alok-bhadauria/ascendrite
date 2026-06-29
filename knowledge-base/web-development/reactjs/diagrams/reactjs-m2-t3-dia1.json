@@ -1,0 +1,7 @@
+{
+  "topic_id": "reactjs-m2-t3",
+  "diagram_id": "reactjs-m2-t3-dia1",
+  "title": "Hooks Closures Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Hooks Closures\"]\n  Process --> End"
+}

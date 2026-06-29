@@ -1,0 +1,7 @@
+{
+  "topic_id": "typescript-m5-t2",
+  "diagram_id": "typescript-m5-t2-dia1",
+  "title": "Declaration Files Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Declaration Files\"]\n  Process --> End"
+}

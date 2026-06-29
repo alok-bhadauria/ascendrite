@@ -1,0 +1,6 @@
+{
+  "topic_id": "genai-m3-t2",
+  "title": "QLoRA & Double Quantization",
+  "version": "1.0.0",
+  "content": "# QLoRA & NF4\n\n*   **NF4:** Quantization bins designed to carry equal information density for normally distributed weights.\n*   **Double Quantization (DQ):** Quantizes the scales of the base quantization block, compressing storage requirements.\n"
+}

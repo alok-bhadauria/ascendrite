@@ -1,0 +1,17 @@
+{
+  "quiz_id": "sql-m2-t2-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which of the following describes a key bottleneck related to Ranking Functions?",
+      "options": [
+        "Inefficient scaling of ROW_NUMBER(), RANK(), DENSE_RANK() duplicates handling differences.",
+        "Hardware is completely offline.",
+        "Lack of database files.",
+        "Syntax compilation errors."
+      ],
+      "correct_answer": "Inefficient scaling of ROW_NUMBER(), RANK(), DENSE_RANK() duplicates handling differences.",
+      "explanation": "The topic covers how ROW_NUMBER(), RANK(), DENSE_RANK() duplicates handling differences scales under concurrent workloads, which represents the primary bottlenecks."
+    }
+  ]
+}

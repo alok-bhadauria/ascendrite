@@ -1,0 +1,17 @@
+{
+  "quiz_id": "sql-m3-t2-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which of the following describes a key bottleneck related to Recursive CTE?",
+      "options": [
+        "Inefficient scaling of Hierarchical graph traversals (manager trees).",
+        "Hardware is completely offline.",
+        "Lack of database files.",
+        "Syntax compilation errors."
+      ],
+      "correct_answer": "Inefficient scaling of Hierarchical graph traversals (manager trees).",
+      "explanation": "The topic covers how Hierarchical graph traversals (manager trees) scales under concurrent workloads, which represents the primary bottlenecks."
+    }
+  ]
+}

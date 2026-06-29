@@ -1,0 +1,7 @@
+{
+  "topic_id": "genai-m3-t3",
+  "asset_id": "genai-m3-t3-ex1",
+  "title": "Prompt & Prefix Tuning",
+  "language": "python",
+  "code": "import numpy as np\n\ndef prefix_tune_attention_keys(keys, prefix_keys):\n    return np.concatenate([prefix_keys, keys], axis=0)\n\nif __name__ == '__main__':\n    print('Prefix tuning vectors configured.')\n"
+}

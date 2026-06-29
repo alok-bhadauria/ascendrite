@@ -1,0 +1,7 @@
+{
+  "topic_id": "sql-m4-t2",
+  "diagram_id": "sql-m4-t2-dia1",
+  "title": "Explain Plans Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Explain Plans\"]\n  Process --> End"
+}

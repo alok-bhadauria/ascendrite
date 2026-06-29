@@ -1,0 +1,7 @@
+{
+  "topic_id": "nlp-m4-t3",
+  "diagram_id": "nlp-m4-t3-dia1",
+  "title": "Transformer Block Components Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Transformer Block Components\"]\n  Process --> End"
+}

@@ -1,0 +1,7 @@
+{
+  "topic_id": "java-m2-t1",
+  "diagram_id": "java-m2-t1-dia1",
+  "title": "Constructors & Initializers Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Constructors & Initializers\"]\n  Process --> End"
+}

@@ -1,0 +1,7 @@
+{
+  "topic_id": "nodejs-expressjs-m2-t3",
+  "diagram_id": "nodejs-expressjs-m2-t3-dia1",
+  "title": "Error Middleware Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Error Middleware\"]\n  Process --> End"
+}

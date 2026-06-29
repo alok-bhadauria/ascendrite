@@ -1,0 +1,29 @@
+{
+  "subject_id": "genai",
+  "name": "Generative AI",
+  "category": "ai",
+  "difficulty": "Advanced",
+  "estimated_learning_hours": 120,
+  "prerequisites": [
+    "Python Programming",
+    "Deep Learning Foundations",
+    "Natural Language Processing"
+  ],
+  "tags": [
+    "LLMs",
+    "PEFT",
+    "RLHF",
+    "DPO",
+    "Quantization",
+    "vLLM",
+    "Multimodal"
+  ],
+  "subject_theme_colors": {
+    "primary": "#7C3AED",
+    "secondary": "#A78BFA",
+    "accent": "#F59E0B",
+    "neutral": "#1F2937"
+  },
+  "version": "1.0.0",
+  "last_updated": "2026-06-29"
+}

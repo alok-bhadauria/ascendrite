@@ -1,0 +1,7 @@
+{
+  "topic_id": "oop-m2-t2",
+  "diagram_id": "oop-m2-t2-dia1",
+  "title": "Dependency Injection (DI) Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Dependency Injection (DI)\"]\n  Process --> End"
+}

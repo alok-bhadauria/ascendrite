@@ -1,0 +1,31 @@
+{
+  "topic_id": "ai-agents-m4-t4",
+  "title": "Conflict Resolution & Consensus",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Medium",
+    "estimated_hours": 5,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Explain multi-agent debate structures and consensus rules.",
+    "Formulate task handoff protocols."
+  ],
+  "content_sections": [
+    {
+      "title": "Multi-Agent Debate and Consensus",
+      "content": "When agents output conflicting results (e.g. two analysts draw different conclusions from a dataset), the system applies **consensus rules**:\n\n1.  **Voting Consensus:** Multiple agents evaluate the proposals, and the option with the most votes is selected.\n2.  **Debate Structures:** Agents exchange arguments in a multi-turn conversation, modifying their positions until a consensus is reached or a maximum number of turns is exceeded.",
+      "callouts": []
+    }
+  ],
+  "example_refs": [
+    "ai-agents-m4-t4-ex1"
+  ],
+  "diagram_refs": [],
+  "practice_refs": [
+    "ai-agents-m4-t4-prac1"
+  ],
+  "quiz_refs": [
+    "ai-agents-m4-t4-quiz"
+  ]
+}

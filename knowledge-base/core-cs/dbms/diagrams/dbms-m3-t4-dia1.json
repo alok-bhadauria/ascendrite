@@ -1,0 +1,7 @@
+{
+  "topic_id": "dbms-m3-t4",
+  "diagram_id": "dbms-m3-t4-dia1",
+  "title": "Compensation Log Records Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Compensation Log Records\"]\n  Process --> End"
+}

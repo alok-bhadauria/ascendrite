@@ -1,0 +1,7 @@
+{
+  "topic_id": "nextjs-m2-t2",
+  "diagram_id": "nextjs-m2-t2-dia1",
+  "title": "Dynamic Routes Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Dynamic Routes\"]\n  Process --> End"
+}

@@ -1,0 +1,7 @@
+{
+  "topic_id": "nodejs-expressjs-m4-t3",
+  "diagram_id": "nodejs-expressjs-m4-t3-dia1",
+  "title": "Authentication Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Authentication\"]\n  Process --> End"
+}

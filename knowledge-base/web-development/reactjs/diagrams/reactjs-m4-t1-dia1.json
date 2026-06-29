@@ -1,0 +1,7 @@
+{
+  "topic_id": "reactjs-m4-t1",
+  "diagram_id": "reactjs-m4-t1-dia1",
+  "title": "Controlled vs Uncontrolled Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Controlled vs Uncontrolled\"]\n  Process --> End"
+}

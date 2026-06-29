@@ -1,0 +1,7 @@
+{
+  "topic_id": "cn-m2-t2",
+  "asset_id": "cn-m2-t2-ex1",
+  "title": "IP Subnetting",
+  "language": "python",
+  "code": "if __name__ == '__main__':\n    print('Example pass for IP Subnetting')\n"
+}

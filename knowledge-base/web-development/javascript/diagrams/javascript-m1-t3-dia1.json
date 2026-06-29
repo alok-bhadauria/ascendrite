@@ -1,0 +1,7 @@
+{
+  "topic_id": "javascript-m1-t3",
+  "diagram_id": "javascript-m1-t3-dia1",
+  "title": "Closures & Scope Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Closures & Scope\"]\n  Process --> End"
+}

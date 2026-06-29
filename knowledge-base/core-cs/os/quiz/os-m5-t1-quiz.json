@@ -1,0 +1,17 @@
+{
+  "quiz_id": "os-m5-t1-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which of the following describes a key bottleneck related to Disk Scheduling?",
+      "options": [
+        "Inefficient scaling of FCFS, SSTF, SCAN, C-SCAN head movement optimizations.",
+        "Hardware is completely offline.",
+        "Lack of database files.",
+        "Syntax compilation errors."
+      ],
+      "correct_answer": "Inefficient scaling of FCFS, SSTF, SCAN, C-SCAN head movement optimizations.",
+      "explanation": "The topic covers how FCFS, SSTF, SCAN, C-SCAN head movement optimizations scales under concurrent workloads, which represents the primary bottlenecks."
+    }
+  ]
+}

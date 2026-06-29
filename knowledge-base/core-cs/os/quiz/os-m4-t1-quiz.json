@@ -1,0 +1,17 @@
+{
+  "quiz_id": "os-m4-t1-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which of the following describes a key bottleneck related to Concurrency?",
+      "options": [
+        "Inefficient scaling of Kernel-level threads vs User-level green threads.",
+        "Hardware is completely offline.",
+        "Lack of database files.",
+        "Syntax compilation errors."
+      ],
+      "correct_answer": "Inefficient scaling of Kernel-level threads vs User-level green threads.",
+      "explanation": "The topic covers how Kernel-level threads vs User-level green threads scales under concurrent workloads, which represents the primary bottlenecks."
+    }
+  ]
+}

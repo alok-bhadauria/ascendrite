@@ -1,0 +1,7 @@
+{
+  "topic_id": "oop-m1-t2",
+  "diagram_id": "oop-m1-t2-dia1",
+  "title": "Abstraction Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Abstraction\"]\n  Process --> End"
+}

@@ -1,0 +1,6 @@
+{
+  "topic_id": "nlp-m3-t2",
+  "title": "Word2Vec Optimization",
+  "version": "1.0.0",
+  "content": "# Word2Vec Optimization\n\n## 1. Negative Sampling Loss\n$$\\mathcal{L} = -\\ln \\sigma(\\mathbf{v}'^{\\top}_{O} \\mathbf{v}_{I}) - \\sum_{j=1}^k \\ln \\sigma(-\\mathbf{v}'^{\\top}_{N_j} \\mathbf{v}_{I})$$\n\n## 2. Noise Distribution\n$$P_n(w) \\propto U(w)^{0.75}$$\n*   Bumps rare word sampling probabilities to balance updates.\n"
+}

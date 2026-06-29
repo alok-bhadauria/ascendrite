@@ -1,0 +1,17 @@
+{
+  "quiz_id": "os-m3-t3-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which of the following describes a key bottleneck related to TLB Hardware?",
+      "options": [
+        "Inefficient scaling of Translation Lookaside Buffer.",
+        "Hardware is completely offline.",
+        "Lack of database files.",
+        "Syntax compilation errors."
+      ],
+      "correct_answer": "Inefficient scaling of Translation Lookaside Buffer.",
+      "explanation": "The topic covers how Translation Lookaside Buffer scales under concurrent workloads, which represents the primary bottlenecks."
+    }
+  ]
+}

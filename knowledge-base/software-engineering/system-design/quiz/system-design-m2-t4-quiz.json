@@ -1,0 +1,17 @@
+{
+  "quiz_id": "system-design-m2-t4-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "What is the key optimization criteria for Distributed Caching?",
+      "options": [
+        "Minimizing complexity bounds.",
+        "Increasing CPU utilization.",
+        "Static heap allocation.",
+        "Syntax execution bypass."
+      ],
+      "correct_answer": "Minimizing complexity bounds.",
+      "explanation": "The primary goal in designing Distributed Caching is minimizing asymptotic and memory complexities."
+    }
+  ]
+}

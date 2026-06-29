@@ -1,0 +1,7 @@
+{
+  "topic_id": "dbms-m4-t5",
+  "diagram_id": "dbms-m4-t5-dia1",
+  "title": "Execution Plans Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Execution Plans\"]\n  Process --> End"
+}

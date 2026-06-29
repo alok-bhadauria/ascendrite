@@ -1,0 +1,7 @@
+{
+  "topic_id": "nlp-m1-t2",
+  "asset_id": "nlp-m1-t2-prac1",
+  "title": "Statistical Tokenization",
+  "language": "python",
+  "code": "def calculate_wordpiece_score(pair_count: int, count_a: int, count_b: int) -> float:\n    \"\"\"Calculates the WordPiece score for a pair (A, B).\"\"\"\n    if count_a == 0 or count_b == 0:\n        return 0.0\n    return float(pair_count) / (count_a * count_b)\n\ndef run_practice():\n    # Pair count = 50, Individual count A = 100, B = 200\n    score = calculate_wordpiece_score(50, 100, 200)\n    assert np.allclose(score, 0.0025)\n    print('[PASS] WordPiece scoring checks passed.')\n\nif __name__ == '__main__':\n    import numpy as np\n    run_practice()\n"
+}

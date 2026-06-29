@@ -1,0 +1,7 @@
+{
+  "topic_id": "nextjs-m4-t5",
+  "diagram_id": "nextjs-m4-t5-dia1",
+  "title": "Partial Prerendering (PPR) Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Partial Prerendering (PPR)\"]\n  Process --> End"
+}

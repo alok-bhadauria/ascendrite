@@ -1,0 +1,7 @@
+{
+  "topic_id": "javascript-m3-t2",
+  "diagram_id": "javascript-m3-t2-dia1",
+  "title": "Promises API Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Promises API\"]\n  Process --> End"
+}

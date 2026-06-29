@@ -1,0 +1,7 @@
+{
+  "topic_id": "nextjs-m5-t1",
+  "diagram_id": "nextjs-m5-t1-dia1",
+  "title": "Image Optimizations Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Image Optimizations\"]\n  Process --> End"
+}

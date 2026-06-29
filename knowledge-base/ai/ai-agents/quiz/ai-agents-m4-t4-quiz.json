@@ -1,0 +1,17 @@
+{
+  "quiz_id": "ai-agents-m4-t4-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which mechanism is commonly used to resolve conflicting outputs between specialist agents?",
+      "options": [
+        "Tallying votes using consensus rules or executing multi-turn debate loops.",
+        "Halting the program.",
+        "Applying absolute positional encodings.",
+        "Running negative sampling checks."
+      ],
+      "correct_answer": "Tallying votes using consensus rules or executing multi-turn debate loops.",
+      "explanation": "Consensus rules (like majority voting) and debate loops resolve conflicting opinions, finding a common solution."
+    }
+  ]
+}

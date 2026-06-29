@@ -1,0 +1,7 @@
+{
+  "topic_id": "genai-m4-t2",
+  "asset_id": "genai-m4-t2-ex1",
+  "title": "PPO Alignment Loop",
+  "language": "python",
+  "code": "import numpy as np\n\ndef compute_kl_penalty(log_p_actor, log_p_ref, beta=0.1):\n    return beta * (log_p_actor - log_p_ref)\n\nif __name__ == '__main__':\n    print('PPO KL penalty trackers loaded.')\n"
+}

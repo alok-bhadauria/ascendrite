@@ -1,0 +1,36 @@
+{
+  "topic_id": "genai-m5-t1",
+  "title": "Continuous Batching & Speculative Decoding",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Medium",
+    "estimated_hours": 5,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Explain Continuous Batching iteration-level scheduling.",
+    "Formulate Speculative Decoding draft-target verification steps."
+  ],
+  "content_sections": [
+    {
+      "title": "Continuous Batching (Iteration-Level Scheduling)",
+      "content": "Static batching requires all sequences in a batch to finish generation before processing a new batch, causing compute idle time due to sequence length variance. \n\n**Continuous Batching** schedules tasks at the iteration level, inserting new requests as soon as a sequence completes. This minimizes idle resources and maximizes GPU utilization.",
+      "callouts": []
+    },
+    {
+      "title": "Speculative Decoding Mathematics",
+      "content": "**Speculative Decoding** accelerates generation without losing accuracy by using a small draft model to speculate $K$ future tokens. The target model validates them in parallel in a single forward pass.\n\nA speculated token $x$ is accepted with probability:\n\n$$P_{accept} = \\min\\left(1.0, \\frac{P_{target}(x \\mid context)}{P_{draft}(x \\mid context)}\\right)$$\n\nIf the token is rejected, we sample a replacement token from the normalized difference distribution: $\\text{softmax}(\\max(0, P_{target}(x) - P_{draft}(x)))$, guaranteeing that outputs are mathematically identical to the target model.",
+      "callouts": []
+    }
+  ],
+  "example_refs": [
+    "genai-m5-t1-ex1"
+  ],
+  "diagram_refs": [],
+  "practice_refs": [
+    "genai-m5-t1-prac1"
+  ],
+  "quiz_refs": [
+    "genai-m5-t1-quiz"
+  ]
+}

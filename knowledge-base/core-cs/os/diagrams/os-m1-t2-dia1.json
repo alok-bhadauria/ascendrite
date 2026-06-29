@@ -1,0 +1,7 @@
+{
+  "topic_id": "os-m1-t2",
+  "diagram_id": "os-m1-t2-dia1",
+  "title": "Privilege Rings Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Privilege Rings\"]\n  Process --> End"
+}

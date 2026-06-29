@@ -1,0 +1,44 @@
+{
+  "topic_id": "os-m5-t4",
+  "title": "RAID Configurations",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Hard",
+    "estimated_hours": 6,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Describe structural characteristics of RAID Configurations.",
+    "Derive mathematical and programmatic bounds for RAID 0 stripe, RAID 1 mirror, RAID 5 parity, RAID 10 hybrid setups."
+  ],
+  "content_sections": [
+    {
+      "title": "RAID Configurations",
+      "content": "### Kernel Architecture & Memory Virtualization\nOperating systems govern resource virtualization, running system code in protected memory environments.\n\n#### System Call Traps\nUsers run in user mode (**Ring 3**), and the kernel runs in kernel mode (**Ring 0**). A user program triggers a system call using a hardware instruction trap (e.g. `syscall` in x86-64). This halts execution, switches the privilege ring to Ring 0, saves registers, and jumps to the address mapped in the kernel's **System Call Vector Table**.\n\n#### Context Switch Internals\nA context switch swaps executing threads. The kernel:\n1. Saves user registers to the thread's kernel stack.\n2. Swaps the CPU's stack pointer to the target thread's stack.\n3. Swaps the MMU page table pointer (registers like `CR3` in x86) to point to the new process's page directory, invalidating the Translation Lookaside Buffer (TLB) unless Address Space Identifiers (ASID) are used.\n\n#### Peterson's Mutual Exclusion\nFor two threads $T_0, T_1$, mutual exclusion is guaranteed by:\n```c\nflag[i] = true;\nturn = j;\nwhile (flag[j] && turn == j);\n// Critical Section\nflag[i] = false;\n```\nProof: If both enter while, `turn` can only equal one value ($0$ or $1$), forcing one thread to spin until the other exits the critical section.\n\n### Depth Analysis: RAID Configurations\nIn production configurations, we analyze how RAID 0 stripe, RAID 1 mirror, RAID 5 parity, RAID 10 hybrid setups affects performance parameters. We evaluate memory layouts and consensus thresholds.",
+      "callouts": [
+        {
+          "type": "Student Trap",
+          "title": "Common Trap in RAID Configurations",
+          "content": "A common mistake when analyzing RAID Configurations is ignoring latency bounds and boundary edge cases during concurrent executions."
+        },
+        {
+          "type": "Engineering Note",
+          "title": "Production Scaling for RAID Configurations",
+          "content": "Production servers implement strict resource isolation and cache alignments to prevent performance regressions when running RAID Configurations loops."
+        }
+      ]
+    }
+  ],
+  "example_refs": [
+    "os-m5-t4-ex1"
+  ],
+  "diagram_refs": [
+    "os-m5-t4-dia1"
+  ],
+  "practice_refs": [
+    "os-m5-t4-prac1"
+  ],
+  "quiz_refs": [
+    "os-m5-t4-quiz"
+  ]
+}

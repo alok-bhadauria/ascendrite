@@ -1,0 +1,7 @@
+{
+  "topic_id": "html-css-git-m3-t5",
+  "diagram_id": "html-css-git-m3-t5-dia1",
+  "title": "Browser Compatibility Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Browser Compatibility\"]\n  Process --> End"
+}

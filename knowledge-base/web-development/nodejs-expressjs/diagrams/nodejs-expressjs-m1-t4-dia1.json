@@ -1,0 +1,7 @@
+{
+  "topic_id": "nodejs-expressjs-m1-t4",
+  "diagram_id": "nodejs-expressjs-m1-t4-dia1",
+  "title": "EventEmitter & Streams Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process EventEmitter & Streams\"]\n  Process --> End"
+}

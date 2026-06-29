@@ -1,0 +1,7 @@
+{
+  "topic_id": "dsa-m3-t2",
+  "diagram_id": "dsa-m3-t2-dia1",
+  "title": "Advanced Stacks Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Advanced Stacks\"]\n  Process --> End"
+}

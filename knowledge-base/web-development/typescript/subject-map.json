@@ -1,0 +1,259 @@
+{
+  "subject_id": "typescript",
+  "name": "TypeScript",
+  "category": "web-development",
+  "modules": [
+    {
+      "name": "Module 1: TS Compiler, Type Inference & Type Assertion Traps",
+      "topics": [
+        {
+          "id": "typescript-m1-t1",
+          "title": "TS Compiler",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "typescript-m1-t2",
+          "title": "Type Inference",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "typescript-m1-t3",
+          "title": "Type Assertions",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "typescript-m1-t4",
+          "title": "Union & Intersection",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "typescript-m1-t5",
+          "title": "Type Guards",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        }
+      ]
+    },
+    {
+      "name": "Module 2: Generics Constraints, Mapped Types & Utility Types",
+      "topics": [
+        {
+          "id": "typescript-m2-t1",
+          "title": "Generics",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "typescript-m2-t2",
+          "title": "Keyof Operator",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "typescript-m2-t3",
+          "title": "Conditional Types",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "typescript-m2-t4",
+          "title": "Utility Types",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "typescript-m2-t5",
+          "title": "Mapped Types Modifiers",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        }
+      ]
+    },
+    {
+      "name": "Module 3: Type Covariance, Contravariance & Declaration Merging",
+      "topics": [
+        {
+          "id": "typescript-m3-t1",
+          "title": "Variance",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "typescript-m3-t2",
+          "title": "Declaration Merging",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "typescript-m3-t3",
+          "title": "Function Overloads",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "typescript-m3-t4",
+          "title": "Type Aliases vs Interfaces",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "typescript-m3-t5",
+          "title": "TS Decorators",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        }
+      ]
+    },
+    {
+      "name": "Module 4: TS DOM Types, Event Handling & API Validations",
+      "topics": [
+        {
+          "id": "typescript-m4-t1",
+          "title": "DOM Type Casts",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "typescript-m4-t2",
+          "title": "Event Handling Types",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "typescript-m4-t3",
+          "title": "API Schema Validations",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "typescript-m4-t4",
+          "title": "Utility Types Creation",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "typescript-m4-t5",
+          "title": "Template Literal Types",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        }
+      ]
+    },
+    {
+      "name": "Module 5: Monorepo TS setups, Compiler Chunks & Tree-Shaking",
+      "topics": [
+        {
+          "id": "typescript-m5-t1",
+          "title": "Monorepo Setup",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "typescript-m5-t2",
+          "title": "Declaration Files",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "typescript-m5-t3",
+          "title": "Compiler Performance",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "typescript-m5-t4",
+          "title": "Tree-Shaking TS",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "typescript-m5-t5",
+          "title": "TS Utility Configurations",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        }
+      ]
+    }
+  ],
+  "version": "1.0.0",
+  "last_updated": "2026-06-29"
+}

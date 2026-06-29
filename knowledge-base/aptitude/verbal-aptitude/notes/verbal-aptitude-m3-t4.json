@@ -1,0 +1,44 @@
+{
+  "topic_id": "verbal-aptitude-m3-t4",
+  "title": "One-Word Substitution",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Hard",
+    "estimated_hours": 6,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Describe structural characteristics of One-Word Substitution.",
+    "Derive mathematical and programmatic bounds for Categorized definitions, Professional and scientific terms mapping."
+  ],
+  "content_sections": [
+    {
+      "title": "One-Word Substitution",
+      "content": "### Syntactic Alignment, Modifiers & Logical Transition Indicators\nVerbal Aptitude studies grammatical structure, modifier bounds, and logical flow connections.\n\n#### Subject-Verb Agreement with Intervening Phrases\nVerbs must align with their subjects, not object nouns located in intervening prepositional phrases (e.g. \"One of the servers *is* down,\" not \"One of the servers *are* down\").\n\n#### Dangling Modifiers\nA modifying phrase must refer to an active subject declared immediately after the phrase. If the subject is omitted, the modifier is left dangling:\n*   *Dangling (Incorrect):* \"While writing code, the system crashed.\"\n*   *Resolved (Correct):* \"While I was writing code, the system crashed.\"\n\n#### Logical Transition categories\n*   **Adversative:** Indicates contrast (e.g. *nevertheless*, *nonetheless*, *conversely*).\n*   **Causal:** Indicates result (e.g. *therefore*, *hence*, *consequently*).\n\n### Depth Analysis: One-Word Substitution\nIn production configurations, we analyze how Categorized definitions, Professional and scientific terms mapping affects performance parameters. We evaluate memory layouts and consensus thresholds.",
+      "callouts": [
+        {
+          "type": "Student Trap",
+          "title": "Common Trap in One-Word Substitution",
+          "content": "A common mistake when analyzing One-Word Substitution is ignoring latency bounds and boundary edge cases during concurrent executions."
+        },
+        {
+          "type": "Engineering Note",
+          "title": "Production Scaling for One-Word Substitution",
+          "content": "Production servers implement strict resource isolation and cache alignments to prevent performance regressions when running One-Word Substitution loops."
+        }
+      ]
+    }
+  ],
+  "example_refs": [
+    "verbal-aptitude-m3-t4-ex1"
+  ],
+  "diagram_refs": [
+    "verbal-aptitude-m3-t4-dia1"
+  ],
+  "practice_refs": [
+    "verbal-aptitude-m3-t4-prac1"
+  ],
+  "quiz_refs": [
+    "verbal-aptitude-m3-t4-quiz"
+  ]
+}

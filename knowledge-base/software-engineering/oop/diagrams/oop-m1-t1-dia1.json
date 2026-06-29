@@ -1,0 +1,7 @@
+{
+  "topic_id": "oop-m1-t1",
+  "diagram_id": "oop-m1-t1-dia1",
+  "title": "Programming Paradigms Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Programming Paradigms\"]\n  Process --> End"
+}

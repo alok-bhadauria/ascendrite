@@ -1,0 +1,6 @@
+{
+  "topic_id": "genai-m5-t5",
+  "title": "Guardrails & Safety Serving",
+  "version": "1.0.0",
+  "content": "# Guardrails & Safety Serving\n\n*   **LlamaGuard:** Evaluates prompts/responses against safety policies.\n*   **Input Guardrail:** Intercepts malicious prompts before model execution.\n*   **Output Guardrail:** Validates generated text before returning it to the user.\n"
+}

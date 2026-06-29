@@ -1,0 +1,7 @@
+{
+  "topic_id": "spring-boot-m4-t4",
+  "diagram_id": "spring-boot-m4-t4-dia1",
+  "title": "Role-Based Access Control (RBAC) Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Role-Based Access Control (RBAC)\"]\n  Process --> End"
+}

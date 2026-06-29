@@ -1,0 +1,6 @@
+{
+  "topic_id": "genai-m5-t1",
+  "title": "Continuous Batching & Speculative Decoding",
+  "version": "1.0.0",
+  "content": "# Interview Prep: Serving Optimizations\n\n## Q1: How does Speculative Decoding accelerate inference without altering output distributions?\n\n### Standard Answer\nThe acceptance probability step guarantees that the output distribution matches the target model exactly. If a draft token is rejected, we sample a new token from the normalized difference distribution, ensuring no loss in quality.\n"
+}

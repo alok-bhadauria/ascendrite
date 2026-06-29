@@ -1,0 +1,7 @@
+{
+  "topic_id": "reactjs-m2-t2",
+  "diagram_id": "reactjs-m2-t2-dia1",
+  "title": "Effect Hook Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Effect Hook\"]\n  Process --> End"
+}

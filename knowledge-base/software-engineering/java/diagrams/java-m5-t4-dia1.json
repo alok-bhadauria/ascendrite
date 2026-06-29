@@ -1,0 +1,7 @@
+{
+  "topic_id": "java-m5-t4",
+  "diagram_id": "java-m5-t4-dia1",
+  "title": "JVM Class Loading Lifecycle Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process JVM Class Loading Lifecycle\"]\n  Process --> End"
+}

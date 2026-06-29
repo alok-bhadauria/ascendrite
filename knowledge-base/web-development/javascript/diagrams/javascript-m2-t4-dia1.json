@@ -1,0 +1,7 @@
+{
+  "topic_id": "javascript-m2-t4",
+  "diagram_id": "javascript-m2-t4-dia1",
+  "title": "Iterators & Generators Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Iterators & Generators\"]\n  Process --> End"
+}

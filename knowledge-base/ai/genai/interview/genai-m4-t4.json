@@ -1,0 +1,6 @@
+{
+  "topic_id": "genai-m4-t4",
+  "title": "KTO Optimization",
+  "version": "1.0.0",
+  "content": "# Interview Prep: KTO\n\n## Q1: Why is KTO easier to scale in enterprise annotation pipelines than DPO?\n\n### Standard Answer\nPairwise preference annotation requires generating and comparing multiple model outputs for each prompt, which adds complexity. KTO only requires annotators to label a single output as positive or negative, which is faster and easier to scale.\n"
+}

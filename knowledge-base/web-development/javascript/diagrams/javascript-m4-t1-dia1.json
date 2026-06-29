@@ -1,0 +1,7 @@
+{
+  "topic_id": "javascript-m4-t1",
+  "diagram_id": "javascript-m4-t1-dia1",
+  "title": "DOM Tree Operations Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process DOM Tree Operations\"]\n  Process --> End"
+}

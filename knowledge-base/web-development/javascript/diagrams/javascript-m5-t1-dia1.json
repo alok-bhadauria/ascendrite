@@ -1,0 +1,7 @@
+{
+  "topic_id": "javascript-m5-t1",
+  "diagram_id": "javascript-m5-t1-dia1",
+  "title": "Module Systems Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Module Systems\"]\n  Process --> End"
+}

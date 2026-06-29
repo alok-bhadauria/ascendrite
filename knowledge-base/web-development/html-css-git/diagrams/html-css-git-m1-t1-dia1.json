@@ -1,0 +1,7 @@
+{
+  "topic_id": "html-css-git-m1-t1",
+  "diagram_id": "html-css-git-m1-t1-dia1",
+  "title": "Semantic Markup Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Semantic Markup\"]\n  Process --> End"
+}

@@ -1,0 +1,7 @@
+{
+  "topic_id": "typescript-m4-t2",
+  "diagram_id": "typescript-m4-t2-dia1",
+  "title": "Event Handling Types Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Event Handling Types\"]\n  Process --> End"
+}

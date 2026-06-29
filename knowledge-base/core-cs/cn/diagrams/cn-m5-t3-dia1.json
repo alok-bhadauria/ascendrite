@@ -1,0 +1,7 @@
+{
+  "topic_id": "cn-m5-t3",
+  "diagram_id": "cn-m5-t3-dia1",
+  "title": "Digital Certificates Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Digital Certificates\"]\n  Process --> End"
+}

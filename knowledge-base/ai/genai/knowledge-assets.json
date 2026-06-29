@@ -1,0 +1,61 @@
+{
+  "glossary": [
+    {
+      "term": "Low-Rank Adaptation (LoRA)",
+      "definition": "A parameter-efficient fine-tuning technique that freezes pre-trained model weights and injects trainable rank decomposition matrices into each layer of the Transformer architecture."
+    },
+    {
+      "term": "Direct Preference Optimization (DPO)",
+      "definition": "An alignment method that optimizes language models to conform to human preferences by optimizing a closed-form objective directly on pairwise preference data, bypassing reinforcement learning reward model training."
+    },
+    {
+      "term": "PagedAttention",
+      "definition": "An attention algorithm that optimizes Key-Value (KV) cache memory allocation by partitioning the cache into non-contiguous physical blocks using virtual memory principles."
+    },
+    {
+      "term": "Mixture of Experts (MoE)",
+      "definition": "An architecture where a gating network dynamically routes input tokens to specific specialist feedforward networks ('experts'), scaling parameters while keeping active compute constant."
+    }
+  ],
+  "references": [
+    {
+      "title": "Build a Large Language Model (From Scratch)",
+      "author": "Sebastian Raschka",
+      "publisher": "Manning Publications",
+      "year": 2024
+    }
+  ],
+  "further_reading": [
+    {
+      "title": "Generative Deep Learning",
+      "author": "David Foster",
+      "publisher": "O'Reilly Media",
+      "year": 2023
+    }
+  ],
+  "research_papers": [
+    {
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "authors": "Edward J. Hu, Yibin Shen, Phillip Wallis, Zeyuan Allen-Zhu, Yuanzhi Li, Shean Wang, Lu Wang, Weizhu Chen",
+      "journal": "ICLR",
+      "year": 2022,
+      "url": "https://arxiv.org/abs/2106.09685"
+    },
+    {
+      "title": "Direct Preference Optimization: Your Language Model is Secretly a Reward Model",
+      "authors": "Rafael Rafailov, Archit Sharma, Eric Mitchell, Stefano Ermon, Christopher D. Manning, Chelsea Finn",
+      "journal": "NeurIPS",
+      "year": 2023,
+      "url": "https://arxiv.org/abs/2305.18290"
+    },
+    {
+      "title": "PagedAttention: Efficient Memory Management for Large Language Model Serving with vLLM",
+      "authors": "Woosuk Kwon, Zhuohan Li, Siyuan Zhuang, Sheng Shen, Joseph E. Gonzalez, Ken Lahanas, Ion Stoica",
+      "journal": "SOSP",
+      "year": 2023,
+      "url": "https://arxiv.org/abs/2309.06180"
+    }
+  ],
+  "version": "1.0.0",
+  "last_updated": "2026-06-29"
+}

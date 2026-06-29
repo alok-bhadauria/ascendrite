@@ -1,0 +1,17 @@
+{
+  "quiz_id": "ai-agents-m1-t5-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which validation step is performed when converting a natural language query into tool parameters?",
+      "options": [
+        "Parsing parameter outputs against JSON schema types and constraints.",
+        "Replacing embeddings with tokens.",
+        "Pruning older context files.",
+        "Running PPO gradient calculations."
+      ],
+      "correct_answer": "Parsing parameter outputs against JSON schema types and constraints.",
+      "explanation": "The parser validates that the generated arguments conform to the types and constraints defined in the tool's JSON Schema."
+    }
+  ]
+}

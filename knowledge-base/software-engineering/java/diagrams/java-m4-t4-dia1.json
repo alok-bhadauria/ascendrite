@@ -1,0 +1,7 @@
+{
+  "topic_id": "java-m4-t4",
+  "diagram_id": "java-m4-t4-dia1",
+  "title": "Streams API Intermediate Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Streams API Intermediate\"]\n  Process --> End"
+}

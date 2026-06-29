@@ -1,0 +1,17 @@
+{
+  "quiz_id": "nlp-m4-t2-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "If d_model = 512 and we configure h = 8 heads, what is the output dimension d_k of the query projection matrix for each individual head?",
+      "options": [
+        "64",
+        "512",
+        "8",
+        "4096"
+      ],
+      "correct_answer": "64",
+      "explanation": "d_k is calculated as d_model / h = 512 / 8 = 64."
+    }
+  ]
+}

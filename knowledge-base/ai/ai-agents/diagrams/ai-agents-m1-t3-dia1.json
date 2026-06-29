@@ -1,0 +1,7 @@
+{
+  "topic_id": "ai-agents-m1-t3",
+  "diagram_id": "ai-agents-m1-t3-dia1",
+  "title": "Planning & Goal Decomposition Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Planning & Goal Decomposition\"]\n  Process --> End"
+}

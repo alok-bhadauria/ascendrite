@@ -1,0 +1,6 @@
+{
+  "topic_id": "nlp-m1-t2",
+  "title": "Statistical Tokenization",
+  "version": "1.0.0",
+  "content": "# Interview Prep: Statistical Tokenization\n\n## Q1: Contrast BPE with the Unigram Language Model tokenization algorithm. How does Unigram tokenization resolve segmentation ambiguity?\n\n### Standard Answer\nBPE is a bottom-up algorithm that merges frequent characters into larger subwords. It is deterministic, resolving segmentation ambiguity by applying its trained merge rules sequentially.\n\nUnigram is a top-down, probabilistic model. It starts with a large vocabulary and prunes low-probability tokens. At inference, a word can often be segmented in multiple ways. Unigram resolves this ambiguity by selecting the segmentation $S$ that maximizes the joint probability:\n\n$$S^* = \\arg\\max_{S} \\prod_{x_i \\in S} P(x_i)$$\n\nThis optimization problem is solved efficiently using the Viterbi algorithm. This probabilistic framework enables subword regularization during training, where the model randomly samples from the top segmentations rather than always choosing the absolute maximum, improving generalization.\n"
+}

@@ -1,0 +1,28 @@
+{
+  "subject_id": "ai-agents",
+  "name": "AI Agents",
+  "category": "ai",
+  "difficulty": "Advanced",
+  "estimated_learning_hours": 120,
+  "prerequisites": [
+    "Python Programming",
+    "Generative AI",
+    "Deep Learning Foundations"
+  ],
+  "tags": [
+    "Autonomous Agents",
+    "LangGraph",
+    "Multi-Agent Systems",
+    "Model Context Protocol",
+    "Safety Guardrails",
+    "Sandboxing"
+  ],
+  "subject_theme_colors": {
+    "primary": "#3B82F6",
+    "secondary": "#60A5FA",
+    "accent": "#F59E0B",
+    "neutral": "#1F2937"
+  },
+  "version": "1.0.0",
+  "last_updated": "2026-06-29"
+}

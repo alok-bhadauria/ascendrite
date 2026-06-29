@@ -1,0 +1,17 @@
+{
+  "quiz_id": "cn-m4-t2-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which of the following describes a key bottleneck related to HTTP Protocol?",
+      "options": [
+        "Inefficient scaling of HTTP/1.1 pipelining HOL blocking, HTTP/2 connection multiplexing, and HTTP/3 QUIC UDP migrations.",
+        "Hardware is completely offline.",
+        "Lack of database files.",
+        "Syntax compilation errors."
+      ],
+      "correct_answer": "Inefficient scaling of HTTP/1.1 pipelining HOL blocking, HTTP/2 connection multiplexing, and HTTP/3 QUIC UDP migrations.",
+      "explanation": "The topic covers how HTTP/1.1 pipelining HOL blocking, HTTP/2 connection multiplexing, and HTTP/3 QUIC UDP migrations scales under concurrent workloads, which represents the primary bottlenecks."
+    }
+  ]
+}

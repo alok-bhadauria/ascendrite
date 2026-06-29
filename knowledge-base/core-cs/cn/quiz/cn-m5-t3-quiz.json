@@ -1,0 +1,17 @@
+{
+  "quiz_id": "cn-m5-t3-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which of the following describes a key bottleneck related to Digital Certificates?",
+      "options": [
+        "Inefficient scaling of Public Key Infrastructure (PKI), Certification Authorities (CA) chain verification loops.",
+        "Hardware is completely offline.",
+        "Lack of database files.",
+        "Syntax compilation errors."
+      ],
+      "correct_answer": "Inefficient scaling of Public Key Infrastructure (PKI), Certification Authorities (CA) chain verification loops.",
+      "explanation": "The topic covers how Public Key Infrastructure (PKI), Certification Authorities (CA) chain verification loops scales under concurrent workloads, which represents the primary bottlenecks."
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "topic_id": "verbal-aptitude-m4-t2",
+  "asset_id": "verbal-aptitude-m4-t2-ex1",
+  "title": "Inference and Tone",
+  "language": "python",
+  "code": "if __name__ == '__main__':\n    print('Example code execution.')\n"
+}

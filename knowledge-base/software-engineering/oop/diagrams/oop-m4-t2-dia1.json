@@ -1,0 +1,7 @@
+{
+  "topic_id": "oop-m4-t2",
+  "diagram_id": "oop-m4-t2-dia1",
+  "title": "Behavioral - Strategy Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Behavioral - Strategy\"]\n  Process --> End"
+}

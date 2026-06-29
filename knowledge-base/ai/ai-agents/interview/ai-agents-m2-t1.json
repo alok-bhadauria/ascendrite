@@ -1,0 +1,6 @@
+{
+  "topic_id": "ai-agents-m2-t1",
+  "title": "Short-Term Memory Systems",
+  "version": "1.0.0",
+  "content": "# Interview Prep: Short-Term Memory\n\n## Q1: Why is simple message truncation risky for reasoning agents, and how do we mitigate it?\n\n### Standard Answer\nSimple truncation deletes the oldest messages. If the user defined critical goals or instructions early in the conversation, truncation will erase them, causing the agent to drift from its objectives. To mitigate this, system prompts and instructions are explicitly locked, ensuring only user-assistant chat history is pruned.\n"
+}

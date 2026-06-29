@@ -1,0 +1,17 @@
+{
+  "quiz_id": "sql-m1-t2-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which of the following describes a key bottleneck related to DDL vs DML?",
+      "options": [
+        "Inefficient scaling of Data Definition vs Data Manipulation transactional boundary differences.",
+        "Hardware is completely offline.",
+        "Lack of database files.",
+        "Syntax compilation errors."
+      ],
+      "correct_answer": "Inefficient scaling of Data Definition vs Data Manipulation transactional boundary differences.",
+      "explanation": "The topic covers how Data Definition vs Data Manipulation transactional boundary differences scales under concurrent workloads, which represents the primary bottlenecks."
+    }
+  ]
+}

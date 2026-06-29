@@ -1,0 +1,7 @@
+{
+  "topic_id": "dsa-m3-t5",
+  "diagram_id": "dsa-m3-t5-dia1",
+  "title": "Binary Search Trees (BST) Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Binary Search Trees (BST)\"]\n  Process --> End"
+}

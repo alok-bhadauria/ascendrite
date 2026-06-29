@@ -1,0 +1,7 @@
+{
+  "topic_id": "nextjs-m4-t1",
+  "diagram_id": "nextjs-m4-t1-dia1",
+  "title": "Static Site Generation (SSG) Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Static Site Generation (SSG)\"]\n  Process --> End"
+}

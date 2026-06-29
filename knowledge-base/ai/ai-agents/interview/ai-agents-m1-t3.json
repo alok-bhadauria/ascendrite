@@ -1,0 +1,6 @@
+{
+  "topic_id": "ai-agents-m1-t3",
+  "title": "Planning & Goal Decomposition",
+  "version": "1.0.0",
+  "content": "# Interview Prep: Goal Decomposition\n\n## Q1: How does BabyAGI prioritize tasks dynamically during execution?\n\n### Standard Answer\nAfter executing a task and receiving feedback, a dedicated 'task creation' prompt generates new sub-tasks. Then, a 'prioritization' prompt takes all unexecuted tasks along with the current context and outputs an ordered list of task IDs, re-allocating resource priority based on the latest state.\n"
+}

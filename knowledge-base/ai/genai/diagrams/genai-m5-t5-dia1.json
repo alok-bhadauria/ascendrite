@@ -1,0 +1,7 @@
+{
+  "topic_id": "genai-m5-t5",
+  "diagram_id": "genai-m5-t5-dia1",
+  "title": "Guardrails & Safety Serving Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Guardrails & Safety Serving\"]\n  Process --> End"
+}

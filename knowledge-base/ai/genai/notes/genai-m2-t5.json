@@ -1,0 +1,31 @@
+{
+  "topic_id": "genai-m2-t5",
+  "title": "Prompt Compression",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Medium",
+    "estimated_hours": 5,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Formulate LLMLingua entropy metrics.",
+    "Explain token pruning thresholds based on information content."
+  ],
+  "content_sections": [
+    {
+      "title": "Prompt Redundancy and Perplexity",
+      "content": "Natural language prompts often contain redundant words. To reduce latency and save token costs, prompt compression algorithms (such as LLMLingua) compute the perplexity or entropy of document segments using a small language model. Segments with low perplexity (which are highly predictable and convey less unique information) are pruned, while high-perplexity segments are preserved.",
+      "callouts": []
+    }
+  ],
+  "example_refs": [
+    "genai-m2-t5-ex1"
+  ],
+  "diagram_refs": [],
+  "practice_refs": [
+    "genai-m2-t5-prac1"
+  ],
+  "quiz_refs": [
+    "genai-m2-t5-quiz"
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "topic_id": "genai-m5-t1",
+  "asset_id": "genai-m5-t1-ex1",
+  "title": "Continuous Batching & Speculative Decoding",
+  "language": "python",
+  "code": "import numpy as np\n\ndef verify_speculative_token(p_target, p_draft):\n    ratio = p_target / p_draft if p_draft > 0 else 0.0\n    return float(np.minimum(1.0, ratio))\n\nif __name__ == '__main__':\n    print('Speculative decoding modules loaded.')\n"
+}

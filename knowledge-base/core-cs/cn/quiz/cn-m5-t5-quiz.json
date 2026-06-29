@@ -1,0 +1,17 @@
+{
+  "quiz_id": "cn-m5-t5-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which of the following describes a key bottleneck related to IPSec & VPNs?",
+      "options": [
+        "Inefficient scaling of Encapsulating Security Payload (ESP) headers, tunnel vs transport modes, and secure routing.",
+        "Hardware is completely offline.",
+        "Lack of database files.",
+        "Syntax compilation errors."
+      ],
+      "correct_answer": "Inefficient scaling of Encapsulating Security Payload (ESP) headers, tunnel vs transport modes, and secure routing.",
+      "explanation": "The topic covers how Encapsulating Security Payload (ESP) headers, tunnel vs transport modes, and secure routing scales under concurrent workloads, which represents the primary bottlenecks."
+    }
+  ]
+}

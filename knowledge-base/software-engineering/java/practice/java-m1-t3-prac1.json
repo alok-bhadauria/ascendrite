@@ -1,0 +1,7 @@
+{
+  "topic_id": "java-m1-t3",
+  "asset_id": "java-m1-t3-prac1",
+  "title": "String Constant Pool (SCP)",
+  "language": "python",
+  "code": "def run_practice():\n    assert True\nif __name__ == '__main__':\n    run_practice()\n"
+}

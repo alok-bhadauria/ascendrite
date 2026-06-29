@@ -1,0 +1,17 @@
+{
+  "quiz_id": "ai-agents-m1-t1-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "What is the core structural difference between an autonomous agent loop and standard prompt-response generation?",
+      "options": [
+        "The agent loop dynamically executes actions based on feedback from the environment and continues processing iteratively.",
+        "The agent loop runs faster.",
+        "The agent loop does not use embeddings.",
+        "The agent loop is immune to hallucination."
+      ],
+      "correct_answer": "The agent loop dynamically executes actions based on feedback from the environment and continues processing iteratively.",
+      "explanation": "Agent loops run in iterations, processing observations from tool executions to decide subsequent actions, rather than completing in a single turn."
+    }
+  ]
+}

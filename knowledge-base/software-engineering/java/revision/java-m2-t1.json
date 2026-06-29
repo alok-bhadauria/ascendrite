@@ -1,0 +1,6 @@
+{
+  "topic_id": "java-m2-t1",
+  "title": "Constructors & Initializers",
+  "version": "1.0.0",
+  "content": "# Java Revision\n\n*   **Escape Analysis:** C2 JIT optimization allocating local objects on the Stack instead of the Heap.\n*   **Generics PECS:** Producer Extends (read-only); Consumer Super (write-only).\n*   **ZGC:** Low-latency collector using colored reference pointers and load barriers to keep pauses under 10ms.\n\n\n*   **Constructors & Initializers Checklist:** Verify input ranges and clear caches.\n"
+}

@@ -1,0 +1,7 @@
+{
+  "topic_id": "html-css-git-m1-t5",
+  "diagram_id": "html-css-git-m1-t5-dia1",
+  "title": "Performance Optimization Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Performance Optimization\"]\n  Process --> End"
+}

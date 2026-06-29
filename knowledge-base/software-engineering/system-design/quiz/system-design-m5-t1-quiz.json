@@ -1,0 +1,17 @@
+{
+  "quiz_id": "system-design-m5-t1-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "What is the key optimization criteria for Case Study: URL Shortener design?",
+      "options": [
+        "Minimizing complexity bounds.",
+        "Increasing CPU utilization.",
+        "Static heap allocation.",
+        "Syntax execution bypass."
+      ],
+      "correct_answer": "Minimizing complexity bounds.",
+      "explanation": "The primary goal in designing Case Study: URL Shortener design is minimizing asymptotic and memory complexities."
+    }
+  ]
+}

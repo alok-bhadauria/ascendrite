@@ -1,0 +1,27 @@
+{
+  "cover": {
+    "publisher": "Ascendrite",
+    "title": "CN: Advanced Industry-Readiness Study Notes",
+    "edition": "First Edition",
+    "version": "1.0.0",
+    "date": "2026-06-29",
+    "author": "Created by Team Ascendrite and AI Agents"
+  },
+  "copyright": "Copyright \u00a9 2026 Ascendrite. All rights reserved.",
+  "disclaimer": "This document is prepared for educational and skill validation purposes only.",
+  "acknowledgements": "This work represents a collaborative effort.",
+  "preface": {
+    "purpose": "Bridge the gap between academic theory and practical requirements in CN.",
+    "target_audience": "Computer Science students and software engineers.",
+    "philosophy": "Conceptual intuition followed by theoretical rigor and production implementations.",
+    "how_to_use": "Read the chapters sequentially and run the practice codes."
+  },
+  "about_ascendrite": "Ascendrite is an advanced learning ecosystem designed to visualize, track, and validate computer science and AI engineering skills.",
+  "watermark": {
+    "enabled": true,
+    "text": "Ascendrite Academic Edition",
+    "opacity": 0.05
+  },
+  "version": "1.0.0",
+  "last_updated": "2026-06-29"
+}

@@ -1,0 +1,7 @@
+{
+  "topic_id": "css-frameworks-m5-t2",
+  "diagram_id": "css-frameworks-m5-t2-dia1",
+  "title": "Critical CSS Extraction Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Critical CSS Extraction\"]\n  Process --> End"
+}

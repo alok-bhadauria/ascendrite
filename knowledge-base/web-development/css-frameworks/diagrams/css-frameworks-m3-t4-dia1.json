@@ -1,0 +1,7 @@
+{
+  "topic_id": "css-frameworks-m3-t4",
+  "diagram_id": "css-frameworks-m3-t4-dia1",
+  "title": "Tailwind vs CSS-in-JS Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Tailwind vs CSS-in-JS\"]\n  Process --> End"
+}

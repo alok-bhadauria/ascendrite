@@ -1,0 +1,17 @@
+{
+  "quiz_id": "genai-m4-t2-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "What is the primary role of the reference policy model in the PPO training loop?",
+      "options": [
+        "To calculate a KL divergence constraint, preventing the active policy from shifting too far from baseline behaviors.",
+        "To generate token lookups.",
+        "To decode log probability matrices.",
+        "To train the tokenizer."
+      ],
+      "correct_answer": "To calculate a KL divergence constraint, preventing the active policy from shifting too far from baseline behaviors.",
+      "explanation": "The reference model is frozen and acts as a constraint baseline; the KL penalty keeps the active model's logits within safe boundaries."
+    }
+  ]
+}

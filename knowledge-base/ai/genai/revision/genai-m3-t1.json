@@ -1,0 +1,6 @@
+{
+  "topic_id": "genai-m3-t1",
+  "title": "LoRA Mathematics",
+  "version": "1.0.0",
+  "content": "# LoRA Mathematics\n\n$$\\mathbf{h} = \\mathbf{W}_0\\mathbf{x} + \\frac{\\alpha}{r} \\mathbf{B}\\mathbf{A}\\mathbf{x}$$\n$$\\mathbf{W}_{merged} = \\mathbf{W}_0 + \\frac{\\alpha}{r} \\mathbf{B}\\mathbf{A}$$\n"
+}

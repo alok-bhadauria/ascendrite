@@ -1,0 +1,7 @@
+{
+  "topic_id": "os-m2-t4",
+  "diagram_id": "os-m2-t4-dia1",
+  "title": "Deadlock Conditions Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Deadlock Conditions\"]\n  Process --> End"
+}

@@ -1,0 +1,7 @@
+{
+  "topic_id": "verbal-aptitude-m1-t2",
+  "diagram_id": "verbal-aptitude-m1-t2-dia1",
+  "title": "Subject-Verb Agreement Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Subject-Verb Agreement\"]\n  Process --> End"
+}

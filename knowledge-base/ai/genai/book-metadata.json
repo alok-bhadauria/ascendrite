@@ -1,0 +1,27 @@
+{
+  "cover": {
+    "publisher": "Ascendrite",
+    "title": "Generative AI: Advanced Industry-Readiness Study Notes",
+    "edition": "First Edition",
+    "version": "1.0.0",
+    "date": "2026-06-29",
+    "author": "Created by Team Ascendrite and AI Agents"
+  },
+  "copyright": "Copyright \u00a9 2026 Ascendrite. All rights reserved. This document and its educational assets are protected under international copyright law. No part of this publication may be reproduced, distributed, or transmitted in any form or by any means, including photocopying, recording, or other electronic or mechanical methods, without the prior written permission of the publisher, except in the case of brief quotations embodied in critical reviews and certain other noncommercial uses permitted by copyright law.",
+  "disclaimer": "This document is prepared for educational and skill validation purposes only. The authors and publishers have made every effort to ensure the accuracy and currency of the mathematical derivations, code blocks, and system designs presented herein. However, generative AI architectures, fine-tuning libraries, and serving frameworks evolve rapidly. No guarantee is provided regarding the absolute applicability of the contents to specific production systems, and no professional, legal, or financial liability is assumed for errors or omissions.",
+  "acknowledgements": "This work represents a collaborative effort between curriculum engineers, systems architects, industry practitioners, and AI agents. We express our gratitude to the authors of seminal research in parameter-efficient fine-tuning, preference alignment, and inference performance scaling who inspired the design of this curriculum.",
+  "preface": {
+    "purpose": "The purpose of this textbook is to bridge the gap between high-level generative AI prompting guides and the deep engineering/mathematical foundations of LLMs. It details fine-tuning mathematics, preference loops, and low-level inference optimizations.",
+    "target_audience": "This book is designed for AI engineers, machine learning scientists, systems engineers specializing in LLM deployment, and students seeking a rigorous understanding of the parameters governing generative model behaviors.",
+    "philosophy": "We follow a pedagogical loop: establishing concrete conceptual intuition, defining formal mathematics, illustrating execution flows, mapping industrial deployment profiles, and analyzing common engineering mistakes and interview expectations.",
+    "how_to_use": "Read the chapters sequentially to build a continuous learning timeline. Use the inline LaTeX derivations to work through mathematical proofs. Pay close attention to the 'Student Trap' and 'Practical Engineering' boxes, as they detail common pitfalls observed in both coding interviews and production systems."
+  },
+  "about_ascendrite": "Ascendrite is an advanced learning ecosystem designed to visualize, track, and validate computer science and AI engineering skills. By structuring knowledge into high-density decentralized databases and dynamic 3D visualizers, Ascendrite enables engineers to rapidly build and verify industry-grade competencies.",
+  "watermark": {
+    "enabled": true,
+    "text": "Ascendrite Academic Edition",
+    "opacity": 0.05
+  },
+  "version": "1.0.0",
+  "last_updated": "2026-06-29"
+}

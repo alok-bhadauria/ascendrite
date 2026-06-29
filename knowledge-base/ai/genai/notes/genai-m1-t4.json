@@ -1,0 +1,36 @@
+{
+  "topic_id": "genai-m1-t4",
+  "title": "Mixture of Experts",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Medium",
+    "estimated_hours": 5,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Explain sparse Mixture of Experts (MoE) routing gating mechanics.",
+    "Formulate load-balancing auxiliary loss functions."
+  ],
+  "content_sections": [
+    {
+      "title": "MoE Routing and Top-K experts",
+      "content": "Sparse Mixture of Experts (MoE) scales model parameters by replacing dense feedforward layers with multiple parallel networks ('experts'). A gating network dynamically routes tokens to the best experts:\n\n$$y = \\sum_{i=1}^E G(\\mathbf{x})_i E_i(\\mathbf{x})$$\n\nwhere $G(\\mathbf{x}) = \\text{softmax}(\\text{TopK}(\\mathbf{x}\\mathbf{W}_g, K))$. Typically $K=1$ or $K=2$. This allows scaling model parameter size while keeping the active compute cost (FLOPs) constant per token, as each token is processed by only a subset of experts.",
+      "callouts": []
+    },
+    {
+      "title": "Load-Balancing and Auxiliary Loss Functions",
+      "content": "A major challenge in MoE models is routing imbalance, where the gating network converges to selecting only a few popular experts, leaving other experts untrained. To resolve this, we optimize a load-balancing auxiliary loss during training:\n\n$$\\mathcal{L}_{aux} = E \\sum_{i=1}^E f_i \\cdot P_i$$\n\nwhere $f_i$ is the fraction of tokens routed to expert $i$, and $P_i$ is the average gating probability assigned to expert $i$ across the batch. Minimizing this loss encourages uniform routing distributions.",
+      "callouts": []
+    }
+  ],
+  "example_refs": [
+    "genai-m1-t4-ex1"
+  ],
+  "diagram_refs": [],
+  "practice_refs": [
+    "genai-m1-t4-prac1"
+  ],
+  "quiz_refs": [
+    "genai-m1-t4-quiz"
+  ]
+}

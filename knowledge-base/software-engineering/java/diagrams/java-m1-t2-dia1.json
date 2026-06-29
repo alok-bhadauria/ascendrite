@@ -1,0 +1,7 @@
+{
+  "topic_id": "java-m1-t2",
+  "diagram_id": "java-m1-t2-dia1",
+  "title": "JVM Memory Architecture Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process JVM Memory Architecture\"]\n  Process --> End"
+}

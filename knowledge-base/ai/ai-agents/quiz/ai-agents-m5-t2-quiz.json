@@ -1,0 +1,17 @@
+{
+  "quiz_id": "ai-agents-m5-t2-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "What is the primary difference between Tools and Resources under the Model Context Protocol?",
+      "options": [
+        "Tools are executable functions, whereas Resources are read-only data sources exposed via URIs.",
+        "Tools use gRPC and resources use FTP.",
+        "Tools are always local and resources are remote.",
+        "There is no difference."
+      ],
+      "correct_answer": "Tools are executable functions, whereas Resources are read-only data sources exposed via URIs.",
+      "explanation": "Tools perform actions (e.g. running code), while resources provide read-only data streams (e.g. files) to the model context."
+    }
+  ]
+}

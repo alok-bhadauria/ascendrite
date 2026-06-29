@@ -1,0 +1,6 @@
+{
+  "topic_id": "nlp-m4-t3",
+  "title": "Transformer Block Components",
+  "version": "1.0.0",
+  "content": "# Interview Prep: Block Components\n\n## Q1: Why does Pre-LN enable stable deep model training without requiring linear learning-rate warmups?\n\n### Standard Answer\nIn Post-LN, the gradient of the residual connection is scaled by the LayerNorm derivative. As layer depth increases, the scale of gradients in early layers diminishes. Pre-LN maintains a direct identity path from input to output, keeping gradients stable.\n"
+}

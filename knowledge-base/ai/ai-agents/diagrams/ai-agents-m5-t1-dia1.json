@@ -1,0 +1,7 @@
+{
+  "topic_id": "ai-agents-m5-t1",
+  "diagram_id": "ai-agents-m5-t1-dia1",
+  "title": "MCP Architecture Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process MCP Architecture\"]\n  Process --> End"
+}

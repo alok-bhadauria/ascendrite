@@ -1,0 +1,6 @@
+{
+  "topic_id": "genai-m3-t5",
+  "title": "Memory Optimization in Fine-Tuning",
+  "version": "1.0.0",
+  "content": "# Interview Prep: Memory Optimizations\n\n## Q1: Prove how storing activations at the boundary of every N layers reduces memory scaling to square root boundaries.\n\n### Standard Answer\nLet $L$ be the number of layers. By setting checkpoints at every $\\sqrt{L}$ layers, the model stores exactly $\\sqrt{L}$ checkpoint activations. During backpropagation, we compute gradients for a segment of size $\\sqrt{L}$ layers, requiring an additional $\\sqrt{L}$ temporary activation stores. The maximum memory footprint scales as $2\\sqrt{L} = \\mathcal{O}(\\sqrt{L})$ rather than $\\mathcal{O}(L)$.\n"
+}

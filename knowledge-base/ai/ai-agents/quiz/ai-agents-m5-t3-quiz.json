@@ -1,0 +1,17 @@
+{
+  "quiz_id": "ai-agents-m5-t3-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "What does a trajectory log store in an agentic evaluation framework?",
+      "options": [
+        "The complete step-by-step history of thoughts, actions, and observations generated during execution.",
+        "Only the final output.",
+        "The model weights.",
+        "The compiler configuration."
+      ],
+      "correct_answer": "The complete step-by-step history of thoughts, actions, and observations generated during execution.",
+      "explanation": "Trajectory logs store the entire execution trace, allowing developers to analyze agent behaviors and diagnose failures."
+    }
+  ]
+}

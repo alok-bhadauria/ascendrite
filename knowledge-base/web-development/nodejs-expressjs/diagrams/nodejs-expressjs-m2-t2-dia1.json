@@ -1,0 +1,7 @@
+{
+  "topic_id": "nodejs-expressjs-m2-t2",
+  "diagram_id": "nodejs-expressjs-m2-t2-dia1",
+  "title": "Middleware Chains Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Middleware Chains\"]\n  Process --> End"
+}

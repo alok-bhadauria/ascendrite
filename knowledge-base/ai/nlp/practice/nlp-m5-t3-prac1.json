@@ -1,0 +1,7 @@
+{
+  "topic_id": "nlp-m5-t3",
+  "asset_id": "nlp-m5-t3-prac1",
+  "title": "Vector Databases & Search",
+  "language": "python",
+  "code": "import numpy as np\n\ndef quantize_vector(sub_vectors, centroids):\n    indices = []\n    for i, sv in enumerate(sub_vectors):\n        distances = np.linalg.norm(centroids[i] - sv, axis=1)\n        indices.append(np.argmin(distances))\n    return indices\n\ndef run_practice():\n    sub_vectors = [np.array([1.0, 1.0])]\n    centroids = [np.array([[0.0, 0.0], [1.2, 1.2]])]\n    idx = quantize_vector(sub_vectors, centroids)\n    assert idx == [1]\n    print('[PASS] Quantizer centroid allocation validated.')\n\nif __name__ == '__main__':\n    run_practice()\n"
+}

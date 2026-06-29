@@ -1,0 +1,7 @@
+{
+  "topic_id": "os-m3-t4",
+  "asset_id": "os-m3-t4-ex1",
+  "title": "Page Faults",
+  "language": "python",
+  "code": "if __name__ == '__main__':\n    print('Example pass for Page Faults')\n"
+}

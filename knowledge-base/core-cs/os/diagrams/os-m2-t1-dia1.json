@@ -1,0 +1,7 @@
+{
+  "topic_id": "os-m2-t1",
+  "diagram_id": "os-m2-t1-dia1",
+  "title": "CPU Schedulers Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process CPU Schedulers\"]\n  Process --> End"
+}

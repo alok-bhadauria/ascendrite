@@ -1,0 +1,7 @@
+{
+  "topic_id": "nlp-m3-t5",
+  "asset_id": "nlp-m3-t5-ex1",
+  "title": "Semantic Analogies",
+  "language": "python",
+  "code": "import numpy as np\n\ndef find_analogy(a, b, c, word_matrix, vocab_list):\n    target = b - a + c\n    scores = np.dot(word_matrix, target) / (np.linalg.norm(word_matrix, axis=1) * np.linalg.norm(target))\n    return vocab_list[np.argmax(scores)]\n\nif __name__ == '__main__':\n    print('Analogy calculation module compiled.')\n"
+}

@@ -1,0 +1,7 @@
+{
+  "topic_id": "nlp-m4-t2",
+  "diagram_id": "nlp-m4-t2-dia1",
+  "title": "Multi-Head Attention Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Multi-Head Attention\"]\n  Process --> End"
+}

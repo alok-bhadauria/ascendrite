@@ -1,0 +1,7 @@
+{
+  "topic_id": "ai-agents-m1-t5",
+  "asset_id": "ai-agents-m1-t5-prac1",
+  "title": "Structured Argument Extraction",
+  "language": "python",
+  "code": "import json\n\ndef parse_tool_args(json_str):\n    try:\n        return json.loads(json_str), True\n    except ValueError:\n        return {}, False\n\ndef run_practice():\n    args, ok = parse_tool_args('{\"query\": \"Llama\"}')\n    assert ok\n    assert args['query'] == 'Llama'\n    print('[PASS] JSON parser validated.')\n\nif __name__ == '__main__':\n    run_practice()\n"
+}

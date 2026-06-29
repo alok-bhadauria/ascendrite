@@ -1,0 +1,17 @@
+{
+  "quiz_id": "nlp-m1-t1-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "According to Zipf's Law, if the most frequent word in a corpus occurs 100,000 times, how many times is the 10th most frequent word expected to occur?",
+      "options": [
+        "10,000",
+        "50,000",
+        "1,000",
+        "100,000"
+      ],
+      "correct_answer": "10,000",
+      "explanation": "Zipf's law states that f(r) = C / r. If r=1 has f(1) = 100,000, then C = 100,000. For the 10th most frequent word (r=10), the frequency is f(10) = 100,000 / 10 = 10,000."
+    }
+  ]
+}

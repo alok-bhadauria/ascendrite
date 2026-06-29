@@ -1,0 +1,7 @@
+{
+  "topic_id": "typescript-m1-t1",
+  "diagram_id": "typescript-m1-t1-dia1",
+  "title": "TS Compiler Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process TS Compiler\"]\n  Process --> End"
+}

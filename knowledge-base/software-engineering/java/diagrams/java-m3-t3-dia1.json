@@ -1,0 +1,7 @@
+{
+  "topic_id": "java-m3-t3",
+  "diagram_id": "java-m3-t3-dia1",
+  "title": "Try-with-resources Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Try-with-resources\"]\n  Process --> End"
+}

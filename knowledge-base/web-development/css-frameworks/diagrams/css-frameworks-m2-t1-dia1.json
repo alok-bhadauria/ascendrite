@@ -1,0 +1,7 @@
+{
+  "topic_id": "css-frameworks-m2-t1",
+  "diagram_id": "css-frameworks-m2-t1-dia1",
+  "title": "Responsive Layouts Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Responsive Layouts\"]\n  Process --> End"
+}

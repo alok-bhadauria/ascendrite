@@ -1,0 +1,31 @@
+{
+  "topic_id": "ai-agents-m5-t5",
+  "title": "Sandbox Execution Environments",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Medium",
+    "estimated_hours": 5,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Explain containerized runtimes and isolated python interpreters.",
+    "Formulate file read-write boundary rules."
+  ],
+  "content_sections": [
+    {
+      "title": "Containerization and Isolated Interpreters",
+      "content": "Allowing agents to execute code on host systems creates severe security risks (e.g. data theft or system deletion). \n\nTo mitigate this, agents run code inside **sandboxed execution environments** (e.g. Docker containers or microVMs). The interpreter has no access to the host filesystem, network, or environment variables. File read-write actions are strictly bounded to a temporary sandbox directory.",
+      "callouts": []
+    }
+  ],
+  "example_refs": [
+    "ai-agents-m5-t5-ex1"
+  ],
+  "diagram_refs": [],
+  "practice_refs": [
+    "ai-agents-m5-t5-prac1"
+  ],
+  "quiz_refs": [
+    "ai-agents-m5-t5-quiz"
+  ]
+}

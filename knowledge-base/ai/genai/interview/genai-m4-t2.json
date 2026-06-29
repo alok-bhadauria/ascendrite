@@ -1,0 +1,6 @@
+{
+  "topic_id": "genai-m4-t2",
+  "title": "PPO Alignment Loop",
+  "version": "1.0.0",
+  "content": "# Interview Prep: PPO Loop\n\n## Q1: What is the risk of setting the KL scaling hyperparameter beta to zero during PPO training?\n\n### Standard Answer\nIf $\\beta=0$, there is no constraint limiting deviations from the reference policy. The actor will exploit blind spots in the reward model (e.g. generating repetitive phrases that happen to score high), leading to **policy collapse** and gibberish outputs.\n"
+}

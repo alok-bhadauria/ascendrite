@@ -1,0 +1,7 @@
+{
+  "topic_id": "typescript-m2-t2",
+  "asset_id": "typescript-m2-t2-ex1",
+  "title": "Keyof Operator",
+  "language": "python",
+  "code": "if __name__ == '__main__':\n    print('Example code execution.')\n"
+}

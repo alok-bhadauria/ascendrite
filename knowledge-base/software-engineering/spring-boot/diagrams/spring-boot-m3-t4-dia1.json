@@ -1,0 +1,7 @@
+{
+  "topic_id": "spring-boot-m3-t4",
+  "diagram_id": "spring-boot-m3-t4-dia1",
+  "title": "Transaction Management Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Transaction Management\"]\n  Process --> End"
+}

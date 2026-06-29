@@ -1,0 +1,7 @@
+{
+  "topic_id": "spring-boot-m1-t3",
+  "diagram_id": "spring-boot-m1-t3-dia1",
+  "title": "Bean Lifecycle Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Bean Lifecycle\"]\n  Process --> End"
+}

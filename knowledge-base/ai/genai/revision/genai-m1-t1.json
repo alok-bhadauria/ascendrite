@@ -1,0 +1,6 @@
+{
+  "topic_id": "genai-m1-t1",
+  "title": "Generative Model Taxonomies",
+  "version": "1.0.0",
+  "content": "# Generative Model Taxonomies\n\n## 1. RMSNorm\n$$\\text{RMSNorm}(\\mathbf{a}) = \\frac{\\mathbf{a}}{\\sqrt{\\frac{1}{d} \\sum_{i=1}^d a_i^2 + \\epsilon}} \\odot \\mathbf{g}$$\n\n## 2. SwiGLU\n$$\\text{SwiGLU}(\\mathbf{x}) = (\\mathbf{x}\\mathbf{W}_1 \\odot \\text{swish}(\\mathbf{x}\\mathbf{W}_2)) \\mathbf{W}_3$$\n"
+}

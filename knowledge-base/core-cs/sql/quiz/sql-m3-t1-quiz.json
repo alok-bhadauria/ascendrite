@@ -1,0 +1,17 @@
+{
+  "quiz_id": "sql-m3-t1-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which of the following describes a key bottleneck related to Common Table Expressions (CTE)?",
+      "options": [
+        "Inefficient scaling of Non-recursive CTE definitions.",
+        "Hardware is completely offline.",
+        "Lack of database files.",
+        "Syntax compilation errors."
+      ],
+      "correct_answer": "Inefficient scaling of Non-recursive CTE definitions.",
+      "explanation": "The topic covers how Non-recursive CTE definitions scales under concurrent workloads, which represents the primary bottlenecks."
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "topic_id": "ai-agents-m3-t3",
+  "title": "Persistence & State Rewinding",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Medium",
+    "estimated_hours": 5,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Explain thread checkpointing state savers.",
+    "Formulate state rollbacks and time-travel debugging triggers."
+  ],
+  "content_sections": [
+    {
+      "title": "Thread Checkpointing",
+      "content": "To enable persistence, graph engines implement **thread checkpointing**. At each step, the state is serialized and stored in a database (checkpoint). This allows long-running agents to resume execution after crashes or pauses, and enables multi-user session management.",
+      "callouts": []
+    },
+    {
+      "title": "State Rewinding (Time-Travel)",
+      "content": "Checkpoint databases enable **time-travel debugging**. By loading a past checkpoint ID, developers can inspect the agent's state at that point, modify it, and fork execution along a new path. This is critical for debugging and safety auditing.",
+      "callouts": []
+    }
+  ],
+  "example_refs": [
+    "ai-agents-m3-t3-ex1"
+  ],
+  "diagram_refs": [],
+  "practice_refs": [
+    "ai-agents-m3-t3-prac1"
+  ],
+  "quiz_refs": [
+    "ai-agents-m3-t3-quiz"
+  ]
+}

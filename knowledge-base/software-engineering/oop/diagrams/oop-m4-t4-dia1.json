@@ -1,0 +1,7 @@
+{
+  "topic_id": "oop-m4-t4",
+  "diagram_id": "oop-m4-t4-dia1",
+  "title": "Behavioral - Template Method Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Behavioral - Template Method\"]\n  Process --> End"
+}

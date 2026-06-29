@@ -1,0 +1,7 @@
+{
+  "topic_id": "nlp-m3-t5",
+  "asset_id": "nlp-m3-t5-prac1",
+  "title": "Semantic Analogies",
+  "language": "python",
+  "code": "import numpy as np\n\ndef run_practice():\n    matrix = np.array([[1.0, 0.0], [0.0, 1.0], [0.7, 0.7]])\n    vocab = ['a', 'b', 'c']\n    target = np.array([0.5, 0.5])\n    scores = np.dot(matrix, target) / (np.linalg.norm(matrix, axis=1) * np.linalg.norm(target))\n    assert np.argmax(scores) == 2\n    print('[PASS] Analogy argmax validated.')\n\nif __name__ == '__main__':\n    run_practice()\n"
+}

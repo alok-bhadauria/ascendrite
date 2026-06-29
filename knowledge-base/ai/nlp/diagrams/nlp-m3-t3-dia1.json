@@ -1,0 +1,7 @@
+{
+  "topic_id": "nlp-m3-t3",
+  "diagram_id": "nlp-m3-t3-dia1",
+  "title": "Global Vectors (GloVe) Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Global Vectors (GloVe)\"]\n  Process --> End"
+}

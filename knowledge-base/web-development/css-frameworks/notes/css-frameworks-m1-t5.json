@@ -1,0 +1,44 @@
+{
+  "topic_id": "css-frameworks-m1-t5",
+  "title": "Typography & Colors",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Hard",
+    "estimated_hours": 6,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Describe structural characteristics of Typography & Colors.",
+    "Derive mathematical and programmatic bounds for Custom font family settings, color palette palettes, opacity helpers."
+  ],
+  "content_sections": [
+    {
+      "title": "Typography & Colors",
+      "content": "### Utility-First CSS & Compilation Layers\nModern CSS frameworks optimize stylesheets compile footprints using preprocessors.\n\n#### Utility-First Paradigm\nTraditional CSS writes custom class rules. Utility-first frameworks (like Tailwind CSS) map single styles to descriptive utility classes, reducing the size of custom stylesheets.\n\n#### Purging & PostCSS Compilation\nTo prevent serving massive stylesheets, the build compiler scans the HTML/JS source code templates:\n*   It extracts all classes matched by regex.\n*   It purges unused CSS declarations from the build bundle, reducing build sizes to raw utility definitions.\n*   *Trap:* Constructing dynamic utility names at runtime (e.g. `bg-${color}-500`) prevents the compiler static scanner from matching the classes, causing them to be purged from the stylesheet.\n\n#### Mobile-First Media Queries\nResponsive breakpoints use min-width query rules (e.g. `@media (min-width: 640px)`). The default class applies to mobile viewports, and overrides apply as screens expand.\n\n### Depth Analysis: Typography & Colors\nIn production configurations, we analyze how Custom font family settings, color palette palettes, opacity helpers affects performance parameters. We evaluate memory layouts and consensus thresholds.",
+      "callouts": [
+        {
+          "type": "Student Trap",
+          "title": "Common Trap in Typography & Colors",
+          "content": "A common mistake when analyzing Typography & Colors is ignoring latency bounds and boundary edge cases during concurrent executions."
+        },
+        {
+          "type": "Engineering Note",
+          "title": "Production Scaling for Typography & Colors",
+          "content": "Production servers implement strict resource isolation and cache alignments to prevent performance regressions when running Typography & Colors loops."
+        }
+      ]
+    }
+  ],
+  "example_refs": [
+    "css-frameworks-m1-t5-ex1"
+  ],
+  "diagram_refs": [
+    "css-frameworks-m1-t5-dia1"
+  ],
+  "practice_refs": [
+    "css-frameworks-m1-t5-prac1"
+  ],
+  "quiz_refs": [
+    "css-frameworks-m1-t5-quiz"
+  ]
+}

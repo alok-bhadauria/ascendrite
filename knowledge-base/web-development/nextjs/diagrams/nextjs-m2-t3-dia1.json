@@ -1,0 +1,7 @@
+{
+  "topic_id": "nextjs-m2-t3",
+  "diagram_id": "nextjs-m2-t3-dia1",
+  "title": "Middleware Routing Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Middleware Routing\"]\n  Process --> End"
+}

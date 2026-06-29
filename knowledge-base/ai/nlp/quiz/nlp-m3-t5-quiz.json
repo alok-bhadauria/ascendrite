@@ -1,0 +1,17 @@
+{
+  "quiz_id": "nlp-m3-t5-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "What is the baseline search constraint applied when solving the analogy a:b :: c:d?",
+      "options": [
+        "The candidate token 'd' must be different from 'a', 'b', and 'c'.",
+        "The vector norm must equal 1.0.",
+        "It must be an out-of-vocabulary word.",
+        "It must be a stopword."
+      ],
+      "correct_answer": "The candidate token 'd' must be different from 'a', 'b', and 'c'.",
+      "explanation": "To prevent trivial identity returns, the input tokens a, b, and c are explicitly excluded from the candidate search space."
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "topic_id": "nlp-m1-t2",
+  "title": "Statistical Tokenization",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Medium",
+    "estimated_hours": 5,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Compare word-level, character-level, and subword-level tokenization paradigms.",
+    "Explain the training and tokenization loops of Byte Pair Encoding (BPE).",
+    "Formulate the WordPiece scoring equation and explain how it differs from BPE.",
+    "Explain the SentencePiece model's reversible stream and lossless detokenization."
+  ],
+  "content_sections": [
+    {
+      "title": "Subword Tokenization Paradigms",
+      "content": "Traditional word-level tokenization leads to vocabulary bloating and struggles with out-of-vocabulary (OOV) words. Character-level tokenization solves the OOV problem but yields long token sequences, which increases computational complexity and weakens contextual tracking. \n\n**Subword tokenization** balances this trade-off. It keeps frequent words intact while decomposing rare or complex words into smaller, meaningful subword units (e.g., 'unbelievable' $\\to$ `un` + `believ` + `able`). This bounds the vocabulary budget $V$ while ensuring the model can represent any unseen text sequence.",
+      "callouts": []
+    },
+    {
+      "title": "Byte Pair Encoding (BPE) & WordPiece Mechanics",
+      "content": "BPE and WordPiece are bottom-up subword tokenization algorithms:\n\n*   **Byte Pair Encoding (BPE):** Starts with character-level units and iteratively merges the most frequent adjacent symbol pair. Merged symbols are added to the vocabulary until the target vocabulary size is reached. BPE is deterministic and frequency-driven.\n*   **WordPiece:** Used in models like BERT, WordPiece also starts with character-level units but merges pairs based on a likelihood score rather than raw frequency:\n\n$$\\text{Score}(A, B) = \\frac{\\text{count}(AB)}{\\text{count}(A) \\times \\text{count}(B)}$$\n\nThis score is proportional to the pointwise mutual information (PMI) of the two tokens, prioritizing pairs that appear together significantly more often than expected by chance (e.g. prioritizing 'Roentgen' over common prepositional pairs like 'of the').",
+      "callouts": [
+        {
+          "type": "Engineering Note",
+          "title": "Byte-Level BPE (BBPE)",
+          "content": "Standard BPE initializes the vocabulary with every unique character in the corpus. In multilingual contexts, this can lead to vocabulary bloating. Byte-Level BPE (BBPE) resolves this by initializing the vocabulary with the 256 possible byte values. This guarantees that any UTF-8 string can be represented without triggering out-of-vocabulary (`[UNK]`) errors."
+        }
+      ]
+    },
+    {
+      "title": "SentencePiece and Unigram Language Models",
+      "content": "Standard BPE and WordPiece require language-specific pre-tokenizers to split text into words before subword decomposition. This fails for languages without explicit spacing.\n\n**SentencePiece** treats the input as a raw character stream, replacing spaces with the meta-symbol `_` (U+2581). This allows spaces to be treated as regular characters, enabling **lossless detokenization**:\n\n$$\\text{detok}(\\text{tokens}) = \\text{replace}(\\text{join}(\\text{tokens}), \\text{'_'}, \\text{' '})$$\n\nSentencePiece implements both BPE and the **Unigram Language Model** algorithm. The Unigram model starts with a large vocabulary and iteratively prunes low-probability tokens using Viterbi segmentation, optimizing corpus likelihood.",
+      "callouts": [
+        {
+          "type": "Student Trap",
+          "title": "SentencePiece is not an Algorithm",
+          "content": "Do not refer to SentencePiece as a distinct tokenization algorithm. SentencePiece is a software wrapper and library that implements BPE and Unigram tokenization directly on raw character streams, bypassing language-specific pre-tokenizers."
+        }
+      ]
+    }
+  ],
+  "example_refs": [
+    "nlp-m1-t2-ex1"
+  ],
+  "diagram_refs": [],
+  "practice_refs": [
+    "nlp-m1-t2-prac1"
+  ],
+  "quiz_refs": [
+    "nlp-m1-t2-quiz"
+  ]
+}

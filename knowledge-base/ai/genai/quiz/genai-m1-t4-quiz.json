@@ -1,0 +1,17 @@
+{
+  "quiz_id": "genai-m1-t4-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "What is the key advantage of a sparse MoE model over a dense model of equal parameter size?",
+      "options": [
+        "It scales the parameter size while keeping active flops (compute cost) constant per token.",
+        "It reduces GPU RAM consumption.",
+        "It eliminates the need for activations.",
+        "It is immune to overfitting."
+      ],
+      "correct_answer": "It scales the parameter size while keeping active flops (compute cost) constant per token.",
+      "explanation": "Since each token is routed to only a subset of experts (Top-K), only those weights are computed, keeping flops constant."
+    }
+  ]
+}

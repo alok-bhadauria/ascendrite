@@ -1,0 +1,6 @@
+{
+  "topic_id": "javascript-m2-t3",
+  "title": "ES6 Classes",
+  "version": "1.0.0",
+  "content": "# JavaScript Interview Prep\n\n## Q1: Why do Promise resolutions execute before setTimeout callbacks even if the timeout is set to 0 milliseconds?\n\n### Standard Answer\nThis behavior is determined by the priority sorting of the event loop. `setTimeout` callbacks are queued in the Macrotask queue, whereas `Promise` resolutions (`.then` blocks) are queued in the Microtask queue. The event loop rules state that the Microtask queue must be completely flushed after the current execution frame and before the next Macrotask is pulled. Therefore, microtasks execute first.\n\n\n## Q2: How does the system handle concurrent throughput anomalies under ES6 Classes?\n\n### Standard Answer\nThe system uses dynamic resource pools and queue-backoff throttles to maintain throughput boundaries, avoiding thread starvation.\n"
+}

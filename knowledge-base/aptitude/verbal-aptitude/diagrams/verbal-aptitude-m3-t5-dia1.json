@@ -1,0 +1,7 @@
+{
+  "topic_id": "verbal-aptitude-m3-t5",
+  "diagram_id": "verbal-aptitude-m3-t5-dia1",
+  "title": "Analogies Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Analogies\"]\n  Process --> End"
+}

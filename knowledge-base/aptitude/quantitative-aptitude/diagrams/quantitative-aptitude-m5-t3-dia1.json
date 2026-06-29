@@ -1,0 +1,7 @@
+{
+  "topic_id": "quantitative-aptitude-m5-t3",
+  "diagram_id": "quantitative-aptitude-m5-t3-dia1",
+  "title": "Data Interpretation Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Data Interpretation\"]\n  Process --> End"
+}

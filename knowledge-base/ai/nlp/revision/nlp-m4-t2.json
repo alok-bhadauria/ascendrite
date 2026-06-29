@@ -1,0 +1,6 @@
+{
+  "topic_id": "nlp-m4-t2",
+  "title": "Multi-Head Attention",
+  "version": "1.0.0",
+  "content": "# Multi-Head Attention\n\n## 1. Architectural Equation\n$$\\text{head}_i = \\operatorname{Attention}(\\mathbf{Q}\\mathbf{W}_i^Q, \\mathbf{K}\\mathbf{W}_i^K, \\mathbf{V}\\mathbf{W}_i^V)$$\n$$\\text{Output} = \\operatorname{Concat}(\\text{head}_1, \\dots, \\text{head}_h)\\mathbf{W}^O$$\n\n## 2. Projection Dimensions\n*   $d_k = d_{\\text{model}} / h$\n*   Keeps computational cost equivalent to single-head attention.\n"
+}

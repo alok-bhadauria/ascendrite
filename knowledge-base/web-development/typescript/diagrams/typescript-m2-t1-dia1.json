@@ -1,0 +1,7 @@
+{
+  "topic_id": "typescript-m2-t1",
+  "diagram_id": "typescript-m2-t1-dia1",
+  "title": "Generics Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Generics\"]\n  Process --> End"
+}

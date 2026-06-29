@@ -1,0 +1,31 @@
+{
+  "topic_id": "ai-agents-m4-t1",
+  "title": "Multi-Agent Topologies",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Medium",
+    "estimated_hours": 5,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Compare hierarchical topologies with peer-to-peer message buses.",
+    "Explain supervisor routing strategies."
+  ],
+  "content_sections": [
+    {
+      "title": "Multi-Agent Topologies",
+      "content": "For complex tasks, a single agent can suffer from context-window clutter and reasoning dilution. **Multi-agent systems** solve this by distributing tasks across multiple specialized agents. \n\n*   **Hierarchical Topology:** A 'supervisor' agent acts as a manager, taking user queries, delegating tasks to specialist worker agents, and aggregating results. Workers communicate only with the supervisor.\n*   **Peer-to-Peer (P2P) Topology:** Agents communicate directly with each other via a shared message bus, passing tasks and feedback dynamically. This is highly flexible but harder to coordinate.",
+      "callouts": []
+    }
+  ],
+  "example_refs": [
+    "ai-agents-m4-t1-ex1"
+  ],
+  "diagram_refs": [],
+  "practice_refs": [
+    "ai-agents-m4-t1-prac1"
+  ],
+  "quiz_refs": [
+    "ai-agents-m4-t1-quiz"
+  ]
+}

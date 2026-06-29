@@ -1,0 +1,44 @@
+{
+  "topic_id": "html-css-git-m5-t2",
+  "title": "Git Cherry-Pick",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Hard",
+    "estimated_hours": 6,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Describe structural characteristics of Git Cherry-Pick.",
+    "Derive mathematical and programmatic bounds for Porting specific commits across feature branches, commits hashes mapping."
+  ],
+  "content_sections": [
+    {
+      "title": "Git Cherry-Pick",
+      "content": "### Semantic Markups, Specificity & Git Storage\nWeb interfaces require structural semantics, style precedence, and version control graphs.\n\n#### Specificity Vectors\nCSS determines style priority using a specificity vector `(Inline, ID, Class/Attribute/Pseudo-class, Element/Pseudo-element)`:\n*   `#header .nav a` has specificity `(0, 1, 1, 1)`.\n*   `div.container ul li` has specificity `(0, 0, 1, 3)`.\n*   `!important` overrides specificity vectors, disrupting cascade rules. Avoid in production stylesheets.\n\n#### Git Storage Internals\nGit is a content-addressable storage system that models history as a Directed Acyclic Graph (DAG) of commit objects. Files are stored as **Blobs** compressed via zlib and keyed by their SHA-1 hash. **Trees** represent directories mapping filenames to Blob hashes. **Commits** point to parent commits, a root Tree object, and metadata (author, message).\n\n#### Branch Merges\n*   **Fast-Forward Merge:** If the target branch has no new commits, Git simply moves the branch pointer forward.\n*   **Three-Way Merge:** If branches have diverged, Git finds the common base commit, creates a new merge commit, and resolves conflicts using three-way file diffs.\n\n### Depth Analysis: Git Cherry-Pick\nIn production configurations, we analyze how Porting specific commits across feature branches, commits hashes mapping affects performance parameters. We evaluate memory layouts and consensus thresholds.",
+      "callouts": [
+        {
+          "type": "Student Trap",
+          "title": "Common Trap in Git Cherry-Pick",
+          "content": "A common mistake when analyzing Git Cherry-Pick is ignoring latency bounds and boundary edge cases during concurrent executions."
+        },
+        {
+          "type": "Engineering Note",
+          "title": "Production Scaling for Git Cherry-Pick",
+          "content": "Production servers implement strict resource isolation and cache alignments to prevent performance regressions when running Git Cherry-Pick loops."
+        }
+      ]
+    }
+  ],
+  "example_refs": [
+    "html-css-git-m5-t2-ex1"
+  ],
+  "diagram_refs": [
+    "html-css-git-m5-t2-dia1"
+  ],
+  "practice_refs": [
+    "html-css-git-m5-t2-prac1"
+  ],
+  "quiz_refs": [
+    "html-css-git-m5-t2-quiz"
+  ]
+}

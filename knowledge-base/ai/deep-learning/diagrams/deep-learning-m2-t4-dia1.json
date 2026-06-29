@@ -1,0 +1,7 @@
+{
+  "topic_id": "deep-learning-m2-t4",
+  "diagram_id": "deep-learning-m2-t4-dia1",
+  "title": "Normalization Layers Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Normalization Layers\"]\n  Process --> End"
+}

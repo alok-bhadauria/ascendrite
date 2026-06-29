@@ -1,0 +1,7 @@
+{
+  "topic_id": "oop-m1-t4",
+  "asset_id": "oop-m1-t4-ex1",
+  "title": "Inheritance & Polymorphism",
+  "language": "python",
+  "code": "if __name__ == '__main__':\n    print('Example code execution.')\n"
+}

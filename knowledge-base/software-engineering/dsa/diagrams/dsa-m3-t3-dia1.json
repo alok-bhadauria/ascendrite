@@ -1,0 +1,7 @@
+{
+  "topic_id": "dsa-m3-t3",
+  "diagram_id": "dsa-m3-t3-dia1",
+  "title": "Queues Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Queues\"]\n  Process --> End"
+}

@@ -1,0 +1,6 @@
+{
+  "topic_id": "genai-m2-t4",
+  "title": "Context Window Constraints",
+  "version": "1.0.0",
+  "content": "# Interview Prep: Context Windows\n\n## Q1: How do positional embedding limitations contribute to accuracy drops in long contexts?\n\n### Standard Answer\nPositional encodings (like absolute embeddings) have a maximum trained sequence length. Extrapolating beyond this length causes the model to struggle to represent positions, leading to degraded attention calculations.\n"
+}

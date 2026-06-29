@@ -1,0 +1,7 @@
+{
+  "topic_id": "nextjs-m1-t5",
+  "diagram_id": "nextjs-m1-t5-dia1",
+  "title": "Streaming HTML Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Streaming HTML\"]\n  Process --> End"
+}

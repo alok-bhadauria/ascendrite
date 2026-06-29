@@ -1,0 +1,7 @@
+{
+  "topic_id": "ai-agents-m4-t4",
+  "asset_id": "ai-agents-m4-t4-prac1",
+  "title": "Conflict Resolution & Consensus",
+  "language": "python",
+  "code": "def tally_votes(votes):\n    counts = {}\n    for v in votes:\n        counts[v] = counts.get(v, 0) + 1\n    return max(counts, key=counts.get)\n\ndef run_practice():\n    votes = ['option_A', 'option_B', 'option_A']\n    assert tally_votes(votes) == 'option_A'\n    print('[PASS] Consensus voting tally checks completed.')\n\nif __name__ == '__main__':\n    run_practice()\n"
+}

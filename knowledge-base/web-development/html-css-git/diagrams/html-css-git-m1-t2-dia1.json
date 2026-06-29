@@ -1,0 +1,7 @@
+{
+  "topic_id": "html-css-git-m1-t2",
+  "diagram_id": "html-css-git-m1-t2-dia1",
+  "title": "Accessibility (a11y) Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Accessibility (a11y)\"]\n  Process --> End"
+}

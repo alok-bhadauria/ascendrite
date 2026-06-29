@@ -1,0 +1,7 @@
+{
+  "topic_id": "deep-learning-m4-t1",
+  "diagram_id": "deep-learning-m4-t1-dia1",
+  "title": "Sequential Data Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Sequential Data\"]\n  Process --> End"
+}

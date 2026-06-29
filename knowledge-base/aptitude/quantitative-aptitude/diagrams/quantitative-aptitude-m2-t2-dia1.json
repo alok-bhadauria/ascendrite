@@ -1,0 +1,7 @@
+{
+  "topic_id": "quantitative-aptitude-m2-t2",
+  "diagram_id": "quantitative-aptitude-m2-t2-dia1",
+  "title": "Percentages Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Percentages\"]\n  Process --> End"
+}

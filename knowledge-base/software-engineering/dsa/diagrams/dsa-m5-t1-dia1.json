@@ -1,0 +1,7 @@
+{
+  "topic_id": "dsa-m5-t1",
+  "diagram_id": "dsa-m5-t1-dia1",
+  "title": "Disjoint Set Union (DSU) Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Disjoint Set Union (DSU)\"]\n  Process --> End"
+}

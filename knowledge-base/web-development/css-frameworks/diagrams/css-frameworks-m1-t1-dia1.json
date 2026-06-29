@@ -1,0 +1,7 @@
+{
+  "topic_id": "css-frameworks-m1-t1",
+  "diagram_id": "css-frameworks-m1-t1-dia1",
+  "title": "Utility-First Paradigm Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Utility-First Paradigm\"]\n  Process --> End"
+}

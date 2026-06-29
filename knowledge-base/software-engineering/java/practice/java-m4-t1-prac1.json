@@ -1,0 +1,7 @@
+{
+  "topic_id": "java-m4-t1",
+  "asset_id": "java-m4-t1-prac1",
+  "title": "Lambda Expressions",
+  "language": "python",
+  "code": "def run_practice():\n    assert True\nif __name__ == '__main__':\n    run_practice()\n"
+}

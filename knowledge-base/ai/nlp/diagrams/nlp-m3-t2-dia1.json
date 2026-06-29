@@ -1,0 +1,7 @@
+{
+  "topic_id": "nlp-m3-t2",
+  "diagram_id": "nlp-m3-t2-dia1",
+  "title": "Word2Vec Optimization Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Word2Vec Optimization\"]\n  Process --> End"
+}

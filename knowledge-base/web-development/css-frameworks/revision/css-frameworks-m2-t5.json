@@ -1,0 +1,6 @@
+{
+  "topic_id": "css-frameworks-m2-t5",
+  "title": "Transitions & Animations",
+  "version": "1.0.0",
+  "content": "# CSS Frameworks Revision\n\n*   **Utility CSS:** Reuses utility class mappings, preventing custom style bloat.\n*   **Static Purging:** PostCSS static analysis removes unused utility rules from output bundles.\n*   **Dynamic Class Trap:** Do not write dynamic classes like `text-${color}`; static scanners will purge them.\n\n\n*   **Transitions & Animations Checklist:** Verify input ranges and clear caches.\n"
+}

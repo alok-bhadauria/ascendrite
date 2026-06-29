@@ -1,0 +1,7 @@
+{
+  "topic_id": "deep-learning-m4-t3",
+  "diagram_id": "deep-learning-m4-t3-dia1",
+  "title": "Long Short-Term Memory (LSTM) Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Long Short-Term Memory (LSTM)\"]\n  Process --> End"
+}

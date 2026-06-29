@@ -1,0 +1,7 @@
+{
+  "topic_id": "sql-m5-t4",
+  "diagram_id": "sql-m5-t4-dia1",
+  "title": "SQL Injection Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process SQL Injection\"]\n  Process --> End"
+}

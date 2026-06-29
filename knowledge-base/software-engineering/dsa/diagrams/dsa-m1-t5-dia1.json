@@ -1,0 +1,7 @@
+{
+  "topic_id": "dsa-m1-t5",
+  "diagram_id": "dsa-m1-t5-dia1",
+  "title": "Hashing Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Hashing\"]\n  Process --> End"
+}

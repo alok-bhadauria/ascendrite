@@ -1,0 +1,7 @@
+{
+  "topic_id": "oop-m3-t5",
+  "asset_id": "oop-m3-t5-ex1",
+  "title": "Structural - Adapter & Decorator",
+  "language": "python",
+  "code": "if __name__ == '__main__':\n    print('Example code execution.')\n"
+}

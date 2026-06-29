@@ -1,0 +1,7 @@
+{
+  "topic_id": "dbms-m1-t5",
+  "diagram_id": "dbms-m1-t5-dia1",
+  "title": "Indexing Pitfalls Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Indexing Pitfalls\"]\n  Process --> End"
+}

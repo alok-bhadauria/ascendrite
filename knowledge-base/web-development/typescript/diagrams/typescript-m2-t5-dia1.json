@@ -1,0 +1,7 @@
+{
+  "topic_id": "typescript-m2-t5",
+  "diagram_id": "typescript-m2-t5-dia1",
+  "title": "Mapped Types Modifiers Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Mapped Types Modifiers\"]\n  Process --> End"
+}

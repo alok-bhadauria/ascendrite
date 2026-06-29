@@ -1,0 +1,7 @@
+{
+  "topic_id": "java-m5-t5",
+  "diagram_id": "java-m5-t5-dia1",
+  "title": "Garbage Collection Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Garbage Collection\"]\n  Process --> End"
+}

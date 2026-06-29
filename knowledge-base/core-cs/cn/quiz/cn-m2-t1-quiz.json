@@ -1,0 +1,17 @@
+{
+  "quiz_id": "cn-m2-t1-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which of the following describes a key bottleneck related to IP Protocol?",
+      "options": [
+        "Inefficient scaling of IPv4 header structures.",
+        "Hardware is completely offline.",
+        "Lack of database files.",
+        "Syntax compilation errors."
+      ],
+      "correct_answer": "Inefficient scaling of IPv4 header structures.",
+      "explanation": "The topic covers how IPv4 header structures scales under concurrent workloads, which represents the primary bottlenecks."
+    }
+  ]
+}

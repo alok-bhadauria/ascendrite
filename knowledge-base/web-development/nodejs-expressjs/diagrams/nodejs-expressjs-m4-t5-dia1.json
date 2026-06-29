@@ -1,0 +1,7 @@
+{
+  "topic_id": "nodejs-expressjs-m4-t5",
+  "diagram_id": "nodejs-expressjs-m4-t5-dia1",
+  "title": "CORS Settings Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process CORS Settings\"]\n  Process --> End"
+}

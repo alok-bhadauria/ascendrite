@@ -1,0 +1,6 @@
+{
+  "topic_id": "nlp-m4-t3",
+  "title": "Transformer Block Components",
+  "version": "1.0.0",
+  "content": "# Transformer Block Components\n\n## 1. Pre-LN vs Post-LN\n*   **Post-LN:** $\\mathbf{x}_{l+1} = \\text{LN}(\\mathbf{x}_l + \\text{SubLayer}(\\mathbf{x}_l))$\n*   **Pre-LN:** $\\mathbf{x}_{l+1} = \\mathbf{x}_l + \\text{SubLayer}(\\text{LN}(\\mathbf{x}_l))$\n\n## 2. RoPE Rotation Matrix\n$$\\mathbf{R}_{m\\theta} = \\begin{bmatrix} \\cos m\\theta & -\\sin m\\theta \\\\ \\sin m\\theta & \\cos m\\theta \\end{bmatrix}$$\n*   Encodes relative distance properties directly during the attention dot product calculation.\n"
+}

@@ -1,0 +1,6 @@
+{
+  "topic_id": "nlp-m1-t4",
+  "title": "Topic Modeling",
+  "version": "1.0.0",
+  "content": "# Topic Modeling (LDA)\n\n## 1. Probabilistic Generation\nFor each document $d \\in \\mathcal{D}$:\n1. Choose topic distribution $\\theta_d \\sim \\text{Dirichlet}(\\alpha)$\n2. For each word $w_i$ in $d$:\n   a. Choose a topic $z_i \\sim \\text{Multinomial}(\\theta_d)$\n   b. Choose word $w_i \\sim \\text{Multinomial}(\\phi_{z_i})$ where $\\phi_k \\sim \\text{Dirichlet}(\\beta)$\n\n## 2. Gibbs Sampling Equation\n$$P(z_i = k \\mid \\mathbf{z}_{-i}) \\propto \\frac{n_{k,-i}^{(v)} + \\beta}{\\sum_v (n_{k,-i}^{(v)} + \\beta)} \\times \\frac{n_{d,-i}^{(k)} + \\alpha}{\\sum_k' (n_{d,-i}^{(k')} + \\alpha)}$$\n"
+}

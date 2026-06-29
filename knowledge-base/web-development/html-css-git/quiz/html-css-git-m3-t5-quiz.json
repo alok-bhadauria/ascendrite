@@ -1,0 +1,17 @@
+{
+  "quiz_id": "html-css-git-m3-t5-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "What is the key optimization criteria for Browser Compatibility?",
+      "options": [
+        "Minimizing complexity bounds.",
+        "Increasing CPU utilization.",
+        "Static heap allocation.",
+        "Syntax execution bypass."
+      ],
+      "correct_answer": "Minimizing complexity bounds.",
+      "explanation": "The primary goal in designing Browser Compatibility is minimizing asymptotic and memory complexities."
+    }
+  ]
+}

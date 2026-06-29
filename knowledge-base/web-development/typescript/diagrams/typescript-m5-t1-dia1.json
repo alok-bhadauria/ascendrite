@@ -1,0 +1,7 @@
+{
+  "topic_id": "typescript-m5-t1",
+  "diagram_id": "typescript-m5-t1-dia1",
+  "title": "Monorepo Setup Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Monorepo Setup\"]\n  Process --> End"
+}

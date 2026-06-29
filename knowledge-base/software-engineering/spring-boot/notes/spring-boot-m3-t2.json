@@ -1,0 +1,44 @@
+{
+  "topic_id": "spring-boot-m3-t2",
+  "title": "Entity Mapping",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Hard",
+    "estimated_hours": 6,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Describe structural characteristics of Entity Mapping.",
+    "Derive mathematical and programmatic bounds for @Entity, @Table, @Column, @Id, @GeneratedValue generation strategies."
+  ],
+  "content_sections": [
+    {
+      "title": "Entity Mapping",
+      "content": "### Spring Dependency Injection & Transactional Loops\nSpring Boot manages object lifecycles and transactions through IoC container injection.\n\n#### IoC Lifecycle & Bean Scopes\nSpring manages beans under defined scopes (Singleton, Prototype, Request, Session). The container initializes and resolves dependencies. To handle circular dependencies (e.g. Bean A depends on B, B on A), Spring uses a **3-Level Cache**:\n1.  `singletonObjects`: Fully initialized singleton beans.\n2.  `earlySingletonObjects`: Partially initialized beans (instantiated but no fields injected yet).\n3.  `singletonFactories`: Bean creation factories that generate early references (including proxies).\n\n#### AOP Self-Invocation Trap\nSpring Transactions (`@Transactional`) use proxy wrappers. When a client invokes a method, the proxy intercepts the call to manage database connections and commit/rollback boundaries. *Trap:* If a method inside Bean A calls another `@Transactional` method inside the same Bean A using self-invocation (e.g. `this.helperMethod()`), the call bypasses the proxy, executing without transaction context.\n\n#### JPA N+1 Select Bottleneck\nOccurs when fetching parent entities with lazy-loaded children. Spring runs 1 query to fetch $N$ parents, then executes $N$ additional queries to fetch children of each parent. *Mitigation:* Use `JOIN FETCH` queries or Entity Graphs to load parent and child rows in a single DB round-trip.\n\n### Depth Analysis: Entity Mapping\nIn production configurations, we analyze how @Entity, @Table, @Column, @Id, @GeneratedValue generation strategies affects performance parameters. We evaluate memory layouts and consensus thresholds.",
+      "callouts": [
+        {
+          "type": "Student Trap",
+          "title": "Common Trap in Entity Mapping",
+          "content": "A common mistake when analyzing Entity Mapping is ignoring latency bounds and boundary edge cases during concurrent executions."
+        },
+        {
+          "type": "Engineering Note",
+          "title": "Production Scaling for Entity Mapping",
+          "content": "Production servers implement strict resource isolation and cache alignments to prevent performance regressions when running Entity Mapping loops."
+        }
+      ]
+    }
+  ],
+  "example_refs": [
+    "spring-boot-m3-t2-ex1"
+  ],
+  "diagram_refs": [
+    "spring-boot-m3-t2-dia1"
+  ],
+  "practice_refs": [
+    "spring-boot-m3-t2-prac1"
+  ],
+  "quiz_refs": [
+    "spring-boot-m3-t2-quiz"
+  ]
+}

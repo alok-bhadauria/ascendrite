@@ -1,0 +1,17 @@
+{
+  "quiz_id": "genai-m2-t1-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "What is the primary objective of system prompts compared to user prompts?",
+      "options": [
+        "To define the global identity guidelines, tone, and behavioral constraints of the model.",
+        "To query facts from databases.",
+        "To increase generation speed.",
+        "To replace tokenizers."
+      ],
+      "correct_answer": "To define the global identity guidelines, tone, and behavioral constraints of the model.",
+      "explanation": "System prompts establish the core identity boundaries, preventing models from leaking passwords or departing from predefined styles."
+    }
+  ]
+}

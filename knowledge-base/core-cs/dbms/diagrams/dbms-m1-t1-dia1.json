@@ -1,0 +1,7 @@
+{
+  "topic_id": "dbms-m1-t1",
+  "diagram_id": "dbms-m1-t1-dia1",
+  "title": "DBMS Architecture Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process DBMS Architecture\"]\n  Process --> End"
+}

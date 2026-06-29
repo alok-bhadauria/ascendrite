@@ -1,0 +1,7 @@
+{
+  "topic_id": "genai-m2-t5",
+  "asset_id": "genai-m2-t5-ex1",
+  "title": "Prompt Compression",
+  "language": "python",
+  "code": "import numpy as np\n\ndef compress_tokens(tokens, self_entropies, threshold=1.0):\n    return [t for i, t in enumerate(tokens) if self_entropies[i] > threshold]\n\nif __name__ == '__main__':\n    print('Token compressor module loaded.')\n"
+}

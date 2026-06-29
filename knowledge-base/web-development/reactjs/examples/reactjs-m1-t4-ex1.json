@@ -1,0 +1,7 @@
+{
+  "topic_id": "reactjs-m1-t4",
+  "asset_id": "reactjs-m1-t4-ex1",
+  "title": "Virtual DOM vs Real DOM",
+  "language": "python",
+  "code": "if __name__ == '__main__':\n    print('Example code execution.')\n"
+}

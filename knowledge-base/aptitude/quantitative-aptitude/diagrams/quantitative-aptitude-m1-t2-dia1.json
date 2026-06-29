@@ -1,0 +1,7 @@
+{
+  "topic_id": "quantitative-aptitude-m1-t2",
+  "diagram_id": "quantitative-aptitude-m1-t2-dia1",
+  "title": "Factors & Remainders Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Factors & Remainders\"]\n  Process --> End"
+}

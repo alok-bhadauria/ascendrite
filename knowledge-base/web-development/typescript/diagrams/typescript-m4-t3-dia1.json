@@ -1,0 +1,7 @@
+{
+  "topic_id": "typescript-m4-t3",
+  "diagram_id": "typescript-m4-t3-dia1",
+  "title": "API Schema Validations Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process API Schema Validations\"]\n  Process --> End"
+}

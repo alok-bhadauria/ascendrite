@@ -1,0 +1,7 @@
+{
+  "topic_id": "typescript-m1-t3",
+  "diagram_id": "typescript-m1-t3-dia1",
+  "title": "Type Assertions Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Type Assertions\"]\n  Process --> End"
+}

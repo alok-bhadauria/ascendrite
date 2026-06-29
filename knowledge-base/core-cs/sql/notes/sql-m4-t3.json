@@ -1,0 +1,44 @@
+{
+  "topic_id": "sql-m4-t3",
+  "title": "Query Cost Analysis",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Hard",
+    "estimated_hours": 6,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Describe structural characteristics of Query Cost Analysis.",
+    "Derive mathematical and programmatic bounds for I/O cost estimations, Logical reads counts, Temporary disk spills diagnostics."
+  ],
+  "content_sections": [
+    {
+      "title": "Query Cost Analysis",
+      "content": "### Logical Query Processing & Execution Optims\nSQL is declarative. The database engine parses, optimizes, and compiles SQL queries into physical execution plans.\n\n#### Logical Processing Sequence\nThe order of processing differs from lexical ordering:\n1.  `FROM` + `JOIN` (Load tables and calculate Cartesian product)\n2.  `ON` (Filter join conditions)\n3.  `WHERE` (Filter row subsets)\n4.  `GROUP BY` (Aggregate rows into groups)\n5.  `HAVING` (Filter group subsets)\n6.  `SELECT` (Project output columns)\n7.  `DISTINCT` (Remove duplicate outputs)\n8.  `ORDER BY` (Sort output rows)\n9.  `LIMIT` (Trunk row outputs)\n*Trap:* Referencing select aliases in the `WHERE` clause triggers compilation errors because the projection has not executed yet.\n\n#### Window Functions ROWS vs RANGE\n*   `ROWS`: Defines the boundary frame strictly by offset counts (e.g. `ROWS BETWEEN 1 PRECEDING AND CURRENT ROW`).\n*   `RANGE`: Defines frame boundaries by value differences based on the sort column (e.g. duplicate sort values are processed as a single frame boundary block).\n\n#### Leftmost Index Prefix Rules\nA composite index on `(A, B, C)` can only optimize queries filtering on `A`, `(A, B)`, or `(A, B, C)`. If a query filters on `B` and `C` without filtering on `A`, the index cannot be traversed because sorting is ordered hierarchically by column indices.\n\n### Depth Analysis: Query Cost Analysis\nIn production configurations, we analyze how I/O cost estimations, Logical reads counts, Temporary disk spills diagnostics affects performance parameters. We evaluate memory layouts and consensus thresholds.",
+      "callouts": [
+        {
+          "type": "Student Trap",
+          "title": "Common Trap in Query Cost Analysis",
+          "content": "A common mistake when analyzing Query Cost Analysis is ignoring latency bounds and boundary edge cases during concurrent executions."
+        },
+        {
+          "type": "Engineering Note",
+          "title": "Production Scaling for Query Cost Analysis",
+          "content": "Production servers implement strict resource isolation and cache alignments to prevent performance regressions when running Query Cost Analysis loops."
+        }
+      ]
+    }
+  ],
+  "example_refs": [
+    "sql-m4-t3-ex1"
+  ],
+  "diagram_refs": [
+    "sql-m4-t3-dia1"
+  ],
+  "practice_refs": [
+    "sql-m4-t3-prac1"
+  ],
+  "quiz_refs": [
+    "sql-m4-t3-quiz"
+  ]
+}

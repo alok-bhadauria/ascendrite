@@ -1,0 +1,7 @@
+{
+  "topic_id": "html-css-git-m2-t2",
+  "diagram_id": "html-css-git-m2-t2-dia1",
+  "title": "CSS Box Model Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process CSS Box Model\"]\n  Process --> End"
+}

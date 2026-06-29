@@ -1,0 +1,7 @@
+{
+  "topic_id": "oop-m5-t3",
+  "diagram_id": "oop-m5-t3-dia1",
+  "title": "Domain-Driven Design (DDD) Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Domain-Driven Design (DDD)\"]\n  Process --> End"
+}

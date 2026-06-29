@@ -1,0 +1,7 @@
+{
+  "topic_id": "os-m4-t3",
+  "diagram_id": "os-m4-t3-dia1",
+  "title": "Synchronization Primitives Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Synchronization Primitives\"]\n  Process --> End"
+}

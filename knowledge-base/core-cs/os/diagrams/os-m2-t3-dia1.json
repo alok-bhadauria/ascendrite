@@ -1,0 +1,7 @@
+{
+  "topic_id": "os-m2-t3",
+  "diagram_id": "os-m2-t3-dia1",
+  "title": "Priority Inversion Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Priority Inversion\"]\n  Process --> End"
+}

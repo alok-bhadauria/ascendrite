@@ -1,0 +1,259 @@
+{
+  "subject_id": "dbms",
+  "name": "DBMS",
+  "category": "core-cs",
+  "modules": [
+    {
+      "name": "Module 1: DBMS Foundations, B+ Tree Indexing & Page Splits",
+      "topics": [
+        {
+          "id": "dbms-m1-t1",
+          "title": "DBMS Architecture",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "dbms-m1-t2",
+          "title": "File Storage & Pages",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "dbms-m1-t3",
+          "title": "B+ Tree Indexing",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "dbms-m1-t4",
+          "title": "Hash-Based Indexing",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "dbms-m1-t5",
+          "title": "Indexing Pitfalls",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        }
+      ]
+    },
+    {
+      "name": "Module 2: Transaction Concurrency, Anomalies & Isolation Levels",
+      "topics": [
+        {
+          "id": "dbms-m2-t1",
+          "title": "Transaction Concepts",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "dbms-m2-t2",
+          "title": "Concurrency Anomalies",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "dbms-m2-t3",
+          "title": "SQL Isolation Levels",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "dbms-m2-t4",
+          "title": "Locking Mechanisms",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "dbms-m2-t5",
+          "title": "Lock Concurrency",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        }
+      ]
+    },
+    {
+      "name": "Module 3: Database Recovery Protocols, WAL & ARIES Algorithms",
+      "topics": [
+        {
+          "id": "dbms-m3-t1",
+          "title": "Database Crash Recovery",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "dbms-m3-t2",
+          "title": "Write-Ahead Logging (WAL)",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "dbms-m3-t3",
+          "title": "ARIES Recovery Algorithm",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "dbms-m3-t4",
+          "title": "Compensation Log Records",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "dbms-m3-t5",
+          "title": "Media Recovery",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        }
+      ]
+    },
+    {
+      "name": "Module 4: Query Optimization, Costs & Execution Plans",
+      "topics": [
+        {
+          "id": "dbms-m4-t1",
+          "title": "Query Parsing & Rewriting",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "dbms-m4-t2",
+          "title": "System Catalog",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "dbms-m4-t3",
+          "title": "Cost Estimation",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "dbms-m4-t4",
+          "title": "Join Execution Algorithms",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "dbms-m4-t5",
+          "title": "Execution Plans",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        }
+      ]
+    },
+    {
+      "name": "Module 5: Distributed Scaling, Replication & Consistency Models",
+      "topics": [
+        {
+          "id": "dbms-m5-t1",
+          "title": "Distributed Scaling",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "dbms-m5-t2",
+          "title": "Database Replication",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "dbms-m5-t3",
+          "title": "Consistency Models",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "dbms-m5-t4",
+          "title": "Distributed Commit",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "dbms-m5-t5",
+          "title": "NoSQL Scaling",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        }
+      ]
+    }
+  ],
+  "version": "1.0.0",
+  "last_updated": "2026-06-29"
+}

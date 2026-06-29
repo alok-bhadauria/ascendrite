@@ -1,0 +1,7 @@
+{
+  "topic_id": "verbal-aptitude-m1-t3",
+  "asset_id": "verbal-aptitude-m1-t3-ex1",
+  "title": "Modifiers",
+  "language": "python",
+  "code": "if __name__ == '__main__':\n    print('Example code execution.')\n"
+}

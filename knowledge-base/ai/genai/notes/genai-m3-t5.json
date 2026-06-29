@@ -1,0 +1,36 @@
+{
+  "topic_id": "genai-m3-t5",
+  "title": "Memory Optimization in Fine-Tuning",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Medium",
+    "estimated_hours": 5,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Explain Gradient Checkpointing memory trade-offs.",
+    "Formulate activation storage size boundaries."
+  ],
+  "content_sections": [
+    {
+      "title": "The Backpropagation Memory Bottleneck",
+      "content": "Standard backpropagation requires storing activation states computed during the forward pass in RAM. In deep networks, this creates a memory bottleneck, as storing activation matrices scales linearly with layer count $L$.",
+      "callouts": []
+    },
+    {
+      "title": "Gradient Checkpointing Mechanics",
+      "content": "**Gradient Checkpointing** optimizes this memory footprint by storing activations at only a subset of layers ('checkpoints'). During the backward pass, missing activations are re-computed dynamically from the nearest preceding checkpoint. \n\nBy placing checkpoints at every $\\sqrt{L}$ layers, the model stores exactly $\\sqrt{L}$ activations. During the backward pass, computing gradients for a segment requires storing an additional $\\sqrt{L}$ temporary activations. This reduces peak memory usage from $\\mathcal{O}(L)$ to $\\mathcal{O}(\\sqrt{L})$, trading a 30% increase in compute cost for up to a 70% decrease in peak GPU memory usage.",
+      "callouts": []
+    }
+  ],
+  "example_refs": [
+    "genai-m3-t5-ex1"
+  ],
+  "diagram_refs": [],
+  "practice_refs": [
+    "genai-m3-t5-prac1"
+  ],
+  "quiz_refs": [
+    "genai-m3-t5-quiz"
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "topic_id": "spring-boot-m3-t5",
+  "diagram_id": "spring-boot-m3-t5-dia1",
+  "title": "Advanced Database Integration Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Advanced Database Integration\"]\n  Process --> End"
+}

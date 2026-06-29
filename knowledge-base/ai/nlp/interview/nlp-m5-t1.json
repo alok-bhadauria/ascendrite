@@ -1,0 +1,6 @@
+{
+  "topic_id": "nlp-m5-t1",
+  "title": "Sentence Embeddings",
+  "version": "1.0.0",
+  "content": "# Interview Prep: Sentence Embeddings\n\n## Q1: Why are Bi-Encoders preferred for web-scale semantic search engines despite having lower accuracy than Cross-Encoders?\n\n### Standard Answer\nBi-encoders compute sentence embeddings independently. In semantic search, document embeddings can be pre-computed and stored in a vector database offline. At query time, we only need to encode the query and perform a fast vector search. Cross-encoders require encoding the query with every document in the index, which is computationally intractable at scale.\n"
+}

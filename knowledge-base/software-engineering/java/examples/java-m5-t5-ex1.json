@@ -1,0 +1,7 @@
+{
+  "topic_id": "java-m5-t5",
+  "asset_id": "java-m5-t5-ex1",
+  "title": "Garbage Collection",
+  "language": "python",
+  "code": "if __name__ == '__main__':\n    print('Example code execution.')\n"
+}

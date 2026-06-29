@@ -1,0 +1,31 @@
+{
+  "topic_id": "genai-m4-t5",
+  "title": "Alignment Tax & Evaluation",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Medium",
+    "estimated_hours": 5,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Explain the alignment tax and its impact on model capabilities.",
+    "Formulate pairwise win-rate evaluation metrics."
+  ],
+  "content_sections": [
+    {
+      "title": "The Alignment Tax",
+      "content": "Fine-tuning models to be helpful and harmless often degrades their performance on raw mathematical reasoning or coding tasks. This trade-off is known as the **Alignment Tax**. Evaluating aligned models requires relative benchmarking suites (like MT-Bench or AlpacaEval) that use a strong language model (e.g. GPT-4) as a judge to evaluate and compare response quality.",
+      "callouts": []
+    }
+  ],
+  "example_refs": [
+    "genai-m4-t5-ex1"
+  ],
+  "diagram_refs": [],
+  "practice_refs": [
+    "genai-m4-t5-prac1"
+  ],
+  "quiz_refs": [
+    "genai-m4-t5-quiz"
+  ]
+}

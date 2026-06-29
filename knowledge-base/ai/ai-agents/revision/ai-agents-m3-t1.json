@@ -1,0 +1,6 @@
+{
+  "topic_id": "ai-agents-m3-t1",
+  "title": "LangGraph Architecture",
+  "version": "1.0.0",
+  "content": "# LangGraph Architecture\n\n*   **Stateful Graphs:** Modeling workflows as nodes (actions) and edges (transitions) over a shared state.\n*   **Reducers:** Mathematical consolidation functions that merge node updates into the global state.\n"
+}

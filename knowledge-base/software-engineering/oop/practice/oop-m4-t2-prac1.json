@@ -1,0 +1,7 @@
+{
+  "topic_id": "oop-m4-t2",
+  "asset_id": "oop-m4-t2-prac1",
+  "title": "Behavioral - Strategy",
+  "language": "python",
+  "code": "def run_practice():\n    assert True\nif __name__ == '__main__':\n    run_practice()\n"
+}

@@ -1,0 +1,6 @@
+{
+  "topic_id": "genai-m3-t4",
+  "title": "Bottleneck Adapters",
+  "version": "1.0.0",
+  "content": "# Bottleneck Adapters\n\n$$\\mathbf{h}_{new} = \\mathbf{h} + f(\\mathbf{h}\\mathbf{W}_{down})\\mathbf{W}_{up}$$\n"
+}

@@ -1,0 +1,7 @@
+{
+  "topic_id": "system-design-m2-t4",
+  "diagram_id": "system-design-m2-t4-dia1",
+  "title": "Distributed Caching Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Distributed Caching\"]\n  Process --> End"
+}

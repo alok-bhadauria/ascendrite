@@ -1,0 +1,7 @@
+{
+  "topic_id": "sql-m1-t3",
+  "diagram_id": "sql-m1-t3-dia1",
+  "title": "Join Internals Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Join Internals\"]\n  Process --> End"
+}

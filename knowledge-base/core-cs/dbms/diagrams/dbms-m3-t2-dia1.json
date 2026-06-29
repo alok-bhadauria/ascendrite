@@ -1,0 +1,7 @@
+{
+  "topic_id": "dbms-m3-t2",
+  "diagram_id": "dbms-m3-t2-dia1",
+  "title": "Write-Ahead Logging (WAL) Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Write-Ahead Logging (WAL)\"]\n  Process --> End"
+}

@@ -1,0 +1,7 @@
+{
+  "topic_id": "genai-m5-t1",
+  "asset_id": "genai-m5-t1-prac1",
+  "title": "Continuous Batching & Speculative Decoding",
+  "language": "python",
+  "code": "import numpy as np\n\ndef verify_speculative_token(p_target, p_draft):\n    ratio = p_target / p_draft if p_draft > 0 else 0.0\n    return float(np.minimum(1.0, ratio))\n\ndef run_practice():\n    assert verify_speculative_token(0.8, 0.4) == 1.0\n    assert verify_speculative_token(0.2, 0.4) == 0.5\n    print('[PASS] Speculative decoding verification scores checked.')\n\nif __name__ == '__main__':\n    run_practice()\n"
+}

@@ -1,0 +1,6 @@
+{
+  "topic_id": "ai-agents-m5-t1",
+  "title": "MCP Architecture",
+  "version": "1.0.0",
+  "content": "# MCP Architecture\n\n*   **Client-Server Topology:** Standardized protocol connecting agent engines (clients) with tool servers.\n*   **JSON-RPC 2.0 Primitives:** Exchanging structured request/response payloads over stdio or HTTP SSE.\n"
+}

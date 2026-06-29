@@ -1,0 +1,17 @@
+{
+  "quiz_id": "dsa-m3-t1-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "What is the key optimization criteria for Stacks?",
+      "options": [
+        "Minimizing complexity bounds.",
+        "Increasing CPU utilization.",
+        "Static heap allocation.",
+        "Syntax execution bypass."
+      ],
+      "correct_answer": "Minimizing complexity bounds.",
+      "explanation": "The primary goal in designing Stacks is minimizing asymptotic and memory complexities."
+    }
+  ]
+}

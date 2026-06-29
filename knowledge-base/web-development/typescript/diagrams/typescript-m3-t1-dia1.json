@@ -1,0 +1,7 @@
+{
+  "topic_id": "typescript-m3-t1",
+  "diagram_id": "typescript-m3-t1-dia1",
+  "title": "Variance Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Variance\"]\n  Process --> End"
+}

@@ -1,0 +1,31 @@
+{
+  "topic_id": "ai-agents-m5-t3",
+  "title": "Agent Evaluation Frameworks",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Medium",
+    "estimated_hours": 5,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Explain trajectory logging database structures.",
+    "Formulate success metrics and evaluation benchmarks."
+  ],
+  "content_sections": [
+    {
+      "title": "Trajectory Logging and Evaluation Metrics",
+      "content": "Evaluating agents is challenging because they generate multi-step execution traces (trajectories) rather than single outputs. **Trajectory Logging** databases record every thought, action, and observation in the loop. Evaluators (human auditors or LLM judges) analyze these logs to measure accuracy, tool usage efficiency, and recovery performance.",
+      "callouts": []
+    }
+  ],
+  "example_refs": [
+    "ai-agents-m5-t3-ex1"
+  ],
+  "diagram_refs": [],
+  "practice_refs": [
+    "ai-agents-m5-t3-prac1"
+  ],
+  "quiz_refs": [
+    "ai-agents-m5-t3-quiz"
+  ]
+}

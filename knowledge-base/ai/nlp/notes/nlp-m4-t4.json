@@ -1,0 +1,36 @@
+{
+  "topic_id": "nlp-m4-t4",
+  "title": "Causal Decoders & Cross-Attention",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Medium",
+    "estimated_hours": 5,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Explain causal masking in autoregressive generation.",
+    "Formulate cross-attention routing layers."
+  ],
+  "content_sections": [
+    {
+      "title": "Causal Masking",
+      "content": "Autoregressive generation generates tokens sequentially, left-to-right. To prevent the model from looking ahead at future tokens during training, we apply a **causal mask** to the self-attention matrix before the softmax step.\n\nThe mask is a lower-triangular matrix $\\mathbf{M}$ where:\n\n$$\\mathbf{M}_{ij} = \\begin{cases} 0 & \\text{if } i \\ge j \\\\ -\\infty & \\text{if } i < j \\end{cases}$$\n\nAdding this mask to the scaled dot-product attention scores zeroes out attention weights for future tokens:\n\n$$\\text{Attention}(\\mathbf{Q}, \\mathbf{K}, \\mathbf{V}) = \\text{softmax}\\left( \\frac{\\mathbf{Q}\\mathbf{K}^{\\top}}{\\sqrt{d_k}} + \\mathbf{M} \\right)\\mathbf{V}$$",
+      "callouts": []
+    },
+    {
+      "title": "Cross-Attention Mechanics",
+      "content": "In sequence-to-sequence architectures (like encoder-decoder translation models), **cross-attention** maps the target sequence in the decoder to the source sequence in the encoder.\n\nThe Query matrix $\\mathbf{Q}$ is projected from the decoder's activation states, while the Key ($\\mathbf{K}$) and Value ($\\mathbf{V}$) matrices are projected from the encoder's output representations. This allows the decoder to attend to the relevant parts of the input sequence for each generated target token.",
+      "callouts": []
+    }
+  ],
+  "example_refs": [
+    "nlp-m4-t4-ex1"
+  ],
+  "diagram_refs": [],
+  "practice_refs": [
+    "nlp-m4-t4-prac1"
+  ],
+  "quiz_refs": [
+    "nlp-m4-t4-quiz"
+  ]
+}

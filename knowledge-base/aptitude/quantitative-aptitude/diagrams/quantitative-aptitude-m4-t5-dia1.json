@@ -1,0 +1,7 @@
+{
+  "topic_id": "quantitative-aptitude-m4-t5",
+  "diagram_id": "quantitative-aptitude-m4-t5-dia1",
+  "title": "Geometry & Mensuration Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Geometry & Mensuration\"]\n  Process --> End"
+}

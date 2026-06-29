@@ -1,0 +1,6 @@
+{
+  "topic_id": "nlp-m4-t2",
+  "title": "Multi-Head Attention",
+  "version": "1.0.0",
+  "content": "# Interview Prep: MHA\n\n## Q1: Why is the model dimension d_model divided by the number of heads h (i.e. d_k = d_model / h) in production implementations?\n\n### Standard Answer\nDividing $d_{model}$ by $h$ ensures that the computational cost of Multi-Head Attention is identical to that of single-head attention with full dimensionality. The total parameter count and operations are kept constant, while allowing the model to attend to information from different representation subspaces simultaneously.\n"
+}

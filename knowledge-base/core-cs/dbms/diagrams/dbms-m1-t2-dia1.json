@@ -1,0 +1,7 @@
+{
+  "topic_id": "dbms-m1-t2",
+  "diagram_id": "dbms-m1-t2-dia1",
+  "title": "File Storage & Pages Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process File Storage & Pages\"]\n  Process --> End"
+}

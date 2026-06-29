@@ -1,0 +1,6 @@
+{
+  "topic_id": "system-design-m2-t1",
+  "title": "Communication Models",
+  "version": "1.0.0",
+  "content": "# System Design Interview Prep\n\n## Q1: Contrast 2-Phase Commit (2PC) with Sagas in distributed transaction management.\n\n### Standard Answer\n2PC is a synchronous, blocking consensus protocol. A coordinator asks all nodes to prepare, and commits only if all nodes vote yes. It guarantees strong consistency (ACID) but degrades availability and locks resources until consensus is reached, risking deadlocks. Sagas are asynchronous and prioritize eventual consistency (BASE). A Saga executes a sequence of local transactions. If one local transaction fails, the coordinator triggers compensating transactions to reverse previous steps, maintaining high system availability.\n\n\n## Q2: How does the system handle concurrent throughput anomalies under Communication Models?\n\n### Standard Answer\nThe system uses dynamic resource pools and queue-backoff throttles to maintain throughput boundaries, avoiding thread starvation.\n"
+}

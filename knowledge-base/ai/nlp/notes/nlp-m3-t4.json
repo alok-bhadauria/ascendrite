@@ -1,0 +1,31 @@
+{
+  "topic_id": "nlp-m3-t4",
+  "title": "FastText Subword Embeddings",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Medium",
+    "estimated_hours": 5,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Formulate subword n-gram representation mathematics.",
+    "Explain how FastText generates vectors for out-of-vocabulary (OOV) tokens."
+  ],
+  "content_sections": [
+    {
+      "title": "FastText Model",
+      "content": "Word2Vec and GloVe represent words as atomic units, failing to capture morphological relationships (e.g. 'running' and 'runner' share the root 'run' but have independent vectors). This creates issues for morphologically rich languages.\n\n**FastText** resolves this by representing each word as a bag of character n-grams. For a word $w$, we append boundary markers `<` and `>` and extract character n-grams of lengths $n$ (typically $3 \\le n \\le 6$). For example, the word 'where' with $n=3$ is represented by the character n-grams: `<wh`, `whe`, `her`, `ere`, `re>` and the special sequence `<where>`. The final word vector is the sum of these subword vectors:\n\n$$\\mathbf{v}(w) = \\sum_{g \\in \\mathcal{G}_w} \\mathbf{v}_g$$\n\nwhere $\\mathcal{G}_w$ is the set of character n-grams constructing word $w$.",
+      "callouts": []
+    }
+  ],
+  "example_refs": [
+    "nlp-m3-t4-ex1"
+  ],
+  "diagram_refs": [],
+  "practice_refs": [
+    "nlp-m3-t4-prac1"
+  ],
+  "quiz_refs": [
+    "nlp-m3-t4-quiz"
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "topic_id": "reactjs-m4-t3",
+  "diagram_id": "reactjs-m4-t3-dia1",
+  "title": "Render Props & Portals Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Render Props & Portals\"]\n  Process --> End"
+}

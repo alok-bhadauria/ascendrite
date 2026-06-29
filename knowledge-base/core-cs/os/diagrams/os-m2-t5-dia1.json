@@ -1,0 +1,7 @@
+{
+  "topic_id": "os-m2-t5",
+  "diagram_id": "os-m2-t5-dia1",
+  "title": "Deadlock Mitigation Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Deadlock Mitigation\"]\n  Process --> End"
+}

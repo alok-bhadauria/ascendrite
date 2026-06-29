@@ -1,0 +1,6 @@
+{
+  "topic_id": "os-m5-t1",
+  "title": "Disk Scheduling",
+  "version": "1.0.0",
+  "content": "# OS Revision\n\n*   **Privilege Rings:** User mode (Ring 3) triggers hardware traps to run system calls in Kernel mode (Ring 0).\n*   **Context Switch:** Saves CPU registers, switches stacks, and changes page table mappings (invalidating the TLB).\n*   **Peterson's Lock:** Mutual exclusion algorithm for two threads using flags and turn variables.\n\n\n*   **Disk Scheduling Checklist:** Verify input ranges and clear caches.\n"
+}

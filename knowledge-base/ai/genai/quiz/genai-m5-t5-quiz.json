@@ -1,0 +1,17 @@
+{
+  "quiz_id": "genai-m5-t5-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Where are output guardrail checks executed in a production API serving pipeline?",
+      "options": [
+        "After token generation is complete but before the text is returned to the user.",
+        "Before the token embedding projection step.",
+        "During the weight quantization pass.",
+        "Only in the training loop."
+      ],
+      "correct_answer": "After token generation is complete but before the text is returned to the user.",
+      "explanation": "Output guardrails intercept generated tokens, evaluating them against safety policies before serving them to the client."
+    }
+  ]
+}

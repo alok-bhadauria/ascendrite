@@ -1,0 +1,6 @@
+{
+  "topic_id": "genai-m4-t3",
+  "title": "Direct Preference Optimization",
+  "version": "1.0.0",
+  "content": "# Interview Prep: DPO Math\n\n## Q1: Why does DPO simplify the MLOps pipeline compared to standard PPO?\n\n### Standard Answer\nStandard PPO requires maintaining four large models in memory simultaneously during training: the actor policy, reference policy, value network, and reward model. This creates high GPU memory demands. DPO requires only the actor and reference policy models, reducing hardware requirements and eliminating PPO hyperparameter tuning.\n"
+}

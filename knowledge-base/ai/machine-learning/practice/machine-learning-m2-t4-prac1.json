@@ -1,0 +1,7 @@
+{
+  "topic_id": "machine-learning-m2-t4",
+  "asset_id": "machine-learning-m2-t4-prac1",
+  "title": "Exploratory Data Analysis & Target Leakage",
+  "language": "python",
+  "code": "import pandas as pd\nfrom sklearn.linear_model import LinearRegression\n\n\ndef get_collinear_features(df: pd.DataFrame, threshold: float) -> list[str]:\n    \"\"\"Identifies and returns features that exceed the VIF threshold.\n\n    Implement:\n    1. Auxiliary linear regression of target feature against other columns.\n    2. Convert R^2 score into VIF rating.\n    3. Return list of feature labels that are greater than threshold.\n    \"\"\"\n    collinear_features = []\n\n    for col in df.columns:\n        predictors = [c for c in df.columns if c != col]\n        X = df[predictors]\n        y = df[col]\n\n        model = LinearRegression()\n        model.fit(X, y)\n        r2 = model.score(X, y)\n\n        if r2 < 1.0:\n            vif = 1.0 / (1.0 - r2)\n        else:\n            vif = float(\"inf\")\n\n        if vif > threshold:\n            collinear_features.append(col)\n\n    return collinear_features\n"
+}

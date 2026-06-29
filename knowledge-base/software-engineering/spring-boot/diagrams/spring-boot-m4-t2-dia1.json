@@ -1,0 +1,7 @@
+{
+  "topic_id": "spring-boot-m4-t2",
+  "diagram_id": "spring-boot-m4-t2-dia1",
+  "title": "Authentication vs Authorization Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Authentication vs Authorization\"]\n  Process --> End"
+}

@@ -1,0 +1,7 @@
+{
+  "topic_id": "reactjs-m3-t1",
+  "diagram_id": "reactjs-m3-t1-dia1",
+  "title": "Routing Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Routing\"]\n  Process --> End"
+}

@@ -1,0 +1,7 @@
+{
+  "topic_id": "spring-boot-m1-t5",
+  "diagram_id": "spring-boot-m1-t5-dia1",
+  "title": "Spring AOP Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Spring AOP\"]\n  Process --> End"
+}

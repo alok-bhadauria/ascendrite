@@ -1,0 +1,7 @@
+{
+  "topic_id": "ai-agents-m4-t3",
+  "asset_id": "ai-agents-m4-t3-prac1",
+  "title": "Agent Specialists & Segregation",
+  "language": "python",
+  "code": "def configure_specialist(role, system_prompt):\n    return {\"role\": role, \"prompt\": system_prompt}\n\ndef run_practice():\n    coder = configure_specialist('coder', 'Write clean code')\n    assert coder['role'] == 'coder'\n    assert 'clean' in coder['prompt']\n    print('[PASS] Specialist profiles configured successfully.')\n\nif __name__ == '__main__':\n    run_practice()\n"
+}

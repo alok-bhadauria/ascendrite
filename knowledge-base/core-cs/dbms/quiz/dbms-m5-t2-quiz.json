@@ -1,0 +1,17 @@
+{
+  "quiz_id": "dbms-m5-t2-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which of the following describes a key bottleneck related to Database Replication?",
+      "options": [
+        "Inefficient scaling of Master-Slave vs Multi-Master topologies.",
+        "Hardware is completely offline.",
+        "Lack of database files.",
+        "Syntax compilation errors."
+      ],
+      "correct_answer": "Inefficient scaling of Master-Slave vs Multi-Master topologies.",
+      "explanation": "The topic covers how Master-Slave vs Multi-Master topologies scales under concurrent workloads, which represents the primary bottlenecks."
+    }
+  ]
+}

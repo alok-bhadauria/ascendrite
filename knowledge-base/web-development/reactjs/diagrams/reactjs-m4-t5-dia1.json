@@ -1,0 +1,7 @@
+{
+  "topic_id": "reactjs-m4-t5",
+  "diagram_id": "reactjs-m4-t5-dia1",
+  "title": "Error Boundaries Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Error Boundaries\"]\n  Process --> End"
+}

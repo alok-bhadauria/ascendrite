@@ -1,0 +1,7 @@
+{
+  "topic_id": "nlp-m3-t1",
+  "asset_id": "nlp-m3-t1-ex1",
+  "title": "Word2Vec Framework",
+  "language": "python",
+  "code": "import numpy as np\n\ndef lookup_embedding(W_in, word_index):\n    return W_in[word_index]\n\nif __name__ == '__main__':\n    print('Embedding lookup initialized.')\n"
+}

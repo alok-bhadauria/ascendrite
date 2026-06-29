@@ -1,0 +1,7 @@
+{
+  "topic_id": "oop-m1-t3",
+  "diagram_id": "oop-m1-t3-dia1",
+  "title": "Encapsulation Boundaries Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Encapsulation Boundaries\"]\n  Process --> End"
+}

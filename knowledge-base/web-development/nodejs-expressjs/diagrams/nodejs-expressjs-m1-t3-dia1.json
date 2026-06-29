@@ -1,0 +1,7 @@
+{
+  "topic_id": "nodejs-expressjs-m1-t3",
+  "diagram_id": "nodejs-expressjs-m1-t3-dia1",
+  "title": "Thread Pool Blockages Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Thread Pool Blockages\"]\n  Process --> End"
+}

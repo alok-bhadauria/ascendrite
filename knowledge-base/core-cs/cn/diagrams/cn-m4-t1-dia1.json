@@ -1,0 +1,7 @@
+{
+  "topic_id": "cn-m4-t1",
+  "diagram_id": "cn-m4-t1-dia1",
+  "title": "DNS Internals Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process DNS Internals\"]\n  Process --> End"
+}

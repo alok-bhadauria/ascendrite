@@ -1,0 +1,7 @@
+{
+  "topic_id": "javascript-m1-t4",
+  "diagram_id": "javascript-m1-t4-dia1",
+  "title": "Hoisting & Temporal Dead Zone (TDZ) Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Hoisting & Temporal Dead Zone (TDZ)\"]\n  Process --> End"
+}

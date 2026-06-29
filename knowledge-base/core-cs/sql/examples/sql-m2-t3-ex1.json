@@ -1,0 +1,7 @@
+{
+  "topic_id": "sql-m2-t3",
+  "asset_id": "sql-m2-t3-ex1",
+  "title": "Value Functions",
+  "language": "python",
+  "code": "if __name__ == '__main__':\n    print('Example pass for Value Functions')\n"
+}

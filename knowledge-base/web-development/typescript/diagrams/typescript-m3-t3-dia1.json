@@ -1,0 +1,7 @@
+{
+  "topic_id": "typescript-m3-t3",
+  "diagram_id": "typescript-m3-t3-dia1",
+  "title": "Function Overloads Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Function Overloads\"]\n  Process --> End"
+}

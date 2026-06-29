@@ -1,0 +1,7 @@
+{
+  "topic_id": "javascript-m1-t5",
+  "diagram_id": "javascript-m1-t5-dia1",
+  "title": "Data Types & Coercion Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Data Types & Coercion\"]\n  Process --> End"
+}

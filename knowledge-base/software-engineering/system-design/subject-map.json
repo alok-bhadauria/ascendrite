@@ -1,0 +1,259 @@
+{
+  "subject_id": "system-design",
+  "name": "System Design",
+  "category": "software-engineering",
+  "modules": [
+    {
+      "name": "Module 1: Scalability, Capacity Math & Network Routing",
+      "topics": [
+        {
+          "id": "system-design-m1-t1",
+          "title": "System Design Fundamentals",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "system-design-m1-t2",
+          "title": "Capacity Estimation",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "system-design-m1-t3",
+          "title": "Network Routing",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "system-design-m1-t4",
+          "title": "Proxies & Gateways",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "system-design-m1-t5",
+          "title": "Microservices",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        }
+      ]
+    },
+    {
+      "name": "Module 2: Communication Models, Caching Topologies & Resiliency",
+      "topics": [
+        {
+          "id": "system-design-m2-t1",
+          "title": "Communication Models",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "system-design-m2-t2",
+          "title": "Caching Basics",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "system-design-m2-t3",
+          "title": "Caching Patterns",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "system-design-m2-t4",
+          "title": "Distributed Caching",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "system-design-m2-t5",
+          "title": "Reliability Patterns",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        }
+      ]
+    },
+    {
+      "name": "Module 3: Database Architectures, Scaling & Distributed Transactions",
+      "topics": [
+        {
+          "id": "system-design-m3-t1",
+          "title": "Database Design",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "system-design-m3-t2",
+          "title": "Concurrency Anomalies",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "system-design-m3-t3",
+          "title": "Database Indexing",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "system-design-m3-t4",
+          "title": "Database Scaling",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "system-design-m3-t5",
+          "title": "Distributed Transactions",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        }
+      ]
+    },
+    {
+      "name": "Module 4: Event-Driven Systems, Logging & Object Storage",
+      "topics": [
+        {
+          "id": "system-design-m4-t1",
+          "title": "Event-Driven Architecture",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "system-design-m4-t2",
+          "title": "Distributed Log",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "system-design-m4-t3",
+          "title": "Storage Systems",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "system-design-m4-t4",
+          "title": "Observability",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "system-design-m4-t5",
+          "title": "CQRS Pattern",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        }
+      ]
+    },
+    {
+      "name": "Module 5: Real-World Case Studies & Scaling AI Infrastructures",
+      "topics": [
+        {
+          "id": "system-design-m5-t1",
+          "title": "Case Study: URL Shortener design",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "system-design-m5-t2",
+          "title": "Case Study: Chat System",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "system-design-m5-t3",
+          "title": "Case Study: Video Streaming",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "system-design-m5-t4",
+          "title": "AI System Design",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        },
+        {
+          "id": "system-design-m5-t5",
+          "title": "AI Systems Scaling",
+          "difficulty": "Medium",
+          "estimated_hours": 5,
+          "importance": "High",
+          "prerequisites": [],
+          "depends_on": []
+        }
+      ]
+    }
+  ],
+  "version": "1.0.0",
+  "last_updated": "2026-06-29"
+}

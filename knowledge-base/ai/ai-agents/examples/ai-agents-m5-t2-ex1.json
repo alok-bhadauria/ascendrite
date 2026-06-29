@@ -1,0 +1,7 @@
+{
+  "topic_id": "ai-agents-m5-t2",
+  "asset_id": "ai-agents-m5-t2-ex1",
+  "title": "MCP Tool & Resource Declarations",
+  "language": "python",
+  "code": "def format_tool_schema(name, description, input_schema):\n    return {\n        \"name\": name,\n        \"description\": description,\n        \"inputSchema\": input_schema\n    }\n\nif __name__ == '__main__':\n    print('MCP schema formatter compiled.')\n"
+}

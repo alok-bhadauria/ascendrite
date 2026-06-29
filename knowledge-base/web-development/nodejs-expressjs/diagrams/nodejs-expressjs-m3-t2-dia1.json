@@ -1,0 +1,7 @@
+{
+  "topic_id": "nodejs-expressjs-m3-t2",
+  "diagram_id": "nodejs-expressjs-m3-t2-dia1",
+  "title": "Connection Pooling Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Connection Pooling\"]\n  Process --> End"
+}

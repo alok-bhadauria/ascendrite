@@ -1,0 +1,7 @@
+{
+  "topic_id": "cn-m3-t3",
+  "diagram_id": "cn-m3-t3-dia1",
+  "title": "Sliding Window Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Sliding Window\"]\n  Process --> End"
+}

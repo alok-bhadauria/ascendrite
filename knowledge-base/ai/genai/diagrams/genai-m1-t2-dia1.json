@@ -1,0 +1,7 @@
+{
+  "topic_id": "genai-m1-t2",
+  "diagram_id": "genai-m1-t2-dia1",
+  "title": "Attention Optimizations Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Attention Optimizations\"]\n  Process --> End"
+}

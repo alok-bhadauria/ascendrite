@@ -1,0 +1,7 @@
+{
+  "topic_id": "deep-learning-m5-t2",
+  "asset_id": "deep-learning-m5-t2-prac1",
+  "title": "Variational Autoencoders (VAE)",
+  "language": "python",
+  "code": "import numpy as np\n\n\ndef reparameterize_practice(\n    mu: np.ndarray, std: np.ndarray, eps: np.ndarray\n) -> np.ndarray:\n    \"\"\"Computes the latent code z using the reparameterization trick.\n\n    z = mu + std * eps\n    \"\"\"\n    z = mu + std * eps\n    return z\n\n\nif __name__ == \"__main__\":\n    print(\"--- Running VAE Reparameterization Practice ---\")\n\n    mu = np.array([[0.5], [-1.0]])\n    std = np.array([[0.1], [0.2]])\n    eps = np.array([[1.5], [-0.5]])\n\n    z = reparameterize_practice(mu, std, eps)\n    print(\"Calculated latent code:\\n\", z)\n\n    # z[0] = 0.5 + 0.1 * 1.5 = 0.5 + 0.15 = 0.65\n    # z[1] = -1.0 + 0.2 * -0.5 = -1.0 - 0.1 = -1.1\n    expected = np.array([[0.65], [-1.1]])\n    assert np.allclose(z, expected)\n    print(\"Reparameterization output matches manual calculation.\")\n\n    print(\"\\n  [PASS] Reparameterization practice verified successfully.\")\n"
+}

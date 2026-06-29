@@ -1,0 +1,17 @@
+{
+  "quiz_id": "ai-agents-m3-t2-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "What does a conditional edge evaluate to determine the next graph transition?",
+      "options": [
+        "The current shared global state.",
+        "The token generation speed.",
+        "The API key validation state.",
+        "The learning rate shape."
+      ],
+      "correct_answer": "The current shared global state.",
+      "explanation": "Conditional routing functions evaluate the shared global state to select the next node path dynamically."
+    }
+  ]
+}

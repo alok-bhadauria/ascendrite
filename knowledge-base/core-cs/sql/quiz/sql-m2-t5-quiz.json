@@ -1,0 +1,17 @@
+{
+  "quiz_id": "sql-m2-t5-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which of the following describes a key bottleneck related to Execution Mechanics?",
+      "options": [
+        "Inefficient scaling of Window functions execution phases.",
+        "Hardware is completely offline.",
+        "Lack of database files.",
+        "Syntax compilation errors."
+      ],
+      "correct_answer": "Inefficient scaling of Window functions execution phases.",
+      "explanation": "The topic covers how Window functions execution phases scales under concurrent workloads, which represents the primary bottlenecks."
+    }
+  ]
+}

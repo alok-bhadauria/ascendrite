@@ -1,0 +1,7 @@
+{
+  "topic_id": "cn-m2-t5",
+  "diagram_id": "cn-m2-t5-dia1",
+  "title": "Translation & Config Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Translation & Config\"]\n  Process --> End"
+}

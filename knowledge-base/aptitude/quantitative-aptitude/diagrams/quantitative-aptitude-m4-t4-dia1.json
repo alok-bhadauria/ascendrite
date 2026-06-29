@@ -1,0 +1,7 @@
+{
+  "topic_id": "quantitative-aptitude-m4-t4",
+  "diagram_id": "quantitative-aptitude-m4-t4-dia1",
+  "title": "Conditional Probability Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Conditional Probability\"]\n  Process --> End"
+}

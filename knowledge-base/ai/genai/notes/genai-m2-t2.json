@@ -1,0 +1,36 @@
+{
+  "topic_id": "genai-m2-t2",
+  "title": "Chain of Thought Prompting",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Medium",
+    "estimated_hours": 5,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Explain Chain of Thought (CoT) logical splits.",
+    "Formulate Self-Consistency majority voting calculations."
+  ],
+  "content_sections": [
+    {
+      "title": "Reasoning Token Allocation",
+      "content": "Chain of Thought (CoT) prompting forces models to output intermediate reasoning steps before generating a final answer. This allocates more compute to reasoning: because the model is autoregressive, each generated token allows the attention layers to compute more complex representations.",
+      "callouts": []
+    },
+    {
+      "title": "Self-Consistency Voting Metrics",
+      "content": "To resolve reasoning drift, **Self-Consistency** samples multiple generation paths ($N$ paths) using temperature sampling, and applies a majority vote to select the most common final answer:\n\n$$\\text{Answer}^* = \\arg\\max_{a} \\sum_{i=1}^N \\mathbb{I}\\left( \\text{extract}(path_i) = a \\right)$$\n\nThis mitigates single-path reasoning errors, improving accuracy on complex logic and mathematics tasks.",
+      "callouts": []
+    }
+  ],
+  "example_refs": [
+    "genai-m2-t2-ex1"
+  ],
+  "diagram_refs": [],
+  "practice_refs": [
+    "genai-m2-t2-prac1"
+  ],
+  "quiz_refs": [
+    "genai-m2-t2-quiz"
+  ]
+}

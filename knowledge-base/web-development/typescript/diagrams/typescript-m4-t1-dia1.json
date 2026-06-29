@@ -1,0 +1,7 @@
+{
+  "topic_id": "typescript-m4-t1",
+  "diagram_id": "typescript-m4-t1-dia1",
+  "title": "DOM Type Casts Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process DOM Type Casts\"]\n  Process --> End"
+}

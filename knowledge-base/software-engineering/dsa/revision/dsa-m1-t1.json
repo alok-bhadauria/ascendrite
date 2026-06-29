@@ -1,0 +1,6 @@
+{
+  "topic_id": "dsa-m1-t1",
+  "title": "Complexity Analysis",
+  "version": "1.0.0",
+  "content": "# DSA Revision\n\n*   **Floyd's Cycle Detector:** Meets at distance $A = C$ from head and meeting point back to entrance.\n*   **Heapify Time Complexity:** Bottom-up heapify is $O(N)$; top-down insertions is $O(N \\log N)$.\n*   **DP Space Reduction:** Compressing 2D state arrays to 1D by iterating weight capacity backwards.\n\n\n*   **Complexity Analysis Checklist:** Verify input ranges and clear caches.\n"
+}

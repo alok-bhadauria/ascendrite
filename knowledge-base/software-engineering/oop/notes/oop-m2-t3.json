@@ -1,0 +1,44 @@
+{
+  "topic_id": "oop-m2-t3",
+  "title": "SOLID Principles (Part 1)",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Hard",
+    "estimated_hours": 6,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Describe structural characteristics of SOLID Principles (Part 1).",
+    "Derive mathematical and programmatic bounds for Single Responsibility Principle (SRP) violations and refactoring, Open-Closed Principle (OCP) extension via polymorphic interfaces."
+  ],
+  "content_sections": [
+    {
+      "title": "SOLID Principles (Part 1)",
+      "content": "### Object-Oriented Programming Paradigms\nOOP structures software around classes and objects, prioritizing loose coupling and high cohesion.\n\n#### Dynamic Method Dispatch\nWhen invoking overridden methods, the compiler cannot determine the implementation at build time. The JVM resolves this at runtime via **vTables (Virtual Method Tables)**. Every class holds a vTable mapping method signatures to physical memory addresses. Method invocations fetch the address from the vTable of the active runtime object instance.\n\n#### Composition vs Inheritance\n*   **Inheritance (Is-A):** Couples subclasses to base classes, violating encapsulation (Fragile Base Class problem).\n*   **Composition (Has-A):** Delegates behavior to helper classes. Allows swapping behaviors dynamically at runtime and maintains class independence.\n\n#### SOLID Design Principles\n1.  **Single Responsibility:** A class should have only one reason to change.\n2.  **Open/Closed:** Open for extension, closed for modification.\n3.  **Liskov Substitution:** Subtypes must be substitutable for their base types.\n4.  **Interface Segregation:** Clients should not depend on interfaces they do not use.\n5.  **Dependency Inversion:** Depend on abstractions, not concretions.\n\n### Depth Analysis: SOLID Principles (Part 1)\nIn production configurations, we analyze how Single Responsibility Principle (SRP) violations and refactoring, Open-Closed Principle (OCP) extension via polymorphic interfaces affects performance parameters. We evaluate memory layouts and consensus thresholds.",
+      "callouts": [
+        {
+          "type": "Student Trap",
+          "title": "Common Trap in SOLID Principles (Part 1)",
+          "content": "A common mistake when analyzing SOLID Principles (Part 1) is ignoring latency bounds and boundary edge cases during concurrent executions."
+        },
+        {
+          "type": "Engineering Note",
+          "title": "Production Scaling for SOLID Principles (Part 1)",
+          "content": "Production servers implement strict resource isolation and cache alignments to prevent performance regressions when running SOLID Principles (Part 1) loops."
+        }
+      ]
+    }
+  ],
+  "example_refs": [
+    "oop-m2-t3-ex1"
+  ],
+  "diagram_refs": [
+    "oop-m2-t3-dia1"
+  ],
+  "practice_refs": [
+    "oop-m2-t3-prac1"
+  ],
+  "quiz_refs": [
+    "oop-m2-t3-quiz"
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "topic_id": "ai-agents-m1-t4",
+  "title": "Advanced Reasoning Paths",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Medium",
+    "estimated_hours": 5,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Explain Tree of Thoughts (ToT) search heuristics.",
+    "Formulate Self-Reflection correction loops."
+  ],
+  "content_sections": [
+    {
+      "title": "Tree of Thoughts (ToT)",
+      "content": "Standard decoding (like chain-of-thought) generates linear paths. For complex search problems (e.g. math proofs, puzzles), **Tree of Thoughts (ToT)** constructs a search tree where nodes represent intermediate thoughts. The model uses search heuristics (e.g. depth-first search or breadth-first search) to explore paths, evaluating node validity and backtracking when a path is deemed invalid.",
+      "callouts": []
+    },
+    {
+      "title": "Self-Reflection Loops",
+      "content": "To correct errors autonomously, agents implement **Self-Reflection**. Before returning a final answer, a reflection prompt evaluates the generated trace for logical flaws or constraint violations. If flaws are found, the model generates corrections, continuing the loop until the output passes validation.",
+      "callouts": []
+    }
+  ],
+  "example_refs": [
+    "ai-agents-m1-t4-ex1"
+  ],
+  "diagram_refs": [],
+  "practice_refs": [
+    "ai-agents-m1-t4-prac1"
+  ],
+  "quiz_refs": [
+    "ai-agents-m1-t4-quiz"
+  ]
+}

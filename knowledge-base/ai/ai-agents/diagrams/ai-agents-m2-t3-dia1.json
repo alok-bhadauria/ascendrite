@@ -1,0 +1,7 @@
+{
+  "topic_id": "ai-agents-m2-t3",
+  "diagram_id": "ai-agents-m2-t3-dia1",
+  "title": "Episodic & Semantic Long-Term Memory Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Episodic & Semantic Long-Term Memory\"]\n  Process --> End"
+}

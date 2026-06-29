@@ -1,0 +1,17 @@
+{
+  "quiz_id": "ai-agents-m4-t2-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "How do agents exchange information in a message-passing multi-agent system?",
+      "options": [
+        "By exchanging structured JSON messages containing sender, recipient, and payload parameters.",
+        "By modifying the model weights.",
+        "By printing values to stdout.",
+        "By running PPO loops."
+      ],
+      "correct_answer": "By exchanging structured JSON messages containing sender, recipient, and payload parameters.",
+      "explanation": "In message-passing architectures, agents collaborate by sending structured JSON message envelopes to each other."
+    }
+  ]
+}

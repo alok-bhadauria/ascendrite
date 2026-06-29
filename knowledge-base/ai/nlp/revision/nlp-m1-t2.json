@@ -1,0 +1,6 @@
+{
+  "topic_id": "nlp-m1-t2",
+  "title": "Statistical Tokenization",
+  "version": "1.0.0",
+  "content": "# Statistical Tokenization\n\n## 1. WordPiece Selection Score\n$$\\text{Score}(A, B) = \\frac{\\text{count}(AB)}{\\text{count}(A) \\times \\text{count}(B)}$$\n*   Prioritizes pairs that maximize pointwise mutual information rather than raw frequency.\n\n## 2. SentencePiece Lossless Detokenization\n$$\\text{detok}(\\text{tokens}) = \\text{replace}(\\text{join}(\\text{tokens}), \\text{'_'}, \\text{' '})$$\n*   Preserves spaces as explicit characters, enabling reversible detokenization.\n"
+}

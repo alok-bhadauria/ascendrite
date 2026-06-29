@@ -1,0 +1,7 @@
+{
+  "topic_id": "java-m1-t3",
+  "diagram_id": "java-m1-t3-dia1",
+  "title": "String Constant Pool (SCP) Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process String Constant Pool (SCP)\"]\n  Process --> End"
+}

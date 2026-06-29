@@ -1,0 +1,7 @@
+{
+  "topic_id": "dbms-m1-t3",
+  "diagram_id": "dbms-m1-t3-dia1",
+  "title": "B+ Tree Indexing Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process B+ Tree Indexing\"]\n  Process --> End"
+}

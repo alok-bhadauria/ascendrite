@@ -1,0 +1,7 @@
+{
+  "topic_id": "html-css-git-m1-t3",
+  "diagram_id": "html-css-git-m1-t3-dia1",
+  "title": "SEO Foundations Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process SEO Foundations\"]\n  Process --> End"
+}

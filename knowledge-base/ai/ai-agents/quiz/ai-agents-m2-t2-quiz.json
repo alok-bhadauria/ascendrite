@@ -1,0 +1,17 @@
+{
+  "quiz_id": "ai-agents-m2-t2-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "What is the role of summarization compression loops in long conversations?",
+      "options": [
+        "To condense historical chat messages into a single summary to save context space.",
+        "To remove stop words.",
+        "To convert text to embeddings.",
+        "To retrain the base model weights."
+      ],
+      "correct_answer": "To condense historical chat messages into a single summary to save context space.",
+      "explanation": "Summarization loops compress historical messages into a brief summary, preserving context while saving token space."
+    }
+  ]
+}

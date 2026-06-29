@@ -1,0 +1,6 @@
+{
+  "topic_id": "nlp-m3-t5",
+  "title": "Semantic Analogies",
+  "version": "1.0.0",
+  "content": "# Semantic Analogies\n\n## 1. 3CosAdd Formulation\n$$\\mathbf{w}^* = \\arg\\max_{\\mathbf{w}} \\operatorname{sim}(\\mathbf{w}, \\mathbf{v}_b - \\mathbf{v}_a + \\mathbf{v}_c)$$\n\n## 2. 3CosMul Formulation\n$$\\mathbf{w}^* = \\arg\\max_{\\mathbf{w}} \\frac{\\operatorname{sim}(\\mathbf{w}, \\mathbf{v}_b) \\times \\operatorname{sim}(\\mathbf{w}, \\mathbf{v}_c)}{\\operatorname{sim}(\\mathbf{w}, \\mathbf{v}_a) + \\epsilon}$$\n"
+}

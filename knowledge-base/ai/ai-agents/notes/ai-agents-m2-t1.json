@@ -1,0 +1,31 @@
+{
+  "topic_id": "ai-agents-m2-t1",
+  "title": "Short-Term Memory Systems",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Medium",
+    "estimated_hours": 5,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Explain conversational session buffers and message tracking.",
+    "Formulate window size truncations to fit context budgets."
+  ],
+  "content_sections": [
+    {
+      "title": "Conversational Session Buffers",
+      "content": "Short-term memory manages active session state. In chat systems, this is tracked as a chronological list of messages: `SystemMessage`, `HumanMessage`, and `AIMessage`. As the conversation progresses, the prompt grows. To prevent exceeding the context window, systems apply sliding window truncation: discarding the oldest messages once token count thresholds are breached.",
+      "callouts": []
+    }
+  ],
+  "example_refs": [
+    "ai-agents-m2-t1-ex1"
+  ],
+  "diagram_refs": [],
+  "practice_refs": [
+    "ai-agents-m2-t1-prac1"
+  ],
+  "quiz_refs": [
+    "ai-agents-m2-t1-quiz"
+  ]
+}

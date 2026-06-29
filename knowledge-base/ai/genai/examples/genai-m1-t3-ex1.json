@@ -1,0 +1,7 @@
+{
+  "topic_id": "genai-m1-t3",
+  "asset_id": "genai-m1-t3-ex1",
+  "title": "LLM Decoding Mathematics",
+  "language": "python",
+  "code": "import numpy as np\n\ndef temperature_softmax(logits, temperature=0.7):\n    scaled_logits = logits / temperature\n    exp_logits = np.exp(scaled_logits - np.max(scaled_logits))\n    return exp_logits / np.sum(exp_logits)\n\nif __name__ == '__main__':\n    print('Decoding soft-max methods initialized.')\n"
+}

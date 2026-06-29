@@ -1,0 +1,17 @@
+{
+  "quiz_id": "os-m2-t4-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "Which of the following describes a key bottleneck related to Deadlock Conditions?",
+      "options": [
+        "Inefficient scaling of Mutual exclusion, hold-and-wait, no-preemption, and circular wait conditions.",
+        "Hardware is completely offline.",
+        "Lack of database files.",
+        "Syntax compilation errors."
+      ],
+      "correct_answer": "Inefficient scaling of Mutual exclusion, hold-and-wait, no-preemption, and circular wait conditions.",
+      "explanation": "The topic covers how Mutual exclusion, hold-and-wait, no-preemption, and circular wait conditions scales under concurrent workloads, which represents the primary bottlenecks."
+    }
+  ]
+}

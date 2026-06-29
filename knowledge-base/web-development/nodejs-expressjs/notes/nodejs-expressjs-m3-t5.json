@@ -1,0 +1,44 @@
+{
+  "topic_id": "nodejs-expressjs-m3-t5",
+  "title": "Transactions Control",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Hard",
+    "estimated_hours": 6,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Describe structural characteristics of Transactions Control.",
+    "Derive mathematical and programmatic bounds for Session transactions in MongoDB, pg rollback blocks executions."
+  ],
+  "content_sections": [
+    {
+      "title": "Transactions Control",
+      "content": "### Event Loops, Threads & Express Middlewares\nNodeJS executes JavaScript on server runtimes using event-driven architectures.\n\n#### Libuv Event Loop Phases\nNodeJS runs single-threaded code using **libuv** event loop phases:\n1.  **Timers:** Executes expired `setTimeout` and `setInterval` callbacks.\n2.  **Pending Callbacks:** Executes deferred I/O callbacks.\n3.  **Poll:** Polls for new I/O events, blocking if call stack is empty.\n4.  **Check:** Executes `setImmediate` callbacks.\n5.  **Close Callbacks:** Executes socket/stream close handles.\n*Worker Pool:* libuv delegates blocking tasks (cryptography, file I/O, DNS lookups) to a background C++ thread pool (default 4 threads).\n\n#### Express Error Handler Middleware Arity\nStandard Express middleware has arity 3 `(req, res, next)`. An Express Error handler middleware MUST declare arity 4 `(err, req, res, next)`. Express uses reflection (`fn.length`) to identify error handlers; omitting `next` prevents Express from registering the function as an error handler, causing exceptions to bypass it.\n\n#### Mongoose Connection Pool\nDatabase connection establishment has high latency. Mongoose maintains a **Connection Pool** of active connections. Reusing active connections bypasses handshake latency, accelerating query executions.\n\n### Depth Analysis: Transactions Control\nIn production configurations, we analyze how Session transactions in MongoDB, pg rollback blocks executions affects performance parameters. We evaluate memory layouts and consensus thresholds.",
+      "callouts": [
+        {
+          "type": "Student Trap",
+          "title": "Common Trap in Transactions Control",
+          "content": "A common mistake when analyzing Transactions Control is ignoring latency bounds and boundary edge cases during concurrent executions."
+        },
+        {
+          "type": "Engineering Note",
+          "title": "Production Scaling for Transactions Control",
+          "content": "Production servers implement strict resource isolation and cache alignments to prevent performance regressions when running Transactions Control loops."
+        }
+      ]
+    }
+  ],
+  "example_refs": [
+    "nodejs-expressjs-m3-t5-ex1"
+  ],
+  "diagram_refs": [
+    "nodejs-expressjs-m3-t5-dia1"
+  ],
+  "practice_refs": [
+    "nodejs-expressjs-m3-t5-prac1"
+  ],
+  "quiz_refs": [
+    "nodejs-expressjs-m3-t5-quiz"
+  ]
+}

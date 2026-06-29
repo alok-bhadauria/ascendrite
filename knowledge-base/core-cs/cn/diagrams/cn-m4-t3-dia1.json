@@ -1,0 +1,7 @@
+{
+  "topic_id": "cn-m4-t3",
+  "diagram_id": "cn-m4-t3-dia1",
+  "title": "Mail & Files Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Mail & Files\"]\n  Process --> End"
+}

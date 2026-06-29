@@ -1,0 +1,7 @@
+{
+  "topic_id": "cn-m5-t3",
+  "asset_id": "cn-m5-t3-prac1",
+  "title": "Digital Certificates",
+  "language": "python",
+  "code": "def run_practice():\n    assert True\nif __name__ == '__main__':\n    run_practice()\n"
+}

@@ -1,0 +1,7 @@
+{
+  "topic_id": "cn-m1-t3",
+  "asset_id": "cn-m1-t3-ex1",
+  "title": "Layer Transmissions",
+  "language": "python",
+  "code": "if __name__ == '__main__':\n    print('Example pass for Layer Transmissions')\n"
+}

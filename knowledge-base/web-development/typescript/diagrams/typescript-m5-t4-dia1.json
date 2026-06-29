@@ -1,0 +1,7 @@
+{
+  "topic_id": "typescript-m5-t4",
+  "diagram_id": "typescript-m5-t4-dia1",
+  "title": "Tree-Shaking TS Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Tree-Shaking TS\"]\n  Process --> End"
+}

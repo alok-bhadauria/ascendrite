@@ -1,0 +1,7 @@
+{
+  "topic_id": "nextjs-m3-t2",
+  "diagram_id": "nextjs-m3-t2-dia1",
+  "title": "Form Mutations Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Form Mutations\"]\n  Process --> End"
+}

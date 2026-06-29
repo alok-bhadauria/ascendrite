@@ -1,0 +1,36 @@
+{
+  "topic_id": "genai-m3-t2",
+  "title": "QLoRA & Double Quantization",
+  "version": "1.0.0",
+  "topic_metadata": {
+    "difficulty": "Medium",
+    "estimated_hours": 5,
+    "importance": "High"
+  },
+  "learning_outcomes": [
+    "Explain NormalFloat4 (NF4) quantization formats.",
+    "Formulate Double Quantization memory savings calculations."
+  ],
+  "content_sections": [
+    {
+      "title": "NormalFloat4 (NF4) Quantization",
+      "content": "QLoRA reduces the memory footprint of fine-tuning by quantizing the base model weights to 4-bit representation while training 16-bit LoRA adapter parameters. It introduces **NormalFloat4 (NF4)**, an information-theoretically optimal quantization scheme for normally distributed data.\n\nNF4 maps base weights to 16 quantization bins containing equal probability areas under a standard normal distribution $\\mathcal{N}(0, 1)$. This preserves model capacity better than standard 4-bit integer formats.",
+      "callouts": []
+    },
+    {
+      "title": "Double Quantization Mechanics",
+      "content": "To compress memory usage further, QLoRA implements **Double Quantization (DQ)**. Quantization scale factors are typically stored as 32-bit floats for each block of 64 weights. Double Quantization treats these scale factors as inputs to a second 8-bit quantization pass, reducing scale storage overhead from 32 bits to 8 bits, saving an additional 0.37 bits per parameter.",
+      "callouts": []
+    }
+  ],
+  "example_refs": [
+    "genai-m3-t2-ex1"
+  ],
+  "diagram_refs": [],
+  "practice_refs": [
+    "genai-m3-t2-prac1"
+  ],
+  "quiz_refs": [
+    "genai-m3-t2-quiz"
+  ]
+}

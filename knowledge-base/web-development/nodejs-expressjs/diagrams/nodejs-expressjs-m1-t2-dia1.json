@@ -1,0 +1,7 @@
+{
+  "topic_id": "nodejs-expressjs-m1-t2",
+  "diagram_id": "nodejs-expressjs-m1-t2-dia1",
+  "title": "libuv Event Loop Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process libuv Event Loop\"]\n  Process --> End"
+}

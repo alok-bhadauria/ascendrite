@@ -1,0 +1,6 @@
+{
+  "topic_id": "ai-agents-m5-t4",
+  "title": "Production Safety Guardrails",
+  "version": "1.0.0",
+  "content": "# Interview Prep: Guardrails\n\n## Q1: How do you design a rate limiter to prevent recursive agent loops from consuming thousands of dollars in tokens?\n\n### Standard Answer\nWe implement a hard limit on both the max token count and the max iteration count per session. If the token count or iteration count exceeds the threshold, the session is terminated automatically, and an alert is logged.\n"
+}

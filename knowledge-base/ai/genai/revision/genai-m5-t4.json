@@ -1,0 +1,6 @@
+{
+  "topic_id": "genai-m5-t4",
+  "title": "Triton Inference Server",
+  "version": "1.0.0",
+  "content": "# Triton Inference Server\n\n*   **Dynamic Batching:** Groups independent requests into a single batch to maximize GPU memory bandwidth.\n*   **Concurrent Execution:** Runs multiple models (or model instances) in parallel on the same GPU.\n"
+}

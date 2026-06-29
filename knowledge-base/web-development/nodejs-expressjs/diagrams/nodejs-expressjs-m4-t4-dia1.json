@@ -1,0 +1,7 @@
+{
+  "topic_id": "nodejs-expressjs-m4-t4",
+  "diagram_id": "nodejs-expressjs-m4-t4-dia1",
+  "title": "Input Sanitization Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Input Sanitization\"]\n  Process --> End"
+}

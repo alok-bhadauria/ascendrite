@@ -1,0 +1,7 @@
+{
+  "topic_id": "system-design-m4-t1",
+  "diagram_id": "system-design-m4-t1-dia1",
+  "title": "Event-Driven Architecture Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Event-Driven Architecture\"]\n  Process --> End"
+}

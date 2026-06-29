@@ -1,0 +1,6 @@
+{
+  "topic_id": "nlp-m1-t1",
+  "title": "Text Corpora & Normalization",
+  "version": "1.0.0",
+  "content": "# Preprocessing, Normalization & Zipf's Law\n\n## 1. Zipf's Law Distribution\n$$\\ln f(r) = \\ln C - s \\ln r$$\n*   Natural language term frequencies follow a power-law distribution, creating high vocabulary sparsity.\n\n## 2. Vocabulary Growth (Heap's Law)\n$$V = k N^\\beta \\quad (0 < \\beta < 1)$$\n*   Vocabulary size grows sublinearly with the number of tokens in the corpus.\n\n## 3. Porter Stemmer Measure\n$$[C](VC)^m[V]$$\n*   **Consonants (C):** Sequences of consonants (including 'y' if preceded by a vowel).\n*   **Vowels (V):** Sequences of vowels (including 'y' if preceded by a consonant).\n*   *Rewrite rule conditions* depend on $m$. For example, step 1b replaces `eed` with `ee` only if $m > 0$.\n"
+}

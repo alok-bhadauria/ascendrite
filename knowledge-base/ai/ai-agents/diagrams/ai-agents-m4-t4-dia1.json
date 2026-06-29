@@ -1,0 +1,7 @@
+{
+  "topic_id": "ai-agents-m4-t4",
+  "diagram_id": "ai-agents-m4-t4-dia1",
+  "title": "Conflict Resolution & Consensus Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Conflict Resolution & Consensus\"]\n  Process --> End"
+}

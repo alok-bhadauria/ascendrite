@@ -1,0 +1,7 @@
+{
+  "topic_id": "genai-m3-t5",
+  "diagram_id": "genai-m3-t5-dia1",
+  "title": "Memory Optimization in Fine-Tuning Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Memory Optimization in Fine-Tuning\"]\n  Process --> End"
+}

@@ -1,0 +1,7 @@
+{
+  "topic_id": "dsa-m2-t3",
+  "diagram_id": "dsa-m2-t3-dia1",
+  "title": "Advanced Sorting Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process Advanced Sorting\"]\n  Process --> End"
+}

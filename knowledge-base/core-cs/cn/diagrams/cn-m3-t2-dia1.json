@@ -1,0 +1,7 @@
+{
+  "topic_id": "cn-m3-t2",
+  "diagram_id": "cn-m3-t2-dia1",
+  "title": "TCP Connection Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process TCP Connection\"]\n  Process --> End"
+}

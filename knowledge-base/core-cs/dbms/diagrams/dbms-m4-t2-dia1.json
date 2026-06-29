@@ -1,0 +1,7 @@
+{
+  "topic_id": "dbms-m4-t2",
+  "diagram_id": "dbms-m4-t2-dia1",
+  "title": "System Catalog Flow",
+  "type": "mermaid",
+  "code": "graph TD\n  Start --> Process[\"Process System Catalog\"]\n  Process --> End"
+}

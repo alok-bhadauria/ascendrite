@@ -1,0 +1,17 @@
+{
+  "quiz_id": "dsa-m5-t2-quiz",
+  "questions": [
+    {
+      "question_id": "q1",
+      "text": "What is the key optimization criteria for Greedy Algorithms?",
+      "options": [
+        "Minimizing complexity bounds.",
+        "Increasing CPU utilization.",
+        "Static heap allocation.",
+        "Syntax execution bypass."
+      ],
+      "correct_answer": "Minimizing complexity bounds.",
+      "explanation": "The primary goal in designing Greedy Algorithms is minimizing asymptotic and memory complexities."
+    }
+  ]
+}
