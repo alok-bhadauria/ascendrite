@@ -1,7 +1,7 @@
 from datetime import datetime, timezone
 from typing import List, Optional
 from pydantic import Field
-from platform.server.models.base import AuditModel, PyObjectId, MongoBaseModel
+from models.base import AuditModel, PyObjectId, MongoBaseModel
 
 class TopicProgress(MongoBaseModel):
     topic_id: str

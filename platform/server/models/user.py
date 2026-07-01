@@ -21,12 +21,11 @@ class UserPreferences(MongoBaseModel):
 class UserModel(AuditModel):
     id: Optional[PyObjectId] = Field(alias="_id", default=None)
     email: str
-    password_hash: Optional[str] = None  # Nullable to support direct Google OAuth SSO
+    password_hash: Optional[str] = None
     first_name: str
     last_name: str
     role: str = "Student"  # Student | Contributor | Admin
     
-    # Enriched Profile Fields
     profile_picture_url: Optional[str] = None
     date_of_birth: Optional[date] = None
     bio: str = ""
@@ -35,6 +34,5 @@ class UserModel(AuditModel):
     skills: List[str] = Field(default_factory=list)
     preferences: UserPreferences = Field(default_factory=UserPreferences)
     
-    # Third-Party Auth & State Flags
     google_id: Optional[str] = None
     is_active: bool = True

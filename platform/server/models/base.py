@@ -1,7 +1,7 @@
 from datetime import datetime, timezone
 from typing import Any, Optional
 from bson import ObjectId
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 from pydantic_core import core_schema
 
 class PyObjectId(str):
@@ -18,7 +18,7 @@ class PyObjectId(str):
                     core_schema.no_info_plain_validator_function(lambda x: ObjectId(x))
                 ])
             ]),
-            serialization=core_schema.plain_serializer_function_type(lambda x: str(x))
+            serialization=core_schema.plain_serializer_function_ser_schema(lambda x: str(x))
         )
 
 class MongoBaseModel(BaseModel):
@@ -29,6 +29,6 @@ class MongoBaseModel(BaseModel):
     )
 
 class AuditModel(MongoBaseModel):
-    created_at: datetime = datetime.now(timezone.utc)
-    updated_at: datetime = datetime.now(timezone.utc)
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     is_deleted: bool = False
