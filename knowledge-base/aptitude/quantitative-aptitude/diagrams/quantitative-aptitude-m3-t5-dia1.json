@@ -1,7 +1,7 @@
 {
   "topic_id": "quantitative-aptitude-m3-t5",
   "diagram_id": "quantitative-aptitude-m3-t5-dia1",
-  "title": "Linear Equations Flow",
+  "title": "Linear Equations Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Linear Equations\"]\n  Process --> End"
+  "code": "graph TD\n  ProductConsistency[\"Product Consistency: A x B = C\"]\n  AIncrease[\"A increases by x/y\"]\n  BDecrease[\"B decreases by x/(x+y)\"]\n  ProductConsistency --> AIncrease\n  ProductConsistency --> BDecrease"
 }

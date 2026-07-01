@@ -1,7 +1,7 @@
 {
   "topic_id": "quantitative-aptitude-m1-t4",
   "diagram_id": "quantitative-aptitude-m1-t4-dia1",
-  "title": "Progressions Flow",
+  "title": "Progressions Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Progressions\"]\n  Process --> End"
+  "code": "graph TD\n  ProductConsistency[\"Product Consistency: A x B = C\"]\n  AIncrease[\"A increases by x/y\"]\n  BDecrease[\"B decreases by x/(x+y)\"]\n  ProductConsistency --> AIncrease\n  ProductConsistency --> BDecrease"
 }

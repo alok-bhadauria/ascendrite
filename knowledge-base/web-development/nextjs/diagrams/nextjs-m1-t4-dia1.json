@@ -1,7 +1,7 @@
 {
   "topic_id": "nextjs-m1-t4",
   "diagram_id": "nextjs-m1-t4-dia1",
-  "title": "Data Fetching Flow",
+  "title": "Data Fetching Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Data Fetching\"]\n  Process --> End"
+  "code": "graph TD\n  StaticShell[\"Static Layout Shell (ISR/PPR)\"] --> DynamicHoles[\"Dynamic Components (Suspense)\"]"
 }

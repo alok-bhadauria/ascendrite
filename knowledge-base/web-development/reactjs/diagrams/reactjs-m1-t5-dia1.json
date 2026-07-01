@@ -1,7 +1,7 @@
 {
   "topic_id": "reactjs-m1-t5",
   "diagram_id": "reactjs-m1-t5-dia1",
-  "title": "Concurrent React Flow",
+  "title": "Concurrent React Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Concurrent React\"]\n  Process --> End"
+  "code": "graph TD\n  OldRoot[Old Root Node] --> NewRoot[New Root Node]\n  OldRoot -.->|Diffing Heuristics| NewRoot"
 }

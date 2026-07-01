@@ -1,7 +1,7 @@
 {
   "topic_id": "typescript-m2-t2",
   "diagram_id": "typescript-m2-t2-dia1",
-  "title": "Keyof Operator Flow",
+  "title": "Keyof Operator Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Keyof Operator\"]\n  Process --> End"
+  "code": "graph TD\n  Covariance[\"Covariance: Subclass preserves assignment direction\"]\n  Contravariance[\"Contravariance: Argument type reverses assignment direction\"]"
 }

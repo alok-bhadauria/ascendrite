@@ -1,7 +1,7 @@
 {
   "topic_id": "system-design-m1-t3",
   "diagram_id": "system-design-m1-t3-dia1",
-  "title": "Network Routing Flow",
+  "title": "Network Routing Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Network Routing\"]\n  Process --> End"
+  "code": "graph TD\n  Closed -->|Failures > Threshold| Open\n  Open -->|Sleep Timeout| Half-Open\n  Half-Open -->|Success| Closed\n  Half-Open -->|Failure| Open"
 }

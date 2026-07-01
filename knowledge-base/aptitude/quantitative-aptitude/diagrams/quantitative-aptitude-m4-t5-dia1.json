@@ -1,7 +1,7 @@
 {
   "topic_id": "quantitative-aptitude-m4-t5",
   "diagram_id": "quantitative-aptitude-m4-t5-dia1",
-  "title": "Geometry & Mensuration Flow",
+  "title": "Geometry & Mensuration Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Geometry & Mensuration\"]\n  Process --> End"
+  "code": "graph TD\n  ProductConsistency[\"Product Consistency: A x B = C\"]\n  AIncrease[\"A increases by x/y\"]\n  BDecrease[\"B decreases by x/(x+y)\"]\n  ProductConsistency --> AIncrease\n  ProductConsistency --> BDecrease"
 }

@@ -1,7 +1,7 @@
 {
   "topic_id": "typescript-m5-t5",
   "diagram_id": "typescript-m5-t5-dia1",
-  "title": "TS Utility Configurations Flow",
+  "title": "TS Utility Configurations Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process TS Utility Configurations\"]\n  Process --> End"
+  "code": "graph TD\n  Covariance[\"Covariance: Subclass preserves assignment direction\"]\n  Contravariance[\"Contravariance: Argument type reverses assignment direction\"]"
 }

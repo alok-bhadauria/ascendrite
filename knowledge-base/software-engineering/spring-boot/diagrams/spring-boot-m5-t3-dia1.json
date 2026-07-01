@@ -1,7 +1,7 @@
 {
   "topic_id": "spring-boot-m5-t3",
   "diagram_id": "spring-boot-m5-t3-dia1",
-  "title": "Configuration & Logging Flow",
+  "title": "Configuration & Logging Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Configuration & Logging\"]\n  Process --> End"
+  "code": "graph TD\n  Client --> Proxy[\"Spring Transaction Proxy\"]\n  Proxy --> Target[\"Target Bean Method\"]"
 }

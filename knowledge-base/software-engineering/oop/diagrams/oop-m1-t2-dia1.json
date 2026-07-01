@@ -1,7 +1,7 @@
 {
   "topic_id": "oop-m1-t2",
   "diagram_id": "oop-m1-t2-dia1",
-  "title": "Abstraction Flow",
+  "title": "Abstraction Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Abstraction\"]\n  Process --> End"
+  "code": "classDiagram\n  class Animal {\n    +makeSound()\n  }\n  class Dog {\n    +makeSound()\n  }\n  Animal <|-- Dog"
 }

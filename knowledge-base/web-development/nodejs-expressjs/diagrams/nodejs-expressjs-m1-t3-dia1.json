@@ -1,7 +1,7 @@
 {
   "topic_id": "nodejs-expressjs-m1-t3",
   "diagram_id": "nodejs-expressjs-m1-t3-dia1",
-  "title": "Thread Pool Blockages Flow",
+  "title": "Thread Pool Blockages Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Thread Pool Blockages\"]\n  Process --> End"
+  "code": "graph LR\n  Express[\"Express Router\"] --> ErrHandler[\"Error Middleware (Arity 4)\"]\n  Express --> Standard[\"Standard Middleware (Arity 3)\"]"
 }

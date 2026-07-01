@@ -1,7 +1,7 @@
 {
   "topic_id": "sql-m3-t5",
   "diagram_id": "sql-m3-t5-dia1",
-  "title": "Temporary Storage Flow",
+  "title": "Temporary Storage Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Temporary Storage\"]\n  Process --> End"
+  "code": "graph TD\n  HashJoin[\"Hash Join\"] --> IndexScanA[\"Index Scan (A)\"]\n  HashJoin --> TableScanB[\"Table Scan (B)\"]"
 }

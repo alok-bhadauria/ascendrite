@@ -1,7 +1,7 @@
 {
   "topic_id": "java-m5-t1",
   "diagram_id": "java-m5-t1-dia1",
-  "title": "Concurrency Flow",
+  "title": "Concurrency Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Concurrency\"]\n  Process --> End"
+  "code": "graph TD\n  Heap[JVM Heap] --> Young[Young Gen: Eden, S0, S1]\n  Heap --> Old[Old/Tenured Gen]\n  JVM --> Metaspace[Metaspace (Native memory)]"
 }

@@ -1,7 +1,7 @@
 {
   "topic_id": "system-design-m3-t2",
   "diagram_id": "system-design-m3-t2-dia1",
-  "title": "Concurrency Anomalies Flow",
+  "title": "Concurrency Anomalies Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Concurrency Anomalies\"]\n  Process --> End"
+  "code": "graph TD\n  Closed -->|Failures > Threshold| Open\n  Open -->|Sleep Timeout| Half-Open\n  Half-Open -->|Success| Closed\n  Half-Open -->|Failure| Open"
 }

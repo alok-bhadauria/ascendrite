@@ -1,7 +1,7 @@
 {
   "topic_id": "spring-boot-m2-t1",
   "diagram_id": "spring-boot-m2-t1-dia1",
-  "title": "REST Architecture Flow",
+  "title": "REST Architecture Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process REST Architecture\"]\n  Process --> End"
+  "code": "graph TD\n  Client --> Proxy[\"Spring Transaction Proxy\"]\n  Proxy --> Target[\"Target Bean Method\"]"
 }

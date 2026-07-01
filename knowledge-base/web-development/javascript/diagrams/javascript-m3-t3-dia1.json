@@ -1,7 +1,7 @@
 {
   "topic_id": "javascript-m3-t3",
   "diagram_id": "javascript-m3-t3-dia1",
-  "title": "Async/Await Flow",
+  "title": "Async/Await Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Async/Await\"]\n  Process --> End"
+  "code": "graph TD\n  obj[\"object\"] -->|__proto__| proto1[\"prototype 1\"]\n  proto1 -->|__proto__| proto2[\"prototype 2\"]\n  proto2 -->|__proto__| nullObj[\"null\"]"
 }

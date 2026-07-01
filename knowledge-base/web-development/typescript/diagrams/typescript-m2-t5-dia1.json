@@ -1,7 +1,7 @@
 {
   "topic_id": "typescript-m2-t5",
   "diagram_id": "typescript-m2-t5-dia1",
-  "title": "Mapped Types Modifiers Flow",
+  "title": "Mapped Types Modifiers Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Mapped Types Modifiers\"]\n  Process --> End"
+  "code": "graph TD\n  Covariance[\"Covariance: Subclass preserves assignment direction\"]\n  Contravariance[\"Contravariance: Argument type reverses assignment direction\"]"
 }

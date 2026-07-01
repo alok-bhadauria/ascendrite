@@ -1,7 +1,7 @@
 {
   "topic_id": "java-m5-t3",
   "diagram_id": "java-m5-t3-dia1",
-  "title": "Synchronization & Locks Flow",
+  "title": "Synchronization & Locks Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Synchronization & Locks\"]\n  Process --> End"
+  "code": "graph TD\n  Heap[JVM Heap] --> Young[Young Gen: Eden, S0, S1]\n  Heap --> Old[Old/Tenured Gen]\n  JVM --> Metaspace[Metaspace (Native memory)]"
 }

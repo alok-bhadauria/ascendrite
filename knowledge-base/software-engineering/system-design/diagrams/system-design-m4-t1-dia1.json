@@ -1,7 +1,7 @@
 {
   "topic_id": "system-design-m4-t1",
   "diagram_id": "system-design-m4-t1-dia1",
-  "title": "Event-Driven Architecture Flow",
+  "title": "Event-Driven Architecture Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Event-Driven Architecture\"]\n  Process --> End"
+  "code": "graph TD\n  Closed -->|Failures > Threshold| Open\n  Open -->|Sleep Timeout| Half-Open\n  Half-Open -->|Success| Closed\n  Half-Open -->|Failure| Open"
 }

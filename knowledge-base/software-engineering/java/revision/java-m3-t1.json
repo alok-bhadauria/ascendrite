@@ -2,5 +2,5 @@
   "topic_id": "java-m3-t1",
   "title": "Throwable Hierarchy",
   "version": "1.0.0",
-  "content": "# Java Revision\n\n*   **Escape Analysis:** C2 JIT optimization allocating local objects on the Stack instead of the Heap.\n*   **Generics PECS:** Producer Extends (read-only); Consumer Super (write-only).\n*   **ZGC:** Low-latency collector using colored reference pointers and load barriers to keep pauses under 10ms.\n\n\n*   **Throwable Hierarchy Checklist:** Verify input ranges and clear caches.\n"
+  "content": "# Java Revision\n\n*   **Escape Analysis:** C2 JIT optimization allocating local objects on the Stack instead of the Heap.\n*   **Generics PECS:** Producer Extends (read-only); Consumer Super (write-only).\n*   **ZGC:** Low-latency collector using colored reference pointers and load barriers to keep pauses under 10ms.\n\n\n*   **Throwable Hierarchy Complexity Reference:** Time $O(N)$, Space $O(1)$ auxiliary."
 }

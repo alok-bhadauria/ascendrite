@@ -2,5 +2,5 @@
   "topic_id": "nodejs-expressjs-m2-t5",
   "title": "Router Decoupling",
   "version": "1.0.0",
-  "content": "# NodeJS-ExpressJS Revision\n\n*   **libuv event loop:** Timers $\\to$ Pending $\\to$ Poll $\\to$ Check $\\to$ Close. CPU-heavy tasks run in C++ thread pool.\n*   **Error Middleware Arity:** Must have 4 arguments `(err, req, res, next)`. Checked by Express via reflection.\n*   **Connection Pool:** Caches active database connections to avoid TCP handshakes on queries.\n\n\n*   **Router Decoupling Checklist:** Verify input ranges and clear caches.\n"
+  "content": "# NodeJS-ExpressJS Revision\n\n*   **libuv event loop:** Timers $\\to$ Pending $\\to$ Poll $\\to$ Check $\\to$ Close. CPU-heavy tasks run in C++ thread pool.\n*   **Error Middleware Arity:** Must have 4 arguments `(err, req, res, next)`. Checked by Express via reflection.\n*   **Connection Pool:** Caches active database connections to avoid TCP handshakes on queries.\n\n\n*   **Router Decoupling Complexity Reference:** Time $O(N)$, Space $O(1)$ auxiliary."
 }

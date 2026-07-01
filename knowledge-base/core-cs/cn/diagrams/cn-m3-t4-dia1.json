@@ -1,7 +1,7 @@
 {
   "topic_id": "cn-m3-t4",
   "diagram_id": "cn-m3-t4-dia1",
-  "title": "TCP Congestion Control Flow",
+  "title": "TCP Congestion Control Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process TCP Congestion Control\"]\n  Process --> End"
+  "code": "sequenceDiagram\n  Client->>Server: ClientHello + Key Share\n  Server-->>Client: ServerHello + Key Share + Finished\n  Client->>Server: Finished (Secure Connection)"
 }

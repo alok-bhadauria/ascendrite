@@ -14,7 +14,7 @@
   "content_sections": [
     {
       "title": "Clocks & Calendars",
-      "content": "### Arithmetic, Totients & Combinatorics\nQuantitative Aptitude focuses on number relationships, algebraic systems, and probability calculations.\n\n#### Euler's Totient Theorem\nFor coprimes $a$ and $n$, the remainder of $a^{\\phi(n)} \\pmod n$ is $1$, where $\\phi(n)$ is Euler's totient (count of numbers coprime to $n$ up to $n$):\n$$\\phi(n) = n \\prod_{p \\mid n} \\left(1 - \\frac{1}{p}\\right)$$\nFor primes, $\\phi(p) = p - 1$, yielding Fermat's Little Theorem: $a^{p-1} \\equiv 1 \\pmod p$.\n\n#### Product Consistency Constraint\nIf $A \\times B = C$ and $C$ remains constant, a fractional increase in $A$ by $x/y$ requires a fractional decrease in $B$ by $\\frac{x}{x + y}$ to maintain product consistency.\n\n#### Stars-and-Bars Partitions\nTo distribute $n$ identical objects among $k$ distinct bins:\n*   *Empty bins allowed:* $\\binom{n + k - 1}{k - 1}$ partitions.\n*   *No empty bins allowed:* $\\binom{n - 1}{k - 1}$ partitions.\n\n### Depth Analysis: Clocks & Calendars\nIn production configurations, we analyze how Hand angle formulas, Calendar leap years cycles, and odd days modular arithmetic affects performance parameters. We evaluate memory layouts and consensus thresholds.",
+      "content": "### Arithmetic, Totients & Combinatorics\nQuantitative Aptitude focuses on number relationships, algebraic systems, and probability calculations.\n\n#### Euler's Totient Theorem\nFor coprimes $a$ and $n$, the remainder of $a^{\\phi(n)} \\pmod n$ is $1$, where $\\phi(n)$ is Euler's totient (count of numbers coprime to $n$ up to $n$):\n$$\\phi(n) = n \\prod_{p \\mid n} \\left(1 - \\frac{1}{p}\\right)$$\nFor primes, $\\phi(p) = p - 1$, yielding Fermat's Little Theorem: $a^{p-1} \\equiv 1 \\pmod p$.\n\n#### Product Consistency Constraint\nIf $A \\times B = C$ and $C$ remains constant, a fractional increase in $A$ by $x/y$ requires a fractional decrease in $B$ by $\\frac{x}{x + y}$ to maintain product consistency.\n\n#### Stars-and-Bars Partitions\nTo distribute $n$ identical objects among $k$ distinct bins:\n*   *Empty bins allowed:* $\\binom{n + k - 1}{k - 1}$ partitions.\n*   *No empty bins allowed:* $\\binom{n - 1}{k - 1}$ partitions.\n\n### Asymptotic and Spatial Complexity Analysis\nWe summarize the computational characteristics for Clocks & Calendars implementations in the following reference matrix:\n\n| Process/Operation | Worst-Case Time | Average-Case Time | Space Complexity |\n| :--- | :--- | :--- | :--- |\n| Core Logic Execution | $O(N)$ | $O(N)$ | $O(1)$ |\n| Memory Operations | $O(N)$ | $O(1)$ | $O(N)$ |\n\n### Interactive Virtualization Configuration\nTo aid conceptual comprehension, the web client maps this topic to the `euler-totient-calculator` simulation runtime, drawing state vectors from the following callout schema.",
       "callouts": [
         {
           "type": "Student Trap",
@@ -23,8 +23,8 @@
         },
         {
           "type": "Engineering Note",
-          "title": "Production Scaling for Clocks & Calendars",
-          "content": "Production servers implement strict resource isolation and cache alignments to prevent performance regressions when running Clocks & Calendars loops."
+          "title": "Visualizer Configuration Model",
+          "content": "{\"visualizer_type\": \"euler-totient-calculator\", \"interactive\": true, \"schema\": {\"input_n\": 10, \"totient_value\": 4}}"
         }
       ]
     }

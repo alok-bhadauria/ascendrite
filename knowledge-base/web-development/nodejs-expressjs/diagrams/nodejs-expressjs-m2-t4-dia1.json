@@ -1,7 +1,7 @@
 {
   "topic_id": "nodejs-expressjs-m2-t4",
   "diagram_id": "nodejs-expressjs-m2-t4-dia1",
-  "title": "Body Parsers Flow",
+  "title": "Body Parsers Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Body Parsers\"]\n  Process --> End"
+  "code": "graph LR\n  Express[\"Express Router\"] --> ErrHandler[\"Error Middleware (Arity 4)\"]\n  Express --> Standard[\"Standard Middleware (Arity 3)\"]"
 }

@@ -1,7 +1,7 @@
 {
   "topic_id": "dsa-m5-t2",
   "diagram_id": "dsa-m5-t2-dia1",
-  "title": "Greedy Algorithms Flow",
+  "title": "Greedy Algorithms Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Greedy Algorithms\"]\n  Process --> End"
+  "code": "graph TD\n  A((Root)) --> B((Left))\n  A --> C((Right))"
 }

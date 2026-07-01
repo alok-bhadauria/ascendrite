@@ -1,7 +1,7 @@
 {
   "topic_id": "cn-m1-t1",
   "diagram_id": "cn-m1-t1-dia1",
-  "title": "Networking Architectures Flow",
+  "title": "Networking Architectures Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Networking Architectures\"]\n  Process --> End"
+  "code": "sequenceDiagram\n  Client->>Server: ClientHello + Key Share\n  Server-->>Client: ServerHello + Key Share + Finished\n  Client->>Server: Finished (Secure Connection)"
 }

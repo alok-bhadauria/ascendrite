@@ -1,7 +1,7 @@
 {
   "topic_id": "cn-m1-t5",
   "diagram_id": "cn-m1-t5-dia1",
-  "title": "Ethernet Switches Flow",
+  "title": "Ethernet Switches Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Ethernet Switches\"]\n  Process --> End"
+  "code": "sequenceDiagram\n  Client->>Server: ClientHello + Key Share\n  Server-->>Client: ServerHello + Key Share + Finished\n  Client->>Server: Finished (Secure Connection)"
 }

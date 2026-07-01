@@ -1,7 +1,7 @@
 {
   "topic_id": "spring-boot-m1-t2",
   "diagram_id": "spring-boot-m1-t2-dia1",
-  "title": "Spring Core IoC & Dependency Injection Flow",
+  "title": "Spring Core IoC & Dependency Injection Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Spring Core IoC & Dependency Injection\"]\n  Process --> End"
+  "code": "graph TD\n  Client --> Proxy[\"Spring Transaction Proxy\"]\n  Proxy --> Target[\"Target Bean Method\"]"
 }

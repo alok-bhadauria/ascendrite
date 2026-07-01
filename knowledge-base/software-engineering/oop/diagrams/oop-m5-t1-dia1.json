@@ -1,7 +1,7 @@
 {
   "topic_id": "oop-m5-t1",
   "diagram_id": "oop-m5-t1-dia1",
-  "title": "Code Smells & Refactoring Flow",
+  "title": "Code Smells & Refactoring Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Code Smells & Refactoring\"]\n  Process --> End"
+  "code": "classDiagram\n  class Animal {\n    +makeSound()\n  }\n  class Dog {\n    +makeSound()\n  }\n  Animal <|-- Dog"
 }

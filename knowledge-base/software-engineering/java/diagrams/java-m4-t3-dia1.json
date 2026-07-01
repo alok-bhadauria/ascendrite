@@ -1,7 +1,7 @@
 {
   "topic_id": "java-m4-t3",
   "diagram_id": "java-m4-t3-dia1",
-  "title": "Method References Flow",
+  "title": "Method References Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Method References\"]\n  Process --> End"
+  "code": "graph TD\n  Heap[JVM Heap] --> Young[Young Gen: Eden, S0, S1]\n  Heap --> Old[Old/Tenured Gen]\n  JVM --> Metaspace[Metaspace (Native memory)]"
 }

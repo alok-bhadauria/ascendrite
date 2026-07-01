@@ -1,7 +1,7 @@
 {
   "topic_id": "typescript-m2-t1",
   "diagram_id": "typescript-m2-t1-dia1",
-  "title": "Generics Flow",
+  "title": "Generics Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Generics\"]\n  Process --> End"
+  "code": "graph TD\n  Covariance[\"Covariance: Subclass preserves assignment direction\"]\n  Contravariance[\"Contravariance: Argument type reverses assignment direction\"]"
 }

@@ -1,7 +1,7 @@
 {
   "topic_id": "reactjs-m2-t5",
   "diagram_id": "reactjs-m2-t5-dia1",
-  "title": "Custom Hooks Flow",
+  "title": "Custom Hooks Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Custom Hooks\"]\n  Process --> End"
+  "code": "graph TD\n  OldRoot[Old Root Node] --> NewRoot[New Root Node]\n  OldRoot -.->|Diffing Heuristics| NewRoot"
 }

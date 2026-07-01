@@ -1,7 +1,7 @@
 {
   "topic_id": "cn-m1-t2",
   "diagram_id": "cn-m1-t2-dia1",
-  "title": "Physical Signalings Flow",
+  "title": "Physical Signalings Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Physical Signalings\"]\n  Process --> End"
+  "code": "sequenceDiagram\n  Client->>Server: ClientHello + Key Share\n  Server-->>Client: ServerHello + Key Share + Finished\n  Client->>Server: Finished (Secure Connection)"
 }

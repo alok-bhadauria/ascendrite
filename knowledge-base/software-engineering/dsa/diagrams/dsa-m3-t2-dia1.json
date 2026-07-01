@@ -1,7 +1,7 @@
 {
   "topic_id": "dsa-m3-t2",
   "diagram_id": "dsa-m3-t2-dia1",
-  "title": "Advanced Stacks Flow",
+  "title": "Advanced Stacks Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Advanced Stacks\"]\n  Process --> End"
+  "code": "graph TD\n  A((Root)) --> B((Left))\n  A --> C((Right))"
 }

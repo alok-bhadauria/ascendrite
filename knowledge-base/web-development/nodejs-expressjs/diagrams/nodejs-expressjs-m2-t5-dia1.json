@@ -1,7 +1,7 @@
 {
   "topic_id": "nodejs-expressjs-m2-t5",
   "diagram_id": "nodejs-expressjs-m2-t5-dia1",
-  "title": "Router Decoupling Flow",
+  "title": "Router Decoupling Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Router Decoupling\"]\n  Process --> End"
+  "code": "graph LR\n  Express[\"Express Router\"] --> ErrHandler[\"Error Middleware (Arity 4)\"]\n  Express --> Standard[\"Standard Middleware (Arity 3)\"]"
 }

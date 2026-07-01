@@ -1,7 +1,7 @@
 {
   "topic_id": "dsa-m4-t2",
   "diagram_id": "dsa-m4-t2-dia1",
-  "title": "Graphs Representation Flow",
+  "title": "Graphs Representation Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Graphs Representation\"]\n  Process --> End"
+  "code": "graph TD\n  A((Root)) --> B((Left))\n  A --> C((Right))"
 }

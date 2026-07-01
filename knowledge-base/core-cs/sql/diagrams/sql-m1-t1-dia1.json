@@ -1,7 +1,7 @@
 {
   "topic_id": "sql-m1-t1",
   "diagram_id": "sql-m1-t1-dia1",
-  "title": "SQL Block Execution Order Flow",
+  "title": "SQL Block Execution Order Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process SQL Block Execution Order\"]\n  Process --> End"
+  "code": "graph TD\n  HashJoin[\"Hash Join\"] --> IndexScanA[\"Index Scan (A)\"]\n  HashJoin --> TableScanB[\"Table Scan (B)\"]"
 }

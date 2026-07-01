@@ -1,7 +1,7 @@
 {
   "topic_id": "reactjs-m4-t3",
   "diagram_id": "reactjs-m4-t3-dia1",
-  "title": "Render Props & Portals Flow",
+  "title": "Render Props & Portals Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Render Props & Portals\"]\n  Process --> End"
+  "code": "graph TD\n  OldRoot[Old Root Node] --> NewRoot[New Root Node]\n  OldRoot -.->|Diffing Heuristics| NewRoot"
 }

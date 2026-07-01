@@ -1,7 +1,7 @@
 {
   "topic_id": "verbal-aptitude-m5-t1",
   "diagram_id": "verbal-aptitude-m5-t1-dia1",
-  "title": "Syllogisms Flow",
+  "title": "Syllogisms Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Syllogisms\"]\n  Process --> End"
+  "code": "graph TD\n  Modifier[\"Modifying Phrase\"] -->|Incorrect association| NearestSubject[\"Incorrect Subject\"]\n  Modifier -->|Correct alignment| ActiveSubject[\"Active Subject\"]"
 }

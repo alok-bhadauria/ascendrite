@@ -1,7 +1,7 @@
 {
   "topic_id": "css-frameworks-m5-t3",
   "diagram_id": "css-frameworks-m5-t3-dia1",
-  "title": "Performance Audits Flow",
+  "title": "Performance Audits Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Performance Audits\"]\n  Process --> End"
+  "code": "graph LR\n  Scanner[\"Static Source Scanner\"] --> Matcher[\"Regex Match Engine\"]\n  Matcher --> Purger[\"Purge post-CSS utility bundle\"]"
 }

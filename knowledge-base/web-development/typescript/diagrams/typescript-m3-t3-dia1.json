@@ -1,7 +1,7 @@
 {
   "topic_id": "typescript-m3-t3",
   "diagram_id": "typescript-m3-t3-dia1",
-  "title": "Function Overloads Flow",
+  "title": "Function Overloads Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Function Overloads\"]\n  Process --> End"
+  "code": "graph TD\n  Covariance[\"Covariance: Subclass preserves assignment direction\"]\n  Contravariance[\"Contravariance: Argument type reverses assignment direction\"]"
 }

@@ -1,7 +1,7 @@
 {
   "topic_id": "cn-m4-t3",
   "diagram_id": "cn-m4-t3-dia1",
-  "title": "Mail & Files Flow",
+  "title": "Mail & Files Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Mail & Files\"]\n  Process --> End"
+  "code": "sequenceDiagram\n  Client->>Server: ClientHello + Key Share\n  Server-->>Client: ServerHello + Key Share + Finished\n  Client->>Server: Finished (Secure Connection)"
 }

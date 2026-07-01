@@ -1,7 +1,7 @@
 {
   "topic_id": "java-m3-t4",
   "diagram_id": "java-m3-t4-dia1",
-  "title": "Java I/O Streams Flow",
+  "title": "Java I/O Streams Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Java I/O Streams\"]\n  Process --> End"
+  "code": "graph TD\n  Heap[JVM Heap] --> Young[Young Gen: Eden, S0, S1]\n  Heap --> Old[Old/Tenured Gen]\n  JVM --> Metaspace[Metaspace (Native memory)]"
 }

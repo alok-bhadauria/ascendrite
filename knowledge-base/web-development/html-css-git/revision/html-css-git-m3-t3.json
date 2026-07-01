@@ -2,5 +2,5 @@
   "topic_id": "html-css-git-m3-t3",
   "title": "Transitions & Animations",
   "version": "1.0.0",
-  "content": "# HTML-CSS-Git Revision\n\n*   **CSS Specificity:** Inline (1000) > ID (100) > Class (10) > Element (1). \n*   **Git Objects:** Blobs (file content) $\\to$ Trees (directories) $\\to$ Commits (history metadata).\n*   **Merges:** Fast-Forward (moves pointer); Three-Way (creates merge commit for diverging branches).\n\n\n*   **Transitions & Animations Checklist:** Verify input ranges and clear caches.\n"
+  "content": "# HTML-CSS-Git Revision\n\n*   **CSS Specificity:** Inline (1000) > ID (100) > Class (10) > Element (1). \n*   **Git Objects:** Blobs (file content) $\\to$ Trees (directories) $\\to$ Commits (history metadata).\n*   **Merges:** Fast-Forward (moves pointer); Three-Way (creates merge commit for diverging branches).\n\n\n*   **Transitions & Animations Complexity Reference:** Time $O(N)$, Space $O(1)$ auxiliary."
 }

@@ -1,7 +1,7 @@
 {
   "topic_id": "oop-m2-t5",
   "diagram_id": "oop-m2-t5-dia1",
-  "title": "Design Idioms Flow",
+  "title": "Design Idioms Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Design Idioms\"]\n  Process --> End"
+  "code": "classDiagram\n  class Animal {\n    +makeSound()\n  }\n  class Dog {\n    +makeSound()\n  }\n  Animal <|-- Dog"
 }

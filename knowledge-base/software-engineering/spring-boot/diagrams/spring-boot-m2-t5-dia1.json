@@ -1,7 +1,7 @@
 {
   "topic_id": "spring-boot-m2-t5",
   "diagram_id": "spring-boot-m2-t5-dia1",
-  "title": "Global Exception Handling Flow",
+  "title": "Global Exception Handling Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Global Exception Handling\"]\n  Process --> End"
+  "code": "graph TD\n  Client --> Proxy[\"Spring Transaction Proxy\"]\n  Proxy --> Target[\"Target Bean Method\"]"
 }

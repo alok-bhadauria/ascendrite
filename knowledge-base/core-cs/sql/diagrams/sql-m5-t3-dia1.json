@@ -1,7 +1,7 @@
 {
   "topic_id": "sql-m5-t3",
   "diagram_id": "sql-m5-t3-dia1",
-  "title": "Transaction Control Flow",
+  "title": "Transaction Control Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Transaction Control\"]\n  Process --> End"
+  "code": "graph TD\n  HashJoin[\"Hash Join\"] --> IndexScanA[\"Index Scan (A)\"]\n  HashJoin --> TableScanB[\"Table Scan (B)\"]"
 }

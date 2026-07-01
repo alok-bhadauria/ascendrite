@@ -1,7 +1,7 @@
 {
   "topic_id": "nodejs-expressjs-m5-t3",
   "diagram_id": "nodejs-expressjs-m5-t3-dia1",
-  "title": "Docker Containerization Flow",
+  "title": "Docker Containerization Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Docker Containerization\"]\n  Process --> End"
+  "code": "graph LR\n  Express[\"Express Router\"] --> ErrHandler[\"Error Middleware (Arity 4)\"]\n  Express --> Standard[\"Standard Middleware (Arity 3)\"]"
 }

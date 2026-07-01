@@ -2,5 +2,5 @@
   "topic_id": "typescript-m5-t4",
   "title": "Tree-Shaking TS",
   "version": "1.0.0",
-  "content": "# TypeScript Revision\n\n*   **as const:** Converts nested object properties to `readonly` literal values.\n*   **infer:** Extracts generic sub-types dynamically within conditional type evaluations.\n*   **Variance:** Covariant (read-only contexts); Contravariant (write-only / function parameters).\n\n\n*   **Tree-Shaking TS Checklist:** Verify input ranges and clear caches.\n"
+  "content": "# TypeScript Revision\n\n*   **as const:** Converts nested object properties to `readonly` literal values.\n*   **infer:** Extracts generic sub-types dynamically within conditional type evaluations.\n*   **Variance:** Covariant (read-only contexts); Contravariant (write-only / function parameters).\n\n\n*   **Tree-Shaking TS Complexity Reference:** Time $O(N)$, Space $O(1)$ auxiliary."
 }

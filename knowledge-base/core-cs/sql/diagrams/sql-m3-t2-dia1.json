@@ -1,7 +1,7 @@
 {
   "topic_id": "sql-m3-t2",
   "diagram_id": "sql-m3-t2-dia1",
-  "title": "Recursive CTE Flow",
+  "title": "Recursive CTE Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Recursive CTE\"]\n  Process --> End"
+  "code": "graph TD\n  HashJoin[\"Hash Join\"] --> IndexScanA[\"Index Scan (A)\"]\n  HashJoin --> TableScanB[\"Table Scan (B)\"]"
 }

@@ -1,7 +1,7 @@
 {
   "topic_id": "verbal-aptitude-m1-t1",
   "diagram_id": "verbal-aptitude-m1-t1-dia1",
-  "title": "Parts of Speech Flow",
+  "title": "Parts of Speech Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Parts of Speech\"]\n  Process --> End"
+  "code": "graph TD\n  Modifier[\"Modifying Phrase\"] -->|Incorrect association| NearestSubject[\"Incorrect Subject\"]\n  Modifier -->|Correct alignment| ActiveSubject[\"Active Subject\"]"
 }

@@ -1,7 +1,7 @@
 {
   "topic_id": "css-frameworks-m4-t5",
   "diagram_id": "css-frameworks-m4-t5-dia1",
-  "title": "Design Systems Flow",
+  "title": "Design Systems Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Design Systems\"]\n  Process --> End"
+  "code": "graph LR\n  Scanner[\"Static Source Scanner\"] --> Matcher[\"Regex Match Engine\"]\n  Matcher --> Purger[\"Purge post-CSS utility bundle\"]"
 }

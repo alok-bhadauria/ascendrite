@@ -1,7 +1,7 @@
 {
   "topic_id": "verbal-aptitude-m3-t3",
   "diagram_id": "verbal-aptitude-m3-t3-dia1",
-  "title": "Idioms & Phrases Flow",
+  "title": "Idioms & Phrases Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Idioms & Phrases\"]\n  Process --> End"
+  "code": "graph TD\n  Modifier[\"Modifying Phrase\"] -->|Incorrect association| NearestSubject[\"Incorrect Subject\"]\n  Modifier -->|Correct alignment| ActiveSubject[\"Active Subject\"]"
 }

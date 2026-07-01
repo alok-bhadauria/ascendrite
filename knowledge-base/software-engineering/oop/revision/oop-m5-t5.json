@@ -2,5 +2,5 @@
   "topic_id": "oop-m5-t5",
   "title": "LLD Case Study (Food/Movie)",
   "version": "1.0.0",
-  "content": "# OOP Revision\n\n*   **vTables:** Array tables mapping method signatures to memory addresses for dynamic dispatch.\n*   **Composition vs Inheritance:** Prefer composition to avoid base class coupling.\n*   **SOLID:** Single responsibility, Open/closed, Liskov substitution, Interface segregation, Dependency inversion.\n\n\n*   **LLD Case Study (Food/Movie) Checklist:** Verify input ranges and clear caches.\n"
+  "content": "# OOP Revision\n\n*   **vTables:** Array tables mapping method signatures to memory addresses for dynamic dispatch.\n*   **Composition vs Inheritance:** Prefer composition to avoid base class coupling.\n*   **SOLID:** Single responsibility, Open/closed, Liskov substitution, Interface segregation, Dependency inversion.\n\n\n*   **LLD Case Study (Food/Movie) Complexity Reference:** Time $O(N)$, Space $O(1)$ auxiliary."
 }

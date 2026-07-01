@@ -1,7 +1,7 @@
 {
   "topic_id": "nodejs-expressjs-m4-t1",
   "diagram_id": "nodejs-expressjs-m4-t1-dia1",
-  "title": "API Rate Limiting Flow",
+  "title": "API Rate Limiting Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process API Rate Limiting\"]\n  Process --> End"
+  "code": "graph LR\n  Express[\"Express Router\"] --> ErrHandler[\"Error Middleware (Arity 4)\"]\n  Express --> Standard[\"Standard Middleware (Arity 3)\"]"
 }

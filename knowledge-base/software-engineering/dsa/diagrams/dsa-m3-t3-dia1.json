@@ -1,7 +1,7 @@
 {
   "topic_id": "dsa-m3-t3",
   "diagram_id": "dsa-m3-t3-dia1",
-  "title": "Queues Flow",
+  "title": "Queues Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Queues\"]\n  Process --> End"
+  "code": "graph TD\n  A((Root)) --> B((Left))\n  A --> C((Right))"
 }

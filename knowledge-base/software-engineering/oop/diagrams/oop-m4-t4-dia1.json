@@ -1,7 +1,7 @@
 {
   "topic_id": "oop-m4-t4",
   "diagram_id": "oop-m4-t4-dia1",
-  "title": "Behavioral - Template Method Flow",
+  "title": "Behavioral - Template Method Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Behavioral - Template Method\"]\n  Process --> End"
+  "code": "classDiagram\n  class Animal {\n    +makeSound()\n  }\n  class Dog {\n    +makeSound()\n  }\n  Animal <|-- Dog"
 }

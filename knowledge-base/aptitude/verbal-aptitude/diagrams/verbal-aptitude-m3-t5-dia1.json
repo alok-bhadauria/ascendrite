@@ -1,7 +1,7 @@
 {
   "topic_id": "verbal-aptitude-m3-t5",
   "diagram_id": "verbal-aptitude-m3-t5-dia1",
-  "title": "Analogies Flow",
+  "title": "Analogies Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Analogies\"]\n  Process --> End"
+  "code": "graph TD\n  Modifier[\"Modifying Phrase\"] -->|Incorrect association| NearestSubject[\"Incorrect Subject\"]\n  Modifier -->|Correct alignment| ActiveSubject[\"Active Subject\"]"
 }

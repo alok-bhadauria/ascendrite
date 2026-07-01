@@ -1,7 +1,7 @@
 {
   "topic_id": "nextjs-m5-t4",
   "diagram_id": "nextjs-m5-t4-dia1",
-  "title": "Production Deployment Flow",
+  "title": "Production Deployment Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Production Deployment\"]\n  Process --> End"
+  "code": "graph TD\n  StaticShell[\"Static Layout Shell (ISR/PPR)\"] --> DynamicHoles[\"Dynamic Components (Suspense)\"]"
 }

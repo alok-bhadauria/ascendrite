@@ -1,7 +1,7 @@
 {
   "topic_id": "sql-m2-t3",
   "diagram_id": "sql-m2-t3-dia1",
-  "title": "Value Functions Flow",
+  "title": "Value Functions Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Value Functions\"]\n  Process --> End"
+  "code": "graph TD\n  HashJoin[\"Hash Join\"] --> IndexScanA[\"Index Scan (A)\"]\n  HashJoin --> TableScanB[\"Table Scan (B)\"]"
 }

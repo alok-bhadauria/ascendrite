@@ -2,5 +2,5 @@
   "topic_id": "verbal-aptitude-m1-t4",
   "title": "Parallel Structure",
   "version": "1.0.0",
-  "content": "# Verbal-Aptitude Revision\n\n*   **Subject-Verb Agreement:** The head noun of the subject determines singular/plural verb form.\n*   **Modifier Alignment:** Place the target noun immediately after the modifying phrase to prevent dangling modifiers.\n*   **Transitions:** Categorize connectors into contrast (adversative) and result (causal) categories.\n\n\n*   **Parallel Structure Checklist:** Verify input ranges and clear caches.\n"
+  "content": "# Verbal-Aptitude Revision\n\n*   **Subject-Verb Agreement:** The head noun of the subject determines singular/plural verb form.\n*   **Modifier Alignment:** Place the target noun immediately after the modifying phrase to prevent dangling modifiers.\n*   **Transitions:** Categorize connectors into contrast (adversative) and result (causal) categories.\n\n\n*   **Parallel Structure Complexity Reference:** Time $O(N)$, Space $O(1)$ auxiliary."
 }

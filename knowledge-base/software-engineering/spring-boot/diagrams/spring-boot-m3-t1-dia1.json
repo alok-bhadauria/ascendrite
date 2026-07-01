@@ -1,7 +1,7 @@
 {
   "topic_id": "spring-boot-m3-t1",
   "diagram_id": "spring-boot-m3-t1-dia1",
-  "title": "Data Access & ORM Flow",
+  "title": "Data Access & ORM Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Data Access & ORM\"]\n  Process --> End"
+  "code": "graph TD\n  Client --> Proxy[\"Spring Transaction Proxy\"]\n  Proxy --> Target[\"Target Bean Method\"]"
 }

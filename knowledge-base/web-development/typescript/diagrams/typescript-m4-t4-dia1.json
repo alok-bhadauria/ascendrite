@@ -1,7 +1,7 @@
 {
   "topic_id": "typescript-m4-t4",
   "diagram_id": "typescript-m4-t4-dia1",
-  "title": "Utility Types Creation Flow",
+  "title": "Utility Types Creation Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Utility Types Creation\"]\n  Process --> End"
+  "code": "graph TD\n  Covariance[\"Covariance: Subclass preserves assignment direction\"]\n  Contravariance[\"Contravariance: Argument type reverses assignment direction\"]"
 }

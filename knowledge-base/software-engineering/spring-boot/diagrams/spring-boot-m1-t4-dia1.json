@@ -1,7 +1,7 @@
 {
   "topic_id": "spring-boot-m1-t4",
   "diagram_id": "spring-boot-m1-t4-dia1",
-  "title": "Spring Boot Foundations Flow",
+  "title": "Spring Boot Foundations Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Spring Boot Foundations\"]\n  Process --> End"
+  "code": "graph TD\n  Client --> Proxy[\"Spring Transaction Proxy\"]\n  Proxy --> Target[\"Target Bean Method\"]"
 }

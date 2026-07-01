@@ -1,7 +1,7 @@
 {
   "topic_id": "javascript-m3-t5",
   "diagram_id": "javascript-m3-t5-dia1",
-  "title": "Timers & Performance Flow",
+  "title": "Timers & Performance Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Timers & Performance\"]\n  Process --> End"
+  "code": "graph TD\n  obj[\"object\"] -->|__proto__| proto1[\"prototype 1\"]\n  proto1 -->|__proto__| proto2[\"prototype 2\"]\n  proto2 -->|__proto__| nullObj[\"null\"]"
 }

@@ -1,7 +1,7 @@
 {
   "topic_id": "verbal-aptitude-m1-t2",
   "diagram_id": "verbal-aptitude-m1-t2-dia1",
-  "title": "Subject-Verb Agreement Flow",
+  "title": "Subject-Verb Agreement Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Subject-Verb Agreement\"]\n  Process --> End"
+  "code": "graph TD\n  Modifier[\"Modifying Phrase\"] -->|Incorrect association| NearestSubject[\"Incorrect Subject\"]\n  Modifier -->|Correct alignment| ActiveSubject[\"Active Subject\"]"
 }

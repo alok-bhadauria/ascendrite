@@ -1,7 +1,7 @@
 {
   "topic_id": "verbal-aptitude-m1-t5",
   "diagram_id": "verbal-aptitude-m1-t5-dia1",
-  "title": "Tense Consistency Flow",
+  "title": "Tense Consistency Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Tense Consistency\"]\n  Process --> End"
+  "code": "graph TD\n  Modifier[\"Modifying Phrase\"] -->|Incorrect association| NearestSubject[\"Incorrect Subject\"]\n  Modifier -->|Correct alignment| ActiveSubject[\"Active Subject\"]"
 }

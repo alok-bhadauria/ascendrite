@@ -1,7 +1,7 @@
 {
   "topic_id": "oop-m5-t2",
   "diagram_id": "oop-m5-t2-dia1",
-  "title": "UML Modeling Flow",
+  "title": "UML Modeling Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process UML Modeling\"]\n  Process --> End"
+  "code": "classDiagram\n  class Animal {\n    +makeSound()\n  }\n  class Dog {\n    +makeSound()\n  }\n  Animal <|-- Dog"
 }

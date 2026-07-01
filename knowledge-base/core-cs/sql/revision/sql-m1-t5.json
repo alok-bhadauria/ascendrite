@@ -2,5 +2,5 @@
   "topic_id": "sql-m1-t5",
   "title": "Data Types",
   "version": "1.0.0",
-  "content": "# SQL Revision\n\n*   **Execution Sequence:** FROM $\\to$ ON $\\to$ WHERE $\\to$ GROUP BY $\\to$ HAVING $\\to$ SELECT $\\to$ ORDER BY $\\to$ LIMIT.\n*   **ROWS vs RANGE:** ROWS operates on strict row index offsets; RANGE operates on row values.\n*   **Leftmost Prefix:** Composite index on `(A, B)` requires `A` in the where filter to perform an index seek.\n\n\n*   **Data Types Checklist:** Verify input ranges and clear caches.\n"
+  "content": "# SQL Revision\n\n*   **Execution Sequence:** FROM $\\to$ ON $\\to$ WHERE $\\to$ GROUP BY $\\to$ HAVING $\\to$ SELECT $\\to$ ORDER BY $\\to$ LIMIT.\n*   **ROWS vs RANGE:** ROWS operates on strict row index offsets; RANGE operates on row values.\n*   **Leftmost Prefix:** Composite index on `(A, B)` requires `A` in the where filter to perform an index seek.\n\n\n*   **Data Types Complexity Reference:** Time $O(N)$, Space $O(1)$ auxiliary."
 }

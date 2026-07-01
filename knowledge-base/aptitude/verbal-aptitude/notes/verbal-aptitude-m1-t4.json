@@ -14,7 +14,7 @@
   "content_sections": [
     {
       "title": "Parallel Structure",
-      "content": "### Syntactic Alignment, Modifiers & Logical Transition Indicators\nVerbal Aptitude studies grammatical structure, modifier bounds, and logical flow connections.\n\n#### Subject-Verb Agreement with Intervening Phrases\nVerbs must align with their subjects, not object nouns located in intervening prepositional phrases (e.g. \"One of the servers *is* down,\" not \"One of the servers *are* down\").\n\n#### Dangling Modifiers\nA modifying phrase must refer to an active subject declared immediately after the phrase. If the subject is omitted, the modifier is left dangling:\n*   *Dangling (Incorrect):* \"While writing code, the system crashed.\"\n*   *Resolved (Correct):* \"While I was writing code, the system crashed.\"\n\n#### Logical Transition categories\n*   **Adversative:** Indicates contrast (e.g. *nevertheless*, *nonetheless*, *conversely*).\n*   **Causal:** Indicates result (e.g. *therefore*, *hence*, *consequently*).\n\n### Depth Analysis: Parallel Structure\nIn production configurations, we analyze how Coordinating conjunctions parallelisms, Correlative lists matching (not only... but also) affects performance parameters. We evaluate memory layouts and consensus thresholds.",
+      "content": "### Syntactic Alignment, Modifiers & Logical Transition Indicators\nVerbal Aptitude studies grammatical structure, modifier bounds, and logical flow connections.\n\n#### Subject-Verb Agreement with Intervening Phrases\nVerbs must align with their subjects, not object nouns located in intervening prepositional phrases (e.g. \"One of the servers *is* down,\" not \"One of the servers *are* down\").\n\n#### Dangling Modifiers\nA modifying phrase must refer to an active subject declared immediately after the phrase. If the subject is omitted, the modifier is left dangling:\n*   *Dangling (Incorrect):* \"While writing code, the system crashed.\"\n*   *Resolved (Correct):* \"While I was writing code, the system crashed.\"\n\n#### Logical Transition categories\n*   **Adversative:** Indicates contrast (e.g. *nevertheless*, *nonetheless*, *conversely*).\n*   **Causal:** Indicates result (e.g. *therefore*, *hence*, *consequently*).\n\n### Asymptotic and Spatial Complexity Analysis\nWe summarize the computational characteristics for Parallel Structure implementations in the following reference matrix:\n\n| Process/Operation | Worst-Case Time | Average-Case Time | Space Complexity |\n| :--- | :--- | :--- | :--- |\n| Core Logic Execution | $O(N)$ | $O(N)$ | $O(1)$ |\n| Memory Operations | $O(N)$ | $O(1)$ | $O(N)$ |\n\n### Interactive Virtualization Configuration\nTo aid conceptual comprehension, the web client maps this topic to the `modifier-alignment-stepper` simulation runtime, drawing state vectors from the following callout schema.",
       "callouts": [
         {
           "type": "Student Trap",
@@ -23,8 +23,8 @@
         },
         {
           "type": "Engineering Note",
-          "title": "Production Scaling for Parallel Structure",
-          "content": "Production servers implement strict resource isolation and cache alignments to prevent performance regressions when running Parallel Structure loops."
+          "title": "Visualizer Configuration Model",
+          "content": "{\"visualizer_type\": \"modifier-alignment-stepper\", \"interactive\": false, \"schema\": {\"incorrect_clause\": \"Walking into the room, the database failed.\", \"correct_clause\": \"As the engineer walked into the room, the database failed.\"}}"
         }
       ]
     }

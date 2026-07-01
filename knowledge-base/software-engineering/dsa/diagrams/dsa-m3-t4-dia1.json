@@ -1,7 +1,7 @@
 {
   "topic_id": "dsa-m3-t4",
   "diagram_id": "dsa-m3-t4-dia1",
-  "title": "Trees & Trie Flow",
+  "title": "Trees & Trie Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Trees & Trie\"]\n  Process --> End"
+  "code": "graph TD\n  A((Root)) --> B((Left))\n  A --> C((Right))"
 }

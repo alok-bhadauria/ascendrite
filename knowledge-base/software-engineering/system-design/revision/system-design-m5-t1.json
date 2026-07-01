@@ -2,5 +2,5 @@
   "topic_id": "system-design-m5-t1",
   "title": "Case Study: URL Shortener design",
   "version": "1.0.0",
-  "content": "# System Design Revision\n\n*   **Consistent Hashing:** Uses Virtual Nodes to distribute hash keys evenly across ring servers.\n*   **Rate Limiters:** Token Bucket (handles bursts); Leaky Bucket (constant egress rate).\n*   **Circuit Breaker:** Closed (normal) $\\to$ Open (failing fast) $\\to$ Half-Open (probing service health).\n\n\n*   **Case Study: URL Shortener design Checklist:** Verify input ranges and clear caches.\n"
+  "content": "# System Design Revision\n\n*   **Consistent Hashing:** Uses Virtual Nodes to distribute hash keys evenly across ring servers.\n*   **Rate Limiters:** Token Bucket (handles bursts); Leaky Bucket (constant egress rate).\n*   **Circuit Breaker:** Closed (normal) $\\to$ Open (failing fast) $\\to$ Half-Open (probing service health).\n\n\n*   **Case Study: URL Shortener design Complexity Reference:** Time $O(N)$, Space $O(1)$ auxiliary."
 }

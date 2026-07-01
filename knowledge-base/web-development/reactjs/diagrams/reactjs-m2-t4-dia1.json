@@ -1,7 +1,7 @@
 {
   "topic_id": "reactjs-m2-t4",
   "diagram_id": "reactjs-m2-t4-dia1",
-  "title": "Memoization Flow",
+  "title": "Memoization Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Memoization\"]\n  Process --> End"
+  "code": "graph TD\n  OldRoot[Old Root Node] --> NewRoot[New Root Node]\n  OldRoot -.->|Diffing Heuristics| NewRoot"
 }

@@ -2,5 +2,5 @@
   "topic_id": "dbms-m2-t4",
   "title": "Locking Mechanisms",
   "version": "1.0.0",
-  "content": "# DBMS Revision\n\n*   **Slotted Page:** Header slots store offsets to records; defragmentation changes offsets but preserves RIDs.\n*   **B+ Tree Fan-out:** $F \\le \\frac{P + K}{D + K}$. Fan-out determines tree height and disk I/O reads.\n*   **ARIES recovery:** Analysis $\\to$ Redo (repeats history) $\\to$ Undo (rolls back active transactions, logging CLRs).\n\n\n*   **Locking Mechanisms Checklist:** Verify input ranges and clear caches.\n"
+  "content": "# DBMS Revision\n\n*   **Slotted Page:** Header slots store offsets to records; defragmentation changes offsets but preserves RIDs.\n*   **B+ Tree Fan-out:** $F \\le \\frac{P + K}{D + K}$. Fan-out determines tree height and disk I/O reads.\n*   **ARIES recovery:** Analysis $\\to$ Redo (repeats history) $\\to$ Undo (rolls back active transactions, logging CLRs).\n\n\n*   **Locking Mechanisms Complexity Reference:** Time $O(N)$, Space $O(1)$ auxiliary."
 }

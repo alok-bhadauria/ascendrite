@@ -1,7 +1,7 @@
 {
   "topic_id": "javascript-m3-t2",
   "diagram_id": "javascript-m3-t2-dia1",
-  "title": "Promises API Flow",
+  "title": "Promises API Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Promises API\"]\n  Process --> End"
+  "code": "graph TD\n  obj[\"object\"] -->|__proto__| proto1[\"prototype 1\"]\n  proto1 -->|__proto__| proto2[\"prototype 2\"]\n  proto2 -->|__proto__| nullObj[\"null\"]"
 }

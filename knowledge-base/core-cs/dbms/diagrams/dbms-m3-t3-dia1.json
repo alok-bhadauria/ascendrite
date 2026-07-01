@@ -1,7 +1,7 @@
 {
   "topic_id": "dbms-m3-t3",
   "diagram_id": "dbms-m3-t3-dia1",
-  "title": "ARIES Recovery Algorithm Flow",
+  "title": "ARIES Recovery Algorithm Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process ARIES Recovery Algorithm\"]\n  Process --> End"
+  "code": "graph TD\n  Header[Page Header: Slots 0, 1] --> Slot0[Slot 0: Offset 4000]\n  Header --> Slot1[Slot 1: Offset 3850]\n  Slot0 --> Record0[Record 0: 96 Bytes]\n  Slot1 --> Record1[Record 1: 150 Bytes]"
 }

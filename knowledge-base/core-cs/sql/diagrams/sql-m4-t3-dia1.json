@@ -1,7 +1,7 @@
 {
   "topic_id": "sql-m4-t3",
   "diagram_id": "sql-m4-t3-dia1",
-  "title": "Query Cost Analysis Flow",
+  "title": "Query Cost Analysis Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Query Cost Analysis\"]\n  Process --> End"
+  "code": "graph TD\n  HashJoin[\"Hash Join\"] --> IndexScanA[\"Index Scan (A)\"]\n  HashJoin --> TableScanB[\"Table Scan (B)\"]"
 }

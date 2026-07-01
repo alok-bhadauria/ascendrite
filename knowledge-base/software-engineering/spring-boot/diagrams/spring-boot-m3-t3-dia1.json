@@ -1,7 +1,7 @@
 {
   "topic_id": "spring-boot-m3-t3",
   "diagram_id": "spring-boot-m3-t3-dia1",
-  "title": "Relationships Flow",
+  "title": "Relationships Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Relationships\"]\n  Process --> End"
+  "code": "graph TD\n  Client --> Proxy[\"Spring Transaction Proxy\"]\n  Proxy --> Target[\"Target Bean Method\"]"
 }

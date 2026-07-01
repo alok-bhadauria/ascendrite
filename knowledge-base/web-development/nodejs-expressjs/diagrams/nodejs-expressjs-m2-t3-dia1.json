@@ -1,7 +1,7 @@
 {
   "topic_id": "nodejs-expressjs-m2-t3",
   "diagram_id": "nodejs-expressjs-m2-t3-dia1",
-  "title": "Error Middleware Flow",
+  "title": "Error Middleware Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Error Middleware\"]\n  Process --> End"
+  "code": "graph LR\n  Express[\"Express Router\"] --> ErrHandler[\"Error Middleware (Arity 4)\"]\n  Express --> Standard[\"Standard Middleware (Arity 3)\"]"
 }

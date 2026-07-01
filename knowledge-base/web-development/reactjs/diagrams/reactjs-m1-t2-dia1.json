@@ -1,7 +1,7 @@
 {
   "topic_id": "reactjs-m1-t2",
   "diagram_id": "reactjs-m1-t2-dia1",
-  "title": "Reconciliation & Diffing Flow",
+  "title": "Reconciliation & Diffing Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Reconciliation & Diffing\"]\n  Process --> End"
+  "code": "graph TD\n  OldRoot[Old Root Node] --> NewRoot[New Root Node]\n  OldRoot -.->|Diffing Heuristics| NewRoot"
 }

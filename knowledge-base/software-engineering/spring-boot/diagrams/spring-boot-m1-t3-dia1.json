@@ -1,7 +1,7 @@
 {
   "topic_id": "spring-boot-m1-t3",
   "diagram_id": "spring-boot-m1-t3-dia1",
-  "title": "Bean Lifecycle Flow",
+  "title": "Bean Lifecycle Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Bean Lifecycle\"]\n  Process --> End"
+  "code": "graph TD\n  Client --> Proxy[\"Spring Transaction Proxy\"]\n  Proxy --> Target[\"Target Bean Method\"]"
 }

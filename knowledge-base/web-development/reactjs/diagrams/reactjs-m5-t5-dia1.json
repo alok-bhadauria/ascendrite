@@ -1,7 +1,7 @@
 {
   "topic_id": "reactjs-m5-t5",
   "diagram_id": "reactjs-m5-t5-dia1",
-  "title": "React Hydration Architecture Flow",
+  "title": "React Hydration Architecture Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process React Hydration Architecture\"]\n  Process --> End"
+  "code": "graph TD\n  OldRoot[Old Root Node] --> NewRoot[New Root Node]\n  OldRoot -.->|Diffing Heuristics| NewRoot"
 }

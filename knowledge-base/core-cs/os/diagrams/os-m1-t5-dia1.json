@@ -1,7 +1,7 @@
 {
   "topic_id": "os-m1-t5",
   "diagram_id": "os-m1-t5-dia1",
-  "title": "Context Switching Cost Flow",
+  "title": "Context Switching Cost Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Context Switching Cost\"]\n  Process --> End"
+  "code": "graph LR\n  VA[\"Virtual Address (0x7FFF0040)\"] --> TLB[\"TLB Lookup (MISS)\"]\n  TLB --> PageDir[\"Page Directory lookup (0x1000)\"]\n  PageDir --> Physical[\"Physical Frame (0x9000)\"]"
 }

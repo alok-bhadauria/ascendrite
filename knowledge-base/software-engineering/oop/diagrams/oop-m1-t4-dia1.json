@@ -1,7 +1,7 @@
 {
   "topic_id": "oop-m1-t4",
   "diagram_id": "oop-m1-t4-dia1",
-  "title": "Inheritance & Polymorphism Flow",
+  "title": "Inheritance & Polymorphism Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Inheritance & Polymorphism\"]\n  Process --> End"
+  "code": "classDiagram\n  class Animal {\n    +makeSound()\n  }\n  class Dog {\n    +makeSound()\n  }\n  Animal <|-- Dog"
 }

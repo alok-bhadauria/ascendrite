@@ -1,7 +1,7 @@
 {
   "topic_id": "spring-boot-m4-t3",
   "diagram_id": "spring-boot-m4-t3-dia1",
-  "title": "JWT Authentication Flow",
+  "title": "JWT Authentication Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process JWT Authentication\"]\n  Process --> End"
+  "code": "graph TD\n  Client --> Proxy[\"Spring Transaction Proxy\"]\n  Proxy --> Target[\"Target Bean Method\"]"
 }

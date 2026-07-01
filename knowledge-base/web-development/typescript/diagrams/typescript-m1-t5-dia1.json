@@ -1,7 +1,7 @@
 {
   "topic_id": "typescript-m1-t5",
   "diagram_id": "typescript-m1-t5-dia1",
-  "title": "Type Guards Flow",
+  "title": "Type Guards Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Type Guards\"]\n  Process --> End"
+  "code": "graph TD\n  Covariance[\"Covariance: Subclass preserves assignment direction\"]\n  Contravariance[\"Contravariance: Argument type reverses assignment direction\"]"
 }

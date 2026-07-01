@@ -1,7 +1,7 @@
 {
   "topic_id": "cn-m4-t5",
   "diagram_id": "cn-m4-t5-dia1",
-  "title": "Content Delivery (CDN) Flow",
+  "title": "Content Delivery (CDN) Flowchart",
   "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Content Delivery (CDN)\"]\n  Process --> End"
+  "code": "sequenceDiagram\n  Client->>Server: ClientHello + Key Share\n  Server-->>Client: ServerHello + Key Share + Finished\n  Client->>Server: Finished (Secure Connection)"
 }
