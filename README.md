@@ -11,6 +11,7 @@ The codebase is organized under a decoupled multi-tier architecture to maintain 
 ```
 ascendrite/
 ├── README.md                           # Core system documentation
+├── docs/                               # Systems design and platform architecture specifications
 ├── editorial/                          # Ascendrite Publishing Constitution and Style Guides
 │   ├── editorial-style-guide.md        # Master editorial guide and tone specifications
 │   ├── mathematical-style-guide.md     # LaTeX syntax standards and notation matrices
