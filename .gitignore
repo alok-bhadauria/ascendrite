@@ -46,3 +46,4 @@ htmlcov/
 
 # Misc
 *.sqlite3
+/frontend-example/

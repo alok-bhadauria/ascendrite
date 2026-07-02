@@ -1,0 +1,382 @@
+/* ── Overlay & Backdrop Blur ─────────────────────────────────────────────── */
+.auth-modal-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.18);
+    z-index: 9000;
+    
+    /* Base/Closing State for transition */
+    opacity: 0;
+    backdrop-filter: blur(0px) brightness(1) saturate(1);
+    -webkit-backdrop-filter: blur(0px) brightness(1) saturate(1);
+    pointer-events: none;
+    transition: 
+        opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+        backdrop-filter 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+        -webkit-backdrop-filter 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Opening State — prepare initial styling */
+.auth-modal-overlay.auth-opening {
+    opacity: 0;
+    backdrop-filter: blur(0px) brightness(1) saturate(1);
+    -webkit-backdrop-filter: blur(0px) brightness(1) saturate(1);
+    pointer-events: none;
+}
+
+/* Fully Visible State — transition to blur, brightness, saturate */
+.auth-modal-overlay.auth-visible {
+    opacity: 1;
+    backdrop-filter: blur(5px) brightness(0.94) saturate(0.85);
+    -webkit-backdrop-filter: blur(5px) brightness(0.94) saturate(0.85);
+    pointer-events: all;
+    transition: 
+        opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+        backdrop-filter 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+        -webkit-backdrop-filter 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Closing State — transition back to invisible and unblurred */
+.auth-modal-overlay.auth-closing {
+    opacity: 0;
+    backdrop-filter: blur(0px) brightness(1) saturate(1);
+    -webkit-backdrop-filter: blur(0px) brightness(1) saturate(1);
+    pointer-events: none;
+}
+
+/* ── Card ────────────────────────────────────────────────────────────────── */
+.auth-card {
+    --auth-gradient: linear-gradient(
+        135deg,
+        var(--color-accent),
+        color-mix(in srgb, var(--color-accent) 55%, #6366f1 45%)
+    );
+
+    position: relative;
+    overflow: hidden;
+    width: 680px;
+    height: 560px;
+    border-radius: 22px;
+    box-shadow:
+        0 32px 96px rgba(0, 0, 0, 0.38),
+        0 0 0 1px rgba(255, 255, 255, 0.05);
+    box-sizing: border-box;
+
+    /* Base/Closing State for transition */
+    transform: scale(0.95) translateY(16px);
+    opacity: 0;
+    transition: 
+        transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 0.22s ease;
+}
+
+.auth-card * {
+    box-sizing: border-box;
+}
+
+/* Opening State Card */
+.auth-modal-overlay.auth-opening .auth-card {
+    transform: scale(0.9) translateY(24px);
+    opacity: 0;
+    transition: none;
+}
+
+/* Fully Visible State Card — spring animation curves */
+.auth-modal-overlay.auth-visible .auth-card {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+    transition: 
+        transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+        opacity 0.4s ease;
+}
+
+/* Closing State Card */
+.auth-modal-overlay.auth-closing .auth-card {
+    transform: scale(0.95) translateY(16px);
+    opacity: 0;
+    transition: 
+        transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 0.22s ease;
+}
+
+
+
+/* ── Close button ────────────────────────────────────────────────────────── */
+.auth-close-btn {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 20;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 50%;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* ── Sliding gradient background panel ───────────────────────────────────── */
+.auth-card .card-bg {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 50%;
+    background: var(--auth-gradient);
+    border-radius: 18px;
+    translate: 0 0;
+    transition: translate 0.65s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.auth-card .card-bg.login {
+    translate: 100% 0;
+}
+
+
+/* ── Shared hero + form base ─────────────────────────────────────────────── */
+.auth-card .hero,
+.auth-card .form {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+        opacity 0.5s ease,
+        visibility 0.5s ease,
+        translate 0.65s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.auth-card .hero.active,
+.auth-card .form.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* ── Form positions ──────────────────────────────────────────────────────── */
+.auth-card .form.login {
+    left: 0;
+    translate: -50% 0;
+    z-index: 1;
+}
+.auth-card .form.login.active { translate: 0; }
+
+.auth-card .form.register {
+    left: 50%;
+    translate: 50% 0;
+    z-index: 1;
+}
+.auth-card .form.register.active { translate: 0; }
+
+
+/* ── Hero positions ──────────────────────────────────────────────────────── */
+.auth-card .hero {
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    color: white;
+    text-align: center;
+    padding: 0 36px;
+}
+
+.auth-card .hero.register { left: 0;   translate: -50% 0; }
+.auth-card .hero.register.active { translate: 0; }
+
+.auth-card .hero.login { left: 50%; translate: 50% 0; }
+.auth-card .hero.login.active { translate: 0; }
+
+
+/* ── Hero logo badge ─────────────────────────────────────────────────────── */
+.hero-logo {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.18);
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 900;
+    color: white;
+    letter-spacing: -1px;
+    margin-bottom: 4px;
+}
+
+
+/* ── Hero toggle button ──────────────────────────────────────────────────── */
+.hero-toggle-btn {
+    padding: 10px 36px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    background: transparent;
+    transition: background 0.25s, color 0.25s, transform 0.2s;
+    cursor: pointer;
+    margin-top: 4px;
+}
+.hero-toggle-btn:hover {
+    background: white;
+    color: var(--color-accent);
+    transform: scale(1.04);
+}
+
+
+/* ── Form panel ──────────────────────────────────────────────────────────── */
+.auth-card .form {
+    background: var(--color-surface);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 36px;
+    gap: 0;
+}
+
+
+/* ── Password feedback box ───────────────────────────────────────────────── */
+.password-feedback-container {
+    width: 100%;
+    text-align: left;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    font-size: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    transition: all 0.2s ease;
+}
+
+
+/* ── Mobile switch link ──────────────────────────────────────────────────── */
+.auth-mobile-switch {
+    display: none;
+    position: absolute;
+    bottom: 18px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 10;
+}
+
+
+/* ── Google Login Button ─────────────────────────────────────────────────── */
+.google-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: 1px solid var(--color-border);
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: inherit;
+    font-size: 13.5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.google-btn:hover {
+    background: var(--color-surface);
+    border-color: var(--color-accent);
+    transform: translateY(-1.5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.google-btn:active {
+    transform: translateY(0);
+}
+
+
+/* ── Mobile (≤ 768px) ────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .auth-card {
+        width: 100%;
+        max-width: 390px;
+        height: 560px;
+        border-radius: 20px;
+    }
+
+    .auth-card .card-bg,
+    .auth-card .hero {
+        display: none;
+    }
+
+    .auth-card .form {
+        width: 100%;
+        padding: 36px 28px 72px;
+    }
+
+    .auth-card .form.login {
+        left: 0;
+        translate: -100% 0;
+    }
+    .auth-card .form.login.active {
+        translate: 0;
+    }
+
+    .auth-card .form.register {
+        left: 0;
+        translate: 100% 0;
+    }
+    .auth-card .form.register.active {
+        translate: 0;
+    }
+
+    .auth-mobile-switch {
+        display: block;
+    }
+
+    .mobile-toggle-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        padding: 6px 14px;
+        border-radius: 8px;
+        border: 1px solid var(--color-border);
+        background: var(--color-bg);
+        color: var(--color-text);
+        font-family: inherit;
+        font-size: 11px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        outline: none;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+        margin-top: 4px;
+    }
+
+    .mobile-toggle-btn:hover {
+        background: var(--color-surface);
+        border-color: var(--color-accent);
+        color: var(--color-accent);
+        transform: translateY(-1px);
+    }
+
+    .mobile-toggle-btn:active {
+        transform: translateY(0);
+    }
+}

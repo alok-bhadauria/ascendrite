@@ -117,11 +117,11 @@ export default function InteractiveVisualizerDemo() {
         </div>
         
         {/* Visualizer Controls */}
-        <div className="flex gap-4 mt-6 justify-center">
+        <div className="flex flex-wrap gap-2.5 sm:gap-4 mt-6 justify-center">
           <button 
             id="btn-play-viz"
             onClick={() => setIsPlaying(!isPlaying)} 
-            className="flex items-center gap-2 bg-theme-accent hover:opacity-90 text-white font-semibold px-4 py-2 rounded-lg transition-all shadow-md active:scale-95"
+            className="flex items-center gap-1.5 sm:gap-2 bg-theme-accent hover:opacity-90 text-white font-semibold px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg transition-all shadow-md active:scale-95 text-xs sm:text-sm"
           >
             {isPlaying ? <FaPause size={12} /> : <FaPlay size={12} />}
             <span>{isPlaying ? 'Pause' : 'Auto Play'}</span>
@@ -130,7 +130,7 @@ export default function InteractiveVisualizerDemo() {
             id="btn-step-viz"
             onClick={stepBubbleSort} 
             disabled={isPlaying}
-            className="flex items-center gap-2 border border-theme-border hover:bg-theme-border text-theme-text font-semibold px-4 py-2 rounded-lg disabled:opacity-40 transition-all active:scale-95"
+            className="flex items-center gap-1.5 sm:gap-2 border border-theme-border hover:bg-theme-border text-theme-text font-semibold px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg disabled:opacity-40 transition-all active:scale-95 text-xs sm:text-sm"
           >
             <FaStepForward size={12} />
             <span>Step</span>
@@ -138,7 +138,7 @@ export default function InteractiveVisualizerDemo() {
           <button 
             id="btn-reset-viz"
             onClick={resetVisualizer}
-            className="flex items-center gap-2 border border-theme-border hover:bg-theme-border text-theme-text font-semibold px-4 py-2 rounded-lg transition-all active:scale-95"
+            className="flex items-center gap-1.5 sm:gap-2 border border-theme-border hover:bg-theme-border text-theme-text font-semibold px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg transition-all active:scale-95 text-xs sm:text-sm"
           >
             <FaUndo size={12} />
             <span>Reset</span>
@@ -147,7 +147,8 @@ export default function InteractiveVisualizerDemo() {
       </div>
 
       {/* Python Code Trace Area */}
-      <div className="w-full md:w-64 bg-theme-bg border border-theme-border rounded-lg p-4 font-mono text-xs select-none">
+      <div className="w-full md:w-80 bg-theme-bg border border-theme-border rounded-lg p-4 font-mono text-xs select-none overflow-x-auto">
+
         <div className="text-theme-subtle text-[10px] uppercase tracking-wider mb-3 font-bold">Python Code Trace</div>
         <div className="flex flex-col gap-1.5">
           {[
@@ -163,9 +164,10 @@ export default function InteractiveVisualizerDemo() {
                 key={idx} 
                 className={`py-1 px-2 rounded whitespace-pre transition-all duration-200 ${
                   isHighlighted 
-                    ? 'bg-theme-accent bg-opacity-20 text-theme-accent font-bold border-l-2 border-theme-accent shadow-sm' 
+                    ? 'text-theme-accent font-bold border-l-2 border-theme-accent shadow-sm' 
                     : 'text-theme-text opacity-50'
                 }`}
+                style={isHighlighted ? { backgroundColor: 'color-mix(in srgb, var(--color-theme-accent) 15%, transparent)' } : {}}
               >
                 {line}
               </div>

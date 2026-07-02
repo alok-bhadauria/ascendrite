@@ -5,7 +5,7 @@ from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from core.config import settings
 from core.logging import setup_logging
-from core.database import connect_to_mongo, close_mongo_connection
+from core.database import connect_to_mongo, close_mongo_connection, db_manager
 from api.v1.router import router as v1_router
 
 # Setup logger before main app starts
@@ -14,15 +14,17 @@ logger = logging.getLogger(__name__)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Application Startup lifecycle
+    # ── Startup ──────────────────────────────────────────────────────────
     logger.info("Initializing Ascendrite API Server core resources...")
-    try:
-        await connect_to_mongo()
-    except Exception as e:
-        logger.critical(f"FastAPI startup cancelled due to database failure: {e}")
-        raise e
+    connected = await connect_to_mongo()
+    if not connected:
+        logger.warning(
+            "Server is starting in DEGRADED MODE — MongoDB unavailable. "
+            "API endpoints requiring a database will return HTTP 503. "
+            "Fix: whitelist your IP in MongoDB Atlas → Network Access."
+        )
     yield
-    # Application Shutdown lifecycle
+    # ── Shutdown ─────────────────────────────────────────────────────────
     logger.info("Shutting down core resources...")
     await close_mongo_connection()
 
@@ -63,8 +65,13 @@ async def root():
 
 @app.get("/health", tags=["System"])
 async def health():
-    """Lightweight health check for edge load balancers"""
-    return {"status": "healthy"}
+    """Health check — reports server and database connectivity state."""
+    db_ok = db_manager.is_connected
+    return {
+        "status": "healthy" if db_ok else "degraded",
+        "server": "online",
+        "database": "connected" if db_ok else "unavailable — whitelist your IP in MongoDB Atlas Network Access",
+    }
 
 # Include V1 Router groups
 app.include_router(v1_router, prefix="/api/v1")
