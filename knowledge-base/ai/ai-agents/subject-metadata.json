@@ -1,9 +1,21 @@
 {
-  "subject_id": "ai-agents",
-  "name": "AI Agents",
-  "category": "ai",
+  "id": "ai-agents",
+  "slug": "ai-agents",
+  "display_name": "AI Agents",
+  "version": "1.0.0",
+  "schema_version": "1.0.0",
+  "content_version": "1.0.0",
+  "theme": {
+    "primary": "#3B82F6",
+    "secondary": "#60A5FA",
+    "accent": "#F59E0B",
+    "surface": "#1F2937",
+    "text": "#F8FAFC",
+    "graph": "#3B82F6"
+  },
+  "estimated_hours": 120,
   "difficulty": "Advanced",
-  "estimated_learning_hours": 120,
+  "category": "ai",
   "prerequisites": [
     "Python Programming",
     "Generative AI",
@@ -17,12 +29,14 @@
     "Safety Guardrails",
     "Sandboxing"
   ],
+  "last_updated": "2026-06-29",
+  "subject_id": "ai-agents",
+  "name": "AI Agents",
+  "estimated_learning_hours": 120,
   "subject_theme_colors": {
     "primary": "#3B82F6",
     "secondary": "#60A5FA",
     "accent": "#F59E0B",
     "neutral": "#1F2937"
-  },
-  "version": "1.0.0",
-  "last_updated": "2026-06-29"
+  }
 }

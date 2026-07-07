@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ascendrite.com/schemas/interview.schema.json",
+  "title": "Interview Prep Schema",
+  "description": "JSON schema for interview preparation files in the Ascendrite platform.",
+  "type": "object",
+  "required": [
+    "topic_id",
+    "title",
+    "version",
+    "content"
+  ],
+  "properties": {
+    "topic_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "title": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "content": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

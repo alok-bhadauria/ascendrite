@@ -61,9 +61,36 @@ Since all curriculum assets are JSON, structural visual diagrams and running cod
 
 ---
 
-## 4. Content Validation Suite (`validate_ai_notes.py`)
-To prevent invalid formatting in production bundles, an automation runner enforces compilation checks before git commits:
-1.  **JSON Validation:** Parses files through native Python `json.loads` to catch trailing commas or escape errors.
-2.  **Emoji Verification:** Rejects files containing any Unicode emoji blocks, ensuring an academic tone.
-3.  **Local Path Safety:** Validates string fields against absolute paths and protocol leaks.
-4.  **Schema Consistency:** Confirms that all JSON files contain the exact key layout defined in the styling guides.
+## 4. Content Validation Suite & Schema Enforcement
+
+To prevent invalid formatting and design regression in production bundles, Ascendrite runs a multi-stage validation check:
+
+### 4.1 JSON Schema Validation (Draft 2020-12)
+All files under `knowledge-base/` are subject to validation schemas residing under `knowledge-base/schemas/`. These files use the JSON Schema Draft 2020-12 standard to ensure support for modern constraints, recursive references, and future schema updates:
+*   `subject.schema.json`: Validates canonical subject configuration settings and theme definitions.
+*   `curriculum.schema.json`: Validates subject-specific syllabus module/topic mappings.
+*   `topic.schema.json`: Validates detail notes, outcome lists, and callout matrices.
+*   `revision.schema.json`: Validates revision cheat-sheet flashcards.
+*   `interview.schema.json`: Validates interview prep questions and answers.
+*   `example.schema.json` & `practice.schema.json`: Validate executable code assets.
+*   `quiz.schema.json`: Validates multiple-choice diagnostic options and explanations.
+
+### 4.2 Cross-Repository Integrity Validation (`validate_knowledge_integrity.py`)
+A custom verification script checks repository-wide integrity, mapping, and key relationships across metadata files. This runner detects:
+1.  **Orphaned References**: Subject or concept IDs referenced in the taxonomy or curriculum mapping that do not exist physically in the codebase.
+2.  **Duplicate Identifiers**: Duplicate module, topic, or asset IDs across different subjects.
+3.  **Broken Asset Mappings**: Logical asset IDs inside `curriculum-map.json` that cannot be resolved physically via `platform-structure.json` mappings.
+4.  **Inconsistent Metadata**: Mismatches between index keys and local subject configs.
+
+### 4.3 Content Compilation Validation (`validate_ai_notes.py`)
+The pre-commit content runner enforces basic formatting rules:
+1.  **JSON Validation**: Verifies that standard parser deserialization executes cleanly.
+2.  **Emoji Verification**: Rejects any files containing Unicode emoji blocks to preserve a professional, academic tone.
+3.  **Local Path Safety**: Checks for absolute paths or protocol leaks.
+4.  **Schema Consistency**: Verifies that files match expected styles and formats.
+
+### 4.4 Subject Metadata Evolution Strategy
+To support progression without breaking API endpoints, changes to subject configuration parameters follow a clear evolution path:
+*   **Canonical Properties**: The new standardized properties (e.g. `id`, `slug`, `display_name`, `theme`, `estimated_hours`) are treated as the canonical source of truth for new components and API responses.
+*   **Legacy Fields Deprecation**: Old parameters (e.g. `subject_id`, `name`, `estimated_learning_hours`, `subject_theme_colors`) are preserved temporarily for backward compatibility. They are formally marked as deprecated, and are scheduled for removal in future versions once all consumers migrate.
+

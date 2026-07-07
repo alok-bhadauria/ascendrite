@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ascendrite.com/schemas/subject.schema.json",
+  "title": "Subject Metadata Schema",
+  "description": "JSON schema for subject metadata configuration files in the Ascendrite platform.",
+  "type": "object",
+  "required": [
+    "id",
+    "slug",
+    "display_name",
+    "version",
+    "schema_version",
+    "content_version",
+    "theme",
+    "estimated_hours",
+    "difficulty",
+    "category"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "display_name": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "schema_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "content_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "theme": {
+      "type": "object",
+      "required": [
+        "primary",
+        "secondary",
+        "accent",
+        "surface",
+        "text",
+        "graph"
+      ],
+      "properties": {
+        "primary": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" },
+        "secondary": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" },
+        "accent": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" },
+        "surface": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" },
+        "text": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" },
+        "graph": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" }
+      },
+      "additionalProperties": false
+    },
+    "estimated_hours": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "difficulty": {
+      "type": "string",
+      "enum": ["Beginner", "Medium", "Hard", "Advanced"]
+    },
+    "category": {
+      "type": "string",
+      "enum": ["ai", "core-cs", "software-engineering", "web-development", "aptitude"]
+    },
+    "prerequisites": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "last_updated": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "subject_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "name": {
+      "type": "string"
+    },
+    "estimated_learning_hours": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "subject_theme_colors": {
+      "type": "object",
+      "properties": {
+        "primary": { "type": "string" },
+        "secondary": { "type": "string" },
+        "accent": { "type": "string" },
+        "neutral": { "type": "string" }
+      }
+    }
+  },
+  "additionalProperties": false
+}

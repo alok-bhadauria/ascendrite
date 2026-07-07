@@ -1,9 +1,21 @@
 {
-  "subject_id": "genai",
-  "name": "Generative AI",
-  "category": "ai",
+  "id": "genai",
+  "slug": "genai",
+  "display_name": "Generative AI",
+  "version": "1.0.0",
+  "schema_version": "1.0.0",
+  "content_version": "1.0.0",
+  "theme": {
+    "primary": "#7C3AED",
+    "secondary": "#A78BFA",
+    "accent": "#F59E0B",
+    "surface": "#1F2937",
+    "text": "#F8FAFC",
+    "graph": "#7C3AED"
+  },
+  "estimated_hours": 120,
   "difficulty": "Advanced",
-  "estimated_learning_hours": 120,
+  "category": "ai",
   "prerequisites": [
     "Python Programming",
     "Deep Learning Foundations",
@@ -18,12 +30,14 @@
     "vLLM",
     "Multimodal"
   ],
+  "last_updated": "2026-06-29",
+  "subject_id": "genai",
+  "name": "Generative AI",
+  "estimated_learning_hours": 120,
   "subject_theme_colors": {
     "primary": "#7C3AED",
     "secondary": "#A78BFA",
     "accent": "#F59E0B",
     "neutral": "#1F2937"
-  },
-  "version": "1.0.0",
-  "last_updated": "2026-06-29"
+  }
 }

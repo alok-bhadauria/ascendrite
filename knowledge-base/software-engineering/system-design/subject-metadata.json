@@ -1,19 +1,33 @@
 {
-  "subject_id": "system-design",
-  "name": "System Design",
-  "category": "software-engineering",
+  "id": "system-design",
+  "slug": "system-design",
+  "display_name": "System Design",
+  "version": "1.0.0",
+  "schema_version": "1.0.0",
+  "content_version": "1.0.0",
+  "theme": {
+    "primary": "#3B82F6",
+    "secondary": "#60A5FA",
+    "accent": "#10B981",
+    "surface": "#1F2937",
+    "text": "#F8FAFC",
+    "graph": "#3B82F6"
+  },
+  "estimated_hours": 80,
   "difficulty": "Medium",
-  "estimated_learning_hours": 80,
+  "category": "software-engineering",
   "prerequisites": [],
   "tags": [
     "System Design"
   ],
+  "last_updated": "2026-06-29",
+  "subject_id": "system-design",
+  "name": "System Design",
+  "estimated_learning_hours": 80,
   "subject_theme_colors": {
     "primary": "#3B82F6",
     "secondary": "#60A5FA",
     "accent": "#10B981",
     "neutral": "#1F2937"
-  },
-  "version": "1.0.0",
-  "last_updated": "2026-06-29"
+  }
 }

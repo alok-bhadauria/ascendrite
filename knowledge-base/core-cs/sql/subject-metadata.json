@@ -1,9 +1,21 @@
 {
-  "subject_id": "sql",
-  "name": "SQL",
-  "category": "core-cs",
+  "id": "sql",
+  "slug": "sql",
+  "display_name": "SQL",
+  "version": "1.0.0",
+  "schema_version": "1.0.0",
+  "content_version": "1.0.0",
+  "theme": {
+    "primary": "#059669",
+    "secondary": "#34D399",
+    "accent": "#F59E0B",
+    "surface": "#1F2937",
+    "text": "#F8FAFC",
+    "graph": "#059669"
+  },
+  "estimated_hours": 60,
   "difficulty": "Medium",
-  "estimated_learning_hours": 60,
+  "category": "core-cs",
   "prerequisites": [
     "Basic DBMS concepts"
   ],
@@ -14,12 +26,14 @@
     "Explain Plans",
     "Prepared Statements"
   ],
+  "last_updated": "2026-06-29",
+  "subject_id": "sql",
+  "name": "SQL",
+  "estimated_learning_hours": 60,
   "subject_theme_colors": {
     "primary": "#059669",
     "secondary": "#34D399",
     "accent": "#F59E0B",
     "neutral": "#1F2937"
-  },
-  "version": "1.0.0",
-  "last_updated": "2026-06-29"
+  }
 }

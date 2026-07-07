@@ -1,9 +1,21 @@
 {
-  "subject_id": "os",
-  "name": "OS",
-  "category": "core-cs",
+  "id": "os",
+  "slug": "os",
+  "display_name": "OS",
+  "version": "1.0.0",
+  "schema_version": "1.0.0",
+  "content_version": "1.0.0",
+  "theme": {
+    "primary": "#DC2626",
+    "secondary": "#F87171",
+    "accent": "#4F46E5",
+    "surface": "#1F2937",
+    "text": "#F8FAFC",
+    "graph": "#DC2626"
+  },
+  "estimated_hours": 100,
   "difficulty": "Advanced",
-  "estimated_learning_hours": 100,
+  "category": "core-cs",
   "prerequisites": [
     "Computer Organization",
     "C/C++ Programming"
@@ -15,12 +27,14 @@
     "Concurrency",
     "File Systems"
   ],
+  "last_updated": "2026-06-29",
+  "subject_id": "os",
+  "name": "OS",
+  "estimated_learning_hours": 100,
   "subject_theme_colors": {
     "primary": "#DC2626",
     "secondary": "#F87171",
     "accent": "#4F46E5",
     "neutral": "#1F2937"
-  },
-  "version": "1.0.0",
-  "last_updated": "2026-06-29"
+  }
 }

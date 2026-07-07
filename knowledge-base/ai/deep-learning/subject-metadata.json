@@ -1,9 +1,21 @@
 {
-  "subject_id": "deep-learning",
-  "name": "Deep Learning",
-  "category": "ai",
+  "id": "deep-learning",
+  "slug": "deep-learning",
+  "display_name": "Deep Learning",
+  "version": "1.0.0",
+  "schema_version": "1.0.0",
+  "content_version": "1.0.0",
+  "theme": {
+    "primary": "#3B82F6",
+    "secondary": "#60A5FA",
+    "accent": "#10B981",
+    "surface": "#1F2937",
+    "text": "#F8FAFC",
+    "graph": "#3B82F6"
+  },
+  "estimated_hours": 120,
   "difficulty": "Advanced",
-  "estimated_learning_hours": 120,
+  "category": "ai",
   "prerequisites": [
     "Machine Learning",
     "Linear Algebra Foundations",
@@ -19,12 +31,14 @@
     "PyTorch",
     "Model Scaling"
   ],
+  "last_updated": "2026-06-26",
+  "subject_id": "deep-learning",
+  "name": "Deep Learning",
+  "estimated_learning_hours": 120,
   "subject_theme_colors": {
     "primary": "#3B82F6",
     "secondary": "#60A5FA",
     "accent": "#10B981",
     "neutral": "#1F2937"
-  },
-  "version": "1.0.0",
-  "last_updated": "2026-06-26"
+  }
 }

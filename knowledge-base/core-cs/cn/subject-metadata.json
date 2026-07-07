@@ -1,9 +1,21 @@
 {
-  "subject_id": "cn",
-  "name": "CN",
-  "category": "core-cs",
+  "id": "cn",
+  "slug": "cn",
+  "display_name": "CN",
+  "version": "1.0.0",
+  "schema_version": "1.0.0",
+  "content_version": "1.0.0",
+  "theme": {
+    "primary": "#7C3AED",
+    "secondary": "#A78BFA",
+    "accent": "#EC4899",
+    "surface": "#1F2937",
+    "text": "#F8FAFC",
+    "graph": "#7C3AED"
+  },
+  "estimated_hours": 80,
   "difficulty": "Medium",
-  "estimated_learning_hours": 80,
+  "category": "core-cs",
   "prerequisites": [
     "Operating Systems Basics"
   ],
@@ -15,12 +27,14 @@
     "HTTP",
     "TLS"
   ],
+  "last_updated": "2026-06-29",
+  "subject_id": "cn",
+  "name": "CN",
+  "estimated_learning_hours": 80,
   "subject_theme_colors": {
     "primary": "#7C3AED",
     "secondary": "#A78BFA",
     "accent": "#EC4899",
     "neutral": "#1F2937"
-  },
-  "version": "1.0.0",
-  "last_updated": "2026-06-29"
+  }
 }

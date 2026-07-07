@@ -1,9 +1,21 @@
 {
-  "subject_id": "nlp",
-  "name": "Natural Language Processing",
-  "category": "ai",
+  "id": "nlp",
+  "slug": "nlp",
+  "display_name": "Natural Language Processing",
+  "version": "1.0.0",
+  "schema_version": "1.0.0",
+  "content_version": "1.0.0",
+  "theme": {
+    "primary": "#0D9488",
+    "secondary": "#2DD4BF",
+    "accent": "#F59E0B",
+    "surface": "#1F2937",
+    "text": "#F8FAFC",
+    "graph": "#0D9488"
+  },
+  "estimated_hours": 100,
   "difficulty": "Advanced",
-  "estimated_learning_hours": 100,
+  "category": "ai",
   "prerequisites": [
     "Python Programming",
     "Deep Learning Foundations",
@@ -16,12 +28,14 @@
     "Information Retrieval",
     "Vector Databases"
   ],
+  "last_updated": "2026-06-29",
+  "subject_id": "nlp",
+  "name": "Natural Language Processing",
+  "estimated_learning_hours": 100,
   "subject_theme_colors": {
     "primary": "#0D9488",
     "secondary": "#2DD4BF",
     "accent": "#F59E0B",
     "neutral": "#1F2937"
-  },
-  "version": "1.0.0",
-  "last_updated": "2026-06-29"
+  }
 }

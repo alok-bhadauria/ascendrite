@@ -48,4 +48,6 @@ To support a completely metadata-driven knowledge architecture, several global s
 *   **`domain-taxonomy.json`**: Academic categorization tree detailing domains, disciplines, and subject groups. It organizes subjects in a generic classification structure.
 *   **`knowledge-graph.json`**: Conceptual semantic graph modeling concepts and logical relationship edges (prerequisites, extensions, parts).
 *   **`curriculum-map.json`**: Progression mapping relating subjects, modules, and topics to actual assets (notes, revision, example codes, diagrams) and semantic concepts.
+*   **`schemas/`**: Folder containing the JSON Schema Draft 2020-12 specifications (`subject.schema.json`, `curriculum.schema.json`, `topic.schema.json`, `revision.schema.json`, `interview.schema.json`, `example.schema.json`, `practice.schema.json`, `quiz.schema.json`) for validation of all curriculum assets.
+
 
