@@ -4,6 +4,7 @@
   "root_dir": "knowledge-base",
   "templates": {
     "standard-subject": {
+      "schema_version": "1.0.0",
       "metadata_files": {
         "syllabus": "syllabus.json",
         "subject_metadata": "subject-metadata.json",
@@ -48,31 +49,84 @@
       "id": "software-engineering",
       "name": "Software Engineering",
       "relative_path": "software-engineering",
+      "display": {
+        "title": "Software Engineering",
+        "description": "Enterprise software engineering methodologies, OOP paradigms, spring boot development, and scalable systems design.",
+        "icon": "Code",
+        "accent_color": "#10B981",
+        "gradient": "linear-gradient(135deg, #10B981 0%, #059669 100%)",
+        "display_order": 1
+      },
       "subjects": [
         {
           "id": "java",
           "relative_path": "software-engineering/java",
-          "template": "standard-subject"
+          "template": "standard-subject",
+          "display": {
+            "title": "Java Programming",
+            "short_title": "Java",
+            "description": "Foundational programming constructs, concurrency limits, and memory profiling within the JVM ecosystem.",
+            "icon": "Coffee",
+            "accent_color": "#ED8B00",
+            "gradient": "linear-gradient(135deg, #ED8B00 0%, #C86400 100%)",
+            "display_order": 1
+          }
         },
         {
           "id": "oop",
           "relative_path": "software-engineering/oop",
-          "template": "standard-subject"
+          "template": "standard-subject",
+          "display": {
+            "title": "Object Oriented Programming",
+            "short_title": "OOP",
+            "description": "Core abstraction patterns, SOLID designs, decoupling principles, and robust interface boundaries.",
+            "icon": "Box",
+            "accent_color": "#3B82F6",
+            "gradient": "linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%)",
+            "display_order": 2
+          }
         },
         {
           "id": "dsa",
           "relative_path": "software-engineering/dsa",
-          "template": "standard-subject"
+          "template": "standard-subject",
+          "display": {
+            "title": "Data Structures & Algorithms",
+            "short_title": "DSA",
+            "description": "Time/space complexity analysis, custom trees, sorting logic, and advanced graph searching.",
+            "icon": "GitFork",
+            "accent_color": "#EF4444",
+            "gradient": "linear-gradient(135deg, #EF4444 0%, #B91C1C 100%)",
+            "display_order": 3
+          }
         },
         {
           "id": "spring-boot",
           "relative_path": "software-engineering/spring-boot",
-          "template": "standard-subject"
+          "template": "standard-subject",
+          "display": {
+            "title": "SpringBoot Framework",
+            "short_title": "SpringBoot",
+            "description": "Enterprise microservice design, IOC containers, database transactions, and secure JWT API structures.",
+            "icon": "Zap",
+            "accent_color": "#6DB33F",
+            "gradient": "linear-gradient(135deg, #6DB33F 0%, #548D2E 100%)",
+            "display_order": 4
+          }
         },
         {
           "id": "system-design",
           "relative_path": "software-engineering/system-design",
-          "template": "standard-subject"
+          "template": "standard-subject",
+          "display": {
+            "title": "System Design",
+            "short_title": "System Design",
+            "description": "High-level scalable designs, load balancing pools, database partitioning, and rate limit architectures.",
+            "icon": "Cpu",
+            "accent_color": "#8B5CF6",
+            "gradient": "linear-gradient(135deg, #8B5CF6 0%, #6D28D9 100%)",
+            "display_order": 5
+          }
         }
       ]
     },
@@ -80,31 +134,84 @@
       "id": "ai",
       "name": "AI",
       "relative_path": "ai",
+      "display": {
+        "title": "Artificial Intelligence",
+        "description": "Theoretical derivations and implementation strategies of ML models, Deep Neural Networks, NLP, and Generative AI Agents.",
+        "icon": "Brain",
+        "accent_color": "#6366F1",
+        "gradient": "linear-gradient(135deg, #6366F1 0%, #4F46E5 100%)",
+        "display_order": 2
+      },
       "subjects": [
         {
           "id": "machine-learning",
           "relative_path": "ai/machine-learning",
-          "template": "standard-subject"
+          "template": "standard-subject",
+          "display": {
+            "title": "Machine Learning",
+            "short_title": "ML",
+            "description": "Mathematical optimization pipelines, gradient descent derivations, and matrix factorization models.",
+            "icon": "TrendingUp",
+            "accent_color": "#4F46E5",
+            "gradient": "linear-gradient(135deg, #4F46E5 0%, #3730A3 100%)",
+            "display_order": 1
+          }
         },
         {
           "id": "deep-learning",
           "relative_path": "ai/deep-learning",
-          "template": "standard-subject"
+          "template": "standard-subject",
+          "display": {
+            "title": "Deep Learning",
+            "short_title": "DL",
+            "description": "Neural net backpropagations, convolutional maps, and transformer scale structures.",
+            "icon": "Activity",
+            "accent_color": "#EC4899",
+            "gradient": "linear-gradient(135deg, #EC4899 0%, #BE185D 100%)",
+            "display_order": 2
+          }
         },
         {
           "id": "nlp",
           "relative_path": "ai/nlp",
-          "template": "standard-subject"
+          "template": "standard-subject",
+          "display": {
+            "title": "Natural Language Processing",
+            "short_title": "NLP",
+            "description": "Linguistic mapping matrices, vector embeddings, and sequence alignments.",
+            "icon": "MessageSquare",
+            "accent_color": "#14B8A6",
+            "gradient": "linear-gradient(135deg, #14B8A6 0%, #0F766E 100%)",
+            "display_order": 3
+          }
         },
         {
           "id": "genai",
           "relative_path": "ai/genai",
-          "template": "standard-subject"
+          "template": "standard-subject",
+          "display": {
+            "title": "Generative AI",
+            "short_title": "GenAI",
+            "description": "Large Language Models engineering, retrieval-augmented generation loops, and fine-tuning models.",
+            "icon": "Sparkles",
+            "accent_color": "#F59E0B",
+            "gradient": "linear-gradient(135deg, #F59E0B 0%, #D97706 100%)",
+            "display_order": 4
+          }
         },
         {
           "id": "ai-agents",
           "relative_path": "ai/ai-agents",
-          "template": "standard-subject"
+          "template": "standard-subject",
+          "display": {
+            "title": "AI Agents",
+            "short_title": "Agents",
+            "description": "Self-directed cognitive architectures, tool calling integrations, and multi-agent systems coordination.",
+            "icon": "Users",
+            "accent_color": "#10B981",
+            "gradient": "linear-gradient(135deg, #10B981 0%, #047857 100%)",
+            "display_order": 5
+          }
         }
       ]
     },
@@ -112,26 +219,70 @@
       "id": "core-cs",
       "name": "Core CS",
       "relative_path": "core-cs",
+      "display": {
+        "title": "Core Computer Science",
+        "description": "Fundamental computer systems engineering, database structures, SQL query optimization, and computer networks.",
+        "icon": "HardDrive",
+        "accent_color": "#F59E0B",
+        "gradient": "linear-gradient(135deg, #F59E0B 0%, #D97706 100%)",
+        "display_order": 3
+      },
       "subjects": [
         {
           "id": "dbms",
           "relative_path": "core-cs/dbms",
-          "template": "standard-subject"
+          "template": "standard-subject",
+          "display": {
+            "title": "Database Management Systems",
+            "short_title": "DBMS",
+            "description": "Transaction control layers, indexing architectures, ACID properties, and relational storage bounds.",
+            "icon": "Database",
+            "accent_color": "#2563EB",
+            "gradient": "linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%)",
+            "display_order": 1
+          }
         },
         {
           "id": "sql",
           "relative_path": "core-cs/sql",
-          "template": "standard-subject"
+          "template": "standard-subject",
+          "display": {
+            "title": "Structured Query Language",
+            "short_title": "SQL",
+            "description": "Complex relational join optimization, indices planning, window functions, and analytics queries.",
+            "icon": "Filter",
+            "accent_color": "#06B6D4",
+            "gradient": "linear-gradient(135deg, #06B6D4 0%, #0891B2 100%)",
+            "display_order": 2
+          }
         },
         {
           "id": "os",
           "relative_path": "core-cs/os",
-          "template": "standard-subject"
+          "template": "standard-subject",
+          "display": {
+            "title": "Operating Systems",
+            "short_title": "OS",
+            "description": "Kernel context switching loops, memory virtualization boundaries, file systems, and thread concurrency control.",
+            "icon": "Sliders",
+            "accent_color": "#EC4899",
+            "gradient": "linear-gradient(135deg, #EC4899 0%, #C026D3 100%)",
+            "display_order": 3
+          }
         },
         {
           "id": "cn",
           "relative_path": "core-cs/cn",
-          "template": "standard-subject"
+          "template": "standard-subject",
+          "display": {
+            "title": "Computer Networks",
+            "short_title": "CN",
+            "description": "Protocol boundary layering, subnet calculations, TCP congestion control algorithms, and routing protocols.",
+            "icon": "Globe",
+            "accent_color": "#8B5CF6",
+            "gradient": "linear-gradient(135deg, #8B5CF6 0%, #6D28D9 100%)",
+            "display_order": 4
+          }
         }
       ]
     },
@@ -139,16 +290,42 @@
       "id": "aptitude",
       "name": "Aptitude",
       "relative_path": "aptitude",
+      "display": {
+        "title": "Analytical Aptitude",
+        "description": "Quantitative reasoning formulations, logical analytics, and linguistic competency structures.",
+        "icon": "BarChart2",
+        "accent_color": "#10B981",
+        "gradient": "linear-gradient(135deg, #10B981 0%, #059669 100%)",
+        "display_order": 4
+      },
       "subjects": [
         {
           "id": "quantitative-aptitude",
           "relative_path": "aptitude/quantitative-aptitude",
-          "template": "standard-subject"
+          "template": "standard-subject",
+          "display": {
+            "title": "Quantitative Aptitude",
+            "short_title": "Quant",
+            "description": "Mathematical logical systems, permutations, data analytics, and probability computations.",
+            "icon": "Percent",
+            "accent_color": "#059669",
+            "gradient": "linear-gradient(135deg, #059669 0%, #047857 100%)",
+            "display_order": 1
+          }
         },
         {
           "id": "verbal-aptitude",
           "relative_path": "aptitude/verbal-aptitude",
-          "template": "standard-subject"
+          "template": "standard-subject",
+          "display": {
+            "title": "Verbal Aptitude",
+            "short_title": "Verbal",
+            "description": "Structural linguistic evaluation, logical reasoning, and reading comprehensions.",
+            "icon": "FileText",
+            "accent_color": "#4B5563",
+            "gradient": "linear-gradient(135deg, #4B5563 0%, #374151 100%)",
+            "display_order": 2
+          }
         }
       ]
     },
@@ -156,41 +333,112 @@
       "id": "web-development",
       "name": "Web Development",
       "relative_path": "web-development",
+      "display": {
+        "title": "Web Development",
+        "description": "Client-side applications, custom rendering states, layout templates, and asynchronous backend operations.",
+        "icon": "Layers",
+        "accent_color": "#3B82F6",
+        "gradient": "linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)",
+        "display_order": 5
+      },
       "subjects": [
         {
           "id": "html-css-git",
           "relative_path": "web-development/html-css-git",
-          "template": "standard-subject"
+          "template": "standard-subject",
+          "display": {
+            "title": "HTML, CSS & Git",
+            "short_title": "Web Basics",
+            "description": "Semantic markup document nodes, CSS layout designs, flexbox models, and git version tracking loops.",
+            "icon": "BookOpen",
+            "accent_color": "#E34F26",
+            "gradient": "linear-gradient(135deg, #E34F26 0%, #C23A16 100%)",
+            "display_order": 1
+          }
         },
         {
           "id": "javascript",
           "relative_path": "web-development/javascript",
-          "template": "standard-subject"
+          "template": "standard-subject",
+          "display": {
+            "title": "JavaScript",
+            "short_title": "JS",
+            "description": "Event loops execution flow, closure scopes, callbacks matrices, and asynchronous programming APIs.",
+            "icon": "ShieldAlert",
+            "accent_color": "#F7DF1E",
+            "gradient": "linear-gradient(135deg, #F7DF1E 0%, #C5B014 100%)",
+            "display_order": 2
+          }
         },
         {
           "id": "css-frameworks",
           "relative_path": "web-development/css-frameworks",
-          "template": "standard-subject"
+          "template": "standard-subject",
+          "display": {
+            "title": "CSS Frameworks",
+            "short_title": "CSS Layout",
+            "description": "Tailwind utility structures, dynamic animations, grid allocations, and mobile viewport controls.",
+            "icon": "Layout",
+            "accent_color": "#38BDF8",
+            "gradient": "linear-gradient(135deg, #38BDF8 0%, #0284C7 100%)",
+            "display_order": 3
+          }
         },
         {
           "id": "reactjs",
           "relative_path": "web-development/reactjs",
-          "template": "standard-subject"
+          "template": "standard-subject",
+          "display": {
+            "title": "ReactJS",
+            "short_title": "React",
+            "description": "Virtual DOM reconciliation loops, hook configurations, custom context bounds, and interactive application controls.",
+            "icon": "RotateCw",
+            "accent_color": "#61DAFB",
+            "gradient": "linear-gradient(135deg, #61DAFB 0%, #008BB0 100%)",
+            "display_order": 4
+          }
         },
         {
           "id": "nodejs-expressjs",
           "relative_path": "web-development/nodejs-expressjs",
-          "template": "standard-subject"
+          "template": "standard-subject",
+          "display": {
+            "title": "NodeJS & ExpressJS",
+            "short_title": "Node/Express",
+            "description": "Backend API structures, server routing controllers, query processing layers, and middleware constraints.",
+            "icon": "Link",
+            "accent_color": "#339933",
+            "gradient": "linear-gradient(135deg, #339933 0%, #216F21 100%)",
+            "display_order": 5
+          }
         },
         {
           "id": "typescript",
           "relative_path": "web-development/typescript",
-          "template": "standard-subject"
+          "template": "standard-subject",
+          "display": {
+            "title": "TypeScript",
+            "short_title": "TS",
+            "description": "Static type checking definitions, interface compilers, union classes, and generic type configurations.",
+            "icon": "Shield",
+            "accent_color": "#3178C6",
+            "gradient": "linear-gradient(135deg, #3178C6 0%, #1E5086 100%)",
+            "display_order": 6
+          }
         },
         {
           "id": "nextjs",
           "relative_path": "web-development/nextjs",
-          "template": "standard-subject"
+          "template": "standard-subject",
+          "display": {
+            "title": "NextJS Framework",
+            "short_title": "NextJS",
+            "description": "Server-side rendering patterns, static site generations, file routers, and server-component optimization.",
+            "icon": "TrendingDown",
+            "accent_color": "#000000",
+            "gradient": "linear-gradient(135deg, #111111 0%, #000000 100%)",
+            "display_order": 7
+          }
         }
       ]
     }

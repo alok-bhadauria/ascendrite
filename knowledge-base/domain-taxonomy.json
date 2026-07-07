@@ -6,21 +6,57 @@
       "id": "computing-and-information-sciences",
       "name": "Computing and Information Sciences",
       "description": "Disciplines covering systems engineering, computer science theory, algorithms, and software development methodologies.",
+      "display": {
+        "title": "Computing & Information Sciences",
+        "short_title": "Computing",
+        "description": "Enterprise software architectures, systems design, artificial intelligence, and core computer science foundations.",
+        "icon": "Terminal",
+        "accent_color": "#4F46E5",
+        "gradient": "linear-gradient(135deg, #4F46E5 0%, #312E81 100%)",
+        "display_order": 1
+      },
       "disciplines": [
         {
           "id": "artificial-intelligence",
           "name": "Artificial Intelligence",
           "description": "Study of cognitive systems, machine learning models, neural architectures, natural language understanding, and automated reasoning.",
+          "display": {
+            "title": "Artificial Intelligence",
+            "short_title": "AI",
+            "description": "From statistical regression to neural network transformers and self-directed agents.",
+            "icon": "Brain",
+            "accent_color": "#818CF8",
+            "gradient": "linear-gradient(135deg, #818CF8 0%, #4F46E5 100%)",
+            "display_order": 1
+          },
           "subject_groups": [
             {
               "id": "statistical-learning",
               "name": "Statistical & Neural Machine Learning",
-              "subjects": ["machine-learning", "deep-learning"]
+              "subjects": ["machine-learning", "deep-learning"],
+              "display": {
+                "title": "Statistical & Neural Machine Learning",
+                "short_title": "ML & DL",
+                "description": "Algorithms and architectures backing statistical calculations and backpropagation systems.",
+                "icon": "Cpu",
+                "accent_color": "#EC4899",
+                "gradient": "linear-gradient(135deg, #EC4899 0%, #BD1C7B 100%)",
+                "display_order": 1
+              }
             },
             {
               "id": "cognitive-applications",
               "name": "Cognitive AI Applications",
-              "subjects": ["nlp", "genai", "ai-agents"]
+              "subjects": ["nlp", "genai", "ai-agents"],
+              "display": {
+                "title": "Cognitive AI Applications",
+                "short_title": "AI Apps",
+                "description": "Natural language mapping, RAG retrieval engines, and multi-agent coordination frameworks.",
+                "icon": "Sparkles",
+                "accent_color": "#F59E0B",
+                "gradient": "linear-gradient(135deg, #F59E0B 0%, #B45309 100%)",
+                "display_order": 2
+              }
             }
           ]
         },
@@ -28,21 +64,57 @@
           "id": "software-engineering",
           "name": "Software Engineering",
           "description": "Systematic application of engineering approaches to the design, construction, testing, and maintenance of software systems.",
+          "display": {
+            "title": "Software Engineering",
+            "short_title": "SWE",
+            "description": "Paradigms, designs patterns, and enterprise frameworks supporting software construction.",
+            "icon": "Code",
+            "accent_color": "#10B981",
+            "gradient": "linear-gradient(135deg, #10B981 0%, #064E3B 100%)",
+            "display_order": 2
+          },
           "subject_groups": [
             {
               "id": "programming-paradigms",
               "name": "Programming Paradigms & Languages",
-              "subjects": ["java", "typescript"]
+              "subjects": ["java", "typescript"],
+              "display": {
+                "title": "Programming Paradigms & Languages",
+                "short_title": "Languages",
+                "description": "JVM setups, static typing interfaces, and memory safety rules.",
+                "icon": "Layers",
+                "accent_color": "#3B82F6",
+                "gradient": "linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%)",
+                "display_order": 1
+              }
             },
             {
               "id": "architecture-design",
               "name": "Architecture & System Design",
-              "subjects": ["oop", "system-design"]
+              "subjects": ["oop", "system-design"],
+              "display": {
+                "title": "Architecture & System Design",
+                "short_title": "Architecture",
+                "description": "Object oriented design boundaries, structural patterns, and microservices topologies.",
+                "icon": "Grid",
+                "accent_color": "#8B5CF6",
+                "gradient": "linear-gradient(135deg, #8B5CF6 0%, #5B21B6 100%)",
+                "display_order": 2
+              }
             },
             {
               "id": "algorithms-infrastructure",
               "name": "Algorithms & Enterprise Frameworks",
-              "subjects": ["dsa", "spring-boot"]
+              "subjects": ["dsa", "spring-boot"],
+              "display": {
+                "title": "Algorithms & Enterprise Frameworks",
+                "short_title": "Alg & Frameworks",
+                "description": "Complexity bounds analysis and enterprise backend integration containers.",
+                "icon": "Box",
+                "accent_color": "#EF4444",
+                "gradient": "linear-gradient(135deg, #EF4444 0%, #991B1B 100%)",
+                "display_order": 3
+              }
             }
           ]
         },
@@ -50,16 +122,43 @@
           "id": "core-computer-science",
           "name": "Core Computer Science",
           "description": "Fundamental academic studies in OS kernels, networking protocols, databases, and structured queries.",
+          "display": {
+            "title": "Core Computer Science",
+            "short_title": "Core CS",
+            "description": "Operating system process loops, database indexing structures, and internet protocol models.",
+            "icon": "HardDrive",
+            "accent_color": "#374151",
+            "gradient": "linear-gradient(135deg, #374151 0%, #111827 100%)",
+            "display_order": 3
+          },
           "subject_groups": [
             {
               "id": "systems-infrastructure",
               "name": "Operating Systems & Networking",
-              "subjects": ["os", "cn"]
+              "subjects": ["os", "cn"],
+              "display": {
+                "title": "Operating Systems & Networking",
+                "short_title": "Systems",
+                "description": "Kernel context switching schedules and layer protocol transmission checks.",
+                "icon": "Globe",
+                "accent_color": "#14B8A6",
+                "gradient": "linear-gradient(135deg, #14B8A6 0%, #115E59 100%)",
+                "display_order": 1
+              }
             },
             {
               "id": "data-management",
               "name": "Database Systems & SQL Theory",
-              "subjects": ["dbms", "sql"]
+              "subjects": ["dbms", "sql"],
+              "display": {
+                "title": "Database Systems & SQL Theory",
+                "short_title": "Databases",
+                "description": "ACID transaction guarantees and relational schema query compilations.",
+                "icon": "Database",
+                "accent_color": "#06B6D4",
+                "gradient": "linear-gradient(135deg, #06B6D4 0%, #0F766E 100%)",
+                "display_order": 2
+              }
             }
           ]
         },
@@ -67,16 +166,43 @@
           "id": "web-engineering",
           "name": "Web Engineering & Design",
           "description": "Professional web stack development, styling systems, client state architecture, and runtime environments.",
+          "display": {
+            "title": "Web Engineering & Design",
+            "short_title": "Web Eng",
+            "description": "Frontend rendering mechanisms, responsive styling parameters, and asynchronous backends.",
+            "icon": "Layers",
+            "accent_color": "#2563EB",
+            "gradient": "linear-gradient(135deg, #2563EB 0%, #1E3A8A 100%)",
+            "display_order": 4
+          },
           "subject_groups": [
             {
               "id": "client-fundamentals",
               "name": "Client-Side Fundamentals & Styling",
-              "subjects": ["html-css-git", "css-frameworks", "javascript"]
+              "subjects": ["html-css-git", "css-frameworks", "javascript"],
+              "display": {
+                "title": "Client-Side Fundamentals & Styling",
+                "short_title": "Web Core",
+                "description": "DOM interaction mechanisms, semantic layout designs, and version controller setups.",
+                "icon": "Eye",
+                "accent_color": "#E35B30",
+                "gradient": "linear-gradient(135deg, #E35B30 0%, #9F3E1E 100%)",
+                "display_order": 1
+              }
             },
             {
               "id": "modern-web-ecosystems",
               "name": "Modern Client & Server Runtimes",
-              "subjects": ["reactjs", "nodejs-expressjs", "nextjs"]
+              "subjects": ["reactjs", "nodejs-expressjs", "nextjs"],
+              "display": {
+                "title": "Modern Client & Server Runtimes",
+                "short_title": "Frameworks",
+                "description": "Reconciliation rendering runs, backend routes routing, and static page compiles.",
+                "icon": "RotateCw",
+                "accent_color": "#00A3C4",
+                "gradient": "linear-gradient(135deg, #00A3C4 0%, #006070 100%)",
+                "display_order": 2
+              }
             }
           ]
         }
@@ -86,21 +212,57 @@
       "id": "analytical-and-professional-studies",
       "name": "Analytical and Professional Studies",
       "description": "Foundational cognitive capability, quantitative reasoning, and linguistic competencies.",
+      "display": {
+        "title": "Analytical & Professional Studies",
+        "short_title": "Aptitude",
+        "description": "Mathematical logic systems and verbal structural communications.",
+        "icon": "TrendingUp",
+        "accent_color": "#10B981",
+        "gradient": "linear-gradient(135deg, #10B981 0%, #064E3B 100%)",
+        "display_order": 2
+      },
       "disciplines": [
         {
           "id": "cognitive-aptitude",
           "name": "Cognitive Aptitude",
           "description": "Standardized mathematical problem-solving skills and verbal competencies.",
+          "display": {
+            "title": "Cognitive Aptitude",
+            "short_title": "Cognitive",
+            "description": "Quantitative analysis equations and syntactic reading evaluations.",
+            "icon": "Search",
+            "accent_color": "#6B7280",
+            "gradient": "linear-gradient(135deg, #6B7280 0%, #374151 100%)",
+            "display_order": 1
+          },
           "subject_groups": [
             {
               "id": "quantitative-reasoning",
               "name": "Quantitative Aptitude & Logic",
-              "subjects": ["quantitative-aptitude"]
+              "subjects": ["quantitative-aptitude"],
+              "display": {
+                "title": "Quantitative Aptitude & Logic",
+                "short_title": "Quant Logic",
+                "description": "Relational analytics, permutations, probability bounds, and graphs checks.",
+                "icon": "CheckSquare",
+                "accent_color": "#059669",
+                "gradient": "linear-gradient(135deg, #059669 0%, #046A4A 100%)",
+                "display_order": 1
+              }
             },
             {
               "id": "verbal-reasoning",
               "name": "Verbal Aptitude & Communication",
-              "subjects": ["verbal-aptitude"]
+              "subjects": ["verbal-aptitude"],
+              "display": {
+                "title": "Verbal Aptitude & Communication",
+                "short_title": "Verbal Reasoning",
+                "description": "Semantic reading patterns, sentence structures, and grammar rules.",
+                "icon": "FileText",
+                "accent_color": "#4B5563",
+                "gradient": "linear-gradient(135deg, #4B5563 0%, #1F2937 100%)",
+                "display_order": 2
+              }
             }
           ]
         }
