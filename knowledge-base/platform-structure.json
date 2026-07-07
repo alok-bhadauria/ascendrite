@@ -1,0 +1,198 @@
+{
+  "name": "Ascendrite Knowledge Base Physical Layout",
+  "description": "Defines the physical directory structure and asset suffix patterns of the knowledge-base.",
+  "root_dir": "knowledge-base",
+  "templates": {
+    "standard-subject": {
+      "metadata_files": {
+        "syllabus": "syllabus.json",
+        "subject_metadata": "subject-metadata.json",
+        "subject_map": "subject-map.json",
+        "knowledge_assets": "knowledge-assets.json",
+        "book_metadata": "book-metadata.json"
+      },
+      "asset_directories": {
+        "notes": {
+          "dir": "notes",
+          "file_pattern": "{topic_id}.json"
+        },
+        "revision": {
+          "dir": "revision",
+          "file_pattern": "{topic_id}.json"
+        },
+        "interview": {
+          "dir": "interview",
+          "file_pattern": "{topic_id}.json"
+        },
+        "diagrams": {
+          "dir": "diagrams",
+          "file_pattern": "{topic_id}-dia1.json"
+        },
+        "examples": {
+          "dir": "examples",
+          "file_pattern": "{topic_id}-ex1.json"
+        },
+        "practice": {
+          "dir": "practice",
+          "file_pattern": "{topic_id}-prac1.json"
+        },
+        "quiz": {
+          "dir": "quiz",
+          "file_pattern": "{topic_id}-quiz.json"
+        }
+      }
+    }
+  },
+  "categories": [
+    {
+      "id": "software-engineering",
+      "name": "Software Engineering",
+      "relative_path": "software-engineering",
+      "subjects": [
+        {
+          "id": "java",
+          "relative_path": "software-engineering/java",
+          "template": "standard-subject"
+        },
+        {
+          "id": "oop",
+          "relative_path": "software-engineering/oop",
+          "template": "standard-subject"
+        },
+        {
+          "id": "dsa",
+          "relative_path": "software-engineering/dsa",
+          "template": "standard-subject"
+        },
+        {
+          "id": "spring-boot",
+          "relative_path": "software-engineering/spring-boot",
+          "template": "standard-subject"
+        },
+        {
+          "id": "system-design",
+          "relative_path": "software-engineering/system-design",
+          "template": "standard-subject"
+        }
+      ]
+    },
+    {
+      "id": "ai",
+      "name": "AI",
+      "relative_path": "ai",
+      "subjects": [
+        {
+          "id": "machine-learning",
+          "relative_path": "ai/machine-learning",
+          "template": "standard-subject"
+        },
+        {
+          "id": "deep-learning",
+          "relative_path": "ai/deep-learning",
+          "template": "standard-subject"
+        },
+        {
+          "id": "nlp",
+          "relative_path": "ai/nlp",
+          "template": "standard-subject"
+        },
+        {
+          "id": "genai",
+          "relative_path": "ai/genai",
+          "template": "standard-subject"
+        },
+        {
+          "id": "ai-agents",
+          "relative_path": "ai/ai-agents",
+          "template": "standard-subject"
+        }
+      ]
+    },
+    {
+      "id": "core-cs",
+      "name": "Core CS",
+      "relative_path": "core-cs",
+      "subjects": [
+        {
+          "id": "dbms",
+          "relative_path": "core-cs/dbms",
+          "template": "standard-subject"
+        },
+        {
+          "id": "sql",
+          "relative_path": "core-cs/sql",
+          "template": "standard-subject"
+        },
+        {
+          "id": "os",
+          "relative_path": "core-cs/os",
+          "template": "standard-subject"
+        },
+        {
+          "id": "cn",
+          "relative_path": "core-cs/cn",
+          "template": "standard-subject"
+        }
+      ]
+    },
+    {
+      "id": "aptitude",
+      "name": "Aptitude",
+      "relative_path": "aptitude",
+      "subjects": [
+        {
+          "id": "quantitative-aptitude",
+          "relative_path": "aptitude/quantitative-aptitude",
+          "template": "standard-subject"
+        },
+        {
+          "id": "verbal-aptitude",
+          "relative_path": "aptitude/verbal-aptitude",
+          "template": "standard-subject"
+        }
+      ]
+    },
+    {
+      "id": "web-development",
+      "name": "Web Development",
+      "relative_path": "web-development",
+      "subjects": [
+        {
+          "id": "html-css-git",
+          "relative_path": "web-development/html-css-git",
+          "template": "standard-subject"
+        },
+        {
+          "id": "javascript",
+          "relative_path": "web-development/javascript",
+          "template": "standard-subject"
+        },
+        {
+          "id": "css-frameworks",
+          "relative_path": "web-development/css-frameworks",
+          "template": "standard-subject"
+        },
+        {
+          "id": "reactjs",
+          "relative_path": "web-development/reactjs",
+          "template": "standard-subject"
+        },
+        {
+          "id": "nodejs-expressjs",
+          "relative_path": "web-development/nodejs-expressjs",
+          "template": "standard-subject"
+        },
+        {
+          "id": "typescript",
+          "relative_path": "web-development/typescript",
+          "template": "standard-subject"
+        },
+        {
+          "id": "nextjs",
+          "relative_path": "web-development/nextjs",
+          "template": "standard-subject"
+        }
+      ]
+    }
+  ]
+}

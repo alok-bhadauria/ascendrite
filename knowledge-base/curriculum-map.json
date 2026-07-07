@@ -1,0 +1,227 @@
+{
+  "name": "Ascendrite Curriculum Map",
+  "description": "Binds physical learning assets, practice modules, diagrams, and quizzes to the conceptual knowledge taxonomy.",
+  "subjects": [
+    {
+      "subject_id": "machine-learning",
+      "modules": [
+        {
+          "module_id": "ml-m1",
+          "name": "Module 1: Mathematical Foundations & Optimization for ML Engineers",
+          "topics": [
+            {
+              "topic_id": "machine-learning-m1-t1",
+              "title": "Linear Algebra & Matrix Decompositions",
+              "concept_nodes": ["vector-space", "eigendecomposition", "singular-value-decomposition"],
+              "assets": {
+                "notes": "notes/machine-learning-m1-t1.json",
+                "revision": "revision/machine-learning-m1-t1.json",
+                "interview": "interview/machine-learning-m1-t1.json",
+                "diagrams": ["diagrams/machine-learning-m1-t1-dia1.json"],
+                "examples": ["examples/machine-learning-m1-t1-ex1.json"],
+                "practice": ["practice/machine-learning-m1-t1-prac1.json"],
+                "quiz": "quiz/machine-learning-m1-t1-quiz.json"
+              }
+            },
+            {
+              "topic_id": "machine-learning-m1-t2",
+              "title": "Vector & Matrix Calculus",
+              "concept_nodes": ["gradient-descent"],
+              "assets": {
+                "notes": "notes/machine-learning-m1-t2.json",
+                "revision": "revision/machine-learning-m1-t2.json",
+                "interview": "interview/machine-learning-m1-t2.json",
+                "diagrams": ["diagrams/machine-learning-m1-t2-dia1.json"],
+                "examples": [],
+                "practice": ["practice/machine-learning-m1-t2-prac1.json"],
+                "quiz": "quiz/machine-learning-m1-t2-quiz.json"
+              }
+            },
+            {
+              "topic_id": "machine-learning-m1-t3",
+              "title": "Probability & Information Theory",
+              "concept_nodes": ["cross-entropy", "kl-divergence", "mle-map"],
+              "assets": {
+                "notes": "notes/machine-learning-m1-t3.json",
+                "revision": "revision/machine-learning-m1-t3.json",
+                "interview": "interview/machine-learning-m1-t3.json",
+                "diagrams": [],
+                "examples": ["examples/machine-learning-m1-t3-ex1.json"],
+                "practice": ["practice/machine-learning-m1-t3-prac1.json"],
+                "quiz": "quiz/machine-learning-m1-t3-quiz.json"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "subject_id": "cn",
+      "modules": [
+        {
+          "module_id": "cn-m1",
+          "name": "Module 1: Networking Models, Physical Signals & Layer Transmissions",
+          "topics": [
+            {
+              "topic_id": "cn-m1-t1",
+              "title": "Networking Architectures",
+              "concept_nodes": ["networking-models"],
+              "assets": {
+                "notes": "notes/cn-m1-t1.json",
+                "revision": "revision/cn-m1-t1.json",
+                "interview": "interview/cn-m1-t1.json",
+                "diagrams": ["diagrams/cn-m1-t1-dia1.json"],
+                "examples": [],
+                "practice": [],
+                "quiz": "quiz/cn-m1-t1-quiz.json"
+              }
+            },
+            {
+              "topic_id": "cn-m1-t5",
+              "title": "Ethernet Switches",
+              "concept_nodes": ["mac-address-learning"],
+              "assets": {
+                "notes": "notes/cn-m1-t5.json",
+                "revision": "revision/cn-m1-t5.json",
+                "interview": "interview/cn-m1-t5.json",
+                "diagrams": ["diagrams/cn-m1-t5-dia1.json"],
+                "examples": ["examples/cn-m1-t5-ex1.json"],
+                "practice": ["practice/cn-m1-t5-prac1.json"],
+                "quiz": "quiz/cn-m1-t5-quiz.json"
+              }
+            }
+          ]
+        },
+        {
+          "module_id": "cn-m2",
+          "name": "Module 2: Network Layer Routing, IP Subnetting & CIDR",
+          "topics": [
+            {
+              "topic_id": "cn-m2-t2",
+              "title": "IP Subnetting & CIDR",
+              "concept_nodes": ["subnetting-cidr"],
+              "assets": {
+                "notes": "notes/cn-m2-t2.json",
+                "revision": "revision/cn-m2-t2.json",
+                "interview": "interview/cn-m2-t2.json",
+                "diagrams": ["diagrams/cn-m2-t2-dia1.json"],
+                "examples": ["examples/cn-m2-t2-ex1.json"],
+                "practice": ["practice/cn-m2-t2-prac1.json"],
+                "quiz": "quiz/cn-m2-t2-quiz.json"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "subject_id": "oop",
+      "modules": [
+        {
+          "module_id": "oop-m1",
+          "name": "Module 1: Programming Paradigms & Robust Class Design",
+          "topics": [
+            {
+              "topic_id": "oop-m1-t3",
+              "title": "Encapsulation Boundaries",
+              "concept_nodes": ["encapsulation"],
+              "assets": {
+                "notes": "notes/oop-m1-t3.json",
+                "revision": "revision/oop-m1-t3.json",
+                "interview": "interview/oop-m1-t3.json",
+                "diagrams": ["diagrams/oop-m1-t3-dia1.json"],
+                "examples": ["examples/oop-m1-t3-ex1.json"],
+                "practice": ["practice/oop-m1-t3-prac1.json"],
+                "quiz": "quiz/oop-m1-t3-quiz.json"
+              }
+            },
+            {
+              "topic_id": "oop-m1-t4",
+              "title": "Inheritance & Polymorphism",
+              "concept_nodes": ["polymorphism"],
+              "assets": {
+                "notes": "notes/oop-m1-t4.json",
+                "revision": "revision/oop-m1-t4.json",
+                "interview": "interview/oop-m1-t4.json",
+                "diagrams": ["diagrams/oop-m1-t4-dia1.json"],
+                "examples": ["examples/oop-m1-t4-ex1.json"],
+                "practice": ["practice/oop-m1-t4-prac1.json"],
+                "quiz": "quiz/oop-m1-t4-quiz.json"
+              }
+            }
+          ]
+        },
+        {
+          "module_id": "oop-m2",
+          "name": "Module 2: Coupling, Cohesion & SOLID Design Principles",
+          "topics": [
+            {
+              "topic_id": "oop-m2-t2",
+              "title": "SOLID Principles",
+              "concept_nodes": ["solid-principles"],
+              "assets": {
+                "notes": "notes/oop-m2-t2.json",
+                "revision": "revision/oop-m2-t2.json",
+                "interview": "interview/oop-m2-t2.json",
+                "diagrams": ["diagrams/oop-m2-t2-dia1.json"],
+                "examples": ["examples/oop-m2-t2-ex1.json"],
+                "practice": ["practice/oop-m2-t2-prac1.json"],
+                "quiz": "quiz/oop-m2-t2-quiz.json"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "subject_id": "javascript",
+      "modules": [
+        {
+          "module_id": "js-m1",
+          "name": "Module 1: JS Engine, Event Loop Execution & Scope Closures",
+          "topics": [
+            {
+              "topic_id": "javascript-m1-t2",
+              "title": "Event Loop",
+              "concept_nodes": ["event-loop"],
+              "assets": {
+                "notes": "notes/javascript-m1-t2.json",
+                "revision": "revision/javascript-m1-t2.json",
+                "interview": "interview/javascript-m1-t2.json",
+                "diagrams": ["diagrams/javascript-m1-t2-dia1.json"],
+                "examples": ["examples/javascript-m1-t2-ex1.json"],
+                "practice": ["practice/javascript-m1-t2-prac1.json"],
+                "quiz": "quiz/javascript-m1-t2-quiz.json"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "subject_id": "reactjs",
+      "modules": [
+        {
+          "module_id": "react-m1",
+          "name": "Module 1: Virtual DOM, JSX compilation & Component lifecycle",
+          "topics": [
+            {
+              "topic_id": "reactjs-m1-t1",
+              "title": "Virtual DOM & Reconciliation",
+              "concept_nodes": ["virtual-dom"],
+              "assets": {
+                "notes": "notes/reactjs-m1-t1.json",
+                "revision": "revision/reactjs-m1-t1.json",
+                "interview": "interview/reactjs-m1-t1.json",
+                "diagrams": ["diagrams/reactjs-m1-t1-dia1.json"],
+                "examples": ["examples/reactjs-m1-t1-ex1.json"],
+                "practice": ["practice/reactjs-m1-t1-prac1.json"],
+                "quiz": "quiz/reactjs-m1-t1-quiz.json"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

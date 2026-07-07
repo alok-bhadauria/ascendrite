@@ -21,7 +21,26 @@ By keeping the curriculum cache in-memory, content searches and lesson routing r
 
 ---
 
-## 2. Subject Metadata & Relationship Mapping
+## 2. Global Metadata Layer & Mapping
+
+To transition from a folder-reliant ingestion layout to a fully metadata-driven systems architecture, Ascendrite integrates a global metadata layer at the root of `knowledge-base/`.
+
+### 2.1 Metadata File Specifications
+
+1.  **`platform-structure.json`**: Bridges physical directory paths to logical category and subject IDs.
+    *   *System Responsibility*: Eliminates hardcoded category folders. The parser queries this file to find directories and load assets dynamically.
+    *   *Future Scalability*: Relocating folders or changing storage schemes requires zero backend modifications; only this index file requires updates.
+2.  **`domain-taxonomy.json`**: Defines the timeless academic domains, disciplines, and subject groupings.
+    *   *System Responsibility*: Establishes standard categorization boundaries. Represents pure classification rather than sequential teaching paths.
+    *   *Future Scalability*: Adapts to any educational taxonomy change without altering curriculum mapping or server parsing engines.
+3.  **`knowledge-graph.json`**: Represents concepts and their semantic dependencies.
+    *   *System Responsibility*: Maps conceptual nodes (e.g. Vector Space, SVD, Event Loop) and topological edges (e.g. `prerequisite_of`, `extends`).
+    *   *Future Scalability*: Powers interactive graph visualizers, AI learning recommendations, and vector database/RAG retrieval pipelines.
+4.  **`curriculum-map.json`**: Connects conceptual nodes with actual practice materials.
+    *   *System Responsibility*: Maps progression order. Sequences modules and topics for students and links topics directly to conceptual graph nodes.
+    *   *Future Scalability*: Enables customizable/dynamic learning paths. For instance, creating a fast-track or deep-dive learning track simply requires creating a new curriculum mapping layout referencing the same conceptual nodes.
+
+### 2.2 Local Subject Metadata
 *   **`syllabus.json`**: Structures the hierarchy (Modules -> Topics -> Subtopics) using strict unique ID vectors.
 *   **`subject-metadata.json`**: Customizes client theme color codes, course levels, and learning budgets.
 *   **`subject-map.json`**: Implements topological sorting to map prerequisite path constraints:

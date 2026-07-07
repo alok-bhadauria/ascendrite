@@ -36,3 +36,16 @@ The `docs/` directory serves as the **Technical Architecture Specification** for
 *   **`knowledge-base-integration.md`**: Parsers, caches, and validation runs for raw content ingestion.
 *   **`ai-architecture.md`**: RAG pipelines, vector directories, search algorithms, and agent patterns.
 *   **`security-standards.md`**: Zero Trust principles, JWT secure cookie parameters, injection blocks, and PR checks.
+
+---
+
+## 3. Knowledge Base Metadata Directory (`knowledge-base/`)
+
+To support a completely metadata-driven knowledge architecture, several global structural indices reside at the root of `knowledge-base/`.
+
+### Files Governed
+*   **`platform-structure.json`**: Physical directory index mapping layout templates and directories. It decouples the application code from physical storage paths.
+*   **`domain-taxonomy.json`**: Academic categorization tree detailing domains, disciplines, and subject groups. It organizes subjects in a generic classification structure.
+*   **`knowledge-graph.json`**: Conceptual semantic graph modeling concepts and logical relationship edges (prerequisites, extensions, parts).
+*   **`curriculum-map.json`**: Progression mapping relating subjects, modules, and topics to actual assets (notes, revision, example codes, diagrams) and semantic concepts.
+

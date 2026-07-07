@@ -1,0 +1,110 @@
+{
+  "name": "Ascendrite Academic Taxonomy",
+  "description": "Universal taxonomy classifying academic domains, disciplines, and subject groupings.",
+  "domains": [
+    {
+      "id": "computing-and-information-sciences",
+      "name": "Computing and Information Sciences",
+      "description": "Disciplines covering systems engineering, computer science theory, algorithms, and software development methodologies.",
+      "disciplines": [
+        {
+          "id": "artificial-intelligence",
+          "name": "Artificial Intelligence",
+          "description": "Study of cognitive systems, machine learning models, neural architectures, natural language understanding, and automated reasoning.",
+          "subject_groups": [
+            {
+              "id": "statistical-learning",
+              "name": "Statistical & Neural Machine Learning",
+              "subjects": ["machine-learning", "deep-learning"]
+            },
+            {
+              "id": "cognitive-applications",
+              "name": "Cognitive AI Applications",
+              "subjects": ["nlp", "genai", "ai-agents"]
+            }
+          ]
+        },
+        {
+          "id": "software-engineering",
+          "name": "Software Engineering",
+          "description": "Systematic application of engineering approaches to the design, construction, testing, and maintenance of software systems.",
+          "subject_groups": [
+            {
+              "id": "programming-paradigms",
+              "name": "Programming Paradigms & Languages",
+              "subjects": ["java", "typescript"]
+            },
+            {
+              "id": "architecture-design",
+              "name": "Architecture & System Design",
+              "subjects": ["oop", "system-design"]
+            },
+            {
+              "id": "algorithms-infrastructure",
+              "name": "Algorithms & Enterprise Frameworks",
+              "subjects": ["dsa", "spring-boot"]
+            }
+          ]
+        },
+        {
+          "id": "core-computer-science",
+          "name": "Core Computer Science",
+          "description": "Fundamental academic studies in OS kernels, networking protocols, databases, and structured queries.",
+          "subject_groups": [
+            {
+              "id": "systems-infrastructure",
+              "name": "Operating Systems & Networking",
+              "subjects": ["os", "cn"]
+            },
+            {
+              "id": "data-management",
+              "name": "Database Systems & SQL Theory",
+              "subjects": ["dbms", "sql"]
+            }
+          ]
+        },
+        {
+          "id": "web-engineering",
+          "name": "Web Engineering & Design",
+          "description": "Professional web stack development, styling systems, client state architecture, and runtime environments.",
+          "subject_groups": [
+            {
+              "id": "client-fundamentals",
+              "name": "Client-Side Fundamentals & Styling",
+              "subjects": ["html-css-git", "css-frameworks", "javascript"]
+            },
+            {
+              "id": "modern-web-ecosystems",
+              "name": "Modern Client & Server Runtimes",
+              "subjects": ["reactjs", "nodejs-expressjs", "nextjs"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "analytical-and-professional-studies",
+      "name": "Analytical and Professional Studies",
+      "description": "Foundational cognitive capability, quantitative reasoning, and linguistic competencies.",
+      "disciplines": [
+        {
+          "id": "cognitive-aptitude",
+          "name": "Cognitive Aptitude",
+          "description": "Standardized mathematical problem-solving skills and verbal competencies.",
+          "subject_groups": [
+            {
+              "id": "quantitative-reasoning",
+              "name": "Quantitative Aptitude & Logic",
+              "subjects": ["quantitative-aptitude"]
+            },
+            {
+              "id": "verbal-reasoning",
+              "name": "Verbal Aptitude & Communication",
+              "subjects": ["verbal-aptitude"]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

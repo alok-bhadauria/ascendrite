@@ -1,0 +1,173 @@
+{
+  "name": "Ascendrite Conceptual Knowledge Graph",
+  "description": "Semantic model of core engineering and mathematical concepts, mappings, and prerequisite paths.",
+  "nodes": [
+    {
+      "id": "vector-space",
+      "name": "Vector Space",
+      "description": "A mathematical structure formed by a collection of vectors, satisfying closure and linear axioms.",
+      "discipline_id": "artificial-intelligence",
+      "subject_references": ["machine-learning", "deep-learning"],
+      "tags": ["linear-algebra", "mathematics"]
+    },
+    {
+      "id": "eigendecomposition",
+      "name": "Eigendecomposition",
+      "description": "Decomposition of a square matrix into eigenvalues and eigenvectors, mapping diagonalizing scales.",
+      "discipline_id": "artificial-intelligence",
+      "subject_references": ["machine-learning", "deep-learning"],
+      "tags": ["linear-algebra", "matrix-factorization"]
+    },
+    {
+      "id": "singular-value-decomposition",
+      "name": "Singular Value Decomposition (SVD)",
+      "description": "Factorization of a real or complex matrix, generalizing eigendecomposition to non-square matrices.",
+      "discipline_id": "artificial-intelligence",
+      "subject_references": ["machine-learning"],
+      "tags": ["linear-algebra", "matrix-factorization", "collaborative-filtering"]
+    },
+    {
+      "id": "gradient-descent",
+      "name": "Gradient Descent",
+      "description": "First-order iterative optimization algorithm for finding the local minimum of a differentiable function.",
+      "discipline_id": "artificial-intelligence",
+      "subject_references": ["machine-learning", "deep-learning"],
+      "tags": ["optimization", "calculus"]
+    },
+    {
+      "id": "cross-entropy",
+      "name": "Cross Entropy",
+      "description": "A measure of the difference between two probability distributions over the same set of events.",
+      "discipline_id": "artificial-intelligence",
+      "subject_references": ["machine-learning", "deep-learning"],
+      "tags": ["probability", "information-theory", "loss-functions"]
+    },
+    {
+      "id": "kl-divergence",
+      "name": "Kullback-Leibler (KL) Divergence",
+      "description": "A measure of how one probability distribution differs from a reference probability distribution.",
+      "discipline_id": "artificial-intelligence",
+      "subject_references": ["machine-learning", "deep-learning", "genai"],
+      "tags": ["probability", "information-theory"]
+    },
+    {
+      "id": "mle-map",
+      "name": "MLE vs MAP Estimation",
+      "description": "Methods of estimating parameters of probability distributions: Maximum Likelihood vs Maximum A Posteriori incorporating prior beliefs.",
+      "discipline_id": "artificial-intelligence",
+      "subject_references": ["machine-learning"],
+      "tags": ["probability", "parameter-estimation"]
+    },
+    {
+      "id": "networking-models",
+      "name": "Networking Models (OSI & TCP/IP)",
+      "description": "Layered protocol stack definitions standardizing communication boundaries from physical signals to application layers.",
+      "discipline_id": "core-computer-science",
+      "subject_references": ["cn"],
+      "tags": ["networking", "systems"]
+    },
+    {
+      "id": "subnetting-cidr",
+      "name": "Subnetting and CIDR",
+      "description": "Mechanisms dividing IP address blocks into logical segments using subnet masks and Classless Inter-Domain Routing.",
+      "discipline_id": "core-computer-science",
+      "subject_references": ["cn"],
+      "tags": ["networking", "ip-addressing"]
+    },
+    {
+      "id": "mac-address-learning",
+      "name": "MAC Address Learning",
+      "description": "Layer-2 bridge mapping dynamic loop building to forward frame traffic strictly using MAC identifiers.",
+      "discipline_id": "core-computer-science",
+      "subject_references": ["cn"],
+      "tags": ["networking", "switching"]
+    },
+    {
+      "id": "encapsulation",
+      "name": "Encapsulation",
+      "description": "Bundling of data and methods operating on that data within a class, hiding internal implementation details.",
+      "discipline_id": "software-engineering",
+      "subject_references": ["oop", "java", "typescript"],
+      "tags": ["software-design", "oop"]
+    },
+    {
+      "id": "polymorphism",
+      "name": "Polymorphism",
+      "description": "Provision of a single interface to entities of different types, mapping run-time method resolution.",
+      "discipline_id": "software-engineering",
+      "subject_references": ["oop", "java", "typescript"],
+      "tags": ["software-design", "oop"]
+    },
+    {
+      "id": "solid-principles",
+      "name": "SOLID Design Principles",
+      "description": "Five design principles mapping clean object-oriented architecture and code maintainability standards.",
+      "discipline_id": "software-engineering",
+      "subject_references": ["oop", "system-design"],
+      "tags": ["software-design", "oop", "architecture"]
+    },
+    {
+      "id": "event-loop",
+      "name": "Event Loop",
+      "description": "Concurrency model in run-time environments orchestrating asynchronous non-blocking callback executions.",
+      "discipline_id": "web-engineering",
+      "subject_references": ["javascript", "nodejs-expressjs"],
+      "tags": ["web-development", "concurrency"]
+    },
+    {
+      "id": "virtual-dom",
+      "name": "Virtual DOM",
+      "description": "In-memory representation of real DOM layout synchronized via reconciliation processes to optimize client-side rendering.",
+      "discipline_id": "web-engineering",
+      "subject_references": ["reactjs", "nextjs"],
+      "tags": ["web-development", "frontend"]
+    }
+  ],
+  "edges": [
+    {
+      "source": "vector-space",
+      "target": "eigendecomposition",
+      "type": "prerequisite_of"
+    },
+    {
+      "source": "eigendecomposition",
+      "target": "singular-value-decomposition",
+      "type": "extends"
+    },
+    {
+      "source": "cross-entropy",
+      "target": "kl-divergence",
+      "type": "extends"
+    },
+    {
+      "source": "mle-map",
+      "target": "kl-divergence",
+      "type": "related_to"
+    },
+    {
+      "source": "networking-models",
+      "target": "subnetting-cidr",
+      "type": "prerequisite_of"
+    },
+    {
+      "source": "networking-models",
+      "target": "mac-address-learning",
+      "type": "prerequisite_of"
+    },
+    {
+      "source": "encapsulation",
+      "target": "polymorphism",
+      "type": "related_to"
+    },
+    {
+      "source": "polymorphism",
+      "target": "solid-principles",
+      "type": "prerequisite_of"
+    },
+    {
+      "source": "event-loop",
+      "target": "virtual-dom",
+      "type": "related_to"
+    }
+  ]
+}
