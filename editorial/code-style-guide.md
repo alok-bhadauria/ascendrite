@@ -1,85 +1,54 @@
 # Ascendrite Code Style Guide
 
-This document defines the coding standards, formatting guidelines, and architectural expectations for all programming examples presented on the Ascendrite platform.
+## Document Metadata
+*   **Purpose**: Standardizes coding styles, naming conventions, formatting guidelines, and architectural expectations for curriculum programming examples.
+*   **Scope**: Governs all code blocks, code exercises, examples, and practice skeletons inside the knowledge base.
+*   **Intended Audience**: All curriculum authors, code coordinators, and code review agents.
+*   **Related Documents**:
+    *   [Editorial Style Guide](editorial-style-guide.md)
+    *   [Platform Philosophy](../docs/governance/platform-philosophy.md)
+*   **Ownership**: Quality Assurance Lead & Head of Platform Engineering
 
 ---
 
-## 1. Document Purpose and Scope
+## 1. Supported Languages and Environments
 
-Coding examples are central to the Ascendrite learning experience. This guide ensures that all code blocks are clean, production-ready, readable, and consistent across different modules, subjects, and language stacks.
+### 1.1 Primary Languages
+*   **Python**: Used for Data Science, Machine Learning, and scripting. Code must target Python 3.10+ and comply with PEP-8.
+*   **TypeScript/JavaScript**: Used for Web Development and Node.js runtimes. Must use strict typing and ES6+ features.
+*   **Go**: Used for distributed systems and concurrency models. Must comply with `gofmt` and idiomatic Go guidelines.
+*   **Rust**: Used for systems programming and memory safety. Must follow `rustfmt` guidelines.
 
----
-
-## 2. Supported Languages and Environments
-
-### Primary Languages
-*   **Python:** Used for Data Science, Machine Learning, Deep Learning, and scripting.
-*   **TypeScript/JavaScript:** Used for Web Development, frontend engineering, and Node.js backend.
-*   **Go:** Used for distributed systems, networking, and concurrency.
-*   **Rust:** Used for low-level systems programming, memory safety, and performance-critical modules.
-
-### Secondary Languages
-[Placeholder: Outline for SQL, HTML/CSS, Shell script, and C++ conventions.]
+### 1.2 Secondary Languages
+*   **SQL**: Keywords must be written in uppercase (e.g. `SELECT`, `INSERT`, `WHERE`). Queries must use clear aliases.
+*   **HTML/CSS**: Must use semantic HTML5 elements. CSS must map to theme variables.
+*   **Shell Scripts**: Must use `bash` compatibility syntax and start with a proper shebang (e.g. `#!/usr/bin/env bash`).
+*   **C++**: Must target C++17 or C++20, utilizing smart pointers (`std::unique_ptr`, `std::shared_ptr`) to ensure memory safety.
 
 ---
 
-## 3. Formatting and Naming Conventions
-
-This section sets rules to ensure visual and structural consistency across all code blocks.
-
-### Naming Conventions
-*   **Python:** PEP-8 compliance (`snake_case` for variables/functions, `PascalCase` for classes).
-*   **TypeScript:** Standard lint configurations (`camelCase` for variables/functions, `PascalCase` for classes, uppercase for constants).
-*   **Go & Rust:** Official idiomatic conventions for variable shadowing, package names, and export levels.
-
-### Formatting Rules
-[Placeholder: Guidelines for maximum line length, indentation (spaces vs tabs), brackets, and blank lines to maintain clean layouts in both web viewports and PDF sheets.]
-
----
-
-## 4. Comments and Code Explanation Philosophy
-
-Guidelines on how to document and explain code blocks within topics.
-
-### Comments Style
-*   **Inline Comments:** Explain *why* a line exists rather than *what* it is doing.
-*   **Docstrings:** Provide API-level descriptions for all classes, methods, and functions including arguments, returns, and raises.
-
-### Code Explanation Philosophy
-[Placeholder: Guidelines on the step-by-step breakdown of key segments of code blocks in the markdown prose instead of wrapping the entire explanation within source comments.]
+## 2. Formatting & Naming Conventions
+*   **Line Length Bounds**: Code blocks must not exceed 80 characters per line. This prevents text wrapping in web viewports and printed PDF sheets.
+*   **Indentation**:
+    *   Python, TypeScript, Go: 4 spaces indentation.
+    *   HTML, CSS, JSON: 2 spaces indentation.
+    *   Tabs are strictly prohibited; spaces must be used instead.
+*   **Naming Conventions**:
+    *   `snake_case`: Python variables, functions, and file paths.
+    *   `camelCase`: TypeScript variables and functions.
+    *   `PascalCase`: Class names in all object-oriented contexts.
 
 ---
 
-## 5. Best Practices and Performance
-
-Standards for quality, complexity, and production optimization.
-
-### Time and Space Complexity
-*   All major algorithms must include a complexity block documenting worst-case, average-case, and best-case time and space usage (using Big-O notation).
-
-### Production Notes
-[Placeholder: Rules on specifying performance trade-offs, cache hits, thread safety, asynchronous event loops, and resource release (like file descriptors and db connections).]
+## 3. Commenting & Explanation Guidelines
+*   **Inline Comments**: Comments must describe *why* an action happens rather than *what* the code does. Standard operations (e.g., iterating a list) must not have comments.
+*   **Markdown Explanations**: Long code blocks must be broken down and explained in the surrounding markdown prose using numbered lists, rather than writing massive comment blocks inside the code.
+*   **Docstrings**: All public functions and classes must contain a structured docstring defining arguments, types, return variables, and possible raises.
 
 ---
 
-## 6. expected Outputs and Validation
-
-Ensure code examples are self-validating and provide expected terminal/UI responses.
-
-*   **Expected Outputs:** Show sample run output immediately following code blocks.
-*   **Execution Logs:** Outlines on formatting output logs or console outputs.
-
----
-
-## 7. Error Handling, Version Compatibility, and Security
-
-Guidelines for writing safe and robust code examples.
-
-### Error Handling
-*   Avoid swallowing exceptions. Use explicit try-except/catch blocks, custom errors, and graceful degradation patterns.
-
-### Version Compatibility
-*   Always specify the language runtime or library versions used (e.g., Python 3.10+, React 18, Node.js LTS).
-
-### Security Considerations
-*   Ensure example code does not introduce security vulnerabilities (e.g., SQL injections, hardcoded credentials, buffer overflows, path traversals).
+## 4. Best Practices & Performance
+*   **Resource Allocation**: Code examples must explicitly close all allocated resources (e.g. database connections, file handlers, network sockets) using standard wrappers (like Python’s `with` context blocks or Go’s `defer` statements).
+*   **No Placeholders**: Example scripts must be fully functional. The use of `pass`, `...`, or `// TODO` placeholder comments is prohibited.
+*   **Complexity Annotations**: Every major algorithm block must document its time and space complexity using Big-O notation.
+*   **Error Handling**: Code must handle exceptions explicitly (using try-except/catch blocks) rather than swallowing errors or returning blank outputs.

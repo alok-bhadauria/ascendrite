@@ -5,87 +5,47 @@ This document defines the mathematical formatting conventions, notations, LaTeX 
 ---
 
 ## 1. Document Purpose and Scope
-
-This style guide establishes a uniform language for mathematical expression. By standardizing notation, variables, symbols, proofs, and equations, we ensure that students can transition between topics and subjects (e.g., from machine learning to digital signal processing or algorithms) without encountering notation mismatches.
-
----
-
-## 2. Mathematical Notation and Conventions
-
-This section defines the mathematical representations across different data structures.
-
-### Variable Naming Conventions
-*   **Scalars:** Represented by lowercase, italicized letters (e.g., $x, y, a, b$).
-*   **Vectors:** Represented by lowercase, boldface, non-italicized letters (e.g., $\mathbf{x}, \mathbf{y}, \mathbf{w}$).
-*   **Matrices:** Represented by uppercase, boldface, non-italicized letters (e.g., $\mathbf{A}, \mathbf{B}, \mathbf{X}$).
-*   **Tensors:** Represented by uppercase, boldface, sans-serif or calligraphic letters (e.g., $\mathsf{T}$ or $\mathcal{T}$).
-*   **Sets:** Represented by uppercase calligraphic or double-struck letters (e.g., $\mathcal{S}$ or $\mathbb{S}$).
-
-### Greek Symbols
-[Placeholder: Guidelines for standard use of Greek letters (e.g., $\alpha$ for learning rates, $\beta$ for weights/biases, $\theta$ for parameters).]
-
-### Matrix, Vector, and Tensor Notations
-[Placeholder: Matrix dimensions, indexing styles, operations like transpose $\mathbf{A}^{\top}$, trace $\text{Tr}(\mathbf{A})$, determinant $\det(\mathbf{A})$, and tensor contractions.]
+*   **Purpose**: Standardizes mathematical notation, LaTeX symbols, derivations, and complexity analysis formatting.
+*   **Scope**: Governs all mathematical formulations, derivations, LaTeX strings, and proofs inside the knowledge base.
+*   **Intended Audience**: All curriculum authors, academic editors, and content review agents.
+*   **Related Documents**:
+    *   [Editorial Style Guide](editorial-style-guide.md)
+    *   [Learning Philosophy](../docs/governance/learning-philosophy.md)
+*   **Ownership**: Lead Educational Systems Designer & Mathematical Reviewer
 
 ---
 
-## 3. Advanced Calculus and Optimization
+## 2. Mathematical Notation & Conventions
 
-Guidelines for representing multivariate calculus and optimization formulations.
+### 2.1 Variable Naming Standards
+To maintain cross-topic continuity, mathematical symbols must adhere to the following standards:
+*   **Scalars**: Represented by lowercase, italicized letters (e.g., $x, y, a, b$).
+*   **Vectors**: Represented by lowercase, boldface, non-italicized letters (e.g., $\mathbf{x}, \mathbf{y}, \mathbf{w}$). Vectors shall be assumed to be column vectors unless transposed.
+*   **Matrices**: Represented by uppercase, boldface, non-italicized letters (e.g., $\mathbf{A}, \mathbf{B}, \mathbf{X}$).
+*   **Sets**: Represented by uppercase calligraphic or double-struck letters (e.g., $\mathcal{S}$ or $\mathbb{S}$). Real numbers must be represented as $\mathbb{R}$.
 
-### Calculus Notation
-[Placeholder: Derivatives $\frac{dy}{dx}$, partial derivatives $\frac{\partial f}{\partial x}$, gradients $\nabla f(\mathbf{x})$, Jacobians $\mathbf{J}$, and Hessians $\mathbf{H}$.]
+### 2.2 Standard Parameters
+Writers must use standard parameter names:
+*   **Learning Rate**: Represented by $\alpha$.
+*   **Regularization Coefficient**: Represented by $\lambda$.
+*   **Weights and Biases**: Represented by $\mathbf{w}$ (weights vector) and $b$ (bias scalar).
+*   **System Parameters**: Represented by $\theta$.
 
-### Optimization Notation
-[Placeholder: Arguing operators $\operatorname{argmin}$, $\operatorname{argmax}$, objective constraints, duality, Lagrangian formulations, and KKT conditions.]
-
----
-
-## 4. Probability and Complexity
-
-Guidelines for statistical, probabilistic, and computational complexity notation.
-
-### Probability Notation
-[Placeholder: Expectation $\mathbb{E}[X]$, variance $\text{Var}(X)$, probability density functions $p(x)$, and conditional distributions $P(A \mid B)$.]
-
-### Complexity Notation
-[Placeholder: Big-O $O(n)$, Big-Omega $\Omega(n)$, Big-Theta $\Theta(n)$, small-o $o(n)$ notation, and recurrent relation analysis formatting.]
-
----
-
-## 5. Theorem, Proof, and Derivation Formatting
-
-Standards for structuring mathematical logical reasoning.
-
-### Theorem Formatting
-[Placeholder: Standard templates for Theorems, Lemmas, Corollaries, and Definitions.]
-
-### Proof Formatting
-[Placeholder: Logical sequence structure, step justifications, and Q.E.D. symbols.]
-
-### Equation Derivation Philosophy
-[Placeholder: Step-by-step guidance on showing intermediate mathematical steps rather than omitting them, ensuring algebraic clarity.]
+### 2.3 Operations and Indexes
+*   **Transposition**: Matrix transposition must be represented as $\mathbf{A}^{\top}$ (using `^{\top}`).
+*   **Trace and Determinant**: Traces and determinants must use roman operators: $\text{Tr}(\mathbf{A})$ and $\det(\mathbf{A})$.
+*   **Matrix Indexing**: Element in row $i$ and column $j$ of matrix $\mathbf{A}$ must be represented as $A_{ij}$ or $A_{i,j}$.
 
 ---
 
-## 6. KaTeX and LaTeX Conventions
-
-Strict formatting conventions for LaTeX syntax in Markdown files.
-
-### Syntax Rules
-*   **Inline Equations:** Use single dollar signs: `$equation$`.
-*   **Block Equations:** Use double dollar signs: `$$equation$$`.
-*   **Escaping in JSON:** Double-escape backslashes in JSON-nested strings (e.g., `\\alpha`, `\\mathbb{R}`).
-
-### Multi-Line Equation Formatting
-[Placeholder: Guidelines for using `\begin{aligned}` for multi-line equation alignment.]
+## 3. Calculus and Optimization Notations
+*   **Derivatives**: Standard derivatives must be written as $\frac{dy}{dx}$. Partial derivatives must be written as $\frac{\partial f}{\partial x}$.
+*   **Gradients and Jacobians**: The gradient vector of function $f$ must be written as $\nabla f(\mathbf{x})$. Jacobians must be written as bold $\mathbf{J}$, and Hessians must be written as bold $\mathbf{H}$.
+*   **Argmin/Argmax**: Optimization arguments must use standard operator names: $\operatorname{argmin}_{\mathbf{x}}$ and $\operatorname{argmax}_{\mathbf{x}}$.
 
 ---
 
-## 7. Numerical Precision, Units, and Consistency Rules
-
-Guidelines for numerical representations.
-
-*   **Numerical Precision:** Standardize to a specific number of decimal places (e.g., four decimal places for probability, two for percentages) unless context demands exact representations.
-*   **Unit Notation:** Guidelines for metric, imperial, and system-specific units.
-*   **Mathematical Consistency Rules:** Platform-wide rules to prevent conflicting notations between different authors.
+## 4. Probability and Complexity Notations
+*   **Expectation and Variance**: Expectations must be represented as $\mathbb{E}[X]$ and variances as $\text{Var}(X)$.
+*   **Probability Distributions**: Probability densities must use lowercase $p(x)$ or $f(x)$, and conditional distributions must be written as $P(A \mid B)$ (using `\mid` instead of a raw pipe character).
+*   **Complexity Bounds**: Algorithmic complexity bounds must use standard notations: $O(n)$ for upper bounds, $\Omega(n)$ for lower bounds, and $\Theta(n)$ for tight bounds.

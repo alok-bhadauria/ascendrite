@@ -5,65 +5,44 @@ This document details the mandatory Quality Assurance (QA) checklist that every 
 ---
 
 ## 1. Document Purpose and Scope
-
-To maintain the reputation of Ascendrite as a premium technical publisher, all content must be validated against a unified set of criteria. This checklist is executed by human editors, peer reviewers, and automated auditing agents.
-
----
-
-## 2. Structural and Grammatical QA
-
-Checks targeting readability, grammar, and alignment with the editorial style.
-
-### Editorial and Grammar
-*   [ ] The tone is objective, authoritative, and analytical.
-*   [ ] Active voice is utilized; filler conversational phrasing is eliminated.
-*   [ ] No emojis are present in any section.
-
-### Terminology and Consistency
-*   [ ] Every technical term matches the spelling and context of the centralized glossary.
-*   [ ] Cross-references point to correct Topic IDs.
+*   **Purpose**: Standardizes the review and validation gates for all educational assets and subject mapping profiles.
+*   **Scope**: Governs peer reviews, editorial reviews, and automated commit-validation runners.
+*   **Intended Audience**: Human editors, content reviewers, and automated auditing agents.
+*   **Related Documents**:
+    *   [Editorial Style Guide](editorial-style-guide.md)
+    *   [Platform Philosophy](../docs/governance/platform-philosophy.md)
+*   **Ownership**: Head of Editorial Division & Quality Assurance Lead
 
 ---
 
-## 3. Technical and Mathematical QA
-
-Checks targeting code, calculations, and mathematical rigor.
-
-### Mathematics and Derivations
-*   [ ] All inline math uses single dollar signs ($) and block math uses double dollar signs ($$).
-*   [ ] Mathematical derivations display all critical algebraic steps clearly.
-*   [ ] Variables correspond to standard conventions (italicized scalars, bold matrices, etc.).
-
-### Engineering Accuracy and Industry Relevance
-[Placeholder: Checklist for assessing architecture layouts, systems claims, and production benchmarks.]
-
-### Code Quality
-*   [ ] Code is PEP-8/idiomatically formatted and syntactically valid (no syntax errors).
-*   [ ] No placeholder comments (e.g., `// TODO`) are present.
-*   [ ] Time and Space Complexity are explicitly documented.
+## 2. Structural & Grammatical QA
+*   [ ] **Voice & Tone**: The narrative must remain objective, formal, and written in the third person or inclusive first-person plural ("we"). Conversational filler is eliminated.
+*   [ ] **No Emojis**: The content must contain zero Unicode emojis.
+*   [ ] **Terminology Consistency**: Terms must match centralized definitions. Cross-topic relative references must use verified IDs (e.g. `machine-learning-m1-t1`).
 
 ---
 
-## 4. Assessment and Pedagogical QA
+## 3. Technical & Mathematical QA
 
-Checks targeting quizzes, exercises, and progression paths.
+### 3.1 Mathematics and Derivations
+*   [ ] **Formatting**: All inline math must use single dollar signs (`$`) and block math must use double dollar signs (`$$`).
+*   [ ] **KaTeX Compatibility**: Math syntax must render correctly in both client-side engines and static engines (Pandoc, WeasyPrint).
+*   [ ] **Derivation Steps**: Complex equations must document intermediate algebraic transformations, rather than leaping directly to final results.
 
-### Learning Outcomes and Difficulty Progression
-[Placeholder: Verifying that objectives align with Bloom's Taxonomy and that difficulty scales appropriately.]
-
-### Interview and Revision Coverage
-[Placeholder: Verifying that mock interview questions are structured properly and that revision cards capture core points.]
-
-### Example Quality and Diagram Quality
-[Placeholder: Reviewing examples for real-world applicability and verifying diagrams conform to palette standards.]
+### 3.2 Engineering Accuracy & Complexity
+*   [ ] **Production Context**: Explanations must address real-world systems bottlenecks (e.g. memory alignment, serialization overhead, cache lines, I/O wait states).
+*   [ ] **Complexity Annotation**: Every major algorithm block and query must document its Big-O time and space complexity in docstrings.
+*   [ ] **Reference Implementations**: Python, JavaScript, and shell code examples must be zero-dependency, containing no placeholder parameters, `pass` directives, or `// TODO` statements.
 
 ---
 
-## 5. Platform, RAG, and Publishing Readiness
+## 4. Assessment & Diagram QA
 
-Checks targeting parsing, rendering, and distribution formatting.
+### 4.1 Quizzes and Mock Interviews
+*   [ ] **Bloom's Taxonomy Alignment**: Learning objectives must use measurable verbs (e.g. Analyze, Derive, Design).
+*   [ ] **Distractor Soundness**: Quizzes must contain exactly four options, with realistic wrong answers representing common traps. Detailed explanations must be written for all options.
+*   [ ] **Dialogue Structure**: Mock interviews must use the standard Candidate-Interviewer dialogue structure, including common mistakes, correct answers, and final code.
 
-*   [ ] **JSON Validation:** All JSON configurations pass strict schema checks (validated using JSON parsers, with double-escaped LaTeX strings).
-*   [ ] **RAG Readiness:** Headings are semantic, clear, and contextually self-contained for semantic chunking.
-*   [ ] **Platform Readiness:** Relative links are valid; page-break indicators conform to PDF printing engines.
-*   [ ] **Publishing Readiness:** Licensing, copyright metadata, and watermarks are configured inside `book-metadata.json`.
+### 4.2 Code Examples & Visual Diagrams
+*   [ ] **Mermaid Diagram Quality**: Diagrams must use standardized flow charts and clear node names, rendering cleanly on both dark and light UI canvases.
+*   [ ] **Syntax Validation**: Diagrams must compile without syntax errors. All node shapes must use standard bracket notation (e.g., `["Label"]` instead of HTML wrappers).

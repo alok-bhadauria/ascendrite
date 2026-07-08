@@ -1,61 +1,64 @@
 # Backend Architecture: API Design, Security, and Performance Engineering
 
----
-
-## 1. Core API Server Design
-The backend is built using **FastAPI** to leverage asynchronous execution loops (`async`/`await`), automatic OpenAPI documentation generation, and strict data parsing using **Pydantic**.
-
-### Dependency Injection
-FastAPI's dependency injection system manages lifetime scopes (e.g. database connections, user sessions). All database sessions are injected via dependencies, ensuring clean connection closures and preventing resource leaks.
-
----
-
-## 2. Authentication & Authorization
-Ascendrite utilizes stateless **JSON Web Tokens (JWT)** for secure, decentralized user sessions.
-
-### Execution Flow
-1.  **Login:** The client sends credentials via `POST /api/v1/auth/login`.
-2.  **Verification:** The server verifies credentials against the database user record (passwords hashed using **bcrypt** with a work factor of 12).
-3.  **Token Generation:** If verified, the server generates an access token containing the user identity and roles in the payload, signed with a secret key using the `HS256` signature algorithm.
-4.  **Client Storage:** The token is returned in a secure, `HttpOnly`, `SameSite=Strict`, `Secure` cookie to mitigate Cross-Site Scripting (XSS) and Cross-Site Request Forgery (CSRF) vulnerabilities.
+## Document Metadata
+*   **Purpose**: Outlines the server routing, dependency injection models, security filters, and caching strategies.
+*   **Scope**: Governs backend FastAPI codebase layouts, API router endpoints, and authentication scopes.
+*   **Intended Audience**: Backend engineers, database administrators, and security coordinators.
+*   **Related Documents**:
+    *   [Engineering Principles](../governance/engineering-principles.md)
+    *   [Security Standards](../security/security-standards.md)
+    *   [Database Schema](database-schema.md)
+*   **Ownership**: Head of Platform Engineering
 
 ---
 
-## 3. User & Permission Management
-The system enforces **Role-Based Access Control (RBAC)** across three distinct role hierarchies:
+## 1. Core API Server Architecture
+The backend application shall be constructed using FastAPI. It must leverage asynchronous execution loops (`async`/`await`) to manage I/O-bound requests concurrently.
 
-| Role | Permissions | API Constraints |
-| :--- | :--- | :--- |
-| **Student** | Read curriculum content, submit progress logs, take quizzes. | `/api/v1/progress/*`, `/api/v1/assessments/*` |
-| **Contributor** | Edit subject JSON configurations, write curriculum data. | Access to staging content generation folders. |
-| **Admin** | Manage users, alter system configurations, view platform logs. | Full access to all API routes. |
-
-Authorization is enforced at the router layer using FastAPI dependencies:
-```python
-def require_role(allowed_roles: List[str]):
-    def dependency(current_user: User = Depends(get_current_user)):
-        if current_user.role not in allowed_roles:
-            raise HTTPException(status_code=403, detail="Operation forbidden")
-        return current_user
-    return dependency
-```
+### 1.1 Dependency Injection Policy
+All runtime resources (database connections, authentication helper tools, user sessions) must be injected using FastAPI’s dependency injection system (`Depends`). 
+*   **Resource Lifetimes**: Injected dependencies shall govern their own scopes, guaranteeing connection cleanup and preventing resource leaks.
+*   **Testing Hooks**: Real database drivers should be swappable with mock implementations in test suites via dependency overrides.
 
 ---
 
-## 4. Security Architecture
-*   **Input Validation:** Pydantic schemas validate all payload inputs, converting types and rejecting malformed requests before execution reaches business logic layers.
-*   **NoSQL/SQL Injection Prevention:** Avoid raw document queries or string concatenations. Utilize the driver parameterization structures to query MongoDB Atlas safely.
-*   **CORS Configuration:** Enforce strict Origin boundaries. Only allow explicit frontend client domains to resolve API responses.
+## 2. Authentication & Session Management
+The platform shall enforce a stateless authentication workflow using JSON Web Tokens (JWT) signed with `HS256` keys.
+
+### 2.1 Login & Token Issuance Flow
+1.  The client sends authentication requests to `POST /api/v1/auth/login`.
+2.  The server must query the user record. Password verification shall compare inputs using **bcrypt** (minimum work factor of 12) or **Argon2id**.
+3.  Upon verification, the server shall generate a short-lived access token (expiration limit: 15 minutes) containing role claims in its payload.
+4.  The access token must be returned to the client inside a secure, `HttpOnly`, `SameSite=Strict`, `Secure` cookie. It must not be returned in JSON response bodies to protect against XSS.
 
 ---
 
-## 5. Caching Strategy
-To minimize database I/O latency:
-*   **Static Asset Caching:** All notes, syllabus maps, and diagrams are loaded once at startup and cached in server memory.
-*   **Dynamic State Caching:** User progress records are cached in a **Redis** instance using a time-to-live (TTL) expiration of 1 hour, reducing read loads on MongoDB Atlas.
+## 3. Role-Based Access Control (RBAC)
+The server must validate permissions on every protected endpoint using dependency filters mapping to user actors:
+
+| Actor | Permitted API Scopes |
+| :--- | :--- |
+| **Guest** | `/api/v1/health`, `/api/v1/subject-indexes` (public read only) |
+| **Learner** | `/api/v1/progress/*`, `/api/v1/quiz/submit` |
+| **Moderator** | `/api/v1/moderation/*`, `/api/v1/curriculum/drafts/*` |
+| **Admin** | Full access to `/api/v1/admin/*` and configuration endpoints |
 
 ---
 
-## 6. Logging & Monitoring
-*   **Structured Logging:** Outputs logs in JSON format containing timestamps, log levels, request paths, execution times, and correlation IDs (to track requests across asynchronous boundaries).
-*   **Application Performance Monitoring (APM):** Exposes Prometheus metrics tracking request durations, latency bounds, and CPU/memory allocations.
+## 4. API Input Validation and Sanitization
+*   **Strict Type Constraints**: All request payloads must be defined using Pydantic V2 models.
+*   **Input Sanitization**: Strings containing HTML or JS content must be escaped before processing to prevent scripting injections.
+*   **NoSQL Injection Prevention**: Database queries shall utilize parameterized driver parameters rather than direct string building.
+
+---
+
+## 5. Performance and Caching Strategies
+*   **Curriculum Memory Cache**: Raw JSON assets (notes, syllabi, metadata) must be parsed once during server startup and stored in a read-only memory cache. Endpoints querying curriculum data shall fetch from this cache to achieve $O(1)$ response times.
+*   **Redis Progress Caching**: Active user progress records and sessions should be stored in a Redis cache using a time-to-live (TTL) parameter of 1 hour to reduce direct datastore reads.
+
+---
+
+## 6. Observability & Logging
+*   **Structured Logging**: App servers shall generate logs in JSON format, capturing correlation IDs, execution durations, request paths, and HTTP statuses.
+*   **Audit Trail Logs**: Crucial actions (role changes, system locks) must be output to a write-once audit log file.
+*   **Metrics Ingestion**: App instances should expose standard metrics tracking memory footprints, error counts, and response latency.

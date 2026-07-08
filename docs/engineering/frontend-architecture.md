@@ -1,57 +1,59 @@
 # Frontend Architecture: UI/UX Standards and Component Design
 
+## Document Metadata
+*   **Purpose**: Outlines the Single Page Application layout, global state synchronization, and UI design standards.
+*   **Scope**: Governs client-side React code structures, visualizer modules, and rendering styles.
+*   **Intended Audience**: Frontend developers, UI engineers, and style guide managers.
+*   **Related Documents**:
+    *   [Platform Philosophy](../governance/platform-philosophy.md)
+    *   [Product Philosophy](../governance/product-philosophy.md)
+    *   [Backend Architecture](backend-architecture.md)
+*   **Ownership**: Lead UX/UI Architect & Head of Platform Engineering
+
 ---
 
 ## 1. Single Page Application (SPA) Structure
-The frontend client is built as a single-page application using **ReactJS** and compiled using **Vite**. The structure separates presentation logic, global state, and interactive visualizer sub-engines.
+The frontend application shall be built using React and compiled via Vite. The project directory layout is structured to maintain clean component boundaries:
 
 ```
 platform/client/
-├── public/                 # Static public assets (icons, font assets)
 ├── src/
-│   ├── components/         # Reusable global design components
-│   │   ├── ui/             # Core primitives (Button, Card, Input)
-│   │   ├── layout/         # Shell containers (Sidebar, Navbar)
-│   │   └── visualizers/    # Polymorphic simulator components
-│   ├── hooks/              # Global state and API hooks
-│   ├── pages/              # Route views (Dashboard, TopicReader, Profile)
-│   ├── store/              # State management modules (Zustand schemas)
-│   ├── utils/              # Helper libraries (KaTeX wrappers, API clients)
-│   ├── App.tsx             # Master Router mapping
-│   └── main.tsx            # DOM hook and global styles entry
+│   ├── components/         # Modular visual UI components
+│   │   ├── ui/             # Standard design primitives (Buttons, Inputs)
+│   │   ├── layout/         # Shell containers (Sidebar, Header)
+│   │   └── visualizers/    # Interactive simulator canvases
+│   ├── hooks/              # Global state loaders and API fetch hooks
+│   ├── pages/              # Primary route containers
+│   ├── store/              # State management stores (Zustand)
+│   └── utils/              # Parsers, KaTeX wrappers, and API clients
 ```
 
 ---
 
-## 2. UI/UX Architecture Guidelines
-Ascendrite utilizes a modern, sleek design system to maximize readability and reduce cognitive load.
-
-### Visual Design System
-*   **Color Palette:** Sleek dark-mode first configuration. Uses slate/zinc base scales with vibrant teal/violet indicators for achievements, math formulas, and code segments.
-*   **Typography:** The platform uses **Inter** for UI layout controls and **Outfit** for structural headings. KaTeX math formulas are rendered using native KaTeX serifs.
-*   **Micro-animations:** Interactive components leverage **Framer Motion** for smooth transition animations (hover states, progress bars sliding, dialog fade-ins).
-*   **Accessibility (WAI-ARIA):** All interactive buttons and inputs require explicit `id` attributes, standard focus rings, and proper keyboard navigation bindings (tab indexing).
+## 2. Workspace-First Experience & Component Composition
+The frontend layout shall implement a single, unified workspace rather than independent, isolated pages:
+*   **Navigation Shell (Left)**: Renders dynamic curriculum indexes and progress indicators from metadata configurations.
+*   **Workspace Canvas (Center)**: Displays active lesson details, LaTeX math formulations, and code interfaces.
+*   **Contextual Panel (Right)**: Slides open to present context-aware widgets (AI assistants, glossary words, code execution outputs) without reloading the main workspace.
+*   **Persistent Context**: The persistent AI assistant and code compilation runtimes must remain mounted across topics, maintaining their state variables in memory.
 
 ---
 
-## 3. State Management Configuration
-Global client state is managed via **Zustand**, providing lightweight, atomic state management without boilerplate overhead.
-
-```
-+-----------------------------------------------------------+
-|                        Zustand Store                      |
-+-----------------------------------------------------------+
-  |-- AuthStore: Track active user data, tokens, and roles.
-  |-- CourseStore: Cache syllabus index paths and topic meta.
-  |-- TrackerStore: Logs active topic duration and quiz inputs.
-```
-
-State changes trigger re-renders only in affected leaf nodes, ensuring page frames remain smooth and run at 60 FPS.
+## 3. Dynamic Theme Engine
+The interface styling system must not use static, hardcoded stylesheets or simple dark/light modes.
+*   **Metadata Integration**: The theme configurations shall be parsed dynamically from subject metadata files (`theme` containing `primary`, `secondary`, `accent`, `surface`, `text`, `graph`).
+*   **Dynamic CSS Custom Properties**: Theme values must be injected into the root HTML context as CSS custom properties (e.g. `--color-primary`, `--color-graph`). Core components shall use these variables to dynamically adapt their accents.
 
 ---
 
-## 4. Content Delivery Optimization
-To maintain rapid initial page loads:
-*   **Route-Based Code Splitting:** Code-split route boundaries using `React.lazy` to load pages dynamically as users navigate.
-*   **Dynamic Visualizer Loading:** Since heavy Canvas/SVG rendering engines (like Mermaid.js) are only required on specific notes, they are imported dynamically (`import()`) only when mounting visualizer components.
-*   **Tree Shaking:** Explicit configurations in compilation tools to strip unused icons and module helpers from the final client bundle.
+## 4. Navigation & Universal Search
+*   **Route Code Splitting**: All primary pages (Dashboard, Profile, Settings) must be lazy-loaded using `React.lazy` and `Suspense` to minimize the initial download footprint.
+*   **Command Palette**: The client must bind `Ctrl+K` to mount a global Command Palette modal, allowing users to search concepts, jump to topics, and toggle AI assistants using keyboard shortcuts.
+
+---
+
+## 5. Offline-First Client Architecture
+*   **Local Caching**: The application shall cache current progress updates and quiz inputs in local client stores.
+*   **Status Indicators**: If network connectivity is lost, the client must display an offline warning in the header.
+*   **State Syncing**: Progress updates must queue locally and synchronize with the backend automatically once connection is restored.
+*   **Assets Fallback**: If dynamic rendering libraries (Mermaid.js, LaTeX packages) fail to load, the visualizers must degrade to render raw text codes within code blocks.

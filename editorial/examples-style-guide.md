@@ -1,63 +1,49 @@
 # Ascendrite Examples Style Guide
 
-This document defines the principles, structures, and criteria for writing conceptual, mathematical, and coding examples across the Ascendrite platform.
+## Document Metadata
+*   **Purpose**: Defines the principles, structures, and criteria for writing conceptual, mathematical, and coding examples across the Ascendrite platform.
+*   **Scope**: Governs all code example files (`examples/*.json`) and inline markdown illustrations.
+*   **Intended Audience**: All curriculum authors, example developers, and content reviewers.
+*   **Related Documents**:
+    *   [Editorial Style Guide](editorial-style-guide.md)
+    *   [Code Style Guide](code-style-guide.md)
+*   **Ownership**: Lead Educational Systems Designer & Quality Assurance Lead
 
 ---
 
-## 1. Document Purpose and Scope
+## 1. Supported Example Archetypes
 
-Examples bridge abstract concepts and practical implementations. This guide ensures that all examples are pedagogically sound, progressively structured, representative of real-world scenarios, and aligned with industry standards.
+### 1.1 Educational Examples
+*   **Purpose**: Simplify complex theory for initial comprehension.
+*   **Format**: Isolated, single-focus demonstrations targeting a specific concept or API method.
 
----
+### 1.2 Real-World Examples
+*   **Purpose**: Show concepts working in simulated real-world conditions.
+*   **Format**: Mini-projects or scripts addressing a typical engineering problem.
 
-## 2. Example Archetypes
+### 1.3 Industry Case Studies
+*   **Purpose**: Deep-dive into how major organizations solve scale, performance, or system design challenges.
+*   **Format**: Detailed architecture breakdowns and system topology reviews.
 
-This section defines the different categories of examples allowed on the platform.
-
-### Educational Examples
-*   **Purpose:** Simplify complex theory for initial comprehension.
-*   **Format:** Isolated, single-focus demonstrations targeting a specific concept or API method.
-
-### Real-World Examples
-*   **Purpose:** Show concepts working in simulated real-world conditions.
-*   **Format:** Mini-projects or scripts addressing a typical engineering problem.
-
-### Industry Case Studies
-*   **Purpose:** Deep dive into how major organizations solve scale, performance, or system design challenges.
-*   **Format:** Detailed architecture breakdowns and system topology reviews.
-
-### Business Scenarios
-[Placeholder: Guidelines for connecting technology choices to business metrics, cost considerations, user retention, or computational budget constraints.]
+### 1.4 Business Scenarios
+*   **Purpose**: Connect technology choices to business metrics, costs, and resources.
+*   **Format**: Cost-benefit analysis sheets comparing cloud configurations, computational budgets, and maintenance overheads.
 
 ---
 
-## 3. Pedagogical Progression
-
-Standards for structuring examples to support scaffolded learning.
-
-*   **Progressive Difficulty:** Start from simple, deterministic configurations (Level 1), progress to stochastic/multivariable setups (Level 2), and conclude with distributed, scaled, or production-grade implementations (Level 3).
-*   **Prerequisite Alignment:** Ensure every example utilizes only concepts that have been formally introduced in the current or prior topics.
+## 2. Pedagogical Progression
+*   **Progressive Difficulty**: Start from simple, deterministic configurations (Level 1), progress to stochastic/multivariable setups (Level 2), and conclude with distributed, scaled, or production-grade implementations (Level 3).
+*   **Prerequisite Alignment**: Ensure every example utilizes only concepts that have been formally introduced in the current or prior topics.
 
 ---
 
-## 4. Formatting and Layout
-
-Visual standards for presenting examples in Markdown.
-
-*   **Example Headers:** Use uniform naming schemas (e.g., `### Example A: [Descriptive Title]`).
-*   **Input/Output Specifications:** Document test inputs, configurations, and corresponding outputs clearly.
+## 3. Formatting & Visual Layout
+*   **Example Headers**: Use uniform naming schemas (e.g., `### Example A: [Descriptive Title]`).
+*   **Input/Output Specifications**: Document test inputs, configurations, and corresponding outputs clearly.
 
 ---
 
-## 5. Solution Philosophy and Trade-Offs
-
-How solutions are structured, analyzed, and evaluated.
-
-### Solution Philosophy
-[Placeholder: Guidelines on choosing clear, legible, and self-documenting code structures for solutions, prioritizing clarity over code minimization or "clever" hacks.]
-
-### Multiple Approaches
-*   Where applicable, show multiple ways to solve a problem (e.g., iterative vs. recursive, synchronous vs. asynchronous, CPU vs. GPU).
-
-### Trade-Off Discussions
-*   Conclude examples with a detailed analysis of performance, memory, complexity, development speed, and maintainability trade-offs.
+## 4. Solution Philosophy & Trade-Offs
+*   **Clarity Over Cleverness**: Code solutions must prioritize readability, types, and self-documenting variable names over code minimization or "clever" hacks.
+*   **Multiple Approaches**: Where applicable, show multiple ways to solve a problem (e.g., iterative vs. recursive, synchronous vs. asynchronous, CPU vs. GPU), detailing the trade-offs of each.
+*   **Performance Metrics**: Document the time and space complexity using Big-O notation, as well as execution profiles when compiling examples.
