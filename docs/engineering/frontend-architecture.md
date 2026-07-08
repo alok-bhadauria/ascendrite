@@ -1,9 +1,9 @@
 # Frontend Architecture: UI/UX Standards and Component Design
 
 ## Document Metadata
-*   **Purpose**: Outlines the Single Page Application layout, global state synchronization, and UI design standards.
+*   **Purpose**: Outlines the Single Page Application layout, global state synchronization, adaptive interfaces, and UI design standards.
 *   **Scope**: Governs client-side React code structures, visualizer modules, and rendering styles.
-*   **Intended Audience**: Frontend developers, UI engineers, and style guide managers.
+*   **Intended Audience**: Frontend developers, UI engineers, accessibility specialists, and design managers.
 *   **Related Documents**:
     *   [Platform Philosophy](../governance/platform-philosophy.md)
     *   [Product Philosophy](../governance/product-philosophy.md)
@@ -39,20 +39,47 @@ The frontend layout shall implement a single, unified workspace rather than inde
 
 ---
 
-## 3. Dynamic Theme Engine
+## 3. Context-Aware UI & Right-Panel Coordination
+The right-side contextual panel must adapt dynamically to the active state of the center workspace:
+*   **Active Node Binding**: The client routing controller shall maintain an active state object tracking the visible curriculum node ID.
+*   **Context Extraction**: Custom hooks (`useActiveContext`) must listen to active node changes, load associated JSON metadata, and automatically instantiate corresponding tools:
+    *   *Conceptual Note*: Mounts the Learning Assistant chatbot pre-primed with the topic's notes text.
+    *   *Coding Exercise*: Mounts the Code Compiler widget and Execution Trace view.
+    *   *Math Derivation*: Mounts step-by-step interactive sliders to trace calculations.
+
+---
+
+## 4. Adaptive Dashboard & Spaced Repetition
+The User Dashboard shall adapt its visual cards and recommended next-steps using progress data:
+*   **Telemetry Integration**: The dashboard retrieves user telemetry progress (score metrics, completions, durations) from backend endpoints.
+*   **Spaced Repetition Schedule**: Using client-side state engines, the dashboard calculates memory decay variables (based on diagnostic scores and study time gaps) to highlight review suggestions.
+*   **Adaptive Pathing**: The next-steps widget dynamically shows nodes matching prerequisites from `subject-map.json` that are unlocked but not completed.
+
+---
+
+## 5. Dynamic Theme Engine
 The interface styling system must not use static, hardcoded stylesheets or simple dark/light modes.
 *   **Metadata Integration**: The theme configurations shall be parsed dynamically from subject metadata files (`theme` containing `primary`, `secondary`, `accent`, `surface`, `text`, `graph`).
 *   **Dynamic CSS Custom Properties**: Theme values must be injected into the root HTML context as CSS custom properties (e.g. `--color-primary`, `--color-graph`). Core components shall use these variables to dynamically adapt their accents.
 
 ---
 
-## 4. Navigation & Universal Search
+## 6. Universal Search & Command Palette
 *   **Route Code Splitting**: All primary pages (Dashboard, Profile, Settings) must be lazy-loaded using `React.lazy` and `Suspense` to minimize the initial download footprint.
 *   **Command Palette**: The client must bind `Ctrl+K` to mount a global Command Palette modal, allowing users to search concepts, jump to topics, and toggle AI assistants using keyboard shortcuts.
 
 ---
 
-## 5. Offline-First Client Architecture
+## 7. Accessibility (WAI-ARIA) and Focus Governance
+All user interfaces must comply with WCAG 2.1 Level AA accessibility criteria:
+*   **Semantic Elements**: Layout definitions must utilize HTML5 semantic tags (`<header>`, `<main>`, `<nav>`, `<section>`).
+*   **ARIA Attributes**: Interactive widgets must declare explicit ARIA roles (e.g., `role="dialog"`, `aria-expanded`, `aria-label`).
+*   **Keyboard Navigation**: Viewports must support standard keyboard tab progression. Focus traps must be enforced on open modal layers (such as the Command Palette) to keep tab navigation restricted to the modal boundaries.
+*   **Focus Ring Indicator**: All focusable inputs, selectors, and buttons must display high-contrast outline focus rings when active (`focus-visible:ring-2`).
+
+---
+
+## 8. Offline-First Client Architecture
 *   **Local Caching**: The application shall cache current progress updates and quiz inputs in local client stores.
 *   **Status Indicators**: If network connectivity is lost, the client must display an offline warning in the header.
 *   **State Syncing**: Progress updates must queue locally and synchronize with the backend automatically once connection is restored.

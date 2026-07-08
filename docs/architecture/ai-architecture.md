@@ -1,8 +1,8 @@
 # AI Architecture: RAG Pipelines, Semantic Search, and Agent Workflows
 
 ## Document Metadata
-*   **Purpose**: Details the RAG pipeline mechanics, vector embedding layouts, and the boundaries of the multi-agent AI framework.
-*   **Scope**: Governs backend LLM connections, embedding generators, and agent task queues.
+*   **Purpose**: Details the RAG pipeline mechanics, vector embedding layouts, guardrails, agent lifecycles, and inference topologies.
+*   **Scope**: Governs backend LLM connections, embedding generators, agent task queues, and guardrail middlewares.
 *   **Intended Audience**: AI engineers, backend developers, and systems integrators.
 *   **Related Documents**:
     *   [AI Philosophy](../governance/ai-philosophy.md)
@@ -41,39 +41,33 @@ When a learner requests clarification:
 ## 2. Multi-Agent System Scopes and Boundaries
 Ascendrite utilizes a decoupled multi-agent architecture where agents own specific operational boundaries. The agents shall interact strictly via contract-first APIs and message queues.
 
-### 2.1 Learning Assistant
-*   **Responsibility**: Resolves user queries regarding subject notes, derivations, and code exercises.
-*   **Boundaries**: Must operate strictly within the context of retrieved RAG documents. It shall not generate content beyond the verified knowledge-base.
-*   **Ownership**: AI Engineering Division
+### 2.1 Agent Definition
+*   **Learning Assistant**: Resolves user queries regarding subject notes, derivations, and code exercises.
+*   **Navigation Assistant**: Converts natural language queries into semantic searches and maps the optimal learning route through the concept graph.
+*   **Knowledge Authoring Agent**: Scans and pre-validates new curriculum files submitted by contributors.
+*   **Knowledge Review Agent**: Performs semantic checks across subject maps to find logical holes or missing links.
+*   **Personalization Engine**: Analyzes learner progress logs and schedules dynamic review intervals.
+*   **Admin Assistant**: Monitors server logs, flags security anomalies, and checks rate-limiting violations.
 
-### 2.2 Navigation Assistant
-*   **Responsibility**: Converts natural language queries into semantic searches and maps the optimal learning route through the concept graph.
-*   **Boundaries**: Must interact with `knowledge-graph.json` to find conceptual nodes and prerequisites.
-*   **Ownership**: Platform Engineering & AI Engineering
-
-### 2.3 Knowledge Authoring Agent
-*   **Responsibility**: Scans and pre-validates new curriculum files submitted by contributors.
-*   **Boundaries**: Must validate files against the JSON Schema specifications. It shall reject files containing formatting or schema errors.
-*   **Ownership**: Developer Experience (DX) & Editorial Division
-
-### 2.4 Knowledge Review Agent
-*   **Responsibility**: Performs semantic checks across subject maps to find logical holes or missing links.
-*   **Boundaries**: Scans all taxonomies and mappings to flag logical inconsistencies.
-*   **Ownership**: Editorial Division & AI Engineering
-
-### 2.5 Personalization Engine
-*   **Responsibility**: Analyzes learner progress logs and schedules dynamic review intervals.
-*   **Boundaries**: Queries user logs and updates recommendation vectors. It shall not modify course contents.
-*   **Ownership**: Platform Engineering
-
-### 2.6 Admin Assistant
-*   **Responsibility**: Monitore server logs, flags security anomalies, and checks rate-limiting violations.
-*   **Boundaries**: Read-only access to system telemetry logs and database metrics.
-*   **Ownership**: Operations & Security
+### 2.2 Agent Lifecycle Management
+Agents must operate within a deterministic lifecycle state machine:
+*   **Idle**: Agent sits in a queue waiting for event-driven triggers.
+*   **Initializing**: Loads configuration schemas, parameters, and telemetry profiles.
+*   **Executing**: Actively processes tasks (e.g., code analysis or semantic search verification).
+*   **Evaluating**: Audits output accuracy against structural schemas and semantic rules.
+*   **Terminal**: Cleans up run resources, releases connection handlers, and writes outcomes to log databases.
 
 ---
 
-## 3. Prompt Management Standards
-All system prompts must follow the templates stored in `editorial/prompt-library.md`. Prompts shall enforce:
-*   **Context Grounding**: Instructing the model to answer *only* using the provided text.
-*   **Formatting Rules**: Outputting structured JSON or clean markdown using LaTeX mathematical expressions.
+## 3. Online vs. Offline Inference Model
+To optimize latency and control operating costs:
+*   **Online Inference**: High-complexity generation tasks (Tutor conversations, complex code feedback) must use cloud-based LLM services accessed via secure backend proxy handlers.
+*   **Offline Inference**: Content verification checks, syntax parsing, schema validations, and local search index tokens must run entirely locally using lightweight client models or pattern-matching scripts to minimize network overhead.
+
+---
+
+## 4. Input & Output Guardrails
+AI services must implement strict guardrails to prevent hallucinations, formatting errors, or security leak vulnerabilities:
+*   **Strict Context Grounding**: System prompts must explicitly limit models to answer *only* based on the retrieved text vectors, returning "I do not know" if context is missing.
+*   **Structural Parsing Constraints**: Outputs must be requested in structured JSON format and programmatically validated against schemas. Non-compliant outputs must trigger retries.
+*   **Input/Output Filtering Middleware**: Input filters must sanitize queries to block prompt injection attacks. Output filters must scan for sensitive leak keywords before response delivery.
