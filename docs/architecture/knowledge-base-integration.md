@@ -7,7 +7,7 @@
 *   **Related Documents**:
     *   [Product Philosophy](../governance/product-philosophy.md)
     *   [Learning Philosophy](../governance/learning-philosophy.md)
-    *   [Directory Structure](../governance/directory-structure.md)
+    *   [Directory Structure](../development/repository-structure.md)
 *   **Ownership**: Knowledge Systems Architect & Head of Editorial Division
 
 ---

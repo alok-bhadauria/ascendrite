@@ -5,8 +5,8 @@
 *   **Scope**: Governs backend FastAPI monitoring instrumentation, Prometheus metrics scraping endpoints, and client telemetry events tracking.
 *   **Intended Audience**: Operations engineers, DevOps leads, system security leads, and backend engineers.
 *   **Related Documents**:
-    *   [Backend Architecture](../engineering/backend-architecture.md)
-    *   [Security Standards](../security/security-standards.md)
+    *   [Backend Architecture](../architecture/backend-architecture.md)
+    *   [Security Standards](security-standards.md)
 *   **Ownership**: Head of Platform Engineering & Site Reliability Operations Lead
 
 ---
@@ -59,3 +59,24 @@ Client actions shall trigger telemetry payloads sent to `/api/v1/telemetry/event
 
 ### 3.2 Telemetry Privacy Controls
 Telemetry collections must not include personally identifying information (PII). All user identity references in telemetry databases must be obfuscated using cryptographic tokens.
+
+---
+
+## 4. Admin OS & Telemetry Dashboards
+
+The Admin OS dashboard translates raw system metrics and log streams into actionable operational insights:
+
+### 4.1 Health Check Registries
+*   **Platform Health**: Tracks API gateway state, frontend bundle distributions, and server cluster statuses.
+*   **API Performance**: Visualizes request latencies, network load spikes, and HTTP rate-limiting triggers.
+*   **Error Monitoring**: Isolates error logs, database timeouts, and unhandled exceptions.
+*   **User Activity**: Summarizes concurrent active session metrics.
+*   **AI Performance**: Tracks LLM token usage, prompt costs, average response latencies, and guardrail retry rates.
+*   **Storage Health**: Monitored read/write stats on MongoDB clusters and object storage storage states.
+*   **Knowledge Health**: Verifies relative path integrity, checking for broken URLs or missing syllabus nodes.
+
+### 4.2 Operations Actions
+*   **Failure Detection**: Identifies latency bottlenecks or database locks, triggering SRE escalation alerts before system outages occur.
+*   **Anomaly Verification**: Monitors suspicious access attempts, high token burn rates, or consecutive validation failures.
+*   **Ecosystem Tuning**: Provides administrators with direct toggle switches to adjust cache durations, disable slow endpoints, or scale sandbox resources dynamically.
+
