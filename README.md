@@ -1,108 +1,118 @@
-# Ascendrite: Advanced Curriculum and Interactive Knowledge Infrastructure
+# Ascendrite
 
-Ascendrite is an enterprise-grade curriculum management and interactive learning platform designed to transform traditional, rigid course structures into granular, code-driven learning roadmaps. It prioritizes content depth, mathematical rigor, and progress-tracking analytics, providing a single source of truth for study materials.
+Ascendrite is an enterprise-grade, metadata-driven learning platform and technical curriculum infrastructure. It translates traditional, high-level technical syllabi into granular, code-driven learning roadmaps. Designed for scalability, high information density, and modularity, the platform separates educational content from application logic.
 
 ---
 
-## Codebase Architecture
+## 1. Project Vision & Governance
 
-The codebase is organized under a decoupled multi-tier architecture to maintain separation of concerns. This allows content databases, visualization systems, and tracking services to evolve independently.
+Ascendrite exists to democratize and accelerate advanced technical mastery. We structure our platform around a decoupled architecture where curriculum databases, interactive clients, and AI-assisted workflows scale independently.
+
+For detailed guidelines on our mission, learning model, and organizational boundaries, refer to the **Governance** layer:
+*   **[Project Vision](docs/governance/project-vision.md)**: Core mission statement, values, and open-access principles.
+*   **[Product Philosophy](docs/governance/product-philosophy.md)**: Metadata-first rendering rules and client-decoupling guidelines.
+*   **[Learning Philosophy](docs/governance/learning-philosophy.md)**: The Dual-Loop Learning model (Conceptual vs. Practical loops).
+*   **[Engineering Principles](docs/governance/engineering-principles.md)**: SOLID design guidelines, DRY/YAGNI, and backward compatibility.
+*   **[Platform Philosophy](docs/governance/platform-philosophy.md)**: Workspace-first layout and dynamic theme engine tokens.
+*   **[AI Philosophy](docs/governance/ai-philosophy.md)**: Multi-agent boundaries and the Non-Replacement Principle.
+*   **[Organizational Structure](docs/governance/organizational-structure.md)**: Team boundaries and ownership scopes across engineering departments.
+*   **[Product Evolution Strategy](docs/governance/product-evolution-strategy.md)**: Boundary decoupling guidelines and contract-first API design.
+*   **[Version Roadmap](docs/governance/version-roadmap.md)**: Technology migrations and scalability roadmap.
+*   **[Engineering Decision Process](docs/governance/engineering-decision-process.md)**: RFC proposal lifecycles and consensus guidelines.
+
+---
+
+## 2. Repository Directory Structure
 
 ```
 ascendrite/
-├── README.md                           # Core system documentation
-├── docs/                               # Systems design and platform architecture specifications
-├── editorial/                          # Ascendrite Publishing Constitution and Style Guides
+├── docs/                               # Systems design and platform specifications
+│   ├── governance/                     # Roadmaps, philosophies, and processes
+│   ├── architecture/                   # Decoupled system blueprints and RAG pipelines
+│   ├── engineering/                    # Backend, frontend, and database specifications
+│   ├── knowledge/                      # Ingestion parsing pipelines and validation rules
+│   └── security/                       # Zero Trust parameters and secure cookie policies
+├── editorial/                          # Operational Publishing Constitution
 │   ├── editorial-style-guide.md        # Master editorial guide and tone specifications
 │   ├── mathematical-style-guide.md     # LaTeX syntax standards and notation matrices
 │   ├── code-style-guide.md             # Python/TypeScript code and script standards
 │   ├── examples-style-guide.md         # Coding examples architecture rules
 │   ├── diagram-style-guide.md          # Visual asset and Mermaid specification rules
-│   ├── assessment-style-guide.md       # Quiz validation rules and option design guidelines
+│   ├── assessment-style-guide.md       # Quiz validation and adaptive metadata tagging rules
 │   ├── glossary-style-guide.md         # Technical terminology and keyword rules
-│   ├── prompt-library.md               # LLM prompt templates for content authors
-│   └── quality-checklist.md            # Editorial compliance checks
-├── knowledge-base/                     # Decentralized, portable subject repositories
-│   ├── ai/                             # Artificial Intelligence subject category
-│   │   ├── machine-learning/           # Machine Learning subject
-│   │   ├── deep-learning/              # Deep Learning subject
-│   │   ├── nlp/                        # Natural Language Processing subject
-│   │   ├── genai/                      # Generative AI subject
-│   │   └── ai-agents/                  # AI Agents and Orchestration subject
-│   ├── core-cs/                        # Core Computer Science subject category
-│   │   ├── dbms/                       # Database Management Systems subject
-│   │   ├── sql/                        # Structured Query Language subject
-│   │   ├── os/                         # Operating Systems subject
-│   │   └── cn/                         # Computer Networks subject
-│   ├── software-engineering/           # Software Engineering subject category
-│   │   ├── java/                       # Java Programming subject
-│   │   ├── oop/                        # Object-Oriented Programming subject
-│   │   ├── dsa/                        # Data Structures and Algorithms subject
-│   │   ├── spring-boot/                # Spring Boot framework subject
-│   │   └── system-design/              # Distributed System Design subject
-│   ├── web-development/                # Web Development subject category
-│   │   ├── html-css-git/               # HTML, CSS, and Git version control subject
-│   │   ├── javascript/                 # Core JavaScript subject
-│   │   ├── css-frameworks/             # CSS Utility Frameworks subject
-│   │   ├── reactjs/                    # ReactJS library subject
-│   │   ├── nodejs-expressjs/           # NodeJS and ExpressJS backend subject
-│   │   ├── typescript/                 # TypeScript language subject
-│   │   └── nextjs/                     # Next.js framework subject
-│   └── aptitude/                       # General Aptitude subject category
-│       ├── quantitative-aptitude/      # Quantitative Aptitude mathematics subject
-│       └── verbal-aptitude/            # Verbal Aptitude grammar and logic subject
-├── platform/                           # Tracking platform code
-│   ├── assets/                         # Static graphical and system assets
-│   ├── client/                         # Next.js/React interactive tracking frontend
-│   └── server/                         # Python API server and environment configuration
-└── scratch/                            # Helper scripts, validation tools, and templates
+│   ├── prompt-library.md               # Actionable prompt templates for AI agents
+│   └── quality-checklist.md            # Editorial QA check vectors
+├── knowledge-base/                     # Decentralized, portable subject metadata
+│   ├── schemas/                        # Draft 2020-12 JSON Schema files
+│   ├── ai/                             # Artificial Intelligence subject files
+│   ├── core-cs/                        # Core Computer Science subject files
+│   ├── software-engineering/           # Software Engineering subject files
+│   ├── web-development/                # Web Development subject files
+│   └── aptitude/                       # General Aptitude subject files
+├── platform/                           # Web application codebase
+│   ├── client/                         # Interactive React SPA frontend
+│   └── server/                         # FastAPI backend and database drivers
+└── scratch/                            # Validation scripts and automation utilities
 ```
 
 ---
 
-## Core Subsystems
+## 3. Technology Stack & Platform Overview
 
-### 1. Decentralized Knowledge Base
-Curriculum content is fully decentralized, machine-readable, and parsed offline. Each subject folder under `knowledge-base/` contains:
-*   **`syllabus.json`**: The academic source of truth defining Modules -> Topics -> Subtopics.
-*   **`subject-metadata.json`**: Theme colors, difficulty flags, and estimated learning times.
-*   **`subject-map.json`**: Topic-level dependency trees and prerequisite resolution maps.
-*   **`knowledge-assets.json`**: Curated bibliographies, glossary terms, and external citations.
-*   **`book-metadata.json`**: Textbook-specific frontmatter, publisher details, and copyright licenses.
-
-For every topic defined in the syllabus, a standardized seven-layer asset suite is generated strictly in JSON format (enforcing the omission of raw markdown and source code files from the database folders):
-1.  **Notes (`notes/*.json`)**: Highly detailed textbook-grade lessons containing LaTeX-formatted mathematical equations and callout blocks (e.g., "Student Trap", "Engineering Note").
-2.  **Revision (`revision/*.json`)**: High-density study cards summarizing key equations, algorithms, and concepts in structured fields.
-3.  **Interview (`interview/*.json`)**: Staff-engineer level mock interview guides containing targeted questions, candidate traps, and optimal responses.
-4.  **Examples (`examples/*.json`)**: Pure NumPy-based reference implementations (zero external runtime dependencies) showcasing the algorithms in action, wrapped in JSON string attributes.
-5.  **Practice (`practice/*.json`)**: Code workspace templates containing algorithms to implement, along with built-in tests and verification logic in JSON.
-6.  **Quiz (`quiz/*.json`)**: Multiple-choice assessment questions providing comprehensive diagnostic feedback.
-7.  **Diagrams (`diagrams/*.json`)**: Structural diagram layouts mapped in code (e.g. Mermaid blocks) to be rendered dynamically by the web platform.
-
-### 2. Editorial Standards
-All content complies with the publishing constitution under the `editorial/` directory:
-*   **Mathematical Style**: Enforces rigid LaTeX matrices. Scalars are italic ($z$), vectors are bold lowercase ($\mathbf{x}$), and parameter matrices are bold uppercase ($\mathbf{W}$). All LaTeX code inside JSON files is double-escaped to prevent parsing failures.
-*   **Code Quality**: Enforces zero-dependency algorithmic implementations in pure Python or JavaScript using standard library elements, with no empty placeholders.
-*   **Tone & Voice**: Written as a professional, expert-authored technical textbook, focusing on logical progression, continuous referencing, and removing duplication across the curriculum hierarchy.
+The platform uses a decoupled stack to guarantee high concurrency, secure session management, and sub-millisecond database queries:
+*   **Backend Server**: Built using **FastAPI** utilizing stateless asynchronous execution loops and role-based access control.
+*   **Frontend Client**: React Single Page Application (SPA) utilizing dynamic **Zustand** state stores, **Framer Motion** micro-animations, and a dynamic Theme Engine.
+*   **Database Tier**: Document-oriented data storage (**MongoDB Atlas** / **Beanie ODM** / **Motor driver**) mapping nested user progress and quiz history. Swappable with relational databases (SQL) via the Repository Pattern.
+*   **In-Memory Caching**: Redis instances cache active session parameters, while the server maintains an in-memory cache of the curriculum indexes for $O(1)$ lesson routing.
+*   **AI Subsystem**: Stateless RAG search pipelines utilizing cosine similarity matches on a vector store, coupled with specialized multi-agent domains.
 
 ---
 
-## Development and Verification
+## 4. Ingestion & Content Validation
 
-### Seeding and Conversion
-To convert any raw curriculum contents or consolidate markdown guides into the topic-by-topic JSON structure, execute:
+Curriculum assets are completely decoupled from application routing. Content is parsed from JSON files at server startup using standard configurations.
+
+### Ingestion Validation Checks
+To ensure database integrity and schema stability, all commits must pass two validation suites:
+
+1.  **JSON Schema Validation**: Validates all curriculum assets against the JSON Schema Draft 2020-12 files under `knowledge-base/schemas/`.
+2.  **Cross-Repository Verification**: Runs reference checking to find orphaned identifiers or duplicate keys:
+    ```bash
+    python scratch/validate_knowledge_integrity.py
+    ```
+3.  **Sanitization Check**: Verifies JSON syntax correctness and rejects Unicode emojis:
+    ```bash
+    python scratch/validate_ai_notes.py
+    ```
+
+---
+
+## 5. Getting Started
+
+### Prerequisites
+*   Python 3.10+
+*   Node.js 18+
+*   MongoDB Instance (or whitelisted access to Atlas cluster)
+
+### Running Backend
 ```bash
-python scratch/convert_curriculum_to_json.py
+cd platform/server
+pip install -r requirements.txt
+python main.py
 ```
 
-### Content Validation
-A custom verification suite is provided to scan all subjects under `knowledge-base/` for:
-1.  Schema conformance (correct key sets, proper nested types).
-2.  Latex syntax and escape checks (verifying that no invalid backslash characters break standard JSON parsers).
-3.  Absolute file path exposures (checking for path leaks from local filesystems).
-4.  Emoji usage (ensuring zero emojis exist in educational content to preserve academic tone).
-
-Run the validation suite via:
+### Running Frontend
 ```bash
-python scratch/validate_ai_notes.py
+cd platform/client
+npm install
+npm run dev
 ```
+
+---
+
+## 6. Contribution & Licensing
+
+We welcome contributions from human developers, content creators, and autonomous AI agents. All contributors must follow the guidelines detailed in the **[Editorial Style Guide](editorial/editorial-style-guide.md)** and the **[Quality Checklist](editorial/quality-checklist.md)**.
+
+### Licensing
+All code blocks are licensed under the Apache 2.0 License. All educational materials inside the `knowledge-base/` are licensed under the Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0).

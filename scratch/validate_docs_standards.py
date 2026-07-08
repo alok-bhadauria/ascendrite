@@ -3,7 +3,6 @@ import re
 import sys
 
 def has_emoji(text):
-    # Standard emoji ranges in Unicode
     emoji_regex = re.compile(
         r'[\U0001F600-\U0001F64F]'  # emoticons
         r'|[\U0001F300-\U0001F5FF]'  # symbols & pictographs
@@ -20,9 +19,12 @@ def main():
     editorial_path = os.path.join(base_dir, "editorial")
     
     errors = []
+    seen_filenames = {}
+    link_pattern = re.compile(r'\[([^\]]*)\]\(([^)]*)\)')
     
-    print("Checking markdown files under docs/ and editorial/...")
+    print("Executing comprehensive documentation QA validations...")
     
+    # 1. Gather all files and check naming, duplicate filenames, metadata structures, and emojis
     for path_dir in [docs_path, editorial_path]:
         if not os.path.exists(path_dir):
             continue
@@ -31,40 +33,63 @@ def main():
             for f in files:
                 if not f.endswith(".md"):
                     continue
-                    
-                # 1. Filename kebab-case check
+                
+                rel_path = os.path.relpath(os.path.join(root, f), base_dir)
+                
+                # Check duplicate filenames
+                if f in seen_filenames:
+                    errors.append(f"Duplicate filename detected: '{f}' in '{rel_path}' and '{seen_filenames[f]}'")
+                else:
+                    seen_filenames[f] = rel_path
+                
+                # Check naming convention
                 if not re.match(r'^[a-z0-9-]+.md$', f):
-                    errors.append(f"Filename '{f}' is not in kebab-case.md format.")
+                    errors.append(f"Filename '{f}' in '{rel_path}' is not in kebab-case.md format.")
                     
                 file_path = os.path.join(root, f)
                 with open(file_path, "r", encoding="utf-8") as file_content:
                     content = file_content.read()
                     
-                # 2. Emoji check
+                # Check for prohibited emojis
                 if has_emoji(content):
-                    errors.append(f"File '{f}' contains prohibited emojis.")
+                    errors.append(f"File '{rel_path}' contains prohibited Unicode emojis.")
                     
-                # 3. Metadata block check for files in docs/ (except directory-structure.md)
+                # Check standard Metadata Block
                 rel_dir = os.path.relpath(root, base_dir)
                 if rel_dir.startswith("docs") and not f == "directory-structure.md":
-                    # We check: system-architecture-hld.md, ai-architecture.md, backend-architecture.md,
-                    # frontend-architecture.md, database-schema.md, knowledge-base-integration.md, security-standards.md
                     target_files = [
                         "system-architecture-hld.md", "ai-architecture.md", "backend-architecture.md",
                         "frontend-architecture.md", "database-schema.md", "knowledge-base-integration.md",
-                        "security-standards.md"
+                        "security-standards.md", "project-vision.md", "product-philosophy.md",
+                        "learning-philosophy.md", "engineering-principles.md", "platform-philosophy.md",
+                        "ai-philosophy.md", "organizational-structure.md", "product-evolution-strategy.md",
+                        "version-roadmap.md", "engineering-decision-process.md"
                     ]
                     if f in target_files:
-                        if "## Document Metadata" not in content or "*   **Purpose**:" not in content:
-                            errors.append(f"File '{f}' is missing standard Metadata Block.")
+                        if "## Document Metadata" not in content or "*   **Purpose**:" not in content or "*   **Scope**:" not in content or "*   **Ownership**:" not in content:
+                            errors.append(f"File '{rel_path}' is missing the standardized Metadata Block (Purpose, Scope, Audience, Ownership, Related Documents).")
+
+                # 2. Link verification check
+                matches = link_pattern.findall(content)
+                for text, link in matches:
+                    if link.startswith("http") or link.startswith("mailto:") or link.startswith("#") or link.startswith("file:"):
+                        continue
+                        
+                    clean_link = link.split("#")[0].split("?")[0]
+                    if not clean_link:
+                        continue
+                        
+                    target_path = os.path.normpath(os.path.join(root, clean_link))
+                    if not os.path.exists(target_path):
+                        errors.append(f"Broken link in '{rel_path}': target path not found for '{link}'")
 
     if errors:
-        print("\nValidation Failed:")
+        print("\nDocumentation Validation Checks Failed:")
         for err in errors:
             print(f" - {err}")
         return 1
     
-    print("\nAll checks passed successfully!")
+    print("\nAll documentation standards and reference links verified successfully!")
     return 0
 
 if __name__ == "__main__":
