@@ -1,118 +1,69 @@
-# Ascendrite
+# Ascendrite Platform Ecosystem
 
-Ascendrite is an enterprise-grade, metadata-driven learning platform and technical curriculum infrastructure. It translates traditional, high-level technical syllabi into granular, code-driven learning roadmaps. Designed for scalability, high information density, and modularity, the platform separates educational content from application logic.
+Ascendrite is an enterprise-grade, metadata-driven educational platform and curriculum infrastructure system. The platform translates traditional high-level technical syllabi into granular, code-driven learning roadmaps. 
+
+This repository houses the platform's core architecture specifications, operational style guides, public database schemas, and validation pipelines, segregating the **Knowledge Infrastructure** from proprietary **Knowledge Assets**.
 
 ---
 
 ## 1. Project Vision & Governance
 
-Ascendrite exists to democratize and accelerate advanced technical mastery. We structure our platform around a decoupled architecture where curriculum databases, interactive clients, and AI-assisted workflows scale independently.
+Ascendrite exists to democratize and accelerate advanced technical mastery. The system is designed around the locked Master Blueprint, which serves as the constitutional source of truth. All technical specs, operational pipelines, database tables, and client views derive from this blueprint's principles.
 
-For detailed guidelines on our mission, learning model, and organizational boundaries, refer to the **Governance** layer:
-*   **[Project Vision](docs/governance/project-vision.md)**: Core mission statement, values, and open-access principles.
-*   **[Product Philosophy](docs/governance/product-philosophy.md)**: Metadata-first rendering rules and client-decoupling guidelines.
-*   **[Learning Philosophy](docs/governance/learning-philosophy.md)**: The Dual-Loop Learning model (Conceptual vs. Practical loops).
-*   **[Engineering Principles](docs/governance/engineering-principles.md)**: SOLID design guidelines, DRY/YAGNI, and backward compatibility.
-*   **[Platform Philosophy](docs/governance/platform-philosophy.md)**: Workspace-first layout and dynamic theme engine tokens.
-*   **[AI Philosophy](docs/governance/ai-philosophy.md)**: Multi-agent boundaries and the Non-Replacement Principle.
-*   **[Organizational Structure](docs/governance/organizational-structure.md)**: Team boundaries and ownership scopes across engineering departments.
-*   **[Product Evolution Strategy](docs/governance/product-evolution-strategy.md)**: Boundary decoupling guidelines and contract-first API design.
-*   **[Version Roadmap](docs/governance/version-roadmap.md)**: Technology migrations and scalability roadmap.
-*   **[Engineering Decision Process](docs/governance/engineering-decision-process.md)**: RFC proposal lifecycles and consensus guidelines.
+The platform separates the public framework codebase from the proprietary educational assets (Notes, Revision, Interview, Examples, Practice, Quizzes), routing all requests through the **Knowledge Service** layer:
+
+$$\text{Platform} \longrightarrow \text{Knowledge Service} \longrightarrow \text{Knowledge Storage} \longrightarrow \text{Private Knowledge Assets}$$
 
 ---
 
-## 2. Repository Directory Structure
+## 2. Repository Directory Map
 
-```
-ascendrite/
-├── docs/                               # Systems design and platform specifications
-│   ├── governance/                     # Roadmaps, philosophies, and processes
-│   ├── architecture/                   # Decoupled system blueprints and RAG pipelines
-│   ├── engineering/                    # Backend, frontend, and database specifications
-│   ├── knowledge/                      # Ingestion parsing pipelines and validation rules
-│   └── security/                       # Zero Trust parameters and secure cookie policies
-├── editorial/                          # Operational Publishing Constitution
-│   ├── editorial-style-guide.md        # Master editorial guide and tone specifications
-│   ├── mathematical-style-guide.md     # LaTeX syntax standards and notation matrices
-│   ├── code-style-guide.md             # Python/TypeScript code and script standards
-│   ├── examples-style-guide.md         # Coding examples architecture rules
-│   ├── diagram-style-guide.md          # Visual asset and Mermaid specification rules
-│   ├── assessment-style-guide.md       # Quiz validation and adaptive metadata tagging rules
-│   ├── glossary-style-guide.md         # Technical terminology and keyword rules
-│   ├── prompt-library.md               # Actionable prompt templates for AI agents
-│   └── quality-checklist.md            # Editorial QA check vectors
-├── knowledge-base/                     # Decentralized, portable subject metadata
-│   ├── schemas/                        # Draft 2020-12 JSON Schema files
-│   ├── ai/                             # Artificial Intelligence subject files
-│   ├── core-cs/                        # Core Computer Science subject files
-│   ├── software-engineering/           # Software Engineering subject files
-│   ├── web-development/                # Web Development subject files
-│   └── aptitude/                       # General Aptitude subject files
-├── platform/                           # Web application codebase
-│   ├── client/                         # Interactive React SPA frontend
-│   └── server/                         # FastAPI backend and database drivers
-└── scratch/                            # Validation scripts and automation utilities
-```
+### 2.1 Constitutional Blueprints (`blueprint/`)
+Contains locked, top-level architectural definitions and decisions:
+*   **[Master Blueprint](blueprint/ascendrite-master-blueprint.md)**: Platform constitutional source of truth.
+*   **[Architectural Decision Records (ADRs)](blueprint/architectural-decision-records.md)**: Record of core engineering decisions (ADR-001 through ADR-013).
+*   **[Domain Reference](blueprint/domain-reference.md)**: Global business terminology reference catalog.
+*   **[Engineering Checklists](blueprint/engineering-checklists.md)**: Commit checkpoints and validation criteria.
+
+### 2.2 Technical Specifications (`docs/`)
+Divided into five operational departments:
+*   **Governance** (`docs/governance/`): Houses [Project Vision](docs/governance/project-vision.md), [Product Philosophy](docs/governance/product-philosophy.md), [Learning Philosophy](docs/governance/learning-philosophy.md), [Engineering Principles](docs/governance/engineering-principles.md), [Platform Philosophy](docs/governance/platform-philosophy.md), [AI Philosophy](docs/governance/ai-philosophy.md), and [Product Evolution Strategy](docs/governance/product-evolution-strategy.md).
+*   **Architecture** (`docs/architecture/`): Specifies [System Architecture (HLD)](docs/architecture/system-architecture-hld.md), [Backend Architecture (LLD)](docs/architecture/backend-architecture.md), [API Architecture](docs/architecture/api-architecture.md), [Database Schema](docs/architecture/database-schema.md), [Event Architecture](docs/architecture/event-architecture.md), [State Machines](docs/architecture/state-machines.md), [Engineering Flows](docs/architecture/engineering-flows.md), and [AI Architecture](docs/architecture/ai-architecture.md).
+*   **Operations** (`docs/operations/`): Details [Security Standards](docs/operations/security-standards.md), [Observability & Telemetry](docs/operations/observability-telemetry.md), [Deployment Architecture](docs/operations/deployment-architecture.md), [Monitoring](docs/operations/monitoring.md), [Backup & Recovery](docs/operations/backup-recovery.md), [Incident Response](docs/operations/incident-response.md), and [Operational Standards](docs/operations/operational-standards.md).
+*   **Development** (`docs/development/`): Houses [Contribution Guide](docs/development/contribution-guide.md), [Coding Standards](docs/development/coding-standards.md), [Local Development](docs/development/local-development.md), [Environment Configuration](docs/development/environment-configuration.md), and [Testing Strategy](docs/development/testing-strategy.md).
+*   **References** (`docs/references/`): Contains centralized lookup tables including [Glossary](docs/references/glossary.md), [Domain Map](docs/references/domain-map.md), [Actor Capability Matrix](docs/references/actor-capability-matrix.md), [Event Catalog](docs/references/event-catalog.md), and [Technology Decisions](docs/references/technology-decisions.md).
+
+### 2.3 Editorial & Publishing guides (`editorial/`)
+Defines the publishing department standards:
+*   **[Style Guides](editorial/editorial-style-guide.md)**: Governs visual guidelines, writing voice, KaTeX mathematical conventions, and formatting constraints.
+*   **[Pedagogical Frameworks](editorial/educational-philosophy.md)**: Structures Bloom's Taxonomy, Spaced Repetition flashcards, and Project-Based learning models.
+*   **[Authoring Specifications](editorial/content-authoring-guide.md)**: Directs notes drafting, [Revision lists](editorial/revision-authoring-guide.md), [Interview mockups](editorial/interview-authoring-guide.md), and [MCQ formatting](editorial/assessment-style-guide.md).
+*   **[Asset Guidelines](editorial/code-style-guide.md)**: Standardizes python/typescript code blocks, [Mermaid diagrams](editorial/diagram-style-guide.md), and [AI prompt templates](editorial/prompt-library.md).
+*   **[QA & Review](editorial/quality-assurance-framework.md)**: Codifies pre-publication checklists, [moderation pipelines](editorial/publishing-workflow.md), and [pre-commit checklist indices](editorial/quality-checklist.md).
+
+### 2.4 Knowledge Infrastructure (`knowledge-base/`)
+Exposes metadata schema configurations and taxonomy trees:
+*   **`schemas/`**: Draft 2020-12 validation schemas for subjects, modules, topics, and assets.
+*   **`domain-taxonomy.json`**: Structural classification tree.
+*   **`knowledge-graph.json`**: Graph relational map verifying concept prerequisite DAG boundaries.
+*   **`curriculum-map.json`**: Flat index catalog relating syllabus paths to actual private assets.
 
 ---
 
-## 3. Technology Stack & Platform Overview
+## 3. Technology Stack & Persistence Architecture
 
-The platform uses a decoupled stack to guarantee high concurrency, secure session management, and sub-millisecond database queries:
-*   **Backend Server**: Built using **FastAPI** utilizing stateless asynchronous execution loops and role-based access control.
-*   **Frontend Client**: React Single Page Application (SPA) utilizing dynamic **Zustand** state stores, **Framer Motion** micro-animations, and a dynamic Theme Engine.
-*   **Database Tier**: Document-oriented data storage (**MongoDB Atlas** / **Beanie ODM** / **Motor driver**) mapping nested user progress and quiz history. Swappable with relational databases (SQL) via the Repository Pattern.
-*   **In-Memory Caching**: Redis instances cache active session parameters, while the server maintains an in-memory cache of the curriculum indexes for $O(1)$ lesson routing.
-*   **AI Subsystem**: Stateless RAG search pipelines utilizing cosine similarity matches on a vector store, coupled with specialized multi-agent domains.
+Ascendrite prioritizes local-first execution as the primary development strategy. Database infrastructure is decoupled to allow isolated components:
+*   **PostgreSQL**: Handles ACID transactions (users, permissions, settings).
+*   **MongoDB**: Hosts metadata document catalogs (syllabi, concept taxonomy).
+*   **Redis Cache**: In-memory transient cache layer warming data at startup.
+*   **Vector Repository**: Abstracted interface engine storing embeddings (pgvector implementation default).
+*   **MinIO**: Object storage housing binary files and private educational assets.
 
 ---
 
 ## 4. Ingestion & Content Validation
 
-Curriculum assets are completely decoupled from application routing. Content is parsed from JSON files at server startup using standard configurations.
-
-### Ingestion Validation Checks
-To ensure database integrity and schema stability, all commits must pass two validation suites:
-
-1.  **JSON Schema Validation**: Validates all curriculum assets against the JSON Schema Draft 2020-12 files under `knowledge-base/schemas/`.
-2.  **Cross-Repository Verification**: Runs reference checking to find orphaned identifiers or duplicate keys:
-    ```bash
-    python scratch/validate_knowledge_integrity.py
-    ```
-3.  **Sanitization Check**: Verifies JSON syntax correctness and rejects Unicode emojis:
-    ```bash
-    python scratch/validate_ai_notes.py
-    ```
-
----
-
-## 5. Getting Started
-
-### Prerequisites
-*   Python 3.10+
-*   Node.js 18+
-*   MongoDB Instance (or whitelisted access to Atlas cluster)
-
-### Running Backend
-```bash
-cd platform/server
-pip install -r requirements.txt
-python main.py
-```
-
-### Running Frontend
-```bash
-cd platform/client
-npm install
-npm run dev
-```
-
----
-
-## 6. Contribution & Licensing
-
-We welcome contributions from human developers, content creators, and autonomous AI agents. All contributors must follow the guidelines detailed in the **[Editorial Style Guide](editorial/editorial-style-guide.md)** and the **[Quality Checklist](editorial/quality-checklist.md)**.
-
-### Licensing
-All code blocks are licensed under the Apache 2.0 License. All educational materials inside the `knowledge-base/` are licensed under the Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0).
+To ensure schema stability, contributions must pass the validation pipelines:
+*   **Schema Linting**: Verifies curriculum files against JSON schemas.
+*   **Graph Linting**: Validates that sitemaps contain no circular prerequisites.
+*   **Audit Check**: Programmatically scans for Unicode emojis, missing citations, or unresolved identifiers.
