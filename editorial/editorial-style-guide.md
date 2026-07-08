@@ -1,60 +1,62 @@
-# Ascendrite Editorial Style Guide
+# Editorial Style Guide
 
-This document is the master editorial standard and publishing constitution of the Ascendrite platform. Every contributor—whether human author, artificial intelligence agent, curriculum architect, editor, or reviewer—must adhere strictly to these guidelines.
+## Document Metadata
+*   **Purpose**: Outlines global writing standards, voice, tone, formatting conventions, and glossary mappings.
+*   **Scope**: Governs all technical writing, descriptions, and metadata schemas inside the platform.
+*   **Intended Audience**: Human authors, editors, review panels, and AI content generation agents.
+*   **Related Documents**:
+    *   [Educational Philosophy](educational-philosophy.md)
+    *   [Content Authoring Guide](content-authoring-guide.md)
+*   **Ownership**: Head of Editorial Division & Lead Educational Systems Designer
 
 ---
 
 ## 1. Vision and Educational Alignment
-The editorial vision of Ascendrite aligns with the [Project Vision](../docs/governance/project-vision.md) and [Product Philosophy](../docs/governance/product-philosophy.md).
-*   **Intuition Before Formalism**: Concepts must be motivated by a practical system bottleneck before introducing mathematical derivations or code.
-*   **Rigorous Accuracy**: Contributors must not simplify concepts to the point of introducing technical inaccuracies. Mathematical representations and hardware mechanics must be presented exactly as they exist in professional systems.
-*   **Industrial Alignment**: Every topic must culminate in actual engineering execution, focusing on real-world systems optimization.
+
+The editorial vision of Ascendrite enforces three core standards across all educational materials:
+*   **Intuition Before Formalism**: Concepts must be motivated by real-world engineering bottlenecks prior to introducing formal mathematical definitions, hardware details, or code.
+*   **Technical Accuracy**: Content must remain mathematically and architecturally accurate. Authors must avoid oversimplifying concepts to the point of introducing inaccuracies.
+*   **Industrial Applicability**: Curriculum modules must culminate in practical system execution and optimization strategies.
 
 ---
 
 ## 2. Pedagogy & Writing Standards
 
-### 2.1 The Dual-Loop Pedagogy
-All curriculum contents must support the [Learning Philosophy](../docs/governance/learning-philosophy.md):
-1.  **Conceptual Loop**: Translates high-level intuition into formal mathematical and theoretical models.
-2.  **Practical Loop**: Translates theoretical models into executable, production-grade code and system architectures.
+### 2.1 Tone and Voice
+*   **Tone**: Objective, analytical, and authoritative. Write in the style of professional technical specifications.
+*   **Voice**: Third-person perspective only. Avoid conversational prefaces (e.g., "In this chapter, we will learn...").
+*   **No Emojis**: The use of emojis is strictly prohibited in all user-facing content, documentation, and JSON metadata.
 
-### 2.2 Knowledge Density and Prose
-The writing tone must remain objective and analytical. Contributors shall write in the style of authoritative engineering specifications rather than blog posts:
-*   **Decluttered Prose**: Authors must avoid conversational fluff, conversational prefaces (e.g., "In this section, we will..."), and first-person singular viewpoints.
-*   **No Emojis**: The use of emojis is strictly prohibited across all content layers to preserve a textbook-like aesthetic.
-*   **Technical Neutrality**: Writers should present system limits, tradeoffs, and metrics objectively, without declaring specific frameworks as "best" or "worst" unless backed by benchmarks.
+### 2.2 Content Density
+*   Eliminate editorial fluff.
+*   Maintain a high ratio of information to prose. Focus on system limits, resource tradeoffs, performance bottlenecks, and design decisions.
 
 ---
 
-## 3. Vocabulary and Typography Specifications
-*   **Code Formatting**: Variables, class names, functions, files, directories, API paths, and console commands must be wrapped in backticks (e.g., `git merge`, `main()`, `/path/to/project`).
-*   **Key Terms**: Technical terms must be highlighted in **boldface** on their first occurrence.
-*   **Mathematical Notation**: All mathematical expressions must use KaTeX/LaTeX syntax. Wrap inline math in single dollar signs (e.g. $x \in \mathbb{R}$) and block equations in double dollar signs (e.g. $$\mathbf{A}\mathbf{x} = \lambda\mathbf{x}$$).
+## 3. Formatting & Typography Conventions
+
+*   **Code Syntax**: Wrap variable names, database collections, functions, file paths, API endpoints, and console commands in backticks (e.g., `api/v1/auth`, `user_id`).
+*   **Emphasis**: Highlight key technical terms in **boldface** on their first occurrence within a topic.
+*   **Mathematical Formulations**: Format all mathematical expressions using KaTeX. Wrap inline math in single dollar signs (e.g. $f(x) = y$) and block equations in double dollar signs (e.g. $$\nabla^2 \Phi = 0$$).
 
 ---
 
 ## 4. Chapter & Topic Structuring Rules
-Every topic file (stored as structured JSON) must follow the standard keys defined in `topic.schema.json`:
-1.  **Learning Objectives**: A list of 3-5 measurable outcomes using Bloom's Taxonomy verbs (e.g. Analyze, Derive, Design).
-2.  **Introduction & Historical Context**: Short background framing the engineering challenge.
-3.  **Theoretical Architecture / Mathematical Foundation**: Core formulas, proofs, diagrams, and explanations.
-4.  **Reference Implementation**: Complete, documented code blocks with input/output examples.
-5.  **Design Trade-Offs & Scaling**: Detailed analysis of time/space complexity, hardware constraints, and failure modes.
-6.  **Revision & Synthesis**: Takeaway concepts, quick reference equations, and review lists.
+
+Every curriculum topic must populate the following sections defined in Pydantic data schemas:
+1.  **Learning Objectives**: List 3-5 measurable objectives using verbs from Bloom's Taxonomy (e.g. "Derive", "Analyze", "Optimize").
+2.  **Introduction & Motivation**: Establish the engineering problem being solved.
+3.  **Theoretical Foundation**: Detail the mathematical definitions, hardware behaviors, and system schemas.
+4.  **Reference Implementation**: Provide runnable, commented code examples without placeholders.
+5.  **Scaling & Tradeoffs**: Document time/space complexity (Big-O) and resource limits.
+6.  **Summary & Review**: Highlight key takeaways and formulas.
 
 ---
 
-## 5. Contributor & AI Agent Guidelines
+## 5. Glossary & Terminology Standards
 
-### 5.1 Human Contributor Checklist
-Before submitting a pull request, contributors must run:
-1.  `python scratch/validate_knowledge_integrity.py` to check for orphaned IDs or broken links.
-2.  `python scratch/validate_ai_notes.py` to ensure JSON format and syntax correctness.
-3.  Verify that all code snippets execute cleanly with zero placeholder blocks.
-
-### 5.2 AI Agent Ingestion Rules
-Autonomous agents authoring or modifying curriculum files must comply with these constraints:
-*   **Strict Schema Compliance**: All output JSON objects must validate against Draft 2020-12 schemas under `knowledge-base/schemas/`.
-*   **No Narrative Prefaces**: AI agents shall generate only the requested JSON/markdown payload directly, without conversational intros or comments.
-*   **Non-Hallucination**: Agents must verify library API versions, mathematical facts, and code syntax before writing.
+To prevent naming collisions and RAG model lookup confusion:
+*   **Term Format**: Standardize glossary term names as singular, lowercase nouns where applicable.
+*   **Acronyms & Abbreviations**: Resolve abbreviations to their full names (e.g., map "PCA" to "Principal Component Analysis").
+*   **Definitions**: Begin definitions with a concise sentence stating the term's classification, followed by its mathematical or architectural context.
+*   **Namespace Isolation**: Segregate subject-specific terminology inside `knowledge-assets.json` to prevent collisions between disciplines (e.g., "Kernel" in Operating Systems vs. Machine Learning).
