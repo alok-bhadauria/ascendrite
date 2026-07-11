@@ -9,6 +9,24 @@ $RuntimeDir = "E:\Projects\ascendrite-data\runtime"
 $BackendPidFile = Join-Path $RuntimeDir "backend.pid"
 $FrontendPidFile = Join-Path $RuntimeDir "frontend.pid"
 
+# Defensive checks for directory structure
+if (-not (Test-Path $ServerDir)) {
+    Write-Host "[ERROR] Platform server directory not found at: $ServerDir" -ForegroundColor Red
+    Read-Host "Press Enter to exit"
+    exit 1
+}
+if (-not (Test-Path $ClientDir)) {
+    Write-Host "[ERROR] Platform client directory not found at: $ClientDir" -ForegroundColor Red
+    Read-Host "Press Enter to exit"
+    exit 1
+}
+$PkgJson = Join-Path $ClientDir "package.json"
+if (-not (Test-Path $PkgJson)) {
+    Write-Host "[ERROR] Frontend package.json not found at: $PkgJson" -ForegroundColor Red
+    Read-Host "Press Enter to exit"
+    exit 1
+}
+
 # Ensure runtime directories exist
 if (-not (Test-Path $RuntimeDir)) {
     New-Item -ItemType Directory -Path $RuntimeDir -Force | Out-Null
@@ -50,6 +68,72 @@ function Get-PortOccupyingPID($port) {
     return $null
 }
 
+function Get-ProcessDescendants($parentPid) {
+    $descendants = @()
+    $queue = [System.Collections.Generic.Queue[int]]::new()
+    $queue.Enqueue($parentPid)
+    while ($queue.Count -gt 0) {
+        $curr = $queue.Dequeue()
+        $children = Get-CimInstance Win32_Process -Filter "ParentProcessId = $curr" -ErrorAction SilentlyContinue
+        foreach ($child in $children) {
+            $descendants += $child.ProcessId
+            $queue.Enqueue($child.ProcessId)
+        }
+    }
+    return $descendants
+}
+
+function Test-ManagedOwnership($pidFile, $port) {
+    if (-not (Test-Path $pidFile)) {
+        return $false
+    }
+    $launcherPidVal = Get-Content $pidFile -Raw -ErrorAction SilentlyContinue
+    if (-not $launcherPidVal) {
+        return $false
+    }
+    $launcherPid = [int]($launcherPidVal.Trim())
+
+    # Check if launcher process is running
+    $launcherProc = Get-Process -Id $launcherPid -ErrorAction SilentlyContinue
+    if (-not $launcherProc) {
+        return $false
+    }
+
+    # Retrieve all process IDs in our managed tree (launcher + descendants)
+    $treePids = @($launcherPid)
+    $treePids += Get-ProcessDescendants $launcherPid
+
+    # Get the PID currently listening on the port
+    $portPidVal = Get-PortOccupyingPID $port
+    if ($portPidVal) {
+        $portPid = [int]$portPidVal
+        # If the port owner is part of our managed process tree, ownership is verified
+        if ($treePids -contains $portPid) {
+            return $true
+        }
+    }
+
+    # Fallback keyword validation on process tree members
+    foreach ($p in $treePids) {
+        $procObj = Get-CimInstance Win32_Process -Filter "ProcessId = $p" -ErrorAction SilentlyContinue
+        if ($procObj) {
+            $cmd = $procObj.CommandLine
+            $path = $procObj.ExecutablePath
+            if ($port -eq 8000) {
+                if ($cmd -match "uvicorn|main:app" -or $path -match "python") {
+                    return $true
+                }
+            } elseif ($port -eq 5173) {
+                if ($cmd -match "vite|node|npm" -or $path -match "node") {
+                    return $true
+                }
+            }
+        }
+    }
+
+    return $false
+}
+
 function Get-ServiceState($serviceName, $port) {
     $service = Get-Service -Name $serviceName -ErrorAction SilentlyContinue
     if ($service) {
@@ -84,20 +168,23 @@ function Test-HTTPStatus($url) {
 
 function Get-AppStatus($pidFile, $port, $url) {
     if (Test-Path $pidFile) {
-        $pidVal = Get-Content -Path $pidFile -Raw -ErrorAction SilentlyContinue
-        if ($pidVal) {
-            $pidVal = $pidVal.Trim()
-            $proc = Get-Process -Id $pidVal -ErrorAction SilentlyContinue
+        $launcherPid = Get-Content -Path $pidFile -Raw -ErrorAction SilentlyContinue
+        if ($launcherPid) {
+            $launcherPid = $launcherPid.Trim()
+            $proc = Get-Process -Id $launcherPid -ErrorAction SilentlyContinue
             if ($proc) {
-                $portListening = Test-PortConnection $port
-                if ($portListening) {
-                    if (Test-HTTPStatus $url) {
-                        return "ONLINE"
+                if (Test-ManagedOwnership $pidFile $port) {
+                    if (Test-PortConnection $port) {
+                        if (Test-HTTPStatus $url) {
+                            return "ONLINE"
+                        } else {
+                            return "DEGRADED"
+                        }
                     } else {
                         return "DEGRADED"
                     }
                 } else {
-                    return "DEGRADED"
+                    Remove-Item $pidFile -Force -ErrorAction SilentlyContinue
                 }
             } else {
                 Remove-Item $pidFile -Force -ErrorAction SilentlyContinue
@@ -312,6 +399,16 @@ function Start-BackendApp {
         }
     }
 
+    # Test if python can import uvicorn
+    Write-Host "Testing python interpreter and uvicorn availability..."
+    $testCmd = "& `"$VenvPython`" -c `"import uvicorn; print('OK')`""
+    $output = Invoke-Expression $testCmd -ErrorAction SilentlyContinue
+    if ($output -ne "OK") {
+        Write-Host "[ERROR] Selected Python interpreter ($VenvPython) cannot run or import 'uvicorn'. Please run 'pip install -r requirements.txt'." -ForegroundColor Red
+        Read-Host "Press Enter to continue"
+        return $false
+    }
+
     $occupyPid = Get-PortOccupyingPID 8000
     if ($occupyPid) {
         if (Test-Path $BackendPidFile) {
@@ -335,13 +432,20 @@ function Start-BackendApp {
     $logPath = Join-Path $RepoRoot "logs\backend.log"
     
     try {
-        $proc = Start-Process -FilePath "$VenvPython" -ArgumentList "-m", "uvicorn", "main:app", "--host", "127.0.0.1", "--port", "8000" -WorkingDirectory "$ServerDir" -PassThru -NoNewWindow -RedirectStandardOutput $logPath -RedirectStandardError $logPath
+        # Redirect standard output and error using CMD to avoid lock conflicts on Windows
+        $args = '/c ""' + $VenvPython + '" -m uvicorn main:app --host 127.0.0.1 --port 8000 >> "' + $logPath + '" 2>&1"'
+        $proc = Start-Process -FilePath "cmd.exe" -ArgumentList $args -WorkingDirectory "$ServerDir" -PassThru -NoNewWindow
         $proc.Id | Out-File -FilePath $BackendPidFile -Encoding ascii
         
         Write-Host "Waiting for Backend to listen on port 8000..." -NoNewline
         $started = $false
         for ($i = 0; $i -lt 15; $i++) {
             Start-Sleep -Seconds 1
+            $chkProc = Get-Process -Id $proc.Id -ErrorAction SilentlyContinue
+            if (-not $chkProc -or $chkProc.HasExited) {
+                Write-Host " [FAILED] Process died during startup." -ForegroundColor Red
+                break
+            }
             if (Test-PortConnection 8000) {
                 $started = $true
                 break
@@ -350,11 +454,18 @@ function Start-BackendApp {
         if ($started) {
             Write-Host " [OK] (PID: $($proc.Id))" -ForegroundColor Green
         } else {
-            Write-Host " [TIMEOUT] Check backend.log for errors." -ForegroundColor Red
+            Write-Host " [TIMEOUT/FAILED] Check backend.log for errors." -ForegroundColor Red
+            if (Test-Path $BackendPidFile) {
+                Remove-Item $BackendPidFile -Force -ErrorAction SilentlyContinue
+            }
             Read-Host "Press Enter to continue"
+            return $false
         }
     } catch {
         Write-Host "[ERROR] Failed to start Backend process: $_" -ForegroundColor Red
+        if (Test-Path $BackendPidFile) {
+            Remove-Item $BackendPidFile -Force -ErrorAction SilentlyContinue
+        }
         Read-Host "Press Enter to continue"
         return $false
     }
@@ -362,30 +473,7 @@ function Start-BackendApp {
 }
 
 function Stop-BackendApp {
-    if (Test-Path $BackendPidFile) {
-        $pidVal = Get-Content $BackendPidFile -Raw -ErrorAction SilentlyContinue
-        if ($pidVal) {
-            $pidVal = $pidVal.Trim()
-            $proc = Get-Process -Id $pidVal -ErrorAction SilentlyContinue
-            if ($proc) {
-                Write-Host "Stopping Backend API Server (PID: $pidVal)..." -NoNewline
-                taskkill /f /t /pid $pidVal >$null 2>&1
-                Start-Sleep -Seconds 1
-                Write-Host " [OK]" -ForegroundColor Green
-            } else {
-                Write-Host "Backend process (PID: $pidVal) was already stopped." -ForegroundColor Yellow
-            }
-        }
-        Remove-Item $BackendPidFile -Force -ErrorAction SilentlyContinue
-    } else {
-        $occupyPid = Get-PortOccupyingPID 8000
-        if ($occupyPid) {
-            Write-Host "[WARN] Port 8000 is occupied by unmanaged process (PID: $occupyPid). Not killing it." -ForegroundColor Yellow
-        } else {
-            Write-Host "Backend is already stopped. [SKIP]" -ForegroundColor Yellow
-        }
-        Start-Sleep -Seconds 1
-    }
+    Stop-AppProcess $BackendPidFile 8000 "Backend"
 }
 
 function Restart-BackendApp {
@@ -424,13 +512,20 @@ function Start-FrontendApp {
     $logPath = Join-Path $RepoRoot "logs\frontend.log"
     
     try {
-        $proc = Start-Process -FilePath "npm.cmd" -ArgumentList "run", "dev" -WorkingDirectory "$ClientDir" -PassThru -NoNewWindow -RedirectStandardOutput $logPath -RedirectStandardError $logPath
+        # Redirect standard output and error using CMD to avoid lock conflicts on Windows
+        $args = '/c "npm run dev >> "' + $logPath + '" 2>&1"'
+        $proc = Start-Process -FilePath "cmd.exe" -ArgumentList $args -WorkingDirectory "$ClientDir" -PassThru -NoNewWindow
         $proc.Id | Out-File -FilePath $FrontendPidFile -Encoding ascii
         
         Write-Host "Waiting for Frontend to listen on port 5173..." -NoNewline
         $started = $false
         for ($i = 0; $i -lt 15; $i++) {
             Start-Sleep -Seconds 1
+            $chkProc = Get-Process -Id $proc.Id -ErrorAction SilentlyContinue
+            if (-not $chkProc -or $chkProc.HasExited) {
+                Write-Host " [FAILED] Process died during startup." -ForegroundColor Red
+                break
+            }
             if (Test-PortConnection 5173) {
                 $started = $true
                 break
@@ -439,11 +534,18 @@ function Start-FrontendApp {
         if ($started) {
             Write-Host " [OK] (PID: $($proc.Id))" -ForegroundColor Green
         } else {
-            Write-Host " [TIMEOUT] Check frontend.log for errors." -ForegroundColor Red
+            Write-Host " [TIMEOUT/FAILED] Check frontend.log for errors." -ForegroundColor Red
+            if (Test-Path $FrontendPidFile) {
+                Remove-Item $FrontendPidFile -Force -ErrorAction SilentlyContinue
+            }
             Read-Host "Press Enter to continue"
+            return $false
         }
     } catch {
         Write-Host "[ERROR] Failed to start Frontend process: $_" -ForegroundColor Red
+        if (Test-Path $FrontendPidFile) {
+            Remove-Item $FrontendPidFile -Force -ErrorAction SilentlyContinue
+        }
         Read-Host "Press Enter to continue"
         return $false
     }
@@ -451,27 +553,31 @@ function Start-FrontendApp {
 }
 
 function Stop-FrontendApp {
-    if (Test-Path $FrontendPidFile) {
-        $pidVal = Get-Content $FrontendPidFile -Raw -ErrorAction SilentlyContinue
-        if ($pidVal) {
-            $pidVal = $pidVal.Trim()
-            $proc = Get-Process -Id $pidVal -ErrorAction SilentlyContinue
-            if ($proc) {
-                Write-Host "Stopping Frontend Server (PID: $pidVal)..." -NoNewline
-                taskkill /f /t /pid $pidVal >$null 2>&1
+    Stop-AppProcess $FrontendPidFile 5173 "Frontend"
+}
+
+function Stop-AppProcess($pidFile, $port, $appName) {
+    if (Test-Path $pidFile) {
+        $launcherPidVal = Get-Content $pidFile -Raw -ErrorAction SilentlyContinue
+        if ($launcherPidVal) {
+            $launcherPid = [int]($launcherPidVal.Trim())
+            # Verify process ownership to prevent killing reused/unrelated Windows PIDs
+            if (Test-ManagedOwnership $pidFile $port) {
+                Write-Host "Stopping $appName (PID: $launcherPid)..." -NoNewline
+                taskkill /f /t /pid $launcherPid >$null 2>&1
                 Start-Sleep -Seconds 1
                 Write-Host " [OK]" -ForegroundColor Green
             } else {
-                Write-Host "Frontend process (PID: $pidVal) was already stopped." -ForegroundColor Yellow
+                Write-Host "[WARN] Process ID $launcherPid does not match managed process tree. Stale PID file cleaned." -ForegroundColor Yellow
             }
         }
-        Remove-Item $FrontendPidFile -Force -ErrorAction SilentlyContinue
+        Remove-Item $pidFile -Force -ErrorAction SilentlyContinue
     } else {
-        $occupyPid = Get-PortOccupyingPID 5173
+        $occupyPid = Get-PortOccupyingPID $port
         if ($occupyPid) {
-            Write-Host "[WARN] Port 5173 is occupied by unmanaged process (PID: $occupyPid). Not killing it." -ForegroundColor Yellow
+            Write-Host "[WARN] Port $port is occupied by unmanaged process (PID: $occupyPid). Not killing it." -ForegroundColor Yellow
         } else {
-            Write-Host "Frontend is already stopped. [SKIP]" -ForegroundColor Yellow
+            Write-Host "$appName is already stopped. [SKIP]" -ForegroundColor Yellow
         }
         Start-Sleep -Seconds 1
     }
@@ -593,18 +699,23 @@ function Show-Diagnostics {
     }
     Write-Host ""
     Write-Host "Windows Services Checks:"
-    $services = @("postgresql-x64-18", "MongoDB", "Memurai", "AscendriteRustFS")
+    $services = @(
+        @{ Name = "postgresql-x64-18"; Desc = "Primary Relational Store - Struct data and user registries (CRITICAL)" },
+        @{ Name = "MongoDB"; Desc = "NoSQL Document Store - Workspace document metadata indexers (DEGRADED CAPABILITY)" },
+        @{ Name = "Memurai"; Desc = "Volatile Cache & Realtime PubSub - Realtime subscriptions and socket rooms (DEGRADED CAPABILITY)" },
+        @{ Name = "AscendriteRustFS"; Desc = "RustFS Object Storage - Binary files, attachments, and learning artifacts (DEGRADED CAPABILITY)" }
+    )
     foreach ($svc in $services) {
-        $status = Get-Service -Name $svc -ErrorAction SilentlyContinue
+        $status = Get-Service -Name $svc.Name -ErrorAction SilentlyContinue
         if ($status) {
-            Write-Host "  Service '$svc': " -NoNewline
+            Write-Host "  Service '$($svc.Name)': " -NoNewline
             if ($status.Status -eq "Running") {
                 Write-Host "RUNNING" -ForegroundColor Green
             } else {
-                Write-Host "STOPPED" -ForegroundColor Red
+                Write-Host "STOPPED (Impact: $($svc.Desc))" -ForegroundColor Red
             }
         } else {
-            Write-Host "  Service '$svc': NOT INSTALLED" -ForegroundColor Yellow
+            Write-Host "  Service '$($svc.Name)': NOT INSTALLED (Impact: $($svc.Desc))" -ForegroundColor Yellow
         }
     }
     Write-Host ""
@@ -626,7 +737,11 @@ function Show-Diagnostics {
             $bPid = $bPid.Trim()
             $bProc = Get-Process -Id $bPid -ErrorAction SilentlyContinue
             if ($bProc) {
-                Write-Host "  Backend process is running with PID: $bPid" -ForegroundColor Green
+                if (Test-ManagedOwnership $BackendPidFile 8000) {
+                    Write-Host "  Backend process is running with PID: $bPid (Ownership: VERIFIED)" -ForegroundColor Green
+                } else {
+                    Write-Host "  Backend process is running with PID: $bPid (Ownership: UNVERIFIED/REUSED)" -ForegroundColor Red
+                }
             } else {
                 Write-Host "  Backend: Stale PID file found (PID: $bPid, process dead)" -ForegroundColor Yellow
             }
@@ -641,7 +756,11 @@ function Show-Diagnostics {
             $fPid = $fPid.Trim()
             $fProc = Get-Process -Id $fPid -ErrorAction SilentlyContinue
             if ($fProc) {
-                Write-Host "  Frontend process is running with PID: $fPid" -ForegroundColor Green
+                if (Test-ManagedOwnership $FrontendPidFile 5173) {
+                    Write-Host "  Frontend process is running with PID: $fPid (Ownership: VERIFIED)" -ForegroundColor Green
+                } else {
+                    Write-Host "  Frontend process is running with PID: $fPid (Ownership: UNVERIFIED/REUSED)" -ForegroundColor Red
+                }
             } else {
                 Write-Host "  Frontend: Stale PID file found (PID: $fPid, process dead)" -ForegroundColor Yellow
             }
@@ -733,7 +852,7 @@ function View-Logs {
         switch ($choice) {
             "1" { Show-LogFile "logs\backend.log" }
             "2" { Show-LogFile "logs\frontend.log" }
-            "3" { Open-Dir "logs" }
+            "3" { Open-Dir $LogsDir }
             "4" { Open-Dir "E:\Projects\ascendrite-data\rustfs\logs\" }
             "0" { return }
             default { Write-Host "Invalid choice." -ForegroundColor Red; Start-Sleep -Seconds 1 }
