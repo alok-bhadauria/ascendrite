@@ -22,14 +22,29 @@ Ascendrite manages runtime variables using strict naming and loading rules:
 
 ## 2. Required Backend Environment Variables
 
-The backend API server requires the following configuration keys:
+The backend API server requires the following configuration keys (non-secret default templates for local development):
 
-*   `DATABASE_URL`: Connection string for the database instance.
-*   `REDIS_URL`: Connection parameters for the memory cache tier.
-*   `JWT_SECRET`: Secret key used for cryptographic token signing.
-*   `JWT_EXPIRATION_MINUTES`: Session token expiration limit.
-*   `AI_MODEL_PROVIDER`: Target LLM provider connector name.
-*   `AI_MODEL_API_KEY`: API credential key for the model client.
+*   **MongoDB Connection**:
+    *   `MONGODB_URI`: Local connection parameters pointing to the MongoDB Community Server instance (e.g. `mongodb://ascendrite_app:Alok@Mongodb#AscendriteApplication@127.0.0.1:27017/ascendrite`).
+    *   `MONGODB_DB_NAME`: Database name (defaults to `ascendrite`).
+*   **PostgreSQL Connection**:
+    *   `POSTGRES_URL`: Relational connection string pointing to the PostgreSQL instance (e.g. `postgresql://ascendrite_app:Alok@Postgresql#AscendriteApplication@127.0.0.1:5432/ascendrite`).
+*   **Redis Connection**:
+    *   `REDIS_URL`: Connection parameters for caching and event queues (e.g. `redis://ascendrite_cache_app:Alok@Memurai#AscendriteApplication@127.0.0.1:6379/0`).
+*   **RustFS / S3 Object Storage**:
+    *   `RUSTFS_ENDPOINT`: Local S3 endpoint address (`127.0.0.1:9000`).
+    *   `RUSTFS_ACCESS_KEY_ID`: Client application key identity (local default: `ascendrite_runtime`).
+    *   `RUSTFS_SECRET_ACCESS_KEY`: Cryptographic signing key (reconciled dynamically at runtime).
+    *   `RUSTFS_REGION`: Bucket storage region (local default: `ap-south-1`).
+*   **JWT Security Configuration**:
+    *   `JWT_SECRET_KEY`: Cryptographic signing secret key.
+    *   `JWT_ALGORITHM`: Signature hash algorithm (default: `HS256`).
+    *   `JWT_ACCESS_TOKEN_EXPIRE_MINUTES`: Access duration (default: `15`).
+    *   `JWT_REFRESH_TOKEN_EXPIRE_DAYS`: Refresh duration (default: `7`).
+*   **AI Tutoring Integration**:
+    *   `OPENAI_API_KEY`: API credential key for LLM calls.
+    *   `OPENAI_EMBEDDING_MODEL`: Target vector embedding model (default: `text-embedding-3-small`).
+    *   `OPENAI_CHAT_MODEL`: Target tutor LLM model (default: `gpt-4o`).
 
 ---
 
@@ -37,7 +52,7 @@ The backend API server requires the following configuration keys:
 
 The React user interface requires the following public properties:
 
-*   `REACT_APP_API_URL`: Target URL endpoint for the REST API server.
+*   `REACT_APP_API_URL`: Target endpoint for the REST API server (local default: `http://127.0.0.1:8000/api/v1`).
 *   `REACT_APP_ENV`: Deployment context indicator (`development`, `staging`, or `production`).
 
 ---
@@ -45,6 +60,7 @@ The React user interface requires the following public properties:
 ## 4. Secret Management Rules
 
 To protect credentials:
-*   **No Secrets in Git**: Committing `.env` files, password strings, or API key values to version control repositories is prohibited.
+*   **No Secrets in Git**: Committing `.env` files containing raw passwords, API secret keys, or access keys to version control is strictly prohibited.
 *   **Local Emulation**: Developers use `.env.local` files for sandbox parameters.
-*   **Production Deployment**: Staging and production credentials are dynamically injected into container memory from secure secret vaults during the release phase.
+*   **Production Deployment**: Staging and production credentials must be injected dynamically into container memory from secure secret vaults during the release phase.
+*   **Local Credentials Registry**: Detailed local infrastructure credentials (usernames, passwords, system permissions) live strictly in the untracked folder `E:\Projects\ascendrite-data\secrets\credentials.txt`.

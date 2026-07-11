@@ -89,6 +89,7 @@ Quick indexing lookups and terminology references:
 *   **[actor-capability-matrix.md](../references/actor-capability-matrix.md)**: Role capability limits and security profiles access grids.
 *   **[event-catalog.md](../references/event-catalog.md)**: Event definitions schemas and domain data properties catalogs.
 *   **[technology-decisions.md](../references/technology-decisions.md)**: Framework selections, database engines, and migration roadmaps justification.
+*   **[discoverability.md](../references/discoverability.md)**: Metadata schemas, crawler sitemap rules, and OpenAPI versioning standards.
 
 ---
 
@@ -120,7 +121,7 @@ To prepare the repository for active coding and infrastructure setup, the physic
     *   `migrations/`: Relational schema updates and indices initialization scripts.
     *   `seeds/`: Standard bootstrap configurations and taxonomy data.
 *   **`storage/`**: Object storage files:
-    *   `configs/`: MinIO server buckets and CORS permission configurations.
+    *   `configs/`: Object Storage (RustFS) server buckets and CORS configurations.
     *   `scripts/`: S3 sync tools to transfer Knowledge Assets from local staging folders to storage.
 *   **`infrastructure/`**: Deployment configurations:
     *   `docker/`: Local development and staging Dockerfiles.
