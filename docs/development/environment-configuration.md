@@ -64,7 +64,8 @@ To protect credentials:
 *   **Local Emulation**: Developers use `.env.local` files for sandbox parameters.
 *   **Production Deployment**: Staging and production credentials must be injected dynamically into container memory from secure secret vaults during the release phase.
 *   **Local Secrets Management**: All development secrets and infrastructure credentials are fully decoupled from source code, residing in the untracked local directory `E:\Projects\ascendrite-data\secrets\`:
-    *   `credentials.txt`: Standard registry containing Postgres, Mongo, Memurai, and RustFS credentials.
-    *   `api-keys.txt`: Custom third-party service provider API tokens (e.g. OpenAI keys).
-    *   `rustfs-access-key.txt` & `rustfs-secret-key.txt`: RustFS-specific authentication secrets loaded dynamically by the S3 server launcher.
-    *   `rustfs-credentials.exported.json`: Configured client-configuration mapping for quick S3 integrations.
+    *   `credentials.txt`: A private, owner-only local credential registry containing local infrastructure connection details, identities, roles, purposes, and credentials for PostgreSQL 18.4, MongoDB Community Server 8.0.26, Memurai Developer Edition 4.2.3 / Redis API 7.4.9, and RustFS 1.0.0-beta.8. It is a current local single-owner development convention, not the intended production secret-management architecture. No credential values are exposed or reproduced in the repository code.
+    *   `api-keys.txt`: Currently empty reserved local file for future API-key storage if required. Its concrete purpose must be established before active use. No active credentials exist in this file.
+    *   `rustfs-access-key.txt`: Machine-readable RustFS access-key file consumed by the current RustFS service startup configuration.
+    *   `rustfs-secret-key.txt`: Machine-readable RustFS secret-key file consumed by the current RustFS service startup configuration.
+    *   `rustfs-credentials.exported.json`: Sensitive RustFS credential export artifact. It must remain private, untracked, and outside the source repository.

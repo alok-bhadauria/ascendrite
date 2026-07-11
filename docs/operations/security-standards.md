@@ -181,3 +181,58 @@ Operational hosting environments must enforce strict boundaries:
 
 To prevent compromise through AI pipelines:
 *   **Prompt Injection Awareness**: Input sanitization filters inspect user prompts for execution instructions before forwarding queries to the LLM.
+
+---
+
+## 11. Adaptive Human-Challenge Abuse Protection
+
+To protect the platform against automated abuse, denial-of-service attempts, and credential-stuffing attacks, the platform employs a provider-neutral adaptive human-challenge (CAPTCHA) model:
+
+### 11.1 Core Abuse Prevention Principles
+*   **Defense-in-Depth**: Human challenges are not a substitute for authentication or authorization. They serve as one layer of abuse prevention alongside:
+    *   IP-based and route-based rate limiting.
+    *   Failed-login cooldown timers.
+    *   Request complexity restrictions.
+    *   Usage quotas and token budgets.
+    *   Audit and security logging.
+*   **Risk-Based Enforcement**: CAPTCHAs are not presented indiscriminately. The security gateway evaluates request risk parameters dynamically:
+    *   *Low Risk*: No challenge is presented; requests proceed subject to standard rate limits.
+    *   *Elevated Risk*: A lightweight, passive, or interactive human challenge is required.
+    *   *High-Confidence Abuse*: Requests are blocked or rejected directly, rather than presenting endless challenge loops.
+*   **Privacy & Accessibility**: Human-challenge components must remain keyboard-navigable and screen-reader compatible. Standard image-selection grids are prohibited; passive background checks (e.g. cryptographic puzzle tokens) are preferred. User data collection must follow data minimization principles.
+
+### 11.2 Flow Enforcement Matrix
+*   **Candidate Flows for Challenge Verification**:
+    *   User registration/signup under anomalous geo-coordinates or network indicators.
+    *   User login attempts following repeated credential validation failures.
+    *   Account recovery or password reset requests to block enumeration attempts.
+    *   Email verification code resend triggers to prevent mail server abuse.
+    *   Public anonymous search or AI tutor endpoints (if exposed in public spaces).
+*   **Exempt Flows (CAPTCHA Prohibited)**:
+    *   Routine workspace operations and note reading by authenticated users.
+    *   Profile updates and configuration adjustments within active, validated sessions.
+    *   Developer application API-key generation requests (which must use **Step-Up Authentication** instead).
+    *   Administrative actions and moderator approvals (which require password confirmations or MFA step-up authentication).
+
+### 11.3 Verification & Integration Flow
+*   **Provider-Neutral Design**: Core business logic interacts with a generic verification adapter interface. While Cloudflare Turnstile is documented as the preferred initial implementation candidate, the integration boundary must remain fully replacable without altering backend controllers.
+*   **Conceptual Challenge Verification Flow**:
+    ```
+    Client Request ──► Gateway Checks ──► Elevated Risk: Return challenge payload
+    Client Solves Challenge ──► Submit Token with Action ──► Server Authoritative Verification
+    ```
+*   **Authoritative Server Verification**:
+    *   Frontend solution tokens are never trusted on their own. The backend must query the challenge provider API to authoritatively verify the token.
+    *   Verifications must validate contextual bounds: expected action string, host header domain name, single-use token signature, and token freshness (expires within 5 minutes).
+    *   Challenge tokens are not reusable. Storing raw tokens in logs is prohibited.
+
+### 11.4 Failure & Outage Recovery (Fail-Closed Policy)
+In the event of a challenge provider outage or API network failure, the platform enforces risk-dependent fallback rules:
+*   *Low-risk operations* (e.g., public search) degrade to basic rate-limiting limits.
+*   *Elevated-risk operations* (e.g., signup, recovery) must fail closed, rejecting requests with HTTP 503 until verification reachability is restored.
+
+### 11.5 Implementation & Deployment Classification
+*   **V1 Direct Requirement**: Provide a provider-neutral human-challenge verification adapter interface class in the backend code and a verification middleware schema.
+*   **Endpoint Activation**: Enforce challenge token validation on signup and login endpoints when they are active.
+*   **Provider Status**: Not currently implemented. The physical Cloudflare Turnstile client is deferred until active deployment.
+

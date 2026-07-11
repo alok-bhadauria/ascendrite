@@ -82,11 +82,14 @@ To protect database instances against denial-of-service attempts via complex que
 ## 4. Authoritative OpenAPI Contracts & Versioning
 
 *   **API Versioning**: Enforced via the URI namespace (e.g., `/api/v1/`). Major updates increment the path variable, keeping legacy code bases isolated.
-*   **Authoritative OpenAPI Specification**: The backend FastAPI engine automatically generates the OpenAPI schema JSON at `/api/v1/openapi.json`. This schema serves as the single source of truth for:
-    *   Client API client code generation.
-    *   AI agent routing configurations (agent-readable API schemas).
-    *   Contract testing validation suites.
-*   **Documentation URLs**: Accessible by human developers at `/docs` (Swagger UI) and `/redoc` (ReDoc) for clear, interactive exploration.
+*   **Authoritative OpenAPI Specification**:
+    *   **V1 Direct Requirement**: The FastAPI backend must expose the authoritative OpenAPI schema at `/api/v1/openapi.json` when the v1 application server is implemented. This schema will serve as the single source of truth for:
+        *   Client API client code generation.
+        *   AI agent routing configurations (agent-readable API schemas).
+        *   Contract testing validation suites.
+*   **Documentation URLs**:
+    *   **V1 Direct Requirement**: The FastAPI backend must make interactive API documentation interfaces available at `/docs` (Swagger UI) and `/redoc` (ReDoc) for clear, interactive exploration when implemented.
+    *   **Security Policy**: Production exposure of interactive API documentation (Swagger UI/ReDoc) must remain configurable according to environment and security policy. Development accessibility does not automatically imply unrestricted production exposure.
 
 ---
 
@@ -136,12 +139,23 @@ API endpoints must return a predictable response envelope. The JSON structure en
 External developer integrations and AI agents authenticate using API credentials managed under `Settings -> Developer Applications` (V1-Ready / Deferred):
 *   **Credential Creation**:
     1.  The user requests a developer application key.
-    2.  The backend generates a client ID (plain text) and an API key secret.
-*   **One-Time Reveal**: The API key secret is shown to the user **exactly once** upon creation. It is never rendered in cleartext again.
-*   **Hashing & Fingerprinting**: The backend hashes the secret key using SHA-256 before storing it in PostgreSQL (`hashed_secret`). Authenticated requests present the key, which is hashed and matched.
-*   **Rotation & Revocation**: Keys can be manually rotated or revoked instantly. Revoked keys update status to `Revoked` in Postgres, blocking subsequent access.
-*   **Expiry Bounds**: Keys are issued with configured expirations (e.g. 90 days, 180 days, or permanent). Expired keys automatically return HTTP 403.
-*   **Audit Tracking**: Creation, rotation, and revocation events write to `security_audit_logs`.
+    2.  The backend generates a public client ID/credential identifier (non-secret, plain text) and a cryptographically secure, high-entropy machine-generated API key secret.
+*   **High-Entropy Machine-Generated Secret**: The API key secret must be generated using a cryptographically secure random generator containing sufficient entropy. It must never be human-chosen.
+*   **One-Time Reveal**: The API key secret is shown to the user **exactly once** upon creation. It is not retrievable or rendered in cleartext afterward.
+*   **Verification Representation**: For cryptographically random, sufficiently high-entropy machine-generated API secrets, a SHA-256 verification representation is stored in PostgreSQL (`hashed_secret`).
+*   **Authentication Flow**: The API authentication pipeline performs validation in the following order:
+    1.  Receive and parse the presented credential payload.
+    2.  Extract or resolve its non-secret public client ID/credential identifier.
+    3.  Perform an indexed lookup in PostgreSQL for the single candidate credential record associated with that client ID (preventing sequential scanning of all records).
+    4.  Hash the presented high-entropy secret using SHA-256.
+    5.  Compare the resulting hash with the stored verification representation using a constant-time comparison mechanism.
+    6.  Evaluate credential state, application state, expiration, revocation, scopes, quotas, rate limits, and other applicable policy rules.
+    7.  Record appropriate audit and usage metadata without logging the raw secret.
+*   **Distinction from Human Password Hashing**: Machine-generated API secrets use SHA-256 because they are cryptographically high-entropy, allowing for fast, indexed matching. Human passwords must never be stored or verified using SHA-256. Human passwords require the canonical password-specific Key Derivation Function (KDF) defined in the security architecture, which is **Argon2id** (or **bcrypt** with a work factor of 12).
+*   **Rotation, Revocation & Expiry**:
+    *   *Rotation & Revocation*: Keys can be manually rotated or revoked instantly. Revoked keys update status to `Revoked` in Postgres, blocking subsequent access.
+    *   *Expiry Bounds*: Keys are issued with configured expirations (e.g., 90 days, 180 days, or permanent). Expired keys automatically return HTTP 403.
+    *   *Audit Tracking*: Creation, rotation, and revocation events write to `security_audit_logs`.
 
 ---
 

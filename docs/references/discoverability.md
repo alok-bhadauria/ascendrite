@@ -54,10 +54,12 @@ Public-facing catalog pages implement standardized optimization rules:
 ## 4. Machine-Legible API Contracts & Structured Data
 
 To allow developer tools, AI assistants, and integration agents to interact with the platform programmatically:
-*   **OpenAPI authority**: The API schema is exposed as a structured JSON object at `/api/v1/openapi.json`. This schema contains full endpoint definitions, input parameter models, DTO schemas, and response validation rules.
+*   **OpenAPI authority**:
+    *   **V1 Direct Requirement**: The FastAPI backend must expose the authoritative OpenAPI schema at `/api/v1/openapi.json` when the v1 application server is implemented, containing full endpoint definitions, input parameter models, DTO schemas, and response validation rules.
 *   **Structured Metadata**: Public subject and topic cards inject **JSON-LD** schema metadata structured according to Schema.org specifications (e.g. `Course` and `EducationalOccupationalCredential` types) to support rich snippets in search results.
 *   **Structured Notes Examples**: Coding exercises and math examples must expose structured JSON templates defining inputs, expected outputs, and execution parameters.
-*   **llms.txt**: To assist external LLMs and AI agents in understanding the platform structure, a static `llms.txt` file is served from the root directory. It contains a markdown map of all stable documentation URLs, API specs, and project governance boundaries.
+*   **llms.txt**:
+    *   **V1-Ready / Deferred Until Public Documentation Activation**: A static `llms.txt` file is not created or served currently. It must be activated only when Ascendrite has sufficient stable public documentation to make it genuinely useful and maintainable. When activated, it will map stable canonical public documentation resources for AI assistants and agents.
 
 ---
 

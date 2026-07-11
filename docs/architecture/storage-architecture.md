@@ -37,10 +37,10 @@ Contains persistent state, runtime logs, backups, and secrets. It must never be 
     *   `data/`: Persistent bucket directories and object binaries.
     *   `logs/`: S3 console and access event outputs.
 *   `secrets/`:
-    *   `credentials.txt`: Standard local credentials registry.
-    *   `api-keys.txt`: Key-value registry for external services (e.g. OpenAI).
-    *   `rustfs-access-key.txt` & `rustfs-secret-key.txt`: Local keys loaded by the S3 server launcher.
-    *   `rustfs-credentials.exported.json`: Shared credentials wrapper maps for programmatic S3 test tools.
+    *   `credentials.txt`: A private, owner-only local credential registry containing local infrastructure connection details, identities, roles, purposes, and credentials for PostgreSQL 18.4, MongoDB Community Server 8.0.26, Memurai Developer Edition 4.2.3 / Redis API 7.4.9, and RustFS 1.0.0-beta.8. It is a current local single-owner development convention, not the intended production secret-management architecture.
+    *   `api-keys.txt`: Currently empty reserved local file for future API-key storage if required. Its concrete purpose must be established before active use.
+    *   `rustfs-access-key.txt` & `rustfs-secret-key.txt`: Machine-readable RustFS credentials files consumed by the current RustFS service startup configuration.
+    *   `rustfs-credentials.exported.json`: Sensitive RustFS credential export artifact. It must remain private, untracked, and outside the source repository.
 *   `backups/`: Unified backups directory containing folders for `knowledge`, `mongodb`, `postgres`, and `rustfs`.
 
 ---
