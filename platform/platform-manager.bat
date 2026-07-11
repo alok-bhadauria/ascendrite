@@ -892,7 +892,7 @@ while ($true) {
         "6" { Show-Diagnostics }
         "7" { Open-URLs }
         "8" { View-Logs }
-        "9" { # Refresh by continuing loop }
+        "9" { }
         "0" { exit 0 }
         default { Write-Host "Invalid choice." -ForegroundColor Red; Start-Sleep -Seconds 1 }
     }
