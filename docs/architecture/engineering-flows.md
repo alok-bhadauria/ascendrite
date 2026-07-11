@@ -124,7 +124,7 @@ This flow handles object storage streaming, malware scans, validation, and trans
 [Browser Client] ──( POST /media/upload )──► [Media Service]
                                                  │
                                                  ▼
-[MinIO / S3 Object Store] ◄──( Stream )───── [Media Service]
+[S3 Object Store (RustFS)] ◄──( Stream )───── [Media Service]
                                                  │
                                      ( FSM: Pending -> Uploading )
                                                  │

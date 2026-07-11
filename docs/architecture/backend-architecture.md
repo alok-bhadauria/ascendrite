@@ -1,12 +1,13 @@
 # Backend Architecture: Low-Level Design (LLD) & Modules Boundaries
 
 ## Document Metadata
-*   **Purpose**: Outlines the low-level design structures, packages, dependency directions, module boundaries, and coding standards.
+*   **Purpose**: Outlines the low-level design structures, clean architecture layers, dependency directions, module boundaries, error standards, and coding constraints.
 *   **Scope**: Governs backend directory layouts, library code dependencies, and server-side software boundaries.
 *   **Intended Audience**: Backend developers, systems integrators, and engineering coordinators.
 *   **Related Documents**:
     *   [System Architecture (HLD)](system-architecture-hld.md)
     *   [Repository Structure](../development/repository-structure.md)
+    *   [Security Standards](../operations/security-standards.md)
 *   **Ownership**: Head of Platform Engineering
 
 ---
@@ -19,7 +20,7 @@ The backend uses a clean architecture layout. All software elements are grouped 
 +-----------------------------------------------------------------+
 |                      Infrastructure Layer                       |
 |  - FastAPI Routers & Middleware    - MongoDB/Redis Drivers      |
-|  - Vector Store Client             - MinIO S3 API Adapters      |
+|  - Vector Store Client             - RustFS S3 API Adapters     |
 +-----------------------------------------------------------------+
                                |
                                v
@@ -45,7 +46,7 @@ The backend uses a clean architecture layout. All software elements are grouped 
 ```
 
 ### 1.1 Package Responsibilities
-*   `domain/`: Contains pure business objects, core validations, and state machine configurations. It has zero dependencies on external databases, frameworks, or libraries.
+*   `domain/`: Contains pure business objects, core validation models, and state machine configurations. It has zero dependencies on external databases, frameworks, or libraries.
 *   `service/`: Orchestrates transaction flows, translates query structures, maps validation errors, and handles third-party APIs.
 *   `repository/`: Implements raw database read/write actions, connection configurations, and schema migrations.
 *   `infrastructure/`: Houses entry web routes, FastAPI application servers, request handlers, telemetry instrumentation, and configurations.
@@ -61,7 +62,7 @@ The backend uses a clean architecture layout. All software elements are grouped 
 
 ## 2. Platform Module Boundaries & Responsibilities
 
-The backend is partitioned into fourteen distinct modules. Each module enforces strict boundary definitions to ensure decouple-ability:
+The backend is partitioned into distinct modules. Each module enforces strict boundary definitions to ensure decouple-ability:
 
 ### 2.1 Authentication
 *   **Ownership**: Identity Domain
@@ -147,14 +148,14 @@ The backend is partitioned into fourteen distinct modules. Each module enforces 
 *   **Dependencies**: Authentication.
 *   **Extension Points**: Custom anti-virus scanner adapters.
 
-### 2.13 Organizations
+### 2.13 Organizations (V2 Future Concept)
 *   **Ownership**: Workspace Domain
-*   **Responsibilities**: Coordinates classrooms, assignments, and group projects.
+*   **Responsibilities**: Coordinates classrooms, assignments, and group projects. (Deferred in V1).
 *   **Boundaries**: Restricts access based on organizational authorization tokens.
 *   **Dependencies**: User Management, Workspace.
 *   **Extension Points**: Assignment creation hooks.
 
-### 2.14 Communication
+### 2.14 Communication (V1-Ready / Deferred)
 *   **Ownership**: Platform Domain
 *   **Responsibilities**: Handles direct messages, connection links, and announcements.
 *   **Boundaries**: Syncs messages securely through WebSocket handlers.
@@ -163,7 +164,21 @@ The backend is partitioned into fourteen distinct modules. Each module enforces 
 
 ---
 
-## 3. Engineering & Design Standards
+## 3. Background Jobs, Retries & Correlation IDs
+
+The backend platform handles long-running processing tasks and telemetry logs using structured, stateless asynchronous routines:
+*   **Background Jobs Queue**: Tasks (such as RAG embedding generation, PDF textbook compilation, and email dispatches) are pushed to an in-memory queue (Redis-backed Celery/rq tasks). In V1, the server falls back to FastAPI's background tasks for local execution.
+*   **Retry Policy with Exponential Backoff**: Outgoing third-party requests (e.g. OpenAI API tutor queries) implement retry loops with exponential backoff and jitter constraints:
+    *   *Retry Count*: 3 attempts.
+    *   *Wait Interval*: $2^n \text{ seconds} + \text{jitter}$ (where $n$ is the retry attempt).
+*   **Correlation & Request Tracking**: Every incoming request is intercepted by the `CorrelationIDMiddleware`.
+    1.  The middleware checks for the `X-Correlation-ID` header. If absent, a new UUIDv4 is generated.
+    2.  The correlation ID is attached to the thread-local logger context and injected into all transaction logs.
+    3.  The ID is returned in the API success or error payload envelope to assist developers in debugging issues.
+
+---
+
+## 4. Engineering & Design Standards
 
 *   **No Cross-Domain Database Joins**: Database collections belonging to one module must not be joined or directly queried by other modules. Cross-domain queries must query the target module's Service layer API.
 *   **Transaction Boundaries**: Services manage transactional units. Operations that cross database collections must run within unit-of-work transactions.

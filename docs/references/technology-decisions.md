@@ -27,7 +27,7 @@ The core platform technology stack is locked for Version One to ensure rapid ite
 *   **Containerization (Docker)**: Deployed to standardize packaging across local workspaces and staging clusters.
 *   **Telemetry (Prometheus & Log Collectors)**: Used to gather performance metrics, trace API latencies, and output structured operational events.
 *   **Vector Search Engine**: Integrated to index and rank concept coordinates for RAG retrieval logic.
-*   **Object Storage (MinIO / S3 API)**: Implemented to handle large binary files, diagrams, and static assets, keeping the main database query paths lightweight.
+*   **Object Storage (S3-compatible API)**: Implemented (locally backed by RustFS) to handle large binary files, diagrams, and static assets, keeping the main database query paths lightweight.
 
 ---
 
@@ -37,7 +37,7 @@ To ensure absolute storage independence and accommodate scaling limits, the data
 
 *   **Metadata & Relationships**: Stored in MongoDB to support dynamic, multi-layered document indexing and graph relations validation.
 *   **Proprietary Educational Assets**: Reside in a private **Managed Knowledge Storage** bucket, keeping intellectual property separated from the public code repository.
-*   **Binary & Large Assets**: Delegated to MinIO/S3 object stores to keep the transactional databases clean of raw data sizes.
+*   **Binary & Large Assets**: Delegated to S3-compatible (locally backed by RustFS) object stores to keep the transactional databases clean of raw data sizes.
 *   **High-Dimensional Vector Embeddings**: Stored in a vector database to power prompt retrieval in RAG workflows.
 *   **Search & Caching**: Search queries are routed through the Knowledge Service, caching frequent hits in Redis to minimize backend reads.
 

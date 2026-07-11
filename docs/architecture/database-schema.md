@@ -41,7 +41,7 @@ The platform uses a hybrid storage topology, separating relational operations, d
             |                                               |
             v                                               v
 +-----------------------+                       +-----------------------+
-|  Redis Memory Cache   |                       |  MinIO Object Storage |
+|  Redis Memory Cache   |                       |  S3 Object Storage    |
 |  - Active session cache|                       |  - Knowledge Assets   |
 |  - Rate-limit flags   |                       |  - User media uploads |
 +-----------------------+ +-----------------------+-----------------------+
@@ -52,16 +52,16 @@ The platform uses a hybrid storage topology, separating relational operations, d
 *   **MongoDB**: Document-based metadata engine hosting curriculum taxonomies (domains, subjects, modules, topics). Handles fast, hierarchical JSON schema validations.
 *   **Redis**: In-memory data structures layer optimizing hot-path reads, rate limits, session caches, and WebSocket notifications queue tracking.
 *   **Vector Database**: High-dimensional index store mapping curriculum notes into embeddings to resolve real-time RAG similarity queries.
-*   **MinIO / Object Storage**: S3-compatible object store housing system backups, temporary exports, static files, and media.
+*   **S3-Compatible Object Storage**: S3-compatible storage service (locally backed by RustFS) housing system backups, temporary exports, static files, and media.
 *   **Managed Knowledge Storage**: Private bucket directory containing the raw proprietary Knowledge Assets, isolated from the public repository.
 
-### 1.2 Universal Resource Abstraction
-Every business entity in the database (Knowledge Assets, Workspaces, Files, Projects, Organizations, Notifications, Messages) inherits from a common Resource model:
-*   **Resource Identity**: Assigned a permanent, prefix-based identifier (e.g. `res_01823a0f`) that remains immutable.
-*   **Resource Ownership**: Maps to an actor ID or an organization token, defining administrative control.
-*   **Resource Versioning**: Tracks modifications via incremental counters (`resource_version`) independent of database transaction IDs.
-*   **Resource Permissions**: Linked to capability scopes. Access evaluation is handled before returning queries.
-*   **Resource Lifecycle**: Transitions through predefined states (Draft, Review, Approved, Published, Archived, Deleted) governed by the FSM engine.
+### 1.2 Universal Resource Abstraction (V1 Requirement)
+To ensure trace-ability and consistent permission enforcement without excessive coupling, core system resources inherit parameters from a common Resource model:
+*   **Resource Identity**: Assigned an immutable, prefix-based identifier (e.g. `res_01823a0f` where prefix indicates the domain: `usr_` for users, `sub_` for subjects, `doc_` for documents, `pkg_` for packages, `con_` for conversations).
+*   **Resource Ownership**: Binds the resource to an owner ID or an organization token, defining administrative control.
+*   **Resource Versioning**: Tracks state modifications via an incrementing integer `resource_version` incremented on every database transaction, independent of the Git code commit history.
+*   **Resource Permissions**: Bound to capability scopes checked by the authorization middleware.
+*   **Resource Lifecycle**: Tracks FSM states (`Draft`, `Review`, `Approved`, `Published`, `Archived`, `Deleted`).
 
 ---
 
@@ -71,7 +71,7 @@ PostgreSQL acts as the transactional storage engine. The database is organized i
 
 ### 2.1 Domain Entity Specifications
 
-#### 2.1.1 Authentication & Users
+#### 2.1.1 Authentication & Users (Current Verified Reality)
 *   **Purpose**: Manages actor login credentials, registration times, and account status.
 *   **Ownership**: Identity Domain
 *   **Primary Key**: `user_id` (UUIDv4)
@@ -80,7 +80,7 @@ PostgreSQL acts as the transactional storage engine. The database is organized i
 *   **Archival Strategy**: Suspended accounts remain online for 90 days. Archived accounts trigger soft-deletion, masking PII fields.
 *   **Concurrency**: Optimistic locking via `version_id` (incrementing integer).
 
-#### 2.1.2 Sessions & Refresh Tokens
+#### 2.1.2 Sessions & Refresh Tokens (V1 Requirement)
 *   **Purpose**: Manages JWT lifecycle and refresh token rotation tokens.
 *   **Ownership**: Identity Domain
 *   **Primary Key**: `session_id` (UUIDv4)
@@ -90,52 +90,56 @@ PostgreSQL acts as the transactional storage engine. The database is organized i
 *   **Archival Strategy**: Expired and revoked sessions are purged daily via cron processes.
 *   **Concurrency**: Single-use token rotation forces immediate lock acquisition.
 
-#### 2.1.3 Permissions, Capabilities & Scope Model
-*   **Actor Types**: Supports human actors, AI agents, and organizational actors.
-*   **Role**: Defines organizational identities (e.g., Guest, Learner, Moderator, Admin).
-*   **Permission**: Relational records mapping actors to capabilities on specific resources.
+#### 2.1.3 Actor, Capability & Scope Model (V1 Requirement)
+To prevent complex over-engineering during initial stages, Ascendrite avoids complex wildcard systems, adopting an explicit Actor-Role-Capability-Scope framework:
+*   **Actor Types**:
+    *   *Human Actors*: Learners, authors, moderators, and administrators.
+    *   *AI Actors*: Scoped agents (tutors, validators, generators) running under programmatic contexts.
+    *   *Organization Actors (V2 Future Concept)*: Business or educational groups mapped to shared capability rules. (Not implemented in v1).
+*   **Role**: Groups permissions into identities (Guest, Learner, Moderator, Admin).
 *   **Capability**: Individual capabilities (Read, Write, Review, Approve, Publish, Archive, Delete, Configure, Manage).
-*   **Scope**: Scope defines path coordinates (Platform, Domain, Subject, Module, Topic, Asset).
-*   **Inheritance Rules**: Permissions inherit down the scope hierarchy.
-*   **Override Rules**: Specific permissions at lower scopes override parent scopes.
-*   **Explicit Deny**: A deny flag at any scope node overrides all allow grants.
-*   **AI Restrictions**: AI agents are assigned scoped permissions matching their tasks.
-*   **Auditing**: Every permission check, grant, or revoke is logged to `security_audit_logs`.
+*   **Scope**: Path coordinates limiting a capability to a specific taxonomy level:
+    $$\text{Platform} \longrightarrow \text{Domain} \longrightarrow \text{Subject} \longrightarrow \text{Module} \longrightarrow \text{Topic} \longrightarrow \text{Asset}$$
+*   **Inheritance & Overrides**: Permissions propagate down the taxonomy. Higher-level allowances (e.g. `Read` at Subject level) apply to all children unless an explicit override or an **Explicit Deny** is set at a lower scope node (e.g., a specific topic). Explicit Deny overrides all allow grants.
+*   **AI Restrictions**: AI agents are assigned scoped capabilities, blocking dangerous actions (such as publishing changes or changing permissions).
+*   **Auditing**: Access grants and privilege evaluations are logged to `security_audit_logs`.
 
-#### 2.1.4 Ownership Architecture
-*   **Ownership Classifications**: Every resource has a defined ownership matrix:
-    *   `Owner`: Holds full management rights (delegation, transfer, deletion).
-    *   `Maintainer`: Holds write and review permissions.
-    *   `Reviewer`: Holds review permissions.
-    *   `Approver`: Holds validation and approval privileges.
-    *   `Publisher`: Holds merge and publish rights.
-    *   `Observer`: Holds read-only access.
-*   **Ownership Transfer**: Supports transferring ownership of domains, subjects, or modules, automatically propagating the inheritance paths.
-*   **Audit History**: All changes to the ownership matrix are logged to `ownership_audit_logs`.
+#### 2.1.4 Ownership Architecture (V1 Requirement)
+Every resource maintains a clear ownership matrix defining administrative authority:
+*   **Owner**: Full management rights (delegation, transfer, deletion).
+*   **Maintainer**: Edit and revision review permissions.
+*   **Reviewer**: Staging queue view and review logging capabilities.
+*   **Approver**: Verification and sign-off privileges.
+*   **Publisher**: Merge and production deployment permissions.
+*   **Observer**: Read-only capability.
+*   **Ownership Transfer**: Supports transferring ownership, which automatically regenerates target permission inheritance branches.
+*   **Audit History**: Ownership updates write to `ownership_audit_logs`.
 
-#### 2.1.5 Communication Data Model
-*   **Events**: Transient system actions that drive logs. Not stored in conversation tables.
-*   **Notifications**: Persistent alerts center logs. Stored in `notifications`.
-*   **Toasts**: Client-side temporary visual flashes. Never stored in PostgreSQL tables.
-*   **Messages**: Stored in `messages`. Coordinates chat histories.
-*   **Announcements**: Stored in `announcements`. Group-wide broadcasts.
+#### 2.1.5 Communication Data Model (V1-Ready / Deferred)
+*   **Domain Definitions**:
+    *   *Events*: Ephemeral backend messages tracking state changes. Never committed to conversation tables.
+    *   *Notifications*: Persistent alert feeds. Stored in `notifications`.
+    *   *Toasts*: Short-lived UI banners. Managed entirely on the client, never written to databases.
+    *   *Messages*: Persistent direct or group chat logs. Stored in `messages`.
+    *   *Announcements*: Broadcast logs. Stored in `announcements`.
 *   **Database Tables**:
-    *   `conversations`: Tracks conversation threads (`conversation_id` PK, unique participants).
+    *   `conversations`: Tracks conversation threads (`conversation_id` PK, unique participants list).
     *   `messages`: Tracks message payloads (`message_id` PK, `conversation_id` FK, author, text, timestamp).
-    *   `attachments`: Tracks file attachment URLs (`attachment_id` PK, `message_id` FK, MinIO S3 URL).
+    *   `attachments`: Tracks file attachment URLs (`attachment_id` PK, `message_id` FK, Object Storage S3 URL).
     *   `notification_preferences`: Stores user delivery channels (e.g., WebSocket, email).
     *   `notification_delivery`: Tracks notification states (Unread, Read, Archived).
     *   `broadcasts`: Tracks broad alerts issued to classrooms or organizations.
 
-#### 2.1.6 Settings Data Model
-*   **Appearance**: Theme studio selections, dark/light modes, layout configurations.
-*   **Accessibility**: High-contrast states, screen reader formats, font sizes, reduced motion flags.
-*   **Privacy**: Visibility overrides for profiles, emails, metrics, and rankings.
+#### 2.1.6 Settings Data Model (V1 Requirement)
+Settings configuration fields are grouped by responsibility domain. The database model supports dynamic schema additions to prevent schema locks when third-party integrations or features are added:
+*   **Appearance**: Theme selections, dark/light modes, layout panel configurations.
+*   **Accessibility**: High-contrast, screen reader formatting, font sizes, and reduced motion states.
+*   **Privacy**: Visibility variables for profiles, metrics, and search crawling.
 *   **Security**: Password logs, 2FA settings, session parameters, and trusted device lists.
-*   **Communication**: Notification frequency controls and direct message permissions.
-*   **Future Plugins**: Dynamic schema support to allow custom plugins to store configurations under settings.
+*   **Communication**: Notification frequencies and direct message filter permissions.
+*   **Extensibility**: Supported via a JSON schema field `plugin_settings` mapping configuration objects.
 
-#### 2.1.7 Workspaces & Projects
+#### 2.1.7 Workspaces & Projects (V1 Requirement)
 *   **Purpose**: Tracks user workspace panels, sync logs, and offline metrics.
 *   **Ownership**: Workspace Domain
 *   **Primary Key**: `workspace_id` (UUIDv4)
@@ -143,7 +147,7 @@ PostgreSQL acts as the transactional storage engine. The database is organized i
 *   **Indexes**: BTREE on `owner_id`, GIN index on `workspace_layout_json`.
 *   **Concurrency**: Row-level locking (`SELECT FOR UPDATE`) during synchronization.
 
-#### 2.1.8 Audit & Telemetry Log
+#### 2.1.8 Audit & Telemetry Log (Current Verified Reality)
 *   **Purpose**: Stores security logs and telemetry metrics.
 *   **Ownership**: Operations Domain
 *   **Primary Key**: `log_id` (UUIDv4)
@@ -167,7 +171,7 @@ MongoDB operates as the document datastore, organizing the platform's metadata i
                           └── [Asset Array]
 ```
 
-### 3.1 Collection Schema Definitions
+### 3.1 Collection Schema Definitions (Current Verified Reality)
 
 #### 3.1.1 `domain_taxonomy`
 *   **Document Ownership**: Knowledge Domain
@@ -198,7 +202,7 @@ MongoDB operates as the document datastore, organizing the platform's metadata i
 
 ---
 
-## 4. Knowledge Storage & Versioning Design
+## 4. Knowledge Storage & Versioning Design (V1 Requirement)
 
 Knowledge educational notes, quizzes, and diagrams are stored securely outside public git version control. Versioning is managed independently by the Knowledge Service:
 *   **`asset_version`**: An incrementing revision integer tracking content changes in database records (e.g. `asset_version: 12`).
@@ -206,32 +210,32 @@ Knowledge educational notes, quizzes, and diagrams are stored securely outside p
 *   **`publication_version`**: A global deployment identifier indicating the active catalog build instance.
 *   **`approval_history`**: A list of moderator signatures validating technical reviews.
 *   **`checksum`**: A SHA-256 fingerprint generated during compilation.
-*   **`rollback_reference`**: A unique MinIO version token, allowing the service to roll back content instantaneously in case of errors.
+*   **`rollback_reference`**: A unique Object Storage (RustFS) version token, allowing the service to roll back content instantaneously in case of errors.
 
 ---
 
-## 5. Redis Cache Principles
+## 5. Redis Cache Principles (Current Verified Reality)
 
 **Redis is never the source of truth.** All data stored in Redis is transient. If Redis crashes, the platform can rebuild all cached records from PostgreSQL, MongoDB, or object storage databases:
-*   **Database Ownership**: The database is the system of record. Writes must commit to PostgreSQL/MongoDB/MinIO before the cache is updated.
+*   **Database Ownership**: The database is the system of record. Writes must commit to PostgreSQL/MongoDB/Object Storage before the cache is updated.
 *   **Cache Warming**: During application startup, a background initialization script runs, pre-loading global indexes, sitemaps, and sitemap settings into Redis.
 *   **Cache Invalidation**: Event-driven pipelines invalidate caches. Mutations trigger a clean command on matching Redis keys (e.g., updating a topic notes file clears `knowledge:subject:{id}`).
 *   **Expiration**: Caches utilize explicit TTL thresholds to prevent stale data.
 
 ---
 
-## 6. Vector Storage Abstraction
+## 6. Vector Storage Abstraction (V1 Requirement)
 
 To prevent coupling retrieval pipelines to specific database engines, the AI subsystem communicates via a **Vector Repository Abstraction** interface:
 *   **Abstraction Contract**: The interface defines methods: `upsert_embeddings()`, `query_similarity()`, and `delete_embeddings()`.
 *   **Default pgvector Adapter**: The default adapter translates these requests into SQL operations using pgvector inside PostgreSQL.
-*   **Future Adaptation**: Switching to a dedicated vector store (e.g. Milvus or Qdrant) requires writing a new adapter class conforming to the Vector Repository interface, leaving core AI services untouched.
+*   **Future Adaptation (V2)**: Switching to a dedicated vector store (e.g. Milvus or Qdrant) requires writing a new adapter class conforming to the Vector Repository interface, leaving core AI services untouched.
 
 ---
 
-## 7. Object Storage Design
+## 7. Object Storage Design (Current Verified Reality)
 
-Object storage is managed via MinIO/S3 API interfaces:
+Object storage is managed via standard S3 API interfaces (locally backed by **RustFS 1.0.0-beta.8**):
 
 *   **`knowledge-assets` Bucket**:
     *   *Purpose*: Houses Knowledge Assets.
@@ -265,12 +269,12 @@ To maintain modularity and avoid circular dependencies, data flows across storag
 [MongoDB: Curriculum Map] ──► [Redis: Cache Check]
        │
        ▼
-[MinIO: Knowledge Assets] ──► [Vector Repository Search]
+[Object Storage: Knowledge Assets] ──► [Vector Repository Search]
 ```
 
 *   **Rule 1**: PostgreSQL user accounts act as the anchor. All user settings, workspaces, and telemetry events refer to the Postgres `user_id`.
 *   **Rule 2**: Progress trackers reference Subject and Topic IDs in MongoDB.
-*   **Rule 3**: Concept IDs link MongoDB documents to corresponding Vector Repository indexes and MinIO assets.
+*   **Rule 3**: Concept IDs link MongoDB documents to corresponding Vector Repository indexes and Object Storage assets.
 
 ---
 
@@ -301,7 +305,7 @@ Knowledge educational assets follow a strict ingestion sequence to ensure integr
 [Metadata Extraction] (Extracts concept tags and prerequisite IDs)
        │
        ▼
-[Database Ingestion] (Writes metadata to MongoDB and assets to MinIO)
+[Database Ingestion] (Writes metadata to MongoDB and assets to Object Storage)
        │
        ▼
 [Embedding Generation] (Computes high-dimensional vectors)

@@ -100,7 +100,7 @@ Tracks client configuration, sync logs, and offline support:
 Controls binary and markdown uploads:
 *   **States**:
     *   `Pending`: Target upload token generated.
-    *   `Uploading`: Data stream written to MinIO.
+    *   `Uploading`: Data stream written to S3 Object Storage.
     *   `Scanning`: Malware checks and security scan active.
     *   `Completed`: Asset validated and URL returned.
     *   `Failed`: Stream interrupted or scan failed.

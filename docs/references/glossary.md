@@ -5,7 +5,7 @@
 *   **Scope**: Applies globally to all documentation, codebase comments, and system metadata.
 *   **Intended Audience**: Software developers, content editors, and onboarding engineers.
 *   **Related Documents**:
-    *   [Domain Reference](file:///E:/Projects/Ascendrite/blueprint/domain-reference.md)
+    *   [Domain Reference](../../blueprint/domain-reference.md)
 *   **Ownership**: Head of Editorial Division & Principal Software Architect
 
 ---

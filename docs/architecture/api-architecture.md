@@ -1,7 +1,7 @@
 # API Architecture
 
 ## Document Metadata
-*   **Purpose**: Standardizes API routing, payloads, error responses, pagination, filtering, and idempotency interfaces.
+*   **Purpose**: Standardizes API routing, public/private/AI interfaces, parameters validation, error responses, pagination, filtering, search, and idempotency interfaces.
 *   **Scope**: Governs all backend RESTful interfaces and routing middleware.
 *   **Intended Audience**: Backend software engineers, frontend developers, and security auditors.
 *   **Related Documents**:
@@ -11,24 +11,86 @@
 
 ---
 
-## 1. Routing Standards
+## 1. API Surface Categorization
 
-All platform APIs conform to RESTful design patterns and are versioned via the URI namespace.
-*   The canonical root path for version one APIs is `/api/v1/`.
-*   Routes correspond to business domains (e.g., `/api/v1/identity`, `/api/v1/workspace`, `/api/v1/knowledge`).
-*   Path parameters must be lowercase and use kebab-case formats (e.g., `/api/v1/knowledge/subjects/{subject-id}`).
+To maintain strict least privilege and isolate operational paths, the platform categorizes all RESTful endpoints into dedicated API surfaces:
+
+*   **Public APIs**:
+    *   *Path Prefix*: `/api/v1/public/`
+    *   *Audience*: Anonymous guest users, educational index crawlers.
+    *   *Scope*: Read-only access to syllabus structures, subject metadata catalogues, and public search.
+    *   *Authentication*: None required. Strictly protected by aggressive rate limiters.
+*   **Internal / Client APIs**:
+    *   *Path Prefix*: `/api/v1/workspace/` and `/api/v1/users/`
+    *   *Audience*: Registered human learners, authors, and moderators using the client SPA.
+    *   *Scope*: Read/write access to personal profiles, workspaces, attachments, and progress syncing.
+    *   *Authentication*: Enforced opaque session cookie checks (`HttpOnly`, `Secure`, `SameSite=Lax`).
+*   **AI Service APIs**:
+    *   *Path Prefix*: `/api/v1/ai/`
+    *   *Audience*: Autonomous AI agents, automated content generators.
+    *   *Scope*: Read-only access to taxonomy graphs, write-only access to progress evaluations.
+    *   *Authentication*: Secure header-based client keys (HMAC-based signature verification).
+*   **Knowledge Platform APIs**:
+    *   *Path Prefix*: `/api/v1/knowledge/`
+    *   *Audience*: Local content ingestion pipelines, publisher tools.
+    *   *Scope*: Compile and ingest raw markdown/JSON syllabus objects, trigger indexing loops.
+    *   *Authentication*: Short-lived authorization tokens bound to localhost/internal IPs.
+*   **Administrative APIs**:
+    *   *Path Prefix*: `/api/v1/admin/`
+    *   *Audience*: System administrators and platform supervisors.
+    *   *Scope*: Revoke sessions, reassign user roles, manage system configurations, rotate S3 credentials, purge quarantine folders.
+    *   *Authentication*: Session cookie authentication with mandatory active step-up verification ($\le 10\text{ min}$ freshness).
 
 ---
 
-## 2. Naming Conventions
+## 2. Path, Query, Body, Header, and Cookie Semantics
 
-*   **Resource Names**: Use plural nouns for resource paths (e.g., `/api/v1/subjects`, `/api/v1/topics`).
-*   **Sub-resources**: Nest sub-resources logically (e.g., `/api/v1/subjects/{subject-id}/modules`).
-*   **Actions**: Non-CRUD operations use post actions at the end of paths (e.g., `POST /api/v1/auth/login`, `POST /api/v1/workspace/sync`).
+All API transactions conform to strict HTTP verb and parameter mappings:
+*   **GET Requests**:
+    *   *Purpose*: Retrieve resources. Must be safe and idempotent.
+    *   *Parameters*: Scoped in path coordinate slugs (e.g. `/subjects/{subject_id}`) and query parameters (e.g. `?limit=20`).
+*   **POST Requests**:
+    *   *Purpose*: Create resources or execute non-CRUD actions (e.g. `POST /auth/login`).
+    *   *Parameters*: Transmitted inside JSON-formatted request bodies.
+*   **PUT/PATCH Requests**:
+    *   *Purpose*: Update resources. `PUT` replaces the entire resource; `PATCH` updates fields partially.
+    *   *Parameters*: JSON request body.
+*   **DELETE Requests**:
+    *   *Purpose*: Soft-delete or archive resources.
+    *   *Parameters*: Target ID passed in the path.
+*   **Cookies**: Authenticated browser requests must transmit opaque session IDs inside cookies using properties `HttpOnly`, `Secure`, and `SameSite=Lax`.
+*   **Headers**:
+    *   `X-Correlation-ID`: Enforced UUID mapping across logs and responses to track requests.
+    *   `Idempotency-Key`: Enforced for POST/PATCH state mutations to prevent double commits.
+    *   `X-Requested-With`: Set to `XMLHttpRequest` to defend against CSRF attempts.
 
 ---
 
-## 3. Response Envelopes
+## 3. Query Parameter Validation & Complexity Controls
+
+To protect database instances against denial-of-service attempts via complex queries:
+*   **Pydantic Schema Checking**: All query parameters must be parsed and validated against strictly defined Pydantic input models. Excess or unmapped parameters trigger instant HTTP 422 errors.
+*   **Input Limits (Pagination)**: Enforce cursor pagination for collections:
+    *   `limit`: Integer defining max records returned (default: 20, max: 100).
+    *   `cursor`: String token returned in `meta` marking the last item coordinate.
+*   **Filtering Limits**: Filters are restricted to a whitelist of indexed database fields (e.g., `filter[difficulty]`, `filter[category]`). Unindexed fields are rejected.
+*   **Sorting Bounds**: Standardize string parsing parameters using a minus (`-`) prefix to represent descending order (e.g., `GET /api/v1/subjects?sort=-created_at`). Max sorting fields limit is 2.
+*   **Search Limits**: Text search strings are trimmed to a maximum length of 128 characters to prevent regex backtracking attacks.
+
+---
+
+## 4. Authoritative OpenAPI Contracts & Versioning
+
+*   **API Versioning**: Enforced via the URI namespace (e.g., `/api/v1/`). Major updates increment the path variable, keeping legacy code bases isolated.
+*   **Authoritative OpenAPI Specification**: The backend FastAPI engine automatically generates the OpenAPI schema JSON at `/api/v1/openapi.json`. This schema serves as the single source of truth for:
+    *   Client API client code generation.
+    *   AI agent routing configurations (agent-readable API schemas).
+    *   Contract testing validation suites.
+*   **Documentation URLs**: Accessible by human developers at `/docs` (Swagger UI) and `/redoc` (ReDoc) for clear, interactive exploration.
+
+---
+
+## 5. API Error Standards
 
 API endpoints must return a predictable response envelope. The JSON structure enforces strict data contracts:
 
@@ -38,7 +100,8 @@ API endpoints must return a predictable response envelope. The JSON structure en
       "status": "success",
       "data": {},
       "meta": {
-        "timestamp": "2026-07-09T03:15:00Z"
+        "timestamp": "2026-07-09T03:15:00Z",
+        "correlation_id": "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d"
       }
     }
     ```
@@ -51,35 +114,51 @@ API endpoints must return a predictable response envelope. The JSON structure en
         "message": "The request payload did not pass validation checks.",
         "details": [
           {
-            "field": "username",
+            "field": "email",
             "issue": "must be a valid email address"
           }
-        ]
+        ],
+        "correlation_id": "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d"
       }
     }
     ```
+*   **Standardized Error Codes**:
+    *   `UNAUTHORIZED`: Session token is missing, expired, or invalid.
+    *   `FORBIDDEN`: Actor lacks the capability required for this resource.
+    *   `NOT_FOUND`: Target resource path does not exist.
+    *   `RATE_LIMIT_EXCEEDED`: API call threshold breached.
+    *   `INTERNAL_ERROR`: Unhandled exception intercepted (hides database stack traces).
 
 ---
 
-## 4. Query Parameter Standards
+## 6. API Credential & Key Lifecycle (Developer Applications)
 
-To search, sort, and paginate collections:
-
-*   **Pagination (Cursor-Based)**: Enforce cursor pagination to support real-time data flow without offset lag:
-    *   `limit`: Integer defining max records returned (default: 20, max: 100).
-    *   `cursor`: String token returned in `meta` marking the last item coordinate.
-    *   *Metadata Envelope*: Returns `next_cursor` within `meta`.
-*   **Filtering**: Group filters using a structured parameter mapping (e.g., `GET /api/v1/subjects?filter[difficulty]=Hard&filter[category]=ai`).
-*   **Sorting**: Standardize string parsing parameters using a minus (`-`) prefix to represent descending order (e.g., `GET /api/v1/subjects?sort=-created_at`).
+External developer integrations and AI agents authenticate using API credentials managed under `Settings -> Developer Applications` (V1-Ready / Deferred):
+*   **Credential Creation**:
+    1.  The user requests a developer application key.
+    2.  The backend generates a client ID (plain text) and an API key secret.
+*   **One-Time Reveal**: The API key secret is shown to the user **exactly once** upon creation. It is never rendered in cleartext again.
+*   **Hashing & Fingerprinting**: The backend hashes the secret key using SHA-256 before storing it in PostgreSQL (`hashed_secret`). Authenticated requests present the key, which is hashed and matched.
+*   **Rotation & Revocation**: Keys can be manually rotated or revoked instantly. Revoked keys update status to `Revoked` in Postgres, blocking subsequent access.
+*   **Expiry Bounds**: Keys are issued with configured expirations (e.g. 90 days, 180 days, or permanent). Expired keys automatically return HTTP 403.
+*   **Audit Tracking**: Creation, rotation, and revocation events write to `security_audit_logs`.
 
 ---
 
-## 5. Mutation Idempotency
+## 7. Mutation Idempotency
 
 Any mutation API route (POST, PUT, PATCH) that modifies system states must enforce idempotency checks:
 *   **Headers**: Clients must transmit a unique, client-generated UUID in the `Idempotency-Key` header.
 *   **Processing Rules**:
-    1.  The server checks if the key exists in the cache.
+    1.  The server checks if the key exists in the cache (Redis).
     2.  If the key exists and matches a completed transaction, the cached response is returned.
     3.  If the key is locked (processing in progress), the server returns an HTTP status `409 Conflict`.
     4.  If the key is new, the server processes the request, caching the output using a TTL of 24 hours.
+
+---
+
+## 8. Webhook Readiness (V2 Future Concept)
+
+To support future real-time integrations, the API architecture is designed to support webhooks without implementing them in V1:
+*   **Webhook Registration Models**: PostgreSQL schemas support registration tables (`webhook_subscriptions` containing `url`, `event_types`, `hashed_secret_token`).
+*   **Dispatch Architecture**: The event dispatcher pipeline checks this table and queues tasks for dispatch. In V1, this step is skipped.
