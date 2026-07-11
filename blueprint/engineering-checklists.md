@@ -6,7 +6,7 @@
 **Last Updated:** 2026-07-09
 
 ### Reference Context
-This document is derived directly from the constitutional source of truth, the [Ascendrite Master Blueprint](file:///E:/Projects/Ascendrite/blueprint/ascendrite-master-blueprint.md). For domain concepts ownership, refer to the [Domain Reference](file:///E:/Projects/Ascendrite/blueprint/domain-reference.md). For phase requirements and dependencies, see the [Implementation Roadmap](file:///E:/Projects/Ascendrite/blueprint/implementation-roadmap.md).
+This document is derived directly from the constitutional source of truth, the [Ascendrite Master Blueprint](ascendrite-master-blueprint.md). For domain concepts ownership, refer to the [Domain Reference](domain-reference.md). For phase requirements and dependencies, see the [Implementation Roadmap](implementation-roadmap.md).
 
 ---
 

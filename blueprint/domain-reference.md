@@ -6,7 +6,7 @@
 **Last Updated:** 2026-07-09
 
 ### Reference Context
-This document is derived directly from the constitutional source of truth, the [Ascendrite Master Blueprint](file:///E:/Projects/Ascendrite/blueprint/ascendrite-master-blueprint.md). For detailed operational checks and development standards associated with these domains, refer to the [Engineering Checklists](file:///E:/Projects/Ascendrite/blueprint/engineering-checklists.md).
+This document is derived directly from the constitutional source of truth, the [Ascendrite Master Blueprint](ascendrite-master-blueprint.md). For detailed operational checks and development standards associated with these domains, refer to the [Engineering Checklists](engineering-checklists.md).
 
 ---
 

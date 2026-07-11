@@ -6,7 +6,7 @@
 **Last Updated:** 2026-07-09
 
 ### Reference Context
-This document is derived directly from the constitutional source of truth, the [Ascendrite Master Blueprint](file:///E:/Projects/Ascendrite/blueprint/ascendrite-master-blueprint.md). For development standards and verification procedures, refer to the [Engineering Checklists](file:///E:/Projects/Ascendrite/blueprint/engineering-checklists.md). For the underlying technical rationale behind design phases, see the [Architectural Decision Records](file:///E:/Projects/Ascendrite/blueprint/architectural-decision-records.md).
+This document is derived directly from the constitutional source of truth, the [Ascendrite Master Blueprint](ascendrite-master-blueprint.md). For development standards and verification procedures, refer to the [Engineering Checklists](engineering-checklists.md). For the underlying technical rationale behind design phases, see the [Architectural Decision Records](architectural-decision-records.md).
 
 ---
 
