@@ -57,7 +57,7 @@ Ascendrite prioritizes local-first execution as the primary development strategy
 *   **MongoDB**: Hosts metadata document catalogs (syllabi, concept taxonomy).
 *   **Redis Cache**: In-memory transient cache layer warming data at startup.
 *   **Vector Repository**: Abstracted interface engine storing embeddings (pgvector implementation default).
-*   **MinIO**: Object storage housing binary files and private educational assets.
+*   **RustFS / Object Storage**: S3-compatible object storage housing binary files and Knowledge Assets.
 
 ---
 

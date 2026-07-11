@@ -6,7 +6,7 @@
 **Last Updated:** 2026-07-09
 
 ### Reference Context
-This document is derived directly from the constitutional source of truth, the [Ascendrite Master Blueprint](file:///E:/Projects/Ascendrite/blueprint/ascendrite-master-blueprint.md). For the phased implementation timeline, refer to the [Implementation Roadmap](file:///E:/Projects/Ascendrite/blueprint/implementation-roadmap.md). For operational checks and developer guidelines, see the [Engineering Checklists](file:///E:/Projects/Ascendrite/blueprint/engineering-checklists.md).
+This document is derived directly from the constitutional source of truth, the [Ascendrite Master Blueprint](ascendrite-master-blueprint.md). For the phased implementation timeline, refer to the [Implementation Roadmap](implementation-roadmap.md). For operational checks and developer guidelines, see the [Engineering Checklists](engineering-checklists.md).
 
 ---
 
@@ -25,6 +25,7 @@ This document is derived directly from the constitutional source of truth, the [
 11. **ADR-011**: Public Knowledge Infrastructure vs. Private Knowledge Assets
 12. **ADR-012**: Knowledge Service Architecture & Hybrid Storage Model
 13. **ADR-013**: Capability-Based, Inherited Permission Model
+14. **ADR-014**: Object Storage Backend — Migration to RustFS
 
 ---
 
@@ -272,7 +273,7 @@ Direct filesystem reads of JSON assets introduce structural coupling, slowing da
 Establish a dedicated **Knowledge Service** layer. Client and backend services query the Knowledge Service, which mediates all access to the underlying storage engines:
 *   Metadata and Relationships map to MongoDB.
 *   Proprietary assets map to **Managed Knowledge Storage** buckets.
-*   Binary assets (diagrams, images) map to MinIO/S3 object stores.
+*   Binary assets (diagrams, images) map to S3-compatible object stores (locally backed by RustFS).
 *   High-dimensional concept indexes map to a Vector Database.
 
 ### Alternatives Considered
@@ -303,4 +304,26 @@ $$\text{Platform} \longrightarrow \text{Domain} \longrightarrow \text{Subject} \
 ### Consequences
 - **Positive**: Absolute granularity of access. AI agents can be restricted to targeted workspaces.
 - **Negative**: Requires recursive authority checks during authorization evaluations.
+
+---
+
+## ADR-014: Object Storage Backend — Migration to RustFS
+
+### Status
+Approved
+
+### Context
+Initially, MinIO was planned as the S3-compatible local development object storage backend. However, to minimize the local footprint on Windows workstations, prevent Docker runtime dependencies, and ensure native performance via a statically compiled binary, a single-executable alternative was required.
+
+### Decision
+Migrate the local development object storage backend to **RustFS (1.0.0-beta.8)** running as an automatic Windows service (`AscendriteRustFS`). The application runtime continues to interact with S3 via standard S3 API client libraries, keeping the domain logic fully decoupled from the storage engine.
+
+### Alternatives Considered
+- **Local MinIO Service**: Rejected due to larger memory footprint and extra configuration overhead compared to a single static binary.
+- **Local Filesystem Emulation**: Rejected because it prevents the application from utilizing authentic S3 bucket policy and versioning semantics during testing.
+
+### Consequences
+- **Positive**: Lightweight execution (compiled in Rust), zero external dependencies, robust S3 API compatibility validated via AWS CLI.
+- **Negative**: Requires configuring a Windows service wrapper (WinSW) for background management.
+
 

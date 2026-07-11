@@ -1,7 +1,7 @@
 # Ascendrite Security Standards
 
 ## Document Metadata
-*   **Purpose**: Outlines the official platform security requirements, authentication specifications, and compliance rules.
+*   **Purpose**: Outlines the official platform security requirements, authentication specifications, session lifecycles, file uploads safety, and compliance rules.
 *   **Scope**: Applies to all software engineering, database design, AI services, and infrastructure deployment pipelines.
 *   **Intended Audience**: All security leads, software engineers, DevOps specialists, and content auditors.
 *   **Related Documents**:
@@ -12,6 +12,7 @@
 ---
 
 ## 1. Security-First Architecture
+
 Security is a foundational design constraint. The platform operates on the assumption that all external endpoints are hostile.
 
 ### 1.1 Zero Trust & Least Privilege
@@ -21,34 +22,116 @@ Security is a foundational design constraint. The platform operates on the assum
 
 ---
 
-## 2. Identity & Session Security
+## 2. Identity, Sessions & Device Security
 
 ### 2.1 Password Hashing Policy
 *   Passwords must never be stored in plain text or using weak hashing algorithms.
 *   **Hashing Standard**: Passwords shall be salted and hashed using **bcrypt** (minimum work factor of 12) or **Argon2id** (configured matching RFC 9106 standards: $m=65536$ memory, $t=3$ iterations, $p=4$ parallel threads).
 
-### 2.2 JWT Session Configuration
-User sessions are managed using stateless JSON Web Tokens (JWT):
-*   **Token Signatures**: Access tokens must be signed using secure keys with algorithm `HS256` or `RS256` (keys $\ge 2048$ bits).
-*   **Session Lifecycle**: Access tokens must expire within 15 minutes. Refresh tokens must expire within 7 days.
-*   **Refresh Token Rotation**: Refresh tokens must follow a single-use rotation strategy. Once a refresh token is used to issue a new access token, it is revoked, and a new refresh token is issued.
-*   **Cookie Delivery Guidelines**: Access tokens must be transmitted to clients inside cookies using `HttpOnly`, `Secure`, and `SameSite=Strict` flags.
+### 2.2 Secure Session Management
+User sessions are managed using secure, server-side session contexts identified by opaque browser session tokens:
+*   **Session Token Storage**: Browser clients receive an opaque, high-entropy session identifier. The token must be transmitted to the browser inside cookies with these properties:
+    *   `HttpOnly = true` (blocks client-side JavaScript access, defending against XSS leaks).
+    *   `Secure = true` (enforced in HTTPS staging/production settings).
+    *   `SameSite = Lax` by default (prevents cross-site request forgery while maintaining navigation usability).
+    *   `Path = /` (scoped to the application domain).
+*   **LocalStorage Ban**: Sensitive credentials, access keys, or long-lived authentication secrets must never be stored in browser `localStorage` or `sessionStorage`. Non-sensitive UI variables (e.g. theme preference) may be stored in local storage.
 
-### 2.3 Verification & SSO Readiness
-*   **Trusted Devices**: The system registers device finger-prints during login. Multi-device logins are tracked, allowing users to revoke active sessions remotely.
-*   **Multi-Factor Authentication (MFA)**: Schema parameters must accommodate future Totp-based MFA configurations.
-*   **Enterprise SSO**: Architecture supports future SAML/OIDC configuration keys to integrate with external identity systems.
-*   **Account Recovery**: Out-of-band email validation links generated via cryptographically signed short-lived tokens. Account recovery processes must never disclose username existence.
+### 2.3 Configurable Security Default Timeouts
+*   **Normal Session Idle Timeout**: 7 days.
+*   **Remember-Login Idle Timeout**: 30 days.
+*   **Absolute Session Lifetime**: 90 days (forces complete re-authentication).
+*   **Step-Up Verification Freshness**: 10 minutes (determines expiration of elevated authorization context).
+*   **Password Reset Token**: 15 to 30 minutes (short-lived cryptographically signed token).
+*   **Email-Change Verification**: 15 to 30 minutes.
+*   **One-Time Verification Code (MFA)**: 10 minutes.
+
+### 2.4 Device & Session Management
+The platform provides users with visual oversight and self-service revocation of active session locations under `Settings -> Security -> Devices & Sessions`:
+*   **Session Metadata Table**: The backend tracks active session contexts including:
+    *   `session_id` (UUIDv4 primary key)
+    *   `user_id` (UUIDv4 referencing the actor)
+    *   `hashed_session_secret` (SHA-256 hash of the opaque session token)
+    *   `created_at` (UTC timestamp)
+    *   `last_active_at` (updated on request validations)
+    *   `client_agent` (normalized browser/OS device classification)
+    *   `ip_address` (used for geo-coordinate lookup context)
+*   **Revocation Flow**:
+    1.  The user selects a remote target session from the device list.
+    2.  The backend validates the request, updates the target's status to `Revoked` in the session database table, and invalidates the cached session key in Redis.
+    3.  The next request from the revoked client fails token validation and redirects the user to the login screen.
+*   **Session Epoch / Epoch Invalidations**: Major account events (password reset, emergency lockdown, or account suspension) trigger a session epoch increment, automatically invalidating all previously issued sessions and token hashes associated with that user ID.
 
 ---
 
-## 3. Application Security & Injection Defense
+## 3. Step-Up Authentication
+
+High-impact operations are protected by step-up verification rules. Actions are classified by risk levels:
+
+*   **Risk Classifications**:
+    *   *Routine*: Viewing progress, editing dashboard card layouts, reading notes. (No step-up required).
+    *   *Sensitive*: Modifying account email, editing notifications preferences, reviewing logs. (Requires active verification freshness $\le 10\text{ minutes}$).
+    *   *Critical*: Banning users, changing roles, assigning system capabilities, or rotating S3 access keys. (Requires step-up confirmation immediately prior to write commit).
+    *   *Destructive*: Deleting an account, purging workspace files, clearing database collections. (Requires password check and active MFA signature).
+*   **Verification Loop**:
+    1.  The API router catches a request classified as Sensitive/Critical.
+    2.  The server checks the session's `last_step_up_time`. If the time has expired or is absent, the backend responds with HTTP 401 requesting re-verification.
+    3.  Upon verification validation, the backend issues an elevated authorization token (stored securely and bound to the session) expiring in 10 minutes, allowing the user to complete the task.
+    4.  All step-up events are recorded in `security_audit_logs`.
+
+---
+
+## 4. Secure File Upload Ingestion Pipeline
+
+To prevent malicious uploads from corrupting storage systems or attacking web clients, all uploads undergo a strict validation pipeline:
+
+```
+[Incoming File Upload]
+       │
+       ▼
+[Size/Extension Verification] (Verifies byte size and checks extension allowlist)
+       │
+       ▼
+[Quarantine Area] (Writes file stream to bucket temporary-assets)
+       │
+       ▼
+[MIME & Magic-Byte Scanner] (Inspects file headers for actual content signatures)
+       │
+       ▼
+[Security & Malware Scan] (Executes security/antivirus checks on temporary files)
+       │
+       ├─► [Failure] ──► Auto-purge from quarantine & log security threat
+       │
+       ▼
+[Metadata Sanitization] (Strips metadata tags from images, escapes characters)
+       │
+       ▼
+[Promotion to Trusted Bucket] (Moves validated asset to knowledge-assets or user-media)
+```
+
+*   **Quarantine Staging**: Files must never write to permanent buckets directly. Uploads write to `temporary-assets` first, using random object keys to block path traversal attempts.
+*   **Automatic Cleanup**: An hourly cron task deletes files remaining in the `temporary-assets` quarantine bucket for more than 24 hours.
+
+---
+
+## 5. Secure Generated Downloads & Exports
+
+The platform secures the delivery of system-generated books, sitemaps, resumes, and study progress reports:
+*   **Entitlement Auditing**: Every export request evaluates the caller's capability scopes and ownership credentials before launching background tasks.
+*   **Storage Isolation**: Generated files write to the private bucket `generated-assets` with an active expiration rule.
+*   **Secure Delivery**: Files must never be exposed via static public URLs. Delivery is handled via short-lived, pre-signed URLs expiring in 15 minutes.
+*   **Download Logging**: Successful download events write to log databases, tracking user ID and document type.
+*   **Lifecycle Purge**: An automated object retention policy purges objects from `generated-assets` after 7 days.
+
+---
+
+## 6. Application Security & Injection Defense
 
 The platform enforces systematic defenses against common application vulnerabilities:
 *   **SQL Injection**: Applications must use parameterized queries or ORMs. Raw SQL concatenation is prohibited.
 *   **NoSQL Injection**: MongoDB queries must utilize driver-native parameters rather than raw strings to sanitize query filters.
 *   **Cross-Site Scripting (XSS)**: Data loaded from databases must be escaped before outputting to the DOM. The client application must use context-aware HTML entity escaping when rendering variables.
-*   **Cross-Site Request Forgery (CSRF)**: Cookies are restricted via `SameSite=Strict` flags, and mutations require custom request headers (e.g. `X-Requested-With`).
+*   **Cross-Site Request Forgery (CSRF)**: Cookies are restricted via `SameSite=Lax` flags, and mutations require custom request headers (e.g. `X-Requested-With`).
 *   **Server-Side Request Forgery (SSRF)**: Any outgoing request triggered by user input must be restricted to a whitelist of verified domains, blocking internal loopback IPs (`127.0.0.1`, `localhost`) and metadata endpoints.
 *   **Clickjacking**: Frame-ancestor options must be configured to deny rendering of the platform within external iframes.
 *   **Path Traversal**: File upload and reading routes must validate target paths against sandboxed workspace directories, rejecting sequences containing directory traversals (`..`).
@@ -56,7 +139,7 @@ The platform enforces systematic defenses against common application vulnerabili
 
 ---
 
-## 4. API Security & Transport Controls
+## 7. API Security & Transport Controls
 
 API routes must implement standardized security layers at the gateway and middleware boundaries:
 *   **Authentication Middleware**: Validates incoming JWT tokens and extracts active actor credentials.
@@ -69,7 +152,7 @@ API routes must implement standardized security layers at the gateway and middle
 
 ---
 
-## 5. Audit Logging, Monitoring & Security Telemetry
+## 8. Audit Logging, Monitoring & Security Telemetry
 
 Structured telemetry gathers security events without exposing personal data:
 *   **Structured Logs**: Logging output shall be generated in JSON format.
@@ -81,12 +164,12 @@ Structured telemetry gathers security events without exposing personal data:
 
 ---
 
-## 6. Infrastructure Security
+## 9. Infrastructure Security
 
 Operational hosting environments must enforce strict boundaries:
 *   **HTTPS Everywhere**: Gateway routers redirect Port 80 requests to encrypted TLS 1.3 channels.
 *   **Secure Secrets Management**: Database passwords, API credentials, and JWT keys are loaded from secure vault stores at runtime, never committed to version control.
-*   **Environment Isolation**: Development, staging, and production clusters run on completely isolated network subnets.
+*   **Environment Isolation**: Development, staging, and production subnets run on completely isolated network segments.
 *   **Reverse Proxy Readiness**: All web requests route through a reverse proxy (e.g. Nginx or Cloudflare) handling load balancing and SSL termination.
 *   **DDoS Mitigation Readiness**: Traffic rate limits and web application firewalls (WAF) protect the entry gateways.
 *   **Container Isolation**: Services run in non-root Docker container contexts with limited host resource access.
@@ -94,11 +177,7 @@ Operational hosting environments must enforce strict boundaries:
 
 ---
 
-## 7. AI Security & Guardrails
+## 10. AI Security & Guardrails
 
 To prevent compromise through AI pipelines:
 *   **Prompt Injection Awareness**: Input sanitization filters inspect user prompts for execution instructions before forwarding queries to the LLM.
-*   **Retrieval Validation**: The Knowledge Service verifies that retrieved RAG context chunks map strictly to the active topic ID, preventing data leakage.
-*   **Agent Capability Restrictions**: AI agents are assigned scoped permissions matching their specific tasks, conforming to PoLP rules.
-*   **Human Approval**: Sensitive operations (such as committing curriculum draft updates or altering system indexes) require manual verification and approval by a moderator.
-*   **Auditability of AI Actions**: Every decision, prompt token weight, similarity score, and LLM output is recorded in the security logging database.
