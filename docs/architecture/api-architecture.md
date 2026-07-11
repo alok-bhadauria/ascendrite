@@ -151,10 +151,10 @@ External developer integrations and AI agents authenticate using API credentials
     5.  Compare the resulting hash with the stored verification representation using a constant-time comparison mechanism.
     6.  Evaluate credential state, application state, expiration, revocation, scopes, quotas, rate limits, and other applicable policy rules.
     7.  Record appropriate audit and usage metadata without logging the raw secret.
-*   **Distinction from Human Password Hashing**: Machine-generated API secrets use SHA-256 because they are cryptographically high-entropy, allowing for fast, indexed matching. Human passwords must never be stored or verified using SHA-256. Human passwords require the canonical password-specific Key Derivation Function (KDF) defined in the security architecture, which is **Argon2id** (or **bcrypt** with a work factor of 12).
+*   **Distinction from Human Password Hashing**: Machine-generated API secrets use SHA-256 because they are cryptographically high-entropy, allowing for fast, indexed matching. Human passwords must never be stored or verified using SHA-256. Human passwords require the canonical password-specific Key Derivation Function (KDF) defined in the security architecture. Argon2id is the canonical password-hashing KDF for new Ascendrite human passwords. Legacy bcrypt hashes may only be supported for compatibility during data migration and must trigger an automatic upgrade to Argon2id upon successful authentication.
 *   **Rotation, Revocation & Expiry**:
     *   *Rotation & Revocation*: Keys can be manually rotated or revoked instantly. Revoked keys update status to `Revoked` in Postgres, blocking subsequent access.
-    *   *Expiry Bounds*: Keys are issued with configured expirations (e.g., 90 days, 180 days, or permanent). Expired keys automatically return HTTP 403.
+    *   *Expiry Bounds*: Keys are issued with configured expirations (e.g., 90 days, 180 days, or permanent). Expired, revoked, malformed, or otherwise invalid API credentials must be rejected according to the canonical API authentication and error-response contract. Authentication failures must remain distinct from authorization failures involving valid credentials that lack required permissions or scopes.
     *   *Audit Tracking*: Creation, rotation, and revocation events write to `security_audit_logs`.
 
 ---

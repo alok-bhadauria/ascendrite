@@ -26,7 +26,7 @@ Security is a foundational design constraint. The platform operates on the assum
 
 ### 2.1 Password Hashing Policy
 *   Passwords must never be stored in plain text or using weak hashing algorithms.
-*   **Hashing Standard**: Passwords shall be salted and hashed using **bcrypt** (minimum work factor of 12) or **Argon2id** (configured matching RFC 9106 standards: $m=65536$ memory, $t=3$ iterations, $p=4$ parallel threads).
+*   **Hashing Standard**: Passwords shall be salted and hashed using **Argon2id** (configured matching RFC 9106 standards: $m=65536$ memory, $t=3$ iterations, $p=4$ parallel threads) as the canonical KDF for new passwords. Legacy bcrypt hashes (minimum work factor of 12) are supported only for migration compatibility, and successful logins using legacy hashes must trigger an automatic upgrade to the Argon2id standard.
 
 ### 2.2 Secure Session Management
 User sessions are managed using secure, server-side session contexts identified by opaque browser session tokens:
@@ -208,7 +208,7 @@ To protect the platform against automated abuse, denial-of-service attempts, and
     *   Account recovery or password reset requests to block enumeration attempts.
     *   Email verification code resend triggers to prevent mail server abuse.
     *   Public anonymous search or AI tutor endpoints (if exposed in public spaces).
-*   **Exempt Flows (CAPTCHA Prohibited)**:
+*   **Normally Exempt Flows**:
     *   Routine workspace operations and note reading by authenticated users.
     *   Profile updates and configuration adjustments within active, validated sessions.
     *   Developer application API-key generation requests (which must use **Step-Up Authentication** instead).
@@ -223,7 +223,8 @@ To protect the platform against automated abuse, denial-of-service attempts, and
     ```
 *   **Authoritative Server Verification**:
     *   Frontend solution tokens are never trusted on their own. The backend must query the challenge provider API to authoritatively verify the token.
-    *   Verifications must validate contextual bounds: expected action string, host header domain name, single-use token signature, and token freshness (expires within 5 minutes).
+    *   Verification must validate token freshness and expiry according to the selected provider's authoritative guarantees and Ascendrite's configured security policy. Ascendrite must never extend provider-issued validity or accept a token outside the provider's valid verification window.
+    *   Where supported by the selected provider, authoritative server-side verification must validate the provider-returned hostname, site identity, or equivalent environment context against Ascendrite's configured allowlist for the active deployment environment. (Incoming raw HTTP request headers are request inputs and must not independently establish trusted challenge context; provider-returned verification metadata must be checked against trusted server-side configuration; and development, staging, and production environments may have different configured allowed hostnames or site identities.)
     *   Challenge tokens are not reusable. Storing raw tokens in logs is prohibited.
 
 ### 11.4 Failure & Outage Recovery (Fail-Closed Policy)
@@ -233,6 +234,6 @@ In the event of a challenge provider outage or API network failure, the platform
 
 ### 11.5 Implementation & Deployment Classification
 *   **V1 Direct Requirement**: Provide a provider-neutral human-challenge verification adapter interface class in the backend code and a verification middleware schema.
-*   **Endpoint Activation**: Enforce challenge token validation on signup and login endpoints when they are active.
+*   **Endpoint Activation**: Challenge verification must be enforced on signup, login, recovery, verification-code resend, public/anonymous AI operations, and other applicable abuse-sensitive endpoints only when the risk engine, endpoint policy, or prior challenge state requires a human challenge. Low-risk requests must be allowed to proceed without CAPTCHA subject to ordinary security controls.
 *   **Provider Status**: Not currently implemented. The physical Cloudflare Turnstile client is deferred until active deployment.
 
