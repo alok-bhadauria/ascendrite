@@ -5,7 +5,7 @@
 *   **Scope**: Governs component ordering, active workspace interactions, and session state transitions.
 *   **Intended Audience**: Frontend engineers, UX designers, and content authors.
 *   **Related Documents**:
-    *   [Workspace-First Philosophy](../../blueprint/architectural-decision-records.md#adr-003)
+    *   [Workspace-First Philosophy](../blueprint/architectural-decision-records.md#adr-003)
     *   [State Machines](../docs/architecture/state-machines.md)
 *   **Ownership**: Head of Platform Engineering & Lead UX/UI Architect
 

@@ -7,7 +7,7 @@
 *   **Related Documents**:
     *   [Engineering Principles](../governance/engineering-principles.md)
     *   [Engineering Decision Process](../governance/engineering-decision-process.md)
-    *   [Knowledge Base Integration](../knowledge/knowledge-base-integration.md)
+    *   [Knowledge Base Integration](../architecture/knowledge-base-integration.md)
 *   **Ownership**: Head of Platform Engineering & Lead Release Coordinator
 
 ---

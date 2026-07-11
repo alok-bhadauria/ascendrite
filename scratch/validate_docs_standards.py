@@ -17,6 +17,7 @@ def main():
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     docs_path = os.path.join(base_dir, "docs")
     editorial_path = os.path.join(base_dir, "editorial")
+    blueprint_path = os.path.join(base_dir, "blueprint")
     
     errors = []
     seen_filenames = {}
@@ -25,7 +26,7 @@ def main():
     print("Executing comprehensive documentation QA validations...")
     
     # 1. Gather all files and check naming, duplicate filenames, metadata structures, and emojis
-    for path_dir in [docs_path, editorial_path]:
+    for path_dir in [docs_path, editorial_path, blueprint_path]:
         if not os.path.exists(path_dir):
             continue
             
@@ -36,14 +37,15 @@ def main():
                 
                 rel_path = os.path.relpath(os.path.join(root, f), base_dir)
                 
-                # Check duplicate filenames
-                if f in seen_filenames:
-                    errors.append(f"Duplicate filename detected: '{f}' in '{rel_path}' and '{seen_filenames[f]}'")
-                else:
-                    seen_filenames[f] = rel_path
+                # Check duplicate filenames (excluding README.md which can exist per directory)
+                if f.lower() != "readme.md":
+                    if f in seen_filenames:
+                        errors.append(f"Duplicate filename detected: '{f}' in '{rel_path}' and '{seen_filenames[f]}'")
+                    else:
+                        seen_filenames[f] = rel_path
                 
                 # Check naming convention
-                if not re.match(r'^[a-z0-9-]+.md$', f):
+                if f.lower() != "readme.md" and not re.match(r'^[a-z0-9-]+.md$', f):
                     errors.append(f"Filename '{f}' in '{rel_path}' is not in kebab-case.md format.")
                     
                 file_path = os.path.join(root, f)
@@ -68,11 +70,16 @@ def main():
                     if f in target_files:
                         if "## Document Metadata" not in content or "*   **Purpose**:" not in content or "*   **Scope**:" not in content or "*   **Ownership**:" not in content:
                             errors.append(f"File '{rel_path}' is missing the standardized Metadata Block (Purpose, Scope, Audience, Ownership, Related Documents).")
-
+ 
                 # 2. Link verification check
                 matches = link_pattern.findall(content)
                 for text, link in matches:
-                    if link.startswith("http") or link.startswith("mailto:") or link.startswith("#") or link.startswith("file:"):
+                    # Fail on local absolute file links
+                    if link.startswith("file:"):
+                        errors.append(f"Absolute local file link detected in '{rel_path}': '{link}'")
+                        continue
+                        
+                    if link.startswith("http") or link.startswith("mailto:") or link.startswith("#"):
                         continue
                         
                     clean_link = link.split("#")[0].split("?")[0]
@@ -82,7 +89,7 @@ def main():
                     target_path = os.path.normpath(os.path.join(root, clean_link))
                     if not os.path.exists(target_path):
                         errors.append(f"Broken link in '{rel_path}': target path not found for '{link}'")
-
+ 
     if errors:
         print("\nDocumentation Validation Checks Failed:")
         for err in errors:
@@ -91,6 +98,6 @@ def main():
     
     print("\nAll documentation standards and reference links verified successfully!")
     return 0
-
+ 
 if __name__ == "__main__":
     sys.exit(main())

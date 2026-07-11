@@ -37,7 +37,10 @@ Contains persistent state, runtime logs, backups, and secrets. It must never be 
     *   `data/`: Persistent bucket directories and object binaries.
     *   `logs/`: S3 console and access event outputs.
 *   `secrets/`:
-    *   `credentials.txt`: Unified local credentials registry file.
+    *   `credentials.txt`: Standard local credentials registry.
+    *   `api-keys.txt`: Key-value registry for external services (e.g. OpenAI).
+    *   `rustfs-access-key.txt` & `rustfs-secret-key.txt`: Local keys loaded by the S3 server launcher.
+    *   `rustfs-credentials.exported.json`: Shared credentials wrapper maps for programmatic S3 test tools.
 *   `backups/`: Unified backups directory containing folders for `knowledge`, `mongodb`, `postgres`, and `rustfs`.
 
 ---

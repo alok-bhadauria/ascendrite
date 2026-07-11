@@ -63,4 +63,8 @@ To protect credentials:
 *   **No Secrets in Git**: Committing `.env` files containing raw passwords, API secret keys, or access keys to version control is strictly prohibited.
 *   **Local Emulation**: Developers use `.env.local` files for sandbox parameters.
 *   **Production Deployment**: Staging and production credentials must be injected dynamically into container memory from secure secret vaults during the release phase.
-*   **Local Credentials Registry**: Detailed local infrastructure credentials (usernames, passwords, system permissions) live strictly in the untracked folder `E:\Projects\ascendrite-data\secrets\credentials.txt`.
+*   **Local Secrets Management**: All development secrets and infrastructure credentials are fully decoupled from source code, residing in the untracked local directory `E:\Projects\ascendrite-data\secrets\`:
+    *   `credentials.txt`: Standard registry containing Postgres, Mongo, Memurai, and RustFS credentials.
+    *   `api-keys.txt`: Custom third-party service provider API tokens (e.g. OpenAI keys).
+    *   `rustfs-access-key.txt` & `rustfs-secret-key.txt`: RustFS-specific authentication secrets loaded dynamically by the S3 server launcher.
+    *   `rustfs-credentials.exported.json`: Configured client-configuration mapping for quick S3 integrations.

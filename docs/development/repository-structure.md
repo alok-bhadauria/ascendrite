@@ -22,7 +22,6 @@ The `editorial/` directory serves as the **Publishing Constitution** for Ascendr
 *   **[examples-style-guide.md](../../editorial/examples-style-guide.md)**: Architectural constraints for zero-dependency Python/JS executions.
 *   **[diagram-style-guide.md](../../editorial/diagram-style-guide.md)**: Structural specs for formatting and nesting Mermaid visual layout scripts.
 *   **[assessment-style-guide.md](../../editorial/assessment-style-guide.md)**: Rules for creating balanced multiple-choice diagnostic queries.
-*   **[glossary-style-guide.md](../../editorial/glossary-style-guide.md)**: Constraints on keywords, tags, and technical references.
 *   **[prompt-library.md](../../editorial/prompt-library.md)**: System prompt templates for LLM-based content generators.
 *   **[quality-checklist.md](../../editorial/quality-checklist.md)**: Pre-commit quality assurance checklist for curriculum authors.
 
@@ -38,16 +37,16 @@ The documentation is organized into five logical departments to reflect ownershi
 
 #### 2.1 Governance (`docs/governance/`)
 Defines the organizational constitution, roadmap, philosophies, and processes:
-*   **[project-vision.md](project-vision.md)**: Core mission statement, open-access principles, and alignment.
-*   **[product-philosophy.md](product-philosophy.md)**: Metadata-first presentation and client-decoupling principles.
-*   **[platform-philosophy.md](platform-philosophy.md)**: Workspace-first layout and dynamic theme engine rules.
-*   **[learning-philosophy.md](learning-philosophy.md)**: The Dual-Loop Learning model (Conceptual vs. Practical loops).
-*   **[engineering-principles.md](engineering-principles.md)**: Modularity, clean coding rules, SOLID adherence, and backward compatibility.
-*   **[ai-philosophy.md](ai-philosophy.md)**: Multi-agent boundaries and the non-replacement principle.
-*   **[organizational-structure.md](organizational-structure.md)**: Ownership scopes across engineering departments.
-*   **[product-evolution-strategy.md](product-evolution-strategy.md)**: Decoupled service boundaries and contract-first APIs.
-*   **[version-roadmap.md](version-roadmap.md)**: Multi-phase technical roadmap and stack migration targets.
-*   **[engineering-decision-process.md](engineering-decision-process.md)**: RFC proposal cycle and consensus guidelines.
+*   **[project-vision.md](../governance/project-vision.md)**: Core mission statement, open-access principles, and alignment.
+*   **[product-philosophy.md](../governance/product-philosophy.md)**: Metadata-first presentation and client-decoupling principles.
+*   **[platform-philosophy.md](../governance/platform-philosophy.md)**: Workspace-first layout and dynamic theme engine rules.
+*   **[learning-philosophy.md](../governance/learning-philosophy.md)**: The Dual-Loop Learning model (Conceptual vs. Practical loops).
+*   **[engineering-principles.md](../governance/engineering-principles.md)**: Modularity, clean coding rules, SOLID adherence, and backward compatibility.
+*   **[ai-philosophy.md](../governance/ai-philosophy.md)**: Multi-agent boundaries and the non-replacement principle.
+*   **[organizational-structure.md](../governance/organizational-structure.md)**: Ownership scopes across engineering departments.
+*   **[product-evolution-strategy.md](../governance/product-evolution-strategy.md)**: Decoupled service boundaries and contract-first APIs.
+*   **[version-roadmap.md](../governance/version-roadmap.md)**: Multi-phase technical roadmap and stack migration targets.
+*   **[engineering-decision-process.md](../governance/engineering-decision-process.md)**: RFC proposal cycle and consensus guidelines.
 
 #### 2.2 Architecture (`docs/architecture/`)
 Documents high-level system diagrams and cross-boundary integrations:

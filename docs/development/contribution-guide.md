@@ -37,7 +37,7 @@ related issues or ADRs.
 ## 3. Pull Request Submission
 
 PR submissions must follow a structured validation sequence:
-*   **Checklists**: PR descriptions must indicate completion of all relevant checks in the [Engineering Checklists](file:///E:/Projects/Ascendrite/blueprint/engineering-checklists.md).
+*   **Checklists**: PR descriptions must indicate completion of all relevant checks in the [Engineering Checklists](../../blueprint/engineering-checklists.md).
 *   **Documentation**: Code changes modifying API endpoints, database structures, or configs must include updates to matching documentation.
 *   **CI Checks**: All automated lint, type check, and test jobs must pass successfully in the PR pipeline prior to merge.
 
