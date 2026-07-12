@@ -1,19 +1,77 @@
 @echo off
 setlocal
 cd /d "%~dp0"
+set "SCRIPT_DIR=%~dp0"
 powershell -NoProfile -ExecutionPolicy Bypass -Command "$c = Get-Content -LiteralPath '%~f0' -Raw; $c = $c -replace '(?s)^.*#PS_START\r?\n', ''; iex $c"
 exit /b %errorlevel%
 #PS_START
 # Ascendrite Platform Manager
 # Self-contained PowerShell backend launcher and status monitor
 
-$PlatformDir = Split-Path -Parent $MyInvocation.MyCommand.Definition
-$RepoRoot = Split-Path -Parent $PlatformDir
+$ScriptDir = $env:SCRIPT_DIR
+if (-not $ScriptDir) {
+    $ScriptDir = (Get-Location).Path
+}
+$ScriptDir = $ScriptDir.TrimEnd('\')
+
+if (Test-Path (Join-Path $ScriptDir "platform")) {
+    $RepoRoot = $ScriptDir
+    $PlatformDir = Join-Path $ScriptDir "platform"
+} else {
+    $PlatformDir = $ScriptDir
+    $RepoRoot = Split-Path -Parent $PlatformDir
+}
 $ServerDir = Join-Path $PlatformDir "server"
 $ClientDir = Join-Path $PlatformDir "client"
 $RuntimeDir = "E:\Projects\ascendrite-data\runtime"
 $BackendPidFile = Join-Path $RuntimeDir "backend.pid"
 $FrontendPidFile = Join-Path $RuntimeDir "frontend.pid"
+
+
+
+# Duplicate instance check
+$ManagerPidFile = Join-Path $RuntimeDir "platform-manager.pid"
+$currentPid = $PID
+
+if (Test-Path $ManagerPidFile) {
+    $oldPidVal = Get-Content $ManagerPidFile -Raw -ErrorAction SilentlyContinue
+    if ($oldPidVal) {
+        $oldPid = [int]($oldPidVal.Trim())
+        if ($oldPid -ne $currentPid) {
+            $oldProc = Get-Process -Id $oldPid -ErrorAction SilentlyContinue
+            if ($oldProc) {
+                $oldProcObj = Get-CimInstance Win32_Process -Filter "ProcessId = $oldPid" -ErrorAction SilentlyContinue
+                if ($oldProcObj -and $oldProcObj.CommandLine -match "run-ascendrite|platform-manager") {
+                    Clear-Host
+                    Write-Host "================================================================" -ForegroundColor Red
+                    Write-Host "                  DUPLICATE INSTANCE DETECTED                   " -ForegroundColor Red
+                    Write-Host "================================================================" -ForegroundColor Red
+                    Write-Host " Another instance of Ascendrite Platform Manager is running:"
+                    Write-Host "   Process ID: $oldPid"
+                    Write-Host "   Start Time: $($oldProc.StartTime)"
+                    Write-Host "================================================================" -ForegroundColor Red
+                    Write-Host "  [1] Terminate the existing instance and start here"
+                    Write-Host "  [2] Keep the existing instance running and exit"
+                    Write-Host "  [3] Run anyway (allow concurrent execution)"
+                    Write-Host "================================================================" -ForegroundColor Red
+                    $dupChoice = Read-Host "Choice"
+                    if ($dupChoice -eq "1") {
+                        Write-Host "Stopping existing platform manager (PID: $oldPid)..." -NoNewline
+                        Stop-Process -Id $oldPid -Force -ErrorAction SilentlyContinue
+                        Start-Sleep -Seconds 1
+                        Write-Host " [OK]" -ForegroundColor Green
+                    } elseif ($dupChoice -eq "2") {
+                        exit 0
+                    } else {
+                        Write-Host "Running concurrent instance..." -ForegroundColor Yellow
+                        Start-Sleep -Seconds 1
+                    }
+                }
+            }
+        }
+    }
+}
+$currentPid | Out-File -FilePath $ManagerPidFile -Encoding ascii
 
 # Defensive checks for directory structure
 if (-not (Test-Path $ServerDir)) {
@@ -33,14 +91,7 @@ if (-not (Test-Path $PkgJson)) {
     exit 1
 }
 
-# Ensure runtime directories exist
-if (-not (Test-Path $RuntimeDir)) {
-    New-Item -ItemType Directory -Path $RuntimeDir -Force | Out-Null
-}
-$LogsDir = Join-Path $RepoRoot "logs"
-if (-not (Test-Path $LogsDir)) {
-    New-Item -ItemType Directory -Path $LogsDir -Force | Out-Null
-}
+
 
 $isAdmin = ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 
@@ -407,8 +458,10 @@ function Start-BackendApp {
 
     # Test if python can import uvicorn
     Write-Host "Testing python interpreter and uvicorn availability..."
-    $testCmd = "& `"$VenvPython`" -c `"import uvicorn; print('OK')`""
-    $output = Invoke-Expression $testCmd -ErrorAction SilentlyContinue
+    $output = & $VenvPython -c "import uvicorn; print('OK')" 2>$null
+    if ($output) {
+        $output = ($output -join "").Trim()
+    }
     if ($output -ne "OK") {
         Write-Host "[ERROR] Selected Python interpreter ($VenvPython) cannot run or import 'uvicorn'. Please run 'pip install -r requirements.txt'." -ForegroundColor Red
         Read-Host "Press Enter to continue"
@@ -692,6 +745,17 @@ function Manage-Application {
     }
 }
 
+function Exit-PlatformManager {
+    $ManagerPidFile = Join-Path $RuntimeDir "platform-manager.pid"
+    if (Test-Path $ManagerPidFile) {
+        $myPidVal = Get-Content $ManagerPidFile -Raw -ErrorAction SilentlyContinue
+        if ($myPidVal -and [int]($myPidVal.Trim()) -eq $PID) {
+            Remove-Item $ManagerPidFile -Force -ErrorAction SilentlyContinue
+        }
+    }
+    exit 0
+}
+
 function Show-Diagnostics {
     Clear-Host
     Write-Host "================================================================" -ForegroundColor Cyan
@@ -893,7 +957,7 @@ while ($true) {
         "7" { Open-URLs }
         "8" { View-Logs }
         "9" { }
-        "0" { exit 0 }
+        "0" { Exit-PlatformManager }
         default { Write-Host "Invalid choice." -ForegroundColor Red; Start-Sleep -Seconds 1 }
     }
 }

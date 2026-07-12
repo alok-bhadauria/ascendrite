@@ -122,10 +122,10 @@ Local platform orchestration and operational workflows are managed via specializ
 Developers launch the local stack using the Windows-native control script:
 
 ```cmd
-E:\Projects\Ascendrite\platform> platform-manager.bat
+E:\Projects\Ascendrite> run-ascendrite.bat
 ```
 
-The script runs a self-contained PowerShell backend launcher and status monitor (`platform/platform-manager.ps1`) that exposes:
+The script runs as a self-contained polyglot batch/PowerShell manager at the repository root that exposes:
 *   **Unified Service Monitoring**: Reads Windows Service query APIs (`sc.exe`) alongside TCP port scans to verify services are active and reachable.
 *   **Safe PID & Process-Tree Ownership**: Writes process coordinates to `E:\Projects\ascendrite-data\runtime\`. Before termination, it validates that active PIDs belong to the managed process tree, eliminating accidental port-based termination of unrelated developer tools.
 *   **Isolated Redirections**: Pipes uvicorn/npm output to `logs/backend.log` and `logs/frontend.log` respectively, avoiding file-locking write contentions.
