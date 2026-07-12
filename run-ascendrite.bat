@@ -2,7 +2,8 @@
 setlocal
 cd /d "%~dp0"
 set "SCRIPT_DIR=%~dp0"
-powershell -NoProfile -ExecutionPolicy Bypass -Command "$c = (Get-Content -LiteralPath '%~f0' -Raw) -split '#PS_START', 2; iex $c[1]"
+set "BATCH_PATH=%~f0"
+powershell -NoProfile -ExecutionPolicy Bypass -Command "$c = (Get-Content -LiteralPath $env:BATCH_PATH -Raw).Split(@('#PS_' + 'START'), 2, [System.StringSplitOptions]::None); iex $c[1]"
 exit /b %errorlevel%
 #PS_START
 # Ascendrite Platform Manager Polyglot script
@@ -121,7 +122,7 @@ function Get-PortOccupyingPID($port) {
     $netstat = netstat -ano | Select-String "LISTENING" | Select-String ":$port\s+"
     if ($netstat) {
         $line = $netstat | Select-Object -First 1 | ForEach-Object { $_.Line.Trim() }
-        $parts = $line -split '\s+'
+        $parts = $line.Split(" ", [System.StringSplitOptions]::RemoveEmptyEntries)
         if ($parts.Count -ge 5) {
             return $parts[4]
         }
@@ -373,7 +374,7 @@ function Start-BackendApp {
     $logPath = Join-Path $LogsDir "backend.log"
     
     try {
-        $cmdLine = "/c `"$VenvPython`" -m uvicorn main:app --host 127.0.0.1 --port 8000 >> `"$logPath`" 2>&1"
+        $cmdLine = "/c $VenvPython -m uvicorn main:app --host 127.0.0.1 --port 8000 >> $logPath 2>&1"
         $proc = Start-Process -FilePath "cmd.exe" -ArgumentList $cmdLine -WorkingDirectory $ServerDir -PassThru -NoNewWindow
         $proc.Id | Out-File -FilePath $BackendPidFile -Encoding ascii
         
@@ -447,7 +448,7 @@ function Start-FrontendApp {
     $logPath = Join-Path $LogsDir "frontend.log"
     
     try {
-        $cmdLine = "/c npm run dev >> `"$logPath`" 2>&1"
+        $cmdLine = "/c npm run dev >> $logPath 2>&1"
         $proc = Start-Process -FilePath "cmd.exe" -ArgumentList $cmdLine -WorkingDirectory $ClientDir -PassThru -NoNewWindow
         $proc.Id | Out-File -FilePath $FrontendPidFile -Encoding ascii
         
