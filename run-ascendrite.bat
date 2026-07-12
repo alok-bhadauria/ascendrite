@@ -2,7 +2,7 @@
 setlocal
 cd /d "%~dp0"
 set "SCRIPT_DIR=%~dp0"
-powershell -NoProfile -ExecutionPolicy Bypass -Command "$c = Get-Content -LiteralPath '%~f0' -Raw; $c = $c -replace '(?s)^.*#PS_START\\r?\\n', ''; iex $c"
+powershell -NoProfile -ExecutionPolicy Bypass -Command "$c = (Get-Content -LiteralPath '%~f0' -Raw) -split '#PS_START', 2; iex $c[1]"
 exit /b %errorlevel%
 #PS_START
 # Ascendrite Platform Manager Polyglot script
