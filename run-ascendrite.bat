@@ -2,11 +2,11 @@
 setlocal
 cd /d "%~dp0"
 set "SCRIPT_DIR=%~dp0"
-powershell -NoProfile -ExecutionPolicy Bypass -Command "$c = Get-Content -LiteralPath '%~f0' -Raw; $c = $c -replace '(?s)^.*#PS_START\r?\n', ''; iex $c"
+powershell -NoProfile -ExecutionPolicy Bypass -Command "$c = Get-Content -LiteralPath '%~f0' -Raw; $c = $c -replace '(?s)^.*#PS_START\\r?\\n', ''; iex $c"
 exit /b %errorlevel%
 #PS_START
-# Ascendrite Platform Manager
-# Self-contained PowerShell backend launcher and status monitor
+# Ascendrite Platform Manager Polyglot script
+# Environment variable SCRIPT_DIR is passed by batch wrapper
 
 $ScriptDir = $env:SCRIPT_DIR
 if (-not $ScriptDir) {
@@ -26,8 +26,15 @@ $ClientDir = Join-Path $PlatformDir "client"
 $RuntimeDir = "E:\Projects\ascendrite-data\runtime"
 $BackendPidFile = Join-Path $RuntimeDir "backend.pid"
 $FrontendPidFile = Join-Path $RuntimeDir "frontend.pid"
+$LogsDir = Join-Path $RepoRoot "logs"
 
-
+# Ensure all runtime and logs directories exist immediately at startup
+if (-not (Test-Path $RuntimeDir)) {
+    New-Item -ItemType Directory -Path $RuntimeDir -Force | Out-Null
+}
+if (-not (Test-Path $LogsDir)) {
+    New-Item -ItemType Directory -Path $LogsDir -Force | Out-Null
+}
 
 # Duplicate instance check
 $ManagerPidFile = Join-Path $RuntimeDir "platform-manager.pid"
@@ -73,7 +80,7 @@ if (Test-Path $ManagerPidFile) {
 }
 $currentPid | Out-File -FilePath $ManagerPidFile -Encoding ascii
 
-# Defensive checks for directory structure
+# Check directory structure
 if (-not (Test-Path $ServerDir)) {
     Write-Host "[ERROR] Platform server directory not found at: $ServerDir" -ForegroundColor Red
     Read-Host "Press Enter to exit"
@@ -91,8 +98,6 @@ if (-not (Test-Path $PkgJson)) {
     exit 1
 }
 
-
-
 $isAdmin = ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 
 # Find python interpreter
@@ -108,7 +113,6 @@ if (-not (Test-Path $VenvPython)) {
 }
 
 function Test-PortConnection($port) {
-    # Check listening ports
     $netstat = netstat -ano | Select-String "LISTENING" | Select-String ":$port\s+"
     return [bool]$netstat
 }
@@ -150,27 +154,22 @@ function Test-ManagedOwnership($pidFile, $port) {
     }
     $launcherPid = [int]($launcherPidVal.Trim())
 
-    # Check if launcher process is running
     $launcherProc = Get-Process -Id $launcherPid -ErrorAction SilentlyContinue
     if (-not $launcherProc) {
         return $false
     }
 
-    # Retrieve all process IDs in our managed tree (launcher + descendants)
     $treePids = @($launcherPid)
     $treePids += Get-ProcessDescendants $launcherPid
 
-    # Get the PID currently listening on the port
     $portPidVal = Get-PortOccupyingPID $port
     if ($portPidVal) {
         $portPid = [int]$portPidVal
-        # If the port owner is part of our managed process tree, ownership is verified
         if ($treePids -contains $portPid) {
             return $true
         }
     }
 
-    # Fallback keyword validation on process tree members
     foreach ($p in $treePids) {
         $procObj = Get-CimInstance Win32_Process -Filter "ProcessId = $p" -ErrorAction SilentlyContinue
         if ($procObj) {
@@ -187,17 +186,15 @@ function Test-ManagedOwnership($pidFile, $port) {
             }
         }
     }
-
     return $false
 }
 
 function Get-ServiceState($serviceName, $port) {
-    $service = Get-Service -Name $serviceName -ErrorAction SilentlyContinue
-    if ($service) {
-        $serviceRunning = $service.Status -eq "Running"
-    } else {
-        $serviceRunning = $false
+    $status = Get-Service -Name $serviceName -ErrorAction SilentlyContinue
+    if (-not $status) {
+        return "OFFLINE"
     }
+    $serviceRunning = $status.Status -eq "Running"
     $portListening = Test-PortConnection $port
 
     if ($serviceRunning -and $portListening) {
@@ -211,18 +208,6 @@ function Get-ServiceState($serviceName, $port) {
     }
 }
 
-function Test-HTTPStatus($url) {
-    try {
-        $res = Invoke-WebRequest -Uri $url -TimeoutSec 2 -UseBasicParsing -ErrorAction Stop
-        if ($res.StatusCode -match "2\d\d|3\d\d") {
-            return $true
-        }
-    } catch {
-        # ignore error
-    }
-    return $false
-}
-
 function Get-AppStatus($pidFile, $port, $url) {
     if (Test-Path $pidFile) {
         $launcherPid = Get-Content -Path $pidFile -Raw -ErrorAction SilentlyContinue
@@ -232,11 +217,7 @@ function Get-AppStatus($pidFile, $port, $url) {
             if ($proc) {
                 if (Test-ManagedOwnership $pidFile $port) {
                     if (Test-PortConnection $port) {
-                        if (Test-HTTPStatus $url) {
-                            return "ONLINE"
-                        } else {
-                            return "DEGRADED"
-                        }
+                        return "ONLINE"
                     } else {
                         return "DEGRADED"
                     }
@@ -256,32 +237,25 @@ function Get-AppStatus($pidFile, $port, $url) {
 }
 
 function Get-FullStatus {
-    $pg = Get-ServiceState "postgresql-x64-18" 5432
-    $mongo = Get-ServiceState "MongoDB" 27017
-    $redis = Get-ServiceState "Memurai" 6379
-    $rustfsS3 = Get-ServiceState "AscendriteRustFS" 9000
-    $rustfsConsole = Get-ServiceState "AscendriteRustFS" 9001
-    
-    $backend = Get-AppStatus $BackendPidFile 8000 "http://127.0.0.1:8000/health"
-    $frontend = Get-AppStatus $FrontendPidFile 5173 "http://localhost:5173"
-
     return [PSCustomObject]@{
-        Postgres = $pg
-        MongoDB = $mongo
-        Redis = $redis
-        RustFS_S3 = $rustfsS3
-        RustFS_Console = $rustfsConsole
-        Backend = $backend
-        Frontend = $frontend
+        Postgres       = Get-ServiceState "postgresql-x64-18" 5432
+        MongoDB        = Get-ServiceState "MongoDB" 27017
+        Redis          = Get-ServiceState "Memurai" 6379
+        RustFS_S3      = Get-ServiceState "AscendriteRustFS" 9000
+        RustFS_Console = Get-ServiceState "AscendriteRustFS" 9001
+        Backend        = Get-AppStatus $BackendPidFile 8000 "http://127.0.0.1:8000"
+        Frontend       = Get-AppStatus $FrontendPidFile 5173 "http://localhost:5173"
     }
 }
 
-function Write-ColoredStatus($status) {
-    switch ($status) {
-        "ONLINE" { Write-Host " [ONLINE] " -ForegroundColor Green -NoNewline }
-        "OFFLINE" { Write-Host " [OFFLINE]" -ForegroundColor Gray -NoNewline }
-        "DEGRADED" { Write-Host " [DEGRADED]" -ForegroundColor Yellow -NoNewline }
-        "UNKNOWN" { Write-Host " [UNKNOWN] " -ForegroundColor Red -NoNewline }
+function Write-StatusLabel($label, $status) {
+    Write-Host "   $($label.PadRight(15)): " -NoNewline
+    if ($status -eq "ONLINE") {
+        Write-Host "[ONLINE]" -ForegroundColor Green
+    } elseif ($status -eq "OFFLINE") {
+        Write-Host "[OFFLINE]" -ForegroundColor Gray
+    } else {
+        Write-Host "[$status]" -ForegroundColor Yellow
     }
 }
 
@@ -290,103 +264,16 @@ function Show-Dashboard($statuses) {
     Write-Host "================================================================" -ForegroundColor Cyan
     Write-Host "                  ASCENDRITE PLATFORM MANAGER                   " -ForegroundColor Cyan
     Write-Host "================================================================" -ForegroundColor Cyan
-    if (-not $isAdmin) {
-        Write-Host "  * Running in USER mode (Infrastructure control requires Admin) *" -ForegroundColor Yellow
-        Write-Host "================================================================" -ForegroundColor Cyan
-    }
-    Write-Host " Infrastructure Status:"
-    Write-Host "   PostgreSQL:        " -NoNewline; Write-ColoredStatus $statuses.Postgres; Write-Host " (Service: postgresql-x64-18, Port: 5432)"
-    Write-Host "   MongoDB:           " -NoNewline; Write-ColoredStatus $statuses.MongoDB; Write-Host " (Service: MongoDB, Port: 27017)"
-    Write-Host "   Memurai / Redis:   " -NoNewline; Write-ColoredStatus $statuses.Redis; Write-Host " (Service: Memurai, Port: 6379)"
-    Write-Host "   RustFS S3 API:     " -NoNewline; Write-ColoredStatus $statuses.RustFS_S3; Write-Host " (Service: AscendriteRustFS, Port: 9000)"
-    Write-Host "   RustFS Console:    " -NoNewline; Write-ColoredStatus $statuses.RustFS_Console; Write-Host " (Service: AscendriteRustFS, Port: 9001)"
-    Write-Host ""
-    Write-Host " Application Status:"
-    Write-Host "   Backend API:       " -NoNewline; Write-ColoredStatus $statuses.Backend; Write-Host " (Port: 8000)"
-    Write-Host "   Frontend:          " -NoNewline; Write-ColoredStatus $statuses.Frontend; Write-Host " (Port: 5173)"
+    Write-Host " Infrastructure:" -ForegroundColor Gray
+    Write-StatusLabel "PostgreSQL" $statuses.Postgres
+    Write-StatusLabel "MongoDB" $statuses.MongoDB
+    Write-StatusLabel "Memurai (Redis)" $statuses.Redis
+    Write-StatusLabel "RustFS S3" $statuses.RustFS_S3
+    Write-StatusLabel "RustFS Console" $statuses.RustFS_Console
+    Write-Host " Applications:" -ForegroundColor Gray
+    Write-StatusLabel "Backend API" $statuses.Backend
+    Write-StatusLabel "Frontend SPA" $statuses.Frontend
     Write-Host "================================================================" -ForegroundColor Cyan
-}
-
-function Start-WinService($serviceName) {
-    if (-not $isAdmin) {
-        Write-Host "[ERROR] Starting service '$serviceName' requires Administrator privileges." -ForegroundColor Red
-        Read-Host "Press Enter to continue"
-        return
-    }
-    $status = Get-Service -Name $serviceName -ErrorAction SilentlyContinue
-    if (-not $status) {
-        Write-Host "[ERROR] Service '$serviceName' is not installed." -ForegroundColor Red
-        Read-Host "Press Enter to continue"
-        return
-    }
-    if ($status.Status -eq "Running") {
-        Write-Host "Service '$serviceName' is already healthy. [SKIP]" -ForegroundColor Yellow
-        Start-Sleep -Seconds 1
-        return
-    }
-    Write-Host "Starting service '$serviceName'..."
-    Start-Service -Name $serviceName -ErrorAction SilentlyContinue
-    Start-Sleep -Seconds 2
-    $status = Get-Service -Name $serviceName -ErrorAction SilentlyContinue
-    if ($status.Status -eq "Running") {
-        Write-Host "Service '$serviceName' started successfully. [OK]" -ForegroundColor Green
-    } else {
-        Write-Host "[ERROR] Failed to start service '$serviceName'." -ForegroundColor Red
-        Read-Host "Press Enter to continue"
-    }
-}
-
-function Stop-WinService($serviceName) {
-    if (-not $isAdmin) {
-        Write-Host "[ERROR] Stopping service '$serviceName' requires Administrator privileges." -ForegroundColor Red
-        Read-Host "Press Enter to continue"
-        return
-    }
-    $status = Get-Service -Name $serviceName -ErrorAction SilentlyContinue
-    if (-not $status) {
-        Write-Host "[ERROR] Service '$serviceName' is not installed." -ForegroundColor Red
-        Read-Host "Press Enter to continue"
-        return
-    }
-    if ($status.Status -eq "Stopped") {
-        Write-Host "Service '$serviceName' is already stopped. [SKIP]" -ForegroundColor Yellow
-        Start-Sleep -Seconds 1
-        return
-    }
-    Write-Host "Stopping service '$serviceName'..."
-    Stop-Service -Name $serviceName -Force -ErrorAction SilentlyContinue
-    Start-Sleep -Seconds 2
-    $status = Get-Service -Name $serviceName -ErrorAction SilentlyContinue
-    if ($status.Status -eq "Stopped") {
-        Write-Host "Service '$serviceName' stopped successfully. [OK]" -ForegroundColor Green
-    } else {
-        Write-Host "[ERROR] Failed to stop service '$serviceName'." -ForegroundColor Red
-        Read-Host "Press Enter to continue"
-    }
-}
-
-function Restart-WinService($serviceName) {
-    if (-not $isAdmin) {
-        Write-Host "[ERROR] Restarting service '$serviceName' requires Administrator privileges." -ForegroundColor Red
-        Read-Host "Press Enter to continue"
-        return
-    }
-    $status = Get-Service -Name $serviceName -ErrorAction SilentlyContinue
-    if (-not $status) {
-        Write-Host "[ERROR] Service '$serviceName' is not installed." -ForegroundColor Red
-        Read-Host "Press Enter to continue"
-        return
-    }
-    Write-Host "Restarting service '$serviceName'..."
-    Restart-Service -Name $serviceName -Force -ErrorAction SilentlyContinue
-    Start-Sleep -Seconds 2
-    $status = Get-Service -Name $serviceName -ErrorAction SilentlyContinue
-    if ($status.Status -eq "Running") {
-        Write-Host "Service '$serviceName' restarted successfully. [OK]" -ForegroundColor Green
-    } else {
-        Write-Host "[ERROR] Failed to restart service '$serviceName'." -ForegroundColor Red
-        Read-Host "Press Enter to continue"
-    }
 }
 
 function Start-AllInfra {
@@ -402,7 +289,7 @@ function Start-AllInfra {
                     Write-Host "Starting '$svc'..."
                     Start-Service -Name $svc -ErrorAction SilentlyContinue
                 } else {
-                    Write-Host "[ERROR] Administrator privileges required to start '$svc'." -ForegroundColor Red
+                    Write-Host "[ERROR] Admin privileges required to start '$svc'." -ForegroundColor Red
                 }
             }
         } else {
@@ -427,7 +314,7 @@ function Stop-AllInfra {
                         Write-Host "Stopping '$svc'..."
                         Stop-Service -Name $svc -Force -ErrorAction SilentlyContinue
                     } else {
-                        Write-Host "[ERROR] Administrator privileges required to stop '$svc'." -ForegroundColor Red
+                        Write-Host "[ERROR] Admin privileges required to stop '$svc'." -ForegroundColor Red
                     }
                 }
             }
@@ -437,33 +324,28 @@ function Stop-AllInfra {
 }
 
 function Start-BackendApp {
-    Write-Host "Verifying infrastructure requirements before Backend startup..."
+    Write-Host "Verifying infrastructure requirements..."
     $statuses = Get-FullStatus
     if ($statuses.Postgres -ne "ONLINE" -or $statuses.MongoDB -ne "ONLINE" -or $statuses.Redis -ne "ONLINE") {
-        Write-Host "[WARN] Infrastructure dependencies are not fully online." -ForegroundColor Yellow
-        Write-Host "  PostgreSQL: $($statuses.Postgres)"
-        Write-Host "  MongoDB:    $($statuses.MongoDB)"
-        Write-Host "  Redis:      $($statuses.Redis)"
-        Write-Host "Starting API server in degraded/partial capability state." -ForegroundColor Yellow
+        Write-Host "[WARN] Infrastructure services are not fully online. Starting in degraded mode." -ForegroundColor Yellow
     }
 
     if ($VenvPython -eq "python.exe") {
         $pyCheck = Get-Command "python" -ErrorAction SilentlyContinue
         if (-not $pyCheck) {
-            Write-Host "[ERROR] Python execution path not found. Please install Python or set up a virtual environment." -ForegroundColor Red
+            Write-Host "[ERROR] Python not found." -ForegroundColor Red
             Read-Host "Press Enter to continue"
             return $false
         }
     }
 
-    # Test if python can import uvicorn
     Write-Host "Testing python interpreter and uvicorn availability..."
     $output = & $VenvPython -c "import uvicorn; print('OK')" 2>$null
     if ($output) {
         $output = ($output -join "").Trim()
     }
     if ($output -ne "OK") {
-        Write-Host "[ERROR] Selected Python interpreter ($VenvPython) cannot run or import 'uvicorn'. Please run 'pip install -r requirements.txt'." -ForegroundColor Red
+        Write-Host "[ERROR] Selected Python interpreter ($VenvPython) cannot import 'uvicorn'." -ForegroundColor Red
         Read-Host "Press Enter to continue"
         return $false
     }
@@ -478,7 +360,7 @@ function Start-BackendApp {
                 return $true
             }
         }
-        Write-Host "[ERROR] Port 8000 occupied by an unmanaged process (PID: $occupyPid). Aborting startup to prevent killing unrelated tasks." -ForegroundColor Red
+        Write-Host "[ERROR] Port 8000 occupied by unmanaged process (PID: $occupyPid)." -ForegroundColor Red
         Read-Host "Press Enter to continue"
         return $false
     }
@@ -488,7 +370,7 @@ function Start-BackendApp {
     }
 
     Write-Host "Starting Backend API Server..."
-    $logPath = Join-Path $RepoRoot "logs\backend.log"
+    $logPath = Join-Path $LogsDir "backend.log"
     
     try {
         # Redirect standard output and error using CMD to avoid lock conflicts on Windows
@@ -521,7 +403,7 @@ function Start-BackendApp {
             return $false
         }
     } catch {
-        Write-Host "[ERROR] Failed to start Backend process: $_" -ForegroundColor Red
+        Write-Host "[ERROR] Failed to start Backend: $_" -ForegroundColor Red
         if (Test-Path $BackendPidFile) {
             Remove-Item $BackendPidFile -Force -ErrorAction SilentlyContinue
         }
@@ -535,15 +417,10 @@ function Stop-BackendApp {
     Stop-AppProcess $BackendPidFile 8000 "Backend"
 }
 
-function Restart-BackendApp {
-    Stop-BackendApp
-    Start-BackendApp
-}
-
 function Start-FrontendApp {
     $npmCheck = Get-Command "npm.cmd" -ErrorAction SilentlyContinue
     if (-not $npmCheck) {
-        Write-Host "[ERROR] npm executable not found in PATH. Please install Node.js." -ForegroundColor Red
+        Write-Host "[ERROR] npm not found in PATH." -ForegroundColor Red
         Read-Host "Press Enter to continue"
         return $false
     }
@@ -558,7 +435,7 @@ function Start-FrontendApp {
                 return $true
             }
         }
-        Write-Host "[ERROR] Port 5173 occupied by an unmanaged process (PID: $occupyPid). Aborting startup to prevent killing unrelated tasks." -ForegroundColor Red
+        Write-Host "[ERROR] Port 5173 occupied by unmanaged process (PID: $occupyPid)." -ForegroundColor Red
         Read-Host "Press Enter to continue"
         return $false
     }
@@ -567,11 +444,10 @@ function Start-FrontendApp {
         Remove-Item $FrontendPidFile -Force -ErrorAction SilentlyContinue
     }
 
-    Write-Host "Starting Frontend (Vite) Server..."
-    $logPath = Join-Path $RepoRoot "logs\frontend.log"
+    Write-Host "Starting Frontend Server..."
+    $logPath = Join-Path $LogsDir "frontend.log"
     
     try {
-        # Redirect standard output and error using CMD to avoid lock conflicts on Windows
         $args = '/c "npm run dev >> "' + $logPath + '" 2>&1"'
         $proc = Start-Process -FilePath "cmd.exe" -ArgumentList $args -WorkingDirectory "$ClientDir" -PassThru -NoNewWindow
         $proc.Id | Out-File -FilePath $FrontendPidFile -Encoding ascii
@@ -601,7 +477,7 @@ function Start-FrontendApp {
             return $false
         }
     } catch {
-        Write-Host "[ERROR] Failed to start Frontend process: $_" -ForegroundColor Red
+        Write-Host "[ERROR] Failed to start Frontend: $_" -ForegroundColor Red
         if (Test-Path $FrontendPidFile) {
             Remove-Item $FrontendPidFile -Force -ErrorAction SilentlyContinue
         }
@@ -620,7 +496,6 @@ function Stop-AppProcess($pidFile, $port, $appName) {
         $launcherPidVal = Get-Content $pidFile -Raw -ErrorAction SilentlyContinue
         if ($launcherPidVal) {
             $launcherPid = [int]($launcherPidVal.Trim())
-            # Verify process ownership to prevent killing reused/unrelated Windows PIDs
             if (Test-ManagedOwnership $pidFile $port) {
                 Write-Host "Stopping $appName (PID: $launcherPid)..." -NoNewline
                 taskkill /f /t /pid $launcherPid >$null 2>&1
@@ -642,11 +517,6 @@ function Stop-AppProcess($pidFile, $port, $appName) {
     }
 }
 
-function Restart-FrontendApp {
-    Stop-FrontendApp
-    Start-FrontendApp
-}
-
 function Start-BothApps {
     Start-BackendApp
     Start-FrontendApp
@@ -660,136 +530,21 @@ function Stop-BothApps {
 function Start-FullStack {
     Write-Host "Starting Full Stack..."
     Start-AllInfra
-    Start-BackendApp
-    Start-FrontendApp
-    Read-Host "Full stack start sequence finished. Press Enter to return to Dashboard."
+    Start-BothApps
 }
 
-function Manage-Infrastructure {
-    while ($true) {
-        $statuses = Get-FullStatus
-        Clear-Host
-        Write-Host "================================================================" -ForegroundColor Cyan
-        Write-Host "                      MANAGE INFRASTRUCTURE                     " -ForegroundColor Cyan
-        Write-Host "================================================================" -ForegroundColor Cyan
-        Write-Host "  [1] Start PostgreSQL       (Current: $($statuses.Postgres))"
-        Write-Host "  [2] Stop PostgreSQL"
-        Write-Host "  [3] Restart PostgreSQL"
-        Write-Host "  [4] Start MongoDB          (Current: $($statuses.MongoDB))"
-        Write-Host "  [5] Stop MongoDB"
-        Write-Host "  [6] Restart MongoDB"
-        Write-Host "  [7] Start Memurai (Redis)  (Current: $($statuses.Redis))"
-        Write-Host "  [8] Stop Memurai (Redis)"
-        Write-Host "  [9] Restart Memurai (Redis)"
-        Write-Host "  [10] Start RustFS          (Current: $($statuses.RustFS_S3))"
-        Write-Host "  [11] Stop RustFS"
-        Write-Host "  [12] Restart RustFS"
-        Write-Host "  [13] Start All Infrastructure"
-        Write-Host "  [14] Stop All Infrastructure (Requires Confirmation)"
-        Write-Host "  [0] Back"
-        Write-Host "================================================================" -ForegroundColor Cyan
-        
-        $choice = Read-Host "Choice"
-        switch ($choice) {
-            "1" { Start-WinService "postgresql-x64-18" }
-            "2" { Stop-WinService "postgresql-x64-18" }
-            "3" { Restart-WinService "postgresql-x64-18" }
-            "4" { Start-WinService "MongoDB" }
-            "5" { Stop-WinService "MongoDB" }
-            "6" { Restart-WinService "MongoDB" }
-            "7" { Start-WinService "Memurai" }
-            "8" { Stop-WinService "Memurai" }
-            "9" { Restart-WinService "Memurai" }
-            "10" { Start-WinService "AscendriteRustFS" }
-            "11" { Stop-WinService "AscendriteRustFS" }
-            "12" { Restart-WinService "AscendriteRustFS" }
-            "13" { Start-AllInfra }
-            "14" { Stop-AllInfra }
-            "0" { return }
-            default { Write-Host "Invalid choice." -ForegroundColor Red; Start-Sleep -Seconds 1 }
-        }
-    }
-}
-
-function Manage-Application {
-    while ($true) {
-        $statuses = Get-FullStatus
-        Clear-Host
-        Write-Host "================================================================" -ForegroundColor Cyan
-        Write-Host "                       MANAGE APPLICATION                       " -ForegroundColor Cyan
-        Write-Host "================================================================" -ForegroundColor Cyan
-        Write-Host "  [1] Start Backend          (Current: $($statuses.Backend))"
-        Write-Host "  [2] Stop Backend"
-        Write-Host "  [3] Restart Backend"
-        Write-Host "  [4] Start Frontend         (Current: $($statuses.Frontend))"
-        Write-Host "  [5] Stop Frontend"
-        Write-Host "  [6] Restart Frontend"
-        Write-Host "  [7] Start Both Applications"
-        Write-Host "  [8] Stop Both Applications"
-        Write-Host "  [0] Back"
-        Write-Host "================================================================" -ForegroundColor Cyan
-        
-        $choice = Read-Host "Choice"
-        switch ($choice) {
-            "1" { Start-BackendApp }
-            "2" { Stop-BackendApp }
-            "3" { Restart-BackendApp }
-            "4" { Start-FrontendApp }
-            "5" { Stop-FrontendApp }
-            "6" { Restart-FrontendApp }
-            "7" { Start-BothApps }
-            "8" { Stop-BothApps }
-            "0" { return }
-            default { Write-Host "Invalid choice." -ForegroundColor Red; Start-Sleep -Seconds 1 }
-        }
-    }
-}
-
-function Exit-PlatformManager {
-    $ManagerPidFile = Join-Path $RuntimeDir "platform-manager.pid"
-    if (Test-Path $ManagerPidFile) {
-        $myPidVal = Get-Content $ManagerPidFile -Raw -ErrorAction SilentlyContinue
-        if ($myPidVal -and [int]($myPidVal.Trim()) -eq $PID) {
-            Remove-Item $ManagerPidFile -Force -ErrorAction SilentlyContinue
-        }
-    }
-    exit 0
+function Stop-FullStack {
+    Write-Host "Stopping Full Stack..."
+    Stop-BothApps
+    Stop-AllInfra
 }
 
 function Show-Diagnostics {
     Clear-Host
     Write-Host "================================================================" -ForegroundColor Cyan
-    Write-Host "                     HEALTH AND DIAGNOSTICS                     " -ForegroundColor Cyan
+    Write-Host "                       SYSTEM DIAGNOSTICS                       " -ForegroundColor Cyan
     Write-Host "================================================================" -ForegroundColor Cyan
-    Write-Host "Privilege Level: " -NoNewline
-    if ($isAdmin) {
-        Write-Host "ADMINISTRATOR (Full Service Control Enabled)" -ForegroundColor Green
-    } else {
-        Write-Host "USER (Service startup/stop disabled)" -ForegroundColor Yellow
-    }
-    Write-Host ""
-    Write-Host "Windows Services Checks:"
-    $services = @(
-        @{ Name = "postgresql-x64-18"; Desc = "Primary Relational Store - Struct data and user registries (CRITICAL)" },
-        @{ Name = "MongoDB"; Desc = "NoSQL Document Store - Workspace document metadata indexers (DEGRADED CAPABILITY)" },
-        @{ Name = "Memurai"; Desc = "Volatile Cache & Realtime PubSub - Realtime subscriptions and socket rooms (DEGRADED CAPABILITY)" },
-        @{ Name = "AscendriteRustFS"; Desc = "RustFS Object Storage - Binary files, attachments, and learning artifacts (DEGRADED CAPABILITY)" }
-    )
-    foreach ($svc in $services) {
-        $status = Get-Service -Name $svc.Name -ErrorAction SilentlyContinue
-        if ($status) {
-            Write-Host "  Service '$($svc.Name)': " -NoNewline
-            if ($status.Status -eq "Running") {
-                Write-Host "RUNNING" -ForegroundColor Green
-            } else {
-                Write-Host "STOPPED (Impact: $($svc.Desc))" -ForegroundColor Red
-            }
-        } else {
-            Write-Host "  Service '$($svc.Name)': NOT INSTALLED (Impact: $($svc.Desc))" -ForegroundColor Yellow
-        }
-    }
-    Write-Host ""
-    Write-Host "Port Occupancy and Conflicts Check:"
+    Write-Host "Port Occupancy Check:"
     $ports = @(5432, 27017, 6379, 9000, 9001, 8000, 5173)
     foreach ($port in $ports) {
         $occupy = Get-PortOccupyingPID $port
@@ -800,56 +555,9 @@ function Show-Diagnostics {
         }
     }
     Write-Host ""
-    Write-Host "Managed Application Runtime State:"
-    if (Test-Path $BackendPidFile) {
-        $bPid = Get-Content $BackendPidFile -Raw -ErrorAction SilentlyContinue
-        if ($bPid) {
-            $bPid = $bPid.Trim()
-            $bProc = Get-Process -Id $bPid -ErrorAction SilentlyContinue
-            if ($bProc) {
-                if (Test-ManagedOwnership $BackendPidFile 8000) {
-                    Write-Host "  Backend process is running with PID: $bPid (Ownership: VERIFIED)" -ForegroundColor Green
-                } else {
-                    Write-Host "  Backend process is running with PID: $bPid (Ownership: UNVERIFIED/REUSED)" -ForegroundColor Red
-                }
-            } else {
-                Write-Host "  Backend: Stale PID file found (PID: $bPid, process dead)" -ForegroundColor Yellow
-            }
-        }
-    } else {
-        Write-Host "  Backend: PID file not found (stopped)" -ForegroundColor Gray
-    }
-
-    if (Test-Path $FrontendPidFile) {
-        $fPid = Get-Content $FrontendPidFile -Raw -ErrorAction SilentlyContinue
-        if ($fPid) {
-            $fPid = $fPid.Trim()
-            $fProc = Get-Process -Id $fPid -ErrorAction SilentlyContinue
-            if ($fProc) {
-                if (Test-ManagedOwnership $FrontendPidFile 5173) {
-                    Write-Host "  Frontend process is running with PID: $fPid (Ownership: VERIFIED)" -ForegroundColor Green
-                } else {
-                    Write-Host "  Frontend process is running with PID: $fPid (Ownership: UNVERIFIED/REUSED)" -ForegroundColor Red
-                }
-            } else {
-                Write-Host "  Frontend: Stale PID file found (PID: $fPid, process dead)" -ForegroundColor Yellow
-            }
-        }
-    } else {
-        Write-Host "  Frontend: PID file not found (stopped)" -ForegroundColor Gray
-    }
-    Write-Host ""
-    Write-Host "Verification Utilities Check:"
-    Write-Host "  Python Executable: $VenvPython " -NoNewline
-    if ($VenvPython -ne "python.exe" -and (Test-Path $VenvPython)) {
-        Write-Host "[OK]" -ForegroundColor Green
-    } else {
-        $pyCheck = Get-Command "python" -ErrorAction SilentlyContinue
-        if ($pyCheck) { Write-Host "[PATH python]" -ForegroundColor Green } else { Write-Host "[NOT FOUND]" -ForegroundColor Red }
-    }
-    Write-Host "  Node Executable (npm): " -NoNewline
-    $npmCheck = Get-Command "npm.cmd" -ErrorAction SilentlyContinue
-    if ($npmCheck) { Write-Host "[OK]" -ForegroundColor Green } else { Write-Host "[NOT FOUND]" -ForegroundColor Red }
+    Write-Host "Environment Checks:"
+    Write-Host "  Python: $VenvPython"
+    Write-Host "  Admin role: $isAdmin"
     Write-Host "================================================================" -ForegroundColor Cyan
     Read-Host "Press Enter to return to Dashboard"
 }
@@ -867,7 +575,6 @@ function Open-URLs {
         Write-Host "  [5] RustFS Console     (http://127.0.0.1:9001)"
         Write-Host "  [0] Back"
         Write-Host "================================================================" -ForegroundColor Cyan
-        
         $choice = Read-Host "Choice"
         switch ($choice) {
             "1" { Start-Process "http://127.0.0.1:8000" }
@@ -876,7 +583,6 @@ function Open-URLs {
             "4" { Start-Process "http://localhost:5173" }
             "5" { Start-Process "http://127.0.0.1:9001" }
             "0" { return }
-            default { Write-Host "Invalid choice." -ForegroundColor Red; Start-Sleep -Seconds 1 }
         }
     }
 }
@@ -913,51 +619,53 @@ function View-Logs {
         Write-Host "================================================================" -ForegroundColor Cyan
         Write-Host "  [1] View Backend Log (Last 50 lines)"
         Write-Host "  [2] View Frontend Log (Last 50 lines)"
-        Write-Host "  [3] Open Application Logs Directory"
-        Write-Host "  [4] Open RustFS Logs Directory"
+        Write-Host "  [3] Open Logs Directory"
         Write-Host "  [0] Back"
         Write-Host "================================================================" -ForegroundColor Cyan
-        
         $choice = Read-Host "Choice"
         switch ($choice) {
             "1" { Show-LogFile "logs\backend.log" }
             "2" { Show-LogFile "logs\frontend.log" }
             "3" { Open-Dir $LogsDir }
-            "4" { Open-Dir "E:\Projects\ascendrite-data\rustfs\logs\" }
             "0" { return }
-            default { Write-Host "Invalid choice." -ForegroundColor Red; Start-Sleep -Seconds 1 }
         }
     }
+}
+
+function Exit-PlatformManager {
+    $ManagerPidFile = Join-Path $RuntimeDir "platform-manager.pid"
+    if (Test-Path $ManagerPidFile) {
+        $myPidVal = Get-Content $ManagerPidFile -Raw -ErrorAction SilentlyContinue
+        if ($myPidVal -and [int]($myPidVal.Trim()) -eq $PID) {
+            Remove-Item $ManagerPidFile -Force -ErrorAction SilentlyContinue
+        }
+    }
+    exit 0
 }
 
 # Main event loop
 while ($true) {
     $statuses = Get-FullStatus
     Show-Dashboard $statuses
-    Write-Host "  [1] Start Application Stack"
-    Write-Host "  [2] Start Full Development Stack"
-    Write-Host "  [3] Stop Application Stack"
-    Write-Host "  [4] Manage Infrastructure"
-    Write-Host "  [5] Manage Application"
-    Write-Host "  [6] Health and Diagnostics"
-    Write-Host "  [7] Open Service URLs"
-    Write-Host "  [8] View Logs"
-    Write-Host "  [9] Refresh Dashboard"
+    Write-Host "  [1] Start Applications (Backend + Frontend)"
+    Write-Host "  [2] Stop Applications"
+    Write-Host "  [3] Start Full Stack   (Infrastructure + Apps)"
+    Write-Host "  [4] Stop Full Stack    (Infrastructure + Apps)"
+    Write-Host "  [5] View Logs          (Backend & Frontend)"
+    Write-Host "  [6] Open Service URLs"
+    Write-Host "  [7] Run Diagnostics"
     Write-Host "  [0] Exit"
     Write-Host "================================================================" -ForegroundColor Cyan
     
     $choice = Read-Host "Choice"
     switch ($choice) {
         "1" { Start-BothApps; Start-Sleep -Seconds 1 }
-        "2" { Start-FullStack }
-        "3" { Stop-BothApps; Start-Sleep -Seconds 1 }
-        "4" { Manage-Infrastructure }
-        "5" { Manage-Application }
-        "6" { Show-Diagnostics }
-        "7" { Open-URLs }
-        "8" { View-Logs }
-        "9" { }
+        "2" { Stop-BothApps; Start-Sleep -Seconds 1 }
+        "3" { Start-FullStack; Start-Sleep -Seconds 1 }
+        "4" { Stop-FullStack; Start-Sleep -Seconds 1 }
+        "5" { View-Logs }
+        "6" { Open-URLs }
+        "7" { Show-Diagnostics }
         "0" { Exit-PlatformManager }
-        default { Write-Host "Invalid choice." -ForegroundColor Red; Start-Sleep -Seconds 1 }
     }
 }
