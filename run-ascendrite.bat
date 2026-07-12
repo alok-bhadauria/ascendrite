@@ -12,7 +12,7 @@ $ScriptDir = $env:SCRIPT_DIR
 if (-not $ScriptDir) {
     $ScriptDir = (Get-Location).Path
 }
-$ScriptDir = $ScriptDir.TrimEnd('\')
+$ScriptDir = $ScriptDir.TrimEnd([char]92)
 
 if (Test-Path (Join-Path $ScriptDir "platform")) {
     $RepoRoot = $ScriptDir
@@ -373,9 +373,8 @@ function Start-BackendApp {
     $logPath = Join-Path $LogsDir "backend.log"
     
     try {
-        # Redirect standard output and error using CMD to avoid lock conflicts on Windows
-        $args = '/c ""' + $VenvPython + '" -m uvicorn main:app --host 127.0.0.1 --port 8000 >> "' + $logPath + '" 2>&1"'
-        $proc = Start-Process -FilePath "cmd.exe" -ArgumentList $args -WorkingDirectory "$ServerDir" -PassThru -NoNewWindow
+        $cmdLine = "/c `"$VenvPython`" -m uvicorn main:app --host 127.0.0.1 --port 8000 >> `"$logPath`" 2>&1"
+        $proc = Start-Process -FilePath "cmd.exe" -ArgumentList $cmdLine -WorkingDirectory $ServerDir -PassThru -NoNewWindow
         $proc.Id | Out-File -FilePath $BackendPidFile -Encoding ascii
         
         Write-Host "Waiting for Backend to listen on port 8000..." -NoNewline
@@ -448,8 +447,8 @@ function Start-FrontendApp {
     $logPath = Join-Path $LogsDir "frontend.log"
     
     try {
-        $args = '/c "npm run dev >> "' + $logPath + '" 2>&1"'
-        $proc = Start-Process -FilePath "cmd.exe" -ArgumentList $args -WorkingDirectory "$ClientDir" -PassThru -NoNewWindow
+        $cmdLine = "/c npm run dev >> `"$logPath`" 2>&1"
+        $proc = Start-Process -FilePath "cmd.exe" -ArgumentList $cmdLine -WorkingDirectory $ClientDir -PassThru -NoNewWindow
         $proc.Id | Out-File -FilePath $FrontendPidFile -Encoding ascii
         
         Write-Host "Waiting for Frontend to listen on port 5173..." -NoNewline
@@ -624,8 +623,8 @@ function View-Logs {
         Write-Host "================================================================" -ForegroundColor Cyan
         $choice = Read-Host "Choice"
         switch ($choice) {
-            "1" { Show-LogFile "logs\backend.log" }
-            "2" { Show-LogFile "logs\frontend.log" }
+            "1" { Show-LogFile "logs\\backend.log" }
+            "2" { Show-LogFile "logs\\frontend.log" }
             "3" { Open-Dir $LogsDir }
             "0" { return }
         }
