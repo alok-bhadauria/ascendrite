@@ -12,6 +12,10 @@ env/
 # Environment Files
 .env
 .env.*
+!.env.example
+
+# Runtime PID files
+*.pid
 
 # Node
 node_modules/
