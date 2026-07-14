@@ -21,7 +21,7 @@ async def lifespan(app: FastAPI):
         logger.warning(
             "Server is starting in DEGRADED MODE — MongoDB unavailable. "
             "API endpoints requiring a database will return HTTP 503. "
-            "Fix: whitelist your IP in MongoDB Atlas → Network Access."
+            "Fix: ensure your local MongoDB service is running."
         )
     yield
     # ── Shutdown ─────────────────────────────────────────────────────────
@@ -70,7 +70,7 @@ async def health():
     return {
         "status": "healthy" if db_ok else "degraded",
         "server": "online",
-        "database": "connected" if db_ok else "unavailable — whitelist your IP in MongoDB Atlas Network Access",
+        "database": "connected" if db_ok else "unavailable — check your local MongoDB service status",
     }
 
 # Include V1 Router groups

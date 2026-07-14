@@ -31,7 +31,7 @@ export default function AiProfiler() {
       '[profiler] Traced conceptual leak in DBMS transaction concurrency control.',
       '[profiler] Memory recall index for "Thread Scheduling Algorithms" elevated.',
       '[ai-copilot] Generated micro-lesson challenge: "Math behind Backpropagation".',
-      '[system] Synchronizing local study logs with MongoDB Atlas replica set...',
+      '[system] Synchronizing local study logs with MongoDB replica set...',
       '[system] Log database successfully updated.',
       '[profiler] AI agent profiled: Weakness found in "B+ Tree Disk Seeks".'
     ];

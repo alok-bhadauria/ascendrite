@@ -33,7 +33,7 @@ const features = [
   { Icon: Code,     title: 'Interactive Code Trace',     body: 'Deconstruct complex execution context. Step through stack frames, loop scopes, and recursion trees dynamically to expose variables and execution flows in real time.' },
   { Icon: Brain,    title: 'AI Copilot Diagnostics',     body: 'Local LLM agents profile your completion intervals and diagnostic quiz inputs to render custom, localized review pathways for weak conceptual links.' },
   { Icon: Database, title: 'LaTeX derivations & Math',   body: 'Textbook-grade academic rigor featuring fully formatted LaTeX proofs, complexity analysis matrices, and mathematical derivations for core algorithm weights.' },
-  { Icon: BarChart2,title: 'Progress Tracking',          body: 'Log completed topics, quiz score percentages, and total duration metrics to a distributed MongoDB Atlas cluster with automatic synchronization.' },
+  { Icon: BarChart2,title: 'Progress Tracking',          body: 'Log completed topics, quiz score percentages, and total duration metrics to a local MongoDB database with automatic synchronization.' },
   { Icon: Palette,  title: 'Monkeytype-Inspired Themes', body: 'Switch layouts instantly with 6 high-quality, Monkeytype-inspired palettes. Fully persistent, FOUC-proof, and designed using HSL tailor matches.' },
   { Icon: Shield,   title: 'Enterprise Security Standards', body: 'Robust security blueprints including Google OAuth SSO, cross-origin resource protection, encrypted session cookies, and sanitized API endpoints.' }
 ];

@@ -13,7 +13,7 @@ class DatabaseManager:
 db_manager = DatabaseManager()
 
 async def connect_to_mongo():
-    """Attempt to connect to MongoDB Atlas.
+    """Attempt to connect to the configured MongoDB database.
     Returns True on success, False on failure.
     Does NOT raise — the caller decides how to handle failure.
     """
@@ -28,27 +28,27 @@ async def connect_to_mongo():
         db_manager.db = db_manager.client[settings.MONGODB_DB_NAME]
         db_manager.is_connected = True
         logger.info(
-            f"Successfully connected to MongoDB Atlas — "
+            f"Successfully connected to MongoDB — "
             f"database: {settings.MONGODB_DB_NAME}"
         )
         return True
     except Exception as e:
         db_manager.is_connected = False
         logger.critical(
-            f"Failed to connect to MongoDB Atlas: {e}\n"
+            f"Failed to connect to MongoDB: {e}\n"
             f"The server will start in DEGRADED MODE. "
-            f"Ensure your IP is whitelisted in Atlas Network Access."
+            f"Ensure your local MongoDB service is running."
         )
         return False
 
 async def close_mongo_connection():
-    logger.info("Closing MongoDB Atlas connection...")
+    logger.info("Closing MongoDB connection...")
     if db_manager.client:
         db_manager.client.close()
         db_manager.client = None
         db_manager.db = None
         db_manager.is_connected = False
-        logger.info("MongoDB Atlas connection closed.")
+        logger.info("MongoDB connection closed.")
 
 async def get_database():
     """FastAPI dependency — returns the DB handle or raises HTTP 503."""
@@ -57,8 +57,8 @@ async def get_database():
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
             detail=(
                 "Database is currently unavailable. "
-                "Ensure your IP is whitelisted in MongoDB Atlas "
-                "Network Access and restart the server."
+                "Ensure your local MongoDB service is running "
+                "and restart the server."
             )
         )
     return db_manager.db
