@@ -9,3 +9,11 @@ class StorageProvider(ABC):
     @abstractmethod
     def get_object(self, bucket: str, key: str) -> bytes:
         pass
+
+    @abstractmethod
+    def put_object(self, bucket: str, key: str, data: bytes, content_type: str) -> None:
+        pass
+
+    @abstractmethod
+    def delete_object(self, bucket: str, key: str) -> None:
+        pass

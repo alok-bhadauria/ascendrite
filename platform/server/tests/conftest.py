@@ -14,6 +14,7 @@ def clear_db():
     db["audit_logs"].delete_many({})
     db["activity_logs"].delete_many({})
     db["in_app_notifications"].delete_many({})
+    db["assets"].delete_many({})
     client.close()
 
 @pytest.fixture(scope="module")

@@ -28,6 +28,13 @@ from app.core.runtime.tasks.base import BackgroundTaskService
 from app.core.runtime.tasks.providers import FastAPIBackgroundTaskProvider
 from app.core.runtime.tasks.scheduler import BackgroundTaskScheduler
 
+# Asset Platform Imports
+from app.infrastructure.storage.manager import StorageManager
+from app.modules.assets.repositories.base import AssetRepository
+from app.modules.assets.repositories.asset import MongoAssetRepository
+from app.modules.assets.services.base import AssetService
+from app.modules.assets.services.service import MongoAssetService
+
 # Singleton Internal Application Event Dispatcher
 event_dispatcher_instance = LocalEventDispatcher()
 
@@ -59,6 +66,9 @@ async def get_auth_service(
 def get_storage_provider() -> StorageProvider:
     """Framework-native dependency injection provider for storage services"""
     return get_rustfs()
+
+def get_storage_manager(provider: StorageProvider = Depends(get_storage_provider)) -> StorageManager:
+    return StorageManager(provider)
 
 async def get_current_user(
     request: Request,
@@ -140,3 +150,19 @@ async def get_notification_service(db: AsyncIOMotorDatabase = Depends(get_databa
 def get_background_task_service(background_tasks: BackgroundTasks) -> BackgroundTaskService:
     provider = FastAPIBackgroundTaskProvider(background_tasks)
     return BackgroundTaskScheduler(provider)
+
+# ------------------------------------------------------------------------------
+# Stage 2.4 Asset & Media Platform Dependencies
+# ------------------------------------------------------------------------------
+
+async def get_asset_repository(db: AsyncIOMotorDatabase = Depends(get_database)) -> AssetRepository:
+    return MongoAssetRepository(db)
+
+async def get_asset_service(
+    repo: AssetRepository = Depends(get_asset_repository),
+    storage_mgr: StorageManager = Depends(get_storage_manager),
+    event_dispatcher: EventDispatcher = Depends(get_event_dispatcher),
+    audit_service: AuditService = Depends(get_audit_service),
+    activity_service: ActivityService = Depends(get_activity_service)
+) -> AssetService:
+    return MongoAssetService(repo, storage_mgr, event_dispatcher, audit_service, activity_service)

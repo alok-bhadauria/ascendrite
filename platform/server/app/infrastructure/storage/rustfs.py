@@ -11,7 +11,14 @@ class RustFSStorageBoundary(StorageProvider):
 
     def get_object(self, bucket: str, key: str) -> bytes:
         logger.info(f"RustFS storage lookup: bucket={bucket} key={key}")
-        return b""
+        # In a real environment we would fetch from storage endpoint; for now return mock bytes
+        return b"mock-binary-data"
+
+    def put_object(self, bucket: str, key: str, data: bytes, content_type: str) -> None:
+        logger.info(f"RustFS storage put: bucket={bucket} key={key} size={len(data)} type={content_type}")
+
+    def delete_object(self, bucket: str, key: str) -> None:
+        logger.info(f"RustFS storage delete: bucket={bucket} key={key}")
 
 rustfs_storage = RustFSStorageBoundary()
 

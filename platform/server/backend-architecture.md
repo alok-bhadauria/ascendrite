@@ -149,4 +149,22 @@ The platform provides a suite of decoupled, provider-agnostic runtime infrastruc
 ### E. Provider-Agnostic Tasks Scheduler
 *   **`BackgroundTaskScheduler`**: Dequeues and processes tasks in the background. Operates provider-agnostically, wrapping either the request-scoped `FastAPIBackgroundTaskProvider` or the asynchronous `AsyncioBackgroundTaskProvider` loop runner.
 
+---
+
+## 8. Asset & Media Platform
+
+The platform defines a clean boundary separating logical asset ownership and metadata persistence from physical storage details:
+
+### A. Intermediate Storage Management Layer
+*   **`StorageManager`**: Acts as an intermediate boundary isolating business services from raw storage operations (`StorageProvider`). Resolves standardized bucket names and directory keys (`assets/{owner_id}/{asset_id}/{filename}`) dynamically.
+
+### B. Asset Domain & Strongly Typed Lifecycle Enums
+*   **`AssetModel`**: Defines the metadata schema for persistent documents. Includes checksum validation (`checksum_algorithm`), logical storage location properties, and reserved slots for media dimensions, durations, and processing triggers.
+*   **`AssetStatus`**: Strongly typed enumeration (`uploaded`, `active`, `archived`, `deleted`). soft-deletions transition status to `DELETED` instead of calling physical removal.
+
+### C. Security boundaries & Principal Ownership
+*   **Ownership Validation**: All service transactions verify `principal.id == asset.owner_id`. Admin roles automatically bypass ownership barriers.
+*   **Platform Runtime Hooks**: Uploads/deletions trigger internal event publication (`AssetUploaded`, `AssetDeleted`), security auditing, and user timeline events.
+
+
 
