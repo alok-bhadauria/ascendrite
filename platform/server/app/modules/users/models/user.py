@@ -21,11 +21,9 @@ class UserPreferences(MongoBaseModel):
 class UserModel(AuditModel):
     id: Optional[PyObjectId] = Field(alias="_id", default=None)
     email: str
-    password_hash: Optional[str] = None
     first_name: str
     last_name: str
     role: str = "Student"  # Student | Contributor | Admin
-    
     profile_picture_url: Optional[str] = None
     date_of_birth: Optional[date] = None
     bio: str = ""
@@ -33,6 +31,4 @@ class UserModel(AuditModel):
     social_links: SocialLinks = Field(default_factory=SocialLinks)
     skills: List[str] = Field(default_factory=list)
     preferences: UserPreferences = Field(default_factory=UserPreferences)
-    
-    google_id: Optional[str] = None
     is_active: bool = True

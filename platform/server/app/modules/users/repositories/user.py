@@ -22,7 +22,7 @@ class MongoUserRepository(UserRepository):
             return None
 
     async def get_by_email(self, email: str) -> Optional[UserModel]:
-        doc = await self.collection.find_one({"email": email.lower(), "is_deleted": False})
+        doc = await self.collection.find_one({"email": email.lower().strip(), "is_deleted": False})
         return UserModel(**doc) if doc else None
 
     async def get_all(self) -> List[UserModel]:
@@ -43,6 +43,5 @@ class MongoUserRepository(UserRepository):
         return None
 
     async def delete(self, id: Any) -> bool:
-        # Enforce soft-deletion design
         result = await self.collection.update_one({"_id": ObjectId(id)}, {"$set": {"is_deleted": True}})
         return result.modified_count > 0

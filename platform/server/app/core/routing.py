@@ -8,7 +8,7 @@ from fastapi.responses import JSONResponse
 from app.core.logging import correlation_id_var
 
 class EnvelopeRoute(APIRoute):
-    """Custom APIRoute class that automatically wraps 200 OK responses in SuccessResponse"""
+    """Custom APIRoute class that automatically wraps 200, 201, and 202 responses in SuccessResponse"""
     def get_route_handler(self) -> Callable[[Request], Any]:
         original_route_handler = super().get_route_handler()
         
@@ -16,8 +16,8 @@ class EnvelopeRoute(APIRoute):
             start_time = time.time()
             response: Response = await original_route_handler(request)
             
-            # Intercept standard successful JSONResponse
-            if isinstance(response, JSONResponse) and response.status_code == 200:
+            # Intercept successful JSONResponse (200, 201, 202)
+            if isinstance(response, JSONResponse) and 200 <= response.status_code < 204:
                 try:
                     data = json.loads(response.body.decode("utf-8"))
                     
@@ -41,7 +41,7 @@ class EnvelopeRoute(APIRoute):
                     headers.pop("content-length", None)
                     return JSONResponse(
                         content=wrapped_content,
-                        status_code=200,
+                        status_code=response.status_code,
                         headers=headers
                     )
                 except Exception:
