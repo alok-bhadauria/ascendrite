@@ -127,3 +127,26 @@ To support non-human access (such as AI agents, service accounts, background wor
 *   **`AuthenticatedPrincipal`**: Represents a generic authenticated context resolving an `id`, `identity_type`, `role`, and active `capabilities` list.
 *   **Principal Resolution**: The active JWT access token resolves into this generic principal context, decoupling authorization evaluations from the specific `UserModel` profile.
 
+---
+
+## 7. Platform Runtime Infrastructure
+
+The platform provides a suite of decoupled, provider-agnostic runtime infrastructure engines under `app/core/runtime/`:
+
+### A. Execution Metadata & Runtime Context
+*   **`RuntimeContext`**: Consolidates correlation tracking and principal variables into a unified, request-scoped payload passed across all platform engines.
+
+### B. Internal Event Dispatcher
+*   **`LocalEventDispatcher`**: Handles internal application pub/sub flows synchronously in-memory, preserving the request's correlation metadata in the event contract.
+
+### C. Auditing & User Activity Boundaries
+*   **`MongoAuditService`**: Persists system-facing security logs (containing actor references, actions, targets, status codes) to the `audit_logs` collection.
+*   **`MongoActivityService`**: Persists user-facing timeline feeds (actions completed by human accounts) to the `activity_logs` collection.
+
+### D. Pluggable Notifications Dispatcher
+*   **`NotificationDispatcher`**: Distributes notification deliveries across active channels (`InAppChannel` to `in_app_notifications` MongoDB collection, `MockEmailChannel`, `MockSMSChannel`, `MockPushChannel`) without coupling routing logic to the sender.
+
+### E. Provider-Agnostic Tasks Scheduler
+*   **`BackgroundTaskScheduler`**: Dequeues and processes tasks in the background. Operates provider-agnostically, wrapping either the request-scoped `FastAPIBackgroundTaskProvider` or the asynchronous `AsyncioBackgroundTaskProvider` loop runner.
+
+

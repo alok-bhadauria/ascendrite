@@ -1,4 +1,4 @@
-from fastapi import Depends, HTTPException, Request, status
+from fastapi import Depends, HTTPException, Request, status, BackgroundTasks
 from jose import jwt, JWTError
 from motor.motor_asyncio import AsyncIOMotorDatabase
 from app.core.config import settings
@@ -13,6 +13,26 @@ from app.modules.authentication.services.auth import AuthService
 from app.infrastructure.storage.base import StorageProvider
 from app.infrastructure.storage.rustfs import get_rustfs
 from app.core.authorization.principal import AuthenticatedPrincipal
+
+# Runtime Infrastructure Imports
+from app.core.runtime.events.base import EventDispatcher
+from app.core.runtime.events.dispatcher import LocalEventDispatcher
+from app.core.runtime.audit.base import AuditService
+from app.core.runtime.audit.service import MongoAuditService
+from app.core.runtime.activity.base import ActivityService
+from app.core.runtime.activity.service import MongoActivityService
+from app.core.runtime.notification.base import NotificationService
+from app.core.runtime.notification.dispatcher import NotificationDispatcher
+from app.core.runtime.notification.channels import InAppChannel, MockEmailChannel, MockSMSChannel, MockPushChannel
+from app.core.runtime.tasks.base import BackgroundTaskService
+from app.core.runtime.tasks.providers import FastAPIBackgroundTaskProvider
+from app.core.runtime.tasks.scheduler import BackgroundTaskScheduler
+
+# Singleton Internal Application Event Dispatcher
+event_dispatcher_instance = LocalEventDispatcher()
+
+def get_event_dispatcher() -> EventDispatcher:
+    return event_dispatcher_instance
 
 async def get_user_repository(db: AsyncIOMotorDatabase = Depends(get_database)) -> UserRepository:
     return MongoUserRepository(db)
@@ -97,3 +117,26 @@ async def get_current_principal(
         role=current_user.role,
         capabilities=caps
     )
+
+# ------------------------------------------------------------------------------
+# Stage 2.3 Shared Runtime Services Dependencies
+# ------------------------------------------------------------------------------
+
+async def get_audit_service(db: AsyncIOMotorDatabase = Depends(get_database)) -> AuditService:
+    return MongoAuditService(db)
+
+async def get_activity_service(db: AsyncIOMotorDatabase = Depends(get_database)) -> ActivityService:
+    return MongoActivityService(db)
+
+async def get_notification_service(db: AsyncIOMotorDatabase = Depends(get_database)) -> NotificationService:
+    channels = [
+        InAppChannel(db),
+        MockEmailChannel(),
+        MockSMSChannel(),
+        MockPushChannel()
+    ]
+    return NotificationDispatcher(channels)
+
+def get_background_task_service(background_tasks: BackgroundTasks) -> BackgroundTaskService:
+    provider = FastAPIBackgroundTaskProvider(background_tasks)
+    return BackgroundTaskScheduler(provider)
