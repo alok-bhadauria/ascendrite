@@ -13,19 +13,24 @@
 
 ## 1. Local Prerequisites & Directory Philosophy
 
-Local development uses a clear separation of binaries, application code, and data. To keep the primary system partitions clean, Ascendrite enforces the following local layout conventions:
+Local development enforces a strict boundary separation between binaries, application code, runtime state data, and private/sensitive developer assets:
 
 ```
 E:\Softwares\
     Third-party software, database binaries, executables, SDKs, CLIs,
     and service wrappers (e.g. E:\Softwares\RustFS\, E:\Softwares\Amazon\AWSCLIV2\).
 
-E:\Projects\Ascendrite\
+E:\Projects\Ascendrite\ (Repository - Tracked in Git)
     Active source repository, frontend/backend application codebase, 
     scripts, and schemas.
 
-E:\Projects\ascendrite-data\
-    Persistent local database files, logs, backups, and configurations.
+E:\Projects\ascendrite-data\ (Runtime Data - Outside Git)
+    Persistent local database files, backups, active catalogs, logs, 
+    and the Migration Toolkit operational utilities.
+
+E:\Projects\ascendrite-private\ (Private Assets - Outside Git)
+    Local secrets, credentials registries, certificates, and historical 
+    knowledge archive snapshots.
 ```
 
 Ensure your developer machine has the following utilities installed:
@@ -54,6 +59,11 @@ pip install -r requirements.txt
 # Initialize frontend dependencies
 cd ../client
 npm install
+
+# Initialize local environment configuration (Repository Root)
+cd ../..
+copy .env.example .env.local  # Or 'cp .env.example .env.local' on macOS/Linux
+# (Edit .env.local manually to populate local database passwords)
 ```
 
 ---

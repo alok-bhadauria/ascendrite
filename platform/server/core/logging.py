@@ -20,7 +20,7 @@ class JSONFormatter(logging.Formatter):
         return json.dumps(log_data)
 
 def setup_logging():
-    log_level = getattr(logging, settings.LOG_LEVEL.upper(), logging.INFO)
+    log_level = getattr(logging, settings.APP_LOG_LEVEL.upper(), logging.INFO)
     root_logger = logging.getLogger()
     root_logger.setLevel(log_level)
 

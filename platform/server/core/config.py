@@ -5,7 +5,8 @@ from pydantic import field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-env_file_path = os.path.join(current_dir, ".env")
+root_dir = os.path.dirname(os.path.dirname(current_dir))
+env_file_path = os.path.join(root_dir, ".env.local")
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=env_file_path, env_file_encoding="utf-8", extra="ignore")
@@ -16,15 +17,16 @@ class Settings(BaseSettings):
     APP_DEBUG: bool = True
     APP_HOST: str = "0.0.0.0"
     APP_PORT: int = 8000
+    APP_LOG_LEVEL: str = "INFO"
 
     # Database Configuration
     MONGODB_URI: str = ""
     MONGODB_DB_NAME: str = "ascendrite"
 
     # JWT Configuration
-    JWT_SECRET_KEY: str = ""
+    JWT_SECRET: str = ""
     JWT_ALGORITHM: str = "HS256"
-    JWT_ACCESS_TOKEN_EXPIRE_MINUTES: int = 15
+    JWT_EXPIRE_MINUTES: int = 15
     JWT_REFRESH_TOKEN_EXPIRE_DAYS: int = 7
 
     # Security Configuration
@@ -43,13 +45,19 @@ class Settings(BaseSettings):
         return v
 
     # Logging Configuration
-    LOG_LEVEL: str = "INFO"
     LOG_FORMAT: str = "json"
 
-    # AI Configuration
+    # AI Providers Configuration
+    LLM_PROVIDER: str = "openai"
+    EMBEDDING_PROVIDER: str = "openai"
     OPENAI_API_KEY: str = ""
     OPENAI_EMBEDDING_MODEL: str = "text-embedding-3-small"
     OPENAI_CHAT_MODEL: str = "gpt-4o"
+
+    # Feature Flags Configuration
+    ENABLE_AI: bool = True
+    ENABLE_SIGNUPS: bool = True
+    ENABLE_GOOGLE_LOGIN: bool = True
 
     # Google OAuth Configuration
     GOOGLE_CLIENT_ID: str = ""
@@ -89,18 +97,18 @@ class Settings(BaseSettings):
     REDIS_HOST: str = "127.0.0.1"
     REDIS_PORT: int = 6379
     REDIS_DATABASE: int = 0
-    REDIS_ADMIN_USER: str = "ascendrite_cache_admin"
+    REDIS_ADMIN_USER: str = "ascendrite_admin"
     REDIS_ADMIN_PASSWORD: str = ""
-    REDIS_APP_USER: str = "ascendrite_cache_app"
+    REDIS_APP_USER: str = "ascendrite_app"
     REDIS_APP_PASSWORD: str = ""
 
     # RustFS Object Storage Variables
     S3_ENDPOINT: str = "http://127.0.0.1:9000"
     S3_CONSOLE_ENDPOINT: str = "http://127.0.0.1:9001"
     S3_REGION: str = "ap-south-1"
-    S3_ADMIN_USER: str = "ascendrite_storage_admin"
+    S3_ADMIN_USER: str = "ascendrite_admin"
     S3_ADMIN_PASSWORD: str = ""
-    S3_APP_PARENT_USER: str = "ascendrite_storage_app"
+    S3_APP_PARENT_USER: str = "ascendrite_app"
     S3_RUNTIME_ACCESS_KEY: str = "ascendrite_runtime"
     S3_RUNTIME_SECRET_KEY: str = ""
 
@@ -109,41 +117,44 @@ class Settings(BaseSettings):
 
     @model_validator(mode="after")
     def resolve_legacy_urls(self) -> "Settings":
-        # Derive MongoDB URI exclusively at runtime from canonical individual fields
-        encoded_mongo_user = urllib.parse.quote(self.MONGODB_APP_USER, safe="")
-        encoded_mongo_pass = urllib.parse.quote(self.MONGODB_APP_PASSWORD, safe="")
-        
-        if encoded_mongo_user and encoded_mongo_pass:
-            self.MONGODB_URI = f"mongodb://{encoded_mongo_user}:{encoded_mongo_pass}@{self.MONGODB_HOST}:{self.MONGODB_PORT}/{self.MONGODB_DATABASE}?authSource={self.MONGODB_AUTH_SOURCE}"
-        elif encoded_mongo_user:
-            self.MONGODB_URI = f"mongodb://{encoded_mongo_user}@{self.MONGODB_HOST}:{self.MONGODB_PORT}/{self.MONGODB_DATABASE}?authSource={self.MONGODB_AUTH_SOURCE}"
-        else:
-            self.MONGODB_URI = f"mongodb://{self.MONGODB_HOST}:{self.MONGODB_PORT}/{self.MONGODB_DATABASE}?authSource={self.MONGODB_AUTH_SOURCE}"
+        # Derive MongoDB URI exclusively at runtime from canonical individual fields if not explicitly provided
+        if not self.MONGODB_URI:
+            encoded_mongo_user = urllib.parse.quote(self.MONGODB_APP_USER, safe="")
+            encoded_mongo_pass = urllib.parse.quote(self.MONGODB_APP_PASSWORD, safe="")
+            
+            if encoded_mongo_user and encoded_mongo_pass:
+                self.MONGODB_URI = f"mongodb://{encoded_mongo_user}:{encoded_mongo_pass}@{self.MONGODB_HOST}:{self.MONGODB_PORT}/{self.MONGODB_DATABASE}?authSource={self.MONGODB_AUTH_SOURCE}"
+            elif encoded_mongo_user:
+                self.MONGODB_URI = f"mongodb://{encoded_mongo_user}@{self.MONGODB_HOST}:{self.MONGODB_PORT}/{self.MONGODB_DATABASE}?authSource={self.MONGODB_AUTH_SOURCE}"
+            else:
+                self.MONGODB_URI = f"mongodb://{self.MONGODB_HOST}:{self.MONGODB_PORT}/{self.MONGODB_DATABASE}?authSource={self.MONGODB_AUTH_SOURCE}"
         
         # Override MongoDB DB Name from database config
         self.MONGODB_DB_NAME = self.MONGODB_DATABASE
 
-        # Derive PostgreSQL URL exclusively at runtime
-        encoded_pg_user = urllib.parse.quote(self.POSTGRES_APP_USER, safe="")
-        encoded_pg_pass = urllib.parse.quote(self.POSTGRES_APP_PASSWORD, safe="")
-        
-        if encoded_pg_user and encoded_pg_pass:
-            self.POSTGRES_URL = f"postgresql://{encoded_pg_user}:{encoded_pg_pass}@{self.POSTGRES_HOST}:{self.POSTGRES_PORT}/{self.POSTGRES_DATABASE}"
-        elif encoded_pg_user:
-            self.POSTGRES_URL = f"postgresql://{encoded_pg_user}@{self.POSTGRES_HOST}:{self.POSTGRES_PORT}/{self.POSTGRES_DATABASE}"
-        else:
-            self.POSTGRES_URL = f"postgresql://{self.POSTGRES_HOST}:{self.POSTGRES_PORT}/{self.POSTGRES_DATABASE}"
+        # Derive PostgreSQL URL exclusively at runtime if not explicitly provided
+        if not self.POSTGRES_URL:
+            encoded_pg_user = urllib.parse.quote(self.POSTGRES_APP_USER, safe="")
+            encoded_pg_pass = urllib.parse.quote(self.POSTGRES_APP_PASSWORD, safe="")
+            
+            if encoded_pg_user and encoded_pg_pass:
+                self.POSTGRES_URL = f"postgresql://{encoded_pg_user}:{encoded_pg_pass}@{self.POSTGRES_HOST}:{self.POSTGRES_PORT}/{self.POSTGRES_DATABASE}"
+            elif encoded_pg_user:
+                self.POSTGRES_URL = f"postgresql://{encoded_pg_user}@{self.POSTGRES_HOST}:{self.POSTGRES_PORT}/{self.POSTGRES_DATABASE}"
+            else:
+                self.POSTGRES_URL = f"postgresql://{self.POSTGRES_HOST}:{self.POSTGRES_PORT}/{self.POSTGRES_DATABASE}"
 
-        # Derive Redis URL exclusively at runtime
-        encoded_redis_user = urllib.parse.quote(self.REDIS_APP_USER, safe="")
-        encoded_redis_pass = urllib.parse.quote(self.REDIS_APP_PASSWORD, safe="")
-        
-        if encoded_redis_user and encoded_redis_pass:
-            self.REDIS_URL = f"redis://{encoded_redis_user}:{encoded_redis_pass}@{self.REDIS_HOST}:{self.REDIS_PORT}/{self.REDIS_DATABASE}"
-        elif encoded_redis_user:
-            self.REDIS_URL = f"redis://{encoded_redis_user}@{self.REDIS_HOST}:{self.REDIS_PORT}/{self.REDIS_DATABASE}"
-        else:
-            self.REDIS_URL = f"redis://{self.REDIS_HOST}:{self.REDIS_PORT}/{self.REDIS_DATABASE}"
+        # Derive Redis URL exclusively at runtime if not explicitly provided
+        if not self.REDIS_URL:
+            encoded_redis_user = urllib.parse.quote(self.REDIS_APP_USER, safe="")
+            encoded_redis_pass = urllib.parse.quote(self.REDIS_APP_PASSWORD, safe="")
+            
+            if encoded_redis_user and encoded_redis_pass:
+                self.REDIS_URL = f"redis://{encoded_redis_user}:{encoded_redis_pass}@{self.REDIS_HOST}:{self.REDIS_PORT}/{self.REDIS_DATABASE}"
+            elif encoded_redis_user:
+                self.REDIS_URL = f"redis://{encoded_redis_user}@{self.REDIS_HOST}:{self.REDIS_PORT}/{self.REDIS_DATABASE}"
+            else:
+                self.REDIS_URL = f"redis://{self.REDIS_HOST}:{self.REDIS_PORT}/{self.REDIS_DATABASE}"
 
         return self
 

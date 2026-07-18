@@ -20,17 +20,40 @@ All platform service instances are packed and executed inside isolated container
 
 ---
 
-## 2. Target Environments
+## 2. Target Environments & Deployment Roadmap
 
-Ascendrite defines three distinct execution environments, ensuring rigorous testing and release procedures:
+Ascendrite defines an evolutionary deployment sequence, moving from local environments to containerized self-hosted VM setups:
 
-*   **Development**: Volatile local container grids and sandbox tools for feature prototyping and tests.
-*   **Staging**: A mirror configuration of production clusters. Used for schema migration verification, regression validation, and pre-release approval.
-*   **Production**: The user-facing production environment, locked behind security firewalls and load balancers.
+$$\text{Local Development} \longrightarrow \text{Containerized Local Development} \longrightarrow \text{Self-hosted Production (VM)} \longrightarrow \text{Cloud-hosted Production (VM)} \longrightarrow \text{Container Orchestration (when justified)}$$
+
+*   **Development (Local)**: Local developer machines running native Windows/Unix services. Emulates credentials using `.env.local` and database collections via local runtimes.
+*   **Containerized Local Stack**: Docker Compose environment replicating all backend, database, cache, and frontend services for integration tests.
+*   **Staging**: Run on a dedicated self-hosted staging VM mirroring the production topology to verify database schema migrations and run integration validation checks.
+*   **Production**: The active, user-facing production environment deployed on secure virtual machine instances running production databases.
+
+> [!IMPORTANT]
+> **Environment Isolation & Synchronization Rules**:
+> Development and Production operate as fully isolated environments. There is no automatic synchronization of database records, curriculum metadata, or schemas. Knowledge moves between local development and production environments exclusively via explicit export and import operations orchestrated through the Migration Toolkit.
 
 ---
 
-## 3. Release Sequencing
+## 3. Self-Hosted Production Stack & Backup Philosophy
+
+The target production infrastructure is built on a resilient, self-hosted container framework:
+
+*   **Host Operating System**: Ubuntu Server LTS.
+*   **Container Platform**: Docker Engine with Docker Compose to coordinate service structures.
+*   **Reverse Proxy / SSL**: Caddy Reverse Proxy, providing automated TLS 1.3 termination and secure routing to frontend/backend containers.
+*   **Storage Volumes**: Docker persistent named data volumes mapped to databases (PostgreSQL, MongoDB) and RustFS object stores.
+*   **Backup and Archival Philosophy**:
+    *   *Runtime Backups*: Cron-based periodic encrypted database snapshots and raw logs are written to the persistent runtime storage folder `ascendrite-data/backups/`.
+    *   *Historical Archiving*: High-fidelity versioned knowledge exports are generated from MongoDB and written to `ascendrite-data/knowledge-base/`, while master snapshots and certifications are preserved separately in `ascendrite-private/snapshots/`. Runtime backups and historical snapshots serve different operational recovery purposes.
+*   **Telemetry & Monitoring**: Prometheus and log scrapers checking ports health and API throughput latencies.
+*   **Security Layers**: Host firewalls (UFW), SSH key logins, IP tables rate-limiting, and constant-time API key comparisons.
+
+---
+
+## 4. Release Sequencing
 
 Deployment actions are managed through automated CI/CD systems, following a defined execution sequence:
 *   A push to release branches triggers compilation, testing, and container compilation.
@@ -40,7 +63,7 @@ Deployment actions are managed through automated CI/CD systems, following a defi
 
 ---
 
-## 4. Rollback Protocols
+## 5. Rollback Protocols
 
 In the event of a deployment failure:
 *   Deployment pipelines must support automated, zero-downtime rollback to the previous version registry image.

@@ -24,7 +24,7 @@ if (Test-Path (Join-Path $ScriptDir "platform")) {
 }
 $ServerDir = Join-Path $PlatformDir "server"
 $ClientDir = Join-Path $PlatformDir "client"
-$RuntimeDir = "E:\Projects\ascendrite-data\runtime"
+$RuntimeDir = Join-Path (Split-Path -Parent $RepoRoot) "ascendrite-data\runtime"
 $BackendPidFile = Join-Path $RuntimeDir "backend.pid"
 $FrontendPidFile = Join-Path $RuntimeDir "frontend.pid"
 $LogsDir = Join-Path $RepoRoot "logs"
@@ -191,19 +191,20 @@ function Test-ManagedOwnership($pidFile, $port) {
 }
 
 function Get-ServiceState($serviceName, $port) {
-    $status = Get-Service -Name $serviceName -ErrorAction SilentlyContinue
-    if (-not $status) {
-        return "OFFLINE"
+    $actualName = $serviceName
+    if ($serviceName -eq "AscendriteRustFS") {
+        $check = Get-Service -Name "RustFS" -ErrorAction SilentlyContinue
+        if ($check) { $actualName = "RustFS" }
     }
-    $serviceRunning = $status.Status -eq "Running"
+    
+    $status = Get-Service -Name $actualName -ErrorAction SilentlyContinue
+    $serviceRunning = $status -and $status.Status -eq "Running"
     $portListening = Test-PortConnection $port
 
-    if ($serviceRunning -and $portListening) {
+    if ($portListening) {
         return "ONLINE"
-    } elseif ($serviceRunning -and -not $portListening) {
+    } elseif ($serviceRunning) {
         return "DEGRADED"
-    } elseif (-not $serviceRunning -and $portListening) {
-        return "UNKNOWN"
     } else {
         return "OFFLINE"
     }
@@ -281,20 +282,41 @@ function Start-AllInfra {
     Write-Host "Starting all infrastructure services..."
     $services = @("postgresql-x64-18", "MongoDB", "Memurai", "AscendriteRustFS")
     foreach ($svc in $services) {
-        $status = Get-Service -Name $svc -ErrorAction SilentlyContinue
+        $actualName = $svc
+        if ($svc -eq "AscendriteRustFS") {
+            $check = Get-Service -Name "RustFS" -ErrorAction SilentlyContinue
+            if ($check) { $actualName = "RustFS" }
+        }
+        
+        $status = Get-Service -Name $actualName -ErrorAction SilentlyContinue
         if ($status) {
             if ($status.Status -eq "Running") {
-                Write-Host "Service '$svc' is already running. [SKIP]" -ForegroundColor Yellow
+                Write-Host "Service '$actualName' is already running. [SKIP]" -ForegroundColor Yellow
             } else {
                 if ($isAdmin) {
-                    Write-Host "Starting '$svc'..."
-                    Start-Service -Name $svc -ErrorAction SilentlyContinue
+                    Write-Host "Starting service '$actualName'..."
+                    Start-Service -Name $actualName -ErrorAction SilentlyContinue
                 } else {
-                    Write-Host "[ERROR] Admin privileges required to start '$svc'." -ForegroundColor Red
+                    Write-Host "[ERROR] Admin privileges required to start '$actualName'." -ForegroundColor Red
                 }
             }
         } else {
-            Write-Host "Service '$svc' is not installed. [SKIP]" -ForegroundColor Red
+            if ($svc -eq "AscendriteRustFS") {
+                if (Test-PortConnection 9000) {
+                    Write-Host "RustFS is already listening on port 9000. [SKIP]" -ForegroundColor Yellow
+                } else {
+                    Write-Host "Service 'RustFS' is not installed. Launching fallback background process..." -ForegroundColor Yellow
+                    $batFile = Join-Path $RepoRoot "scripts\services\rustfs-start.bat"
+                    if (Test-Path $batFile) {
+                        Start-Process cmd.exe -ArgumentList "/c `"$batFile`"" -WindowStyle Minimized
+                        Start-Sleep -Seconds 2
+                    } else {
+                        Write-Host "[ERROR] Fallback script '$batFile' not found." -ForegroundColor Red
+                    }
+                }
+            } else {
+                Write-Host "Service '$svc' is not installed. [SKIP]" -ForegroundColor Red
+            }
         }
     }
     Start-Sleep -Seconds 2
@@ -306,16 +328,30 @@ function Stop-AllInfra {
     if ($confirm -eq "y" -or $confirm -eq "Y") {
         $services = @("postgresql-x64-18", "MongoDB", "Memurai", "AscendriteRustFS")
         foreach ($svc in $services) {
-            $status = Get-Service -Name $svc -ErrorAction SilentlyContinue
+            $actualName = $svc
+            if ($svc -eq "AscendriteRustFS") {
+                $check = Get-Service -Name "RustFS" -ErrorAction SilentlyContinue
+                if ($check) { $actualName = "RustFS" }
+            }
+            
+            $status = Get-Service -Name $actualName -ErrorAction SilentlyContinue
             if ($status) {
                 if ($status.Status -eq "Stopped") {
-                    Write-Host "Service '$svc' is already stopped. [SKIP]" -ForegroundColor Yellow
+                    Write-Host "Service '$actualName' is already stopped. [SKIP]" -ForegroundColor Yellow
                 } else {
                     if ($isAdmin) {
-                        Write-Host "Stopping '$svc'..."
-                        Stop-Service -Name $svc -Force -ErrorAction SilentlyContinue
+                        Write-Host "Stopping service '$actualName'..."
+                        Stop-Service -Name $actualName -Force -ErrorAction SilentlyContinue
                     } else {
-                        Write-Host "[ERROR] Admin privileges required to stop '$svc'." -ForegroundColor Red
+                        Write-Host "[ERROR] Admin privileges required to stop '$actualName'." -ForegroundColor Red
+                    }
+                }
+            } else {
+                if ($svc -eq "AscendriteRustFS") {
+                    $rustfsProc = Get-Process -Name "rustfs" -ErrorAction SilentlyContinue
+                    if ($rustfsProc) {
+                        Write-Host "Stopping fallback process 'rustfs'..."
+                        Stop-Process -Name "rustfs" -Force -ErrorAction SilentlyContinue
                     }
                 }
             }

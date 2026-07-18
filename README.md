@@ -158,7 +158,7 @@ The script runs as a self-contained polyglot batch/PowerShell manager at the rep
 ================================================================
 ```
 
-For configuration specifics, review [Local Development](docs/development/local-development.md) and [Environment Configuration](docs/development/environment-configuration.md).
+For configuration specifics, review [Local Development](docs/development/local-development.md) and [Environment Configuration](docs/development/environment-configuration.md). Note that configuration is unified around a single `.env.local` file at the repository root; nested backend environment files (like `platform/server/.env`) are prohibited.
 
 ### 5.2 Quality Gates & Validation Engines
 All repository updates must pass validation scripts located in `scratch/` prior to version commits:

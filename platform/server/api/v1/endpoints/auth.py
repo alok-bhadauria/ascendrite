@@ -49,7 +49,7 @@ async def login(
         httponly=settings.SECURITY_COOKIE_HTTPONLY,
         secure=settings.SECURITY_COOKIE_SECURE,
         samesite=settings.SECURITY_COOKIE_SAMESITE,
-        max_age=settings.JWT_ACCESS_TOKEN_EXPIRE_MINUTES * 60
+        max_age=settings.JWT_EXPIRE_MINUTES * 60
     )
     
     return {
@@ -130,7 +130,7 @@ async def google_login(
         httponly=settings.SECURITY_COOKIE_HTTPONLY,
         secure=settings.SECURITY_COOKIE_SECURE,
         samesite=settings.SECURITY_COOKIE_SAMESITE,
-        max_age=settings.JWT_ACCESS_TOKEN_EXPIRE_MINUTES * 60
+        max_age=settings.JWT_EXPIRE_MINUTES * 60
     )
     
     return {

@@ -22,15 +22,15 @@ All Git branches must be named to match the nature of the change:
 
 ## 2. Commit Message Standards
 
-Ascendrite uses structured commit messages. The message format is:
-```
-[domain-prefix]: Short, imperative-mood description of the change
-
-Detailed explanation of why the change is necessary, including references to 
-related issues or ADRs.
-```
-*   **Valid Domain Prefixes**: `identity`, `workspace`, `knowledge`, `practice`, `platform`, `operations`, `docs`.
-*   **Imperative Mood**: Use "add feature" instead of "added feature" or "adds feature".
+Git history is treated as engineering documentation. Commit messages must be short, professional, specific, and human-written:
+*   **Style**: Use a direct, descriptive summary of the change. Avoid verbose AI-generated summaries, marketing language, or emojis.
+*   **Format**: Focus on a single logical change per commit.
+*   **Examples**:
+    *   `Refactor backend configuration loading`
+    *   `Remove legacy backend env loading`
+    *   `Update deployment documentation`
+    *   `Add RustFS storage abstraction`
+    *   `Implement PostgreSQL user repository`
 
 ---
 

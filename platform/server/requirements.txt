@@ -12,4 +12,6 @@ requests==2.31.0
 httpx==0.26.0
 openai==1.10.0
 email-validator==2.3.0
+psycopg2-binary==2.9.9
+redis==5.0.1
 

@@ -29,19 +29,26 @@ Houses the active Git repository, schemas, scripts, and modular service codes:
 *   `knowledge-base/`: Public curriculum schemas and metadata taxonomy files.
 
 ### 1.3 Persistent Infrastructure Data (`E:\Projects\ascendrite-data\`)
-Contains persistent state, runtime logs, backups, and secrets. It must never be committed to Git:
+Contains persistent state, runtime logs, backups, and active data. It must never be committed to Git:
 *   `mongodb/`: MongoDB active collections and lock files.
 *   `postgres/`: PostgreSQL transactional records.
 *   `redis/`: Ephemeral Memurai database caches.
 *   `rustfs/`:
     *   `data/`: Persistent bucket directories and object binaries.
     *   `logs/`: S3 console and access event outputs.
-*   `secrets/`:
-    *   `credentials.txt`: A private, owner-only local credential registry containing local infrastructure connection details, identities, roles, purposes, and credentials for PostgreSQL 18.4, MongoDB Community Server 8.0.26, Memurai Developer Edition 4.2.3 / Redis API 7.4.9, and RustFS 1.0.0-beta.8. It is a current local single-owner development convention, not the intended production secret-management architecture.
-    *   `api-keys.txt`: Currently empty reserved local file for future API-key storage if required. Its concrete purpose must be established before active use.
-    *   `rustfs-access-key.txt` & `rustfs-secret-key.txt`: Machine-readable RustFS credentials files consumed by the current RustFS service startup configuration.
-    *   `rustfs-credentials.exported.json`: Sensitive RustFS credential export artifact. It must remain private, untracked, and outside the source repository.
+*   `knowledge-base/`: Generated runtime exports of the curriculum catalogs.
+*   `migration-toolkit/`: Operational utilities for data migration (containing import/export scripts and logs under `reports/`).
 *   `backups/`: Unified backups directory containing folders for `knowledge`, `mongodb`, `postgres`, and `rustfs`.
+
+### 1.4 Private Assets Directory (`E:\Projects\ascendrite-private\`)
+Contains untracked credential keys, certificates, and historical snapshots:
+*   `secrets/`:
+    *   `credentials.txt`: A private, owner-only local credential registry containing local infrastructure connection details.
+    *   `api-keys.txt`: Reserved file for future API-key storage.
+    *   `rustfs-access-key.txt` & `rustfs-secret-key.txt`: Machine-readable S3 credentials.
+    *   `rustfs-credentials.exported.json`: Sensitive RustFS credential export artifact.
+*   `certificates/`: SSL and TLS certificates for secure local domain endpoints.
+*   `snapshots/`: Historical snapshots of raw content directories.
 
 ---
 

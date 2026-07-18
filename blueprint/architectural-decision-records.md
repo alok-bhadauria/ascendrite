@@ -26,6 +26,8 @@ This document is derived directly from the constitutional source of truth, the [
 12. **ADR-012**: Knowledge Service Architecture & Hybrid Storage Model
 13. **ADR-013**: Capability-Based, Inherited Permission Model
 14. **ADR-014**: Object Storage Backend — Migration to RustFS
+15. **ADR-015**: Unified Environment Configuration & Self-Hosted VM Production Roadmap
+16. **ADR-016**: Operational Domain Separation & Knowledge Base Lifecycle Model
 
 ---
 
@@ -326,4 +328,51 @@ Migrate the local development object storage backend to **RustFS (1.0.0-beta.8)*
 - **Positive**: Lightweight execution (compiled in Rust), zero external dependencies, robust S3 API compatibility validated via AWS CLI.
 - **Negative**: Requires configuring a Windows service wrapper (WinSW) for background management.
 
+---
 
+## ADR-015: Unified Environment Configuration & Self-Hosted VM Production Roadmap
+
+### Status
+Approved
+
+### Context
+Managing configuration files nested across different modules (e.g. `platform/server/.env`) increases configuration drift risk and environment-specific code fragmentation. Furthermore, early deployment targets relied on disparate third-party free-tier cloud host tools, which violates the self-hosted first philosophy.
+
+### Decision
+1. **Unify Configuration Precedence**: Restructure backend settings to load from a single root `.env.local` file for local development. Eliminate nested application `.env` files. Ensure the Pydantic Settings validator checks if database URI configurations are already provided in environment memory before defaulting to local host variables.
+2. **Self-Hosted Production VM Targeting**: Focus the production roadmap around containerized local setups moving to self-hosted Ubuntu Linux Virtual Machines coordinated via Docker Compose and Caddy Reverse Proxy, isolating data in persistent named docker volumes.
+
+### Alternatives Considered
+- **Decentralized Environment Configs**: Rejected as it duplicates configuration properties and leads to silent configuration drift.
+- **Managed SaaS Deployment**: Rejected to avoid platform vendor lock-in, recurring SaaS subscription billing, and privacy exposure risks.
+
+### Consequences
+- **Positive**: Single environment configuration contract simplifies local onboarding. Self-hosted production preserves local-first data ownership and absolute deployment portability.
+- **Negative**: Requires developers to copy `.env.example` to `.env.local` at the root folder manually before execution.
+
+---
+
+## ADR-016: Operational Domain Separation & Knowledge Base Lifecycle Model
+
+### Status
+Approved
+
+### Context
+To maintain strict codebase hygiene and protect sensitive keys or personal data, the platform must partition file scopes clearly. Furthermore, tracking mutable, database-driven educational content directly in Git leads to high commit noise, sync challenges, and limits in-app metadata changes.
+
+### Decision
+1. **Three-Tier Operational Boundaries**:
+   - **Repository** (Git): Code, schemas, documents, and configuration contracts.
+   - **Runtime Data** (`ascendrite-data/` outside Git): Persistent local database files, logs, backups, and runtime exports.
+   - **Private Assets** (`ascendrite-private/` outside Git): Credentials registry (`credentials.txt`), certs, API keys, and snapshot backups.
+2. **MongoDB as Authoritative Source of Truth**:
+   - *Phase 0 Ingestion*: Parse files in the Git `knowledge-base/` and migrate to MongoDB.
+   - *Post-Migration*: MongoDB is the sole authoritative system of record. Git files are no longer edited. Edits occur within the platform, writing directly to MongoDB. Runtime exports are written to `ascendrite-data/knowledge-base/`.
+3. **External Migration Toolkit**: All operational scripts (importer/exporter/diagnostics) reside in the untracked toolkit directory `ascendrite-data/migration-toolkit/`. Reports reside under `migration-toolkit/reports/`. The legacy top-level `migrations/` folder is deprecated.
+
+### Alternatives Considered
+- **All-in-Git Knowledge Authoring**: Rejected due to commit noise, database synchronization complexity, and the inability to support runtime curation flows.
+
+### Consequences
+- **Positive**: Complete separation of secrets and local database state from core code. Supports dynamic, database-driven metadata adjustments within the platform.
+- **Negative**: Content modifications can no longer be tracked directly in Git history; database backup pipelines must serve as historical trace systems.

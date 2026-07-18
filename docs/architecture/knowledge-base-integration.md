@@ -12,11 +12,17 @@
 
 ---
 
-## 1. Decentralized Ingestion Pipeline
-The platform shall ingest a git-friendly offline content database residing in `knowledge-base/`:
-*   **Server Startup Loading**: During initialization, the ingestion parser must read directories, compile syllabus layout trees, and parse lesson profiles.
-*   **Curriculum Memory Cache**: Parsed data structures shall be loaded into a read-only memory cache (hash-map indices). The API must serve curriculum queries directly from this cache to ensure $O(1)$ response latency.
-*   **Decoupled Directories**: The ingestion system must not hardcode category names or subject directory names. Path locations must be dynamically resolved from the configuration files.
+## 1. Decentralized Ingestion Pipeline & Source of Truth
+
+The knowledge base operates in two distinct lifecycle stages:
+
+1.  **Initial Migration Phase**: The platform reads the static, git-friendly content database from the repository `knowledge-base/`. A validation pipeline validates, indexes, and ingests these records into the MongoDB database.
+2.  **Post-Ingestion Production Phase**: MongoDB becomes the **sole authoritative source of truth** for all curriculum data. The original repository folder is no longer maintained. Content editing, curation, and moderation occur directly within the platform's database.
+
+*   **Runtime Exports**: When backups or offline packages are required, runtime exports are generated from MongoDB and written to the untracked runtime directory `ascendrite-data/knowledge-base/`.
+*   **Historical Snapshots**: Archive snapshots of taxonomy versions can be exported and archived inside `ascendrite-private/` for recovery.
+*   **Curriculum Memory Cache**: Serving endpoints query a read-only memory cache populated from MongoDB at startup, ensuring $O(1)$ response latency.
+*   **Decoupled Directories**: Path structures and domain taxonomy groupings are resolved dynamically from configurations, avoiding hardcoded path targets.
 
 ---
 
@@ -60,3 +66,16 @@ All files under `knowledge-base/` must validate against the schemas inside `know
 ### 4.3 Subject Metadata Evolution
 *   **Canonical Properties**: New systems shall query canonical fields (`id`, `slug`, `display_name`, `theme`, `estimated_hours`, `difficulty`).
 *   **Legacy Preservation**: Legacy fields (`subject_id`, `name`, `estimated_learning_hours`, `subject_theme_colors`) must remain in configuration files for backward compatibility. They are deprecated and scheduled for removal in future versions.
+
+---
+
+## 5. Runtime Migration Toolkit
+
+To facilitate the initial import and ongoing export loops of knowledge, a runtime Migration Toolkit is maintained as an operational utility.
+
+*   **Location**: Resides in `ascendrite-data/migration-toolkit/` (outside Git repository).
+*   **Toolkit Utilities**:
+    - **Knowledge Import**: Reads repository schema layouts and writes verified content objects to the MongoDB instance.
+    - **Knowledge Export**: Exports active MongoDB curriculum catalogs as portable JSON packages into `ascendrite-data/knowledge-base/`.
+    - **Integrity Validation**: Runs topological audits, prerequisites checks, and checks for DAG loops against the live database state.
+    - **Operational Reports**: All output results, migration telemetry, and diagnostics are logged to `ascendrite-data/migration-toolkit/reports/`. The old top-level `migrations/` directory has been deprecated and removed.
