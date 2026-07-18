@@ -1,5 +1,6 @@
 from datetime import timedelta
-from fastapi import APIRouter, Depends, HTTPException, Response, status
+from app.core.routing import APIRouter
+from fastapi import Depends, HTTPException, Response, status
 import httpx
 from pydantic import BaseModel
 from app.core.config import settings

@@ -1,4 +1,5 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from app.core.routing import APIRouter
+from fastapi import Depends, HTTPException, status
 from app.modules.users.models.user import UserModel
 from app.modules.learning.schemas.progress import TopicProgressLog, SubjectProgressResponse
 from app.modules.learning.services.progress import ProgressService

@@ -1,6 +1,6 @@
 import time
 import sys
-from fastapi import APIRouter
+from app.core.routing import APIRouter
 from app.core.config import settings
 from app.core.constants import APP_NAME, APP_VERSION, BUILD_VERSION, RELEASE_CHANNEL, STARTUP_TIMESTAMP
 from app.core.logging import correlation_id_var
@@ -11,8 +11,6 @@ router = APIRouter()
 async def get_system_metadata():
     """Consolidated system metadata endpoint with logically grouped runtime details"""
     return {
-        "status": "success",
-        "request_id": correlation_id_var.get(),
         "application": {
             "name": APP_NAME,
             "version": APP_VERSION,

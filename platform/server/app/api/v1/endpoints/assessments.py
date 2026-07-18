@@ -1,6 +1,7 @@
 import logging
 from typing import List
-from fastapi import APIRouter, Depends, HTTPException, status
+from app.core.routing import APIRouter
+from fastapi import Depends, HTTPException, status
 from app.modules.users.models.user import UserModel
 from app.modules.assessments.models.quiz_submission import QuizSubmissionModel, AnswerDetail
 from app.modules.assessments.schemas.quiz_submission import QuizSubmitRequest, QuizSubmissionResponse

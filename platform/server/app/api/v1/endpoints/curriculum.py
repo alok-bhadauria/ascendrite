@@ -1,4 +1,5 @@
-from fastapi import APIRouter, HTTPException, status
+from app.core.routing import APIRouter
+from fastapi import HTTPException, status
 from app.modules.knowledge.services.curriculum import curriculum_service
 
 router = APIRouter()

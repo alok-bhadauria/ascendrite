@@ -2,6 +2,7 @@ import json
 import time
 from typing import Callable, Any
 from fastapi import Request, Response
+from fastapi import APIRouter as FastAPIRouter
 from fastapi.routing import APIRoute
 from fastapi.responses import JSONResponse
 from app.core.logging import correlation_id_var
@@ -48,3 +49,9 @@ class EnvelopeRoute(APIRoute):
             return response
             
         return custom_route_handler
+
+class APIRouter(FastAPIRouter):
+    def __init__(self, *args, **kwargs):
+        if "route_class" not in kwargs:
+            kwargs["route_class"] = EnvelopeRoute
+        super().__init__(*args, **kwargs)
