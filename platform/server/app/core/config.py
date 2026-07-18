@@ -4,8 +4,10 @@ from typing import List, Union
 from pydantic import field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-root_dir = os.path.dirname(os.path.dirname(current_dir))
+# Resolve absolute path to the workspace root directory dynamically
+# __file__ is platform/server/app/core/config.py
+current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # platform/server/app
+root_dir = os.path.dirname(os.path.dirname(os.path.dirname(current_dir)))  # g:/Projects/ascendrite
 env_file_path = os.path.join(root_dir, ".env.local")
 
 class Settings(BaseSettings):
@@ -54,10 +56,15 @@ class Settings(BaseSettings):
     OPENAI_EMBEDDING_MODEL: str = "text-embedding-3-small"
     OPENAI_CHAT_MODEL: str = "gpt-4o"
 
-    # Feature Flags Configuration
-    ENABLE_AI: bool = True
-    ENABLE_SIGNUPS: bool = True
-    ENABLE_GOOGLE_LOGIN: bool = True
+    # Operational Feature Flags
+    FEATURE_ENABLE_AI: bool = True
+    FEATURE_ENABLE_BACKGROUND_WORKERS: bool = True
+    FEATURE_ENABLE_EMAIL: bool = True
+
+    # Development & Testing Feature Flags
+    FEATURE_ENABLE_SEARCH: bool = True
+    FEATURE_ENABLE_REGISTRATION: bool = True
+    FEATURE_ENABLE_ANALYTICS: bool = True
 
     # Google OAuth Configuration
     GOOGLE_CLIENT_ID: str = ""
@@ -115,28 +122,47 @@ class Settings(BaseSettings):
     # Vector DB Backend Selection
     VECTOR_BACKEND: str = "pgvector"
 
+    # Runtime Profile Query Helpers
+    @property
+    def current_profile(self) -> str:
+        return self.APP_ENV.lower()
+
+    @property
+    def is_development(self) -> bool:
+        return self.current_profile == "development"
+
+    @property
+    def is_testing(self) -> bool:
+        return self.current_profile == "testing"
+
+    @property
+    def is_production(self) -> bool:
+        return self.current_profile == "production"
+
+    @property
+    def is_debug_enabled(self) -> bool:
+        return self.APP_DEBUG
+
+    def is_feature_enabled(self, feature_name: str) -> bool:
+        flag_name = f"FEATURE_ENABLE_{feature_name.upper()}"
+        return getattr(self, flag_name, False)
+
     @model_validator(mode="after")
     def resolve_legacy_urls(self) -> "Settings":
-        # Derive MongoDB URI exclusively at runtime from canonical individual fields if not explicitly provided
         if not self.MONGODB_URI:
             encoded_mongo_user = urllib.parse.quote(self.MONGODB_APP_USER, safe="")
             encoded_mongo_pass = urllib.parse.quote(self.MONGODB_APP_PASSWORD, safe="")
-            
             if encoded_mongo_user and encoded_mongo_pass:
                 self.MONGODB_URI = f"mongodb://{encoded_mongo_user}:{encoded_mongo_pass}@{self.MONGODB_HOST}:{self.MONGODB_PORT}/{self.MONGODB_DATABASE}?authSource={self.MONGODB_AUTH_SOURCE}"
             elif encoded_mongo_user:
                 self.MONGODB_URI = f"mongodb://{encoded_mongo_user}@{self.MONGODB_HOST}:{self.MONGODB_PORT}/{self.MONGODB_DATABASE}?authSource={self.MONGODB_AUTH_SOURCE}"
             else:
                 self.MONGODB_URI = f"mongodb://{self.MONGODB_HOST}:{self.MONGODB_PORT}/{self.MONGODB_DATABASE}?authSource={self.MONGODB_AUTH_SOURCE}"
-        
-        # Override MongoDB DB Name from database config
         self.MONGODB_DB_NAME = self.MONGODB_DATABASE
 
-        # Derive PostgreSQL URL exclusively at runtime if not explicitly provided
         if not self.POSTGRES_URL:
             encoded_pg_user = urllib.parse.quote(self.POSTGRES_APP_USER, safe="")
             encoded_pg_pass = urllib.parse.quote(self.POSTGRES_APP_PASSWORD, safe="")
-            
             if encoded_pg_user and encoded_pg_pass:
                 self.POSTGRES_URL = f"postgresql://{encoded_pg_user}:{encoded_pg_pass}@{self.POSTGRES_HOST}:{self.POSTGRES_PORT}/{self.POSTGRES_DATABASE}"
             elif encoded_pg_user:
@@ -144,11 +170,9 @@ class Settings(BaseSettings):
             else:
                 self.POSTGRES_URL = f"postgresql://{self.POSTGRES_HOST}:{self.POSTGRES_PORT}/{self.POSTGRES_DATABASE}"
 
-        # Derive Redis URL exclusively at runtime if not explicitly provided
         if not self.REDIS_URL:
             encoded_redis_user = urllib.parse.quote(self.REDIS_APP_USER, safe="")
             encoded_redis_pass = urllib.parse.quote(self.REDIS_APP_PASSWORD, safe="")
-            
             if encoded_redis_user and encoded_redis_pass:
                 self.REDIS_URL = f"redis://{encoded_redis_user}:{encoded_redis_pass}@{self.REDIS_HOST}:{self.REDIS_PORT}/{self.REDIS_DATABASE}"
             elif encoded_redis_user:

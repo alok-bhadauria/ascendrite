@@ -41,7 +41,35 @@ platform/server/app/
 *   **Security Foundation**: Hashing algorithms and JWT signing helpers mapped under `app/core/security.py`.
 *   **API Response Standards**: Exception interceptor middleware (`app/middleware/exceptions.py`) converting custom core errors (`app/core/errors.py`) to unified JSON outputs.
 
-## 3. Operational Foundation
+## 3. Configuration & Provider Architecture
+
+### A. Configuration Precedence & Profile Helpers
+Configurations are strongly typed and resolved from:
+1.  **Environment Variables**: Overrides local configurations in production.
+2.  **Root `.env.local`**: Custom developer configuration values.
+3.  **Application Defaults**: Preconfigured fallback settings.
+
+The active runtime profile (`APP_ENV`) exposes helper query properties:
+*   `is_development`: Development environment.
+*   `is_testing`: Pytest sandbox context.
+*   `is_production`: Production container runtime environment.
+*   `is_feature_enabled(name)`: Operations check for feature toggles.
+
+### B. Feature Flags Classification
+Feature flags are structured configurations prefixing operational and developer rules:
+*   **Operational Flags**: `FEATURE_ENABLE_AI`, `FEATURE_ENABLE_BACKGROUND_WORKERS`, `FEATURE_ENABLE_EMAIL`.
+*   **Development Flags**: `FEATURE_ENABLE_SEARCH`, `FEATURE_ENABLE_REGISTRATION`, `FEATURE_ENABLE_ANALYTICS`.
+
+### C. Provider Interfaces Abstraction
+External infrastructure drivers are decoupled behind abstract provider interfaces:
+*   **`StorageProvider`**: Decouples binary payload interactions. Swaps implementations (Local `RustFS` $\rightarrow$ AWS S3 $\rightarrow$ Azure Blob) without editing business modules.
+*   **`AIProvider`**: Decouples Generative model queries. Swaps implementations (OpenAI $\rightarrow$ Gemini $\rightarrow$ Ollama) for RAG curriculum processing.
+
+Provider concrete implementations are bound to API endpoints dynamically using FastAPI native dependency injection (`Depends`), preventing service locator anti-patterns.
+
+---
+
+## 4. Operational Foundation
 
 ### A. Endpoint Responsibilities
 *   `GET /api/v1/health`: Consolidates overall system health contract (timestamp, uptime, version, dependencies).
@@ -71,7 +99,7 @@ In production, standard logging formats logs as JSON records containing:
 
 ---
 
-## 4. Development Commands
+## 5. Development Commands
 
 ### Running unit and config tests
 Run pytest from the backend workspace root directory:

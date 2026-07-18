@@ -7,6 +7,8 @@ from app.modules.users.models.user import UserModel
 from app.modules.users.repositories.user import MongoUserRepository, UserRepository
 from app.modules.learning.repositories.progress import MongoProgressRepository, ProgressRepository
 from app.modules.assessments.repositories.quiz_submission import MongoQuizSubmissionRepository, QuizSubmissionRepository
+from app.infrastructure.storage.base import StorageProvider
+from app.infrastructure.storage.rustfs import get_rustfs
 
 async def get_user_repository(db: AsyncIOMotorDatabase = Depends(get_database)) -> UserRepository:
     return MongoUserRepository(db)
@@ -16,6 +18,10 @@ async def get_progress_repository(db: AsyncIOMotorDatabase = Depends(get_databas
 
 async def get_quiz_submission_repository(db: AsyncIOMotorDatabase = Depends(get_database)) -> QuizSubmissionRepository:
     return MongoQuizSubmissionRepository(db)
+
+def get_storage_provider() -> StorageProvider:
+    """Framework-native dependency injection provider for storage services"""
+    return get_rustfs()
 
 async def get_current_user(
     request: Request,

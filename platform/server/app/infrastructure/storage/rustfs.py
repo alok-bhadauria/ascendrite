@@ -1,9 +1,10 @@
 import logging
 from app.core.config import settings
+from app.infrastructure.storage.base import StorageProvider
 
 logger = logging.getLogger(__name__)
 
-class RustFSStorageBoundary:
+class RustFSStorageBoundary(StorageProvider):
     def __init__(self):
         self.endpoint = settings.S3_ENDPOINT
         self.region = settings.S3_REGION
@@ -14,5 +15,5 @@ class RustFSStorageBoundary:
 
 rustfs_storage = RustFSStorageBoundary()
 
-def get_rustfs():
+def get_rustfs() -> StorageProvider:
     return rustfs_storage

@@ -340,15 +340,18 @@ Managing configuration files nested across different modules (e.g. `platform/ser
 
 ### Decision
 1. **Unify Configuration Precedence**: Restructure backend settings to load from a single root `.env.local` file for local development. Eliminate nested application `.env` files. Ensure the Pydantic Settings validator checks if database URI configurations are already provided in environment memory before defaulting to local host variables.
-2. **Self-Hosted Production VM Targeting**: Focus the production roadmap around containerized local setups moving to self-hosted Ubuntu Linux Virtual Machines coordinated via Docker Compose and Caddy Reverse Proxy, isolating data in persistent named docker volumes.
+2. **Provider-Oriented Architecture**: Extract external systems integrations (file storage, AI assistants, etc.) behind abstract provider interfaces (`StorageProvider`, `AIProvider`). The application domain consumes these interfaces via framework-native dependency injection, decoupling logical workflows from concrete drivers.
+3. **Operational Feature Flags & Runtime Profiles**: Organize runtime profiles under canonical configurations (`APP_ENV`) and segment operational capabilities (`FEATURE_ENABLE_AI`, `FEATURE_ENABLE_BACKGROUND_WORKERS`) from development checks to ensure predictable platform executions.
+4. **Self-Hosted Production VM Targeting**: Focus the production roadmap around containerized local setups moving to self-hosted Ubuntu Linux Virtual Machines coordinated via Docker Compose and Caddy Reverse Proxy, isolating data in persistent named docker volumes.
 
 ### Alternatives Considered
 - **Decentralized Environment Configs**: Rejected as it duplicates configuration properties and leads to silent configuration drift.
 - **Managed SaaS Deployment**: Rejected to avoid platform vendor lock-in, recurring SaaS subscription billing, and privacy exposure risks.
+- **Service Locator Registry**: Rejected class locator lookups as they hide dependency definitions, favoring standard FastAPI dependency injection instead.
 
 ### Consequences
-- **Positive**: Single environment configuration contract simplifies local onboarding. Self-hosted production preserves local-first data ownership and absolute deployment portability.
-- **Negative**: Requires developers to copy `.env.example` to `.env.local` at the root folder manually before execution.
+- **Positive**: Single environment configuration contract simplifies local onboarding. Self-hosted production preserves local-first data ownership and absolute deployment portability. Abstract provider interfaces allow swapping infrastructure concrete drivers (e.g. RustFS S3 storage to MinIO/S3, or OpenAI to local Ollama) without editing business modules.
+- **Negative**: Requires developers to copy `.env.example` to `.env.local` at the root folder manually before execution. Adds a lightweight layer of abstract parent contracts.
 
 ---
 
