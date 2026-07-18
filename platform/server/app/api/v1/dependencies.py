@@ -12,6 +12,7 @@ from app.modules.assessments.repositories.quiz_submission import MongoQuizSubmis
 from app.modules.authentication.services.auth import AuthService
 from app.infrastructure.storage.base import StorageProvider
 from app.infrastructure.storage.rustfs import get_rustfs
+from app.core.authorization.principal import AuthenticatedPrincipal
 
 async def get_user_repository(db: AsyncIOMotorDatabase = Depends(get_database)) -> UserRepository:
     return MongoUserRepository(db)
@@ -83,3 +84,16 @@ async def get_current_user(
             detail="User account is deactivated."
         )
     return user
+
+async def get_current_principal(
+    current_user: UserModel = Depends(get_current_user)
+) -> AuthenticatedPrincipal:
+    """Resolve AuthenticatedPrincipal context from active UserModel"""
+    from app.core.authorization.evaluator import resolve_capabilities
+    caps = resolve_capabilities(current_user.role)
+    return AuthenticatedPrincipal(
+        id=str(current_user.id),
+        identity_type="user",
+        role=current_user.role,
+        capabilities=caps
+    )

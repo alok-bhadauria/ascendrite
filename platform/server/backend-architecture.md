@@ -111,3 +111,19 @@ python-venv-3.10.11\Scripts\python.exe -m pytest -v tests
 ```powershell
 python-venv-3.10.11\Scripts\uvicorn main:app --host 127.0.0.1 --port 8000
 ```
+
+---
+
+## 6. Capability-Based Authorization Platform
+
+### A. Authorization Philosophy
+The platform employs a fine-grained **capability-based authorization model** instead of checking static application roles directly inside logic endpoints.
+1.  **Capabilities as Contracts**: Permissions represent the sole authorization contracts (`domain:action`).
+2.  **Roles as Bundles**: Roles (`Student`, `Contributor`, `Admin`) are reusable collections of these capabilities, serving as configurations rather than hardcoded logic boundaries.
+3.  **FastAPI Route Guards**: Endpoints declare capability constraints using the `RequireCapability` dependency class, keeping access validation out of service business modules.
+
+### B. Authenticated Principal Abstraction
+To support non-human access (such as AI agents, service accounts, background workers, and API keys) without code changes:
+*   **`AuthenticatedPrincipal`**: Represents a generic authenticated context resolving an `id`, `identity_type`, `role`, and active `capabilities` list.
+*   **Principal Resolution**: The active JWT access token resolves into this generic principal context, decoupling authorization evaluations from the specific `UserModel` profile.
+
