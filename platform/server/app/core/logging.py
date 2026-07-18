@@ -1,10 +1,11 @@
 import logging
 import sys
 import json
-from datetime import datetime, timezone
-from app.core.config import settings
-
 import contextvars
+from pathlib import Path
+from datetime import datetime, timezone
+from logging.handlers import RotatingFileHandler
+from app.core.config import settings
 
 # Context local request correlation tracker
 correlation_id_var = contextvars.ContextVar("correlation_id", default=None)
@@ -21,7 +22,6 @@ class JSONFormatter(logging.Formatter):
             "function": record.funcName,
             "line": record.lineno,
         }
-        # Inject timing metadata if present via extra attributes
         if hasattr(record, "duration"):
             log_data["duration_ms"] = record.duration
         if hasattr(record, "route"):
@@ -35,20 +35,49 @@ def setup_logging():
     root_logger = logging.getLogger()
     root_logger.setLevel(log_level)
 
-    # Clean existing handlers to prevent duplicate logging
     for handler in root_logger.handlers[:]:
         root_logger.removeHandler(handler)
 
-    handler = logging.StreamHandler(sys.stdout)
+    # Console Handler
+    console_handler = logging.StreamHandler(sys.stdout)
     if settings.LOG_FORMAT.lower() == "json":
-        handler.setFormatter(JSONFormatter())
+        formatter = JSONFormatter()
     else:
-        handler.setFormatter(logging.Formatter(
-            "[%(asctime)s] %(levelname)s in %(module)s: %(message)s"
-        ))
+        formatter = logging.Formatter("[%(asctime)s] %(levelname)s in %(module)s: %(message)s")
+    console_handler.setFormatter(formatter)
+    root_logger.addHandler(console_handler)
 
-    root_logger.addHandler(handler)
-    
-    # Set levels for third party verbose libraries
+    # Centralized Rotating File Handlers under logs/backend/
+    try:
+        workspace_root = Path(__file__).resolve().parents[4]
+        logs_dir = workspace_root / "logs" / "backend"
+        logs_dir.mkdir(parents=True, exist_ok=True)
+        
+        # 1. Main log file (INFO and above)
+        main_file_handler = RotatingFileHandler(
+            logs_dir / "backend.log",
+            maxBytes=10 * 1024 * 1024, # 10MB
+            backupCount=5,
+            encoding="utf-8"
+        )
+        main_file_handler.setLevel(log_level)
+        main_file_handler.setFormatter(formatter)
+        root_logger.addHandler(main_file_handler)
+
+        # 2. Error log file (ERROR and above)
+        error_file_handler = RotatingFileHandler(
+            logs_dir / "error.log",
+            maxBytes=10 * 1024 * 1024, # 10MB
+            backupCount=5,
+            encoding="utf-8"
+        )
+        error_file_handler.setLevel(logging.ERROR)
+        error_file_handler.setFormatter(formatter)
+        root_logger.addHandler(error_file_handler)
+        
+        print(f"File loggers successfully bound to: {logs_dir}")
+    except Exception as e:
+        print(f"WARNING: Centralized file loggers could not be configured: {e}", file=sys.stderr)
+
     logging.getLogger("uvicorn.access").setLevel(log_level)
     logging.getLogger("uvicorn.error").setLevel(log_level)

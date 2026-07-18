@@ -15,16 +15,26 @@ logger = logging.getLogger(__name__)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    logger.info("Initializing Ascendrite API Server core resources...")
+    logger.info("Initializing Ascendrite Platform core services...")
     await connect_to_mongo()
     yield
-    logger.info("Shutting down core resources...")
+    logger.info("Shutting down Platform core resources...")
     await close_mongo_connection()
 
 app = FastAPI(
-    title=settings.APP_NAME,
-    description="Ascendrite Enterprise Knowledge Delivery and Interactive Learning Platform API Server",
+    title="Ascendrite Platform API Server",
+    description="High-throughput educational platform core engine exposing curriculum delivery, user progress aggregates, assessments validation, and AI search interfaces.",
     version="1.0.0",
+    terms_of_service="https://ascendrite.com/terms",
+    contact={
+        "name": "Ascendrite Engineering Support",
+        "url": "https://ascendrite.com/support",
+        "email": "engineering@ascendrite.com",
+    },
+    license_info={
+        "name": "Proprietary",
+        "url": "https://ascendrite.com/license",
+    },
     debug=settings.APP_DEBUG,
     lifespan=lifespan
 )

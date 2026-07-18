@@ -1,16 +1,14 @@
 import logging
+import uuid
+import time
 from fastapi import Request, status
 from fastapi.responses import JSONResponse
 from app.core.errors import AppException
+from app.core.logging import correlation_id_var
 
 logger = logging.getLogger(__name__)
 
-import uuid
-import time
-from app.core.logging import correlation_id_var
-
 async def exception_handler_middleware(request: Request, call_next):
-    # Retrieve or generate correlation ID
     correlation_id = request.headers.get("X-Correlation-ID") or request.headers.get("X-Request-ID") or str(uuid.uuid4())
     token = correlation_id_var.set(correlation_id)
     
@@ -19,7 +17,6 @@ async def exception_handler_middleware(request: Request, call_next):
         response = await call_next(request)
         duration_ms = int((time.time() - start_time) * 1000)
         
-        # Log structured request metadata
         logger.info(
             f"HTTP {request.method} {request.url.path} completed in {duration_ms}ms",
             extra={
@@ -30,7 +27,6 @@ async def exception_handler_middleware(request: Request, call_next):
             }
         )
         
-        # Append correlation and duration headers
         response.headers["X-Correlation-ID"] = correlation_id
         response.headers["X-Process-Time"] = f"{duration_ms}ms"
         return response
@@ -43,7 +39,7 @@ async def exception_handler_middleware(request: Request, call_next):
         response = JSONResponse(
             status_code=ex.status_code,
             content={
-                "status": "error",
+                "success": False,
                 "error": {
                     "code": ex.code,
                     "message": ex.message,
@@ -65,9 +61,9 @@ async def exception_handler_middleware(request: Request, call_next):
         response = JSONResponse(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             content={
-                "status": "error",
+                "success": False,
                 "error": {
-                    "code": "INTERNAL_SERVER_ERROR",
+                    "code": "SYSTEM_INTERNAL_ERROR",
                     "message": "An unhandled internal server error occurred.",
                     "correlation_id": correlation_id,
                     "details": []
