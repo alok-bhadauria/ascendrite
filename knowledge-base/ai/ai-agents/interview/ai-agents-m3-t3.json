@@ -1,6 +1,0 @@
-{
-  "topic_id": "ai-agents-m3-t3",
-  "title": "Persistence & State Rewinding",
-  "version": "1.0.0",
-  "content": "# Interview Prep: Persistence\n\n## Q1: How does state checkpointing support human-in-the-loop interventions?\n\n### Standard Answer\nWhen an action requires human review, the engine checkpoints the state and pauses execution. Once human feedback is received, the engine loads the checkpoint, applies the update, and resumes execution from the exact point it paused.\n"
-}

@@ -1,7 +1,0 @@
-{
-  "topic_id": "genai-m4-t1",
-  "asset_id": "genai-m4-t1-ex1",
-  "title": "Reward Model Training",
-  "language": "python",
-  "code": "import numpy as np\n\ndef binary_preference_loss(r_pos, r_neg):\n    return -np.log(1.0 / (1.0 + np.exp(-(r_pos - r_neg))))\n\nif __name__ == '__main__':\n    print('Bradley-Terry preference losses active.')\n"
-}

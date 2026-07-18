@@ -1,6 +1,0 @@
-{
-  "topic_id": "ai-agents-m1-t4",
-  "title": "Advanced Reasoning Paths",
-  "version": "1.0.0",
-  "content": "# Advanced Reasoning Paths\n\n*   **Tree of Thoughts:** Graph-search evaluation heuristics (DFS/BFS) over branching thought nodes.\n*   **Self-Reflection:** Validation prompts checking execution outputs for logical consistency and triggering retries.\n"
-}

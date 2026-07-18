@@ -1,7 +1,0 @@
-{
-  "topic_id": "ai-agents-m1-t1",
-  "asset_id": "ai-agents-m1-t1-ex1",
-  "title": "Agent Philosophy & Loops",
-  "language": "python",
-  "code": "class SimpleAgentLoop:\n    def __init__(self, env):\n        self.env = env\n    def run_step(self, action):\n        return self.env.execute(action)\n\nif __name__ == '__main__':\n    print('Agent loop base module loaded.')\n"
-}

@@ -1,6 +1,0 @@
-{
-  "topic_id": "genai-m3-t5",
-  "title": "Memory Optimization in Fine-Tuning",
-  "version": "1.0.0",
-  "content": "# Memory Optimization\n\n*   **Standard Backprop:** Stores all activation matrices: memory $\\mathcal{O}(L)$.\n*   **Gradient Checkpointing:** Stores $\\sqrt{L}$ activations, re-computing intermediate steps: memory $\\mathcal{O}(\\sqrt{L})$.\n"
-}

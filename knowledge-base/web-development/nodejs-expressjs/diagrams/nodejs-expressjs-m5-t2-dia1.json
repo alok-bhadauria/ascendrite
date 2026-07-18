@@ -1,7 +1,0 @@
-{
-  "topic_id": "nodejs-expressjs-m5-t2",
-  "diagram_id": "nodejs-expressjs-m5-t2-dia1",
-  "title": "PM2 Process Manager Flowchart",
-  "type": "mermaid",
-  "code": "graph LR\n  Express[\"Express Router\"] --> ErrHandler[\"Error Middleware (Arity 4)\"]\n  Express --> Standard[\"Standard Middleware (Arity 3)\"]"
-}

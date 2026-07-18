@@ -1,7 +1,0 @@
-{
-  "topic_id": "dsa-m1-t4",
-  "diagram_id": "dsa-m1-t4-dia1",
-  "title": "Linear Arrays & Strings Flowchart",
-  "type": "mermaid",
-  "code": "graph TD\n  A((Root)) --> B((Left))\n  A --> C((Right))"
-}

@@ -1,6 +1,0 @@
-{
-  "topic_id": "ai-agents-m1-t1",
-  "title": "Agent Philosophy & Loops",
-  "version": "1.0.0",
-  "content": "# Agent Philosophy & Loops\n\n*   **Passive Generation:** Single input-output pass.\n*   **Autonomous Loop:** Continuous perception-action cycle responding to environmental feedback.\n"
-}

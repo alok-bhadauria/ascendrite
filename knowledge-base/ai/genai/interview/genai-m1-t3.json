@@ -1,6 +1,0 @@
-{
-  "topic_id": "genai-m1-t3",
-  "title": "LLM Decoding Mathematics",
-  "version": "1.0.0",
-  "content": "# Interview Prep: Decoding Mathematics\n\n## Q1: How does Top-P sampling vary the number of candidates dynamically compared to Top-K?\n\n### Standard Answer\nTop-K keeps the candidate set size constant (exactly $K$). In flat distributions, this can exclude likely candidates, whereas in peak distributions, it can include highly unlikely candidates. Top-P uses a cumulative probability threshold $P$. When the distribution is flat, many tokens are selected; when the distribution is narrow, only the top few are selected.\n"
-}

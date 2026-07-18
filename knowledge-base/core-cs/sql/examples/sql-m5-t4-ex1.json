@@ -1,7 +1,0 @@
-{
-  "topic_id": "sql-m5-t4",
-  "asset_id": "sql-m5-t4-ex1",
-  "title": "SQL Injection",
-  "language": "python",
-  "code": "if __name__ == '__main__':\n    print('Example pass for SQL Injection')\n"
-}

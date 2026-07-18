@@ -1,7 +1,0 @@
-{
-  "topic_id": "verbal-aptitude-m2-t4",
-  "asset_id": "verbal-aptitude-m2-t4-prac1",
-  "title": "Articles & Prepositions",
-  "language": "python",
-  "code": "def run_practice():\n    assert True\nif __name__ == '__main__':\n    run_practice()\n"
-}

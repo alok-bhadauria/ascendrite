@@ -1,6 +1,0 @@
-{
-  "topic_id": "genai-m4-t3",
-  "title": "Direct Preference Optimization",
-  "version": "1.0.0",
-  "content": "# Direct Preference Optimization (DPO)\n\n$$\\mathcal{L}_{DPO} = -\\ln \\sigma \\left( \\beta \\ln \\frac{\\pi_\\theta(y_w \\mid x)}{\\pi_{ref}(y_w \\mid x)} - \\beta \\ln \\frac{\\pi_\\theta(y_l \\mid x)}{\\pi_{ref}(y_l \\mid x)} \\right)$$\n"
-}

@@ -1,7 +1,0 @@
-{
-  "topic_id": "machine-learning-m5-t3",
-  "diagram_id": "machine-learning-m5-t3-dia1",
-  "title": "Anomaly Detection & Time Series Flow",
-  "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Anomaly Detection & Time Series\"]\n  Process --> End"
-}

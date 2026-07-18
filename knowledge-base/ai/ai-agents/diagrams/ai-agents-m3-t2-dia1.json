@@ -1,7 +1,0 @@
-{
-  "topic_id": "ai-agents-m3-t2",
-  "diagram_id": "ai-agents-m3-t2-dia1",
-  "title": "Graph Routing & Conditional Edges Flow",
-  "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Graph Routing & Conditional Edges\"]\n  Process --> End"
-}

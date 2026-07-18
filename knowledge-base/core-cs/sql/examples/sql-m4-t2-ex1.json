@@ -1,7 +1,0 @@
-{
-  "topic_id": "sql-m4-t2",
-  "asset_id": "sql-m4-t2-ex1",
-  "title": "Explain Plans",
-  "language": "python",
-  "code": "if __name__ == '__main__':\n    print('Example pass for Explain Plans')\n"
-}

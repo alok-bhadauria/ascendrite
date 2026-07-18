@@ -1,7 +1,0 @@
-{
-  "topic_id": "css-frameworks-m1-t1",
-  "asset_id": "css-frameworks-m1-t1-ex1",
-  "title": "Utility-First Paradigm",
-  "language": "python",
-  "code": "if __name__ == '__main__':\n    print('Example code execution.')\n"
-}

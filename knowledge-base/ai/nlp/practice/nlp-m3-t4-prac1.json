@@ -1,7 +1,0 @@
-{
-  "topic_id": "nlp-m3-t4",
-  "asset_id": "nlp-m3-t4-prac1",
-  "title": "FastText Subword Embeddings",
-  "language": "python",
-  "code": "def get_char_ngrams(word, n=3):\n    extended_word = '<' + word + '>'\n    return [extended_word[i:i+n] for i in range(len(extended_word)-n+1)]\n\ndef run_practice():\n    ngrams = get_char_ngrams('cat', 3)\n    assert '<ca' in ngrams\n    assert 'at>' in ngrams\n    print('[PASS] FastText n-gram generation verified.')\n\nif __name__ == '__main__':\n    run_practice()\n"
-}

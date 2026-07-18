@@ -1,7 +1,0 @@
-{
-  "topic_id": "ai-agents-m4-t5",
-  "asset_id": "ai-agents-m4-t5-ex1",
-  "title": "Scalability & Parallel Execution",
-  "language": "python",
-  "code": "import time\n\ndef run_async_mock(worker_id):\n    # Simulate a task\n    return f\"Result {worker_id}\"\n\nif __name__ == '__main__':\n    print('Parallel scheduler tools active.')\n"
-}

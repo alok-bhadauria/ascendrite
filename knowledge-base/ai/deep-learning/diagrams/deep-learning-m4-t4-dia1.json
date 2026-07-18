@@ -1,7 +1,0 @@
-{
-  "topic_id": "deep-learning-m4-t4",
-  "diagram_id": "deep-learning-m4-t4-dia1",
-  "title": "Gated Recurrent Units (GRU) Flow",
-  "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Gated Recurrent Units (GRU)\"]\n  Process --> End"
-}

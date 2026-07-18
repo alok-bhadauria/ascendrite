@@ -1,7 +1,0 @@
-{
-  "topic_id": "sql-m2-t5",
-  "diagram_id": "sql-m2-t5-dia1",
-  "title": "Execution Mechanics Flowchart",
-  "type": "mermaid",
-  "code": "graph TD\n  HashJoin[\"Hash Join\"] --> IndexScanA[\"Index Scan (A)\"]\n  HashJoin --> TableScanB[\"Table Scan (B)\"]"
-}

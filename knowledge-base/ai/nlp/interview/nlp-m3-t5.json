@@ -1,6 +1,0 @@
-{
-  "topic_id": "nlp-m3-t5",
-  "title": "Semantic Analogies",
-  "version": "1.0.0",
-  "content": "# Interview Prep: Analogies\n\n## Q1: Why does the 3CosMul formulation perform better than 3CosAdd for solving analogies in word embedding spaces?\n\n### Standard Answer\nThe 3CosAdd formulation evaluates similarity using linear addition:\n\n$$\\arg\\max_{\\mathbf{w}} \\left[ \\text{sim}(\\mathbf{w}, \\mathbf{v}_b) - \\text{sim}(\\mathbf{w}, \\mathbf{v}_a) + \\text{sim}(\\mathbf{w}, \\mathbf{v}_c) \\right]$$\n\nThis additive combination allows a word that is extremely close to $\\mathbf{v}_c$ to dominate the optimization, even if it has no relation to the query. For example, in the analogy 'man:king :: apple:?', the model might output 'apples' simply because 'apples' is highly similar to 'apple'.\n\n3CosMul converts this relationship to a product of ratios:\n\n$$\\arg\\max_{\\mathbf{w}} \\frac{\\text{sim}(\\mathbf{w}, \\mathbf{v}_b) \\times \\text{sim}(\\mathbf{w}, \\mathbf{v}_c)}{\\text{sim}(\\mathbf{w}, \\mathbf{v}_a) + \\epsilon}$$\n\nThis multiplicative combination acts as an AND gate. A candidate must be similar to both $b$ and $c$ while being distinct from $a$, preventing single-term dominance."
-}

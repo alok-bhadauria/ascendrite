@@ -1,7 +1,0 @@
-{
-  "topic_id": "nlp-m4-t2",
-  "asset_id": "nlp-m4-t2-prac1",
-  "title": "Multi-Head Attention",
-  "language": "python",
-  "code": "import numpy as np\n\ndef concat_heads(heads):\n    return np.concatenate(heads, axis=-1)\n\ndef run_practice():\n    h1 = np.array([[1.0]])\n    h2 = np.array([[2.0]])\n    merged = concat_heads([h1, h2])\n    assert np.allclose(merged, np.array([[1.0, 2.0]]))\n    print('[PASS] Concatenation assertions passed.')\n\nif __name__ == '__main__':\n    run_practice()\n"
-}

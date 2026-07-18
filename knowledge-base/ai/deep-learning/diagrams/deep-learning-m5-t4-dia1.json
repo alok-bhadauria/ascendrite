@@ -1,7 +1,0 @@
-{
-  "topic_id": "deep-learning-m5-t4",
-  "diagram_id": "deep-learning-m5-t4-dia1",
-  "title": "Mixed Precision & Mixed Training Flow",
-  "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Mixed Precision & Mixed Training\"]\n  Process --> End"
-}

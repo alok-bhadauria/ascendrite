@@ -1,6 +1,0 @@
-{
-  "topic_id": "java-m4-t4",
-  "title": "Streams API Intermediate",
-  "version": "1.0.0",
-  "content": "# Java Revision\n\n*   **Escape Analysis:** C2 JIT optimization allocating local objects on the Stack instead of the Heap.\n*   **Generics PECS:** Producer Extends (read-only); Consumer Super (write-only).\n*   **ZGC:** Low-latency collector using colored reference pointers and load barriers to keep pauses under 10ms.\n\n\n*   **Streams API Intermediate Complexity Reference:** Time $O(N)$, Space $O(1)$ auxiliary."
-}

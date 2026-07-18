@@ -1,6 +1,0 @@
-{
-  "topic_id": "genai-m3-t4",
-  "title": "Bottleneck Adapters",
-  "version": "1.0.0",
-  "content": "# Interview Prep: Bottleneck Adapters\n\n## Q1: Why do sequential adapters introduce higher inference latency compared to LoRA adapters?\n\n### Standard Answer\nLoRA updates can be folded back into the base weights during compilation, resulting in zero latency overhead. Sequential adapters add feedforward layers to the execution graph, preventing weight folding and adding compute overhead at each layer.\n"
-}

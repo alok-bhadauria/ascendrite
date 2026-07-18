@@ -1,7 +1,0 @@
-{
-  "topic_id": "verbal-aptitude-m1-t4",
-  "asset_id": "verbal-aptitude-m1-t4-ex1",
-  "title": "Parallel Structure",
-  "language": "python",
-  "code": "if __name__ == '__main__':\n    print('Example code execution.')\n"
-}

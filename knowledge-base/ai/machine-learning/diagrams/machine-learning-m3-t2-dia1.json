@@ -1,7 +1,0 @@
-{
-  "topic_id": "machine-learning-m3-t2",
-  "diagram_id": "machine-learning-m3-t2-dia1",
-  "title": "Logistic Regression & Log-Loss Flow",
-  "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Logistic Regression & Log-Loss\"]\n  Process --> End"
-}

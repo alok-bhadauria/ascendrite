@@ -1,7 +1,0 @@
-{
-  "topic_id": "java-m4-t2",
-  "asset_id": "java-m4-t2-ex1",
-  "title": "Functional Interfaces",
-  "language": "python",
-  "code": "if __name__ == '__main__':\n    print('Example code execution.')\n"
-}

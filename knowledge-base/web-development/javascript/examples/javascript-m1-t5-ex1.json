@@ -1,7 +1,0 @@
-{
-  "topic_id": "javascript-m1-t5",
-  "asset_id": "javascript-m1-t5-ex1",
-  "title": "Data Types & Coercion",
-  "language": "python",
-  "code": "if __name__ == '__main__':\n    print('Example code execution.')\n"
-}

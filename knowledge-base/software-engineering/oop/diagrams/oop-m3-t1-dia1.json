@@ -1,7 +1,0 @@
-{
-  "topic_id": "oop-m3-t1",
-  "diagram_id": "oop-m3-t1-dia1",
-  "title": "Pattern Philosophy Flowchart",
-  "type": "mermaid",
-  "code": "classDiagram\n  class Animal {\n    +makeSound()\n  }\n  class Dog {\n    +makeSound()\n  }\n  Animal <|-- Dog"
-}

@@ -1,7 +1,0 @@
-{
-  "topic_id": "genai-m1-t5",
-  "asset_id": "genai-m1-t5-prac1",
-  "title": "Multimodal Tokenization",
-  "language": "python",
-  "code": "import numpy as np\n\ndef clip_contrastive_logits(image_embeds, text_embeds, temperature=0.07):\n    I = image_embeds / np.linalg.norm(image_embeds, axis=-1, keepdims=True)\n    T = text_embeds / np.linalg.norm(text_embeds, axis=-1, keepdims=True)\n    return np.matmul(I, T.T) / temperature\n\ndef run_practice():\n    I = np.array([[1.0, 0.0]])\n    T = np.array([[1.0, 0.0]])\n    logits = clip_contrastive_logits(I, T, 0.1)\n    assert np.allclose(logits, np.array([[10.0]]))\n    print('[PASS] Multimodal projection logits checked.')\n\nif __name__ == '__main__':\n    run_practice()\n"
-}

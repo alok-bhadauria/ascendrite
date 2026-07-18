@@ -1,6 +1,0 @@
-{
-  "topic_id": "nlp-m5-t2",
-  "title": "Information Retrieval & BM25",
-  "version": "1.0.0",
-  "content": "# Interview Prep: BM25\n\n## Q1: How does parameter k_1 control term frequency saturation in BM25?\n\n### Standard Answer\nIn TF-IDF, the score scales linearly (or log-linearly) with term frequency, meaning that many occurrences of a query term can heavily distort the ranking. In BM25, as term frequency increases, the score asymptotically approaches a limit. The parameter $k_1$ controls how fast this saturation is reached; higher values scale the score longer before flattening.\n"
-}

@@ -1,7 +1,0 @@
-{
-  "topic_id": "nextjs-m5-t5",
-  "asset_id": "nextjs-m5-t5-ex1",
-  "title": "Analytics & Web Vitals",
-  "language": "python",
-  "code": "if __name__ == '__main__':\n    print('Example code execution.')\n"
-}

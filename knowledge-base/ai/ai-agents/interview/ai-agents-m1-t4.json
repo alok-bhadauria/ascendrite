@@ -1,6 +1,0 @@
-{
-  "topic_id": "ai-agents-m1-t4",
-  "title": "Advanced Reasoning Paths",
-  "version": "1.0.0",
-  "content": "# Interview Prep: Reasoning Paths\n\n## Q1: How does Tree of Thoughts (ToT) evaluate intermediate thought nodes during search?\n\n### Standard Answer\nToT prompts the LLM to act as a heuristic evaluator. For a given intermediate node, the model classifies it as 'sure' (highly likely to lead to a solution), 'likely' (promising), or 'impossible' (hopeless). Based on these classifications, the search algorithm guides traversal (e.g. pruning 'impossible' branches)."
-}

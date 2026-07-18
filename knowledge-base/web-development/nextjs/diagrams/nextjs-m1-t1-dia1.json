@@ -1,7 +1,0 @@
-{
-  "topic_id": "nextjs-m1-t1",
-  "diagram_id": "nextjs-m1-t1-dia1",
-  "title": "React Server Components Flowchart",
-  "type": "mermaid",
-  "code": "graph TD\n  StaticShell[\"Static Layout Shell (ISR/PPR)\"] --> DynamicHoles[\"Dynamic Components (Suspense)\"]"
-}

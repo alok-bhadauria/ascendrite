@@ -1,6 +1,0 @@
-{
-  "topic_id": "spring-boot-m5-t4",
-  "title": "Actuator, Caching & Reactive",
-  "version": "1.0.0",
-  "content": "# Spring Boot Revision\n\n*   **3-Level Cache:** singletonObjects $\\to$ earlySingletonObjects $\\to$ singletonFactories. Resolves circular dependencies.\n*   **AOP Proxy Bypass:** Self-invocation of `@Transactional` methods bypasses proxies, running without transactions.\n*   **JPA N+1:** Fix using JOIN FETCH to load related parent-child entities in a single database query.\n\n\n*   **Actuator, Caching & Reactive Complexity Reference:** Time $O(N)$, Space $O(1)$ auxiliary."
-}

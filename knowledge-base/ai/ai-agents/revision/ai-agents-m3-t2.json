@@ -1,6 +1,0 @@
-{
-  "topic_id": "ai-agents-m3-t2",
-  "title": "Graph Routing & Conditional Edges",
-  "version": "1.0.0",
-  "content": "# Graph Routing\n\n*   **Conditional Edges:** Dynamic routing functions that evaluate state to determine the next node transition.\n*   **Loops & Cycles:** Repeating node executions until a terminal condition is met.\n"
-}

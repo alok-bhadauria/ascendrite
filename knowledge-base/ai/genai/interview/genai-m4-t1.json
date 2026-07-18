@@ -1,6 +1,0 @@
-{
-  "topic_id": "genai-m4-t1",
-  "title": "Reward Model Training",
-  "version": "1.0.0",
-  "content": "# Interview Prep: Reward Models\n\n## Q1: Why is a pairwise ranking loss used to train reward models instead of a standard absolute regression loss?\n\n### Standard Answer\nHuman evaluations are highly subjective and uncalibrated; different annotators assign different scores to the same response. Humans are much more consistent when asked to perform comparative judgments (ranking). Pairwise loss trains the model to align with these relative comparisons, yielding more stable gradients.\n"
-}

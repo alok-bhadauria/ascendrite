@@ -1,7 +1,0 @@
-{
-  "topic_id": "machine-learning-m3-t1",
-  "diagram_id": "machine-learning-m3-t1-dia1",
-  "title": "Linear & Regularized Regression Flow",
-  "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Linear & Regularized Regression\"]\n  Process --> End"
-}

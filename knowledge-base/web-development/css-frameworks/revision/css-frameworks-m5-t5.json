@@ -1,6 +1,0 @@
-{
-  "topic_id": "css-frameworks-m5-t5",
-  "title": "Modern Layouts",
-  "version": "1.0.0",
-  "content": "# CSS Frameworks Revision\n\n*   **Utility CSS:** Reuses utility class mappings, preventing custom style bloat.\n*   **Static Purging:** PostCSS static analysis removes unused utility rules from output bundles.\n*   **Dynamic Class Trap:** Do not write dynamic classes like `text-${color}`; static scanners will purge them.\n\n\n*   **Modern Layouts Complexity Reference:** Time $O(N)$, Space $O(1)$ auxiliary."
-}

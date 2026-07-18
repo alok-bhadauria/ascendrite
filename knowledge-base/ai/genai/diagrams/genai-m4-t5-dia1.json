@@ -1,7 +1,0 @@
-{
-  "topic_id": "genai-m4-t5",
-  "diagram_id": "genai-m4-t5-dia1",
-  "title": "Alignment Tax & Evaluation Flow",
-  "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Alignment Tax & Evaluation\"]\n  Process --> End"
-}

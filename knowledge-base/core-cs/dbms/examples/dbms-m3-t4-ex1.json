@@ -1,7 +1,0 @@
-{
-  "topic_id": "dbms-m3-t4",
-  "asset_id": "dbms-m3-t4-ex1",
-  "title": "Compensation Log Records",
-  "language": "python",
-  "code": "if __name__ == '__main__':\n    print('Example pass for Compensation Log Records')\n"
-}

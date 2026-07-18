@@ -1,7 +1,0 @@
-{
-  "topic_id": "html-css-git-m2-t4",
-  "asset_id": "html-css-git-m2-t4-prac1",
-  "title": "Flexbox Layout",
-  "language": "python",
-  "code": "def run_practice():\n    assert True\nif __name__ == '__main__':\n    run_practice()\n"
-}

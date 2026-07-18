@@ -1,7 +1,0 @@
-{
-  "topic_id": "nlp-m3-t1",
-  "asset_id": "nlp-m3-t1-prac1",
-  "title": "Word2Vec Framework",
-  "language": "python",
-  "code": "import numpy as np\n\ndef lookup_embedding(W_in, word_index):\n    return W_in[word_index]\n\ndef run_practice():\n    W_in = np.array([[1.0, 2.0], [3.0, 4.0]])\n    assert np.allclose(lookup_embedding(W_in, 1), np.array([3.0, 4.0]))\n    print('[PASS] Lookup checks succeeded.')\n\nif __name__ == '__main__':\n    run_practice()\n"
-}

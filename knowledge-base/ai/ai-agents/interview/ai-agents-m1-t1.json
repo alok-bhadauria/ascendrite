@@ -1,6 +1,0 @@
-{
-  "topic_id": "ai-agents-m1-t1",
-  "title": "Agent Philosophy & Loops",
-  "version": "1.0.0",
-  "content": "# Interview Prep: Agent Loops\n\n## Q1: How does an agent loop handle unexpected exceptions during tool execution without crashing?\n\n### Standard Answer\nAn agent loop must wrap tool execution blocks in robust try-catch handlers. Instead of crashing, the exception traceback is captured, formatted as a text string, and injected back into the LLM context as an 'Observation'. This allows the agent's reasoning layer to diagnose the error and plan a correction.\n"
-}

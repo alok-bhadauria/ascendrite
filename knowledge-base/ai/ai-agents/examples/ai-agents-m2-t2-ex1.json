@@ -1,7 +1,0 @@
-{
-  "topic_id": "ai-agents-m2-t2",
-  "asset_id": "ai-agents-m2-t2-ex1",
-  "title": "Context Window Management",
-  "language": "python",
-  "code": "def compress_summary(summary, new_message):\n    return f\"{summary} | Then: {new_message}\"\n\nif __name__ == '__main__':\n    print('Context compression helper initialized.')\n"
-}

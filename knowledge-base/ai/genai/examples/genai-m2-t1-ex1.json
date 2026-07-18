@@ -1,7 +1,0 @@
-{
-  "topic_id": "genai-m2-t1",
-  "asset_id": "genai-m2-t1-ex1",
-  "title": "Prompting Mechanics & In-Context Learning",
-  "language": "python",
-  "code": "import re\n\ndef detect_prompt_injection(prompt):\n    pattern = re.compile(r'(?:ignore previous instructions|system overrides|override system prompt)', re.IGNORECASE)\n    return bool(pattern.search(prompt))\n\nif __name__ == '__main__':\n    print('Prompt injection validator active.')\n"
-}

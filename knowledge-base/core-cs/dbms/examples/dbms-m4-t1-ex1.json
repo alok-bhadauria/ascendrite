@@ -1,7 +1,0 @@
-{
-  "topic_id": "dbms-m4-t1",
-  "asset_id": "dbms-m4-t1-ex1",
-  "title": "Query Parsing & Rewriting",
-  "language": "python",
-  "code": "if __name__ == '__main__':\n    print('Example pass for Query Parsing & Rewriting')\n"
-}

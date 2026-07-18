@@ -1,7 +1,0 @@
-{
-  "topic_id": "genai-m5-t3",
-  "diagram_id": "genai-m5-t3-dia1",
-  "title": "Post-Training Quantization Flow",
-  "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Post-Training Quantization\"]\n  Process --> End"
-}

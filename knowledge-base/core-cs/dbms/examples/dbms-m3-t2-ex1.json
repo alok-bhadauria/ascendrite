@@ -1,7 +1,0 @@
-{
-  "topic_id": "dbms-m3-t2",
-  "asset_id": "dbms-m3-t2-ex1",
-  "title": "Write-Ahead Logging (WAL)",
-  "language": "python",
-  "code": "if __name__ == '__main__':\n    print('Example pass for Write-Ahead Logging (WAL)')\n"
-}

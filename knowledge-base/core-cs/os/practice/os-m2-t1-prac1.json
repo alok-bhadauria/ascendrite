@@ -1,7 +1,0 @@
-{
-  "topic_id": "os-m2-t1",
-  "asset_id": "os-m2-t1-prac1",
-  "title": "CPU Schedulers",
-  "language": "python",
-  "code": "def run_practice():\n    assert True\nif __name__ == '__main__':\n    run_practice()\n"
-}

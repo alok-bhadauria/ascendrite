@@ -1,6 +1,0 @@
-{
-  "topic_id": "ai-agents-m4-t2",
-  "title": "State Sharing & Message Formats",
-  "version": "1.0.0",
-  "content": "# Interview Prep: State Sharing\n\n## Q1: How do you handle merge conflicts when two agents write to the same state field simultaneously?\n\n### Standard Answer\nWe implement optimistic locking or assign a master state reducer. If two updates conflict, the reducer merges them sequentially based on timestamps or field-specific rules (e.g. appending messages to a thread list)."
-}

@@ -1,6 +1,0 @@
-{
-  "topic_id": "genai-m4-t5",
-  "title": "Alignment Tax & Evaluation",
-  "version": "1.0.0",
-  "content": "# Interview Prep: Alignment Tax\n\n## Q1: Why is an LLM-based judge (e.g. GPT-4) used to evaluate open-ended generation benchmarks instead of standard lexical metrics (like ROUGE)?\n\n### Standard Answer\nLexical metrics compare n-gram overlaps against a reference. Open-ended generation tasks (like creative writing or code explanation) have many valid formulations that do not share n-grams. Strong language models can evaluate semantic coherence, correctness, and style directly, showing high correlation with human judgments.\n"
-}

@@ -1,7 +1,0 @@
-{
-  "topic_id": "css-frameworks-m1-t2",
-  "asset_id": "css-frameworks-m1-t2-ex1",
-  "title": "Tailwind Configuration",
-  "language": "python",
-  "code": "if __name__ == '__main__':\n    print('Example code execution.')\n"
-}

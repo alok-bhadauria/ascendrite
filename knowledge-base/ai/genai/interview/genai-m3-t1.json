@@ -1,6 +1,0 @@
-{
-  "topic_id": "genai-m3-t1",
-  "title": "LoRA Mathematics",
-  "version": "1.0.0",
-  "content": "# Interview Prep: LoRA Math\n\n## Q1: Prove mathematically how LoRA reduces parameter storage during training for a layer of size d x d with rank r.\n\n### Standard Answer\nFor a matrix of size $d \\times d$, the number of parameters is $d^2$. Under LoRA, the low-rank decomposition matrices $\\mathbf{A}$ and $\\mathbf{B}$ have dimensions $r \\times d$ and $d \\times r$ respectively, requiring $2 r d$ parameters. If $d = 4096$ and $r = 8$, standard tuning requires $16.7 \\times 10^6$ parameters, while LoRA requires only $2 \\times 8 \\times 4096 = 65,536$ parameters, a $99.6\\%$ reduction in parameter updates.\n"
-}

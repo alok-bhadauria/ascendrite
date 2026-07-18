@@ -1,7 +1,0 @@
-{
-  "topic_id": "nlp-m4-t4",
-  "asset_id": "nlp-m4-t4-ex1",
-  "title": "Causal Decoders & Cross-Attention",
-  "language": "python",
-  "code": "import numpy as np\n\ndef apply_causal_mask(scores):\n    seq_len = scores.shape[-1]\n    mask = np.tril(np.ones((seq_len, seq_len))) == 0\n    scores[mask] = -1e9\n    return scores\n\nif __name__ == '__main__':\n    print('Causal masking utilities loaded.')\n"
-}

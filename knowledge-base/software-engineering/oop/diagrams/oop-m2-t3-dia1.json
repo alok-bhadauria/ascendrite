@@ -1,7 +1,0 @@
-{
-  "topic_id": "oop-m2-t3",
-  "diagram_id": "oop-m2-t3-dia1",
-  "title": "SOLID Principles (Part 1) Flowchart",
-  "type": "mermaid",
-  "code": "classDiagram\n  class Animal {\n    +makeSound()\n  }\n  class Dog {\n    +makeSound()\n  }\n  Animal <|-- Dog"
-}

@@ -1,7 +1,0 @@
-{
-  "topic_id": "javascript-m5-t5",
-  "asset_id": "javascript-m5-t5-ex1",
-  "title": "Build Bundling",
-  "language": "python",
-  "code": "if __name__ == '__main__':\n    print('Example code execution.')\n"
-}

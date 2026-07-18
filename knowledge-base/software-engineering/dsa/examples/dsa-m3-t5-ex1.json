@@ -1,7 +1,0 @@
-{
-  "topic_id": "dsa-m3-t5",
-  "asset_id": "dsa-m3-t5-ex1",
-  "title": "Binary Search Trees (BST)",
-  "language": "python",
-  "code": "if __name__ == '__main__':\n    print('Example code execution.')\n"
-}

@@ -1,6 +1,0 @@
-{
-  "topic_id": "genai-m3-t2",
-  "title": "QLoRA & Double Quantization",
-  "version": "1.0.0",
-  "content": "# Interview Prep: QLoRA\n\n## Q1: Explain how NormalFloat4 (NF4) achieves higher accuracy than standard FP4 quantization.\n\n### Standard Answer\nBase model weights are normally distributed. Standard FP4 has fixed intervals, which allocates too many bits to low-probability values in the tails and saturates values near the mean. NF4 creates quantiles with equal probability density, ensuring that each bin carries equal information.\n"
-}

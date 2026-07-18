@@ -1,6 +1,0 @@
-{
-  "topic_id": "quantitative-aptitude-m5-t1",
-  "title": "Quadratic Equations",
-  "version": "1.0.0",
-  "content": "# Quantitative-Aptitude Revision\n\n*   **Euler's Theorem:** $a^{\\phi(n)} \\equiv 1 \\pmod n$. Used to simplify exponent remainders.\n*   **Product Consistency:** $A \\times B = C$. If $A$ increases by $\\frac{x}{y}$, $B$ must decrease by $\\frac{x}{x+y}$.\n*   **Stars-and-Bars:** Bins can be empty: $\\binom{n+k-1}{k-1}$; Bins cannot be empty: $\\binom{n-1}{k-1}$.\n\n\n*   **Quadratic Equations Complexity Reference:** Time $O(N)$, Space $O(1)$ auxiliary."
-}

@@ -1,7 +1,0 @@
-{
-  "topic_id": "ai-agents-m1-t4",
-  "asset_id": "ai-agents-m1-t4-ex1",
-  "title": "Advanced Reasoning Paths",
-  "language": "python",
-  "code": "def dfs_backtrack_sim(node, visited):\n    visited.append(node)\n    return visited\n\nif __name__ == '__main__':\n    print('DFS backtracking trackers ready.')\n"
-}

@@ -1,6 +1,0 @@
-{
-  "topic_id": "typescript-m1-t3",
-  "title": "Type Assertions",
-  "version": "1.0.0",
-  "content": "# TypeScript Revision\n\n*   **as const:** Converts nested object properties to `readonly` literal values.\n*   **infer:** Extracts generic sub-types dynamically within conditional type evaluations.\n*   **Variance:** Covariant (read-only contexts); Contravariant (write-only / function parameters).\n\n\n*   **Type Assertions Complexity Reference:** Time $O(N)$, Space $O(1)$ auxiliary."
-}

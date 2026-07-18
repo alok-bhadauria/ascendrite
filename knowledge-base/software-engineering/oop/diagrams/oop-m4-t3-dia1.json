@@ -1,7 +1,0 @@
-{
-  "topic_id": "oop-m4-t3",
-  "diagram_id": "oop-m4-t3-dia1",
-  "title": "Behavioral - Observer Flowchart",
-  "type": "mermaid",
-  "code": "classDiagram\n  class Animal {\n    +makeSound()\n  }\n  class Dog {\n    +makeSound()\n  }\n  Animal <|-- Dog"
-}

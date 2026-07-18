@@ -1,7 +1,0 @@
-{
-  "topic_id": "css-frameworks-m4-t1",
-  "diagram_id": "css-frameworks-m4-t1-dia1",
-  "title": "CSS Preprocessors Flowchart",
-  "type": "mermaid",
-  "code": "graph LR\n  Scanner[\"Static Source Scanner\"] --> Matcher[\"Regex Match Engine\"]\n  Matcher --> Purger[\"Purge post-CSS utility bundle\"]"
-}

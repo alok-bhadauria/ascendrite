@@ -1,7 +1,0 @@
-{
-  "topic_id": "dsa-m4-t4",
-  "diagram_id": "dsa-m4-t4-dia1",
-  "title": "Topological Sort & Advanced Graphs Flowchart",
-  "type": "mermaid",
-  "code": "graph TD\n  A((Root)) --> B((Left))\n  A --> C((Right))"
-}

@@ -1,7 +1,0 @@
-{
-  "topic_id": "machine-learning-m3-t1",
-  "asset_id": "machine-learning-m3-t1-ex1",
-  "title": "Linear & Regularized Regression",
-  "language": "python",
-  "code": "import numpy as np\n\n\ndef solve_ols_scratch(X: np.ndarray, y: np.ndarray) -> np.ndarray:\n    \"\"\"Computes the closed-form Ordinary Least Squares solution:\n\n    w = (X^T * X)^-1 * X^T * y\n    \"\"\"\n    # Add bias dimension\n    n_samples = X.shape[0]\n    X_bias = np.hstack([np.ones((n_samples, 1)), X])\n\n    # Normal equations\n    XtX = X_bias.T @ X_bias\n    XtY = X_bias.T @ y\n\n    # Solve linear system\n    return np.linalg.solve(XtX, XtY)\n\n\ndef solve_ridge_scratch(\n    X: np.ndarray, y: np.ndarray, alpha: float\n) -> np.ndarray:\n    \"\"\"Computes the closed-form Ridge Regression solution:\n\n    w = (X^T * X + alpha * I)^-1 * X^T * y\n    \"\"\"\n    n_samples, n_features = X.shape\n    # Add bias dimension\n    X_bias = np.hstack([np.ones((n_samples, 1)), X])\n    d_dimensions = n_features + 1\n\n    # Normal equations with L2 penalty matrix (bias is not regularized)\n    penalty_matrix = alpha * np.eye(d_dimensions)\n    penalty_matrix[0, 0] = 0.0\n\n    XtX = X_bias.T @ X_bias + penalty_matrix\n    XtY = X_bias.T @ y\n\n    return np.linalg.solve(XtX, XtY)\n"
-}

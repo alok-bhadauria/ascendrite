@@ -1,6 +1,0 @@
-{
-  "topic_id": "ai-agents-m2-t1",
-  "title": "Short-Term Memory Systems",
-  "version": "1.0.0",
-  "content": "# Short-Term Memory Systems\n\n*   **Session Buffer:** Chronological tracking of system, user, and assistant message states.\n*   **Truncation:** Discarding early messages to maintain token usage within maximum boundaries.\n"
-}

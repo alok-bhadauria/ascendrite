@@ -1,6 +1,0 @@
-{
-  "topic_id": "genai-m4-t5",
-  "title": "Alignment Tax & Evaluation",
-  "version": "1.0.0",
-  "content": "# Alignment Tax & Evaluation\n\n*   **Alignment Tax:** The loss of generalization and reasoning accuracy due to safety tuning.\n*   **Win Rate:** \n    \n    $$\\text{Win Rate} = \\frac{\\text{wins} + 0.5 \\times \\text{ties}}{\\text{total matches}}$$\n"
-}

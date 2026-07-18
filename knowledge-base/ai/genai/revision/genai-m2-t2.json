@@ -1,6 +1,0 @@
-{
-  "topic_id": "genai-m2-t2",
-  "title": "Chain of Thought Prompting",
-  "version": "1.0.0",
-  "content": "# Chain of Thought & Self-Consistency\n\n*   **CoT:** 'Let\\'s think step by step' forces intermediate reasoning.\n*   **Self-Consistency:**\n    \n    $$\\text{Answer}^* = \\arg\\max_{a} \\sum_{i=1}^N \\mathbb{I}(\\text{extract}(path_i) = a)$$\n"
-}

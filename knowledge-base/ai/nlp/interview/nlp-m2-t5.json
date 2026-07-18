@@ -1,6 +1,0 @@
-{
-  "topic_id": "nlp-m2-t5",
-  "title": "Perplexity & Evaluation",
-  "version": "1.0.0",
-  "content": "# Interview Prep: Perplexity\n\n## Q1: Prove how perplexity corresponds to the average branching factor of a language model.\n\n### Standard Answer\nConsider a language model predicting the next token from a vocabulary of size $V$. If the model is completely uniform (i.e. $P(w_i \\mid \\text{context}) = \\frac{1}{K}$ for exactly $K$ words, and $0$ for others), the perplexity is:\n\n$$\\text{PPL}(W) = \\left( \\prod_{i=1}^N \\frac{1}{K} \\right)^{-\\frac{1}{N}} = \\left( K^{-N} \\right)^{-\\frac{1}{N}} = K$$\n\nThus, a perplexity of $K$ indicates that the model is as confused as if it had to choose uniformly from $K$ candidates at each step. $K$ represents the **average branching factor** of the language."
-}

@@ -1,7 +1,0 @@
-{
-  "topic_id": "nextjs-m3-t4",
-  "diagram_id": "nextjs-m3-t4-dia1",
-  "title": "Optimistic Updates Flowchart",
-  "type": "mermaid",
-  "code": "graph TD\n  StaticShell[\"Static Layout Shell (ISR/PPR)\"] --> DynamicHoles[\"Dynamic Components (Suspense)\"]"
-}

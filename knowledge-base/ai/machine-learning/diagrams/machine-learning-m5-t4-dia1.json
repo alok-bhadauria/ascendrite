@@ -1,7 +1,0 @@
-{
-  "topic_id": "machine-learning-m5-t4",
-  "diagram_id": "machine-learning-m5-t4-dia1",
-  "title": "Explainable AI (XAI) Mathematics Flow",
-  "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Explainable AI (XAI) Mathematics\"]\n  Process --> End"
-}

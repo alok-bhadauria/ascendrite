@@ -1,7 +1,0 @@
-{
-  "topic_id": "deep-learning-m1-t3",
-  "diagram_id": "deep-learning-m1-t3-dia1",
-  "title": "Loss Functions Flow",
-  "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Loss Functions\"]\n  Process --> End"
-}

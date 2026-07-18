@@ -1,6 +1,0 @@
-{
-  "topic_id": "nlp-m1-t5",
-  "title": "Sentiment Analysis",
-  "version": "1.0.0",
-  "content": "# Interview Prep: Sentiment Analysis\n\n## Q1: Explain why the Naive Bayes conditional independence assumption is 'naive' and why the model still performs well on text classification.\n\n### Standard Answer\nThe 'naive' assumption is that all feature tokens $w_i$ are conditionally independent given the class label $c$:\n\n$$P(w_1, \\dots, w_W \\mid c) = \\prod_{i=1}^W P(w_i \\mid c)$$\n\nThis is untrue in natural language, where syntactic structures and word co-occurrences create strong dependencies (e.g. 'San' is highly dependent on 'Francisco').\n\nDespite this violation, Naive Bayes performs well because classification only requires correct **ranking boundaries** (argmax) rather than exact probability calibration. Even if joint probabilities are skewed, the decision boundary remains highly robust.\n"
-}

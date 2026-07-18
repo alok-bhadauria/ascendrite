@@ -1,7 +1,0 @@
-{
-  "topic_id": "css-frameworks-m4-t2",
-  "diagram_id": "css-frameworks-m4-t2-dia1",
-  "title": "Sass Mixins & Functions Flowchart",
-  "type": "mermaid",
-  "code": "graph LR\n  Scanner[\"Static Source Scanner\"] --> Matcher[\"Regex Match Engine\"]\n  Matcher --> Purger[\"Purge post-CSS utility bundle\"]"
-}

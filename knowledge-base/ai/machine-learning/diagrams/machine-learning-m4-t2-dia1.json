@@ -1,7 +1,0 @@
-{
-  "topic_id": "machine-learning-m4-t2",
-  "diagram_id": "machine-learning-m4-t2-dia1",
-  "title": "Advanced Cross-Validation Protocols Flow",
-  "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Advanced Cross-Validation Protocols\"]\n  Process --> End"
-}

@@ -1,7 +1,0 @@
-{
-  "topic_id": "cn-m4-t3",
-  "diagram_id": "cn-m4-t3-dia1",
-  "title": "Mail & Files Flowchart",
-  "type": "mermaid",
-  "code": "sequenceDiagram\n  Client->>Server: ClientHello + Key Share\n  Server-->>Client: ServerHello + Key Share + Finished\n  Client->>Server: Finished (Secure Connection)"
-}

@@ -1,7 +1,0 @@
-{
-  "topic_id": "nextjs-m1-t4",
-  "asset_id": "nextjs-m1-t4-ex1",
-  "title": "Data Fetching",
-  "language": "python",
-  "code": "if __name__ == '__main__':\n    print('Example code execution.')\n"
-}

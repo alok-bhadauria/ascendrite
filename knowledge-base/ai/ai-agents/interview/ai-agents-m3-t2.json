@@ -1,6 +1,0 @@
-{
-  "topic_id": "ai-agents-m3-t2",
-  "title": "Graph Routing & Conditional Edges",
-  "version": "1.0.0",
-  "content": "# Interview Prep: Graph Routing\n\n## Q1: How do we prevent infinite loops in stateful graph execution loops?\n\n### Standard Answer\nWe configure a maximum recursion depth limit (e.g. `recursion_limit=50`). If the execution path visits more nodes than the limit, the engine raises an exception and halts, preventing infinite loops.\n"
-}

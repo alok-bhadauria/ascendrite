@@ -1,7 +1,0 @@
-{
-  "topic_id": "java-m3-t1",
-  "diagram_id": "java-m3-t1-dia1",
-  "title": "Throwable Hierarchy Flowchart",
-  "type": "mermaid",
-  "code": "graph TD\n  Heap[JVM Heap] --> Young[Young Gen: Eden, S0, S1]\n  Heap --> Old[Old/Tenured Gen]\n  JVM --> Metaspace[Metaspace (Native memory)]"
-}

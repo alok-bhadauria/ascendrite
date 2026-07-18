@@ -1,7 +1,0 @@
-{
-  "topic_id": "system-design-m3-t3",
-  "diagram_id": "system-design-m3-t3-dia1",
-  "title": "Database Indexing Flowchart",
-  "type": "mermaid",
-  "code": "graph TD\n  Closed -->|Failures > Threshold| Open\n  Open -->|Sleep Timeout| Half-Open\n  Half-Open -->|Success| Closed\n  Half-Open -->|Failure| Open"
-}

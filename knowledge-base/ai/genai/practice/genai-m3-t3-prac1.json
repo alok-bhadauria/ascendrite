@@ -1,7 +1,0 @@
-{
-  "topic_id": "genai-m3-t3",
-  "asset_id": "genai-m3-t3-prac1",
-  "title": "Prompt & Prefix Tuning",
-  "language": "python",
-  "code": "import numpy as np\n\ndef prefix_tune_attention_keys(keys, prefix_keys):\n    return np.concatenate([prefix_keys, keys], axis=0)\n\ndef run_practice():\n    k = np.array([[1.0]])\n    pk = np.array([[2.0]])\n    merged = prefix_tune_attention_keys(k, pk)\n    assert np.allclose(merged, np.array([[2.0], [1.0]]))\n    print('[PASS] Prefix tuning key injection validated.')\n\nif __name__ == '__main__':\n    run_practice()\n"
-}

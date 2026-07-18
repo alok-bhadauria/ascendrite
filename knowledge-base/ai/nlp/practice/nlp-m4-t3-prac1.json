@@ -1,7 +1,0 @@
-{
-  "topic_id": "nlp-m4-t3",
-  "asset_id": "nlp-m4-t3-prac1",
-  "title": "Transformer Block Components",
-  "language": "python",
-  "code": "import numpy as np\n\ndef apply_rope_2d(q, m, theta=10000.0):\n    angle = m / theta\n    R = np.array([[np.cos(angle), -np.sin(angle)], [np.sin(angle), np.cos(angle)]])\n    return np.dot(R, q)\n\ndef run_practice():\n    q = np.array([1.0, 0.0])\n    out = apply_rope_2d(q, 0.0)\n    assert np.allclose(out, q)\n    print('[PASS] RoPE identity rotation verified.')\n\nif __name__ == '__main__':\n    run_practice()\n"
-}

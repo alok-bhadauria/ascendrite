@@ -1,6 +1,0 @@
-{
-  "topic_id": "genai-m1-t4",
-  "title": "Mixture of Experts",
-  "version": "1.0.0",
-  "content": "# Interview Prep: MoE\n\n## Q1: Why do MoE models require load-balancing auxiliary losses during training?\n\n### Standard Answer\nWithout load-balancing losses, the routing network falls into a winner-take-all feedback loop. Early in training, a few experts are selected slightly more often than others, causing their weights to receive more updates. The router continues to favor them, leaving other experts untrained."
-}

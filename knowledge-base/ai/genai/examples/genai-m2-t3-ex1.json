@@ -1,7 +1,0 @@
-{
-  "topic_id": "genai-m2-t3",
-  "asset_id": "genai-m2-t3-ex1",
-  "title": "Structured Outputs",
-  "language": "python",
-  "code": "import numpy as np\n\ndef apply_logit_bias(logits, allowed_indices, bias_value=100.0):\n    adjusted = logits.copy()\n    mask = np.ones_like(logits, dtype=bool)\n    mask[allowed_indices] = False\n    adjusted[mask] -= bias_value\n    return adjusted\n\nif __name__ == '__main__':\n    print('Logit bias utility module loaded.')\n"
-}

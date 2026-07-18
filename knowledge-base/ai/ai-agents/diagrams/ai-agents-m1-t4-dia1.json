@@ -1,7 +1,0 @@
-{
-  "topic_id": "ai-agents-m1-t4",
-  "diagram_id": "ai-agents-m1-t4-dia1",
-  "title": "Advanced Reasoning Paths Flow",
-  "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Advanced Reasoning Paths\"]\n  Process --> End"
-}

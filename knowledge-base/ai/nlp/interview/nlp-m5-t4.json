@@ -1,6 +1,0 @@
-{
-  "topic_id": "nlp-m5-t4",
-  "title": "Hybrid Search",
-  "version": "1.0.0",
-  "content": "# Interview Prep: Hybrid Search\n\n## Q1: Why is raw score normalization unreliable for hybrid search, justifying the use of RRF?\n\n### Standard Answer\nRaw scores from BM25 (unbounded positive scores) and dense cosine similarity (bounded $[-1, 1]$) have completely different scale parameters and probability distributions. Normalizing these directly creates highly skewed results. RRF resolves this by using ranks, which are scale-invariant, to fuse the results.\n"
-}

@@ -1,7 +1,0 @@
-{
-  "topic_id": "os-m5-t5",
-  "asset_id": "os-m5-t5-ex1",
-  "title": "Containers Foundation",
-  "language": "python",
-  "code": "if __name__ == '__main__':\n    print('Example pass for Containers Foundation')\n"
-}

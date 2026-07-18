@@ -1,7 +1,0 @@
-{
-  "topic_id": "nlp-m5-t5",
-  "asset_id": "nlp-m5-t5-ex1",
-  "title": "Summarization & Translation Metrics",
-  "language": "python",
-  "code": "import numpy as np\n\ndef compute_brevity_penalty(c_len, r_len):\n    if c_len > r_len:\n        return 1.0\n    return np.exp(1.0 - r_len / c_len) if c_len > 0 else 0.0\n\nif __name__ == '__main__':\n    print('Brevity penalty metric loaded.')\n"
-}

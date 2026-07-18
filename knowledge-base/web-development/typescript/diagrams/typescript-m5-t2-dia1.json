@@ -1,7 +1,0 @@
-{
-  "topic_id": "typescript-m5-t2",
-  "diagram_id": "typescript-m5-t2-dia1",
-  "title": "Declaration Files Flowchart",
-  "type": "mermaid",
-  "code": "graph TD\n  Covariance[\"Covariance: Subclass preserves assignment direction\"]\n  Contravariance[\"Contravariance: Argument type reverses assignment direction\"]"
-}

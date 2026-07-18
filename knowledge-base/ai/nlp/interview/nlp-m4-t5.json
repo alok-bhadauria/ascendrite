@@ -1,6 +1,0 @@
-{
-  "topic_id": "nlp-m4-t5",
-  "title": "Pre-training Objectives",
-  "version": "1.0.0",
-  "content": "# Interview Prep: Pre-training\n\n## Q1: Why did modern LLMs shift away from Next Sentence Prediction (NSP) training?\n\n### Standard Answer\nSubsequent studies (like RoBERTa) demonstrated that the NSP task is too easy and can degrade downstream performance. Training the model on longer contiguous text blocks with MLM is sufficient to capture long-range coherence."
-}

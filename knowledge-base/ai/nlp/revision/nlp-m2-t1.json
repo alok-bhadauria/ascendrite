@@ -1,6 +1,0 @@
-{
-  "topic_id": "nlp-m2-t1",
-  "title": "Bag of Words & N-Grams",
-  "version": "1.0.0",
-  "content": "# Bag of Words & N-Grams\n\n## 1. BoW Vector Representation\nGiven vocabulary $\\mathcal{V}$, document vector $\\mathbf{d} \\in \\mathbb{R}^{|\\mathcal{V}|}$ is:\n\n$$d_j = \\sum_{t \\in \\text{tokens}} \\mathbb{I}(t = w_j)$$\n\n## 2. N-Gram Complexity\n*   Theoretical vocabulary size scales as $\\mathcal{O}(|\\mathcal{V}|^n)$.\n*   Pruned using `min_df`, `max_df`, and `max_features` constraints.\n"
-}

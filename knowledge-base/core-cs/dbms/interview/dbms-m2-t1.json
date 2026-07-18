@@ -1,6 +1,0 @@
-{
-  "topic_id": "dbms-m2-t1",
-  "title": "Transaction Concepts",
-  "version": "1.0.0",
-  "content": "# DBMS Interview Prep\n\n## Q1: Why does ARIES write Compensation Log Records (CLRs) during the Undo phase?\n\n### Standard Answer\nDuring crash recovery, the database can crash again during the Undo phase. If we did not write CLRs, we would re-undo the same updates multiple times, which violates undo idempotency and causes recovery loops. A CLR logs the fact that an undo operation has occurred and contains an `UndoNextLSN` field pointing to the next LSN to undo. When repeating recovery, the Undo phase reads the CLR and skips directly to the `UndoNextLSN` of the active transaction.\n\n\n## Q2: What is the spatial complexity bounds of Transaction Concepts?\n\n### Standard Answer\nThe spatial complexity scales strictly as $O(1)$ auxiliary memory unless additional arrays or dynamic heap nodes are allocated, yielding $O(N)$ total space."
-}

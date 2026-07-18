@@ -1,7 +1,0 @@
-{
-  "topic_id": "nlp-m2-t2",
-  "asset_id": "nlp-m2-t2-prac1",
-  "title": "TF-IDF Mathematics",
-  "language": "python",
-  "code": "import numpy as np\n\ndef run_practice():\n    idf = np.log(100.0 / 10.0) + 1.0\n    tfidf = 2.0 * idf\n    assert np.allclose(tfidf, 6.60517)\n    print('[PASS] TF-IDF equations manual verification passes.')\n\nif __name__ == '__main__':\n    run_practice()\n"
-}

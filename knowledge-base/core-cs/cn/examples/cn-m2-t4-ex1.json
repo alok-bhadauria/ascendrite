@@ -1,7 +1,0 @@
-{
-  "topic_id": "cn-m2-t4",
-  "asset_id": "cn-m2-t4-ex1",
-  "title": "Internet Routing",
-  "language": "python",
-  "code": "if __name__ == '__main__':\n    print('Example pass for Internet Routing')\n"
-}

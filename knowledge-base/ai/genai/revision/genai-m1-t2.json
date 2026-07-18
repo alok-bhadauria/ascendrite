@@ -1,6 +1,0 @@
-{
-  "topic_id": "genai-m1-t2",
-  "title": "Attention Optimizations",
-  "version": "1.0.0",
-  "content": "# Attention Optimizations\n\n*   **Multi-Head Attention (MHA):** $H$ query heads, $H$ key-value heads.\n*   **Multi-Query Attention (MQA):** $H$ query heads, 1 key-value head.\n*   **Grouped-Query Attention (GQA):** $H$ query heads grouped into $G$ groups, sharing $G$ key-value heads.\n"
-}

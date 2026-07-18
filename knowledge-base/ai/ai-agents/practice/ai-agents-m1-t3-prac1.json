@@ -1,7 +1,0 @@
-{
-  "topic_id": "ai-agents-m1-t3",
-  "asset_id": "ai-agents-m1-t3-prac1",
-  "title": "Planning & Goal Decomposition",
-  "language": "python",
-  "code": "class TaskQueue:\n    def __init__(self):\n        self.tasks = []\n    def add_task(self, name):\n        self.tasks.append(name)\n    def pop_task(self):\n        return self.tasks.pop(0) if self.tasks else None\n\ndef run_practice():\n    tq = TaskQueue()\n    tq.add_task('Task 1')\n    tq.add_task('Task 2')\n    assert tq.pop_task() == 'Task 1'\n    assert len(tq.tasks) == 1\n    print('[PASS] Task queue basic schedulers verified.')\n\nif __name__ == '__main__':\n    run_practice()\n"
-}

@@ -1,6 +1,0 @@
-{
-  "topic_id": "genai-m2-t3",
-  "title": "Structured Outputs",
-  "version": "1.0.0",
-  "content": "# Structured Outputs\n\n$$\\tilde{z}_i = z_i + \\text{bias}_i$$\n*   Invalid tokens are masked out by setting bias to $-\\infty$.\n"
-}

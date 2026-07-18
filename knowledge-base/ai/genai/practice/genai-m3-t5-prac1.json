@@ -1,7 +1,0 @@
-{
-  "topic_id": "genai-m3-t5",
-  "asset_id": "genai-m3-t5-prac1",
-  "title": "Memory Optimization in Fine-Tuning",
-  "language": "python",
-  "code": "def compute_checkpoint_mem(n_layers, acts_per_layer):\n    std_mem = n_layers * acts_per_layer\n    check_mem = 2 * int(n_layers ** 0.5) * acts_per_layer\n    return std_mem, check_mem\n\ndef run_practice():\n    std, check = compute_checkpoint_mem(100, 10)\n    assert std == 1000\n    assert check == 200\n    print('[PASS] Checkpoint memory scale calculation verified.')\n\nif __name__ == '__main__':\n    run_practice()\n"
-}

@@ -1,7 +1,0 @@
-{
-  "topic_id": "ai-agents-m2-t1",
-  "asset_id": "ai-agents-m2-t1-ex1",
-  "title": "Short-Term Memory Systems",
-  "language": "python",
-  "code": "def prune_messages(messages, max_tokens, token_counter):\n    # Simple message list pruning helper\n    total_tokens = sum([token_counter(m) for m in messages])\n    while total_tokens > max_tokens and len(messages) > 1:\n        removed = messages.pop(0)\n        total_tokens -= token_counter(removed)\n    return messages\n\nif __name__ == '__main__':\n    print('Pruning utilities loaded.')\n"
-}

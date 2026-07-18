@@ -1,6 +1,0 @@
-{
-  "topic_id": "nlp-m1-t5",
-  "title": "Sentiment Analysis",
-  "version": "1.0.0",
-  "content": "# Sentiment Analysis\n\n## 1. Naive Bayes Classification\nSelect tag $c$ maximizing:\n\n$$c_{NB} = \\arg\\max_{c \\in \\mathcal{C}} \\left[ \\ln P(c) + \\sum_{i=1}^W \\ln P(w_i \\mid c) \\right]$$\n\n## 2. Laplace-Smoothed Likelihood\n$$P(w \\mid c) = \\frac{C(c, w) + 1}{\\sum_{w'} C(c, w') + |\\mathcal{V}|}$$\n"
-}

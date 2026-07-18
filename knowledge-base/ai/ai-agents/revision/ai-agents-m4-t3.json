@@ -1,6 +1,0 @@
-{
-  "topic_id": "ai-agents-m4-t3",
-  "title": "Agent Specialists & Segregation",
-  "version": "1.0.0",
-  "content": "# Specialists & Segregation\n\n*   **Role Specialization:** Configuring agents with specific prompt templates (e.g. Coder, Tester).\n*   **Boundaries Segregation:** Restricting the tools and actions available to each agent based on its role.\n"
-}

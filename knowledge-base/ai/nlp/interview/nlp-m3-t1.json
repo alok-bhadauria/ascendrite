@@ -1,6 +1,0 @@
-{
-  "topic_id": "nlp-m3-t1",
-  "title": "Word2Vec Framework",
-  "version": "1.0.0",
-  "content": "# Interview Prep: Word2Vec\n\n## Q1: Why is the projection layer of Word2Vec linear (lacks activation function)?\n\n### Standard Answer\nThe projection layer in Word2Vec acts as a simple lookup table. Since we want to map sparse one-hot vectors $\\mathbf{x} \\in \\mathbb{R}^V$ to dense vectors $\\mathbf{v} \\in \\mathbb{R}^d$, the forward pass is just $\\mathbf{v} = \\mathbf{W}_{in} \\mathbf{x}$. Adding non-linear activations would slow down training without yielding better representations.\n"
-}

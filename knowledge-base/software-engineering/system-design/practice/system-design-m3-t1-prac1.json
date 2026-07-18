@@ -1,7 +1,0 @@
-{
-  "topic_id": "system-design-m3-t1",
-  "asset_id": "system-design-m3-t1-prac1",
-  "title": "Database Design",
-  "language": "python",
-  "code": "def run_practice():\n    assert True\nif __name__ == '__main__':\n    run_practice()\n"
-}

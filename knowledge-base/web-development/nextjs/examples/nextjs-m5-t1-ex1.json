@@ -1,7 +1,0 @@
-{
-  "topic_id": "nextjs-m5-t1",
-  "asset_id": "nextjs-m5-t1-ex1",
-  "title": "Image Optimizations",
-  "language": "python",
-  "code": "if __name__ == '__main__':\n    print('Example code execution.')\n"
-}

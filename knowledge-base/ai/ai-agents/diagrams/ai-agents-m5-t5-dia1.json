@@ -1,7 +1,0 @@
-{
-  "topic_id": "ai-agents-m5-t5",
-  "diagram_id": "ai-agents-m5-t5-dia1",
-  "title": "Sandbox Execution Environments Flow",
-  "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Sandbox Execution Environments\"]\n  Process --> End"
-}

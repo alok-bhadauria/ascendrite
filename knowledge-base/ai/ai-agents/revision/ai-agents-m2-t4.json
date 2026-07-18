@@ -1,6 +1,0 @@
-{
-  "topic_id": "ai-agents-m2-t4",
-  "title": "Custom Tool Definitions",
-  "version": "1.0.0",
-  "content": "# Custom Tool Definitions\n\n*   **Function Declarations:** JSON schemas defining parameter names, types, and descriptions.\n*   **Return Mapping:** Serializing tool outputs to text strings to inject them back into the model context.\n"
-}

@@ -1,7 +1,0 @@
-{
-  "topic_id": "genai-m5-t2",
-  "diagram_id": "genai-m5-t2-dia1",
-  "title": "PagedAttention & vLLM Flow",
-  "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process PagedAttention & vLLM\"]\n  Process --> End"
-}

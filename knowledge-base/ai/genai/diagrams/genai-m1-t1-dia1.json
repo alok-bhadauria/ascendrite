@@ -1,7 +1,0 @@
-{
-  "topic_id": "genai-m1-t1",
-  "diagram_id": "genai-m1-t1-dia1",
-  "title": "Generative Model Taxonomies Flow",
-  "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Generative Model Taxonomies\"]\n  Process --> End"
-}

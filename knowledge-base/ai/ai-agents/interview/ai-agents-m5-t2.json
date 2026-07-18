@@ -1,6 +1,0 @@
-{
-  "topic_id": "ai-agents-m5-t2",
-  "title": "MCP Tool & Resource Declarations",
-  "version": "1.0.0",
-  "content": "# Interview Prep: MCP Tools\n\n## Q1: How does the client handle dynamic tool updates on the server side without restarting?\n\n### Standard Answer\nThe client issues a `tools/list` request during initialization and can monitor server notification events (e.g. `notifications/tools/list_changed`). If tools are added, the client updates its schema bindings dynamically.\n"
-}

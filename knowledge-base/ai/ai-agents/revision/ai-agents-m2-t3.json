@@ -1,6 +1,0 @@
-{
-  "topic_id": "ai-agents-m2-t3",
-  "title": "Episodic & Semantic Long-Term Memory",
-  "version": "1.0.0",
-  "content": "# Long-Term Memory\n\n*   **Episodic Memory:** Storing past execution traces and observations in a vector database.\n*   **Retrieval Routing:** Performing similarity searches on active user queries to recall relevant past interactions.\n"
-}

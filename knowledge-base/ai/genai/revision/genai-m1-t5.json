@@ -1,6 +1,0 @@
-{
-  "topic_id": "genai-m1-t5",
-  "title": "Multimodal Tokenization",
-  "version": "1.0.0",
-  "content": "# Multimodal Tokenization\n\n$$\\mathcal{L}_{CLIP} = \\text{CrossEntropy}(\\text{logits}, \\text{labels})_V + \\text{CrossEntropy}(\\text{logits}^{\\top}, \\text{labels})_H$$\n"
-}

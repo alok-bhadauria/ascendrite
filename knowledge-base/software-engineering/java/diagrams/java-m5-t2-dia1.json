@@ -1,7 +1,0 @@
-{
-  "topic_id": "java-m5-t2",
-  "diagram_id": "java-m5-t2-dia1",
-  "title": "Java Memory Model (JMM) Flowchart",
-  "type": "mermaid",
-  "code": "graph TD\n  Heap[JVM Heap] --> Young[Young Gen: Eden, S0, S1]\n  Heap --> Old[Old/Tenured Gen]\n  JVM --> Metaspace[Metaspace (Native memory)]"
-}

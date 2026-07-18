@@ -1,6 +1,0 @@
-{
-  "topic_id": "system-design-m5-t1",
-  "title": "Case Study: URL Shortener design",
-  "version": "1.0.0",
-  "content": "# System Design Interview Prep\n\n## Q1: Contrast 2-Phase Commit (2PC) with Sagas in distributed transaction management.\n\n### Standard Answer\n2PC is a synchronous, blocking consensus protocol. A coordinator asks all nodes to prepare, and commits only if all nodes vote yes. It guarantees strong consistency (ACID) but degrades availability and locks resources until consensus is reached, risking deadlocks. Sagas are asynchronous and prioritize eventual consistency (BASE). A Saga executes a sequence of local transactions. If one local transaction fails, the coordinator triggers compensating transactions to reverse previous steps, maintaining high system availability.\n\n\n## Q2: What is the spatial complexity bounds of Case Study: URL Shortener design?\n\n### Standard Answer\nThe spatial complexity scales strictly as $O(1)$ auxiliary memory unless additional arrays or dynamic heap nodes are allocated, yielding $O(N)$ total space."
-}

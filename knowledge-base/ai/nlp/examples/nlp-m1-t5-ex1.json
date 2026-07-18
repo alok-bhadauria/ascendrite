@@ -1,7 +1,0 @@
-{
-  "topic_id": "nlp-m1-t5",
-  "asset_id": "nlp-m1-t5-ex1",
-  "title": "Sentiment Analysis",
-  "language": "python",
-  "code": "import numpy as np\n\ndef naive_bayes_predict(log_prior, log_likelihood, doc_tokens):\n    class_scores = log_prior.copy()\n    for t in doc_tokens:\n        if t in log_likelihood:\n            class_scores += log_likelihood[t]\n    return class_scores\n\nif __name__ == '__main__':\n    print('Naive Bayes prediction framework initialized.')\n"
-}

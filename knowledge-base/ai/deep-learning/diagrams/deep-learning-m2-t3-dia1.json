@@ -1,7 +1,0 @@
-{
-  "topic_id": "deep-learning-m2-t3",
-  "diagram_id": "deep-learning-m2-t3-dia1",
-  "title": "Regularization Techniques Flow",
-  "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Regularization Techniques\"]\n  Process --> End"
-}

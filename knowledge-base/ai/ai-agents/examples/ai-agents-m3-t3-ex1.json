@@ -1,7 +1,0 @@
-{
-  "topic_id": "ai-agents-m3-t3",
-  "asset_id": "ai-agents-m3-t3-ex1",
-  "title": "Persistence & State Rewinding",
-  "language": "python",
-  "code": "class MockCheckpointSaver:\n    def __init__(self):\n        self.db = {}\n    def save(self, thread_id, state):\n        self.db[thread_id] = state.copy()\n    def load(self, thread_id):\n        return self.db.get(thread_id, {})\n\nif __name__ == '__main__':\n    print('Checkpoint modules ready.')\n"
-}

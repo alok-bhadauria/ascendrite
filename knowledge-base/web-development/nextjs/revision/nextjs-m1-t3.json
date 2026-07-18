@@ -1,6 +1,0 @@
-{
-  "topic_id": "nextjs-m1-t3",
-  "title": "Hydration Mismatch",
-  "version": "1.0.0",
-  "content": "# NextJS Revision\n\n*   **RSC:** Default server components that do not ship JS code to the browser.\n*   **Caching Layers:** Request Deduplication, Data Cache, Full Route Cache, Router Cache.\n*   **PPR:** Combines static page shells with streaming dynamic components inside Suspense.\n\n\n*   **Hydration Mismatch Complexity Reference:** Time $O(N)$, Space $O(1)$ auxiliary."
-}

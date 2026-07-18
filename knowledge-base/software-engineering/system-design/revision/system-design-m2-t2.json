@@ -1,6 +1,0 @@
-{
-  "topic_id": "system-design-m2-t2",
-  "title": "Caching Basics",
-  "version": "1.0.0",
-  "content": "# System Design Revision\n\n*   **Consistent Hashing:** Uses Virtual Nodes to distribute hash keys evenly across ring servers.\n*   **Rate Limiters:** Token Bucket (handles bursts); Leaky Bucket (constant egress rate).\n*   **Circuit Breaker:** Closed (normal) $\\to$ Open (failing fast) $\\to$ Half-Open (probing service health).\n\n\n*   **Caching Basics Complexity Reference:** Time $O(N)$, Space $O(1)$ auxiliary."
-}

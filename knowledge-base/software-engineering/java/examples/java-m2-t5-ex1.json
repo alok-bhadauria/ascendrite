@@ -1,7 +1,0 @@
-{
-  "topic_id": "java-m2-t5",
-  "asset_id": "java-m2-t5-ex1",
-  "title": "Collections Internals",
-  "language": "python",
-  "code": "if __name__ == '__main__':\n    print('Example code execution.')\n"
-}

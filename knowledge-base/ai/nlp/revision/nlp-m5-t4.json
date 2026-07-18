@@ -1,6 +1,0 @@
-{
-  "topic_id": "nlp-m5-t4",
-  "title": "Hybrid Search",
-  "version": "1.0.0",
-  "content": "# Hybrid Search & RRF\n\n$$\\text{RRF\\_Score}(d) = \\frac{1}{k + r_{\\text{sparse}}(d)} + \\frac{1}{k + r_{\\text{dense}}(d)}$$\n"
-}

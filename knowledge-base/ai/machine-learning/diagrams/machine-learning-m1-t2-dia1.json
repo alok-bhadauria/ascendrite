@@ -1,7 +1,0 @@
-{
-  "topic_id": "machine-learning-m1-t2",
-  "diagram_id": "machine-learning-m1-t2-dia1",
-  "title": "Vector & Matrix Calculus Flow",
-  "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Vector & Matrix Calculus\"]\n  Process --> End"
-}

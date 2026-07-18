@@ -1,7 +1,0 @@
-{
-  "topic_id": "oop-m3-t5",
-  "diagram_id": "oop-m3-t5-dia1",
-  "title": "Structural - Adapter & Decorator Flowchart",
-  "type": "mermaid",
-  "code": "classDiagram\n  class Animal {\n    +makeSound()\n  }\n  class Dog {\n    +makeSound()\n  }\n  Animal <|-- Dog"
-}

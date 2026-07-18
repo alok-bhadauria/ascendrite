@@ -1,6 +1,0 @@
-{
-  "topic_id": "ai-agents-m4-t5",
-  "title": "Scalability & Parallel Execution",
-  "version": "1.0.0",
-  "content": "# Scalability & Parallel Execution\n\n*   **Asynchronous Scheduling:** Dispatching independent tasks to parallel workers to maximize throughput.\n*   **State Merging:** Thread-safe operations that consolidate updates from multiple parallel workers.\n"
-}

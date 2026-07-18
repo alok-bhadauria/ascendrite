@@ -1,6 +1,0 @@
-{
-  "topic_id": "ai-agents-m4-t3",
-  "title": "Agent Specialists & Segregation",
-  "version": "1.0.0",
-  "content": "# Interview Prep: Specialist Agents\n\n## Q1: Why is it better to have separate Coder and Tester agents than a single agent that writes and tests code?\n\n### Standard Answer\nA single agent suffers from confirmation bias: it will write test cases that fit its code implementation, failing to spot edge cases. Splitting the roles forces the Tester agent to evaluate the code independently, increasing the likelihood of identifying bugs.\n"
-}

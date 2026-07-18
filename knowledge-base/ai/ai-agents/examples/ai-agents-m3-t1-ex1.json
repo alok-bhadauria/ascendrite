@@ -1,7 +1,0 @@
-{
-  "topic_id": "ai-agents-m3-t1",
-  "asset_id": "ai-agents-m3-t1-ex1",
-  "title": "LangGraph Architecture",
-  "language": "python",
-  "code": "def message_list_reducer(state, new_messages):\n    return state + new_messages\n\nif __name__ == '__main__':\n    print('LangGraph state reducers active.')\n"
-}

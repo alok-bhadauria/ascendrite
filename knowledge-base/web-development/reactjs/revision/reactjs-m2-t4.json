@@ -1,6 +1,0 @@
-{
-  "topic_id": "reactjs-m2-t4",
-  "title": "Memoization",
-  "version": "1.0.0",
-  "content": "# ReactJS Revision\n\n*   **Render vs Commit:** Render phase builds tree changes (interruptible); Commit phase writes changes to DOM (synchronous).\n*   **Diffing Heuristics:** $O(N)$ complexity based on component type mapping and stable key checks.\n*   **State Batches:** Combines state calls in a single render sweep; update queue resolves updates sequentially.\n\n\n*   **Memoization Complexity Reference:** Time $O(N)$, Space $O(1)$ auxiliary."
-}

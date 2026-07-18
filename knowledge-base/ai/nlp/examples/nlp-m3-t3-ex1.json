@@ -1,7 +1,0 @@
-{
-  "topic_id": "nlp-m3-t3",
-  "asset_id": "nlp-m3-t3-ex1",
-  "title": "Global Vectors (GloVe)",
-  "language": "python",
-  "code": "import numpy as np\n\ndef glove_weight(x, x_max=100, alpha=0.75):\n    return (x / x_max)**alpha if x < x_max else 1.0\n\nif __name__ == '__main__':\n    print('GloVe weighting metrics active.')\n"
-}

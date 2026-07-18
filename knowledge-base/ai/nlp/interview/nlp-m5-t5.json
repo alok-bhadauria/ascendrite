@@ -1,6 +1,0 @@
-{
-  "topic_id": "nlp-m5-t5",
-  "title": "Summarization & Translation Metrics",
-  "version": "1.0.0",
-  "content": "# Interview Prep: Generation Evals\n\n## Q1: Why is the Brevity Penalty (BP) required in BLEU evaluations?\n\n### Standard Answer\nWithout the brevity penalty, a model could generate extremely short outputs containing only high-confidence words (e.g. 'the') to achieve perfect precision. The brevity penalty scales the score down if the candidate translation length is shorter than the reference translation length.\n"
-}

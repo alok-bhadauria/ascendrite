@@ -1,7 +1,0 @@
-{
-  "topic_id": "sql-m4-t2",
-  "diagram_id": "sql-m4-t2-dia1",
-  "title": "Explain Plans Flowchart",
-  "type": "mermaid",
-  "code": "graph TD\n  HashJoin[\"Hash Join\"] --> IndexScanA[\"Index Scan (A)\"]\n  HashJoin --> TableScanB[\"Table Scan (B)\"]"
-}

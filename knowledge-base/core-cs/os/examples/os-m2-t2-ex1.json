@@ -1,7 +1,0 @@
-{
-  "topic_id": "os-m2-t2",
-  "asset_id": "os-m2-t2-ex1",
-  "title": "Scheduling Algorithms",
-  "language": "python",
-  "code": "if __name__ == '__main__':\n    print('Example pass for Scheduling Algorithms')\n"
-}

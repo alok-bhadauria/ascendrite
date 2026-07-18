@@ -1,6 +1,0 @@
-{
-  "topic_id": "ai-agents-m3-t5",
-  "title": "Self-Correction Loops",
-  "version": "1.0.0",
-  "content": "# Self-Correction Loops\n\n*   **Validation Checks:** Running compilers, linters, or test suites on agent outputs.\n*   **Feedback Loops:** Passing parser tracebacks back to the generator to correct code errors.\n"
-}

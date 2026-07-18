@@ -1,7 +1,0 @@
-{
-  "topic_id": "oop-m1-t1",
-  "diagram_id": "oop-m1-t1-dia1",
-  "title": "Programming Paradigms Flowchart",
-  "type": "mermaid",
-  "code": "classDiagram\n  class Animal {\n    +makeSound()\n  }\n  class Dog {\n    +makeSound()\n  }\n  Animal <|-- Dog"
-}

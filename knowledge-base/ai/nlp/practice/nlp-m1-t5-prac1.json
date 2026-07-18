@@ -1,7 +1,0 @@
-{
-  "topic_id": "nlp-m1-t5",
-  "asset_id": "nlp-m1-t5-prac1",
-  "title": "Sentiment Analysis",
-  "language": "python",
-  "code": "import numpy as np\n\ndef run_practice():\n    prior = np.array([np.log(0.5), np.log(0.5)])\n    likelihood = {'good': np.array([np.log(0.8), np.log(0.2)]), 'bad': np.array([np.log(0.1), np.log(0.9)])}\n    scores = prior + likelihood['good'] + likelihood['bad']\n    expected = np.array([np.log(0.5*0.8*0.1), np.log(0.5*0.2*0.9)])\n    assert np.allclose(scores, expected)\n    print('[PASS] Naive Bayes likelihood manual calculation passes.')\n\nif __name__ == '__main__':\n    run_practice()\n"
-}

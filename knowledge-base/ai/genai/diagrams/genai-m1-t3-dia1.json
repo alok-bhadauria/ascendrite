@@ -1,7 +1,0 @@
-{
-  "topic_id": "genai-m1-t3",
-  "diagram_id": "genai-m1-t3-dia1",
-  "title": "LLM Decoding Mathematics Flow",
-  "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process LLM Decoding Mathematics\"]\n  Process --> End"
-}

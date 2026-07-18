@@ -1,7 +1,0 @@
-{
-  "topic_id": "nlp-m4-t5",
-  "asset_id": "nlp-m4-t5-prac1",
-  "title": "Pre-training Objectives",
-  "language": "python",
-  "code": "import numpy as np\n\ndef sample_mlm_mask(seq_len, mask_prob=0.15):\n    return np.random.rand(seq_len) < mask_prob\n\ndef run_practice():\n    mask = sample_mlm_mask(100, 1.0)\n    assert np.all(mask)\n    print('[PASS] MLM mask helper checked.')\n\nif __name__ == '__main__':\n    run_practice()\n"
-}

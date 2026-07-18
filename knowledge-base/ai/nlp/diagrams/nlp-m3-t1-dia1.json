@@ -1,7 +1,0 @@
-{
-  "topic_id": "nlp-m3-t1",
-  "diagram_id": "nlp-m3-t1-dia1",
-  "title": "Word2Vec Framework Flow",
-  "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Word2Vec Framework\"]\n  Process --> End"
-}

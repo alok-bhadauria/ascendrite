@@ -1,6 +1,0 @@
-{
-  "topic_id": "genai-m2-t5",
-  "title": "Prompt Compression",
-  "version": "1.0.0",
-  "content": "# Interview Prep: Prompt Compression\n\n## Q1: Why is a smaller language model (e.g. GPT-2) reliable for calculating compression thresholds for larger models?\n\n### Standard Answer\nText redundancy and grammatical predictability are highly correlated across language models. A smaller model can identify repetitive phrases, filler words, and predictable structures. The remaining high-information tokens map well to the reasoning capabilities of larger models.\n"
-}

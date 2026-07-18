@@ -1,7 +1,0 @@
-{
-  "topic_id": "os-m5-t2",
-  "asset_id": "os-m5-t2-ex1",
-  "title": "File System Layouts",
-  "language": "python",
-  "code": "if __name__ == '__main__':\n    print('Example pass for File System Layouts')\n"
-}

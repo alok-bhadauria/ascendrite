@@ -1,7 +1,0 @@
-{
-  "topic_id": "os-m1-t5",
-  "asset_id": "os-m1-t5-ex1",
-  "title": "Context Switching Cost",
-  "language": "python",
-  "code": "if __name__ == '__main__':\n    print('Example pass for Context Switching Cost')\n"
-}

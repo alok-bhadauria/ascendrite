@@ -1,7 +1,0 @@
-{
-  "topic_id": "ai-agents-m4-t1",
-  "diagram_id": "ai-agents-m4-t1-dia1",
-  "title": "Multi-Agent Topologies Flow",
-  "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Multi-Agent Topologies\"]\n  Process --> End"
-}

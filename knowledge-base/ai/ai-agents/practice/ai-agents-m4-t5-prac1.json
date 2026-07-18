@@ -1,7 +1,0 @@
-{
-  "topic_id": "ai-agents-m4-t5",
-  "asset_id": "ai-agents-m4-t5-prac1",
-  "title": "Scalability & Parallel Execution",
-  "language": "python",
-  "code": "def run_async_mock(worker_id):\n    return f\"Result {worker_id}\"\n\ndef run_practice():\n    res = run_async_mock(1)\n    assert res == 'Result 1'\n    print('[PASS] Parallel worker simulation verified.')\n\nif __name__ == '__main__':\n    run_practice()\n"
-}

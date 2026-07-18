@@ -1,7 +1,0 @@
-{
-  "topic_id": "ai-agents-m3-t4",
-  "asset_id": "ai-agents-m3-t4-ex1",
-  "title": "Human-in-the-Loop Integrations",
-  "language": "python",
-  "code": "def check_approval_status(state):\n    return state.get('human_approved', False)\n\nif __name__ == '__main__':\n    print('Approval validators loaded.')\n"
-}

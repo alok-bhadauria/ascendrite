@@ -1,6 +1,0 @@
-{
-  "topic_id": "genai-m2-t1",
-  "title": "Prompting Mechanics & In-Context Learning",
-  "version": "1.0.0",
-  "content": "# Prompting Mechanics\n\n*   **Zero-shot:** Simple instruction without examples.\n*   **Few-shot:** Prepend $N$ structured examples: $(x_1, y_1), \\dots, (x_N, y_N)$ before input $x_{test}$.\n"
-}

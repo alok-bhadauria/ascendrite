@@ -1,7 +1,0 @@
-{
-  "topic_id": "dbms-m1-t3",
-  "asset_id": "dbms-m1-t3-ex1",
-  "title": "B+ Tree Indexing",
-  "language": "python",
-  "code": "def compute_fanout(p, k, v, d):\n    return (p + k - v) // (d + k)\nif __name__ == '__main__':\n    print(compute_fanout(4096, 8, 16, 8))\n"
-}

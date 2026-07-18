@@ -1,7 +1,0 @@
-{
-  "topic_id": "genai-m2-t2",
-  "asset_id": "genai-m2-t2-prac1",
-  "title": "Chain of Thought Prompting",
-  "language": "python",
-  "code": "def self_consistency_vote(paths):\n    counts = {}\n    for p in paths:\n        ans = p.split()[-1]\n        counts[ans] = counts.get(ans, 0) + 1\n    return max(counts, key=counts.get)\n\ndef run_practice():\n    paths = ['Answer is 4', 'Answer is 2', 'Answer is 4']\n    assert self_consistency_vote(paths) == '4'\n    print('[PASS] Self-consistency voting checks succeeded.')\n\nif __name__ == '__main__':\n    run_practice()\n"
-}

@@ -1,7 +1,0 @@
-{
-  "topic_id": "deep-learning-m5-t5",
-  "diagram_id": "deep-learning-m5-t5-dia1",
-  "title": "High-Performance Scaling Flow",
-  "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process High-Performance Scaling\"]\n  Process --> End"
-}

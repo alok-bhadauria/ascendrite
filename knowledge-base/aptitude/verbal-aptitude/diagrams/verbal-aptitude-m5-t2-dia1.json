@@ -1,7 +1,0 @@
-{
-  "topic_id": "verbal-aptitude-m5-t2",
-  "diagram_id": "verbal-aptitude-m5-t2-dia1",
-  "title": "Arguments Analysis Flowchart",
-  "type": "mermaid",
-  "code": "graph TD\n  Modifier[\"Modifying Phrase\"] -->|Incorrect association| NearestSubject[\"Incorrect Subject\"]\n  Modifier -->|Correct alignment| ActiveSubject[\"Active Subject\"]"
-}

@@ -1,6 +1,0 @@
-{
-  "topic_id": "genai-m5-t3",
-  "title": "Post-Training Quantization",
-  "version": "1.0.0",
-  "content": "# Interview Prep: Quantization\n\n## Q1: Why do outliers in activation distributions cause high quantization loss in simple integer quantization (e.g. INT8)?\n\n### Standard Answer\nSimple quantization maps the maximum absolute activation to the maximum integer range. If outliers are present, the scaling factor is distorted, forcing the bulk of standard activations to compress into a few bins, destroying representation detail.\n"
-}

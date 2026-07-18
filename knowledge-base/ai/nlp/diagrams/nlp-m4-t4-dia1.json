@@ -1,7 +1,0 @@
-{
-  "topic_id": "nlp-m4-t4",
-  "diagram_id": "nlp-m4-t4-dia1",
-  "title": "Causal Decoders & Cross-Attention Flow",
-  "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Causal Decoders & Cross-Attention\"]\n  Process --> End"
-}

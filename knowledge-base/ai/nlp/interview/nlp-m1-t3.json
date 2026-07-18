@@ -1,6 +1,0 @@
-{
-  "topic_id": "nlp-m1-t3",
-  "title": "POS Tagging & Named Entity Recognition",
-  "version": "1.0.0",
-  "content": "# Interview Prep: POS Tagging & NER\n\n## Q1: Explain how the Viterbi algorithm computes the most likely hidden state sequence in an HMM. Write the update step in the log domain.\n\n### Standard Answer\nThe Viterbi algorithm is a dynamic programming algorithm. It computes the trellis of maximum path probabilities $v_t(j)$, representing the probability of the most likely state sequence ending in state $j$ at time $t$:\n\n$$v_t(j) = \\max_{i} [ v_{t-1}(i) \\times P(y_t=j \\mid y_{t-1}=i) ] \\times P(x_t \\mid y_t=j)$$\n\nTo prevent floating-point underflow, we perform the computation in the log domain:\n\n$$\\ln v_t(j) = \\max_{i} \\left[ \\ln v_{t-1}(i) + \\ln P(y_t=j \\mid y_{t-1}=i) \\right] + \\ln P(x_t \\mid y_t=j)$$\n\nAt each step, we record the backpointer:\n\n$$\\text{bp}_t(j) = \\arg\\max_{i} \\left[ \\ln v_{t-1}(i) + \\ln P(y_t=j \\mid y_{t-1}=i) \\right]$$\n\nAt the final step $T$, we select the state maximizing $v_T(j)$ and backtrack using the stored backpointers to reconstruct the optimal sequence.\n"
-}

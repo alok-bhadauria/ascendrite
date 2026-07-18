@@ -1,7 +1,0 @@
-{
-  "topic_id": "java-m5-t2",
-  "asset_id": "java-m5-t2-ex1",
-  "title": "Java Memory Model (JMM)",
-  "language": "python",
-  "code": "if __name__ == '__main__':\n    print('Example code execution.')\n"
-}

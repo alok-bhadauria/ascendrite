@@ -1,6 +1,0 @@
-{
-  "topic_id": "nlp-m3-t3",
-  "title": "Global Vectors (GloVe)",
-  "version": "1.0.0",
-  "content": "# Interview Prep: GloVe\n\n## Q1: How does GloVe combine the advantages of global matrix factorization and local context window models?\n\n### Standard Answer\nMatrix factorization models (like LSA) capture global co-occurrence statistics across the entire corpus but are computationally expensive and perform poorly on analogies. Local window models (like Word2Vec) capture local semantic patterns and perform well on analogies, but fail to exploit global co-occurrence statistics.\n\nGloVe combines these approaches by training directly on the non-zero cells of the global co-occurrence matrix $X$. It derives a log-bilinear relation: $\\mathbf{w}_i^{\\top} \\tilde{\\mathbf{w}}_j + b_i + \\tilde{b}_j = \\ln X_{ij}$, which is optimized using a weighted least-squares loss. This achieves efficient training on global statistics while preserving local semantic structure."
-}

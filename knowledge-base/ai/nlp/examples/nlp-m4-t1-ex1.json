@@ -1,7 +1,0 @@
-{
-  "topic_id": "nlp-m4-t1",
-  "asset_id": "nlp-m4-t1-ex1",
-  "title": "Self-Attention Mechanics",
-  "language": "python",
-  "code": "import numpy as np\n\ndef scaled_dot_product_attention(Q, K, V):\n    dk = Q.shape[-1]\n    scores = np.matmul(Q, K.T) / np.sqrt(dk)\n    weights = np.exp(scores) / np.sum(np.exp(scores), axis=-1, keepdims=True)\n    return np.matmul(weights, V), weights\n\nif __name__ == '__main__':\n    print('Attention module loaded.')\n"
-}

@@ -1,7 +1,0 @@
-{
-  "topic_id": "ai-agents-m3-t2",
-  "asset_id": "ai-agents-m3-t2-prac1",
-  "title": "Graph Routing & Conditional Edges",
-  "language": "python",
-  "code": "def route_next_node(state):\n    if state.get('error'):\n        return 'error_handler'\n    return 'success_end'\n\ndef run_practice():\n    state = {'error': True}\n    assert route_next_node(state) == 'error_handler'\n    print('[PASS] Conditional edge routing checks passed.')\n\nif __name__ == '__main__':\n    run_practice()\n"
-}

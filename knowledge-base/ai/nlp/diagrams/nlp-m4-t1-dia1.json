@@ -1,7 +1,0 @@
-{
-  "topic_id": "nlp-m4-t1",
-  "diagram_id": "nlp-m4-t1-dia1",
-  "title": "Self-Attention Mechanics Flow",
-  "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Self-Attention Mechanics\"]\n  Process --> End"
-}

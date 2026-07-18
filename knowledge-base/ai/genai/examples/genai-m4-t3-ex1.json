@@ -1,7 +1,0 @@
-{
-  "topic_id": "genai-m4-t3",
-  "asset_id": "genai-m4-t3-ex1",
-  "title": "Direct Preference Optimization",
-  "language": "python",
-  "code": "import numpy as np\n\ndef dpo_loss(pi_w_logratio, pi_l_logratio, beta=0.1):\n    diff = beta * (pi_w_logratio - pi_l_logratio)\n    return -np.log(1.0 / (1.0 + np.exp(-diff)))\n\nif __name__ == '__main__':\n    print('DPO loss function loaded.')\n"
-}

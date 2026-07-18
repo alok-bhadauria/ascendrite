@@ -1,7 +1,0 @@
-{
-  "topic_id": "deep-learning-m4-t2",
-  "diagram_id": "deep-learning-m4-t2-dia1",
-  "title": "RNN Gradients Flow",
-  "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process RNN Gradients\"]\n  Process --> End"
-}

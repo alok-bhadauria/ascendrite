@@ -1,7 +1,0 @@
-{
-  "topic_id": "spring-boot-m4-t3",
-  "diagram_id": "spring-boot-m4-t3-dia1",
-  "title": "JWT Authentication Flowchart",
-  "type": "mermaid",
-  "code": "graph TD\n  Client --> Proxy[\"Spring Transaction Proxy\"]\n  Proxy --> Target[\"Target Bean Method\"]"
-}

@@ -1,7 +1,0 @@
-{
-  "topic_id": "nextjs-m4-t2",
-  "asset_id": "nextjs-m4-t2-prac1",
-  "title": "Incremental Static Regeneration (ISR)",
-  "language": "python",
-  "code": "def run_practice():\n    assert True\nif __name__ == '__main__':\n    run_practice()\n"
-}

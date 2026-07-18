@@ -1,6 +1,0 @@
-{
-  "topic_id": "nlp-m4-t1",
-  "title": "Self-Attention Mechanics",
-  "version": "1.0.0",
-  "content": "# Interview Prep: Self-Attention\n\n## Q1: Prove mathematically why the scaling factor 1/sqrt(d_k) is required in the self-attention equation.\n\n### Standard Answer\nLet key and query vectors $\\mathbf{q}, \\mathbf{k} \\in \\mathbb{R}^{d_k}$ have components that are independent random variables with mean $0$ and variance $1$. The dot product is $q \\cdot k = \\sum_{i=1}^{d_k} q_i k_i$. The mean of the sum is $0$. Since components are independent, the variance of the sum is the sum of the variances:\n\n$$\\text{Var}(q \\cdot k) = \\sum_{i=1}^{d_k} \\text{Var}(q_i k_i) = d_k$$\n\nFor large values of $d_k$, the variance is $d_k$, causing the dot products to grow large. The softmax function will saturate, leading to vanishing gradients. Dividing by $\\sqrt{d_k}$ scales the variance of the dot product back to $1.0$.\n"
-}

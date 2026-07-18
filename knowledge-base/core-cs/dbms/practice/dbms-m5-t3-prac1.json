@@ -1,7 +1,0 @@
-{
-  "topic_id": "dbms-m5-t3",
-  "asset_id": "dbms-m5-t3-prac1",
-  "title": "Consistency Models",
-  "language": "python",
-  "code": "def is_strongly_consistent(r, w, n):\n    return (r + w) > n\ndef run_practice():\n    assert is_strongly_consistent(2, 2, 3)\nif __name__ == '__main__':\n    run_practice()\n"
-}

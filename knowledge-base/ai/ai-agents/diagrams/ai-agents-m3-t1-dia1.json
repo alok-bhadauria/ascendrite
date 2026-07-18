@@ -1,7 +1,0 @@
-{
-  "topic_id": "ai-agents-m3-t1",
-  "diagram_id": "ai-agents-m3-t1-dia1",
-  "title": "LangGraph Architecture Flow",
-  "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process LangGraph Architecture\"]\n  Process --> End"
-}

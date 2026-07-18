@@ -1,7 +1,0 @@
-{
-  "topic_id": "javascript-m3-t1",
-  "asset_id": "javascript-m3-t1-ex1",
-  "title": "Callbacks & Hell",
-  "language": "python",
-  "code": "if __name__ == '__main__':\n    print('Example code execution.')\n"
-}

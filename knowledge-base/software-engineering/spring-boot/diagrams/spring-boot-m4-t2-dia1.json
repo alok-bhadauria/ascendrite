@@ -1,7 +1,0 @@
-{
-  "topic_id": "spring-boot-m4-t2",
-  "diagram_id": "spring-boot-m4-t2-dia1",
-  "title": "Authentication vs Authorization Flowchart",
-  "type": "mermaid",
-  "code": "graph TD\n  Client --> Proxy[\"Spring Transaction Proxy\"]\n  Proxy --> Target[\"Target Bean Method\"]"
-}

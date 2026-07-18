@@ -1,6 +1,0 @@
-{
-  "topic_id": "dbms-m4-t3",
-  "title": "Cost Estimation",
-  "version": "1.0.0",
-  "content": "# DBMS Revision\n\n*   **Slotted Page:** Header slots store offsets to records; defragmentation changes offsets but preserves RIDs.\n*   **B+ Tree Fan-out:** $F \\le \\frac{P + K}{D + K}$. Fan-out determines tree height and disk I/O reads.\n*   **ARIES recovery:** Analysis $\\to$ Redo (repeats history) $\\to$ Undo (rolls back active transactions, logging CLRs).\n\n\n*   **Cost Estimation Complexity Reference:** Time $O(N)$, Space $O(1)$ auxiliary."
-}

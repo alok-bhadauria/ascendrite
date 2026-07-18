@@ -1,6 +1,0 @@
-{
-  "topic_id": "ai-agents-m2-t5",
-  "title": "Error Handling & Recovery Loops",
-  "version": "1.0.0",
-  "content": "# Error Handling & Recovery\n\n*   **Exception Capture:** Wrapping tool executions to catch errors and prevent crashes.\n*   **Recovery Loops:** Passing tracebacks back to the model as observations to guide corrections.\n"
-}

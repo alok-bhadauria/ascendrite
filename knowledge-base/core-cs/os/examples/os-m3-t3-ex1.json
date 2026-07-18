@@ -1,7 +1,0 @@
-{
-  "topic_id": "os-m3-t3",
-  "asset_id": "os-m3-t3-ex1",
-  "title": "TLB Hardware",
-  "language": "python",
-  "code": "if __name__ == '__main__':\n    print('Example pass for TLB Hardware')\n"
-}

@@ -1,7 +1,0 @@
-{
-  "topic_id": "genai-m5-t5",
-  "asset_id": "genai-m5-t5-prac1",
-  "title": "Guardrails & Safety Serving",
-  "language": "python",
-  "code": "import numpy as np\n\ndef evaluate_safety_logits(logits, toxic_indices, threshold=0.5):\n    toxic_activation = logits[toxic_indices]\n    return 'unsafe' if np.any(toxic_activation > threshold) else 'safe'\n\ndef run_practice():\n    logits = np.array([0.1, 0.9])\n    res = evaluate_safety_logits(logits, [1], 0.5)\n    assert res == 'unsafe'\n    print('[PASS] Safety logits validation checks completed.')\n\nif __name__ == '__main__':\n    run_practice()\n"
-}

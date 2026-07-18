@@ -1,7 +1,0 @@
-{
-  "topic_id": "ai-agents-m5-t5",
-  "asset_id": "ai-agents-m5-t5-prac1",
-  "title": "Sandbox Execution Environments",
-  "language": "python",
-  "code": "def validate_sandbox_path(path, sandbox_dir):\n    import os\n    # Use string prefix checks on absolute paths\n    abs_sandbox = os.path.abspath(sandbox_dir)\n    abs_target = os.path.abspath(path)\n    return abs_target.startswith(abs_sandbox)\n\ndef run_practice():\n    sandbox = './sandbox'\n    # target inside sandbox\n    assert validate_sandbox_path('./sandbox/file.txt', sandbox)\n    # target attempting escape\n    assert not validate_sandbox_path('./sandbox/../host_file.txt', sandbox)\n    print('[PASS] Sandbox path validation checked.')\n\nif __name__ == '__main__':\n    run_practice()\n"
-}

@@ -1,7 +1,0 @@
-{
-  "topic_id": "html-css-git-m3-t5",
-  "asset_id": "html-css-git-m3-t5-ex1",
-  "title": "Browser Compatibility",
-  "language": "python",
-  "code": "if __name__ == '__main__':\n    print('Example code execution.')\n"
-}

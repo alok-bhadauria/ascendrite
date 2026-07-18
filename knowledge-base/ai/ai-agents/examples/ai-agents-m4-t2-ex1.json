@@ -1,7 +1,0 @@
-{
-  "topic_id": "ai-agents-m4-t2",
-  "asset_id": "ai-agents-m4-t2-ex1",
-  "title": "State Sharing & Message Formats",
-  "language": "python",
-  "code": "def parse_envelope(envelope_json):\n    # Simple parser\n    import json\n    return json.loads(envelope_json)\n\nif __name__ == '__main__':\n    print('Envelope parsing helper initialized.')\n"
-}

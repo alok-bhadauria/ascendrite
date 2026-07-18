@@ -1,7 +1,0 @@
-{
-  "topic_id": "machine-learning-m3-t4",
-  "diagram_id": "machine-learning-m3-t4-dia1",
-  "title": "Support Vector Machines (SVM) Flow",
-  "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Support Vector Machines (SVM)\"]\n  Process --> End"
-}

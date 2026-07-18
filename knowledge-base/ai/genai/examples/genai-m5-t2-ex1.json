@@ -1,7 +1,0 @@
-{
-  "topic_id": "genai-m5-t2",
-  "asset_id": "genai-m5-t2-ex1",
-  "title": "PagedAttention & vLLM",
-  "language": "python",
-  "code": "class VirtualBlockTable:\n    def __init__(self):\n        self.table = {}\n    def allocate_page(self, logical_idx, physical_idx):\n        self.table[logical_idx] = physical_idx\n    def get_physical(self, logical_idx):\n        return self.table.get(logical_idx, -1)\n\nif __name__ == '__main__':\n    print('Virtual page table initialized.')\n"
-}

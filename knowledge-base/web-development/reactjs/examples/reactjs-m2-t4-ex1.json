@@ -1,7 +1,0 @@
-{
-  "topic_id": "reactjs-m2-t4",
-  "asset_id": "reactjs-m2-t4-ex1",
-  "title": "Memoization",
-  "language": "python",
-  "code": "if __name__ == '__main__':\n    print('Example code execution.')\n"
-}

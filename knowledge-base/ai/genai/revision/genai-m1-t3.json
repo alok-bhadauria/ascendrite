@@ -1,6 +1,0 @@
-{
-  "topic_id": "genai-m1-t3",
-  "title": "LLM Decoding Mathematics",
-  "version": "1.0.0",
-  "content": "# LLM Decoding Mathematics\n\n## 1. Temperature-Scaled Softmax\n$$p_i = \\frac{e^{z_i / T}}{\\sum_j e^{z_j / T}}$$\n\n## 2. Top-P Condition\n$$\\sum_{i \\in \\mathcal{V}_{Top-P}} P(w_i \\mid w_{<t}) \\ge P$$\n"
-}

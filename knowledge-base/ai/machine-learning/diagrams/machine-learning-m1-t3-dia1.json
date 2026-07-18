@@ -1,7 +1,0 @@
-{
-  "topic_id": "machine-learning-m1-t3",
-  "diagram_id": "machine-learning-m1-t3-dia1",
-  "title": "Probability & Information Theory Flow",
-  "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Probability & Information Theory\"]\n  Process --> End"
-}

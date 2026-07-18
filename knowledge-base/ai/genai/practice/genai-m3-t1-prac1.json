@@ -1,7 +1,0 @@
-{
-  "topic_id": "genai-m3-t1",
-  "asset_id": "genai-m3-t1-prac1",
-  "title": "LoRA Mathematics",
-  "language": "python",
-  "code": "import numpy as np\n\ndef lora_forward(x, W0, A, B, alpha=16, r=8):\n    h0 = np.dot(x, W0)\n    h_lora = np.dot(np.dot(x, A), B) * (alpha / r)\n    return h0 + h_lora\n\ndef run_practice():\n    x = np.array([1.0, 1.0])\n    W0 = np.zeros((2, 2))\n    A = np.array([[1.0, 0.0], [0.0, 1.0]])\n    B = np.array([[1.0, 0.0], [0.0, 1.0]])\n    out = lora_forward(x, W0, A, B, 8, 8)\n    assert np.allclose(out, x)\n    print('[PASS] LoRA forward calculations verified.')\n\nif __name__ == '__main__':\n    run_practice()\n"
-}

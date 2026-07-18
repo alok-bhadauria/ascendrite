@@ -1,7 +1,0 @@
-{
-  "topic_id": "deep-learning-m5-t4",
-  "asset_id": "deep-learning-m5-t4-prac1",
-  "title": "Mixed Precision & Mixed Training",
-  "language": "python",
-  "code": "import numpy as np\n\n\ndef has_gradient_overflow(grads: dict[str, np.ndarray]) -> bool:\n    \"\"\"Checks if any gradient value in the dictionary contains NaN or Inf.\n\n    Returns:\n        bool: True if overflow detected, False otherwise\n    \"\"\"\n    for name, g in grads.items():\n        if np.any(np.isnan(g)) or np.any(np.isinf(g)):\n            return True\n    return False\n\n\nif __name__ == \"__main__\":\n    print(\"--- Running Gradient Overflow Check Practice ---\")\n\n    # Case 1: Clean gradients\n    grads_clean = {\n        \"W1\": np.array([[0.1, -0.5], [0.3, 0.0]]),\n        \"b1\": np.array([[0.01], [0.02]]),\n    }\n    assert not has_gradient_overflow(grads_clean)\n    print(\"Case 1 (Clean) check passed.\")\n\n    # Case 2: Contains NaN\n    grads_nan = {\n        \"W1\": np.array([[0.1, np.nan], [0.3, 0.0]]),\n        \"b1\": np.array([[0.01], [0.02]]),\n    }\n    assert has_gradient_overflow(grads_nan)\n    print(\"Case 2 (NaN check) passed.\")\n\n    # Case 3: Contains Inf\n    grads_inf = {\n        \"W1\": np.array([[0.1, -0.5], [0.3, 0.0]]),\n        \"b1\": np.array([[0.01], [np.inf]]),\n    }\n    assert has_gradient_overflow(grads_inf)\n    print(\"Case 3 (Inf check) passed.\")\n\n    print(\"\\n  [PASS] Gradient overflow checking practice verified.\")\n"
-}

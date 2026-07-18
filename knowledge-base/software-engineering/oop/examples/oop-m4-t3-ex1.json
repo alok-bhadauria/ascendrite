@@ -1,7 +1,0 @@
-{
-  "topic_id": "oop-m4-t3",
-  "asset_id": "oop-m4-t3-ex1",
-  "title": "Behavioral - Observer",
-  "language": "python",
-  "code": "if __name__ == '__main__':\n    print('Example code execution.')\n"
-}

@@ -1,7 +1,0 @@
-{
-  "topic_id": "dsa-m4-t5",
-  "diagram_id": "dsa-m4-t5-dia1",
-  "title": "Shortest Path & MST Flowchart",
-  "type": "mermaid",
-  "code": "graph TD\n  A((Root)) --> B((Left))\n  A --> C((Right))"
-}

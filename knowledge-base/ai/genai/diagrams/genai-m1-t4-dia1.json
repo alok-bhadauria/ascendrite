@@ -1,7 +1,0 @@
-{
-  "topic_id": "genai-m1-t4",
-  "diagram_id": "genai-m1-t4-dia1",
-  "title": "Mixture of Experts Flow",
-  "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Mixture of Experts\"]\n  Process --> End"
-}

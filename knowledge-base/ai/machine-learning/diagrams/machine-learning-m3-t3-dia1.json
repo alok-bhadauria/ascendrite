@@ -1,7 +1,0 @@
-{
-  "topic_id": "machine-learning-m3-t3",
-  "diagram_id": "machine-learning-m3-t3-dia1",
-  "title": "K-Nearest Neighbors (KNN) & Naive Bayes Algorithms Flow",
-  "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process K-Nearest Neighbors (KNN) & Naive Bayes Algorithms\"]\n  Process --> End"
-}

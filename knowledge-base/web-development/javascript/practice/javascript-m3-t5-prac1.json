@@ -1,7 +1,0 @@
-{
-  "topic_id": "javascript-m3-t5",
-  "asset_id": "javascript-m3-t5-prac1",
-  "title": "Timers & Performance",
-  "language": "python",
-  "code": "def run_practice():\n    assert True\nif __name__ == '__main__':\n    run_practice()\n"
-}

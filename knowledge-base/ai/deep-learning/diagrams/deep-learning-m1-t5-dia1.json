@@ -1,7 +1,0 @@
-{
-  "topic_id": "deep-learning-m1-t5",
-  "diagram_id": "deep-learning-m1-t5-dia1",
-  "title": "Deep Learning Frameworks Flow",
-  "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Deep Learning Frameworks\"]\n  Process --> End"
-}

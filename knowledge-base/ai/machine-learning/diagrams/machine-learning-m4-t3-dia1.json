@@ -1,7 +1,0 @@
-{
-  "topic_id": "machine-learning-m4-t3",
-  "diagram_id": "machine-learning-m4-t3-dia1",
-  "title": "Decision Trees Mathematics Flow",
-  "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Decision Trees Mathematics\"]\n  Process --> End"
-}

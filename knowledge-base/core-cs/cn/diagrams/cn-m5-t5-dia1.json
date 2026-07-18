@@ -1,7 +1,0 @@
-{
-  "topic_id": "cn-m5-t5",
-  "diagram_id": "cn-m5-t5-dia1",
-  "title": "IPSec & VPNs Flowchart",
-  "type": "mermaid",
-  "code": "sequenceDiagram\n  Client->>Server: ClientHello + Key Share\n  Server-->>Client: ServerHello + Key Share + Finished\n  Client->>Server: Finished (Secure Connection)"
-}

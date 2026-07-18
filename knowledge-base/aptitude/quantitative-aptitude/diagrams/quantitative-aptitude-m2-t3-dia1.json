@@ -1,7 +1,0 @@
-{
-  "topic_id": "quantitative-aptitude-m2-t3",
-  "diagram_id": "quantitative-aptitude-m2-t3-dia1",
-  "title": "Profit, Loss & Discount Flowchart",
-  "type": "mermaid",
-  "code": "graph TD\n  ProductConsistency[\"Product Consistency: A x B = C\"]\n  AIncrease[\"A increases by x/y\"]\n  BDecrease[\"B decreases by x/(x+y)\"]\n  ProductConsistency --> AIncrease\n  ProductConsistency --> BDecrease"
-}

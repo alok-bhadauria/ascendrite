@@ -1,7 +1,0 @@
-{
-  "topic_id": "nlp-m1-t2",
-  "diagram_id": "nlp-m1-t2-dia1",
-  "title": "Statistical Tokenization Flow",
-  "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Statistical Tokenization\"]\n  Process --> End"
-}

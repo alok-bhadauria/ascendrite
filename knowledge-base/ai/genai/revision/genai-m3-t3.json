@@ -1,6 +1,0 @@
-{
-  "topic_id": "genai-m3-t3",
-  "title": "Prompt & Prefix Tuning",
-  "version": "1.0.0",
-  "content": "# Prompt & Prefix Tuning\n\n*   **Prompt Tuning:** Adds virtual tokens to sequence inputs: $\\mathbf{X}_{tuned} = [\\mathbf{P}_{embed}; \\mathbf{X}]$.\n*   **Prefix Tuning:** Prepend continuous key-value states to attention computation steps: $\\mathbf{K}_{new} = [\\mathbf{P}_K; \\mathbf{K}]$.\n"
-}

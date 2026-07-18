@@ -1,7 +1,0 @@
-{
-  "topic_id": "genai-m4-t5",
-  "asset_id": "genai-m4-t5-prac1",
-  "title": "Alignment Tax & Evaluation",
-  "language": "python",
-  "code": "def compute_win_rate(wins, ties, losses):\n    total = wins + ties + losses\n    return (wins + 0.5 * ties) / total if total > 0 else 0.0\n\ndef run_practice():\n    wr = compute_win_rate(10, 10, 10)\n    assert wr == 0.5\n    print('[PASS] Win rate calculation verified.')\n\nif __name__ == '__main__':\n    run_practice()\n"
-}

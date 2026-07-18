@@ -1,6 +1,0 @@
-{
-  "topic_id": "nlp-m2-t3",
-  "title": "Vector Similarity Metrics",
-  "version": "1.0.0",
-  "content": "# Similarity Metrics\n\n## 1. Cosine Similarity\n$$\\text{sim}(\\mathbf{u}, \\mathbf{v}) = \\frac{\\mathbf{u} \\cdot \\mathbf{v}}{\\|\\mathbf{u}\\|_2 \\|\\mathbf{v}\\|_2}$$\n\n## 2. Jaccard Similarity\n$$J(A, B) = \\frac{|A \\cap B|}{|A \\cup B|}$$\n\n## 3. Normalized Distance Equivalence\n$$\\|\\mathbf{u}_{norm} - \\mathbf{v}_{norm}\\|_2^2 = 2 - 2\\cos(\\theta)$$\n"
-}

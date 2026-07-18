@@ -1,7 +1,0 @@
-{
-  "topic_id": "cn-m3-t2",
-  "asset_id": "cn-m3-t2-ex1",
-  "title": "TCP Connection",
-  "language": "python",
-  "code": "if __name__ == '__main__':\n    print('Example pass for TCP Connection')\n"
-}

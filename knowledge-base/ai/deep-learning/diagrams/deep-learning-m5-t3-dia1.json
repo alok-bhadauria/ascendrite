@@ -1,7 +1,0 @@
-{
-  "topic_id": "deep-learning-m5-t3",
-  "diagram_id": "deep-learning-m5-t3-dia1",
-  "title": "Generative Adversarial Networks (GANs) Flow",
-  "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Generative Adversarial Networks (GANs)\"]\n  Process --> End"
-}

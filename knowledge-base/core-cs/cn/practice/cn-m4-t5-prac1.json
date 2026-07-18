@@ -1,7 +1,0 @@
-{
-  "topic_id": "cn-m4-t5",
-  "asset_id": "cn-m4-t5-prac1",
-  "title": "Content Delivery (CDN)",
-  "language": "python",
-  "code": "def run_practice():\n    assert True\nif __name__ == '__main__':\n    run_practice()\n"
-}

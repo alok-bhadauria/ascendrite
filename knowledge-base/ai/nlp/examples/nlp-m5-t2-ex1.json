@@ -1,7 +1,0 @@
-{
-  "topic_id": "nlp-m5-t2",
-  "asset_id": "nlp-m5-t2-ex1",
-  "title": "Information Retrieval & BM25",
-  "language": "python",
-  "code": "import numpy as np\n\ndef compute_bm25_term(tf, idf, doc_len, avg_len, k1=1.5, b=0.75):\n    numerator = tf * (k1 + 1.0)\n    denominator = tf + k1 * (1.0 - b + b * (doc_len / avg_len))\n    return idf * (numerator / denominator)\n\nif __name__ == '__main__':\n    print('BM25 formula configured.')\n"
-}

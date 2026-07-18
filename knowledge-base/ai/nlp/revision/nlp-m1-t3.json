@@ -1,6 +1,0 @@
-{
-  "topic_id": "nlp-m1-t3",
-  "title": "POS Tagging & Named Entity Recognition",
-  "version": "1.0.0",
-  "content": "# POS Tagging & NER\n\n## 1. HMM Joint Probability\n$$P(\\mathbf{x}, \\mathbf{y}) = \\prod_{t=1}^T P(y_t \\mid y_{t-1}) P(x_t \\mid y_t)$$\n*   **Transition:** $P(y_t \\mid y_{t-1}) = \\frac{C(y_{t-1}, y_t)}{C(y_{t-1})}$\n*   **Emission:** $P(x_t \\mid y_t) = \\frac{C(y_t, x_t)}{C(y_t)}$\n\n## 2. Viterbi Trellis Update\n$$v_t(j) = \\max_{i} [ v_{t-1}(i) \\times P(y_t=j \\mid y_{t-1}=i) ] \\times P(x_t \\mid y_t=j)$$\n*   Reduces decoding complexity from $O(N^T)$ to $O(N^2 T)$.\n"
-}

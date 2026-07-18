@@ -1,6 +1,0 @@
-{
-  "topic_id": "genai-m5-t3",
-  "title": "Post-Training Quantization",
-  "version": "1.0.0",
-  "content": "# Post-Training Quantization\n\n*   **GPTQ:** Minimizes quadratic quantization error using inverse Hessians.\n*   **AWQ:** Protects the top 1% of salient channels by scaling, quantizing the remaining channels to 4 bits.\n"
-}

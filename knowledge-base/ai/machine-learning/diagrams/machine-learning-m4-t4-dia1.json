@@ -1,7 +1,0 @@
-{
-  "topic_id": "machine-learning-m4-t4",
-  "diagram_id": "machine-learning-m4-t4-dia1",
-  "title": "Bagging & Random Forests Flow",
-  "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Bagging & Random Forests\"]\n  Process --> End"
-}

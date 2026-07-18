@@ -1,7 +1,0 @@
-{
-  "topic_id": "ai-agents-m5-t3",
-  "asset_id": "ai-agents-m5-t3-prac1",
-  "title": "Agent Evaluation Frameworks",
-  "language": "python",
-  "code": "def calculate_trajectory_efficiency(n_steps, min_steps=3):\n    return min_steps / n_steps if n_steps > 0 else 0.0\n\ndef run_practice():\n    eff = calculate_trajectory_efficiency(6, 3)\n    assert eff == 0.5\n    print('[PASS] Trajectory efficiency calculation verified.')\n\nif __name__ == '__main__':\n    run_practice()\n"
-}

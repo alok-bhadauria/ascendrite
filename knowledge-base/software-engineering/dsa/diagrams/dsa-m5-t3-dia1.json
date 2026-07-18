@@ -1,7 +1,0 @@
-{
-  "topic_id": "dsa-m5-t3",
-  "diagram_id": "dsa-m5-t3-dia1",
-  "title": "Backtracking Flowchart",
-  "type": "mermaid",
-  "code": "graph TD\n  A((Root)) --> B((Left))\n  A --> C((Right))"
-}

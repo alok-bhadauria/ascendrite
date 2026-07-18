@@ -1,7 +1,0 @@
-{
-  "topic_id": "cn-m4-t3",
-  "asset_id": "cn-m4-t3-prac1",
-  "title": "Mail & Files",
-  "language": "python",
-  "code": "def run_practice():\n    assert True\nif __name__ == '__main__':\n    run_practice()\n"
-}

@@ -1,6 +1,0 @@
-{
-  "topic_id": "genai-m5-t4",
-  "title": "Triton Inference Server",
-  "version": "1.0.0",
-  "content": "# Interview Prep: Triton Serving\n\n## Q1: How does Triton's dynamic batching scheduler balance throughput and latency SLAs?\n\n### Standard Answer\nTriton uses two parameters: `max_queue_delay_microseconds` and `max_batch_size`. The scheduler waits for incoming requests until either the maximum batch size is reached or the queue delay threshold is exceeded, guaranteeing latency bounds.\n"
-}

@@ -1,6 +1,0 @@
-{
-  "topic_id": "nlp-m5-t3",
-  "title": "Vector Databases & Search",
-  "version": "1.0.0",
-  "content": "# Vector DB Search\n\n*   **HNSW:** Hierarchical skip-list graphs routing search queries in $\\mathcal{O}(\\log N)$ time.\n*   **IVF-PQ:** Clusters space (Inverted File) and compresses dimensions via sub-space quantization (Product Quantization).\n"
-}

@@ -1,6 +1,0 @@
-{
-  "topic_id": "nlp-m3-t1",
-  "title": "Word2Vec Framework",
-  "version": "1.0.0",
-  "content": "# Word2Vec Framework\n\n## 1. Skip-Gram Objective\n$$\\mathcal{L} = \\frac{1}{T} \\sum_{t=1}^T \\sum_{-c \\le j \\le c, j \\neq 0} \\ln P(w_{t+j} \\mid w_t)$$\n\n## 2. Output Softmax Probability\n$$P(w_o \\mid w_i) = \\frac{\\exp(\\mathbf{v}'^{\\top}_{w_o} \\mathbf{v}_{w_i})}{\\sum_{w=1}^V \\exp(\\mathbf{v}'^{\\top}_{w} \\mathbf{v}_{w_i})}$$\n"
-}

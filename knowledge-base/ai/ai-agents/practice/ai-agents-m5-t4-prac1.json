@@ -1,7 +1,0 @@
-{
-  "topic_id": "ai-agents-m5-t4",
-  "asset_id": "ai-agents-m5-t4-prac1",
-  "title": "Production Safety Guardrails",
-  "language": "python",
-  "code": "def enforce_iteration_limit(current_iter, max_iter=10):\n    return current_iter < max_iter\n\ndef run_practice():\n    assert enforce_iteration_limit(5, 10)\n    assert not enforce_iteration_limit(10, 10)\n    print('[PASS] Iteration guardrails checks completed.')\n\nif __name__ == '__main__':\n    run_practice()\n"
-}

@@ -1,6 +1,0 @@
-{
-  "topic_id": "nlp-m2-t1",
-  "title": "Bag of Words & N-Grams",
-  "version": "1.0.0",
-  "content": "# Interview Prep: BoW & N-Grams\n\n## Q1: Explain why N-gram representations suffer from the 'curse of dimensionality' and how vocabulary pruning mitigates this.\n\n### Standard Answer\nAs $n$ increases, the theoretical vocabulary size scales exponentially as $|\\mathcal{V}|^n$. For a vocabulary of 10,000 words, bigrams yield $10^8$ possible features and trigrams yield $10^{12}$, creating massive sparsity and memory requirements. Most features will have zero counts across the dataset, causing statistical classifiers to overfit.\n\nVocabulary pruning mitigates this by applying constraints:\n1. `min_df`: Removes rare terms that do not contribute to generalization.\n2. `max_df`: Removes high-frequency terms that act as stopwords.\n3. `max_features`: Bounds the feature space size to a manageable limit (e.g. 5,000 to 10,000 features).\n"
-}

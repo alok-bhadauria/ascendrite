@@ -1,7 +1,0 @@
-{
-  "topic_id": "ai-agents-m5-t2",
-  "diagram_id": "ai-agents-m5-t2-dia1",
-  "title": "MCP Tool & Resource Declarations Flow",
-  "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process MCP Tool & Resource Declarations\"]\n  Process --> End"
-}

@@ -1,7 +1,0 @@
-{
-  "topic_id": "genai-m1-t4",
-  "asset_id": "genai-m1-t4-prac1",
-  "title": "Mixture of Experts",
-  "language": "python",
-  "code": "import numpy as np\n\ndef moe_gating(x, W_g, top_k=2):\n    scores = np.dot(x, W_g)\n    top_indices = np.argsort(scores)[-top_k:]\n    gate_weights = np.zeros_like(scores)\n    top_scores = scores[top_indices]\n    exp_scores = np.exp(top_scores - np.max(top_scores))\n    gate_weights[top_indices] = exp_scores / np.sum(exp_scores)\n    return gate_weights, top_indices\n\ndef run_practice():\n    x = np.array([1.0, 0.0])\n    W_g = np.array([[1.0, 2.0, 3.0], [0.0, 0.0, 0.0]])\n    weights, idx = moe_gating(x, W_g, 2)\n    assert np.all(idx == np.array([1, 2]))\n    print('[PASS] MoE gating routing indices verified.')\n\nif __name__ == '__main__':\n    run_practice()\n"
-}

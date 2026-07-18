@@ -1,6 +1,0 @@
-{
-  "topic_id": "genai-m4-t4",
-  "title": "KTO Optimization",
-  "version": "1.0.0",
-  "content": "# KTO Optimization\n\n*   **Data Format:** Single prompt-response pairs labeled as desirable ($y \\in \\{+1\\}$) or undesirable ($y \\in \\{-1\\}$).\n*   **Prospect Theory link:** Models human decision-making, where losses are perceived more strongly than equivalent gains.\n"
-}

@@ -1,7 +1,0 @@
-{
-  "topic_id": "dbms-m4-t4",
-  "asset_id": "dbms-m4-t4-ex1",
-  "title": "Join Execution Algorithms",
-  "language": "python",
-  "code": "if __name__ == '__main__':\n    print('Example pass for Join Execution Algorithms')\n"
-}

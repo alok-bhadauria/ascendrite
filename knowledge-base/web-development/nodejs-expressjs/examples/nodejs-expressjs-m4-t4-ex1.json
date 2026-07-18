@@ -1,7 +1,0 @@
-{
-  "topic_id": "nodejs-expressjs-m4-t4",
-  "asset_id": "nodejs-expressjs-m4-t4-ex1",
-  "title": "Input Sanitization",
-  "language": "python",
-  "code": "if __name__ == '__main__':\n    print('Example code execution.')\n"
-}

@@ -1,7 +1,0 @@
-{
-  "topic_id": "deep-learning-m3-t2",
-  "diagram_id": "deep-learning-m3-t2-dia1",
-  "title": "CNN Layers Flow",
-  "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process CNN Layers\"]\n  Process --> End"
-}

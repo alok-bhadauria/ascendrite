@@ -1,7 +1,0 @@
-{
-  "topic_id": "os-m4-t5",
-  "asset_id": "os-m4-t5-ex1",
-  "title": "Inter-Process Communication (IPC)",
-  "language": "python",
-  "code": "if __name__ == '__main__':\n    print('Example pass for Inter-Process Communication (IPC)')\n"
-}

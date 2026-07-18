@@ -1,7 +1,0 @@
-{
-  "topic_id": "nlp-m1-t3",
-  "asset_id": "nlp-m1-t3-ex1",
-  "title": "POS Tagging & Named Entity Recognition",
-  "language": "python",
-  "code": "import numpy as np\n\ndef viterbi_decode(obs, states, start_p, trans_p, emit_p):\n    T = len(obs)\n    N = len(states)\n    viterbi = np.zeros((N, T))\n    backpointer = np.zeros((N, T), dtype=int)\n    for s in range(N):\n        viterbi[s, 0] = start_p[s] * emit_p[s, obs[0]]\n    for t in range(1, T):\n        for s in range(N):\n            prob = viterbi[:, t-1] * trans_p[:, s] * emit_p[s, obs[t]]\n            viterbi[s, t] = np.max(prob)\n            backpointer[s, t] = np.argmax(prob)\n    best_path = []\n    state = np.argmax(viterbi[:, T-1])\n    best_path.append(state)\n    for t in range(T-1, 0, -1):\n        state = backpointer[state, t]\n        best_path.insert(0, state)\n    return best_path, viterbi\n\nif __name__ == '__main__':\n    print('POS Viterbi implementation loaded successfully.')\n"
-}

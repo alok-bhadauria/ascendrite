@@ -1,7 +1,0 @@
-{
-  "topic_id": "nlp-m5-t4",
-  "asset_id": "nlp-m5-t4-ex1",
-  "title": "Hybrid Search",
-  "language": "python",
-  "code": "import numpy as np\n\ndef compute_rrf_score(rank_sparse, rank_dense, k=60):\n    return 1.0 / (k + rank_sparse) + 1.0 / (k + rank_dense)\n\nif __name__ == '__main__':\n    print('RRF score fusion configured.')\n"
-}

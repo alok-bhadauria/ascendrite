@@ -1,7 +1,0 @@
-{
-  "topic_id": "html-css-git-m2-t3",
-  "diagram_id": "html-css-git-m2-t3-dia1",
-  "title": "CSS Positioning Flowchart",
-  "type": "mermaid",
-  "code": "graph TD\n  CommitB[\"Commit B (Branch A tip)\"] --> LCA[\"LCA Commit\"]\n  CommitC[\"Commit C (Branch B tip)\"] --> LCA\n  MergeCommit[\"Merge Commit\"] --> CommitB\n  MergeCommit --> CommitC"
-}

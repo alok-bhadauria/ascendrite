@@ -1,6 +1,0 @@
-{
-  "topic_id": "genai-m2-t4",
-  "title": "Context Window Constraints",
-  "version": "1.0.0",
-  "content": "# Context Window Constraints\n\n*   **Lost in the Middle:** Retrieval accuracy forms a U-shaped curve, dropping in the middle of long contexts.\n*   **Mitigation:** Place critical context at the beginning or end of the prompt.\n"
-}

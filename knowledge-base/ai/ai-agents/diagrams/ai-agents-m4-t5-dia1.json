@@ -1,7 +1,0 @@
-{
-  "topic_id": "ai-agents-m4-t5",
-  "diagram_id": "ai-agents-m4-t5-dia1",
-  "title": "Scalability & Parallel Execution Flow",
-  "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Scalability & Parallel Execution\"]\n  Process --> End"
-}

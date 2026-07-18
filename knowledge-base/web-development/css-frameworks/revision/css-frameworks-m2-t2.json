@@ -1,6 +1,0 @@
-{
-  "topic_id": "css-frameworks-m2-t2",
-  "title": "State Modifiers",
-  "version": "1.0.0",
-  "content": "# CSS Frameworks Revision\n\n*   **Utility CSS:** Reuses utility class mappings, preventing custom style bloat.\n*   **Static Purging:** PostCSS static analysis removes unused utility rules from output bundles.\n*   **Dynamic Class Trap:** Do not write dynamic classes like `text-${color}`; static scanners will purge them.\n\n\n*   **State Modifiers Complexity Reference:** Time $O(N)$, Space $O(1)$ auxiliary."
-}

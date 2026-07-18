@@ -1,7 +1,0 @@
-{
-  "topic_id": "deep-learning-m1-t2",
-  "diagram_id": "deep-learning-m1-t2-dia1",
-  "title": "Activation Functions Flow",
-  "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Activation Functions\"]\n  Process --> End"
-}

@@ -1,7 +1,0 @@
-{
-  "topic_id": "reactjs-m2-t2",
-  "diagram_id": "reactjs-m2-t2-dia1",
-  "title": "Effect Hook Flowchart",
-  "type": "mermaid",
-  "code": "graph TD\n  OldRoot[Old Root Node] --> NewRoot[New Root Node]\n  OldRoot -.->|Diffing Heuristics| NewRoot"
-}

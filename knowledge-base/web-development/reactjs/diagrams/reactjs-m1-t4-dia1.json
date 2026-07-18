@@ -1,7 +1,0 @@
-{
-  "topic_id": "reactjs-m1-t4",
-  "diagram_id": "reactjs-m1-t4-dia1",
-  "title": "Virtual DOM vs Real DOM Flowchart",
-  "type": "mermaid",
-  "code": "graph TD\n  OldRoot[Old Root Node] --> NewRoot[New Root Node]\n  OldRoot -.->|Diffing Heuristics| NewRoot"
-}

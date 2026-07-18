@@ -1,7 +1,0 @@
-{
-  "topic_id": "spring-boot-m4-t1",
-  "diagram_id": "spring-boot-m4-t1-dia1",
-  "title": "Spring Security Foundations Flowchart",
-  "type": "mermaid",
-  "code": "graph TD\n  Client --> Proxy[\"Spring Transaction Proxy\"]\n  Proxy --> Target[\"Target Bean Method\"]"
-}

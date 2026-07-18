@@ -1,7 +1,0 @@
-{
-  "topic_id": "sql-m4-t4",
-  "asset_id": "sql-m4-t4-ex1",
-  "title": "Join Optimization",
-  "language": "python",
-  "code": "if __name__ == '__main__':\n    print('Example pass for Join Optimization')\n"
-}

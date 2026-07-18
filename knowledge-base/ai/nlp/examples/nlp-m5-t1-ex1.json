@@ -1,7 +1,0 @@
-{
-  "topic_id": "nlp-m5-t1",
-  "asset_id": "nlp-m5-t1-ex1",
-  "title": "Sentence Embeddings",
-  "language": "python",
-  "code": "import numpy as np\n\ndef bi_encoder_cosine(u, v):\n    return np.dot(u, v) / (np.linalg.norm(u) * np.linalg.norm(v))\n\nif __name__ == '__main__':\n    print('Bi-encoder simulator loaded.')\n"
-}

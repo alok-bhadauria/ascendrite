@@ -1,7 +1,0 @@
-{
-  "topic_id": "dbms-m1-t2",
-  "asset_id": "dbms-m1-t2-ex1",
-  "title": "File Storage & Pages",
-  "language": "python",
-  "code": "if __name__ == '__main__':\n    print('Example pass for File Storage & Pages')\n"
-}

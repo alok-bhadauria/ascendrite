@@ -1,7 +1,0 @@
-{
-  "topic_id": "nlp-m2-t5",
-  "diagram_id": "nlp-m2-t5-dia1",
-  "title": "Perplexity & Evaluation Flow",
-  "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Perplexity & Evaluation\"]\n  Process --> End"
-}

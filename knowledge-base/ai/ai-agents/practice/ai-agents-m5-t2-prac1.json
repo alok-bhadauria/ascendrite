@@ -1,7 +1,0 @@
-{
-  "topic_id": "ai-agents-m5-t2",
-  "asset_id": "ai-agents-m5-t2-prac1",
-  "title": "MCP Tool & Resource Declarations",
-  "language": "python",
-  "code": "def format_tool_schema(name, description, input_schema):\n    return {\n        \"name\": name,\n        \"description\": description,\n        \"inputSchema\": input_schema\n    }\n\ndef run_practice():\n    schema = format_tool_schema('run_cmd', 'Runs command', {'type': 'object'})\n    assert schema['name'] == 'run_cmd'\n    assert schema['inputSchema']['type'] == 'object'\n    print('[PASS] Dynamic tool discovery schema validated.')\n\nif __name__ == '__main__':\n    run_practice()\n"
-}

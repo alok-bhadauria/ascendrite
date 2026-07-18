@@ -1,7 +1,0 @@
-{
-  "topic_id": "os-m4-t2",
-  "asset_id": "os-m4-t2-ex1",
-  "title": "Critical Section",
-  "language": "python",
-  "code": "if __name__ == '__main__':\n    print('Example pass for Critical Section')\n"
-}

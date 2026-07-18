@@ -1,6 +1,0 @@
-{
-  "topic_id": "ai-agents-m5-t1",
-  "title": "MCP Architecture",
-  "version": "1.0.0",
-  "content": "# Interview Prep: MCP Architecture\n\n## Q1: Why is stdio preferred over HTTP SSE for local MCP server integrations?\n\n### Standard Answer\n`stdio` uses standard input/output streams for communication. When the client launches a local server process, it communicates directly via process pipes. This requires no network configuration, firewalls, or token authentication, simplifying deployment and reducing latency.\n"
-}

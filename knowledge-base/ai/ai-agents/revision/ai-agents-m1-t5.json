@@ -1,6 +1,0 @@
-{
-  "topic_id": "ai-agents-m1-t5",
-  "title": "Structured Argument Extraction",
-  "version": "1.0.0",
-  "content": "# Structured Argument Extraction\n\n*   **Structured Output:** Maps model outputs to structured parameter blocks (e.g. JSON schemas).\n*   **Validations:** Verifies parameter types and ranges before calling APIs.\n"
-}

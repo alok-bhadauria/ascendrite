@@ -1,6 +1,0 @@
-{
-  "topic_id": "ai-agents-m1-t5",
-  "title": "Structured Argument Extraction",
-  "version": "1.0.0",
-  "content": "# Interview Prep: Argument Extraction\n\n## Q1: How do modern serving libraries guarantee that tool arguments conform exactly to JSON schemas?\n\n### Standard Answer\nServing libraries (like OpenAI's structured outputs or vLLM) compile the JSON schema into a Context-Free Grammar (CFG). During token generation, the engine masks vocabulary logits that violate the grammar constraints (e.g., forcing a closing bracket `}` or quote `\"`), guaranteeing schema compliance.\n"
-}

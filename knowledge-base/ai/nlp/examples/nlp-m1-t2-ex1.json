@@ -1,7 +1,0 @@
-{
-  "topic_id": "nlp-m1-t2",
-  "asset_id": "nlp-m1-t2-ex1",
-  "title": "Statistical Tokenization",
-  "language": "python",
-  "code": "def run_bpe_step(corpus, vocab):\n    # Simple BPE merge step helper\n    pairs = {}\n    for word, freq in corpus.items():\n        symbols = word.split()\n        for i in range(len(symbols)-1):\n            pair = (symbols[i], symbols[i+1])\n            pairs[pair] = pairs.get(pair, 0) + freq\n    if not pairs:\n        return corpus, vocab\n    best_pair = max(pairs, key=pairs.get)\n    # Merge best pair\n    new_corpus = {}\n    merged = ''.join(best_pair)\n    vocab.add(merged)\n    for word, freq in corpus.items():\n        new_word = word.replace(' '.join(best_pair), merged)\n        new_corpus[new_word] = freq\n    return new_corpus, vocab\n\nif __name__ == '__main__':\n    corpus = {'l o w': 5, 'l o w e r': 2, 'n e w e s t': 6}\n    vocab = set(['l', 'o', 'w', 'e', 'r', 'n', 's', 't'])\n    new_c, new_v = run_bpe_step(corpus, vocab)\n    print('BPE vocabulary after 1 step:', sorted(list(new_v)))\n"
-}

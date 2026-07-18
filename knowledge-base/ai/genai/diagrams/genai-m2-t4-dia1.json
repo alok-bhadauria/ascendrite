@@ -1,7 +1,0 @@
-{
-  "topic_id": "genai-m2-t4",
-  "diagram_id": "genai-m2-t4-dia1",
-  "title": "Context Window Constraints Flow",
-  "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Context Window Constraints\"]\n  Process --> End"
-}

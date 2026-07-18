@@ -1,7 +1,0 @@
-{
-  "topic_id": "nextjs-m4-t4",
-  "diagram_id": "nextjs-m4-t4-dia1",
-  "title": "Static Export Flowchart",
-  "type": "mermaid",
-  "code": "graph TD\n  StaticShell[\"Static Layout Shell (ISR/PPR)\"] --> DynamicHoles[\"Dynamic Components (Suspense)\"]"
-}

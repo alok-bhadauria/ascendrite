@@ -1,7 +1,0 @@
-{
-  "topic_id": "cn-m3-t1",
-  "asset_id": "cn-m3-t1-ex1",
-  "title": "Transport Services",
-  "language": "python",
-  "code": "if __name__ == '__main__':\n    print('Example pass for Transport Services')\n"
-}

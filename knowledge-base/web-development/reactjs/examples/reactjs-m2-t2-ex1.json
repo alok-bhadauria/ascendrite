@@ -1,7 +1,0 @@
-{
-  "topic_id": "reactjs-m2-t2",
-  "asset_id": "reactjs-m2-t2-ex1",
-  "title": "Effect Hook",
-  "language": "python",
-  "code": "if __name__ == '__main__':\n    print('Example code execution.')\n"
-}

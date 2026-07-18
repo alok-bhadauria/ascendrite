@@ -1,7 +1,0 @@
-{
-  "topic_id": "spring-boot-m1-t1",
-  "asset_id": "spring-boot-m1-t1-ex1",
-  "title": "Enterprise Architecture",
-  "language": "python",
-  "code": "if __name__ == '__main__':\n    print('Example code execution.')\n"
-}

@@ -1,7 +1,0 @@
-{
-  "topic_id": "ai-agents-m1-t1",
-  "diagram_id": "ai-agents-m1-t1-dia1",
-  "title": "Agent Philosophy & Loops Flow",
-  "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Agent Philosophy & Loops\"]\n  Process --> End"
-}

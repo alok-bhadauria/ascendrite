@@ -1,7 +1,0 @@
-{
-  "topic_id": "nlp-m3-t2",
-  "asset_id": "nlp-m3-t2-prac1",
-  "title": "Word2Vec Optimization",
-  "language": "python",
-  "code": "import numpy as np\n\ndef sigmoid(x):\n    return 1.0 / (1.0 + np.exp(-x))\n\ndef neg_sampling_loss(v_in, v_out_pos, v_out_negs):\n    loss = -np.log(sigmoid(np.dot(v_out_pos, v_in)))\n    for v_neg in v_out_negs:\n        loss -= np.log(sigmoid(-np.dot(v_neg, v_in)))\n    return loss\n\ndef run_practice():\n    v_in = np.array([1.0, 0.0])\n    v_pos = np.array([0.0, 0.0])\n    v_negs = [np.array([0.0, 0.0])]\n    loss = neg_sampling_loss(v_in, v_pos, v_negs)\n    assert np.allclose(loss, 1.386294)\n    print('[PASS] Neg sampling math verified.')\n\nif __name__ == '__main__':\n    run_practice()\n"
-}

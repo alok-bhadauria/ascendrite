@@ -1,6 +1,0 @@
-{
-  "topic_id": "ai-agents-m3-t4",
-  "title": "Human-in-the-Loop Integrations",
-  "version": "1.0.0",
-  "content": "# Interview Prep: Human-in-the-Loop\n\n## Q1: How do you implement a secure approval gate for a database delete operation in an agent graph?\n\n### Standard Answer\nWe define a breakpoint on the `delete_db` node. The graph executes up to the breakpoint and pauses. An API exposes the pending payload to an admin portal. Once the admin clicks 'Approve', the system injects an approval token into the state and triggers the graph resume loop.\n"
-}

@@ -1,6 +1,0 @@
-{
-  "topic_id": "genai-m5-t2",
-  "title": "PagedAttention & vLLM",
-  "version": "1.0.0",
-  "content": "# PagedAttention\n\n*   **Virtual Block Table:** Translates logical sequence positions to physical GPU memory addresses.\n*   **Benefit:** Reduces memory fragmentation to under 4%, increasing maximum batch sizes.\n"
-}

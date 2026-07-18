@@ -1,6 +1,0 @@
-{
-  "topic_id": "javascript-m5-t5",
-  "title": "Build Bundling",
-  "version": "1.0.0",
-  "content": "# JavaScript Revision\n\n*   **Temporal Dead Zone:** Period between variable hoisting and initialization for `let`/`const` variables.\n*   **Event Loop Queues:** Call Stack $\\to$ Microtasks (Promise resolutions) $\\to$ Macrotasks (timeouts, intervals).\n*   **Prototypes:** Dynamic object extensions using the `__proto__` reference chain.\n\n\n*   **Build Bundling Complexity Reference:** Time $O(N)$, Space $O(1)$ auxiliary."
-}

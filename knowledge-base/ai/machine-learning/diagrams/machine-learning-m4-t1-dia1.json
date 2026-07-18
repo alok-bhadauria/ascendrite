@@ -1,7 +1,0 @@
-{
-  "topic_id": "machine-learning-m4-t1",
-  "diagram_id": "machine-learning-m4-t1-dia1",
-  "title": "Generalization Theory & Overfitting Flow",
-  "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Generalization Theory & Overfitting\"]\n  Process --> End"
-}

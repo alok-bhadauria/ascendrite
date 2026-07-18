@@ -1,7 +1,0 @@
-{
-  "topic_id": "dsa-m3-t1",
-  "diagram_id": "dsa-m3-t1-dia1",
-  "title": "Stacks Flowchart",
-  "type": "mermaid",
-  "code": "graph TD\n  A((Root)) --> B((Left))\n  A --> C((Right))"
-}

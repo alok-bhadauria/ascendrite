@@ -1,7 +1,0 @@
-{
-  "topic_id": "genai-m5-t3",
-  "asset_id": "genai-m5-t3-ex1",
-  "title": "Post-Training Quantization",
-  "language": "python",
-  "code": "import numpy as np\n\ndef compute_awq_scale(weights, activation_magnitudes, alpha=0.5):\n    return weights * (activation_magnitudes ** alpha)\n\nif __name__ == '__main__':\n    print('AWQ scale shifting functions active.')\n"
-}

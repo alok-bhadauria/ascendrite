@@ -1,7 +1,0 @@
-{
-  "topic_id": "typescript-m2-t2",
-  "asset_id": "typescript-m2-t2-prac1",
-  "title": "Keyof Operator",
-  "language": "python",
-  "code": "def run_practice():\n    assert True\nif __name__ == '__main__':\n    run_practice()\n"
-}

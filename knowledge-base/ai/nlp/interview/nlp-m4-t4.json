@@ -1,6 +1,0 @@
-{
-  "topic_id": "nlp-m4-t4",
-  "title": "Causal Decoders & Cross-Attention",
-  "version": "1.0.0",
-  "content": "# Interview Prep: Causal Decoders\n\n## Q1: How does cross-attention connect the encoder and decoder states in translation models?\n\n### Standard Answer\nIn cross-attention, Query vectors represent target tokens in the decoder, while Key and Value vectors represent source tokens in the encoder. This allows the decoder to attend to the relevant parts of the input sequence for each generated target token.\n"
-}

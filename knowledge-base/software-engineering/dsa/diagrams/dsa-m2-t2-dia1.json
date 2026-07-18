@@ -1,7 +1,0 @@
-{
-  "topic_id": "dsa-m2-t2",
-  "diagram_id": "dsa-m2-t2-dia1",
-  "title": "Sorting Basics Flowchart",
-  "type": "mermaid",
-  "code": "graph TD\n  A((Root)) --> B((Left))\n  A --> C((Right))"
-}

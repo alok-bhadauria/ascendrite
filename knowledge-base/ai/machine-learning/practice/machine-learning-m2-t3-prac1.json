@@ -1,7 +1,0 @@
-{
-  "topic_id": "machine-learning-m2-t3",
-  "asset_id": "machine-learning-m2-t3-prac1",
-  "title": "Data Quality & Advanced Imputation",
-  "language": "python",
-  "code": "import numpy as np\n\n\ndef detect_outliers_mahalanobis(\n    data: np.ndarray, threshold: float\n) -> np.ndarray:\n    \"\"\"Calculates Mahalanobis distance from scratch for each sample in data\n\n    and returns a boolean array indicating which samples are outliers\n    (distance > threshold).\n\n    Ensure:\n    1. Base covariance calculation handles matrix layouts correctly.\n    2. Uses regularized covariance if data has collinearity.\n    \"\"\"\n    n_samples, n_features = data.shape\n    mean = np.mean(data, axis=0)\n    data_centered = data - mean\n\n    # Covariance matrix calculation\n    cov = np.cov(data.T)\n\n    # Add diagonal regularization\n    cov_reg = cov + 1e-6 * np.eye(n_features)\n\n    # Invert covariance\n    inv_cov = np.linalg.inv(cov_reg)\n\n    # Calculate distances\n    distances = np.zeros(n_samples)\n    for i in range(n_samples):\n        diff = data_centered[i]\n        distances[i] = np.sqrt(diff.T @ inv_cov @ diff)\n\n    return distances > threshold\n"
-}

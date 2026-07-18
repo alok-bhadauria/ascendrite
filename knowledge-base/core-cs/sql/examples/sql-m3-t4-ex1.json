@@ -1,7 +1,0 @@
-{
-  "topic_id": "sql-m3-t4",
-  "asset_id": "sql-m3-t4-ex1",
-  "title": "Exists vs In",
-  "language": "python",
-  "code": "if __name__ == '__main__':\n    print('Example pass for Exists vs In')\n"
-}

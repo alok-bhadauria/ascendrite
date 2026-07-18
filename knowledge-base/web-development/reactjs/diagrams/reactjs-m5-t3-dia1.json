@@ -1,7 +1,0 @@
-{
-  "topic_id": "reactjs-m5-t3",
-  "diagram_id": "reactjs-m5-t3-dia1",
-  "title": "Server Actions Flowchart",
-  "type": "mermaid",
-  "code": "graph TD\n  OldRoot[Old Root Node] --> NewRoot[New Root Node]\n  OldRoot -.->|Diffing Heuristics| NewRoot"
-}

@@ -1,7 +1,0 @@
-{
-  "topic_id": "os-m5-t2",
-  "diagram_id": "os-m5-t2-dia1",
-  "title": "File System Layouts Flowchart",
-  "type": "mermaid",
-  "code": "graph LR\n  VA[\"Virtual Address (0x7FFF0040)\"] --> TLB[\"TLB Lookup (MISS)\"]\n  TLB --> PageDir[\"Page Directory lookup (0x1000)\"]\n  PageDir --> Physical[\"Physical Frame (0x9000)\"]"
-}

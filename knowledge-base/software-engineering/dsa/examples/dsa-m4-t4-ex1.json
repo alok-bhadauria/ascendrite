@@ -1,7 +1,0 @@
-{
-  "topic_id": "dsa-m4-t4",
-  "asset_id": "dsa-m4-t4-ex1",
-  "title": "Topological Sort & Advanced Graphs",
-  "language": "python",
-  "code": "if __name__ == '__main__':\n    print('Example code execution.')\n"
-}

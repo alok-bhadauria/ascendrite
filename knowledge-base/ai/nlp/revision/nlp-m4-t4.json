@@ -1,6 +1,0 @@
-{
-  "topic_id": "nlp-m4-t4",
-  "title": "Causal Decoders & Cross-Attention",
-  "version": "1.0.0",
-  "content": "# Causal Decoders & Cross-Attention\n\n## 1. Causal Masking\n$$\\mathbf{M}_{ij} = \\begin{cases} 0 & \\text{if } i \\ge j \\\\ -\\infty & \\text{if } i < j \\end{cases}$$\n*   Forces decoder attention to be strictly autoregressive.\n\n## 2. Cross-Attention Setup\n*   Queries ($\\mathbf{Q}$) projected from the decoder.\n*   Keys ($\\mathbf{K}$) and Values ($\\mathbf{V}$) projected from the encoder.\n"
-}

@@ -1,7 +1,0 @@
-{
-  "topic_id": "oop-m5-t3",
-  "diagram_id": "oop-m5-t3-dia1",
-  "title": "Domain-Driven Design (DDD) Flowchart",
-  "type": "mermaid",
-  "code": "classDiagram\n  class Animal {\n    +makeSound()\n  }\n  class Dog {\n    +makeSound()\n  }\n  Animal <|-- Dog"
-}

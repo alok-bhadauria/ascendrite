@@ -1,6 +1,0 @@
-{
-  "topic_id": "nlp-m4-t1",
-  "title": "Self-Attention Mechanics",
-  "version": "1.0.0",
-  "content": "# Self-Attention Mechanics\n\n## 1. Mathematical Equation\n$$\\text{Attention}(\\mathbf{Q}, \\mathbf{K}, \\mathbf{V}) = \\text{softmax}\\left( \\frac{\\mathbf{Q}\\mathbf{K}^{\\top}}{\\sqrt{d_k}} \\right)\\mathbf{V}$$\n\n## 2. Scaling Derivation\n*   If $q_i, k_i \\sim \\mathcal{N}(0, 1)$, then $\\text{Var}(\\mathbf{q} \\cdot \\mathbf{k}) = d_k$.\n*   Dividing by $\\sqrt{d_k}$ scales the variance back to $1.0$, preventing softmax saturation.\n"
-}

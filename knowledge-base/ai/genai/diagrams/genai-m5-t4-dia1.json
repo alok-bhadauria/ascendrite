@@ -1,7 +1,0 @@
-{
-  "topic_id": "genai-m5-t4",
-  "diagram_id": "genai-m5-t4-dia1",
-  "title": "Triton Inference Server Flow",
-  "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Triton Inference Server\"]\n  Process --> End"
-}

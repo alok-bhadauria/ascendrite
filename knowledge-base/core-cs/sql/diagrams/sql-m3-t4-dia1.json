@@ -1,7 +1,0 @@
-{
-  "topic_id": "sql-m3-t4",
-  "diagram_id": "sql-m3-t4-dia1",
-  "title": "Exists vs In Flowchart",
-  "type": "mermaid",
-  "code": "graph TD\n  HashJoin[\"Hash Join\"] --> IndexScanA[\"Index Scan (A)\"]\n  HashJoin --> TableScanB[\"Table Scan (B)\"]"
-}

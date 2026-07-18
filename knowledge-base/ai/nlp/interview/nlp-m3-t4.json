@@ -1,6 +1,0 @@
-{
-  "topic_id": "nlp-m3-t4",
-  "title": "FastText Subword Embeddings",
-  "version": "1.0.0",
-  "content": "# Interview Prep: FastText\n\n## Q1: How does FastText construct representation vectors for completely unseen, out-of-vocabulary (OOV) words at test time?\n\n### Standard Answer\nSince FastText represents words as sums of character n-gram embeddings, an unseen word can still be tokenized into its constituent character n-grams. FastText sums the pre-trained embeddings of these subword n-grams to produce a representation vector, capturing morphological patterns (e.g., matching the suffix '-ly').\n"
-}

@@ -1,6 +1,0 @@
-{
-  "topic_id": "os-m4-t2",
-  "title": "Critical Section",
-  "version": "1.0.0",
-  "content": "# OS Revision\n\n*   **Privilege Rings:** User mode (Ring 3) triggers hardware traps to run system calls in Kernel mode (Ring 0).\n*   **Context Switch:** Saves CPU registers, switches stacks, and changes page table mappings (invalidating the TLB).\n*   **Peterson's Lock:** Mutual exclusion algorithm for two threads using flags and turn variables.\n\n\n*   **Critical Section Complexity Reference:** Time $O(N)$, Space $O(1)$ auxiliary."
-}

@@ -1,7 +1,0 @@
-{
-  "topic_id": "nlp-m1-t1",
-  "asset_id": "nlp-m1-t1-prac1",
-  "title": "Text Corpora & Normalization",
-  "language": "python",
-  "code": "def calculate_porter_measure(word: str) -> int:\n    \"\"\"Calculates Porter's measure m for a word, representing VC repetitions.\"\"\"\n    # Determine vowel/consonant flags\n    vowels = 'aeiou'\n    is_vowel = []\n    for i, char in enumerate(word):\n        if char in vowels:\n            is_vowel.append(True)\n        elif char == 'y' and i > 0 and not is_vowel[i-1]:\n            is_vowel.append(True)\n        else:\n            is_vowel.append(False)\n    \n    # Convert flags to states: V (True) or C (False)\n    # Compress consecutive identical flags\n    states = []\n    for val in is_vowel:\n        if not states or states[-1] != val:\n            states.append(val)\n            \n    # Count 'VC' transitions\n    m = 0\n    state_str = ''.join(['V' if s else 'C' for s in states])\n    # Find patterns of 'VC'\n    idx = 0\n    while True:\n        pos = state_str.find('VC', idx)\n        if pos != -1:\n            m += 1\n            idx = pos + 2\n        else:\n            break\n    return m\n\ndef run_practice():\n    assert calculate_porter_measure('tree') == 0 # C V (no VC transition)\n    assert calculate_porter_measure('troubles') == 2 # C V C V C (VC transitions: ou->bl, e->s)\n    print('[PASS] Porter measure m calculations verified successfully.')\n\nif __name__ == '__main__':\n    run_practice()\n"
-}

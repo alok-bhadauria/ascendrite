@@ -1,7 +1,0 @@
-{
-  "topic_id": "reactjs-m2-t5",
-  "asset_id": "reactjs-m2-t5-ex1",
-  "title": "Custom Hooks",
-  "language": "python",
-  "code": "if __name__ == '__main__':\n    print('Example code execution.')\n"
-}

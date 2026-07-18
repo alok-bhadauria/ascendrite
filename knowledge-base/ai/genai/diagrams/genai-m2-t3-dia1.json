@@ -1,7 +1,0 @@
-{
-  "topic_id": "genai-m2-t3",
-  "diagram_id": "genai-m2-t3-dia1",
-  "title": "Structured Outputs Flow",
-  "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Structured Outputs\"]\n  Process --> End"
-}

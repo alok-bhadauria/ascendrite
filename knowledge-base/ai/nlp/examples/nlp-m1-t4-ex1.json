@@ -1,7 +1,0 @@
-{
-  "topic_id": "nlp-m1-t4",
-  "asset_id": "nlp-m1-t4-ex1",
-  "title": "Topic Modeling",
-  "language": "python",
-  "code": "import numpy as np\n\ndef sample_topic(p_dist):\n    return np.random.choice(len(p_dist), p=p_dist/np.sum(p_dist))\n\nif __name__ == '__main__':\n    print('Gibbs sampler helper module loaded.')\n"
-}

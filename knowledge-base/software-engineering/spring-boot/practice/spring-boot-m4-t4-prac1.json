@@ -1,7 +1,0 @@
-{
-  "topic_id": "spring-boot-m4-t4",
-  "asset_id": "spring-boot-m4-t4-prac1",
-  "title": "Role-Based Access Control (RBAC)",
-  "language": "python",
-  "code": "def run_practice():\n    assert True\nif __name__ == '__main__':\n    run_practice()\n"
-}

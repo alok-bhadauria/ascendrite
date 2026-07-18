@@ -1,7 +1,0 @@
-{
-  "topic_id": "java-m2-t5",
-  "diagram_id": "java-m2-t5-dia1",
-  "title": "Collections Internals Flowchart",
-  "type": "mermaid",
-  "code": "graph TD\n  Heap[JVM Heap] --> Young[Young Gen: Eden, S0, S1]\n  Heap --> Old[Old/Tenured Gen]\n  JVM --> Metaspace[Metaspace (Native memory)]"
-}

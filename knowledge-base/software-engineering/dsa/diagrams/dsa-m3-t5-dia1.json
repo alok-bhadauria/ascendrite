@@ -1,7 +1,0 @@
-{
-  "topic_id": "dsa-m3-t5",
-  "diagram_id": "dsa-m3-t5-dia1",
-  "title": "Binary Search Trees (BST) Flowchart",
-  "type": "mermaid",
-  "code": "graph TD\n  A((Root)) --> B((Left))\n  A --> C((Right))"
-}

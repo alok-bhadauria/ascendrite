@@ -1,6 +1,0 @@
-{
-  "topic_id": "genai-m1-t2",
-  "title": "Attention Optimizations",
-  "version": "1.0.0",
-  "content": "# Interview Prep: Attention Optimizations\n\n## Q1: How does Grouped-Query Attention (GQA) balance the trade-off between MHA accuracy and MQA inference speeds?\n\n### Standard Answer\nMQA achieves maximum throughput by reducing KV cache sizes to a single head, but it degrades model capacity and accuracy. GQA generalizes this by introducing a group parameter $G$. If $G=8$ and $H=64$, 8 query heads share a key-value head. This yields 8x memory savings over MHA while maintaining comparable generation quality.\n"
-}

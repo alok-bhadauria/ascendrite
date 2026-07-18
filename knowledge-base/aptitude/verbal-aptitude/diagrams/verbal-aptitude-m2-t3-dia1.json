@@ -1,7 +1,0 @@
-{
-  "topic_id": "verbal-aptitude-m2-t3",
-  "diagram_id": "verbal-aptitude-m2-t3-dia1",
-  "title": "Direct/Indirect Speech Flowchart",
-  "type": "mermaid",
-  "code": "graph TD\n  Modifier[\"Modifying Phrase\"] -->|Incorrect association| NearestSubject[\"Incorrect Subject\"]\n  Modifier -->|Correct alignment| ActiveSubject[\"Active Subject\"]"
-}

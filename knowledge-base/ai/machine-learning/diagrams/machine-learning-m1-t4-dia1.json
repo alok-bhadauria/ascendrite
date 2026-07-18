@@ -1,7 +1,0 @@
-{
-  "topic_id": "machine-learning-m1-t4",
-  "diagram_id": "machine-learning-m1-t4-dia1",
-  "title": "Numerical Optimization & Convergence Flow",
-  "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Numerical Optimization & Convergence\"]\n  Process --> End"
-}

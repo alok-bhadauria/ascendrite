@@ -1,7 +1,0 @@
-{
-  "topic_id": "os-m5-t4",
-  "diagram_id": "os-m5-t4-dia1",
-  "title": "RAID Configurations Flowchart",
-  "type": "mermaid",
-  "code": "graph LR\n  VA[\"Virtual Address (0x7FFF0040)\"] --> TLB[\"TLB Lookup (MISS)\"]\n  TLB --> PageDir[\"Page Directory lookup (0x1000)\"]\n  PageDir --> Physical[\"Physical Frame (0x9000)\"]"
-}

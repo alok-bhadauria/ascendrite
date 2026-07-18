@@ -1,7 +1,0 @@
-{
-  "topic_id": "quantitative-aptitude-m3-t3",
-  "asset_id": "quantitative-aptitude-m3-t3-ex1",
-  "title": "Pipes & Cisterns",
-  "language": "python",
-  "code": "if __name__ == '__main__':\n    print('Example code execution.')\n"
-}

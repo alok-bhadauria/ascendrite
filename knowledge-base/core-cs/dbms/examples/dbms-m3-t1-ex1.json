@@ -1,7 +1,0 @@
-{
-  "topic_id": "dbms-m3-t1",
-  "asset_id": "dbms-m3-t1-ex1",
-  "title": "Database Crash Recovery",
-  "language": "python",
-  "code": "if __name__ == '__main__':\n    print('Example pass for Database Crash Recovery')\n"
-}

@@ -1,7 +1,0 @@
-{
-  "topic_id": "machine-learning-m2-t2",
-  "asset_id": "machine-learning-m2-t2-prac1",
-  "title": "Scalable Data Wrangling with Pandas",
-  "language": "python",
-  "code": "import pandas as pd\n\n\ndef chunked_filter_and_save(\n    input_file: str, output_file: str, target_column: str, threshold: float\n) -> int:\n    \"\"\"Reads input_file in chunks, filters rows where target_column > threshold,\n\n    and writes them to output_file in chunks.\n    Should return the total count of filtered rows written.\n\n    Rules:\n    1. Memory must remain bounded (no loading the whole file).\n    2. Write headers only for the first chunk to avoid duplicated titles.\n    \"\"\"\n    total_written = 0\n    chunk_size = 10000\n\n    # Stream the data in chunks\n    chunks = pd.read_csv(input_file, chunksize=chunk_size)\n\n    for i, chunk in enumerate(chunks):\n        # Filter rows\n        filtered_chunk = chunk[chunk[target_column] > threshold]\n        num_rows = len(filtered_chunk)\n\n        if num_rows > 0:\n            # Write to output file.\n            # If it's the first chunk being written, write the header.\n            # Otherwise, append without header.\n            mode = \"w\" if total_written == 0 else \"a\"\n            header = True if total_written == 0 else False\n\n            filtered_chunk.to_csv(\n                output_file, mode=mode, header=header, index=False\n            )\n            total_written += num_rows\n\n    return total_written\n"
-}

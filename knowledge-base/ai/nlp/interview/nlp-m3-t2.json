@@ -1,6 +1,0 @@
-{
-  "topic_id": "nlp-m3-t2",
-  "title": "Word2Vec Optimization",
-  "version": "1.0.0",
-  "content": "# Interview Prep: W2V Opt\n\n## Q1: Why do we raise word frequencies to the 3/4 power in the negative sampling distribution?\n\n### Standard Answer\nRaising counts to the 3/4 power ($U(w)^{0.75}$) increases the probability of selecting rare words as negative samples. For example, if a rare word has a frequency of $0.00001$ and a common word has a frequency of $0.01$ (a 1000x difference), raising them to the $0.75$ power yields $0.00017$ and $0.031$ (now a 180x difference). This prevents highly frequent words from dominating the negative selections, ensuring the model learns robust representations for rare terms.\n"
-}

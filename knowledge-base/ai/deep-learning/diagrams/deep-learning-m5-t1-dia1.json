@@ -1,7 +1,0 @@
-{
-  "topic_id": "deep-learning-m5-t1",
-  "diagram_id": "deep-learning-m5-t1-dia1",
-  "title": "Autoencoders (AE) Flow",
-  "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Autoencoders (AE)\"]\n  Process --> End"
-}

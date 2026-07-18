@@ -1,7 +1,0 @@
-{
-  "topic_id": "dbms-m5-t2",
-  "diagram_id": "dbms-m5-t2-dia1",
-  "title": "Database Replication Flowchart",
-  "type": "mermaid",
-  "code": "graph TD\n  Header[Page Header: Slots 0, 1] --> Slot0[Slot 0: Offset 4000]\n  Header --> Slot1[Slot 1: Offset 3850]\n  Slot0 --> Record0[Record 0: 96 Bytes]\n  Slot1 --> Record1[Record 1: 150 Bytes]"
-}

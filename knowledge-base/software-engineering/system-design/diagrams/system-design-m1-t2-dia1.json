@@ -1,7 +1,0 @@
-{
-  "topic_id": "system-design-m1-t2",
-  "diagram_id": "system-design-m1-t2-dia1",
-  "title": "Capacity Estimation Flowchart",
-  "type": "mermaid",
-  "code": "graph TD\n  Closed -->|Failures > Threshold| Open\n  Open -->|Sleep Timeout| Half-Open\n  Half-Open -->|Success| Closed\n  Half-Open -->|Failure| Open"
-}

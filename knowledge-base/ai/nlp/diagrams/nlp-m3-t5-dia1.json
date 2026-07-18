@@ -1,7 +1,0 @@
-{
-  "topic_id": "nlp-m3-t5",
-  "diagram_id": "nlp-m3-t5-dia1",
-  "title": "Semantic Analogies Flow",
-  "type": "mermaid",
-  "code": "graph TD\n  Start --> Process[\"Process Semantic Analogies\"]\n  Process --> End"
-}

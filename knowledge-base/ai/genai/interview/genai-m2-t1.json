@@ -1,6 +1,0 @@
-{
-  "topic_id": "genai-m2-t1",
-  "title": "Prompting Mechanics & In-Context Learning",
-  "version": "1.0.0",
-  "content": "# Interview Prep: Prompting Mechanics\n\n## Q1: Why does the distribution of labels in few-shot prompts affect generation bias?\n\n### Standard Answer\nLLMs are highly sensitive to target token distributions. If a few-shot prompt contains mostly positive examples, the model will shift its outputs toward positive classes, regardless of the test content, due to pre-training distribution alignments.\n"
-}

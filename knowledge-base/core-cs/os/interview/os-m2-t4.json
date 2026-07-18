@@ -1,6 +1,0 @@
-{
-  "topic_id": "os-m2-t4",
-  "title": "Deadlock Conditions",
-  "version": "1.0.0",
-  "content": "# OS Interview Prep\n\n## Q1: Why does changing the page table directory pointer during context switches degrade system performance?\n\n### Standard Answer\nChanging the page table pointer (e.g., loading CR3 in x86) changes virtual-to-physical address mappings. By default, the CPU page translation cache, the **Translation Lookaside Buffer (TLB)**, must invalidate its cached mappings because they belong to the previous address space. Consequently, subsequent memory reads trigger slow multi-level page table traversals (TLB misses) until the cache is repopulated. Modern processors mitigate this by tagging TLB entries with Address Space Identifiers (ASID), preventing full flushes.\n\n\n## Q2: What is the spatial complexity bounds of Deadlock Conditions?\n\n### Standard Answer\nThe spatial complexity scales strictly as $O(1)$ auxiliary memory unless additional arrays or dynamic heap nodes are allocated, yielding $O(N)$ total space."
-}

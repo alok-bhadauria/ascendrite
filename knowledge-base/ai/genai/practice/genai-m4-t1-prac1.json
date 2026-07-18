@@ -1,7 +1,0 @@
-{
-  "topic_id": "genai-m4-t1",
-  "asset_id": "genai-m4-t1-prac1",
-  "title": "Reward Model Training",
-  "language": "python",
-  "code": "import numpy as np\n\ndef binary_preference_loss(r_pos, r_neg):\n    return -np.log(1.0 / (1.0 + np.exp(-(r_pos - r_neg))))\n\ndef run_practice():\n    loss = binary_preference_loss(1.0, 1.0)\n    assert np.allclose(loss, 0.693147)\n    print('[PASS] Preference loss calculation matches predictions.')\n\nif __name__ == '__main__':\n    run_practice()\n"
-}

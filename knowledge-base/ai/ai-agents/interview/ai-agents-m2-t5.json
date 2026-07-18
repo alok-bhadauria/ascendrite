@@ -1,6 +1,0 @@
-{
-  "topic_id": "ai-agents-m2-t5",
-  "title": "Error Handling & Recovery Loops",
-  "version": "1.0.0",
-  "content": "# Interview Prep: Error Recovery\n\n## Q1: How do we prevent infinite loops when an agent keeps repeating a failing action?\n\n### Standard Answer\nWe implement a retry budget. If the model encounters the same exception repeatedly, the system triggers a hard stop, logs a failure message, and exits the loop to prevent runaway token costs.\n"
-}
