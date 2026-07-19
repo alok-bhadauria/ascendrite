@@ -166,5 +166,30 @@ The platform defines a clean boundary separating logical asset ownership and met
 *   **Ownership Validation**: All service transactions verify `principal.id == asset.owner_id`. Admin roles automatically bypass ownership barriers.
 *   **Platform Runtime Hooks**: Uploads/deletions trigger internal event publication (`AssetUploaded`, `AssetDeleted`), security auditing, and user timeline events.
 
+---
+
+## 9. Academic Structures, Knowledge Content & Platform Search
+
+The platform implements an institutional-independent academic syllabus hierarchy, publication workflows, and unified search discovery:
+
+### A. Academic Syllabus Semantics
+*   **Subject**: Canonical discipline independent of any specific university or course provider (e.g. Operating Systems).
+*   **Syllabus**: Institution/university-specific curriculum structure (e.g. GLA University B.Tech CSE 2025).
+*   **Module**: Logically grouped divisions within a syllabus (e.g. Process Synchronization).
+*   **Topic**: Actionable instructional node within a module (e.g. Dining Philosophers).
+*   *Validation Constraints*: Strict parent-child resolution is enforced on CRUD. Parent deletion is blocked if any active child nodes reference it (non-cascading deletion).
+
+### B. Knowledge Content & Publishing Lifecycle
+*   **Content Types**: Notes, Revision Summaries, and Interview Preparation materials linked directly to specific topics.
+*   **Publication States**: Managed through a state machine: `Draft` $\rightarrow$ `Published` $\rightarrow$ `Archived` $\rightarrow$ `Deleted`.
+*   **Visibility Guards**: Enforce access controls. Students can only retrieve `Published` content. Contributors and authors can access `Draft` versions.
+*   **Asset Association**: Reusable media attachments (from the Asset platform) are verified for ownership and active status.
+
+### C. Unified Search Platform
+*   **Decoupled Search**: Agnostic search adapter interfaces (`SearchProvider`) separate the engine interface from the database client.
+*   **MongoSearchProvider**: Regular-expression indexing provider for lightweight text matches over subjects and content items.
+*   **Service Syncing**: Automatically triggers updates/removals in the `search_index` collection upon database updates.
+
+
 
 
