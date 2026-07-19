@@ -15,6 +15,12 @@ def clear_db():
     db["activity_logs"].delete_many({})
     db["in_app_notifications"].delete_many({})
     db["assets"].delete_many({})
+    db["subjects"].delete_many({})
+    db["syllabuses"].delete_many({})
+    db["modules"].delete_many({})
+    db["topics"].delete_many({})
+    db["knowledge_contents"].delete_many({})
+    db["search_index"].delete_many({})
     client.close()
 
 @pytest.fixture(scope="module")

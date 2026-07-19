@@ -35,6 +35,24 @@ from app.modules.assets.repositories.asset import MongoAssetRepository
 from app.modules.assets.services.base import AssetService
 from app.modules.assets.services.service import MongoAssetService
 
+# ------------------------------------------------------------------------------
+# Phase 3: Curriculum Structure, Content, Discovery and Publishing Imports
+# ------------------------------------------------------------------------------
+from app.modules.knowledge.repositories.base import (
+    SubjectRepository, SyllabusRepository, ModuleRepository, TopicRepository, KnowledgeContentRepository
+)
+from app.modules.knowledge.repositories.mongo import (
+    MongoSubjectRepository, MongoSyllabusRepository, MongoModuleRepository, MongoTopicRepository, MongoKnowledgeContentRepository
+)
+from app.modules.knowledge.services.base import AcademicStructureService, KnowledgeContentService
+from app.modules.knowledge.services.academic import MongoAcademicStructureService
+from app.modules.knowledge.services.content import MongoKnowledgeContentService
+
+# Phase 3 Search Platform Imports
+from app.core.search.base import SearchProvider
+from app.core.search.mongo import MongoSearchProvider
+from app.core.search.service import SearchService
+
 # Singleton Internal Application Event Dispatcher
 event_dispatcher_instance = LocalEventDispatcher()
 
@@ -166,3 +184,76 @@ async def get_asset_service(
     activity_service: ActivityService = Depends(get_activity_service)
 ) -> AssetService:
     return MongoAssetService(repo, storage_mgr, event_dispatcher, audit_service, activity_service)
+
+from app.core.runtime.context import RuntimeContext
+
+async def get_runtime_context(
+    request: Request,
+    principal: AuthenticatedPrincipal = Depends(get_current_principal)
+) -> RuntimeContext:
+    correlation_id = request.headers.get("X-Correlation-ID", "unknown")
+    ip_address = request.client.host if request.client else None
+    user_agent = request.headers.get("User-Agent")
+    return RuntimeContext(
+        correlation_id=correlation_id,
+        principal=principal,
+        ip_address=ip_address,
+        user_agent=user_agent
+    )
+
+# ------------------------------------------------------------------------------
+# Phase 3 Dependencies
+# ------------------------------------------------------------------------------
+
+async def get_subject_repository(db: AsyncIOMotorDatabase = Depends(get_database)) -> SubjectRepository:
+    return MongoSubjectRepository(db)
+
+async def get_syllabus_repository(db: AsyncIOMotorDatabase = Depends(get_database)) -> SyllabusRepository:
+    return MongoSyllabusRepository(db)
+
+async def get_module_repository(db: AsyncIOMotorDatabase = Depends(get_database)) -> ModuleRepository:
+    return MongoModuleRepository(db)
+
+async def get_topic_repository(db: AsyncIOMotorDatabase = Depends(get_database)) -> TopicRepository:
+    return MongoTopicRepository(db)
+
+async def get_search_provider(db: AsyncIOMotorDatabase = Depends(get_database)) -> SearchProvider:
+    return MongoSearchProvider(db)
+
+def get_search_service(provider: SearchProvider = Depends(get_search_provider)) -> SearchService:
+    return SearchService(provider)
+
+async def get_academic_structure_service(
+    subject_repo: SubjectRepository = Depends(get_subject_repository),
+    syllabus_repo: SyllabusRepository = Depends(get_syllabus_repository),
+    module_repo: ModuleRepository = Depends(get_module_repository),
+    topic_repo: TopicRepository = Depends(get_topic_repository),
+    event_dispatcher: EventDispatcher = Depends(get_event_dispatcher),
+    audit_service: AuditService = Depends(get_audit_service),
+    activity_service: ActivityService = Depends(get_activity_service),
+    db: AsyncIOMotorDatabase = Depends(get_database),
+    search_service: SearchService = Depends(get_search_service)
+) -> AcademicStructureService:
+    return MongoAcademicStructureService(
+        subject_repo, syllabus_repo, module_repo, topic_repo,
+        event_dispatcher, audit_service, activity_service,
+        db_ref=db, search_service=search_service
+    )
+
+async def get_knowledge_content_repository(db: AsyncIOMotorDatabase = Depends(get_database)) -> KnowledgeContentRepository:
+    return MongoKnowledgeContentRepository(db)
+
+async def get_knowledge_content_service(
+    repo: KnowledgeContentRepository = Depends(get_knowledge_content_repository),
+    academic_service: AcademicStructureService = Depends(get_academic_structure_service),
+    asset_service: AssetService = Depends(get_asset_service),
+    event_dispatcher: EventDispatcher = Depends(get_event_dispatcher),
+    audit_service: AuditService = Depends(get_audit_service),
+    activity_service: ActivityService = Depends(get_activity_service),
+    search_service: SearchService = Depends(get_search_service)
+) -> KnowledgeContentService:
+    return MongoKnowledgeContentService(
+        repo, academic_service, asset_service,
+        event_dispatcher, audit_service, activity_service,
+        search_service=search_service
+    )
