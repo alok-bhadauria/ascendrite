@@ -21,6 +21,9 @@ def clear_db():
     db["topics"].delete_many({})
     db["knowledge_contents"].delete_many({})
     db["search_index"].delete_many({})
+    db["learning_sessions"].delete_many({})
+    db["learning_attempts"].delete_many({})
+    db["progress"].delete_many({})
     client.close()
 
 @pytest.fixture(scope="module")

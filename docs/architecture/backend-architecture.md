@@ -184,3 +184,25 @@ The backend platform handles long-running processing tasks and telemetry logs us
 *   **Transaction Boundaries**: Services manage transactional units. Operations that cross database collections must run within unit-of-work transactions.
 *   **Backward Compatibility**: Metadata schema changes must use optional fields and default values, allowing legacy client versions to parse new response payloads without crashing.
 *   **Extension Hooks**: Module actions must publish events to the event bus, allowing other systems to extend behavior without modifying the core service files.
+
+---
+
+## 5. Learning Platform Foundation
+
+The platform introduces the foundational elements of the Learning Domain under `app/modules/learning/`.
+
+### A. Domain Separation & Knowledge Decoupling
+*   **Knowledge vs. Learning Boundary**: The Learning module is decoupled from the Knowledge module. It stores no content structures (such as syllabus titles or content notes). It references curriculum nodes (Topics, Contents) strictly by their string IDs.
+*   **Ownership Model**: Every learning record is owned by a specific student account. Access is restricted using capability authorization guards (`learning:read`, `learning:write`).
+
+### B. Lightweight Learning Sessions
+*   **Temporal Container**: A `LearningSessionModel` represents a contiguous period of learner activity. It is lightweight and carries no business workflows.
+*   **Decoupled Hooking**: Future learning experiences participate in active sessions to record timeline threads rather than sessions orchestrating experiences.
+
+### C. Resource-Agnostic Learning Attempts
+*   **Activity Evidence**: A `LearningAttemptModel` tracks a single student interaction with any learning resource.
+*   **Generic References**: Attempts reference resources generically via `resource_id` and open-ended `resource_type` (e.g. topic, content, quiz, practice, note, challenge), future-proofing the schema.
+
+### D. Derived Learning Progress
+*   **Summary Representation**: `ProgressModel` is a derived representation of attempts. It summarizes confidence levels, status progressions (`not_started` -> `in_progress` -> `completed` -> `reviewed` -> `mastered`), review counts, and active times. It does not act as a learner event database.
+

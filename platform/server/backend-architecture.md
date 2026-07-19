@@ -185,10 +185,29 @@ The platform implements an institutional-independent academic syllabus hierarchy
 *   **Visibility Guards**: Enforce access controls. Students can only retrieve `Published` content. Contributors and authors can access `Draft` versions.
 *   **Asset Association**: Reusable media attachments (from the Asset platform) are verified for ownership and active status.
 
-### C. Unified Search Platform
-*   **Decoupled Search**: Agnostic search adapter interfaces (`SearchProvider`) separate the engine interface from the database client.
-*   **MongoSearchProvider**: Regular-expression indexing provider for lightweight text matches over subjects and content items.
-*   **Service Syncing**: Automatically triggers updates/removals in the `search_index` collection upon database updates.
+---
+
+## 10. Learning Platform Foundation
+
+The platform introduces the foundational elements of the Learning Domain, designed to track student engagement, progression, and evidence of mastery without coupling to specific content types or hardcoding learning experiences.
+
+### A. Domain Separation & Knowledge Decoupling
+*   **Knowledge vs. Learning Boundary**: The Learning module (`app/modules/learning`) remains strictly decoupled from the Knowledge module. It stores no content properties (such as title, description, or body). It refers to curriculum nodes (Topics, Contents) strictly via their ID string keys.
+*   **Ownership Model**: Every learning record is tied directly to an owner `principal.id`. Access is governed by capability checks (`learning:read`, `learning:write`) rather than static roles.
+
+### B. Lightweight Learning Sessions
+*   **Temporal Container**: A `LearningSessionModel` represents a contiguous period of learner activity. It is lightweight and intentionally carries no business workflows.
+*   **Participating Abstraction**: Future learning experiences participate in the session container to provide a chronological thread of learning rather than having the session orchestrate the experiences.
+
+### C. Resource-Agnostic Learning Attempts
+*   **Activity Evidence**: A `LearningAttemptModel` tracks a single learner interaction with any resource (e.g. topic, content, quiz, practice, note, challenge).
+*   **Generic References**: Attempts reference resources generically via `resource_id` and open-ended `resource_type`, future-proofing the schema against new curriculum content types.
+
+### D. Derived Learning Progress
+*   **Derived Summary State**: `ProgressModel` acts as a derived summary of student achievement rather than a persistence layer for learning events.
+*   **Evidence Aggregator**: Completion of attempts triggers progression calculations which evolve progress states (`not_started` -> `in_progress` -> `completed` -> `reviewed` -> `mastered`), increment review counters, and update generic confidence scores.
+*   **Backward Compatibility**: The progress schemas default new lifecycle states and confidence metrics upon parsing legacy documents, preserving compatibility.
+
 
 
 

@@ -9,6 +9,7 @@ from app.api.v1.endpoints.system import router as system_router
 from app.api.v1.endpoints.academic import router as academic_router
 from app.api.v1.endpoints.content import router as content_router
 from app.api.v1.endpoints.search import router as search_router
+from app.api.v1.endpoints.session import router as learning_router
 
 router = APIRouter(route_class=EnvelopeRoute)
 
@@ -21,3 +22,4 @@ router.include_router(system_router, prefix="/system")
 router.include_router(academic_router, prefix="/academic")
 router.include_router(content_router, prefix="/knowledge-content")
 router.include_router(search_router, prefix="/search")
+router.include_router(learning_router, prefix="/learning")
