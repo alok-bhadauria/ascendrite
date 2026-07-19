@@ -80,6 +80,16 @@ from app.modules.learning.repositories.goal import LearningGoalRepository, Mongo
 from app.modules.learning.services.utilities import LearningUtilitiesService
 from app.modules.learning.services.discovery import DiscoveryService
 
+# ------------------------------------------------------------------------------
+# Phase 6: Creator, Collaboration & Administration Platform Imports
+# ------------------------------------------------------------------------------
+from app.modules.creator.repositories.draft import DraftResourceRepository, MongoDraftResourceRepository
+from app.modules.creator.services.workspace import ContentWorkspaceService
+from app.modules.creator.repositories.attachment import AssetAttachmentRepository, MongoAssetAttachmentRepository
+from app.modules.creator.services.attachment import AssetAttachmentService
+from app.modules.creator.repositories.workflow import PublishingWorkflowRepository, MongoPublishingWorkflowRepository
+from app.modules.creator.services.pipeline import PublishingPipelineService
+
 # Singleton Internal Application Event Dispatcher
 event_dispatcher_instance = LocalEventDispatcher()
 
@@ -456,6 +466,56 @@ async def get_discovery_service(
     db: AsyncIOMotorDatabase = Depends(get_database)
 ) -> DiscoveryService:
     return DiscoveryService(db)
+
+# ------------------------------------------------------------------------------
+# Phase 6: Creator platform dependency providers
+# ------------------------------------------------------------------------------
+
+async def get_draft_resource_repository(db: AsyncIOMotorDatabase = Depends(get_database)) -> DraftResourceRepository:
+    return MongoDraftResourceRepository(db)
+
+async def get_creator_workspace_service(
+    repo: DraftResourceRepository = Depends(get_draft_resource_repository),
+    db: AsyncIOMotorDatabase = Depends(get_database),
+    event_dispatcher: EventDispatcher = Depends(get_event_dispatcher),
+    audit_service: AuditService = Depends(get_audit_service)
+) -> ContentWorkspaceService:
+    return ContentWorkspaceService(repo, db, event_dispatcher, audit_service)
+
+async def get_asset_attachment_repository(db: AsyncIOMotorDatabase = Depends(get_database)) -> AssetAttachmentRepository:
+    return MongoAssetAttachmentRepository(db)
+
+async def get_creator_asset_service(
+    repo: AssetAttachmentRepository = Depends(get_asset_attachment_repository),
+    draft_repo: DraftResourceRepository = Depends(get_draft_resource_repository),
+    asset_service: AssetService = Depends(get_asset_service),
+    db: AsyncIOMotorDatabase = Depends(get_database),
+    audit_service: AuditService = Depends(get_audit_service)
+) -> AssetAttachmentService:
+    return AssetAttachmentService(repo, draft_repo, asset_service, db, audit_service)
+
+async def get_publishing_workflow_repository(db: AsyncIOMotorDatabase = Depends(get_database)) -> PublishingWorkflowRepository:
+    return MongoPublishingWorkflowRepository(db)
+
+async def get_creator_pipeline_service(
+    repo: PublishingWorkflowRepository = Depends(get_publishing_workflow_repository),
+    workspace_service: ContentWorkspaceService = Depends(get_creator_workspace_service),
+    knowledge_content_service: KnowledgeContentService = Depends(get_knowledge_content_service),
+    assessment_content_service: AssessmentContentService = Depends(get_assessment_content_service),
+    db: AsyncIOMotorDatabase = Depends(get_database),
+    event_dispatcher: EventDispatcher = Depends(get_event_dispatcher),
+    audit_service: AuditService = Depends(get_audit_service)
+) -> PublishingPipelineService:
+    return PublishingPipelineService(
+        repo=repo,
+        workspace_service=workspace_service,
+        knowledge_content_service=knowledge_content_service,
+        assessment_content_service=assessment_content_service,
+        db=db,
+        event_dispatcher=event_dispatcher,
+        audit_service=audit_service
+    )
+
 
 
 

@@ -18,6 +18,11 @@ from app.api.v1.endpoints.assessment_results import router as assessment_results
 from app.api.v1.endpoints.learning_utilities import router as learning_utilities_router
 from app.api.v1.endpoints.discovery import router as discovery_router
 
+# Phase 6: Creator platform endpoints imports
+from app.api.v1.endpoints.workspace import router as workspace_router
+from app.api.v1.endpoints.creator_assets import router as creator_assets_router
+from app.api.v1.endpoints.pipeline import router as pipeline_router
+
 router = APIRouter(route_class=EnvelopeRoute)
 
 router.include_router(auth_router, prefix="/auth")
@@ -37,3 +42,8 @@ router.include_router(experience_router, prefix="/learning/experiences")
 router.include_router(insights_router, prefix="/learning/insights")
 router.include_router(learning_utilities_router, prefix="/learning/utilities")
 router.include_router(discovery_router, prefix="/learning/discovery")
+
+# Register Phase 6 Creator Platform routes
+router.include_router(workspace_router, prefix="/creator/drafts")
+router.include_router(creator_assets_router, prefix="/creator/drafts")
+router.include_router(pipeline_router, prefix="/creator/drafts")

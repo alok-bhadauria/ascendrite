@@ -249,6 +249,24 @@ Phase 5 introduces the Education & Assessment Platform, establishing end-to-end 
 *   **Learning Utilities**: Manages learner study bookmarks/favorites (`LearningCollectionModel`), study planning (`LearningGoalModel`), and dynamic timelines for recently accessed/completed items.
 *   **Discovery Platform**: Exposes global text search, advanced filtering, and related resource lookups across all platform models mapped to a unified `DiscoverableResource` projection.
 
+---
+
+## 14. Creator Platform (Phase 6 · Milestone 6.1)
+
+Milestone 6.1 introduces the Creator Platform, providing the authoring environment and publication workflow management for educational resources.
+
+### A. Content Workspace
+*   **Unified Draft Model**: Manages editing lifecycles via `DraftResourceModel`, featuring an open-ended payload dictionary storing unsanitized fields for topics, content, questions, and assessments.
+*   **Structural Verification**: Executes validation routines on draft objects, checking reference integrity and mandatory metadata fields before allowing progression to review stages.
+
+### B. Asset Attachment
+*   **Coordination Links**: Links existing `AssetModel` records to draft entities through `AssetAttachmentModel` records, querying the core Asset Platform to confirm existence without duplicating binary storage.
+
+### C. Publishing Pipeline
+*   **Deterministic Transitions**: Orchestrates lifecycle transitions (`draft` -> `ready_for_review` -> `approved` -> `published`) through `PublishingPipelineService`.
+*   **Domain-Specific Insertion**: Upon final approval and publication, the pipeline invokes the target domain services (Knowledge or Assessments) to insert or update production records, maintaining clear domain boundaries.
+
+
 
 
 
