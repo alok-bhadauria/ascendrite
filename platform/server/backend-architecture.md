@@ -222,6 +222,19 @@ Stage 4.2 introduces the Learning Experience Platform layer. It orchestrates lea
 *   **Attempt Logging**: Upon completion or abandonment of an experience, the orchestrator triggers the `LearningAttemptService` to log corresponding learner attempt evidence.
 *   **Derived Progress updates**: This attempt evidence is then picked up by the `ProgressService` to calculate topic-level status progressions (up to `mastered`) and increment confidence scores.
 
+---
+
+## 12. Learning Insights Platform
+
+Stage 4.3 introduces the Learning Insights Platform layer. It provides deterministic, evidence-based aggregations and educational metrics that prepare the codebase for future personalization and intelligent layers.
+
+### A. Information Architecture & Aggregations
+*   **Learner Dashboard**: Computes dynamic statistics (total sessions, attempts, mastered topics, and concepts requiring review) along with the active temporal container state.
+*   **Chronological Timeline**: Merges sessions, attempts, and experience events into a single unified timeline representation sorted descending.
+*   **Rule-Based Recommendations**: Deterministically suggests next study options, including resuming open experiences, continuing incomplete topics, and retrying failed assessments (scores < 70%).
+*   **Weak Area Tracking**: Evaluates attempt histories and marks subjects/topics as weak if their latest or average assessment score falls below 70%.
+
+
 
 
 

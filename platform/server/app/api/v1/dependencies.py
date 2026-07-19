@@ -62,6 +62,7 @@ from app.modules.learning.services.session import LearningSessionService
 from app.modules.learning.services.attempt import LearningAttemptService
 from app.modules.learning.services.progress import ProgressService
 from app.modules.learning.services.experience import LearningExperienceService
+from app.modules.learning.services.insights import LearningInsightsService
 
 # Singleton Internal Application Event Dispatcher
 event_dispatcher_instance = LocalEventDispatcher()
@@ -342,4 +343,10 @@ async def get_learning_experience_service(
         audit_service=audit_service,
         activity_service=activity_service
     )
+
+async def get_learning_insights_service(
+    db: AsyncIOMotorDatabase = Depends(get_database)
+) -> LearningInsightsService:
+    return LearningInsightsService(db)
+
 
