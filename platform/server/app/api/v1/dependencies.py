@@ -100,6 +100,12 @@ from app.modules.collaboration.services.workflow import CollaborationWorkflowSer
 from app.modules.collaboration.repositories.activity import CollaborationActivityRepository, MongoCollaborationActivityRepository, CollaborationNotificationRepository, MongoCollaborationNotificationRepository
 from app.modules.collaboration.services.activity import CollaborationActivityService
 
+# ------------------------------------------------------------------------------
+# Phase 6 Administration Platform Imports
+# ------------------------------------------------------------------------------
+from app.modules.administration.repositories.config import PlatformConfigRepository, MongoPlatformConfigRepository
+from app.modules.administration.services.admin import AdministrationService
+
 # Singleton Internal Application Event Dispatcher
 event_dispatcher_instance = LocalEventDispatcher()
 
@@ -568,6 +574,21 @@ async def get_collaboration_activity_service(
     notification_repo: CollaborationNotificationRepository = Depends(get_collaboration_notification_repository)
 ) -> CollaborationActivityService:
     return CollaborationActivityService(activity_repo, notification_repo)
+
+# ------------------------------------------------------------------------------
+# Phase 6 Administration Platform dependency providers
+# ------------------------------------------------------------------------------
+
+async def get_platform_config_repository(db: AsyncIOMotorDatabase = Depends(get_database)) -> PlatformConfigRepository:
+    return MongoPlatformConfigRepository(db)
+
+async def get_administration_service(
+    repo: PlatformConfigRepository = Depends(get_platform_config_repository),
+    db: AsyncIOMotorDatabase = Depends(get_database),
+    audit_service: AuditService = Depends(get_audit_service)
+) -> AdministrationService:
+    return AdministrationService(repo, db, audit_service)
+
 
 
 

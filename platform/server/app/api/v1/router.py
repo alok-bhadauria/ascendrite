@@ -57,3 +57,9 @@ from app.api.v1.endpoints.collaboration_activity import router as collaboration_
 router.include_router(team_router, prefix="/collaboration")
 router.include_router(collaboration_workflow_router, prefix="/collaboration")
 router.include_router(collaboration_activity_router, prefix="/collaboration")
+
+# Phase 6: Administration platform endpoints imports
+from app.api.v1.endpoints.administration import router as administration_router
+
+# Register Phase 6 Administration Platform routes
+router.include_router(administration_router, prefix="/admin")

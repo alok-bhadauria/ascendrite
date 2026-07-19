@@ -283,6 +283,20 @@ Milestone 6.2 introduces the Collaboration Platform, coordinating organizational
 *   **Timeline History**: Records immutable operations history timeline streams (`CollaborationActivityModel`).
 *   **Notifications Dispatch**: Distributes real-time collaborative alerts (`CollaborationNotificationModel`) to keep team members informed.
 
+---
+
+## 11. Administration Platform (Phase 6 · Milestone 6.3)
+
+Milestone 6.3 introduces the Administration Platform, establishing system management operations and global feature configurations.
+
+### A. Platform Configuration
+*   **Global Config**: Persists key configurations (`PlatformConfigModel`) governing maintenance modes, CORS origin structures, and global feature toggles.
+*   **Admin Guardianship**: Restricts edit/update and view access exclusively to users authenticated under the role `Admin`.
+
+### B. Administrative Visibility
+*   **Composition Dashboards**: Aggregates document footprint sizes and backlogs across topics, knowledge contents, assessments, draft review items, and uploaded assets collections, providing comprehensive operational visibility without duplicating data ownership.
+
+
 
 
 
