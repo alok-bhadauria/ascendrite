@@ -64,6 +64,22 @@ from app.modules.learning.services.progress import ProgressService
 from app.modules.learning.services.experience import LearningExperienceService
 from app.modules.learning.services.insights import LearningInsightsService
 
+# ------------------------------------------------------------------------------
+# Phase 5: Education & Assessment Platform Imports
+# ------------------------------------------------------------------------------
+from app.modules.assessments.repositories.question import QuestionRepository, MongoQuestionRepository
+from app.modules.assessments.repositories.assessment import AssessmentRepository, MongoAssessmentRepository
+from app.modules.assessments.services.content import AssessmentContentService
+from app.modules.assessments.repositories.runtime import AssessmentSessionRepository, MongoAssessmentSessionRepository
+from app.modules.assessments.services.runtime import AssessmentRuntimeService
+from app.modules.assessments.repositories.results import AssessmentResultRepository, MongoAssessmentResultRepository
+from app.modules.assessments.services.evaluation import AssessmentEvaluationService
+
+from app.modules.learning.repositories.collection import LearningCollectionRepository, MongoLearningCollectionRepository
+from app.modules.learning.repositories.goal import LearningGoalRepository, MongoLearningGoalRepository
+from app.modules.learning.services.utilities import LearningUtilitiesService
+from app.modules.learning.services.discovery import DiscoveryService
+
 # Singleton Internal Application Event Dispatcher
 event_dispatcher_instance = LocalEventDispatcher()
 
@@ -348,5 +364,98 @@ async def get_learning_insights_service(
     db: AsyncIOMotorDatabase = Depends(get_database)
 ) -> LearningInsightsService:
     return LearningInsightsService(db)
+
+async def get_question_repository(db: AsyncIOMotorDatabase = Depends(get_database)) -> QuestionRepository:
+    return MongoQuestionRepository(db)
+
+async def get_assessment_repository(db: AsyncIOMotorDatabase = Depends(get_database)) -> AssessmentRepository:
+    return MongoAssessmentRepository(db)
+
+async def get_assessment_content_service(
+    question_repo: QuestionRepository = Depends(get_question_repository),
+    assessment_repo: AssessmentRepository = Depends(get_assessment_repository),
+    db: AsyncIOMotorDatabase = Depends(get_database),
+    event_dispatcher: EventDispatcher = Depends(get_event_dispatcher),
+    audit_service: AuditService = Depends(get_audit_service),
+    activity_service: ActivityService = Depends(get_activity_service)
+) -> AssessmentContentService:
+    return AssessmentContentService(
+        question_repo=question_repo,
+        assessment_repo=assessment_repo,
+        db=db,
+        event_dispatcher=event_dispatcher,
+        audit_service=audit_service,
+        activity_service=activity_service
+    )
+
+async def get_assessment_session_repository(db: AsyncIOMotorDatabase = Depends(get_database)) -> AssessmentSessionRepository:
+    return MongoAssessmentSessionRepository(db)
+
+async def get_assessment_result_repository(db: AsyncIOMotorDatabase = Depends(get_database)) -> AssessmentResultRepository:
+    return MongoAssessmentResultRepository(db)
+
+async def get_assessment_evaluation_service(
+    repo: AssessmentResultRepository = Depends(get_assessment_result_repository),
+    session_repo: AssessmentSessionRepository = Depends(get_assessment_session_repository),
+    question_repo: QuestionRepository = Depends(get_question_repository),
+    assessment_repo: AssessmentRepository = Depends(get_assessment_repository),
+    db: AsyncIOMotorDatabase = Depends(get_database),
+    event_dispatcher: EventDispatcher = Depends(get_event_dispatcher),
+    audit_service: AuditService = Depends(get_audit_service),
+    attempt_service: LearningAttemptService = Depends(get_learning_attempt_service),
+    session_service: LearningSessionService = Depends(get_learning_session_service)
+) -> AssessmentEvaluationService:
+    return AssessmentEvaluationService(
+        repo=repo,
+        session_repo=session_repo,
+        question_repo=question_repo,
+        assessment_repo=assessment_repo,
+        db=db,
+        event_dispatcher=event_dispatcher,
+        audit_service=audit_service,
+        attempt_service=attempt_service,
+        session_service=session_service
+    )
+
+async def get_assessment_runtime_service(
+    repo: AssessmentSessionRepository = Depends(get_assessment_session_repository),
+    content_service: AssessmentContentService = Depends(get_assessment_content_service),
+    db: AsyncIOMotorDatabase = Depends(get_database),
+    event_dispatcher: EventDispatcher = Depends(get_event_dispatcher),
+    audit_service: AuditService = Depends(get_audit_service),
+    evaluation_service: AssessmentEvaluationService = Depends(get_assessment_evaluation_service)
+) -> AssessmentRuntimeService:
+    srv = AssessmentRuntimeService(
+        repo=repo,
+        content_service=content_service,
+        db=db,
+        event_dispatcher=event_dispatcher,
+        audit_service=audit_service,
+        evaluation_service=evaluation_service
+    )
+    return srv
+
+async def get_learning_collection_repository(db: AsyncIOMotorDatabase = Depends(get_database)) -> LearningCollectionRepository:
+    return MongoLearningCollectionRepository(db)
+
+async def get_learning_goal_repository(db: AsyncIOMotorDatabase = Depends(get_database)) -> LearningGoalRepository:
+    return MongoLearningGoalRepository(db)
+
+async def get_learning_utilities_service(
+    collection_repo: LearningCollectionRepository = Depends(get_learning_collection_repository),
+    goal_repo: LearningGoalRepository = Depends(get_learning_goal_repository),
+    db: AsyncIOMotorDatabase = Depends(get_database)
+) -> LearningUtilitiesService:
+    return LearningUtilitiesService(
+        collection_repo=collection_repo,
+        goal_repo=goal_repo,
+        db=db
+    )
+
+async def get_discovery_service(
+    db: AsyncIOMotorDatabase = Depends(get_database)
+) -> DiscoveryService:
+    return DiscoveryService(db)
+
 
 

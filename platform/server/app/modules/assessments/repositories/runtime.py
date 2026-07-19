@@ -1,0 +1,74 @@
+from abc import ABC, abstractmethod
+from typing import Any, List, Optional
+from bson import ObjectId
+from motor.motor_asyncio import AsyncIOMotorDatabase
+from app.modules.assessments.models.runtime import AssessmentSessionModel, SessionStatus
+from app.repositories.base import BaseRepository
+
+class AssessmentSessionRepository(BaseRepository[AssessmentSessionModel], ABC):
+    @abstractmethod
+    async def get_active_session_by_user(self, user_id: Any, assessment_id: str) -> Optional[AssessmentSessionModel]:
+        pass
+
+class MongoAssessmentSessionRepository(AssessmentSessionRepository):
+    def __init__(self, db: AsyncIOMotorDatabase):
+        self.collection = db["assessment_sessions"]
+
+    def _to_db_doc(self, model: AssessmentSessionModel) -> dict:
+        doc = model.model_dump(by_alias=True, exclude={"id"})
+        # Convert user_id / session_id if needed to ObjectId
+        for key in ["user_id"]:
+            if key in doc and doc[key] is not None:
+                val = doc[key]
+                if isinstance(val, str) and ObjectId.is_valid(val):
+                    doc[key] = ObjectId(val)
+                elif not isinstance(val, ObjectId):
+                    try:
+                        doc[key] = ObjectId(str(val))
+                    except Exception:
+                        pass
+        return doc
+
+    def _to_query_id(self, val: Any) -> Any:
+        if isinstance(val, str) and ObjectId.is_valid(val):
+            return ObjectId(val)
+        return val
+
+    async def get_by_id(self, id: Any) -> Optional[AssessmentSessionModel]:
+        try:
+            doc = await self.collection.find_one({"_id": self._to_query_id(id)})
+            return AssessmentSessionModel(**doc) if doc else None
+        except Exception:
+            return None
+
+    async def get_active_session_by_user(self, user_id: Any, assessment_id: str) -> Optional[AssessmentSessionModel]:
+        try:
+            doc = await self.collection.find_one({
+                "user_id": self._to_query_id(user_id),
+                "assessment_id": assessment_id,
+                "status": SessionStatus.ACTIVE.value
+            })
+            return AssessmentSessionModel(**doc) if doc else None
+        except Exception:
+            return None
+
+    async def get_all(self) -> List[AssessmentSessionModel]:
+        cursor = self.collection.find()
+        return [AssessmentSessionModel(**doc) for doc in await cursor.to_list(length=100)]
+
+    async def create(self, entity: AssessmentSessionModel) -> AssessmentSessionModel:
+        doc = self._to_db_doc(entity)
+        result = await self.collection.insert_one(doc)
+        entity.id = str(result.inserted_id)
+        return entity
+
+    async def update(self, id: Any, entity: AssessmentSessionModel) -> Optional[AssessmentSessionModel]:
+        doc = self._to_db_doc(entity)
+        result = await self.collection.replace_one({"_id": self._to_query_id(id)}, doc)
+        if result.matched_count:
+            return entity
+        return None
+
+    async def delete(self, id: Any) -> bool:
+        result = await self.collection.delete_one({"_id": self._to_query_id(id)})
+        return result.deleted_count > 0

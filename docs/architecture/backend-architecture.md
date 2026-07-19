@@ -233,5 +233,21 @@ Stage 4.3 introduces the Learning Insights Platform layer. It provides determini
 *   **Rule-Based Recommendations**: Deterministically suggests next study options, including resuming open experiences, continuing incomplete topics, and retrying failed assessments (scores < 70%).
 *   **Weak Area Tracking**: Evaluates attempt histories and marks subjects/topics as weak if their latest or average assessment score falls below 70%.
 
+---
+
+## 8. Education & Assessment Platform (Phase 5)
+
+Phase 5 introduces the Education & Assessment Platform, establishing end-to-end evaluation capabilities alongside learner workspace organization and content discovery.
+
+### A. Assessment Foundation
+*   **Assessment Content**: Manages the modular `QuestionModel` bank (supporting multiple types like MCQ, FillBlank, TrueFalse) and reusable `AssessmentModel` definitions containing ordered, weighted `AssessmentQuestionRef` items.
+*   **Assessment Runtime**: Executes lightweight active temporal `AssessmentSessionModel` instances capturing user responses, with built-in time-limit boundary enforcement.
+*   **Deterministic Evaluation**: Grades finalized `AssessmentSubmissionModel` payloads against correct answers, generating strengths/weaknesses and logging completed attempt evidence to update Progress.
+
+### B. Educational Experience
+*   **Learning Utilities**: Manages learner study bookmarks/favorites (`LearningCollectionModel`), study planning (`LearningGoalModel`), and dynamic timelines for recently accessed/completed items.
+*   **Discovery Platform**: Exposes global text search, advanced filtering, and related resource lookups across all platform models mapped to a unified `DiscoverableResource` projection.
+
+
 
 
