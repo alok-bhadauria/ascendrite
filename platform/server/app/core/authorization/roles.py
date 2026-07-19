@@ -19,6 +19,7 @@ ROLE_BUNDLES: Dict[str, List[Capability]] = {
         Capability.USER_UPDATE_SELF,
         Capability.KNOWLEDGE_READ,
         Capability.KNOWLEDGE_WRITE,
+        Capability.KNOWLEDGE_PUBLISH,
         Capability.LEARNING_READ,
         Capability.LEARNING_WRITE,
         Capability.ASSESSMENT_READ,

@@ -14,6 +14,7 @@ class Capability(str, Enum):
     # Knowledge Base / Curriculum
     KNOWLEDGE_READ = "knowledge:read"
     KNOWLEDGE_WRITE = "knowledge:write"
+    KNOWLEDGE_PUBLISH = "knowledge:publish"
 
     # Progress/Learning trackers
     LEARNING_READ = "learning:read"
