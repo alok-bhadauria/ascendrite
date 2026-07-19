@@ -47,3 +47,13 @@ router.include_router(discovery_router, prefix="/learning/discovery")
 router.include_router(workspace_router, prefix="/creator/drafts")
 router.include_router(creator_assets_router, prefix="/creator/drafts")
 router.include_router(pipeline_router, prefix="/creator/drafts")
+
+# Phase 6: Collaboration platform endpoints imports
+from app.api.v1.endpoints.team import router as team_router
+from app.api.v1.endpoints.collaboration_workflow import router as collaboration_workflow_router
+from app.api.v1.endpoints.collaboration_activity import router as collaboration_activity_router
+
+# Register Phase 6 Collaboration Platform routes
+router.include_router(team_router, prefix="/collaboration")
+router.include_router(collaboration_workflow_router, prefix="/collaboration")
+router.include_router(collaboration_activity_router, prefix="/collaboration")

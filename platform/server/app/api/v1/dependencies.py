@@ -90,6 +90,16 @@ from app.modules.creator.services.attachment import AssetAttachmentService
 from app.modules.creator.repositories.workflow import PublishingWorkflowRepository, MongoPublishingWorkflowRepository
 from app.modules.creator.services.pipeline import PublishingPipelineService
 
+# ------------------------------------------------------------------------------
+# Phase 6 Collaboration Platform Imports
+# ------------------------------------------------------------------------------
+from app.modules.collaboration.repositories.team import TeamRepository, MongoTeamRepository, TeamMembershipRepository, MongoTeamMembershipRepository
+from app.modules.collaboration.services.team import TeamService
+from app.modules.collaboration.repositories.workflow import CollaborationAssignmentRepository, MongoCollaborationAssignmentRepository, CollaborationCommentRepository, MongoCollaborationCommentRepository
+from app.modules.collaboration.services.workflow import CollaborationWorkflowService
+from app.modules.collaboration.repositories.activity import CollaborationActivityRepository, MongoCollaborationActivityRepository, CollaborationNotificationRepository, MongoCollaborationNotificationRepository
+from app.modules.collaboration.services.activity import CollaborationActivityService
+
 # Singleton Internal Application Event Dispatcher
 event_dispatcher_instance = LocalEventDispatcher()
 
@@ -515,6 +525,50 @@ async def get_creator_pipeline_service(
         event_dispatcher=event_dispatcher,
         audit_service=audit_service
     )
+
+# ------------------------------------------------------------------------------
+# Phase 6 Collaboration Platform dependency providers
+# ------------------------------------------------------------------------------
+
+async def get_collaboration_team_repository(db: AsyncIOMotorDatabase = Depends(get_database)) -> TeamRepository:
+    return MongoTeamRepository(db)
+
+async def get_collaboration_membership_repository(db: AsyncIOMotorDatabase = Depends(get_database)) -> TeamMembershipRepository:
+    return MongoTeamMembershipRepository(db)
+
+async def get_collaboration_team_service(
+    repo: TeamRepository = Depends(get_collaboration_team_repository),
+    membership_repo: TeamMembershipRepository = Depends(get_collaboration_membership_repository),
+    db: AsyncIOMotorDatabase = Depends(get_database),
+    audit_service: AuditService = Depends(get_audit_service)
+) -> TeamService:
+    return TeamService(repo, membership_repo, db, audit_service)
+
+async def get_collaboration_assignment_repository(db: AsyncIOMotorDatabase = Depends(get_database)) -> CollaborationAssignmentRepository:
+    return MongoCollaborationAssignmentRepository(db)
+
+async def get_collaboration_comment_repository(db: AsyncIOMotorDatabase = Depends(get_database)) -> CollaborationCommentRepository:
+    return MongoCollaborationCommentRepository(db)
+
+async def get_collaboration_workflow_service(
+    assignment_repo: CollaborationAssignmentRepository = Depends(get_collaboration_assignment_repository),
+    comment_repo: CollaborationCommentRepository = Depends(get_collaboration_comment_repository),
+    audit_service: AuditService = Depends(get_audit_service)
+) -> CollaborationWorkflowService:
+    return CollaborationWorkflowService(assignment_repo, comment_repo, audit_service)
+
+async def get_collaboration_activity_repository(db: AsyncIOMotorDatabase = Depends(get_database)) -> CollaborationActivityRepository:
+    return MongoCollaborationActivityRepository(db)
+
+async def get_collaboration_notification_repository(db: AsyncIOMotorDatabase = Depends(get_database)) -> CollaborationNotificationRepository:
+    return MongoCollaborationNotificationRepository(db)
+
+async def get_collaboration_activity_service(
+    activity_repo: CollaborationActivityRepository = Depends(get_collaboration_activity_repository),
+    notification_repo: CollaborationNotificationRepository = Depends(get_collaboration_notification_repository)
+) -> CollaborationActivityService:
+    return CollaborationActivityService(activity_repo, notification_repo)
+
 
 
 

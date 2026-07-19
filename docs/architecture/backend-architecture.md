@@ -265,6 +265,25 @@ Milestone 6.1 introduces the Creator Platform, providing the authoring environme
 *   **Deterministic Transitions**: Orchestrates lifecycle transitions (`draft` -> `ready_for_review` -> `approved` -> `published`) through `PublishingPipelineService`.
 *   **Domain-Specific Insertion**: Upon final approval and publication, the pipeline invokes the target domain services (Knowledge or Assessments) to insert or update production records, maintaining clear domain boundaries.
 
+---
+
+## 10. Collaboration Platform (Phase 6 · Milestone 6.2)
+
+Milestone 6.2 introduces the Collaboration Platform, coordinating organizational team dynamics, task assignments, contextual discussions, and recipient user notification systems.
+
+### A. Teams & Membership
+*   **Team Container**: Encapsulates collaborative spaces through `TeamModel` referencing the owner actor.
+*   **Membership Lifecycle**: Manages user invitation status (`TeamMembershipModel`) mapped directly to existing identity user identifiers, preserving identity and auth scopes.
+
+### B. Collaboration Workflows
+*   **Assignments Mapping**: Tracks work allocation through `CollaborationAssignmentModel` linking workspace drafts to explicit assignee users.
+*   **Discussions Threading**: Enables contextual comment trees through `CollaborationCommentModel` logs.
+
+### C. Activity Tracking & Alerts
+*   **Timeline History**: Records immutable operations history timeline streams (`CollaborationActivityModel`).
+*   **Notifications Dispatch**: Distributes real-time collaborative alerts (`CollaborationNotificationModel`) to keep team members informed.
+
+
 
 
 
