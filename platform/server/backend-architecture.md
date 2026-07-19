@@ -205,8 +205,23 @@ The platform introduces the foundational elements of the Learning Domain, design
 
 ### D. Derived Learning Progress
 *   **Derived Summary State**: `ProgressModel` acts as a derived summary of student achievement rather than a persistence layer for learning events.
-*   **Evidence Aggregator**: Completion of attempts triggers progression calculations which evolve progress states (`not_started` -> `in_progress` -> `completed` -> `reviewed` -> `mastered`), increment review counters, and update generic confidence scores.
 *   **Backward Compatibility**: The progress schemas default new lifecycle states and confidence metrics upon parsing legacy documents, preserving compatibility.
+
+---
+
+## 11. Learning Experience Platform
+
+Stage 4.2 introduces the Learning Experience Platform layer. It orchestrates learner-facing educational workflows (Reading Notes, Revision, Practice, Quiz, and Interview Preparation) utilizing the foundational abstractions of Stage 4.1.
+
+### A. Unified Experience Orchestration
+*   **Agnostic Interaction Model**: The platform defines a single `LearningExperienceModel` to represent a student's active engagement with an educational resource.
+*   **Workflow State Containment**: The experience model retains lightweight runtime parameters (e.g. current question indices, submitted choices, scroll positions) inside an open-ended `state` schema, keeping sessions and attempt records free of transient workflow state.
+*   **Automatic Lifespans**: Starting an experience automatically deactivates any existing active experience of the same type and hooks into the active temporal `LearningSession` if present.
+
+### B. Progress & Evidence Pipeline
+*   **Attempt Logging**: Upon completion or abandonment of an experience, the orchestrator triggers the `LearningAttemptService` to log corresponding learner attempt evidence.
+*   **Derived Progress updates**: This attempt evidence is then picked up by the `ProgressService` to calculate topic-level status progressions (up to `mastered`) and increment confidence scores.
+
 
 
 

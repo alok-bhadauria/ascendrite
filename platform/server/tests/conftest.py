@@ -23,6 +23,7 @@ def clear_db():
     db["search_index"].delete_many({})
     db["learning_sessions"].delete_many({})
     db["learning_attempts"].delete_many({})
+    db["learning_experiences"].delete_many({})
     db["progress"].delete_many({})
     client.close()
 

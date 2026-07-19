@@ -56,11 +56,12 @@ from app.core.search.service import SearchService
 # ------------------------------------------------------------------------------
 # Phase 4: Learning Domain Foundation Imports
 # ------------------------------------------------------------------------------
-from app.modules.learning.repositories.base import LearningSessionRepository, LearningAttemptRepository
-from app.modules.learning.repositories.mongo import MongoLearningSessionRepository, MongoLearningAttemptRepository
+from app.modules.learning.repositories.base import LearningSessionRepository, LearningAttemptRepository, LearningExperienceRepository
+from app.modules.learning.repositories.mongo import MongoLearningSessionRepository, MongoLearningAttemptRepository, MongoLearningExperienceRepository
 from app.modules.learning.services.session import LearningSessionService
 from app.modules.learning.services.attempt import LearningAttemptService
 from app.modules.learning.services.progress import ProgressService
+from app.modules.learning.services.experience import LearningExperienceService
 
 # Singleton Internal Application Event Dispatcher
 event_dispatcher_instance = LocalEventDispatcher()
@@ -319,3 +320,26 @@ async def get_learning_attempt_service(
         audit_service=audit_service,
         activity_service=activity_service
     )
+
+async def get_learning_experience_repository(db: AsyncIOMotorDatabase = Depends(get_database)) -> LearningExperienceRepository:
+    return MongoLearningExperienceRepository(db)
+
+async def get_learning_experience_service(
+    repo: LearningExperienceRepository = Depends(get_learning_experience_repository),
+    db: AsyncIOMotorDatabase = Depends(get_database),
+    session_service: LearningSessionService = Depends(get_learning_session_service),
+    attempt_service: LearningAttemptService = Depends(get_learning_attempt_service),
+    event_dispatcher: EventDispatcher = Depends(get_event_dispatcher),
+    audit_service: AuditService = Depends(get_audit_service),
+    activity_service: ActivityService = Depends(get_activity_service)
+) -> LearningExperienceService:
+    return LearningExperienceService(
+        repo=repo,
+        db=db,
+        session_service=session_service,
+        attempt_service=attempt_service,
+        event_dispatcher=event_dispatcher,
+        audit_service=audit_service,
+        activity_service=activity_service
+    )
+

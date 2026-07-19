@@ -3,7 +3,12 @@ from bson import ObjectId
 from motor.motor_asyncio import AsyncIOMotorDatabase
 from app.modules.learning.models.learning_session import LearningSessionModel, SessionStatus
 from app.modules.learning.models.learning_attempt import LearningAttemptModel
-from app.modules.learning.repositories.base import LearningSessionRepository, LearningAttemptRepository
+from app.modules.learning.models.experience import LearningExperienceModel, ExperienceStatus
+from app.modules.learning.repositories.base import (
+    LearningSessionRepository,
+    LearningAttemptRepository,
+    LearningExperienceRepository
+)
 
 def _to_db_doc(model) -> dict:
     doc = model.model_dump(by_alias=True, exclude={"id"})
@@ -115,3 +120,50 @@ class MongoLearningAttemptRepository(LearningAttemptRepository):
             return LearningAttemptModel(**doc) if doc else None
         except Exception:
             return None
+
+class MongoLearningExperienceRepository(LearningExperienceRepository):
+    def __init__(self, db: AsyncIOMotorDatabase):
+        self.collection = db["learning_experiences"]
+
+    async def create(self, experience: LearningExperienceModel) -> LearningExperienceModel:
+        doc = _to_db_doc(experience)
+        result = await self.collection.insert_one(doc)
+        experience.id = str(result.inserted_id)
+        return experience
+
+    async def get_by_id(self, experience_id: Any) -> Optional[LearningExperienceModel]:
+        try:
+            doc = await self.collection.find_one({"_id": _to_query_id(experience_id)})
+            return LearningExperienceModel(**doc) if doc else None
+        except Exception:
+            return None
+
+    async def update(self, experience_id: Any, experience: LearningExperienceModel) -> Optional[LearningExperienceModel]:
+        try:
+            doc = _to_db_doc(experience)
+            result = await self.collection.replace_one({"_id": _to_query_id(experience_id)}, doc)
+            if result.matched_count:
+                return experience
+            return None
+        except Exception:
+            return None
+
+    async def get_active_experience_by_user(self, user_id: Any, experience_type: str) -> Optional[LearningExperienceModel]:
+        try:
+            doc = await self.collection.find_one({
+                "user_id": _to_query_id(user_id),
+                "experience_type": experience_type,
+                "status": ExperienceStatus.ACTIVE.value
+            })
+            return LearningExperienceModel(**doc) if doc else None
+        except Exception:
+            return None
+
+    async def list_by_session(self, session_id: Any) -> List[LearningExperienceModel]:
+        try:
+            cursor = self.collection.find({"session_id": _to_query_id(session_id)})
+            docs = await cursor.to_list(length=100)
+            return [LearningExperienceModel(**doc) for doc in docs]
+        except Exception:
+            return []
+

@@ -176,14 +176,21 @@ class ProgressService:
 
     async def _resolve_ids(self, attempt: LearningAttemptModel):
         try:
+            topic_id = None
             if attempt.resource_type == "topic":
                 topic_id = attempt.resource_id
-            elif attempt.resource_type == "content":
-                content_doc = await self.db["knowledge_contents"].find_one({"_id": attempt.resource_id})
-                if not content_doc:
-                    return None, None
-                topic_id = content_doc.get("topic_id")
             else:
+                # Try finding in knowledge_contents
+                content_doc = await self.db["knowledge_contents"].find_one({"_id": attempt.resource_id})
+                if content_doc:
+                    topic_id = content_doc.get("topic_id")
+                else:
+                    # Fallback to direct topic lookup
+                    topic_doc = await self.db["topics"].find_one({"_id": attempt.resource_id})
+                    if topic_doc:
+                        topic_id = attempt.resource_id
+
+            if not topic_id:
                 return None, None
 
             topic_doc = await self.db["topics"].find_one({"_id": topic_id})

@@ -206,3 +206,19 @@ The platform introduces the foundational elements of the Learning Domain under `
 ### D. Derived Learning Progress
 *   **Summary Representation**: `ProgressModel` is a derived representation of attempts. It summarizes confidence levels, status progressions (`not_started` -> `in_progress` -> `completed` -> `reviewed` -> `mastered`), review counts, and active times. It does not act as a learner event database.
 
+---
+
+## 6. Learning Experience Platform
+
+Stage 4.2 introduces the Learning Experience Platform layer. It orchestrates learner-facing educational workflows (Reading Notes, Revision, Practice, Quiz, and Interview Preparation) utilizing the foundational abstractions of Stage 4.1.
+
+### A. Unified Experience Orchestration
+*   **Agnostic Interaction Model**: The platform defines a single `LearningExperienceModel` to represent a student's active engagement with an educational resource.
+*   **Workflow State Containment**: The experience model retains lightweight runtime parameters (e.g. current question indices, submitted choices, scroll positions) inside an open-ended `state` schema, keeping sessions and attempt records free of transient workflow state.
+*   **Automatic Lifespans**: Starting an experience automatically deactivates any existing active experience of the same type and hooks into the active temporal `LearningSession` if present.
+
+### B. Progress & Evidence Pipeline
+*   **Attempt Logging**: Upon completion or abandonment of an experience, the orchestrator triggers the `LearningAttemptService` to log corresponding learner attempt evidence.
+*   **Derived Progress updates**: This attempt evidence is then picked up by the `ProgressService` to calculate topic-level status progressions (up to `mastered`) and increment confidence scores.
+
+
