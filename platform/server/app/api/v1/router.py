@@ -18,13 +18,14 @@ from app.api.v1.endpoints.assessment_results import router as assessment_results
 from app.api.v1.endpoints.learning_utilities import router as learning_utilities_router
 from app.api.v1.endpoints.discovery import router as discovery_router
 
-# Phase 6: Creator platform endpoints imports
+# Creator platform endpoints imports
 from app.api.v1.endpoints.workspace import router as workspace_router
 from app.api.v1.endpoints.creator_assets import router as creator_assets_router
 from app.api.v1.endpoints.pipeline import router as pipeline_router
 
 router = APIRouter(route_class=EnvelopeRoute)
 
+# Core Platform & Learning endpoints
 router.include_router(auth_router, prefix="/auth")
 router.include_router(curriculum_router, prefix="/curriculum")
 router.include_router(progress_router, prefix="/progress")
@@ -43,23 +44,23 @@ router.include_router(insights_router, prefix="/learning/insights")
 router.include_router(learning_utilities_router, prefix="/learning/utilities")
 router.include_router(discovery_router, prefix="/learning/discovery")
 
-# Register Phase 6 Creator Platform routes
+# Creator Platform workspace & pipeline routes
 router.include_router(workspace_router, prefix="/creator/drafts")
 router.include_router(creator_assets_router, prefix="/creator/drafts")
 router.include_router(pipeline_router, prefix="/creator/drafts")
 
-# Phase 6: Collaboration platform endpoints imports
+# Collaboration platform endpoints imports
 from app.api.v1.endpoints.team import router as team_router
 from app.api.v1.endpoints.collaboration_workflow import router as collaboration_workflow_router
 from app.api.v1.endpoints.collaboration_activity import router as collaboration_activity_router
 
-# Register Phase 6 Collaboration Platform routes
+# Collaboration Platform routes
 router.include_router(team_router, prefix="/collaboration")
 router.include_router(collaboration_workflow_router, prefix="/collaboration")
 router.include_router(collaboration_activity_router, prefix="/collaboration")
 
-# Phase 6: Administration platform endpoints imports
+# Administration platform endpoints imports
 from app.api.v1.endpoints.administration import router as administration_router
 
-# Register Phase 6 Administration Platform routes
+# Administration Platform routes
 router.include_router(administration_router, prefix="/admin")
