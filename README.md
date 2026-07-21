@@ -198,12 +198,12 @@ Ascendrite operates on a phased rollout. The system is transitioning from archit
                    |
                    v
 +------------------------------------+
-| 4. Platform Codebase (IN PROGRESS) |
+| 4. Core Backend Platform (COMPLETE)|
 +------------------+-----------------+
                    |
                    v
 +------------------------------------+
-|  5. Active APIs & V1 (PLANNED)     |
+|  5. Active APIs & Release (ACTIVE) |
 +------------------------------------+
 ```
 
