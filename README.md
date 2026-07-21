@@ -112,6 +112,8 @@ The current local development and persistence stack is verified to run natively 
 | Backend API | Python 3.10.11 / FastAPI | Uvicorn Server | `127.0.0.1:8000` (HTTP) | Managed Process |
 | Frontend SPA | React / Node.js / Vite | Dev Server | `localhost:5173` (HTTP) | Managed Process |
 
+The API backend encapsulates operational platform modules under standardized v1 route prefixes: `/api/v1/creator` (workspaces & publishing), `/api/v1/collaboration` (teams & tasks), and `/api/v1/admin` (system configuration & telemetry).
+
 ---
 
 ## 5. Development & Operations
