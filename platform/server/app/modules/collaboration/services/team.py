@@ -65,6 +65,7 @@ class TeamService:
         role: MembershipRole,
         context: RuntimeContext
     ) -> TeamMembershipModel:
+        """Invites a user to a team, verifying team ownership and principal write authorization."""
         self._require_capability(context, "collab:write")
         db_team_id = self._to_db_id(team_id)
         db_user_id = self._to_db_id(user_id)
