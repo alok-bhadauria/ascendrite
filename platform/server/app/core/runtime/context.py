@@ -8,6 +8,7 @@ class RuntimeContext(BaseModel):
     Maintains correlation ID boundaries, IP coordinates, and authenticated Principal.
     """
     correlation_id: str
+    # Authenticated security principal holding actor identity, role, and capabilities
     principal: Optional[AuthenticatedPrincipal] = None
     ip_address: Optional[str] = None
     user_agent: Optional[str] = None
