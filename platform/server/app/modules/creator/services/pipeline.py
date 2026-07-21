@@ -23,6 +23,8 @@ from app.modules.assessments.models.assessment import AssessmentModel
 logger = logging.getLogger(__name__)
 
 class PublishingPipelineService:
+    """Orchestrates deterministic lifecycle transitions for workspace drafts and delegates content publishing to core domain services."""
+
     def __init__(
         self,
         repo: PublishingWorkflowRepository,
