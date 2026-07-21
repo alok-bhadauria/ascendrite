@@ -47,9 +47,9 @@ The architecture is governed by the principles defined in the constitutional [Ma
 
 ### 2.1 Separation of Concerns
 The core platform is structured as a modular monolith following Clean Architecture boundaries:
-*   **Domain Layer**: Houses pure business entities and graph invariants.
-*   **Service Layer**: Orchestrates database transactions and content delivery pipelines.
-*   **Repository Layer**: Abstracts storage implementations (PostgreSQL, MongoDB, vector registries).
+*   **Domain Layer**: Houses pure business entities, graph invariants, and domain definitions across Knowledge, Learning, and Assessment platforms.
+*   **Service Layer**: Orchestrates database transactions, publishing workflows, team assignments, and operational administration capabilities.
+*   **Repository Layer**: Abstracts storage implementations (PostgreSQL, MongoDB, vector registries, object storage).
 *   **Infrastructure Layer**: Exposes FastAPI endpoints, handles authentication, and interfaces with external network utilities.
 
 For details, refer to the [System Architecture HLD](docs/architecture/system-architecture-hld.md) and [Backend Architecture](docs/architecture/backend-architecture.md).
