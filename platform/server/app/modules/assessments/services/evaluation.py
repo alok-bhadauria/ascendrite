@@ -20,6 +20,8 @@ from app.modules.learning.services.session import LearningSessionService
 from app.modules.learning.services.attempt import LearningAttemptService
 
 class AssessmentEvaluationService:
+    """Evaluates finalized assessment submissions against deterministic rules and emits evidence logs to the Learning foundation."""
+
     def __init__(
         self,
         repo: AssessmentResultRepository,
