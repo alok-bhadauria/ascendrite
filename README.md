@@ -166,6 +166,13 @@ All repository updates must pass validation scripts located in `scratch/` prior 
 *   `validate_knowledge_integrity.py`: Validates taxonomic schemas, curriculum mappings, and prerequisites concept mapping DAG cycles.
 *   `validate_ai_notes.py`: Evaluates content formatting, mathematical latex validation, and academic structure layout standards.
 
+### 5.3 Automated Integration Test Suite
+The platform backend features comprehensive integration and regression test suites powered by `pytest`. Run all verification suites using:
+
+```cmd
+python -m pytest -v platform/server/tests
+```
+
 ---
 
 ## 6. Implementation Roadmap
