@@ -114,6 +114,8 @@ The current local development and persistence stack is verified to run natively 
 
 The API backend encapsulates operational platform modules under standardized v1 route prefixes: `/api/v1/creator` (workspaces & publishing), `/api/v1/collaboration` (teams & tasks), and `/api/v1/admin` (system configuration & telemetry).
 
+Developers must compile using **Python 3.10.11** (backend runtime) and **Node.js 18.0+** with npm (client workspace packaging) to prevent dependency conflicts.
+
 ---
 
 ## 5. Development & Operations
