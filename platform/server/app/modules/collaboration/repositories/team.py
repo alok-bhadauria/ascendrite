@@ -11,6 +11,8 @@ class TeamRepository(BaseRepository[TeamModel], ABC):
         pass
 
 class MongoTeamRepository(TeamRepository):
+    """MongoDB repository implementation managing persistence and query mappings for organizational teams."""
+
     def __init__(self, db: AsyncIOMotorDatabase):
         self.collection = db["collaboration_teams"]
 
