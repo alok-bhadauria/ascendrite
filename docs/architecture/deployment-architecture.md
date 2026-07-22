@@ -84,6 +84,7 @@ The target production infrastructure runs on a hardened Linux distribution (spec
 ### 3.1 Nginx Reverse Proxy
 *   **Role**: Handles public incoming connections, serves pre-built static client assets, routes `/api/v1/*` requests to the app server, and enforces rate-limiting configurations.
 *   **HTTPS and Certificates**: Manages SSL handshake termination using Let's Encrypt certificates managed automatically via Certbot.
+*   **Rate Limiting**: Enforces server-side rate limits using a leaky bucket algorithm on incoming `/api/v1/auth/` connections to prevent brute-force exploitation.
 
 ### 3.2 FastAPI Application Server
 *   **Role**: Executes stateless Python service logic. It runs locally on port `8000` via Uvicorn process workers, scaling horizontally behind the Nginx load balancer.
