@@ -224,3 +224,9 @@ Select the appropriate document directory to begin development or review:
 *   **Security Reviewers**: Audit compliance rules in the [Security Standards](docs/operations/security-standards.md) and token models in [API Architecture](docs/architecture/api-architecture.md) (Section 6).
 *   **Content Editors**: Review pedagogical guidelines in the [Educational Philosophy](editorial/educational-philosophy.md), visual styling in the [UI/UX Design System](editorial/ui-ux-design-system.md), and draft specs in [Content Authoring Guide](editorial/content-authoring-guide.md).
 *   **System Operations**: Configure host properties via [Local Development](docs/development/local-development.md) and configure environment variables in [Environment Configuration](docs/development/environment-configuration.md).
+
+---
+
+## 8. Developer Contribution Policy
+
+All backend contributions must adhere to clean architecture design principles, preserve the distinct domain ownership boundaries, and maintain 100% test coverage safety. Run validation scripts located in `scratch/` locally before staging commits.
