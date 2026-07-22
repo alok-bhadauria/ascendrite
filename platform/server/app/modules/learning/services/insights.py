@@ -14,6 +14,8 @@ from app.modules.learning.models.progress import LearningStatus
 from app.modules.learning.models.experience import ExperienceStatus
 
 class LearningInsightsService:
+    """Provides analytical dashboard data and metrics aggregation for student learning records and achievements."""
+
     def __init__(self, db: AsyncIOMotorDatabase):
         self.db = db
 
