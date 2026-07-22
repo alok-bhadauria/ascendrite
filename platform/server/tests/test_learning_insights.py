@@ -18,6 +18,7 @@ from app.modules.learning.schemas.insights import (
 )
 from app.modules.learning.services.insights import LearningInsightsService
 
+# Security principal fixture simulating a verified Student actor with base learning capabilities
 @pytest.fixture
 def mock_learner():
     return AuthenticatedPrincipal(
