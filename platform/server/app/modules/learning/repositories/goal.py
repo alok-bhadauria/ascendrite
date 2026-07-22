@@ -6,6 +6,8 @@ from app.modules.learning.models.goal import LearningGoalModel
 from app.repositories.base import BaseRepository
 
 class LearningGoalRepository(BaseRepository[LearningGoalModel], ABC):
+    """Abstract interface repository for querying and managing user study planning goal records."""
+
     @abstractmethod
     async def get_by_user(self, user_id: Any) -> List[LearningGoalModel]:
         pass
