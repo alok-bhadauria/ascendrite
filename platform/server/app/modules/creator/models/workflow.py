@@ -13,6 +13,8 @@ class WorkflowStatus(str, Enum):
     ARCHIVED = "archived"
 
 class PublishingWorkflowModel(AuditModel):
+    """Represents a draft's publishing lifecycle containing moderation reviews, status flags, and timeline transition histories."""
+
     id: Optional[PyObjectId] = Field(alias="_id", default=None)
     draft_id: PyObjectId
     status: WorkflowStatus = WorkflowStatus.DRAFT
