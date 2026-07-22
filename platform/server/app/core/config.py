@@ -11,6 +11,8 @@ root_dir = os.path.dirname(os.path.dirname(os.path.dirname(current_dir)))  # g:/
 env_file_path = os.path.join(root_dir, ".env.local")
 
 class Settings(BaseSettings):
+    """Central settings model parsing environment configurations from the root .env.local variables."""
+
     model_config = SettingsConfigDict(env_file=env_file_path, env_file_encoding="utf-8", extra="ignore")
 
     # Application Configuration
