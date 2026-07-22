@@ -102,6 +102,9 @@ The target production infrastructure runs on a hardened Linux distribution (spec
 ### 3.6 RustFS Object Storage
 *   **Role**: Implements S3-compatible file storage on port `9000` for hosting curriculum PDFs, user assets, and system backup archives.
 
+### 3.7 Centralized Telemetry & Log Rotation
+*   **Role**: Application and infrastructure server logs are forwarded to systemd journald log streams. A native logrotate job runs nightly to compress and archive application log files, keeping disk usage bounded.
+
 ---
 
 ## 4. Initialization & Migration Strategy
