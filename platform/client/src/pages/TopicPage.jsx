@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
-import { ChevronLeft, BookOpen, Download, Bookmark, FileText, CheckCircle2, ArrowRight, AlertTriangle } from 'lucide-react';
+import { ChevronLeft, BookOpen, Download, Bookmark, FileText, CheckCircle2, ArrowRight, AlertTriangle, MessageSquare, Send } from 'lucide-react';
 import { Button } from '../components/primitives/Button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../components/primitives/Card';
 import { Badge } from '../components/primitives/Badge';
@@ -57,6 +57,10 @@ export default function TopicPage() {
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [localNotes, setLocalNotes] = useState('');
   const [completed, setCompleted] = useState(false);
+  
+  // Comments and discussion board state
+  const [comments, setComments] = useState([]);
+  const [newCommentText, setNewCommentText] = useState('');
 
   const topicData = topicsContent[topicId] || topicsContent['ml-foundations'];
 
@@ -70,10 +74,37 @@ export default function TopicPage() {
     const savedNotes = localStorage.getItem(`ascendrite-notes-${topicId}`) || '';
     setLocalNotes(savedNotes);
 
+    // Hydrate comments
+    const savedComments = JSON.parse(localStorage.getItem(`ascendrite-comments-${topicId}`) || '[]');
+    if (savedComments.length > 0) {
+      setComments(savedComments);
+    } else {
+      setComments([
+        { id: 'c-1', author: 'Alok Bhadauria', text: 'The mathematical step for Mean Squared Error minimization outlines regression weights clearly.', timestamp: '2h ago' }
+      ]);
+    }
+
     // Reset status
     setCompleted(false);
     setError(false);
   }, [topicId]);
+
+  const handleCommentSubmit = (e) => {
+    e.preventDefault();
+    if (!newCommentText.trim()) return;
+
+    const newComment = {
+      id: `c-${Date.now()}`,
+      author: 'Author Account',
+      text: newCommentText.trim(),
+      timestamp: 'Just now'
+    };
+
+    const updatedComments = [...comments, newComment];
+    setComments(updatedComments);
+    localStorage.setItem(`ascendrite-comments-${topicId}`, JSON.stringify(updatedComments));
+    setNewCommentText('');
+  };
 
   const toggleBookmark = () => {
     const savedBookmarks = JSON.parse(localStorage.getItem('ascendrite-bookmarks') || '[]');
@@ -221,6 +252,44 @@ export default function TopicPage() {
               <Button variant="secondary" onClick={() => navigate('/workspace')}>
                 Open Practice Sandbox
               </Button>
+            </CardContent>
+          </Card>
+
+          {/* Discussion board */}
+          <Card>
+            <CardHeader className="mb-2">
+              <CardTitle className="text-base font-bold flex items-center gap-2">
+                <MessageSquare className="h-4.5 w-4.5 text-theme-accent" />
+                <span>Discussion Thread</span>
+              </CardTitle>
+              <CardDescription>Collaborative notes and topic explanations shared by contributors.</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              {/* Existing comments */}
+              <div className="flex flex-col gap-3">
+                {comments.map(c => (
+                  <div key={c.id} className="bg-theme-bg/50 border border-theme-border rounded-xl p-3 space-y-1">
+                    <div className="flex justify-between items-center text-[10px] font-mono text-theme-subtle">
+                      <span className="font-bold text-theme-text">{c.author}</span>
+                      <span>{c.timestamp}</span>
+                    </div>
+                    <p className="text-xs text-theme-text/90 leading-relaxed">{c.text}</p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Submit form */}
+              <form onSubmit={handleCommentSubmit} className="flex gap-2 border-t border-theme-border pt-4">
+                <Input
+                  value={newCommentText}
+                  onChange={(e) => setNewCommentText(e.target.value)}
+                  placeholder="Share a conceptual note..."
+                  className="py-2 text-xs"
+                />
+                <Button type="submit" variant="secondary" className="px-3 py-2 shrink-0">
+                  <Send className="h-4 w-4" />
+                </Button>
+              </form>
             </CardContent>
           </Card>
         </div>
