@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { BookOpen, Lock, Unlock, CheckCircle2, Clock, ArrowRight, Sparkles, ChevronRight } from 'lucide-react';
 import { Button } from '../components/primitives/Button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../components/primitives/Card';
@@ -297,15 +297,23 @@ export default function LearnPage() {
                       Concept Nodes Included
                     </span>
                     <div className="flex flex-wrap gap-2">
-                      {mod.topics.map(topic => (
-                        <div 
-                          key={topic} 
-                          className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-theme-bg/60 border border-theme-border text-xs text-theme-text"
-                        >
-                          <ChevronRight className="h-3 w-3 text-theme-accent" />
-                          <span>{topic}</span>
-                        </div>
-                      ))}
+                      {mod.topics.map(topic => {
+                        const contentNode = (
+                          <div className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-theme-bg/60 border border-theme-border text-xs text-theme-text hover:border-theme-accent/40 transition-colors">
+                            <ChevronRight className="h-3 w-3 text-theme-accent" />
+                            <span>{topic}</span>
+                          </div>
+                        );
+                        return isUnlocked ? (
+                          <Link key={topic} to={`/learn/${mod.id}`}>
+                            {contentNode}
+                          </Link>
+                        ) : (
+                          <div key={topic} className="opacity-60 select-none">
+                            {contentNode}
+                          </div>
+                        );
+                      })}
                     </div>
                   </CardContent>
 

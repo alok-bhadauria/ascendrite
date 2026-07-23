@@ -17,6 +17,7 @@ const AdminPage = lazy(() => import('./pages/AdminPage'));
 const ForbiddenPage = lazy(() => import('./pages/ForbiddenPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 const OnboardingPage = lazy(() => import('./pages/OnboardingPage'));
+const TopicPage = lazy(() => import('./pages/TopicPage'));
 
 // Setup global TanStack Query Client
 const queryClient = new QueryClient({
@@ -52,6 +53,7 @@ function App() {
                   <Route path="/onboarding" element={<OnboardingPage />} />
                   <Route element={<AppLayout />}>
                     <Route path="/learn" element={<LearnPage />} />
+                    <Route path="/learn/:topicId" element={<TopicPage />} />
                     <Route path="/workspace" element={<WorkspacePage />} />
                     
                     {/* Creator authoring channel */}
