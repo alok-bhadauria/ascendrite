@@ -167,7 +167,7 @@
 
 /* Glassmorphism custom classes */
 .glassmorphism {
-  background: rgba(var(--color-surface), 0.7);
+  background-color: color-mix(in srgb, var(--color-theme-surface) 70%, transparent);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
