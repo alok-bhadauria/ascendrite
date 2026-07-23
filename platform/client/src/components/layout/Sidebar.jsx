@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { BookOpen, Cpu, PenTool, Users, Shield, Settings, Command } from 'lucide-react';
+import { BookOpen, Cpu, PenTool, Users, Shield, Command } from 'lucide-react';
 import { useAuthStore } from '../../store/authStore';
 import { useLayoutStore } from '../../store/layoutStore';
 

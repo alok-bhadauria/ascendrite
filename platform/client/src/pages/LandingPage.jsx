@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { 
   Code, Cpu, Database, Brain, Globe, TrendingUp, 
   Sparkles, BookOpen, Clock, BarChart2, Shield, Award, Palette,
-  ArrowRight, CheckCircle2, PlayCircle
+  ArrowRight, CheckCircle2
 } from 'lucide-react';
 
 import api from '../utils/api';

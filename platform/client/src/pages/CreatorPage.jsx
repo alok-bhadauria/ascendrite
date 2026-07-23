@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { PenTool, Plus, Edit3, Trash2, CheckCircle2, Clock, Eye, AlertCircle } from 'lucide-react';
+import { PenTool, Plus, Edit3, Trash2, CheckCircle2, Clock, AlertCircle } from 'lucide-react';
 import { Button } from '../components/primitives/Button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../components/primitives/Card';
 import { Badge } from '../components/primitives/Badge';

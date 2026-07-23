@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { BookOpen, Lock, Unlock, CheckCircle2, Clock, ArrowRight, Sparkles, ChevronRight } from 'lucide-react';
 import { Button } from '../components/primitives/Button';
@@ -235,7 +235,7 @@ export default function LearnPage() {
         </h3>
         
         <div className="relative border-l border-theme-border/80 pl-6 space-y-8 ml-3">
-          {pathway.modules.map((mod, idx) => {
+          {pathway.modules.map((mod) => {
             const isCompleted = mod.completed;
             const isUnlocked = mod.unlocked;
             

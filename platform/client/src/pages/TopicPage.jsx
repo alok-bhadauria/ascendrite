@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
-import { ChevronLeft, BookOpen, Download, Bookmark, FileText, CheckCircle2, ArrowRight, AlertTriangle, MessageSquare, Send } from 'lucide-react';
+import { ChevronLeft, BookOpen, Download, Bookmark, FileText, CheckCircle2, ArrowRight, AlertTriangle, MessageSquare, Send, Sparkles } from 'lucide-react';
 import { Button } from '../components/primitives/Button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../components/primitives/Card';
 import { Badge } from '../components/primitives/Badge';
+import { Input } from '../components/primitives/Input';
 import { TextArea } from '../components/primitives/TextArea';
 import { Spinner } from '../components/primitives/Spinner';
 

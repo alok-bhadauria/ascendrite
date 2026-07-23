@@ -20,7 +20,6 @@ export function AuthModal({ isOpen, onClose, onAuthSuccess }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const closeTimerRef = useRef(null);
-  const scrollYRef = useRef(0);
 
   // ── Persistent form states (never reset on close) ─────────────────────
   const [loginData, setLoginData] = useState({ email: '', password: '' });
@@ -83,6 +82,16 @@ export function AuthModal({ isOpen, onClose, onAuthSuccess }) {
     };
   }, [phase]);
 
+  // ── Close handler ─────────────────────────────────────────────────────
+  const handleClose = () => {
+    setError('');
+    setPhase('closing');
+    closeTimerRef.current = setTimeout(() => {
+      setPhase('hidden');
+      onClose(); // Parent will hide state and update URL after transition is done
+    }, 280);
+  };
+
   // ── ESC key ───────────────────────────────────────────────────────────
   useEffect(() => {
     if (phase === 'hidden') return;
@@ -100,16 +109,6 @@ export function AuthModal({ isOpen, onClose, onAuthSuccess }) {
 
   // ── Don't render at all while fully hidden ────────────────────────────
   if (phase === 'hidden') return null;
-
-  // ── Close handler ─────────────────────────────────────────────────────
-  const handleClose = () => {
-    setError('');
-    setPhase('closing');
-    closeTimerRef.current = setTimeout(() => {
-      setPhase('hidden');
-      onClose(); // Parent will hide state and update URL after transition is done
-    }, 280);
-  };
 
   // ── Clear forms only after successful auth ────────────────────────────
   const clearForms = () => {

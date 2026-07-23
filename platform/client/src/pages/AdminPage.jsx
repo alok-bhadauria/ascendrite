@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Shield, Users, PenTool, CheckCircle2, Activity, AlertTriangle } from 'lucide-react';
+import { Shield, Users, PenTool, CheckCircle2, Activity } from 'lucide-react';
 import { Button } from '../components/primitives/Button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../components/primitives/Card';
 import { Switch } from '../components/primitives/Switch';

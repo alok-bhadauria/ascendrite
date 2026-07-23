@@ -34,7 +34,7 @@ export default function InteractiveVisualizerDemo() {
   };
 
   const stepBubbleSort = () => {
-    let { i, j, swapped, arr } = stateRef.current;
+    let { i, j, arr } = stateRef.current;
     const n = arr.length;
 
     if (i >= n - 1) {
