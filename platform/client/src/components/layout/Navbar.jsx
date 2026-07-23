@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Palette, ChevronDown, LogIn, LogOut, Star } from 'lucide-react';
+import { Palette, ChevronDown, LogIn, LogOut, Star, Menu } from 'lucide-react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { AuthModal } from '../auth/AuthModal';
+import { useAuthStore } from '../../store/authStore';
+import { useLayoutStore } from '../../store/layoutStore';
 
 const themes = [
   { id: 'carbon', name: 'Carbon', preview: { bg: '#151515', surface: '#1d1d1d', text: '#f6f6f6', accent: '#f44336' } },
@@ -13,13 +15,15 @@ const themes = [
 ];
 
 export default function Navbar() {
-  const [activeTheme, setActiveTheme]       = useState('nord-light');
+  const [activeTheme, setActiveTheme] = useState('nord-light');
   const [showThemeDropdown, setShowThemeDropdown] = useState(false);
-  const [showAuthModal, setShowAuthModal]   = useState(false);
-  const [currentUser, setCurrentUser]       = useState(null);
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  
+  const { user, isAuthenticated, login, logout } = useAuthStore();
+  const { toggleSidebar } = useLayoutStore();
 
-  const navigate         = useNavigate();
-  const location         = useLocation();
+  const navigate = useNavigate();
+  const location = useLocation();
   const themeSelectorRef = useRef(null);
 
   // Auto-open modal when navigating directly to /login
@@ -57,12 +61,6 @@ export default function Navbar() {
   useEffect(() => {
     const savedTheme = localStorage.getItem('ascendrite-theme') || 'nord-light';
     setActiveTheme(savedTheme);
-    
-    // Check if token exists in cookie or localStorage to auto login
-    const savedUser = localStorage.getItem('ascendrite-user');
-    if (savedUser) {
-      setCurrentUser(JSON.parse(savedUser));
-    }
   }, []);
 
   const changeTheme = (themeId) => {
@@ -72,9 +70,8 @@ export default function Navbar() {
     setShowThemeDropdown(false);
   };
 
-  const handleAuthSuccess = (user) => {
-    setCurrentUser(user);
-    localStorage.setItem('ascendrite-user', JSON.stringify(user));
+  const handleAuthSuccess = (userData) => {
+    login(userData);
   };
 
   const handleLogoClick = (e) => {
@@ -99,31 +96,42 @@ export default function Navbar() {
     }
   };
 
-  const handleLogout = () => {
-    setCurrentUser(null);
-    localStorage.removeItem('ascendrite-user');
+  const handleLogoutClick = () => {
+    logout();
     document.cookie = "access_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    navigate('/');
   };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-theme-bg bg-opacity-70 backdrop-blur-md border-b border-theme-border transition-all duration-200 w-full max-w-full">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         
-        {/* Brand Logo */}
-        <Link to="/" onClick={handleLogoClick} className="flex items-center gap-2 select-none group">
-          <div className="w-8 h-8 rounded-lg bg-theme-accent text-white flex items-center justify-center font-display font-extrabold text-lg shadow-md group-hover:scale-105 transition-transform">
-            A
-          </div>
-          <span className="font-display font-bold text-xl tracking-tight text-theme-text">
-            Ascendrite
-          </span>
-        </Link>
-
+        {/* Left Brand and Menu Toggle */}
+        <div className="flex items-center gap-3">
+          {isAuthenticated && (
+            <button
+              onClick={toggleSidebar}
+              className="lg:hidden p-1.5 rounded-lg border border-theme-border text-theme-text hover:bg-theme-border/40 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-theme-accent cursor-pointer"
+              aria-label="Toggle Sidebar navigation"
+            >
+              <Menu size={18} />
+            </button>
+          )}
+          
+          <Link to="/" onClick={handleLogoClick} className="flex items-center gap-2 select-none group">
+            <div className="w-8 h-8 rounded-lg bg-theme-accent text-white flex items-center justify-center font-display font-extrabold text-lg shadow-md group-hover:scale-105 transition-transform">
+              A
+            </div>
+            <span className="font-display font-bold text-xl tracking-tight text-theme-text">
+              Ascendrite
+            </span>
+          </Link>
+        </div>
 
         {/* Global Controls */}
         <div className="flex items-center gap-4 relative">
           
-          {/* Theme Selector Dropdown (with Color Dots Previews) */}
+          {/* Theme Selector Dropdown */}
           <div className="relative" ref={themeSelectorRef}>
             <button 
               id="btn-theme-selector"
@@ -178,7 +186,7 @@ export default function Navbar() {
           </div>
 
           {/* User Section / Login Portal Triggers */}
-          {!currentUser ? (
+          {!isAuthenticated ? (
             <button 
               id="btn-header-login"
               onClick={() => {
@@ -195,13 +203,13 @@ export default function Navbar() {
           ) : (
             <div className="flex items-center gap-4">
               <div className="hidden sm:flex flex-col text-right">
-                <span className="text-xs font-bold text-theme-text leading-tight">{currentUser.first_name} {currentUser.last_name}</span>
-                <span className="text-[10px] text-theme-subtle">{currentUser.email}</span>
+                <span className="text-xs font-bold text-theme-text leading-tight">{user.first_name} {user.last_name}</span>
+                <span className="text-[10px] text-theme-subtle">{user.email}</span>
               </div>
               
               <button 
                 id="btn-header-logout"
-                onClick={handleLogout}
+                onClick={handleLogoutClick}
                 className="border border-theme-border text-theme-text hover:bg-theme-accent hover:text-white px-3 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-1.5 cursor-pointer"
               >
                 <LogOut size={14} />

@@ -7,6 +7,8 @@ import LandingPage from './pages/LandingPage';
 import { ProtectedRoute, CapabilityGate } from './router/RouteGuards';
 import { Spinner } from './components/primitives/Spinner';
 
+import AppLayout from './components/layout/AppLayout';
+
 // Lazy load page views
 const LearnPage = lazy(() => import('./pages/LearnPage'));
 const WorkspacePage = lazy(() => import('./pages/WorkspacePage'));
@@ -46,17 +48,19 @@ function App() {
 
                 {/* Protected client channels */}
                 <Route element={<ProtectedRoute />}>
-                  <Route path="/learn" element={<LearnPage />} />
-                  <Route path="/workspace" element={<WorkspacePage />} />
-                  
-                  {/* Creator authoring channel */}
-                  <Route element={<CapabilityGate requiredCapability="creator:write" />}>
-                    <Route path="/creator" element={<CreatorPage />} />
-                  </Route>
+                  <Route element={<AppLayout />}>
+                    <Route path="/learn" element={<LearnPage />} />
+                    <Route path="/workspace" element={<WorkspacePage />} />
+                    
+                    {/* Creator authoring channel */}
+                    <Route element={<CapabilityGate requiredCapability="creator:write" />}>
+                      <Route path="/creator" element={<CreatorPage />} />
+                    </Route>
 
-                  {/* Governance admin channel */}
-                  <Route element={<CapabilityGate requiredCapability="admin:write" />}>
-                    <Route path="/admin" element={<AdminPage />} />
+                    {/* Governance admin channel */}
+                    <Route element={<CapabilityGate requiredCapability="admin:write" />}>
+                      <Route path="/admin" element={<AdminPage />} />
+                    </Route>
                   </Route>
                 </Route>
 
