@@ -166,6 +166,7 @@ export function AuthModal({ isOpen, onClose, onAuthSuccess }) {
       if (onAuthSuccess) onAuthSuccess(loginRes.data.user);
       clearForms();
       handleClose();
+      navigate('/onboarding');
     } catch (err) {
       setError(err.response?.data?.detail || 'Registration failed. Try again.');
     } finally { setLoading(false); }
