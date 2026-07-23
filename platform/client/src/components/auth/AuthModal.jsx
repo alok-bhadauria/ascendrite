@@ -30,8 +30,32 @@ export function AuthModal({ isOpen, onClose, onAuthSuccess }) {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
 
+  const loginEmailRef = useRef(null);
+  const registerFirstNameRef = useRef(null);
+  const triggerElementRef = useRef(null);
+
   const navigate = useNavigate();
   const location = useLocation();
+
+  // ── Focus shifts when modal state opens / transitions ────────────────
+  useEffect(() => {
+    if (phase === 'visible') {
+      if (activeView === 'login') {
+        loginEmailRef.current?.focus();
+      } else {
+        registerFirstNameRef.current?.focus();
+      }
+    }
+  }, [phase, activeView]);
+
+  // ── Track and restore focus on open/close lifecycle ──────────────────
+  useEffect(() => {
+    if (isOpen) {
+      triggerElementRef.current = document.activeElement;
+    } else if (phase === 'hidden' && triggerElementRef.current) {
+      triggerElementRef.current.focus();
+    }
+  }, [isOpen, phase]);
 
   // ── Phase transitions ─────────────────────────────────────────────────
   useEffect(() => {
@@ -224,7 +248,7 @@ export function AuthModal({ isOpen, onClose, onAuthSuccess }) {
 
           <form onSubmit={handleRegisterSubmit} className="w-full flex flex-col gap-2.5">
             <div className="flex gap-2">
-              <input className={inputCls} type="text" placeholder="First name" required
+              <input ref={registerFirstNameRef} className={inputCls} type="text" placeholder="First name" required
                 value={registerData.firstName}
                 onChange={(e) => setRegisterData({ ...registerData, firstName: e.target.value })} />
               <input className={inputCls} type="text" placeholder="Last name" required
@@ -315,7 +339,7 @@ export function AuthModal({ isOpen, onClose, onAuthSuccess }) {
           )}
 
           <form onSubmit={handleLoginSubmit} className="w-full flex flex-col gap-3">
-            <input className={inputCls} type="email" placeholder="Email address" required
+            <input ref={loginEmailRef} className={inputCls} type="email" placeholder="Email address" required
               value={loginData.email}
               onChange={(e) => setLoginData({ ...loginData, email: e.target.value })} />
             <div className="relative w-full">
