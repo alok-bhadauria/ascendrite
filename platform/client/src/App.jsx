@@ -18,6 +18,7 @@ const ForbiddenPage = lazy(() => import('./pages/ForbiddenPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 const OnboardingPage = lazy(() => import('./pages/OnboardingPage'));
 const TopicPage = lazy(() => import('./pages/TopicPage'));
+const AuthoringPage = lazy(() => import('./pages/AuthoringPage'));
 
 // Setup global TanStack Query Client
 const queryClient = new QueryClient({
@@ -59,6 +60,7 @@ function App() {
                     {/* Creator authoring channel */}
                     <Route element={<CapabilityGate requiredCapability="creator:write" />}>
                       <Route path="/creator" element={<CreatorPage />} />
+                      <Route path="/creator/edit/:draftId" element={<AuthoringPage />} />
                     </Route>
 
                     {/* Governance admin channel */}
