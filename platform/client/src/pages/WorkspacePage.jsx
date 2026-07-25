@@ -6,6 +6,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../co
 import { Input } from '../components/primitives/Input';
 import { TextArea } from '../components/primitives/TextArea';
 import { useAuthStore } from '../store/authStore';
+import api from '../utils/api';
 
 export default function WorkspacePage() {
   const { user } = useAuthStore();
@@ -29,6 +30,11 @@ export default function WorkspacePage() {
       "## Study Notes\nJot down thoughts, derivations, or loop state mappings here. This workspace is persisted automatically.";
   });
 
+  const [recentMilestones, setRecentMilestones] = useState([
+    { title: 'Enriched learning direction setup', desc: 'Onboarding objectives parsed successfully.', date: 'Today' },
+    { title: 'Signed up for Ascendrite ecosystem', desc: 'Welcome user account created.', date: '3 days ago' }
+  ]);
+
   // Sync state helpers
   useEffect(() => {
     localStorage.setItem('ascendrite-workspace-tasks', JSON.stringify(tasks));
@@ -37,6 +43,25 @@ export default function WorkspacePage() {
   useEffect(() => {
     localStorage.setItem('ascendrite-workspace-notes', notes);
   }, [notes]);
+
+  useEffect(() => {
+    async function loadRecentAccessed() {
+      try {
+        const res = await api.get('/recent/accessed');
+        if (res.data && res.data.length > 0) {
+          const mapped = res.data.map(item => ({
+            title: `Accessed topic: ${item.resource_id}`,
+            desc: `Type: ${item.resource_type}`,
+            date: new Date(item.accessed_at).toLocaleDateString()
+          }));
+          setRecentMilestones(mapped);
+        }
+      } catch (err) {
+        console.error('Failed to load recent accessed activities:', err);
+      }
+    }
+    loadRecentAccessed();
+  }, []);
 
   const addTask = (e) => {
     e.preventDefault();
@@ -210,18 +235,14 @@ export default function WorkspacePage() {
             </CardHeader>
             <CardContent>
               <div className="flex flex-col gap-4 relative pl-4 border-l border-theme-border">
-                <div className="relative">
-                  <div className="absolute -left-[21px] top-1.5 w-2.5 h-2.5 rounded-full bg-theme-accent border-2 border-theme-surface" />
-                  <span className="text-[10px] font-mono text-theme-subtle">Today</span>
-                  <h5 className="text-xs font-bold text-theme-text mt-0.5">Enriched learning direction setup</h5>
-                  <p className="text-[10.5px] text-theme-subtle mt-0.5">Onboarding objectives parsed successfully.</p>
-                </div>
-                <div className="relative">
-                  <div className="absolute -left-[21px] top-1.5 w-2.5 h-2.5 rounded-full bg-theme-border border-2 border-theme-surface" />
-                  <span className="text-[10px] font-mono text-theme-subtle">Yesterday</span>
-                  <h5 className="text-xs font-bold text-theme-text mt-0.5">Authorized ecosystem access</h5>
-                  <p className="text-[10.5px] text-theme-subtle mt-0.5">Local session validation rules compiled.</p>
-                </div>
+                {recentMilestones.map((m, idx) => (
+                  <div key={idx} className="relative">
+                    <div className={`absolute -left-[21px] top-1.5 w-2.5 h-2.5 rounded-full border-2 border-theme-surface ${idx === 0 ? 'bg-theme-accent' : 'bg-theme-border'}`} />
+                    <span className="text-[10px] font-mono text-theme-subtle">{m.date}</span>
+                    <h5 className="text-xs font-bold text-theme-text mt-0.5">{m.title}</h5>
+                    <p className="text-[10.5px] text-theme-subtle mt-0.5">{m.desc}</p>
+                  </div>
+                ))}
               </div>
             </CardContent>
           </Card>

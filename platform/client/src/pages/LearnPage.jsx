@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { BookOpen, Lock, Unlock, CheckCircle2, Clock, ArrowRight, Sparkles, ChevronRight } from 'lucide-react';
 import { Button } from '../components/primitives/Button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../components/primitives/Card';
 import { Badge } from '../components/primitives/Badge';
+import { Spinner } from '../components/primitives/Spinner';
 import { useAuthStore } from '../store/authStore';
+import api from '../utils/api';
 
 // Mock curriculum roadmap pipelines for each primary interest track
 const curriculumData = {
@@ -158,13 +160,52 @@ export default function LearnPage() {
   const { user } = useAuthStore();
   const navigate = useNavigate();
 
+  const [pathway, setPathway] = useState(null);
+  const [loading, setLoading] = useState(true);
+
   const trackInterest = user?.preferences?.interest || 'web-development';
-  const pathway = curriculumData[trackInterest] || curriculumData['web-development'];
+
+  useEffect(() => {
+    async function loadPathway() {
+      const subjectIdMap = {
+        'ai': 'machine-learning',
+        'core-cs': 'operating-systems',
+        'software-engineering': 'design-patterns',
+        'web-development': 'frontend-frameworks'
+      };
+      const subjectId = subjectIdMap[trackInterest] || 'frontend-frameworks';
+      
+      try {
+        setLoading(true);
+        const res = await api.get(`/curriculum/subject/${subjectId}`);
+        setPathway({
+          title: res.data.name + ' Pathway',
+          description: res.data.metadata.description || 'Master structured conceptual pipelines.',
+          modules: res.data.modules
+        });
+      } catch (err) {
+        console.error('Failed to load dynamic subject pathway:', err);
+        const local = curriculumData[trackInterest] || curriculumData['web-development'];
+        setPathway(local);
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadPathway();
+  }, [trackInterest]);
+
+  if (loading || !pathway) {
+    return (
+      <div className="flex-1 flex items-center justify-center min-h-[50vh]">
+        <Spinner size="lg" />
+      </div>
+    );
+  }
 
   // Calculate progress details
   const totalModules = pathway.modules.length;
   const completedModules = pathway.modules.filter(m => m.completed).length;
-  const progressPercent = Math.round((completedModules / totalModules) * 100);
+  const progressPercent = totalModules > 0 ? Math.round((completedModules / totalModules) * 100) : 0;
 
   // Identify next unlocked incomplete target
   const nextTarget = pathway.modules.find(m => m.unlocked && !m.completed) || pathway.modules[0];
