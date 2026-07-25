@@ -28,13 +28,13 @@ Security is a foundational design constraint. The platform operates on the assum
 *   Passwords must never be stored in plain text or using weak hashing algorithms.
 *   **Hashing Standard**: Passwords shall be salted and hashed using **Argon2id** (configured matching RFC 9106 standards: $m=65536$ memory, $t=3$ iterations, $p=4$ parallel threads) as the canonical KDF for new passwords. Legacy bcrypt hashes (minimum work factor of 12) are supported only for migration compatibility, and successful logins using legacy hashes must trigger an automatic upgrade to the Argon2id standard.
 
-### 2.2 Secure Session Management
+### 2.2 Secure Session Management & Cookies Configuration
+
 User sessions are managed using secure, server-side session contexts identified by opaque browser session tokens:
-*   **Session Token Storage**: Browser clients receive an opaque, high-entropy session identifier. The token must be transmitted to the browser inside cookies with these properties:
-    *   `HttpOnly = true` (blocks client-side JavaScript access, defending against XSS leaks).
-    *   `Secure = true` (enforced in HTTPS staging/production settings).
-    *   `SameSite = Lax` by default (prevents cross-site request forgery while maintaining navigation usability).
-    *   `Path = /` (scoped to the application domain).
+*   **Session Token Storage**: Browser clients receive an opaque, high-entropy session identifier. The token is transmitted to the browser inside cookies using configuration-driven parameters defined in the application settings (`app/core/config.py`):
+    - `SECURITY_COOKIE_HTTPONLY`: Defaults to `true` to block client-side JavaScript access and defend against XSS leaks.
+    - `SECURITY_COOKIE_SECURE`: Controls the secure cookie flag. Developers configure this value based on host target environments (set to `false` for localhost HTTP testing, and overridden to `true` in production staging/environments to enforce TLS/SSL).
+    - `SECURITY_COOKIE_SAMESITE`: Configured to `lax` to prevent cross-site request forgery (CSRF) while maintaining navigation usability.
 *   **LocalStorage Ban**: Sensitive credentials, access keys, or long-lived authentication secrets must never be stored in browser `localStorage` or `sessionStorage`. Non-sensitive UI variables (e.g. theme preference) may be stored in local storage.
 
 ### 2.3 Configurable Security Default Timeouts

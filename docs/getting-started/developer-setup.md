@@ -60,27 +60,38 @@ Double-click or run the primary batch file from your command line:
 
 ---
 
-## 5. Ingestion Pipeline & Validation
+## 5. Database Schema Initialization & Seeding
 
-Curriculum contents are managed locally inside `knowledge-base/` category folders. To sync changes to MongoDB, run the administrative toolkit:
+Before launching client/server applications or running test suites, initialize and seed the local databases:
 
-### Ingestion Commands
-Navigate to `G:\Projects\ascendrite-data\migration-toolkit/` using the platform's python environment:
+### 5.1 Initialize Schemas and Seeding Users
+To create PostgreSQL tables, map MongoDB index configurations, and write default developer credential accounts:
 ```powershell
-# Simulate and validation checks
-python cli.py dry-run
+python scripts/init_databases.py
+```
+This inserts default testing accounts:
+*   **Admin**: `admin@ascendrite.com` / `Admin@123`
+*   **Contributor**: `creator@ascendrite.com` / `Creator@123`
+*   **Student**: `learner@ascendrite.com` / `Learner@123`
 
-# Persist repository changes into MongoDB
-python cli.py apply
-
-# Verify database matches repository files exactly
-python cli.py verify
+### 5.2 Ingest Curriculum Metadata
+To import category course modules structure and notes content metadata files into MongoDB:
+```powershell
+python scripts/seed_database.py --config config/local-seeds.json
 ```
 
-### Preflight Sanity Checks
-Ensure no documentation format regressions occur by running the local validation tools:
+### 5.3 Unified Control Panel Setup
+Alternatively, you can automate both setup steps by running `./run-ascendrite.bat` and choosing Option `[8] Initialize & Seed Databases`.
+
+### 5.4 Preflight Verification Checks
+Ensure code cleanliness and test compliance before committing:
 ```powershell
-python scratch/validate_docs_standards.py
-python scratch/validate_knowledge_integrity.py
-python scratch/validate_ai_notes.py
+# Run backend test suite:
+python -m pytest -v platform/server/tests
+
+# Run frontend checks:
+cd platform/client
+npm run lint
+npm run build
 ```
+
