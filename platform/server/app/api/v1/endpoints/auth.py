@@ -3,6 +3,7 @@ from pydantic import BaseModel, Field
 from typing import List
 
 from app.core.routing import APIRouter
+from app.core.config import settings
 from app.api.v1.dependencies import get_auth_service, get_current_user
 from app.modules.users.schemas.user import UserCreate, UserLogin, UserResponse
 from app.modules.users.models.user import UserModel
@@ -74,16 +75,16 @@ async def login(
     response.set_cookie(
         key="access_token",
         value=access_token,
-        httponly=True,
-        secure=False,  # Set True in production SSL setup
-        samesite="lax"
+        httponly=settings.SECURITY_COOKIE_HTTPONLY,
+        secure=settings.SECURITY_COOKIE_SECURE,
+        samesite=settings.SECURITY_COOKIE_SAMESITE
     )
     response.set_cookie(
         key="refresh_token",
         value=refresh_token,
-        httponly=True,
-        secure=False,
-        samesite="lax"
+        httponly=settings.SECURITY_COOKIE_HTTPONLY,
+        secure=settings.SECURITY_COOKIE_SECURE,
+        samesite=settings.SECURITY_COOKIE_SAMESITE
     )
 
     return {
@@ -125,8 +126,20 @@ async def refresh(
         ip_address=ip_address
     )
 
-    response.set_cookie(key="access_token", value=access_token, httponly=True, secure=False, samesite="lax")
-    response.set_cookie(key="refresh_token", value=new_refresh_token, httponly=True, secure=False, samesite="lax")
+    response.set_cookie(
+        key="access_token",
+        value=access_token,
+        httponly=settings.SECURITY_COOKIE_HTTPONLY,
+        secure=settings.SECURITY_COOKIE_SECURE,
+        samesite=settings.SECURITY_COOKIE_SAMESITE
+    )
+    response.set_cookie(
+        key="refresh_token",
+        value=new_refresh_token,
+        httponly=settings.SECURITY_COOKIE_HTTPONLY,
+        secure=settings.SECURITY_COOKIE_SECURE,
+        samesite=settings.SECURITY_COOKIE_SAMESITE
+    )
 
     return {
         "access_token": access_token,
