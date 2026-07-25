@@ -6,7 +6,7 @@ const sections = [
   { id: 'visual-pedagogy', label: 'Pedagogy' },
   { id: 'curriculum-grid', label: 'Roadmap' },
   { id: 'interactive-sandbox', label: '3D Sandbox' },
-  { id: 'ai-profiling', label: 'AI Profiling' },
+  { id: 'ai-profiling', label: 'Diagnostics' },
   { id: 'learning-features', label: 'Features' }
 ];
 

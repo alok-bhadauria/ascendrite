@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 
 /**
- * AiProfiler renders the AI diagnostics terminal console section
+ * AiProfiler renders the diagnostics terminal console section
  * with a live typewriter effect for terminal logs, dynamic cognitive
  * metrics progress bars, and a scan execution button.
  */
 export default function AiProfiler() {
   const [metrics, setMetrics] = useState({ cognitive: 87, retention: 92, recall: 78 });
   const [terminalLogs, setTerminalLogs] = useState([
-    '[system] Profiler kernel active on core-0.',
-    '[system] Traced 4 scopes; cognitive coherence at 87%.'
+    '[system] Diagnostics kernel active on core-0.',
+    '[system] Traced 4 scopes; subject coherence at 87%.'
   ]);
   const [currentTypingText, setCurrentTypingText] = useState('');
 
@@ -21,19 +21,19 @@ export default function AiProfiler() {
     });
     setTerminalLogs(prev => [
       ...prev.slice(-3),
-      `[profiler] Scanning conceptual traces... Done.`,
-      `[profiler] Retention profile updated.`
+      `[diagnostics] Scanning study logs... Done.`,
+      `[diagnostics] Retention profile updated.`
     ]);
   };
 
   useEffect(() => {
     const events = [
-      '[profiler] Traced conceptual leak in DBMS transaction concurrency control.',
-      '[profiler] Memory recall index for "Thread Scheduling Algorithms" elevated.',
-      '[ai-copilot] Generated micro-lesson challenge: "Math behind Backpropagation".',
-      '[system] Synchronizing local study logs with MongoDB replica set...',
+      '[diagnostics] Traced learning latency in DBMS transaction concurrency control.',
+      '[diagnostics] Recall indexes updated for "Thread Scheduling Algorithms".',
+      '[diagnostics] Flagged review priority: "Math behind Backpropagation".',
+      '[system] Synchronizing local study logs with MongoDB database...',
       '[system] Log database successfully updated.',
-      '[profiler] AI agent profiled: Weakness found in "B+ Tree Disk Seeks".'
+      '[diagnostics] Weakness flagged in "B+ Tree Disk Seeks".'
     ];
     let eventIdx = 0;
 
@@ -78,7 +78,7 @@ export default function AiProfiler() {
               </div>
               <div className="flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-ping" />
-                <span className="text-[10px] font-bold text-theme-subtle">ascendrite-ai-profiler --v1.0.0</span>
+                <span className="text-[10px] font-bold text-theme-subtle">ascendrite-diagnostics-kernel --v1.0.0</span>
               </div>
             </div>
             
@@ -106,28 +106,28 @@ export default function AiProfiler() {
               onClick={runScan}
               className="w-full bg-theme-border border border-theme-border hover:bg-theme-surface text-theme-text font-bold py-2 rounded-xl text-xs transition-all active:scale-95 cursor-pointer"
             >
-              Execute Assessment Scan
+              Execute Diagnostics Scan
             </button>
           </div>
 
           {/* Right: Info panel & dynamic stats */}
           <div className="space-y-6">
             <span className="text-[10px] font-bold text-theme-accent uppercase tracking-wider bg-theme-accent/15 px-3 py-1 rounded-full">
-              AI Diagnostics
+              Platform Diagnostics
             </span>
             <h2 className="font-display font-bold text-3xl sm:text-4xl text-theme-text leading-tight">
-              Dynamic Cognitive <br />
-              Profiling & Feedback
+              Dynamic Progress <br />
+              Diagnostics & Feedback
             </h2>
             <p className="text-theme-subtle text-sm leading-relaxed">
-              Ascendrite's AI agent traces your path step completion intervals and assessment score distributions to compute a localized conceptual recall profile.
+              Ascendrite traces your learning pathways, topic completion intervals, and assessment score distributions to compute a localized study review profile.
             </p>
 
             {/* Dynamic metrics bar counters */}
             <div className="space-y-4 pt-2">
               <div>
                 <div className="flex justify-between text-xs font-bold text-theme-text mb-1">
-                  <span>Cognitive Coherence</span>
+                  <span>Syllabus Coherence</span>
                   <span className="text-theme-accent">{metrics.cognitive}%</span>
                 </div>
                 <div className="h-1.5 w-full bg-theme-border rounded-full overflow-hidden">

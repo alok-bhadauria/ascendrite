@@ -31,7 +31,7 @@ const subjectOrder = {
 
 const features = [
   { Icon: Code,     title: 'Interactive Code Trace',     body: 'Deconstruct complex execution context. Step through stack frames, loop scopes, and recursion trees dynamically to expose variables and execution flows in real time.' },
-  { Icon: Brain,    title: 'AI Copilot Diagnostics',     body: 'Local LLM agents profile your completion intervals and diagnostic quiz inputs to render custom, localized review pathways for weak conceptual links.' },
+  { Icon: Brain,    title: 'Structured Progress Diagnostics',     body: 'Traces your completion history and diagnostic review inputs to highlight conceptual weaknesses and prioritize topics.' },
   { Icon: Database, title: 'LaTeX derivations & Math',   body: 'Textbook-grade academic rigor featuring fully formatted LaTeX proofs, complexity analysis matrices, and mathematical derivations for core algorithm weights.' },
   { Icon: BarChart2,title: 'Progress Tracking',          body: 'Log completed topics, quiz score percentages, and total duration metrics to a local MongoDB database with automatic synchronization.' },
   { Icon: Palette,  title: 'Monkeytype-Inspired Themes', body: 'Switch layouts instantly with 6 high-quality, Monkeytype-inspired palettes. Fully persistent, FOUC-proof, and designed using HSL tailor matches.' },
@@ -88,7 +88,7 @@ export default function LandingPage() {
               with <span className="text-theme-accent">interactive simulators</span>
             </h1>
             <p className="text-base sm:text-lg md:text-xl text-theme-subtle mb-10 leading-relaxed max-w-2xl mx-auto">
-              Experience a structured, decentralized curriculum enriched with code trace visualizations, LaTeX derivations, and AI agent profiling.
+              Experience a structured, decentralized curriculum enriched with code trace visualizations, LaTeX derivations, and progress diagnostics.
             </p>
 
             {/* Hero CTAs */}
@@ -151,7 +151,7 @@ export default function LandingPage() {
               <div className="flex flex-wrap justify-center items-center gap-6 sm:gap-12 text-xs font-mono text-theme-text opacity-50 select-none">
                 <span className="hover:opacity-90 transition-opacity cursor-default">── Distributed Curriculum Architecture ──</span>
                 <span className="hover:opacity-90 transition-opacity cursor-default">── Textbook-Grade Cognitive Visualizations ──</span>
-                <span className="hover:opacity-90 transition-opacity cursor-default">── AI Diagnostic Modeling Patterns ──</span>
+                <span className="hover:opacity-90 transition-opacity cursor-default">── Decentralized Progress Analytics ──</span>
               </div>
             </div>
 
@@ -220,7 +220,7 @@ export default function LandingPage() {
                     </div>
                     <div>
                       <h5 className="font-bold text-xs text-theme-text">3. Assessment Feedback</h5>
-                      <p className="text-[11px] text-theme-subtle mt-0.5">Submit code segments or quizzes. The AI profiles revision metrics.</p>
+                      <p className="text-[11px] text-theme-subtle mt-0.5">Submit code segments or quizzes. The system profiles revision metrics.</p>
                     </div>
                   </div>
                 </div>
