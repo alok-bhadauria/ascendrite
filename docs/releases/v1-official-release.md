@@ -1,6 +1,6 @@
-# V1 Release Candidate Specification
+# V1 Official Release Specification
 
-This document details the V1 Release Candidate architecture, completed platforms integrations, security standards, and local development configurations for Ascendrite.
+This document details the V1 Official Release architecture, completed platforms integrations, security standards, and local development configurations for Ascendrite.
 
 ---
 

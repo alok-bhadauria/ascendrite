@@ -3,9 +3,9 @@
 ```
                             ASCENDRITE
 -------------------------------------------------------------------
-        Knowledge | Intelligence | Infrastructure | Learning
+         Knowledge | Curriculum | Infrastructure | Learning
 
-                   Learner / Educator / Developer / AI Agent
+                Learner / Educator / Developer / Services
                                      |
                                      v
                             API Gateway (FastAPI)
@@ -14,13 +14,13 @@
                      |                               |
                      v                               v
         Platform Infrastructure             Knowledge Services
-      (RBAC, Workspace, Auditing)         (Syllabi, Graphs, RAG)
+      (RBAC, Workspace, Auditing)        (Syllabi, Graphs, Assets)
                      |                               |
-    +----------------+----------------+--------------+----------------+
-    |                |                |              |                |
-    v                v                v              v                v
-PostgreSQL        MongoDB          Memurai        pgvector         RustFS
-(Relational)      (Metadata)     (Cache/Volatile) (Embeddings)    (Object/S3)
+    +----------------+----------------+--------------+
+    |                |                |              |
+    v                v                v              v
+PostgreSQL        MongoDB          Memurai        RustFS
+(Relational)      (Metadata)     (Cache/Volatile) (Object/S3)
 ```
 
 Ascendrite is an enterprise-grade, metadata-driven educational platform ecosystem and knowledge infrastructure system. The ecosystem translates technical curricula into granular, code-driven learning roadmaps, treating educational knowledge as structured, queryable, and mathematically validated resources.
@@ -37,7 +37,7 @@ The platform provides:
 *   **Structured Metadata Boundaries**: Content structure is decoupled from platform rendering logic, allowing the knowledge base to evolve independently.
 *   **Segregated Content Lifecycle**: A strict division separates public platform infrastructure from proprietary knowledge assets, protecting intellectual property while ensuring developer flexibility.
 *   **Role-Based & Capability-Based Access**: Multi-actor security models govern read, write, moderation, and administrative capability scopes.
-*   **AI Agency & Retrieval-Augmented Generation**: Bounded AI workflows access validated platform schemas and semantic repositories prior to inference, ensuring high-fidelity, hallucination-resistant assistance.
+*   **Structured Curriculum Exploration**: Textbook-grade pedagogy maps out prerequisites and taxonomy relations, giving learners a clean progress pathway.
 
 ---
 
@@ -66,7 +66,6 @@ Rather than using a single database, storage responsibilities are strictly divid
 *   **PostgreSQL 18.4**: Serves as the relational store for structured transactional metadata (user identities, workspace settings, capability assignments, and security audit logs). See the [Database Schema](docs/architecture/database-schema.md).
 *   **MongoDB Community Server 8.0.26**: Serves as the document catalog for curriculum structures, taxonomy definitions, and knowledge graphs.
 *   **Memurai / Redis compatibility**: Acts strictly as a transient caching layer. No primary write commits directly to the cache; it is warmed at startup or populated on-demand.
-*   **Vector Repository (pgvector)**: Abstracted behind a provider-neutral interface to handle semantic embeddings query similarity checks.
 *   **RustFS S3 API**: Handles binary objects and private knowledge assets through a validated secure file promotion and quarantine pipeline.
 
 For detailed storage mechanics, see the [Storage Architecture](docs/architecture/storage-architecture.md).
@@ -179,9 +178,9 @@ python -m pytest -v platform/server/tests
 
 ---
 
-## 6. Implementation Roadmap
+## 6. Implementation Status & Release Roadmap
 
-Ascendrite operates on a phased rollout. The system is transitioning from architectural baseline validation into active platform codebase development.
+Ascendrite V1 has completed its developmental stages and is compiled as a stable release candidate.
 
 ```
 +------------------------------------+
@@ -205,7 +204,7 @@ Ascendrite operates on a phased rollout. The system is transitioning from archit
                    |
                    v
 +------------------------------------+
-|  5. Active APIs & Release (ACTIVE) |
+| 5. Product Release V1 (STABLE RC)  |
 +------------------------------------+
 ```
 
