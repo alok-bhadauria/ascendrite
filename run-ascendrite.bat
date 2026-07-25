@@ -679,6 +679,23 @@ function Exit-PlatformManager {
     exit 0
 }
 
+function Run-DbInitAndSeed {
+    Clear-Host
+    Write-Host "================================================================" -ForegroundColor Cyan
+    Write-Host "                 DATABASE INITIALIZATION & SEEDING              " -ForegroundColor Cyan
+    Write-Host "================================================================" -ForegroundColor Cyan
+    
+    Write-Host "1. Running schema setup and seeding default credentials..." -ForegroundColor Yellow
+    & $VenvPython (Join-Path $RepoRoot "scripts\init_databases.py")
+    
+    Write-Host ""
+    Write-Host "2. Running knowledge base curriculum ingestion seeder..." -ForegroundColor Yellow
+    & $VenvPython (Join-Path $RepoRoot "scripts\seed_database.py") --config (Join-Path $RepoRoot "config\local-seeds.json")
+    
+    Write-Host "================================================================" -ForegroundColor Cyan
+    Read-Host "Press Enter to return to Dashboard"
+}
+
 # Main event loop
 while ($true) {
     $statuses = Get-FullStatus
@@ -690,6 +707,7 @@ while ($true) {
     Write-Host "  [5] View Logs          (Backend & Frontend)"
     Write-Host "  [6] Open Service URLs"
     Write-Host "  [7] Run Diagnostics"
+    Write-Host "  [8] Initialize & Seed Databases"
     Write-Host "  [0] Exit"
     Write-Host "================================================================" -ForegroundColor Cyan
     
@@ -702,6 +720,7 @@ while ($true) {
         "5" { View-Logs }
         "6" { Open-URLs }
         "7" { Show-Diagnostics }
+        "8" { Run-DbInitAndSeed }
         "0" { Exit-PlatformManager }
     }
 }

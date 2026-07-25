@@ -115,12 +115,31 @@ Ascendrite uses native Windows services in the local development environment rat
 
 ---
 
-## 4. Ingesting Curriculum Metadata
+## 4. Database Schema Initialization & Seeding
 
-Before running tests or client applications, load mock knowledge bases:
+Before running tests or launching client/server application suites, ensure the local databases are configured and seeded:
 
+### 4.1 Schema Setup and User Seeding
+Initialize the PostgreSQL relational schemas and MongoDB collection index constraints, and populate standard local developer credentials:
 ```bash
-# Execute local database seed script
+# Execute local database setup script
+python scripts/init_databases.py
+```
+This applies the relational DDL tables defined in [init_postgres.sql](file:///g:/Projects/ascendrite/scripts/init_postgres.sql), maps validation rules/unique constraints on MongoDB collections, and creates default testing profiles:
+*   **Admin**: `admin@ascendrite.com` / `Admin@123`
+*   **Contributor**: `creator@ascendrite.com` / `Creator@123`
+*   **Student**: `learner@ascendrite.com` / `Learner@123`
+
+### 4.2 Ingesting Curriculum Metadata
+Populate subject taxonomies, modules, and topic notes metadata inside MongoDB:
+```bash
+# Execute local curriculum catalog seed script
 python scripts/seed_database.py --config config/local-seeds.json
 ```
-This validates and imports domain taxonomy schemas from the `knowledge-base/` folder into MongoDB.
+This validates and imports domain taxonomy schemas and notes files from the `platform/server/app/knowledge-base/` category folders.
+
+### 4.3 Unified Setup via Manager Dashboard
+Alternatively, you can run both steps automatically in one click using the interactive launcher:
+1.  Run the launcher script: `./run-ascendrite.bat`
+2.  Choose Option `[8] Initialize & Seed Databases` to completely initialize and seed your development databases ecosystem.
+
