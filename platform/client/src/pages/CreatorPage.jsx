@@ -4,53 +4,82 @@ import { PenTool, Plus, Edit3, Trash2, CheckCircle2, Clock, AlertCircle } from '
 import { Button } from '../components/primitives/Button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../components/primitives/Card';
 import { Badge } from '../components/primitives/Badge';
+import { Spinner } from '../components/primitives/Spinner';
+import api from '../utils/api';
 
 export default function CreatorPage() {
   const navigate = useNavigate();
 
-  // ── Drafts and Publishing Queue State ─────────────────────────────────────
-  const [drafts, setDrafts] = useState(() => {
-    const saved = localStorage.getItem('ascendrite-creator-drafts');
-    return saved ? JSON.parse(saved) : [
-      {
-        id: 'draft-1',
-        title: 'Backpropagation Calculus & Chain Rule Chain',
-        category: 'ai',
-        status: 'draft', // draft | ready_for_review | published
-        lastModified: '10m ago',
-        content: 'Understanding partial derivatives in layer configurations...'
-      },
-      {
-        id: 'draft-2',
-        title: 'B-Tree Database Index Traversals',
-        category: 'core-cs',
-        status: 'ready_for_review',
-        lastModified: '1h ago',
-        content: 'Analyzing leaf splits, nodes, and keys matching transaction isolations...'
-      }
-    ];
-  });
+  const [drafts, setDrafts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    localStorage.setItem('ascendrite-creator-drafts', JSON.stringify(drafts));
-  }, [drafts]);
-
-  const handleCreateDraft = () => {
-    const newDraft = {
-      id: `draft-${Date.now()}`,
-      title: 'Untitled Subject Draft',
-      category: 'ai',
-      status: 'draft',
-      lastModified: 'Just now',
-      content: ''
-    };
-    setDrafts([newDraft, ...drafts]);
-    navigate(`/creator/edit/${newDraft.id}`);
+  const loadDrafts = async () => {
+    try {
+      setLoading(true);
+      const res = await api.get('/creator/drafts');
+      const mapped = res.data.map(d => ({
+        id: d.id,
+        title: d.content?.title || d.content?.name || 'Untitled Draft',
+        category: d.content?.category || 'ai',
+        status: d.validation_status?.toLowerCase() || 'draft',
+        lastModified: d.updated_at ? new Date(d.updated_at).toLocaleDateString() : 'Just now',
+        content: d.content?.body || ''
+      }));
+      setDrafts(mapped);
+    } catch (err) {
+      console.error('Failed to load drafts from server:', err);
+      // fallback
+      const saved = localStorage.getItem('ascendrite-creator-drafts');
+      setDrafts(saved ? JSON.parse(saved) : []);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleDeleteDraft = (id, e) => {
+  useEffect(() => {
+    loadDrafts();
+  }, []);
+
+  const handleCreateDraft = async () => {
+    try {
+      const res = await api.post('/creator/drafts', {
+        resource_type: 'topic',
+        content: {
+          title: 'Untitled Subject Draft',
+          category: 'ai',
+          subject_id: 'machine-learning',
+          body: ''
+        }
+      });
+      navigate(`/creator/edit/${res.data.id}`);
+    } catch (err) {
+      console.error('Failed to create backend draft:', err);
+      const newDraft = {
+        id: `draft-${Date.now()}`,
+        title: 'Untitled Subject Draft',
+        category: 'ai',
+        status: 'draft',
+        lastModified: 'Just now',
+        content: ''
+      };
+      const updated = [newDraft, ...drafts];
+      setDrafts(updated);
+      localStorage.setItem('ascendrite-creator-drafts', JSON.stringify(updated));
+      navigate(`/creator/edit/${newDraft.id}`);
+    }
+  };
+
+  const handleDeleteDraft = async (id, e) => {
     e.stopPropagation();
-    setDrafts(drafts.filter(d => d.id !== id));
+    try {
+      await api.delete(`/creator/drafts/${id}`);
+      setDrafts(drafts.filter(d => d.id !== id));
+    } catch (err) {
+      console.error('Failed to delete backend draft:', err);
+      const updated = drafts.filter(d => d.id !== id);
+      setDrafts(updated);
+      localStorage.setItem('ascendrite-creator-drafts', JSON.stringify(updated));
+    }
   };
 
   const getStatusBadge = (status) => {
@@ -93,7 +122,12 @@ export default function CreatorPage() {
             Active Draft Workspaces
           </h3>
 
-          {drafts.length === 0 ? (
+          {loading ? (
+            <div className="py-16 text-center">
+              <Spinner size="lg" />
+              <p className="text-xs text-theme-subtle mt-2 font-semibold">Loading drafts...</p>
+            </div>
+          ) : drafts.length === 0 ? (
             <Card className="border-dashed py-16 text-center">
               <AlertCircle className="h-10 w-10 text-theme-subtle mx-auto mb-4" />
               <CardTitle className="text-base font-bold">No Drafts Found</CardTitle>

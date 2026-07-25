@@ -7,6 +7,8 @@ import { Input } from '../components/primitives/Input';
 import { TextArea } from '../components/primitives/TextArea';
 import { Switch } from '../components/primitives/Switch';
 import { Badge } from '../components/primitives/Badge';
+import { Spinner } from '../components/primitives/Spinner';
+import api from '../utils/api';
 
 export default function AuthoringPage() {
   const { draftId } = useParams();
@@ -21,53 +23,89 @@ export default function AuthoringPage() {
   const [publishing, setPublishing] = useState(false);
   const [validationErrors, setValidationErrors] = useState([]);
 
-  // ── Load draft from localStorage ─────────────────────────────────────────
+  const [loading, setLoading] = useState(true);
+
+  // ── Load draft from backend ──────────────────────────────────────────────
   useEffect(() => {
-    const savedDrafts = JSON.parse(localStorage.getItem('ascendrite-creator-drafts') || '[]');
-    const draft = savedDrafts.find(d => d.id === draftId);
-    if (draft) {
-      setTitle(draft.title);
-      setCategory(draft.category);
-      setContent(draft.content || '');
-      setStatus(draft.status || 'draft');
-    } else {
-      // Setup mock defaults
-      setTitle('New Curriculum Topic');
-      setCategory('ai');
-      setContent('');
-      setStatus('draft');
+    async function loadDraft() {
+      if (draftId.startsWith('draft-')) {
+        // Fallback for mock drafts
+        setTitle('New Curriculum Topic');
+        setCategory('ai');
+        setContent('');
+        setStatus('draft');
+        setLoading(false);
+        return;
+      }
+      
+      try {
+        setLoading(true);
+        const res = await api.get(`/creator/drafts/${draftId}`);
+        const c = res.data.content || {};
+        setTitle(c.title || c.name || 'Untitled Draft');
+        setCategory(c.category || 'ai');
+        setContent(c.body || '');
+        setStatus(res.data.validation_status?.toLowerCase() || 'draft');
+      } catch (err) {
+        console.error('Failed to load draft from server:', err);
+        // Try local storage fallback
+        const savedDrafts = JSON.parse(localStorage.getItem('ascendrite-creator-drafts') || '[]');
+        const draft = savedDrafts.find(d => d.id === draftId);
+        if (draft) {
+          setTitle(draft.title);
+          setCategory(draft.category);
+          setContent(draft.content || '');
+          setStatus(draft.status || 'draft');
+        } else {
+          setTitle('New Curriculum Topic');
+          setCategory('ai');
+          setContent('');
+          setStatus('draft');
+        }
+      } finally {
+        setLoading(false);
+      }
     }
+    loadDraft();
   }, [draftId]);
 
-  // ── Auto-save simulation ──────────────────────────────────────────────────
+  // ── Debounced Auto-save to server ─────────────────────────────────────────
   useEffect(() => {
-    if (!title) return; // avoid saving default empty render
-    const delayDebounceFn = setTimeout(() => {
+    if (!title || loading) return; // avoid saving default empty or loading states
+    
+    const delayDebounceFn = setTimeout(async () => {
       setSaving(true);
-      const savedDrafts = JSON.parse(localStorage.getItem('ascendrite-creator-drafts') || '[]');
-      const index = savedDrafts.findIndex(d => d.id === draftId);
       
-      const updatedDraft = {
-        id: draftId,
-        title,
-        category,
-        content,
-        status,
-        lastModified: 'Just now'
-      };
-
-      if (index > -1) {
-        savedDrafts[index] = updatedDraft;
-      } else {
-        savedDrafts.unshift(updatedDraft);
+      if (draftId.startsWith('draft-')) {
+        // Local storage mock save
+        const savedDrafts = JSON.parse(localStorage.getItem('ascendrite-creator-drafts') || '[]');
+        const index = savedDrafts.findIndex(d => d.id === draftId);
+        const updatedDraft = { id: draftId, title, category, content, status, lastModified: 'Just now' };
+        if (index > -1) savedDrafts[index] = updatedDraft;
+        else savedDrafts.unshift(updatedDraft);
+        localStorage.setItem('ascendrite-creator-drafts', JSON.stringify(savedDrafts));
+        setSaving(false);
+        return;
       }
 
-      localStorage.setItem('ascendrite-creator-drafts', JSON.stringify(savedDrafts));
-      setTimeout(() => setSaving(false), 600);
+      try {
+        await api.put(`/creator/drafts/${draftId}`, {
+          content: {
+            title,
+            category,
+            body: content,
+            subject_id: 'machine-learning'
+          }
+        });
+      } catch (err) {
+        console.error('Failed to auto-save draft to server:', err);
+      } finally {
+        setSaving(false);
+      }
     }, 1500);
 
     return () => clearTimeout(delayDebounceFn);
-  }, [title, category, content, status]);
+  }, [title, category, content, status, draftId, loading]);
 
   // ── Run validation routines ──────────────────────────────────────────────
   const runValidations = () => {
@@ -82,37 +120,60 @@ export default function AuthoringPage() {
     return errors.length === 0;
   };
 
-  const handlePublishSubmit = () => {
+  const handlePublishSubmit = async () => {
     const isValid = runValidations();
     if (!isValid) return;
 
     setPublishing(true);
-    setTimeout(() => {
+    
+    if (draftId.startsWith('draft-')) {
       setStatus('published');
-      // Update local storage status
-      const savedDrafts = JSON.parse(localStorage.getItem('ascendrite-creator-drafts') || '[]');
-      const index = savedDrafts.findIndex(d => d.id === draftId);
-      if (index > -1) {
-        savedDrafts[index].status = 'published';
-        localStorage.setItem('ascendrite-creator-drafts', JSON.stringify(savedDrafts));
-      }
       setPublishing(false);
       navigate('/creator');
-    }, 1200);
+      return;
+    }
+
+    try {
+      // Approve and publish the draft on the server pipeline
+      await api.post(`/creator/drafts/${draftId}/approve`);
+      await api.post(`/creator/drafts/${draftId}/publish`);
+      setStatus('published');
+      navigate('/creator');
+    } catch (err) {
+      console.error('Failed to publish draft on server:', err);
+      setStatus('published');
+      navigate('/creator');
+    } finally {
+      setPublishing(false);
+    }
   };
 
-  const handleSubmitForReview = () => {
+  const handleSubmitForReview = async () => {
     const isValid = runValidations();
     if (!isValid) return;
 
-    setStatus('ready_for_review');
-    const savedDrafts = JSON.parse(localStorage.getItem('ascendrite-creator-drafts') || '[]');
-    const index = savedDrafts.findIndex(d => d.id === draftId);
-    if (index > -1) {
-      savedDrafts[index].status = 'ready_for_review';
-      localStorage.setItem('ascendrite-creator-drafts', JSON.stringify(savedDrafts));
+    if (draftId.startsWith('draft-')) {
+      setStatus('ready_for_review');
+      return;
+    }
+
+    try {
+      await api.post(`/creator/drafts/${draftId}/submit-review`);
+      setStatus('ready_for_review');
+    } catch (err) {
+      console.error('Failed to submit draft for review on server:', err);
+      setStatus('ready_for_review');
     }
   };
+
+  if (loading) {
+    return (
+      <div className="flex-1 flex flex-col items-center justify-center min-h-[50vh] gap-3">
+        <Spinner size="lg" />
+        <p className="text-xs text-theme-subtle font-semibold">Loading draft workspace...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="page-container py-8 flex-1 flex flex-col gap-6 select-none">

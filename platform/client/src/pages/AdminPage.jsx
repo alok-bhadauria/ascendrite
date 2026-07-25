@@ -3,6 +3,7 @@ import { Shield, Users, PenTool, CheckCircle2, Activity } from 'lucide-react';
 import { Button } from '../components/primitives/Button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../components/primitives/Card';
 import { Switch } from '../components/primitives/Switch';
+import api from '../utils/api';
 
 export default function AdminPage() {
   // ── platform configuration states ───────────────────────────────────────
@@ -12,27 +13,73 @@ export default function AdminPage() {
   // ── platform data counts ────────────────────────────────────────────────
   const [completedCount, setCompletedCount] = useState(0);
   const [reviewQueue, setReviewQueue] = useState([]);
+  const [metrics, setMetrics] = useState({
+    users: 0,
+    teams: 0,
+    published_topics: 0,
+    published_contents: 0,
+    published_assessments: 0,
+    review_backlog: 0,
+    total_assets: 0
+  });
+
+  const loadAdminData = async () => {
+    try {
+      // 1. Fetch metrics
+      const metricsRes = await api.get('/admin/dashboard');
+      setMetrics(metricsRes.data);
+      
+      // 2. Fetch config
+      const configRes = await api.get('/admin/config');
+      setMaintenanceMode(configRes.data.maintenance_mode || false);
+      if (configRes.data.feature_flags) {
+        setDebugLogs(configRes.data.feature_flags.enable_debug || false);
+      }
+      
+      // 3. Fetch review drafts
+      const draftsRes = await api.get('/creator/drafts');
+      const inReview = draftsRes.data
+        .filter(d => d.validation_status?.toLowerCase() === 'ready_for_review' || d.status === 'ready_for_review')
+        .map(d => ({
+          id: d.id,
+          title: d.content?.title || d.content?.name || 'Untitled Draft',
+          category: d.content?.category || 'ai',
+          status: 'ready_for_review'
+        }));
+      setReviewQueue(inReview);
+    } catch (err) {
+      console.error('Failed to load admin data from server:', err);
+    }
+  };
 
   useEffect(() => {
-    // Read completed count
     const completed = JSON.parse(localStorage.getItem('ascendrite-completed-topics') || '[]');
     setCompletedCount(completed.length);
-
-    // Read creator drafts in review queue
-    const drafts = JSON.parse(localStorage.getItem('ascendrite-creator-drafts') || '[]');
-    const inReview = drafts.filter(d => d.status === 'ready_for_review');
-    setReviewQueue(inReview);
+    loadAdminData();
   }, []);
 
-  const handleApproveDraft = (id) => {
-    const drafts = JSON.parse(localStorage.getItem('ascendrite-creator-drafts') || '[]');
-    const index = drafts.findIndex(d => d.id === id);
-    if (index > -1) {
-      drafts[index].status = 'published';
-      localStorage.setItem('ascendrite-creator-drafts', JSON.stringify(drafts));
+  const handleMaintenanceToggle = async (checked) => {
+    setMaintenanceMode(checked);
+    try {
+      await api.put('/admin/config', { maintenance_mode: checked });
+    } catch (err) {
+      console.error('Failed to update maintenance configuration:', err);
     }
-    // Update local queue state
-    setReviewQueue(reviewQueue.filter(d => d.id !== id));
+  };
+
+  const handleApproveDraft = async (id) => {
+    try {
+      await api.post(`/creator/drafts/${id}/approve`);
+      await api.post(`/creator/drafts/${id}/publish`);
+      setReviewQueue(reviewQueue.filter(d => d.id !== id));
+      
+      // reload metrics
+      const statsRes = await api.get('/admin/dashboard');
+      setMetrics(statsRes.data);
+    } catch (err) {
+      console.error('Failed to approve/publish draft:', err);
+      setReviewQueue(reviewQueue.filter(d => d.id !== id));
+    }
   };
 
   return (
@@ -83,7 +130,7 @@ export default function AdminPage() {
             <Users className="h-4 w-4 text-theme-accent" />
           </CardHeader>
           <CardContent className="mt-1">
-            <h3 className="font-display font-extrabold text-4xl text-theme-text">14</h3>
+            <h3 className="font-display font-extrabold text-4xl text-theme-text">{metrics.users}</h3>
             <p className="text-[10px] text-theme-subtle mt-1">User actors validated in last 5m</p>
           </CardContent>
         </Card>
@@ -135,7 +182,7 @@ export default function AdminPage() {
             <CardContent className="flex flex-col gap-4">
               <Switch
                 checked={maintenanceMode}
-                onChange={setMaintenanceMode}
+                onChange={handleMaintenanceToggle}
                 label="Maintenance Lockout"
               />
               <Switch
