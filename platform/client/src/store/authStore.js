@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import api from '../utils/api';
 
 export const useAuthStore = create((set) => ({
   user: (() => {
@@ -19,5 +20,16 @@ export const useAuthStore = create((set) => ({
   logout: () => {
     localStorage.removeItem('ascendrite-user');
     set({ user: null, isAuthenticated: false });
+  },
+
+  checkSession: async () => {
+    try {
+      const res = await api.get('/auth/me');
+      localStorage.setItem('ascendrite-user', JSON.stringify(res.data));
+      set({ user: res.data, isAuthenticated: true });
+    } catch {
+      localStorage.removeItem('ascendrite-user');
+      set({ user: null, isAuthenticated: false });
+    }
   }
 }));

@@ -22,6 +22,18 @@ class SessionResponse(BaseModel):
     last_seen_at: str
     is_active: bool
 
+@router.get("/me", response_model=UserResponse, tags=["Identity"])
+async def get_me(current_user: UserModel = Depends(get_current_user)):
+    """Retrieve active user profile details from the session context"""
+    return UserResponse(
+        id=str(current_user.id),
+        email=current_user.email,
+        first_name=current_user.first_name,
+        last_name=current_user.last_name,
+        role=current_user.role,
+        is_active=current_user.is_active
+    )
+
 @router.post("/signup", status_code=status.HTTP_201_CREATED, tags=["Identity"])
 async def signup(user_data: UserCreate, auth_service: AuthService = Depends(get_auth_service)):
     """Register a new platform user profile and credential entity"""

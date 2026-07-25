@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Navbar from './components/layout/Navbar';
@@ -6,6 +6,7 @@ import Footer from './components/layout/Footer';
 import LandingPage from './pages/LandingPage';
 import { ProtectedRoute, CapabilityGate } from './router/RouteGuards';
 import { Spinner } from './components/primitives/Spinner';
+import { useAuthStore } from './store/authStore';
 
 import AppLayout from './components/layout/AppLayout';
 
@@ -31,6 +32,12 @@ const queryClient = new QueryClient({
 });
 
 function App() {
+  const checkSession = useAuthStore(state => state.checkSession);
+
+  useEffect(() => {
+    checkSession();
+  }, [checkSession]);
+
   return (
     <QueryClientProvider client={queryClient}>
       <Router>
