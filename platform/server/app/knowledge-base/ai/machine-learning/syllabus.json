@@ -1,0 +1,46 @@
+{
+  "modules": [
+    {
+      "id": "ml-foundations",
+      "title": "Machine Learning Foundations",
+      "description": "Linear regressions, gradient descents, loss parameters, and error fitting calculations.",
+      "unlocked": true,
+      "completed": true,
+      "duration": "45m",
+      "difficulty": "Medium",
+      "topics": [
+        "Gradient Descent Derivations",
+        "MSE Cost Fit",
+        "Overfitting Optimization"
+      ]
+    },
+    {
+      "id": "deep-learning",
+      "title": "Deep Learning Networks",
+      "description": "Multi-layer feed-forward networks, backpropagation calculus, and weights updates.",
+      "unlocked": true,
+      "completed": false,
+      "duration": "60m",
+      "difficulty": "Hard",
+      "topics": [
+        "Backpropagation Chain Rule",
+        "Activation Functions (ReLU, Sigmoid)",
+        "Weights & Biases Mapping"
+      ]
+    },
+    {
+      "id": "multi-agents",
+      "title": "Multi-Agent Architectures",
+      "description": "Orchestrating autonomous agents, communication paradigms, and tool capabilities.",
+      "unlocked": false,
+      "completed": false,
+      "duration": "75m",
+      "difficulty": "Expert",
+      "topics": [
+        "Agent Coordination Protocols",
+        "Execution Tree Planning",
+        "Context Allocation Limits"
+      ]
+    }
+  ]
+}

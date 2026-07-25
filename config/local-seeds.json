@@ -1,0 +1,9 @@
+{
+  "kb_path": "platform/server/app/knowledge-base",
+  "categories": [
+    "ai",
+    "core-cs",
+    "software-engineering",
+    "web-development"
+  ]
+}

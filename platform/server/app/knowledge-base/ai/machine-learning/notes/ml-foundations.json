@@ -1,0 +1,18 @@
+{
+  "title": "Linear Regressions & Gradient Fit",
+  "duration": "45m",
+  "difficulty": "Medium",
+  "content": "Linear regression maps a scalar response to one or more explanatory variables using linear predictor functions. The weights are updated iteratively using the Gradient Descent optimization algorithm:\n\n\\theta_j := \\theta_j - \\alpha \\frac{\\partial}{\\partial \\theta_j} J(\\theta)\n\nWhere J(\\theta) represents the Mean Squared Error (MSE) cost function:\n\nJ(\\theta) = \\frac{1}{2m} \\sum_{i=1}^{m} (h_\\theta(x^{(i)}) - y^{(i)})^2\n\nBy minimizing this loss matrix, the model aligns the regression predictor line to the training coordinate parameters.",
+  "attachments": [
+    {
+      "name": "regression_gradient_descent_proof.pdf",
+      "size": "1.4 MB"
+    },
+    {
+      "name": "mse_loss_matrix_derivation.pdf",
+      "size": "890 KB"
+    }
+  ],
+  "nextId": "deep-learning",
+  "nextTitle": "Deep Learning Networks"
+}

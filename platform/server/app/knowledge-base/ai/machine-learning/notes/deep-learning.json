@@ -1,0 +1,18 @@
+{
+  "title": "Backpropagation Calculus & Network Layers",
+  "duration": "60m",
+  "difficulty": "Hard",
+  "content": "Backpropagation calculates the gradient of the error function with respect to the neural network's weights. It applies the multi-variable Chain Rule calculus layer by layer:\n\n\\frac{\\partial E}{\\partial w_{ij}} = \\frac{\\partial E}{\\partial a_{j}} \\cdot \\frac{\\partial a_j}{\\partial w_{ij}}\n\nBy propagating error derivatives backward from the output layer, weights are fine-tuned to match expected values.",
+  "attachments": [
+    {
+      "name": "backprop_chain_rule_calculus.pdf",
+      "size": "2.1 MB"
+    },
+    {
+      "name": "neural_weights_matrix_ref.xlsx",
+      "size": "420 KB"
+    }
+  ],
+  "nextId": "multi-agents",
+  "nextTitle": "Multi-Agent Architectures"
+}

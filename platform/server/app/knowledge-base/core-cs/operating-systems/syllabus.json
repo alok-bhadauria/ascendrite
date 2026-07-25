@@ -1,0 +1,32 @@
+{
+  "modules": [
+    {
+      "id": "dbms-engines",
+      "title": "DBMS Database Engines",
+      "description": "Relational storage engines, locking schemas, and index tree traversals.",
+      "unlocked": true,
+      "completed": true,
+      "duration": "40m",
+      "difficulty": "Medium",
+      "topics": [
+        "B-Tree Index Traversals",
+        "ACID Transactions Isolation",
+        "Query Execution Planners"
+      ]
+    },
+    {
+      "id": "os-threads",
+      "title": "Operating Systems & Threads",
+      "description": "Thread scheduling, CPU registers, process execution bounds, and locks.",
+      "unlocked": true,
+      "completed": false,
+      "duration": "50m",
+      "difficulty": "Hard",
+      "topics": [
+        "Mutex & Semaphores",
+        "CPU Thread Context Switching",
+        "Memory Mappings"
+      ]
+    }
+  ]
+}

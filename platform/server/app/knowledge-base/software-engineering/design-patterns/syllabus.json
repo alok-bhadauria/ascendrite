@@ -1,0 +1,18 @@
+{
+  "modules": [
+    {
+      "id": "oop-design",
+      "title": "Object-Oriented System Design",
+      "description": "SOLID patterns, separation of domain rules, and class encapsulation.",
+      "unlocked": true,
+      "completed": true,
+      "duration": "35m",
+      "difficulty": "Medium",
+      "topics": [
+        "SOLID Code Design",
+        "Dependency Injections",
+        "Encapsulation Limits"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "modules": [
+    {
+      "id": "html-css-git",
+      "title": "Web Core Layouts & Git",
+      "description": "Semantic HTML structures, flexbox alignments, responsive layout models, and branches.",
+      "unlocked": true,
+      "completed": true,
+      "duration": "30m",
+      "difficulty": "Easy",
+      "topics": [
+        "Semantic Document Landmarks",
+        "Responsive Media Queries",
+        "Git Branches & Tags Merges"
+      ]
+    }
+  ]
+}
