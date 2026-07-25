@@ -187,3 +187,8 @@ class ContentWorkspaceService:
 
         await self.repo.update(draft_id, draft)
         return draft
+
+    async def list_drafts(self, context: RuntimeContext) -> List[DraftResourceModel]:
+        self._require_capability(context, "creator:read")
+        creator_id = context.principal.id
+        return await self.repo.get_by_creator(creator_id)

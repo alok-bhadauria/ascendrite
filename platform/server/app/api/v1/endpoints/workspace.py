@@ -15,6 +15,14 @@ from app.modules.creator.schemas.draft import (
 
 router = APIRouter()
 
+@router.get("/", response_model=List[DraftResourceResponse], tags=["Creator Workspace"])
+async def list_drafts(
+    service: ContentWorkspaceService = Depends(get_creator_workspace_service),
+    context: RuntimeContext = Depends(get_runtime_context)
+):
+    """Retrieve all active workspace drafts created by the current creator"""
+    return await service.list_drafts(context)
+
 @router.post("/", response_model=DraftResourceResponse, status_code=status.HTTP_201_CREATED, tags=["Creator Workspace"])
 async def create_draft(
     payload: DraftCreateRequest,
