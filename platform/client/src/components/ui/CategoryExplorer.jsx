@@ -1,11 +1,13 @@
 import React from 'react';
-import { PlayCircle } from 'lucide-react';
-import SubjectVisualizer from './SubjectVisualizer';
+import { Link } from 'react-router-dom';
+import { 
+  Play, Compass, Layers, 
+  GitCommit, ChevronRight, Clock, HelpCircle 
+} from 'lucide-react';
 
 /**
  * CategoryExplorer renders the interactive curriculum roadmap grid.
- * It displays the subject category sidebar, the subject timeline,
- * and the dynamic subject visualizer preview.
+ * It visualizes: Domain ➔ Subject ➔ Module ➔ Concept ➔ Learning Journey.
  */
 export default function CategoryExplorer({
   tracks,
@@ -17,6 +19,8 @@ export default function CategoryExplorer({
   onSubjectChange,
   subjectOrder
 }) {
+
+  // Filter subjects for the active category
   const currentCategorySubjects = subjects
     .filter(s => s.category === activeCategory)
     .sort((a, b) => {
@@ -25,28 +29,39 @@ export default function CategoryExplorer({
       return orderA - orderB;
     });
 
+  // Calculate stats for active track
+  const totalHours = currentCategorySubjects.reduce((acc, s) => acc + (s.metadata?.estimated_hours || 40), 0);
+
   return (
-    <section id="curriculum-grid" className="scroll-mt-[120px] py-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="curriculum-grid" className="scroll-mt-[120px] py-24 select-none relative overflow-hidden">
+      {/* Background spatial mesh decor */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-5 pointer-events-none" />
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        {/* === Section Header === */}
         <div className="text-center mb-16">
-          <span className="text-xs font-mono text-theme-accent uppercase tracking-wider bg-theme-accent/15 px-3 py-1 rounded-full">
-            Knowledge Hub
+          <span className="text-[10px] font-mono font-bold text-theme-accent uppercase tracking-wider bg-theme-accent/10 border border-theme-accent/20 px-3.5 py-1 rounded-full">
+            Knowledge Map
           </span>
-          <h2 className="font-display font-bold text-3xl sm:text-4xl text-theme-text mt-3 mb-2">Dynamic Knowledge Roadmap Tree</h2>
-          <p className="text-theme-subtle text-sm max-w-md mx-auto">Click through subject pipelines to trigger direct compilation and diagram simulations.</p>
+          <h2 className="font-display font-extrabold text-3xl sm:text-4xl text-theme-text mt-4 mb-2 tracking-tight">
+            Curriculum Topology Schema
+          </h2>
+          <p className="text-theme-subtle text-sm max-w-lg mx-auto leading-relaxed">
+            Trace the structured pathways of engineering domains. Dive deep into modules, LaTeX proofs, and concepts nodes.
+          </p>
         </div>
 
         {loading ? (
           <div className="flex flex-col items-center justify-center py-20 gap-3">
             <div className="w-8 h-8 rounded-full border-4 border-theme-border border-t-theme-accent animate-spin" />
-            <p className="text-xs text-theme-subtle font-semibold">Loading syllabus roadmap configurations...</p>
+            <p className="text-xs text-theme-subtle font-mono">Resolving metadata index cache...</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start max-w-6xl mx-auto">
+          <div className="space-y-12">
             
-            {/* Left Nav: Subject Categories */}
-            <div className="lg:col-span-3 flex flex-col gap-2">
-              <h4 className="font-display font-bold text-xs text-theme-subtle uppercase tracking-wider mb-2 px-1">Subject Areas</h4>
+            {/* === 1. Domain (Track) Bar === */}
+            <div className="flex flex-wrap justify-center gap-2 max-w-4xl mx-auto">
               {tracks.map(t => {
                 const Icon = t.icon;
                 const isActive = activeCategory === t.id;
@@ -54,140 +69,181 @@ export default function CategoryExplorer({
                   <button
                     key={t.id}
                     onClick={() => onCategoryChange(t.id)}
-                    className={`w-full text-left p-3.5 rounded-xl border transition-all duration-300 flex items-center gap-3 cursor-pointer ${
+                    className={`px-5 py-3 rounded-xl border transition-all duration-200 flex items-center gap-3 cursor-pointer select-none font-bold text-sm ${
                       isActive 
-                        ? 'bg-theme-surface border-theme-accent shadow-md scale-[1.01]' 
-                        : 'border-theme-border/60 hover:bg-theme-surface/50'
+                        ? 'bg-theme-surface border-theme-accent text-theme-text shadow-md scale-[1.01]' 
+                        : 'border-theme-border/50 bg-theme-surface/30 hover:bg-theme-surface hover:border-theme-border text-theme-subtle'
                     }`}
                   >
-                    <div className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 ${
-                      isActive ? 'bg-theme-accent text-white' : 'bg-theme-border text-theme-text'
-                    }`}>
-                      <Icon size={14} />
-                    </div>
-                    <span className="font-display font-bold text-sm text-theme-text">{t.name}</span>
+                    <Icon size={16} className={isActive ? 'text-theme-accent' : ''} />
+                    <span>{t.name}</span>
                   </button>
                 );
               })}
             </div>
 
-            {/* Right Display: Nested Connected Pipeline Card */}
-            {activeCategory === 'others' ? (
-              <div className="lg:col-span-9 bg-theme-surface border border-theme-border rounded-3xl p-4 sm:p-6 md:p-8 shadow-xl grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch min-h-[440px] animate-fade-in">
-                {/* Left Side: Category Blocks */}
-                <div className="flex flex-col justify-between space-y-6">
-                  <div>
-                    <span className="text-xs font-mono font-bold text-theme-accent uppercase tracking-wider bg-theme-accent/15 px-2.5 py-1 rounded-full select-none">
-                      Expanding Knowledge Frontiers
-                    </span>
-                    <h3 className="font-display font-extrabold text-2xl text-theme-text mt-4 leading-tight">
-                      Scaling to cover all interests and skills
-                    </h3>
-                    <p className="text-sm text-theme-subtle mt-2 leading-relaxed">
-                      Ascendrite is dynamically mapping structured syllabus graphs across creative, scientific, and vocational disciplines—each matching the same rich double-coding simulations.
-                    </p>
-                  </div>
-                  
-                  {/* Grid of future tracks */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                    <div className="bg-theme-bg border border-theme-border p-3 rounded-xl space-y-1">
-                      <span className="font-bold text-theme-accent block font-display">Creative Passions</span>
-                      <span className="text-[10px] text-theme-subtle block">Photography, Film &amp; Editing, Sound Design</span>
-                    </div>
-                    <div className="bg-theme-bg border border-theme-border p-3 rounded-xl space-y-1">
-                      <span className="font-bold text-[#10b981] block font-display">Applied Sciences</span>
-                      <span className="text-[10px] text-theme-subtle block">Cosmology, Geology, Medical Diagnostics</span>
-                    </div>
-                    <div className="bg-theme-bg border border-theme-border p-3 rounded-xl space-y-1">
-                      <span className="font-bold text-[#f59e0b] block font-display">Life Vocation</span>
-                      <span className="text-[10px] text-theme-subtle block">Personal Finance, Rhetoric, Survival Camping</span>
-                    </div>
-                    <div className="bg-theme-bg border border-theme-border p-3 rounded-xl space-y-1">
-                      <span className="font-bold text-[#8b5cf6] block font-display">Human Behaviour</span>
-                      <span className="text-[10px] text-theme-subtle block">Cognitive Psychology, Sociology, Analytics</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Right Side: Expanding Universe SVG Node Tree */}
-                <div className="bg-theme-bg border border-theme-border rounded-2xl p-6 flex flex-col justify-center items-center relative overflow-hidden shadow-inner min-h-[300px]">
-                  <span className="text-xs font-mono text-theme-accent uppercase font-bold text-center mt-2 absolute top-4">Syllabus Expansion DAG</span>
-                  <svg className="w-full h-48 fill-none stroke-theme-accent mt-6" viewBox="0 0 100 100">
-                    <circle cx="50" cy="50" r="8" fill="var(--color-theme-surface)" stroke="var(--color-theme-border)" strokeWidth="2" />
-                    <circle cx="20" cy="20" r="5" fill="#10b981" />
-                    <circle cx="80" cy="20" r="5" fill="var(--color-theme-accent)" />
-                    <circle cx="20" cy="80" r="5" fill="#f59e0b" />
-                    <circle cx="80" cy="80" r="5" fill="#8b5cf6" />
-                    <line x1="50" y1="50" x2="20" y2="20" stroke="var(--color-theme-accent)" strokeWidth="1" strokeDasharray="3" />
-                    <line x1="50" y1="50" x2="80" y2="20" stroke="var(--color-theme-accent)" strokeWidth="1" strokeDasharray="3" />
-                    <line x1="50" y1="50" x2="20" y2="80" stroke="var(--color-theme-accent)" strokeWidth="1" strokeDasharray="3" />
-                    <line x1="50" y1="50" x2="80" y2="80" stroke="var(--color-theme-accent)" strokeWidth="1" strokeDasharray="3" />
-                    <text x="43" y="53" fill="var(--color-theme-text)" fontSize="8" fontWeight="bold">Root</text>
-                  </svg>
-                  <span className="text-xs font-mono text-theme-subtle text-center pb-2">Continuously compiling active nodes...</span>
+            {/* === Empty & Upcoming State === */}
+            {currentCategorySubjects.length === 0 ? (
+              <div className="bg-theme-surface border border-theme-border rounded-3xl p-12 text-center max-w-3xl mx-auto space-y-6 shadow-xl">
+                <Compass className="mx-auto text-theme-accent/40 animate-pulse-soft" size={48} />
+                <h3 className="font-display font-bold text-xl text-theme-text"> frontier pipeline mapping active</h3>
+                <p className="text-sm text-theme-subtle max-w-md mx-auto leading-relaxed">
+                  The syllabus specifications for this track are currently being curated and validated against our engineering database schema. Dynamic nodes will ingest automatically.
+                </p>
+                <div className="pt-4 flex justify-center gap-4 text-xs font-mono text-theme-subtle">
+                  <span>── Deployed: 4 Core tracks ──</span>
+                  <span>── Under review: 2 Tracks ──</span>
                 </div>
               </div>
             ) : (
-              <div className="lg:col-span-9 bg-theme-surface border border-theme-border rounded-3xl p-4 sm:p-6 md:p-8 shadow-xl grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch min-h-[440px]">
+              
+              /* === 2. Connected Graph Canvas === */
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch max-w-6xl mx-auto">
                 
-                {/* Connected Subject Details & Timeline */}
-                <div className="flex flex-col justify-between">
-                  <div>
-                    <span className="text-xs font-mono font-bold text-theme-accent uppercase tracking-wider bg-theme-accent/15 px-2.5 py-1 rounded-full select-none">
-                      {activeCategory.replace("-", " ")} Pipeline
+                {/* Left Side: Subject Pipeline Nodes */}
+                <div className="lg:col-span-4 flex flex-col gap-4">
+                  <div className="flex justify-between items-center px-1 mb-2">
+                    <span className="text-[10px] font-mono font-bold text-theme-subtle uppercase tracking-wider">
+                      Subject Node list
                     </span>
-                    
-                    <div className="mt-6 pl-4 relative space-y-4">
-                      {/* Vertical timeline connector line */}
-                      <div className="absolute left-[3px] top-4 bottom-4 w-0.5 bg-theme-border" />
-                      
-                      {currentCategorySubjects.map((sub) => {
-                        const isSelected = selectedSubject?.subject_id === sub.subject_id;
-                        return (
-                          <button
-                            key={sub.subject_id}
-                            onClick={() => onSubjectChange(sub)}
-                            className="flex items-start gap-4 text-left w-full relative z-10 group cursor-pointer focus:outline-none"
-                          >
-                            {/* Left node indicator */}
-                            <div className={`w-2 h-2 rounded-full border-2 mt-1.5 transition-all duration-300 shrink-0 ${
-                              isSelected 
-                                ? 'bg-theme-accent border-theme-bg scale-125 ring-4 ring-theme-accent/25' 
-                                : 'bg-theme-bg border-theme-subtle group-hover:border-theme-accent'
-                            }`} />
-                            
-                            <div className="flex-1">
-                              <h5 className={`font-display font-bold text-base leading-tight transition-colors ${
-                                isSelected ? 'text-theme-accent font-extrabold' : 'text-theme-text group-hover:text-theme-accent font-bold'
-                              }`}>
-                                {sub.name}
-                              </h5>
-                              {isSelected && (
-                                <p className="text-sm text-theme-subtle mt-1.5 leading-relaxed transition-all animate-fade-in">
-                                  {sub.metadata?.description || "High-end pipeline syllabus mapping core derivations, LaTeX equations, and execution blocks."}
-                                </p>
-                              )}
-                            </div>
-                          </button>
-                        );
-                      })}
-                    </div>
+                    <span className="text-[10px] font-mono text-theme-accent">
+                      {totalHours} Total Hours Est.
+                    </span>
                   </div>
 
-                  {selectedSubject && (
-                    <button
-                      onClick={() => alert(`Starting pathway: ${selectedSubject.name}`)}
-                      className="w-full mt-6 bg-theme-accent hover:opacity-90 hover:scale-[1.02] hover:shadow-md hover:shadow-theme-accent/15 text-white font-bold py-2.5 rounded-xl transition-all shadow-md active:scale-[0.98] duration-200 flex items-center justify-center gap-2 cursor-pointer text-xs"
-                    >
-                      <PlayCircle size={14} />
-                      <span>Start learning path</span>
-                    </button>
-                  )}
+                  <div className="space-y-3 relative">
+                    {/* SVG Connector Flow line */}
+                    <div className="absolute left-[24px] top-6 bottom-6 w-0.5 bg-theme-border/50 border-dashed" />
+
+                    {currentCategorySubjects.map((sub, idx) => {
+                      const isSelected = selectedSubject?.subject_id === sub.subject_id;
+                      return (
+                        <button
+                          key={sub.subject_id}
+                          onClick={() => onSubjectChange(sub)}
+                          className={`w-full text-left p-4 rounded-2xl border transition-all duration-300 relative z-10 flex items-start gap-4 cursor-pointer ${
+                            isSelected 
+                              ? 'bg-theme-surface border-theme-accent shadow-lg scale-[1.02]' 
+                              : 'border-theme-border/40 bg-theme-surface/20 hover:bg-theme-surface/50'
+                          }`}
+                        >
+                          <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 font-mono font-bold text-xs ${
+                            isSelected ? 'bg-theme-accent text-white' : 'bg-theme-border text-theme-subtle'
+                          }`}>
+                            0{idx + 1}
+                          </div>
+                          
+                          <div className="flex-1 space-y-1">
+                            <h4 className="font-display font-bold text-sm text-theme-text">
+                              {sub.name}
+                            </h4>
+                            <div className="flex items-center gap-3 text-[10px] font-mono text-theme-subtle">
+                              <span className="text-theme-accent font-semibold">{sub.difficulty}</span>
+                              <span>•</span>
+                              <span>{sub.metadata?.estimated_hours || 40} Hours</span>
+                            </div>
+                          </div>
+                          <ChevronRight size={14} className={`text-theme-subtle self-center transition-transform ${isSelected ? 'translate-x-1 text-theme-accent' : ''}`} />
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
 
-                {/* Dynamic Interactive Render Sandbox Preview */}
-                <div className="bg-theme-bg border border-theme-border rounded-2xl p-6 flex flex-col items-stretch justify-center relative overflow-hidden shadow-inner min-h-[300px]">
-                  <SubjectVisualizer selectedSubject={selectedSubject} />
+                {/* Right Side: Modules & Concepts Schema Tree */}
+                <div className="lg:col-span-8 bg-theme-surface/30 border border-theme-border rounded-3xl p-6 md:p-8 shadow-xl flex flex-col justify-between relative">
+                  
+                  {selectedSubject ? (
+                    <div className="space-y-6">
+                      
+                      {/* Subject Metadata Card Header */}
+                      <div className="border-b border-theme-border/50 pb-6">
+                        <div className="flex flex-wrap justify-between items-center gap-3">
+                          <div>
+                            <span className="text-[10px] font-mono font-bold text-theme-accent uppercase tracking-wider bg-theme-accent/10 border border-theme-accent/20 px-2.5 py-0.5 rounded-md">
+                              {selectedSubject.subject_id.replace("-", " ")}
+                            </span>
+                            <h3 className="font-display font-extrabold text-xl text-theme-text mt-2">
+                              {selectedSubject.name} Curriculum Map
+                            </h3>
+                          </div>
+                          <div className="flex items-center gap-4 text-xs font-mono text-theme-subtle">
+                            <div className="flex items-center gap-1">
+                              <Layers size={12} className="text-theme-accent" />
+                              <span>{selectedSubject.modules?.length || 0} Modules</span>
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <Clock size={12} />
+                              <span>{selectedSubject.metadata?.estimated_hours || 40} hrs</span>
+                            </div>
+                          </div>
+                        </div>
+                        <p className="text-xs text-theme-subtle leading-relaxed mt-3">
+                          {selectedSubject.metadata?.description || "Master these micro-syllabi structures. Step through conceptual derivations and local terminal code tracers."}
+                        </p>
+                      </div>
+
+                      {/* Tree Flow: Modules & Concepts */}
+                      <div className="space-y-6 relative pl-3 border-l border-theme-border/40">
+                        {selectedSubject.modules?.map((mod, idx) => (
+                          <div key={mod.id} className="relative space-y-3 group">
+                            {/* Connector dot */}
+                            <div className="absolute -left-[16.5px] top-1.5 w-2 h-2 rounded-full bg-theme-border group-hover:bg-theme-accent transition-colors" />
+
+                            <div className="space-y-1">
+                              <div className="flex items-center gap-2">
+                                <span className="text-[10px] font-mono text-theme-accent font-semibold">Module {idx + 1}</span>
+                                <span className="text-[10px] text-theme-subtle font-mono">({mod.duration || '45m'})</span>
+                              </div>
+                              <h5 className="font-display font-bold text-sm text-theme-text">
+                                {mod.title}
+                              </h5>
+                              <p className="text-xs text-theme-subtle leading-relaxed">
+                                {mod.description}
+                              </p>
+                            </div>
+
+                            {/* Conceptual Nodes Checklist */}
+                            <div className="flex flex-wrap gap-2 pt-1.5">
+                              {mod.topics?.map(topic => (
+                                <Link 
+                                  key={topic}
+                                  to={`/learn/${mod.id}`}
+                                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-theme-bg/40 border border-theme-border hover:border-theme-accent/50 text-[11px] font-semibold text-theme-text hover:text-theme-accent transition-all hover:scale-[1.01]"
+                                >
+                                  <GitCommit size={10} className="text-theme-accent" />
+                                  <span>{topic}</span>
+                                </Link>
+                              ))}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+
+                    </div>
+                  ) : (
+                    <div className="flex flex-col items-center justify-center py-20 text-center space-y-4">
+                      <HelpCircle className="text-theme-subtle/30 animate-pulse-soft" size={40} />
+                      <h4 className="font-display font-bold text-sm text-theme-text">No subject selected</h4>
+                      <p className="text-xs text-theme-subtle max-w-xs leading-relaxed">
+                        Choose a subject node from the timeline sidebar to expand its modules mapping tree.
+                      </p>
+                    </div>
+                  )}
+
+                  {/* Start learning pathway action button */}
+                  {selectedSubject && (
+                    <div className="mt-8 pt-6 border-t border-theme-border/50 flex justify-end">
+                      <Link
+                        to={`/learn/${selectedSubject.modules?.[0]?.id || 'ml-foundations'}`}
+                        className="bg-theme-accent hover:opacity-90 hover:scale-[1.02] hover:shadow-lg hover:shadow-theme-accent/15 text-white font-bold px-6 py-3 rounded-xl transition-all shadow-md active:scale-[0.98] duration-200 flex items-center gap-2 cursor-pointer text-xs"
+                      >
+                        <Play size={12} fill="white" />
+                        <span>Launch Study Pathway</span>
+                      </Link>
+                    </div>
+                  )}
+
                 </div>
 
               </div>

@@ -115,31 +115,31 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* === 1.1. Numerical Trust & Authority Badges === */}
+        {/* === 1.1. Curriculum Craftsmanship & Authority Badges === */}
         <section className="py-16 border-b border-theme-border bg-theme-surface/10 select-none">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
             {/* Stat Cards Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 xl:gap-8 max-w-5xl mx-auto mb-12">
               <div className="bg-theme-surface border border-theme-border rounded-2xl p-6 space-y-3 hover:border-theme-accent/50 hover:shadow-md transition-all duration-300">
-                <h3 className="font-display font-extrabold text-5xl text-theme-accent">240K+</h3>
-                <p className="text-sm font-bold text-theme-text">Active learning pathways</p>
-                <p className="text-xs text-theme-subtle leading-relaxed">Completed across core algorithms, systems, and full-stack disciplines by developers worldwide.</p>
+                <h3 className="font-display font-extrabold text-5xl text-theme-accent">100%</h3>
+                <p className="text-sm font-bold text-theme-text">Handcrafted Curricula</p>
+                <p className="text-xs text-theme-subtle leading-relaxed">Every module, proof, and quiz is curated for software engineering precision and academic depth.</p>
               </div>
               <div className="bg-theme-surface border border-theme-border rounded-2xl p-6 space-y-3 hover:border-theme-accent/50 hover:shadow-md transition-all duration-300">
-                <h3 className="font-display font-extrabold text-5xl text-theme-accent">4.8x</h3>
-                <p className="text-sm font-bold text-theme-text">Recall retention speed</p>
-                <p className="text-xs text-theme-subtle leading-relaxed">Acceleration in user knowledge acquisition validated by cognitive diagnostic scans and reviews.</p>
+                <h3 className="font-display font-extrabold text-5xl text-theme-accent">Dual</h3>
+                <p className="text-sm font-bold text-theme-text">Dual-Coding Retention</p>
+                <p className="text-xs text-theme-subtle leading-relaxed">Combining formatted LaTeX mathematical proofs side-by-side with step-by-step interactive algorithm traces.</p>
               </div>
               <div className="bg-theme-surface border border-theme-border rounded-2xl p-6 space-y-3 hover:border-theme-accent/50 hover:shadow-md transition-all duration-300">
-                <h3 className="font-display font-extrabold text-5xl text-theme-accent">85%</h3>
-                <p className="text-sm font-bold text-theme-text">Fewer stack trace errors</p>
-                <p className="text-xs text-theme-subtle leading-relaxed">Reduction in program compilation and tracing faults during active simulation training logs.</p>
+                <h3 className="font-display font-extrabold text-5xl text-theme-accent">Local</h3>
+                <p className="text-sm font-bold text-theme-text">Zero Cloud Dependencies</p>
+                <p className="text-xs text-theme-subtle leading-relaxed">Runs entirely inside local host database services for maximum availability, privacy, and speed.</p>
               </div>
               <div className="bg-theme-surface border border-theme-border rounded-2xl p-6 space-y-3 hover:border-theme-accent/50 hover:shadow-md transition-all duration-300">
-                <h3 className="font-display font-extrabold text-5xl text-theme-accent">99.9%</h3>
-                <p className="text-sm font-bold text-theme-text">Distributed replica sync</p>
-                <p className="text-xs text-theme-subtle leading-relaxed">High-availability network uptime serving decentralized syllabus configurations and maps.</p>
+                <h3 className="font-display font-extrabold text-5xl text-theme-accent">4 Core</h3>
+                <p className="text-sm font-bold text-theme-text">Engineering Tracks</p>
+                <p className="text-xs text-theme-subtle leading-relaxed">Comprehensive pathways mapped out across Systems, Algorithms, Software Engineering, and Web Architectures.</p>
               </div>
             </div>
 
