@@ -7,6 +7,8 @@ import { Badge } from '../components/primitives/Badge';
 import { Input } from '../components/primitives/Input';
 import { TextArea } from '../components/primitives/TextArea';
 import { Spinner } from '../components/primitives/Spinner';
+import { useAuthStore } from '../store/authStore';
+import api from '../utils/api';
 
 // Dynamic mock topics content mapped by ID
 const topicsContent = {
@@ -51,9 +53,10 @@ By propagating error derivatives backward from the output layer, weights are fin
 export default function TopicPage() {
   const { topicId } = useParams();
   const navigate = useNavigate();
+  const { user } = useAuthStore();
 
   // ── Universal State Simulators (Loading / Errors) ──────────────────────
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [localNotes, setLocalNotes] = useState('');
@@ -63,10 +66,35 @@ export default function TopicPage() {
   const [comments, setComments] = useState([]);
   const [newCommentText, setNewCommentText] = useState('');
 
-  const topicData = topicsContent[topicId] || topicsContent['ml-foundations'];
+  const [topicData, setTopicData] = useState(null);
 
   // Sync state on load
   useEffect(() => {
+    async function loadTopicData() {
+      const trackInterest = user?.preferences?.interest || 'web-development';
+      const subjectIdMap = {
+        'ai': 'machine-learning',
+        'core-cs': 'operating-systems',
+        'software-engineering': 'design-patterns',
+        'web-development': 'frontend-frameworks'
+      };
+      const subjectId = subjectIdMap[trackInterest] || 'frontend-frameworks';
+
+      try {
+        setLoading(true);
+        const res = await api.get(`/curriculum/subject/${subjectId}/notes/${topicId}`);
+        setTopicData(res.data);
+      } catch (err) {
+        console.error('Failed to load dynamic topic notes:', err);
+        const local = topicsContent[topicId] || topicsContent['ml-foundations'];
+        setTopicData(local);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadTopicData();
+
     // Hydrate bookmarks
     const savedBookmarks = JSON.parse(localStorage.getItem('ascendrite-bookmarks') || '[]');
     setIsBookmarked(savedBookmarks.includes(topicId));
@@ -76,35 +104,69 @@ export default function TopicPage() {
     setLocalNotes(savedNotes);
 
     // Hydrate comments
-    const savedComments = JSON.parse(localStorage.getItem(`ascendrite-comments-${topicId}`) || '[]');
-    if (savedComments.length > 0) {
-      setComments(savedComments);
-    } else {
-      setComments([
-        { id: 'c-1', author: 'Alok Bhadauria', text: 'The mathematical step for Mean Squared Error minimization outlines regression weights clearly.', timestamp: '2h ago' }
-      ]);
+    async function loadComments() {
+      try {
+        const res = await api.get(`/collaboration/comments?resource_id=${topicId}`);
+        if (res.data && res.data.length > 0) {
+          const mapped = res.data.map(c => ({
+            id: c.id || c._id,
+            author: c.author_id || 'User',
+            text: c.content,
+            timestamp: c.created_at ? new Date(c.created_at).toLocaleTimeString() : 'Recent'
+          }));
+          setComments(mapped);
+        } else {
+          setComments([
+            { id: 'c-1', author: 'Alok Bhadauria', text: 'The mathematical step for Mean Squared Error minimization outlines regression weights clearly.', timestamp: '2h ago' }
+          ]);
+        }
+      } catch (err) {
+        console.error('Failed to load comments from server:', err);
+        const savedComments = JSON.parse(localStorage.getItem(`ascendrite-comments-${topicId}`) || '[]');
+        if (savedComments.length > 0) {
+          setComments(savedComments);
+        } else {
+          setComments([
+            { id: 'c-1', author: 'Alok Bhadauria', text: 'The mathematical step for Mean Squared Error minimization outlines regression weights clearly.', timestamp: '2h ago' }
+          ]);
+        }
+      }
     }
+    loadComments();
 
     // Reset status
     setCompleted(false);
     setError(false);
-  }, [topicId]);
+  }, [topicId, user]);
 
-  const handleCommentSubmit = (e) => {
+  const handleCommentSubmit = async (e) => {
     e.preventDefault();
     if (!newCommentText.trim()) return;
 
-    const newComment = {
-      id: `c-${Date.now()}`,
-      author: 'Author Account',
-      text: newCommentText.trim(),
-      timestamp: 'Just now'
-    };
-
-    const updatedComments = [...comments, newComment];
-    setComments(updatedComments);
-    localStorage.setItem(`ascendrite-comments-${topicId}`, JSON.stringify(updatedComments));
-    setNewCommentText('');
+    try {
+      const res = await api.post(`/collaboration/comments?resource_id=${topicId}&content=${encodeURIComponent(newCommentText.trim())}`);
+      const posted = res.data;
+      const mapped = {
+        id: posted.id || posted._id,
+        author: posted.author_id || user?.first_name || 'Me',
+        text: posted.content || newCommentText.trim(),
+        timestamp: 'Just now'
+      };
+      setComments([...comments, mapped]);
+      setNewCommentText('');
+    } catch (err) {
+      console.error('Failed to post comment to server:', err);
+      const newComment = {
+        id: `c-${Date.now()}`,
+        author: user?.first_name || 'Learner',
+        text: newCommentText.trim(),
+        timestamp: 'Just now'
+      };
+      const updatedComments = [...comments, newComment];
+      setComments(updatedComments);
+      localStorage.setItem(`ascendrite-comments-${topicId}`, JSON.stringify(updatedComments));
+      setNewCommentText('');
+    }
   };
 
   const toggleBookmark = () => {
@@ -124,12 +186,31 @@ export default function TopicPage() {
     localStorage.setItem(`ascendrite-notes-${topicId}`, val);
   };
 
-  const handleMarkMastered = () => {
+  const handleMarkMastered = async () => {
     setCompleted(true);
     // Mark as completed in learning history
     const completedHistory = JSON.parse(localStorage.getItem('ascendrite-completed-topics') || '[]');
     if (!completedHistory.includes(topicId)) {
       localStorage.setItem('ascendrite-completed-topics', JSON.stringify([...completedHistory, topicId]));
+    }
+
+    const trackInterest = user?.preferences?.interest || 'web-development';
+    const subjectIdMap = {
+      'ai': 'machine-learning',
+      'core-cs': 'operating-systems',
+      'software-engineering': 'design-patterns',
+      'web-development': 'frontend-frameworks'
+    };
+    const subjectId = subjectIdMap[trackInterest] || 'frontend-frameworks';
+
+    try {
+      await api.post(`/progress/${subjectId}/log`, {
+        topic_id: topicId,
+        duration_seconds: 1800,
+        quiz_score: 100.0
+      });
+    } catch (err) {
+      console.error('Failed to log topic progress to backend:', err);
     }
   };
 
