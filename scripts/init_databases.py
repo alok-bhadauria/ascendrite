@@ -99,7 +99,7 @@ def seed_users(mongo_db):
             "last_name": "Bhadauria",
             "role": "Admin",
             "password": "Admin@123",
-            "capabilities": ["knowledge:read", "knowledge:write", "knowledge:publish", "admin:manage"]
+            "capabilities": ["knowledge:read", "knowledge:write", "knowledge:publish", "admin:manage", "admin:write", "creator:write"]
         },
         {
             "id": "usr_creator002",
@@ -108,7 +108,7 @@ def seed_users(mongo_db):
             "last_name": "Account",
             "role": "Contributor",
             "password": "Creator@123",
-            "capabilities": ["knowledge:read", "knowledge:write"]
+            "capabilities": ["knowledge:read", "knowledge:write", "creator:write"]
         },
         {
             "id": "usr_learner003",
@@ -128,13 +128,11 @@ def seed_users(mongo_db):
     pg_engine = create_engine(admin_app_url)
     try:
         with pg_engine.connect() as pg_conn:
+            # Clean existing seed IDs to allow updating user capabilities
+            seed_ids = [user["id"] for user in seed_data]
+            pg_conn.execute(text("DELETE FROM users WHERE id = ANY(:ids)"), {"ids": seed_ids})
+            
             for user in seed_data:
-                # Check if user already exists
-                res = pg_conn.execute(text("SELECT 1 FROM users WHERE id = :id"), {"id": user["id"]})
-                if res.fetchone():
-                    print(f"User '{user['email']}' already exists in PostgreSQL. Skipping.")
-                    continue
-                
                 # Insert into users table
                 pg_conn.execute(
                     text("""
@@ -182,13 +180,12 @@ def seed_users(mongo_db):
     # Seed MongoDB
     if mongo_db is not None:
         try:
+            # Clean existing seed IDs
+            seed_ids = [user["id"] for user in seed_data]
+            mongo_db["users"].delete_many({"_id": {"$in": seed_ids}})
+            mongo_db["user_identities"].delete_many({"user_id": {"$in": seed_ids}})
+            
             for user in seed_data:
-                # Check if user already exists
-                existing = mongo_db["users"].find_one({"_id": user["id"]})
-                if existing:
-                    print(f"User '{user['email']}' already exists in MongoDB. Skipping.")
-                    continue
-                
                 # Insert users doc
                 mongo_db["users"].insert_one({
                     "_id": user["id"],
