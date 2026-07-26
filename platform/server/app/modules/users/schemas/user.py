@@ -1,4 +1,5 @@
 from pydantic import BaseModel, EmailStr, Field
+from typing import List
 
 class UserCreate(BaseModel):
     email: EmailStr
@@ -17,3 +18,4 @@ class UserResponse(BaseModel):
     last_name: str
     role: str
     is_active: bool
+    capabilities: List[str] = Field(default_factory=list)

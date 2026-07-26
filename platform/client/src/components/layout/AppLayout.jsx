@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar';
+import CommandPalette from '../ui/CommandPalette';
 import { useLayoutStore } from '../../store/layoutStore';
 
 export default function AppLayout() {
@@ -18,10 +19,13 @@ export default function AppLayout() {
     
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  }, [toggleCommandPalette]);
 
   return (
     <div className="flex-1 flex w-full relative pt-16">
+      {/* Search overlay Command Palette */}
+      <CommandPalette />
+
       {/* Dynamic Sidebar navigation */}
       <Sidebar />
 

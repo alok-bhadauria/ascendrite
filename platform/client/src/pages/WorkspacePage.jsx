@@ -13,6 +13,9 @@ export default function WorkspacePage() {
   const { user } = useAuthStore();
   const navigate = useNavigate();
 
+  // ── Hydration State ──────────────────────────────────────────────────────
+  const [isHydrated, setIsHydrated] = useState(false);
+
   // ── Study Planner / Tasks State ──────────────────────────────────────────
   const [tasks, setTasks] = useState([]);
   const [newTaskText, setNewTaskText] = useState('');
@@ -20,10 +23,7 @@ export default function WorkspacePage() {
   // ── Personal Notes State ────────────────────────────────────────────────
   const [notes, setNotes] = useState('');
 
-  const [recentMilestones, setRecentMilestones] = useState([
-    { title: 'Enriched learning direction setup', desc: 'Onboarding objectives parsed successfully.', date: 'Today' },
-    { title: 'Signed up for Ascendrite ecosystem', desc: 'Welcome user account created.', date: '3 days ago' }
-  ]);
+  const [recentMilestones, setRecentMilestones] = useState([]);
 
   // Load state when user changes
   useEffect(() => {
@@ -35,21 +35,22 @@ export default function WorkspacePage() {
       ]));
       setNotes(userStorage.getRawItem(user, 'ascendrite-workspace-notes', 
         "## Study Notes\nJot down thoughts, derivations, or loop state mappings here. This workspace is persisted automatically."));
+      setIsHydrated(true);
     }
   }, [user]);
 
   // Sync state helpers
   useEffect(() => {
-    if (user) {
+    if (user && isHydrated) {
       userStorage.setItem(user, 'ascendrite-workspace-tasks', tasks);
     }
-  }, [tasks, user]);
+  }, [tasks, user, isHydrated]);
 
   useEffect(() => {
-    if (user) {
+    if (user && isHydrated) {
       userStorage.setRawItem(user, 'ascendrite-workspace-notes', notes);
     }
-  }, [notes, user]);
+  }, [notes, user, isHydrated]);
 
   useEffect(() => {
     async function loadRecentAccessed() {
@@ -91,17 +92,18 @@ export default function WorkspacePage() {
   };
 
   // Determine track preferences dynamically
-  const trackInterest = user?.preferences?.interest || 'web-development';
-  const trackGoal = user?.preferences?.objective || 'Strengthen fundamentals';
+  const trackInterest = user?.preferences?.interest || 'explore';
+  const trackGoal = user?.preferences?.objective || 'Explore Platform';
 
   const tracksMap = {
     'ai': { name: 'Artificial Intelligence', nextTopic: 'Deep Learning Feed-Forward Networks' },
     'core-cs': { name: 'Core Computer Science', nextTopic: 'Operating Systems & Thread Locks' },
     'software-engineering': { name: 'Software Engineering', nextTopic: 'Object-Oriented System Design' },
-    'web-development': { name: 'Web Development', nextTopic: 'Full-Stack Express & SQL Integrations' }
+    'web-development': { name: 'Web Development', nextTopic: 'Full-Stack Express & SQL Integrations' },
+    'explore': { name: 'Explore Platform', nextTopic: 'Choose your study track in Learning Paths' }
   };
 
-  const activeTrack = tracksMap[trackInterest] || tracksMap['web-development'];
+  const activeTrack = tracksMap[trackInterest] || tracksMap['explore'];
 
   return (
     <div className="page-container py-8 flex-1 flex flex-col gap-8 select-none">
@@ -191,27 +193,31 @@ export default function WorkspacePage() {
             </CardHeader>
             <CardContent className="flex flex-col gap-4">
               {/* Task list container */}
-              <div className="flex flex-col gap-2">
-                {tasks.map((task) => (
-                  <div key={task.id} className="flex items-start justify-between gap-2 bg-theme-bg/60 border border-theme-border rounded-xl p-3">
-                    <button
-                      onClick={() => toggleTask(task.id)}
-                      className={`flex items-start gap-2.5 cursor-pointer text-left focus:outline-none ${
-                        task.completed ? 'text-theme-subtle line-through' : 'text-theme-text'
-                      }`}
-                    >
-                      <CheckCircle2 className={`h-4.5 w-4.5 shrink-0 mt-0.5 ${task.completed ? 'text-theme-accent' : 'text-theme-border'}`} />
-                      <span className="text-xs leading-normal">{task.text}</span>
-                    </button>
-                    <button
-                      onClick={() => deleteTask(task.id)}
-                      className="text-theme-subtle hover:text-theme-accent shrink-0 cursor-pointer p-0.5 focus:outline-none"
-                      aria-label="Delete task"
-                    >
-                      <Trash2 className="h-3.5 w-3.5" />
-                    </button>
-                  </div>
-                ))}
+              <div className="flex flex-col gap-2 max-h-[220px] overflow-y-auto pr-1">
+                {tasks.length > 0 ? (
+                  tasks.map((task) => (
+                    <div key={task.id} className="flex items-start justify-between gap-2 bg-theme-bg/60 border border-theme-border rounded-xl p-3">
+                      <button
+                        onClick={() => toggleTask(task.id)}
+                        className={`flex items-start gap-2.5 cursor-pointer text-left focus:outline-none ${
+                          task.completed ? 'text-theme-subtle line-through' : 'text-theme-text'
+                        }`}
+                      >
+                        <CheckCircle2 className={`h-4.5 w-4.5 shrink-0 mt-0.5 ${task.completed ? 'text-theme-accent' : 'text-theme-border'}`} />
+                        <span className="text-xs leading-normal">{task.text}</span>
+                      </button>
+                      <button
+                        onClick={() => deleteTask(task.id)}
+                        className="text-theme-subtle hover:text-theme-accent shrink-0 cursor-pointer p-0.5 focus:outline-none"
+                        aria-label="Delete task"
+                      >
+                        <Trash2 className="h-3.5 w-3.5" />
+                      </button>
+                    </div>
+                  ))
+                ) : (
+                  <p className="text-xs text-theme-subtle text-center py-4">No tasks planned yet. Add one below!</p>
+                )}
               </div>
 
               {/* Add task form */}
@@ -241,16 +247,22 @@ export default function WorkspacePage() {
               </div>
             </CardHeader>
             <CardContent>
-              <div className="flex flex-col gap-4 relative pl-4 border-l border-theme-border">
-                {recentMilestones.map((m, idx) => (
-                  <div key={idx} className="relative">
-                    <div className={`absolute -left-[21px] top-1.5 w-2.5 h-2.5 rounded-full border-2 border-theme-surface ${idx === 0 ? 'bg-theme-accent' : 'bg-theme-border'}`} />
-                    <span className="text-[10px] font-mono text-theme-subtle">{m.date}</span>
-                    <h5 className="text-xs font-bold text-theme-text mt-0.5">{m.title}</h5>
-                    <p className="text-[10.5px] text-theme-subtle mt-0.5">{m.desc}</p>
-                  </div>
-                ))}
-              </div>
+              {recentMilestones.length > 0 ? (
+                <div className="flex flex-col gap-4 relative pl-4 border-l border-theme-border">
+                  {recentMilestones.map((m, idx) => (
+                    <div key={idx} className="relative">
+                      <div className={`absolute -left-[21px] top-1.5 w-2.5 h-2.5 rounded-full border-2 border-theme-surface ${idx === 0 ? 'bg-theme-accent' : 'bg-theme-border'}`} />
+                      <span className="text-[10px] font-mono text-theme-subtle">{m.date}</span>
+                      <h5 className="text-xs font-bold text-theme-text mt-0.5">{m.title}</h5>
+                      <p className="text-[10.5px] text-theme-subtle mt-0.5">{m.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="text-center py-6">
+                  <p className="text-xs text-theme-subtle leading-relaxed">No recent milestones recorded yet. Start reading lessons to build your timeline.</p>
+                </div>
+              )}
             </CardContent>
           </Card>
 

@@ -22,13 +22,13 @@ export default function Sidebar() {
   ];
 
   const operationalLinks = [];
-  if (user?.capabilities?.includes('creator:write') || user?.role === 'Admin') {
+  if (user?.capabilities?.includes('knowledge:write') || user?.role === 'Admin') {
     operationalLinks.push({ to: '/creator', label: 'Creator platform', icon: PenTool });
   }
-  if (user?.capabilities?.includes('collab:read') || user?.role === 'Admin') {
+  if (user?.capabilities?.includes('learning:read') || user?.role === 'Admin') {
     operationalLinks.push({ to: '/collaboration', label: 'Collaboration', icon: Users });
   }
-  if (user?.capabilities?.includes('admin:write') || user?.role === 'Admin') {
+  if (user?.capabilities?.includes('system:admin') || user?.role === 'Admin') {
     operationalLinks.push({ to: '/admin', label: 'Admin OS', icon: Shield });
   }
 

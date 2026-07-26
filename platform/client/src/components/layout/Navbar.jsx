@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Palette, ChevronDown, LogIn, LogOut, Star, Menu, User } from 'lucide-react';
+import { Palette, ChevronDown, LogIn, LogOut, Star, Menu, User, Settings } from 'lucide-react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { AuthModal } from '../auth/AuthModal';
 import { useAuthStore } from '../../store/authStore';
@@ -28,15 +28,18 @@ export default function Navbar() {
   const themeSelectorRef = useRef(null);
   const profileSelectorRef = useRef(null);
 
-  // Auto-open modal when navigating directly to /login
+  // Auto-open modal when navigating directly to /login (or redirect if already authenticated)
   useEffect(() => {
-    if (location.pathname === '/login' && !showAuthModal) {
-      setShowAuthModal(true);
-    }
-    if (location.pathname !== '/login' && showAuthModal) {
+    if (location.pathname === '/login') {
+      if (isAuthenticated) {
+        navigate('/learn', { replace: true });
+      } else if (!showAuthModal) {
+        setShowAuthModal(true);
+      }
+    } else if (location.pathname !== '/login' && showAuthModal) {
       setShowAuthModal(false);
     }
-  }, [location.pathname]);
+  }, [location.pathname, isAuthenticated, showAuthModal, navigate]);
 
   // Unified click/scroll listeners for dropdowns
   useEffect(() => {
@@ -267,6 +270,14 @@ export default function Navbar() {
                         >
                           <User size={13} className="text-theme-accent" />
                           <span>Learning Dashboard</span>
+                        </Link>
+                        <Link
+                          to="/profile"
+                          onClick={() => setShowProfileDropdown(false)}
+                          className="flex items-center gap-2 px-3 py-2 text-xs text-theme-text hover:bg-theme-border/30 rounded-lg transition-colors"
+                        >
+                          <Settings size={13} className="text-theme-accent" />
+                          <span>Account Settings</span>
                         </Link>
                         <button
                           onClick={() => {

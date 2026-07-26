@@ -3,6 +3,8 @@ import { createPortal } from 'react-dom';
 import { X, Eye, EyeOff, Loader2, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import api from '../../utils/api';
+import { useToast } from '../ui/ToastProvider';
+import { validateEmail, validatePassword } from '../../utils/validation';
 import './AuthModal.css';
 
 // ── Phase state machine ─────────────────────────────────────────────────────
@@ -19,6 +21,7 @@ export function AuthModal({ isOpen, onClose, onAuthSuccess }) {
   const [activeView, setActiveView] = useState('login');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const { showToast } = useToast();
   const closeTimerRef = useRef(null);
 
   // ── Persistent form states (never reset on close) ─────────────────────
@@ -126,14 +129,31 @@ export function AuthModal({ isOpen, onClose, onAuthSuccess }) {
   // ── Login submit ──────────────────────────────────────────────────────
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
+    if (!loginData.email || !loginData.password) {
+      const msg = 'Please enter both your email address and password credentials.';
+      setError(msg);
+      showToast('warning', 'Missing Fields', msg);
+      return;
+    }
+    if (!validateEmail(loginData.email)) {
+      const msg = 'The email format entered is invalid. Please check for spelling mistakes.';
+      setError(msg);
+      showToast('error', 'Invalid Email Format', msg);
+      return;
+    }
+    
     setLoading(true); setError('');
     try {
       const res = await api.post('/auth/login', loginData);
+      showToast('success', 'Logged In Successfully', `Welcome back, ${res.data.user.first_name || 'user'}! Heading to your syllabus roadmap.`);
       if (onAuthSuccess) onAuthSuccess(res.data.user);
       clearForms();
       handleClose();
+      navigate('/learn');
     } catch (err) {
-      setError(err.response?.data?.detail || 'Invalid email or password.');
+      const msg = err.response?.data?.detail || 'The credentials provided are invalid. Please verify your email and password details.';
+      setError(msg);
+      showToast('error', 'Authentication Failed', msg);
     } finally { setLoading(false); }
   };
 
@@ -149,10 +169,31 @@ export function AuthModal({ isOpen, onClose, onAuthSuccess }) {
 
   const handleRegisterSubmit = async (e) => {
     e.preventDefault();
-    if (!pwMatch) { setError('Passwords do not match.'); return; }
-    if (!hasLength || !hasNumber || !hasUpper || !hasSpecial) {
-      setError('Password does not meet the requirements.'); return;
+    if (!registerData.firstName || !registerData.lastName || !registerData.email) {
+      const msg = 'Please populate all required fields before initiating registration.';
+      setError(msg);
+      showToast('warning', 'Missing Fields', msg);
+      return;
     }
+    if (!validateEmail(registerData.email)) {
+      const msg = 'The email address format entered is invalid. Please check for spelling errors.';
+      setError(msg);
+      showToast('error', 'Invalid Email Format', msg);
+      return;
+    }
+    const pwCheck = validatePassword(password);
+    if (!pwCheck.isValid) {
+      setError(pwCheck.error);
+      showToast('error', 'Weak Password Criteria', pwCheck.error);
+      return;
+    }
+    if (!pwMatch) {
+      const msg = 'The verification password does not match. Please retype and confirm.';
+      setError(msg);
+      showToast('error', 'Password Mismatch', msg);
+      return;
+    }
+
     setLoading(true); setError('');
     try {
       await api.post('/auth/signup', {
@@ -162,12 +203,15 @@ export function AuthModal({ isOpen, onClose, onAuthSuccess }) {
       const loginRes = await api.post('/auth/login', {
         email: registerData.email, password,
       });
+      showToast('success', 'Account Registered', `Welcome to Ascendrite, ${registerData.firstName}! Let's select your learning interest direction.`);
       if (onAuthSuccess) onAuthSuccess(loginRes.data.user);
       clearForms();
       handleClose();
       navigate('/onboarding');
     } catch (err) {
-      setError(err.response?.data?.detail || 'Registration failed. Try again.');
+      const msg = err.response?.data?.detail || 'Unable to register account. An account with this email address may already exist.';
+      setError(msg);
+      showToast('error', 'Registration Failed', msg);
     } finally { setLoading(false); }
   };
 

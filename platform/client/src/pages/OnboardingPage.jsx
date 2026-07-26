@@ -43,7 +43,7 @@ export default function OnboardingPage() {
   };
 
   return (
-    <div className="flex-1 flex items-center justify-center p-6 select-none relative min-h-[calc(100vh-140px)]">
+    <div className="flex-1 flex items-center justify-center p-6 pt-20 select-none relative min-h-[calc(100vh-140px)]">
       {/* Background radial highlight */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-theme-accent opacity-5 rounded-full blur-3xl pointer-events-none" />
 

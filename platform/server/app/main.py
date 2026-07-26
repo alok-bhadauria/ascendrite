@@ -18,6 +18,11 @@ async def lifespan(app: FastAPI):
     """Manages application lifecycle events, initializing database pools on startup and closing connections on shutdown."""
     logger.info("Initializing Ascendrite Platform core services...")
     await connect_to_mongo()
+    try:
+        from app.infrastructure.database.seeder import seed_database_from_knowledge_base
+        await seed_database_from_knowledge_base()
+    except Exception as ex:
+        logger.error(f"Automated database seeding failed: {ex}")
     yield
     logger.info("Shutting down Platform core resources...")
     await close_mongo_connection()
