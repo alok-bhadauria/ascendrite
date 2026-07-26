@@ -2,40 +2,38 @@ import React, { useState, useEffect, useRef } from 'react';
 import { FaPlay, FaPause, FaStepForward, FaUndo } from 'react-icons/fa';
 
 export default function InteractiveVisualizerDemo() {
-  const [array, setArray] = useState([45, 18, 85, 32, 64, 12, 53]);
+  const initialArr = [
+    { id: 45, val: 45, index: 0 },
+    { id: 18, val: 18, index: 1 },
+    { id: 85, val: 85, index: 2 },
+    { id: 32, val: 32, index: 3 },
+    { id: 64, val: 64, index: 4 },
+    { id: 12, val: 12, index: 5 },
+    { id: 53, val: 53, index: 6 }
+  ];
+
+  const [arrayState, setArrayState] = useState(initialArr);
   const [activeIndices, setActiveIndices] = useState([]);
   const [sortedCount, setSortedCount] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [activeLine, setActiveLine] = useState(0);
+  
   const timerRef = useRef(null);
-
-  // Reference for tracking state variables across async ticks
-  const stateRef = useRef({
-    i: 0,
-    j: 0,
-    swapped: false,
-    arr: [45, 18, 85, 32, 64, 12, 53]
-  });
+  const stateRef = useRef({ i: 0, j: 0, swapped: false });
 
   const resetVisualizer = () => {
     setIsPlaying(false);
     if (timerRef.current) clearInterval(timerRef.current);
-    const initialArr = [45, 18, 85, 32, 64, 12, 53];
-    setArray(initialArr);
+    setArrayState(initialArr);
     setActiveIndices([]);
     setSortedCount(0);
     setActiveLine(0);
-    stateRef.current = {
-      i: 0,
-      j: 0,
-      swapped: false,
-      arr: [...initialArr]
-    };
+    stateRef.current = { i: 0, j: 0, swapped: false };
   };
 
   const stepBubbleSort = () => {
-    let { i, j, arr } = stateRef.current;
-    const n = arr.length;
+    let { i, j } = stateRef.current;
+    const n = arrayState.length;
 
     if (i >= n - 1) {
       setIsPlaying(false);
@@ -47,69 +45,107 @@ export default function InteractiveVisualizerDemo() {
 
     // Step 1: Highlight comparison
     setActiveIndices([j, j + 1]);
-    setActiveLine(3); // Highlights if condition checking line
+    setActiveLine(3); // Highlights 'if arr[j] > arr[j+1]' line
 
+    // Step 2: Perform the comparison and potential swap
     setTimeout(() => {
-      // Step 2: Swap values if needed
-      if (arr[j] > arr[j + 1]) {
-        const temp = arr[j];
-        arr[j] = arr[j + 1];
-        arr[j + 1] = temp;
-        setArray([...arr]);
+      // Find items at current positions j and j + 1
+      const itemA = arrayState.find(item => item.index === j);
+      const itemB = arrayState.find(item => item.index === j + 1);
+
+      if (itemA && itemB && itemA.val > itemB.val) {
+        // Swap indices inside arrayState
+        setArrayState(prev => prev.map(item => {
+          if (item.id === itemA.id) return { ...item, index: j + 1 };
+          if (item.id === itemB.id) return { ...item, index: j };
+          return item;
+        }));
         setActiveLine(4); // Highlights swap assignment line
         stateRef.current.swapped = true;
       } else {
-        setActiveLine(2); // Highlights loop increment check line
+        setActiveLine(2); // Highlights loop check
       }
 
-      // Step indices increment
-      j++;
-      if (j >= n - i - 1) {
-        j = 0;
-        i++;
-        setSortedCount(i);
-        stateRef.current.swapped = false;
-      }
+      // Step 3: Advance search index j
+      setTimeout(() => {
+        let nextJ = j + 1;
+        let nextI = i;
+        let nextSwapped = stateRef.current.swapped;
 
-      stateRef.current = { i, j, swapped: stateRef.current.swapped, arr };
-    }, 350);
+        if (nextJ >= n - i - 1) {
+          nextJ = 0;
+          nextI++;
+          setSortedCount(nextI);
+          nextSwapped = false;
+        }
+
+        stateRef.current = { i: nextI, j: nextJ, swapped: nextSwapped };
+        
+        if (nextI >= n - 1) {
+          setSortedCount(n);
+          setActiveIndices([]);
+          setActiveLine(0);
+          setIsPlaying(false);
+        } else {
+          setActiveIndices([nextJ, nextJ + 1]);
+          setActiveLine(2);
+        }
+      }, 500);
+
+    }, 450);
   };
 
   useEffect(() => {
     if (isPlaying) {
       timerRef.current = setInterval(() => {
         stepBubbleSort();
-      }, 900);
+      }, 1200);
     } else {
       if (timerRef.current) clearInterval(timerRef.current);
     }
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
-  }, [isPlaying]);
+  }, [isPlaying, arrayState]);
 
   return (
-    <div className="bg-theme-surface border border-theme-border rounded-xl p-6 shadow-xl w-full max-w-3xl mx-auto flex flex-col md:flex-row gap-6">
+    <div className="bg-theme-surface border border-theme-border rounded-xl p-6 shadow-xl w-full max-w-3xl mx-auto flex flex-col md:flex-row gap-6 relative select-none">
       {/* Visualizer Canvas Area */}
       <div className="flex-1 flex flex-col justify-between">
         <div>
           <h4 className="font-display font-bold text-lg text-theme-accent mb-1">Sorting steps simulator</h4>
           <p className="text-xs text-theme-subtle mb-4">Observe how memory operations map to code lines in real-time.</p>
         </div>
-        <div className="h-44 flex items-end gap-3 px-2 border-b border-theme-border pb-2 justify-center">
-          {array.map((val, idx) => {
-            const isComparing = activeIndices.includes(idx);
-            const isSorted = idx >= array.length - sortedCount;
+
+        {/* Absolute-positioned slide bars container */}
+        <div className="h-44 relative w-full border-b border-theme-border pb-2 justify-center overflow-hidden">
+          {arrayState.map((item) => {
+            const isComparing = activeIndices.includes(item.index);
+            const isSorted = item.index >= arrayState.length - sortedCount;
             let barColor = 'bg-theme-subtle opacity-60';
-            if (isComparing) barColor = 'bg-theme-accent animate-pulse';
+            if (isComparing) barColor = 'bg-theme-accent shadow-[0_0_12px_var(--color-theme-accent)]';
             else if (isSorted) barColor = 'bg-emerald-500 opacity-90';
             
+            // Calculate dynamic left offset relative to active sorted position index
+            const leftPercent = item.index * (100 / 7);
+
             return (
-              <div key={idx} className="flex flex-col items-center flex-1 transition-all duration-300">
-                <span className="text-xs mb-1 font-mono text-theme-text">{val}</span>
+              <div 
+                key={item.id} 
+                className="absolute bottom-2 flex flex-col items-center transition-all duration-500 ease-in-out"
+                style={{ 
+                  width: '11%', 
+                  left: `${leftPercent}%`, 
+                  height: '80%', 
+                  justifyContent: 'flex-end'
+                }}
+              >
+                <span className="text-[10px] mb-1 font-mono text-theme-text transition-colors duration-300">
+                  {item.val}
+                </span>
                 <div 
                   className={`w-full rounded-t-sm transition-all duration-300 ${barColor}`}
-                  style={{ height: `${val * 1.3}px` }}
+                  style={{ height: `${item.val * 1.3}px` }}
                 />
               </div>
             );
@@ -121,7 +157,7 @@ export default function InteractiveVisualizerDemo() {
           <button 
             id="btn-play-viz"
             onClick={() => setIsPlaying(!isPlaying)} 
-            className="flex items-center gap-1.5 sm:gap-2 bg-theme-accent hover:opacity-90 text-white font-semibold px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg transition-all shadow-md active:scale-95 text-xs sm:text-sm"
+            className="flex items-center gap-1.5 sm:gap-2 bg-theme-accent hover:opacity-90 text-white font-semibold px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg transition-all shadow-md active:scale-95 text-xs sm:text-sm cursor-pointer"
           >
             {isPlaying ? <FaPause size={12} /> : <FaPlay size={12} />}
             <span>{isPlaying ? 'Pause' : 'Auto Play'}</span>
@@ -130,7 +166,7 @@ export default function InteractiveVisualizerDemo() {
             id="btn-step-viz"
             onClick={stepBubbleSort} 
             disabled={isPlaying}
-            className="flex items-center gap-1.5 sm:gap-2 border border-theme-border hover:bg-theme-border text-theme-text font-semibold px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg disabled:opacity-40 transition-all active:scale-95 text-xs sm:text-sm"
+            className="flex items-center gap-1.5 sm:gap-2 border border-theme-border hover:bg-theme-border text-theme-text font-semibold px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg disabled:opacity-40 transition-all active:scale-95 text-xs sm:text-sm cursor-pointer"
           >
             <FaStepForward size={12} />
             <span>Step</span>
@@ -138,7 +174,7 @@ export default function InteractiveVisualizerDemo() {
           <button 
             id="btn-reset-viz"
             onClick={resetVisualizer}
-            className="flex items-center gap-1.5 sm:gap-2 border border-theme-border hover:bg-theme-border text-theme-text font-semibold px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg transition-all active:scale-95 text-xs sm:text-sm"
+            className="flex items-center gap-1.5 sm:gap-2 border border-theme-border hover:bg-theme-border text-theme-text font-semibold px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg transition-all active:scale-95 text-xs sm:text-sm cursor-pointer"
           >
             <FaUndo size={12} />
             <span>Reset</span>
@@ -148,7 +184,6 @@ export default function InteractiveVisualizerDemo() {
 
       {/* Python Code Trace Area */}
       <div className="w-full md:w-80 bg-theme-bg border border-theme-border rounded-lg p-4 font-mono text-xs select-none overflow-x-auto">
-
         <div className="text-theme-subtle text-[10px] uppercase tracking-wider mb-3 font-bold">Python Code Trace</div>
         <div className="flex flex-col gap-1.5">
           {[

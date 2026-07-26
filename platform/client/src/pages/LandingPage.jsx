@@ -23,9 +23,9 @@ const tracks = [
 
 const subjectOrder = {
   'machine-learning': 1, 'deep-learning': 2, 'nlp': 3, 'genai': 4, 'ai-agents': 5,
-  'os': 1, 'cn': 2, 'dbms': 3, 'sql': 4,
-  'dsa': 1, 'oop': 2, 'java': 3, 'spring-boot': 4, 'system-design': 5,
-  'html-css-git': 1, 'css-frameworks': 2, 'javascript': 3, 'typescript': 4, 'nodejs-expressjs': 5, 'reactjs': 6, 'nextjs': 7,
+  'os': 1, 'operating-systems': 1, 'dbms': 2, 'sql': 3, 'cn': 4,
+  'java': 1, 'oop': 2, 'dsa': 3, 'spring-boot': 4, 'system-design': 5,
+  'html-css-git': 1, 'css-frameworks': 2, 'javascript': 3, 'typescript': 4, 'reactjs': 5, 'nextjs': 6, 'nodejs-expressjs': 7,
   'quantitative-aptitude': 1, 'verbal-aptitude': 2
 };
 
