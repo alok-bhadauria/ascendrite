@@ -1,10 +1,19 @@
 import React from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useAuthStore } from '../store/authStore';
+import { Spinner } from '../components/primitives/Spinner';
 
 export function ProtectedRoute() {
-  const { isAuthenticated } = useAuthStore();
+  const { isAuthenticated, isCheckingSession } = useAuthStore();
   const location = useLocation();
+
+  if (isCheckingSession) {
+    return (
+      <div className="flex-1 flex items-center justify-center min-h-[50vh]">
+        <Spinner size="lg" />
+      </div>
+    );
+  }
 
   if (!isAuthenticated) {
     // Redirect to root page but open login modal state or navigate to /login
@@ -15,7 +24,15 @@ export function ProtectedRoute() {
 }
 
 export function CapabilityGate({ requiredCapability }) {
-  const { user, isAuthenticated } = useAuthStore();
+  const { user, isAuthenticated, isCheckingSession } = useAuthStore();
+
+  if (isCheckingSession) {
+    return (
+      <div className="flex-1 flex items-center justify-center min-h-[50vh]">
+        <Spinner size="lg" />
+      </div>
+    );
+  }
 
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;

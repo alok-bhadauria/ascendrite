@@ -12,6 +12,9 @@ import CategoryExplorer from '../components/ui/CategoryExplorer';
 import IsometricSandbox from '../components/ui/IsometricSandbox';
 import AiProfiler from '../components/ui/AiProfiler';
 
+import { useNavigate } from 'react-router-dom';
+import { useAuthStore } from '../store/authStore';
+
 const tracks = [
   { id: 'ai', name: 'Artificial Intelligence', icon: Brain, desc: 'Machine Learning, DL networks, Transformers, and Multi-Agent structures.' },
   { id: 'core-cs', name: 'Core Computer Science', icon: Database, desc: 'DBMS engines, SQL optimization, OS threads, and Computer Networking.' },
@@ -30,10 +33,19 @@ const subjectOrder = {
 };
 
 export default function LandingPage() {
+  const { isAuthenticated, isCheckingSession } = useAuthStore();
+  const navigate = useNavigate();
+
   const [subjects, setSubjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState('ai');
   const [selectedSubject, setSelectedSubject] = useState(null);
+
+  useEffect(() => {
+    if (isAuthenticated && !isCheckingSession) {
+      navigate('/learn');
+    }
+  }, [isAuthenticated, isCheckingSession, navigate]);
 
   useEffect(() => {
     async function fetchSubjects() {

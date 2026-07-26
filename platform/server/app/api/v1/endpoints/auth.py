@@ -318,25 +318,29 @@ async def google_callback(
             detail=f"Authentication pipeline registration failure: {str(ex)}"
         )
 
-    # 4. Set HttpOnly Cookies
-    response.set_cookie(
-        key="access_token",
-        value=access_token,
-        httponly=settings.SECURITY_COOKIE_HTTPONLY,
-        secure=settings.SECURITY_COOKIE_SECURE,
-        samesite=settings.SECURITY_COOKIE_SAMESITE
-    )
-    response.set_cookie(
-        key="refresh_token",
-        value=refresh_token,
-        httponly=settings.SECURITY_COOKIE_HTTPONLY,
-        secure=settings.SECURITY_COOKIE_SECURE,
-        samesite=settings.SECURITY_COOKIE_SAMESITE
-    )
-
-    # 5. Redirect back to frontend portal homepage
+    # 4. Redirect back to frontend portal homepage /learn
     frontend_host = request.headers.get("Origin") or "http://localhost:5173"
     if "localhost:5173" not in frontend_host and "127.0.0.1:5173" not in frontend_host:
         frontend_host = "http://localhost:5173"
     
-    return RedirectResponse(url=f"{frontend_host}/")
+    redirect_response = RedirectResponse(url=f"{frontend_host}/learn")
+
+    # Set cookies directly on redirect_response with path="/"
+    redirect_response.set_cookie(
+        key="access_token",
+        value=access_token,
+        httponly=settings.SECURITY_COOKIE_HTTPONLY,
+        secure=settings.SECURITY_COOKIE_SECURE,
+        samesite=settings.SECURITY_COOKIE_SAMESITE,
+        path="/"
+    )
+    redirect_response.set_cookie(
+        key="refresh_token",
+        value=refresh_token,
+        httponly=settings.SECURITY_COOKIE_HTTPONLY,
+        secure=settings.SECURITY_COOKIE_SECURE,
+        samesite=settings.SECURITY_COOKIE_SAMESITE,
+        path="/"
+    )
+    
+    return redirect_response
