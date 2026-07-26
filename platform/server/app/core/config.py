@@ -38,8 +38,12 @@ class Settings(BaseSettings):
     SECURITY_COOKIE_HTTPONLY: bool = True
     SECURITY_COOKIE_SAMESITE: str = "lax"
 
-    # CORS Configuration
-    CORS_ALLOWED_ORIGINS: Union[str, List[str]] = ["http://localhost:5173", "http://localhost:3000"]
+    CORS_ALLOWED_ORIGINS: Union[str, List[str]] = [
+        "http://localhost:5173",
+        "http://localhost:3000",
+        "http://127.0.0.1:5173",
+        "http://127.0.0.1:3000"
+    ]
 
     @field_validator("CORS_ALLOWED_ORIGINS", mode="before")
     @classmethod

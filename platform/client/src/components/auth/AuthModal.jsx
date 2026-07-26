@@ -118,11 +118,6 @@ export function AuthModal({ isOpen, onClose, onAuthSuccess }) {
     setShowConfirm(false);
   };
 
-  // ── Google auth callback placeholder ──────────────────────────────────
-  const handleGoogleLogin = () => {
-    alert("Google authentication callback triggered.");
-  };
-
   // ── Login submit ──────────────────────────────────────────────────────
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
@@ -229,9 +224,9 @@ export function AuthModal({ isOpen, onClose, onAuthSuccess }) {
           <h2 className="font-display font-bold text-2xl text-theme-accent mb-1">Sign Up</h2>
           <p className="text-xs text-theme-subtle mb-3">Join Ascendrite and start learning</p>
 
-          <button type="button" className="google-btn text-theme-text hover:bg-theme-border transition-all w-full flex items-center justify-center gap-2 mb-2" onClick={handleGoogleLogin}>
-            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" width="16" height="16" />
-            <span>Continue with Google</span>
+          <button type="button" disabled className="google-btn text-theme-text opacity-40 cursor-not-allowed w-full flex items-center justify-center gap-2 mb-2">
+            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" width="16" height="16" className="grayscale" />
+            <span>Google Login (Disabled in V1)</span>
           </button>
 
           <div className="flex items-center gap-2 w-full mb-3 opacity-60">
@@ -321,9 +316,9 @@ export function AuthModal({ isOpen, onClose, onAuthSuccess }) {
           <h2 className="font-display font-bold text-2xl text-theme-accent mb-1">Login</h2>
           <p className="text-xs text-theme-subtle mb-3">Welcome back to Ascendrite</p>
 
-          <button type="button" className="google-btn text-theme-text hover:bg-theme-border transition-all w-full flex items-center justify-center gap-2 mb-2" onClick={handleGoogleLogin}>
-            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" width="16" height="16" />
-            <span>Continue with Google</span>
+          <button type="button" disabled className="google-btn text-theme-text opacity-40 cursor-not-allowed w-full flex items-center justify-center gap-2 mb-2">
+            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" width="16" height="16" className="grayscale" />
+            <span>Google Login (Disabled in V1)</span>
           </button>
 
           <div className="flex items-center gap-2 w-full mb-3 opacity-60">
