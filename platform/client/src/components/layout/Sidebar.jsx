@@ -36,7 +36,7 @@ export default function Sidebar() {
 
   return (
     <aside
-      className={`fixed lg:sticky top-[73px] left-0 h-[calc(100vh-73px)] w-64 bg-theme-surface border-r border-theme-border z-30 flex flex-col justify-between p-4 transition-transform duration-300 lg:transition-none ${
+      className={`fixed lg:sticky top-16 left-0 h-[calc(100vh-64px)] w-64 bg-theme-surface border-r border-theme-border z-30 flex flex-col justify-between p-4 transition-transform duration-300 lg:transition-none ${
         sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:hidden'
       }`}
       aria-label="Sidebar Navigation"

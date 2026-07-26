@@ -21,7 +21,7 @@ export default function AppLayout() {
   }, []);
 
   return (
-    <div className="flex-1 flex w-full relative">
+    <div className="flex-1 flex w-full relative pt-16">
       {/* Dynamic Sidebar navigation */}
       <Sidebar />
 
@@ -29,13 +29,13 @@ export default function AppLayout() {
       {sidebarOpen && (
         <div
           onClick={() => setSidebarOpen(false)}
-          className="fixed inset-0 top-[73px] bg-black/40 z-20 lg:hidden animate-fade-in"
+          className="fixed inset-0 top-16 bg-black/40 z-20 lg:hidden animate-fade-in"
           aria-hidden="true"
         />
       )}
 
       {/* Primary content area */}
-      <div className="flex-1 flex flex-col min-w-0 pt-[73px]">
+      <div className="flex-1 flex flex-col min-w-0">
         <Outlet />
       </div>
     </div>

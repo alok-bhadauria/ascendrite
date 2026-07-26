@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Palette, ChevronDown, LogIn, LogOut, Star, Menu } from 'lucide-react';
+import { Palette, ChevronDown, LogIn, LogOut, Star, Menu, User } from 'lucide-react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { AuthModal } from '../auth/AuthModal';
 import { useAuthStore } from '../../store/authStore';
@@ -17,6 +17,7 @@ const themes = [
 export default function Navbar() {
   const [activeTheme, setActiveTheme] = useState('nord-light');
   const [showThemeDropdown, setShowThemeDropdown] = useState(false);
+  const [showProfileDropdown, setShowProfileDropdown] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
   
   const { user, isAuthenticated, login, logout } = useAuthStore();
@@ -25,6 +26,7 @@ export default function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
   const themeSelectorRef = useRef(null);
+  const profileSelectorRef = useRef(null);
 
   // Auto-open modal when navigating directly to /login
   useEffect(() => {
@@ -36,17 +38,20 @@ export default function Navbar() {
     }
   }, [location.pathname]);
 
+  // Unified click/scroll listeners for dropdowns
   useEffect(() => {
-    if (!showThemeDropdown) return;
-
     const handleOutsideClick = (e) => {
       if (themeSelectorRef.current && !themeSelectorRef.current.contains(e.target)) {
         setShowThemeDropdown(false);
+      }
+      if (profileSelectorRef.current && !profileSelectorRef.current.contains(e.target)) {
+        setShowProfileDropdown(false);
       }
     };
 
     const handleScroll = () => {
       setShowThemeDropdown(false);
+      setShowProfileDropdown(false);
     };
 
     document.addEventListener('mousedown', handleOutsideClick);
@@ -56,7 +61,7 @@ export default function Navbar() {
       document.removeEventListener('mousedown', handleOutsideClick);
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [showThemeDropdown]);
+  }, []);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('ascendrite-theme') || 'nord-light';
@@ -214,19 +219,69 @@ export default function Navbar() {
           ) : (
             isAuthenticated && (
               <div className="flex items-center gap-4">
-                <div className="hidden sm:flex flex-col text-right">
-                  <span className="text-xs font-bold text-theme-text leading-tight">{user?.first_name} {user?.last_name}</span>
-                  <span className="text-[10px] text-theme-subtle">{user?.email}</span>
+                <div className="relative" ref={profileSelectorRef}>
+                  <button
+                    onClick={() => setShowProfileDropdown(!showProfileDropdown)}
+                    className="flex items-center gap-2 hover:bg-theme-border/20 px-3 py-1.5 rounded-lg transition-all duration-200 text-left cursor-pointer select-none"
+                  >
+                    <div className="hidden sm:flex flex-col text-right">
+                      <span className="text-xs font-bold text-theme-text leading-tight">
+                        {user?.first_name} {user?.last_name}
+                      </span>
+                      <span className="text-[10px] text-theme-subtle">{user?.email}</span>
+                    </div>
+                    <div className="h-8 w-8 rounded-full bg-theme-accent/10 border border-theme-accent/20 flex items-center justify-center text-theme-accent font-bold text-sm shrink-0">
+                      {user?.first_name ? user.first_name[0].toUpperCase() : 'U'}
+                    </div>
+                    <ChevronDown size={12} className={`text-theme-subtle transition-transform duration-200 ${showProfileDropdown ? 'rotate-180' : ''}`} />
+                  </button>
+
+                  {showProfileDropdown && (
+                    <div className="absolute right-0 mt-2 w-64 bg-theme-surface border border-theme-border/60 rounded-xl shadow-xl py-3 z-50 animate-fade-in-down">
+                      <div className="px-4 py-2 border-b border-theme-border/40 mb-2">
+                        <p className="text-xs text-theme-subtle font-semibold">AUTHENTICATED LEARNER</p>
+                        <p className="text-sm font-bold text-theme-text mt-0.5 truncate">{user?.first_name} {user?.last_name}</p>
+                        <p className="text-xs text-theme-subtle truncate">{user?.email}</p>
+                      </div>
+
+                      <div className="px-4 py-2 border-b border-theme-border/40 mb-2 text-xs text-theme-subtle space-y-1">
+                        <div className="flex justify-between">
+                          <span>Learning Track:</span>
+                          <span className="font-bold text-theme-text capitalize">
+                            {user?.preferences?.interest ? user.preferences.interest.replace('-', ' ') : 'Not selected'}
+                          </span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span>Objective:</span>
+                          <span className="font-bold text-theme-text capitalize truncate max-w-[140px]" title={user?.preferences?.objective}>
+                            {user?.preferences?.objective || 'General'}
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="px-2 space-y-1">
+                        <Link
+                          to="/learn"
+                          onClick={() => setShowProfileDropdown(false)}
+                          className="flex items-center gap-2 px-3 py-2 text-xs text-theme-text hover:bg-theme-border/30 rounded-lg transition-colors"
+                        >
+                          <User size={13} className="text-theme-accent" />
+                          <span>Learning Dashboard</span>
+                        </Link>
+                        <button
+                          onClick={() => {
+                            setShowProfileDropdown(false);
+                            handleLogoutClick();
+                          }}
+                          className="w-full flex items-center gap-2 px-3 py-2 text-xs text-red-500 hover:bg-red-500/10 rounded-lg transition-colors text-left cursor-pointer"
+                        >
+                          <LogOut size={13} />
+                          <span>Logout Account</span>
+                        </button>
+                      </div>
+                    </div>
+                  )}
                 </div>
-                
-                <button 
-                  id="btn-header-logout"
-                  onClick={handleLogoutClick}
-                  className="border border-theme-border text-theme-text hover:bg-theme-accent hover:text-white px-3 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-1.5 cursor-pointer"
-                >
-                  <LogOut size={14} />
-                  <span className="hidden sm:inline">Logout</span>
-                </button>
               </div>
             )
           )}

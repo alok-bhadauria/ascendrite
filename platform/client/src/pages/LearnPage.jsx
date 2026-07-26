@@ -16,24 +16,39 @@ export default function LearnPage() {
   const [pathway, setPathway] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [retryCount, setRetryCount] = useState(0);
 
   const trackInterest = user?.preferences?.interest || 'web-development';
 
   useEffect(() => {
+    let active = true;
+
     async function loadPathway() {
       const subjectIdMap = {
         'ai': 'machine-learning',
-        'core-cs': 'operating-systems',
-        'software-engineering': 'design-patterns',
-        'web-development': 'frontend-frameworks'
+        'core-cs': 'os',
+        'software-engineering': 'system-design',
+        'web-development': 'reactjs'
       };
-      const subjectId = subjectIdMap[trackInterest] || 'frontend-frameworks';
+      const subjectId = subjectIdMap[trackInterest] || 'reactjs';
       
+      const timeoutPromise = new Promise((_, reject) =>
+        setTimeout(() => reject(new Error('Request Timeout: Server took too long to respond')), 8000)
+      );
+
       try {
         setLoading(true);
         setError(false);
-        const res = await api.get(`/curriculum/subject/${subjectId}`);
+        setErrorMessage('');
         
+        const res = await Promise.race([
+          api.get(`/curriculum/subject/${subjectId}`),
+          timeoutPromise
+        ]);
+        
+        if (!active) return;
+
         // Fetch namespaced completed topics history
         const completedHistory = userStorage.getItem(user, 'ascendrite-completed-topics', []);
         
@@ -57,16 +72,29 @@ export default function LearnPage() {
           modules: enrichedModules
         });
       } catch (err) {
+        if (!active) return;
         console.error('Failed to load dynamic subject pathway:', err);
         setError(true);
+        if (err.message && err.message.includes('Timeout')) {
+          setErrorMessage('The connection timed out after 8 seconds. Please verify backend service responsiveness.');
+        } else {
+          setErrorMessage('Failed to load curriculum subjects from the database. Please verify backend database seeds are loaded.');
+        }
       } finally {
-        setLoading(false);
+        if (active) {
+          setLoading(false);
+        }
       }
     }
+
     if (user) {
       loadPathway();
     }
-  }, [trackInterest, user]);
+
+    return () => {
+      active = false;
+    };
+  }, [trackInterest, user, retryCount]);
 
   if (loading) {
     return (
@@ -82,10 +110,10 @@ export default function LearnPage() {
         <AlertTriangle className="h-12 w-12 text-theme-accent mb-4 animate-pulse-soft" />
         <h3 className="font-display font-bold text-xl text-theme-text mb-2">Subject Pathway Offline</h3>
         <p className="text-theme-subtle text-sm max-w-sm mb-6 leading-relaxed">
-          Failed to load curriculum subjects from the database. Please verify backend database seeds are loaded.
+          {errorMessage || 'Failed to load curriculum subjects from the database. Please verify backend database seeds are loaded.'}
         </p>
         <div className="flex gap-3">
-          <Button variant="secondary" onClick={() => { setError(false); setLoading(true); }}>
+          <Button variant="secondary" onClick={() => setRetryCount(prev => prev + 1)}>
             Retry Connection
           </Button>
           <Button variant="subtle" onClick={() => navigate('/')}>

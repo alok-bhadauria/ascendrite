@@ -19,6 +19,8 @@ export default function TopicPage() {
   // ── Universal State Simulators (Loading / Errors) ──────────────────────
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [retryCount, setRetryCount] = useState(0);
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [localNotes, setLocalNotes] = useState('');
   const [completed, setCompleted] = useState(false);
@@ -31,25 +33,47 @@ export default function TopicPage() {
 
   // Sync state on load
   useEffect(() => {
+    let active = true;
+
     async function loadTopicData() {
       const trackInterest = user?.preferences?.interest || 'web-development';
       const subjectIdMap = {
         'ai': 'machine-learning',
-        'core-cs': 'operating-systems',
-        'software-engineering': 'design-patterns',
-        'web-development': 'frontend-frameworks'
+        'core-cs': 'os',
+        'software-engineering': 'system-design',
+        'web-development': 'reactjs'
       };
-      const subjectId = subjectIdMap[trackInterest] || 'frontend-frameworks';
+      const subjectId = subjectIdMap[trackInterest] || 'reactjs';
+      
+      const timeoutPromise = new Promise((_, reject) =>
+        setTimeout(() => reject(new Error('Request Timeout: Server took too long to respond')), 8000)
+      );
 
       try {
         setLoading(true);
-        const res = await api.get(`/curriculum/subject/${subjectId}/notes/${topicId}`);
+        setError(false);
+        setErrorMessage('');
+        
+        const res = await Promise.race([
+          api.get(`/curriculum/subject/${subjectId}/notes/${topicId}`),
+          timeoutPromise
+        ]);
+        
+        if (!active) return;
         setTopicData(res.data);
       } catch (err) {
+        if (!active) return;
         console.error('Failed to load dynamic topic notes:', err);
         setError(true);
+        if (err.message && err.message.includes('Timeout')) {
+          setErrorMessage('The connection timed out after 8 seconds. Please verify backend service responsiveness.');
+        } else {
+          setErrorMessage('Failed to load topic notes from the database. Please verify backend database seeds are loaded.');
+        }
       } finally {
-        setLoading(false);
+        if (active) {
+          setLoading(false);
+        }
       }
     }
 
@@ -100,9 +124,10 @@ export default function TopicPage() {
       loadComments();
     }
 
-    // Reset status
-    setError(false);
-  }, [topicId, user]);
+    return () => {
+      active = false;
+    };
+  }, [topicId, user, retryCount]);
 
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
@@ -162,11 +187,11 @@ export default function TopicPage() {
     const trackInterest = user?.preferences?.interest || 'web-development';
     const subjectIdMap = {
       'ai': 'machine-learning',
-      'core-cs': 'operating-systems',
-      'software-engineering': 'design-patterns',
-      'web-development': 'frontend-frameworks'
+      'core-cs': 'os',
+      'software-engineering': 'system-design',
+      'web-development': 'reactjs'
     };
-    const subjectId = subjectIdMap[trackInterest] || 'frontend-frameworks';
+    const subjectId = subjectIdMap[trackInterest] || 'reactjs';
 
     try {
       await api.post(`/progress/${subjectId}/log`, {
@@ -205,10 +230,10 @@ export default function TopicPage() {
         <AlertTriangle className="h-12 w-12 text-theme-accent mb-4 animate-pulse-soft" />
         <h3 className="font-display font-bold text-xl text-theme-text mb-2">Service Temporarily Unavailable</h3>
         <p className="text-theme-subtle text-sm max-w-sm mb-6 leading-relaxed">
-          Failed to fetch syllabus topic data from the Knowledge Platform engine.
+          {errorMessage || 'Failed to fetch syllabus topic data from the Knowledge Platform engine.'}
         </p>
         <div className="flex gap-3">
-          <Button variant="secondary" onClick={() => setError(false)}>
+          <Button variant="secondary" onClick={() => setRetryCount(prev => prev + 1)}>
             Retry Connection
           </Button>
           <Button variant="subtle" onClick={() => navigate('/learn')}>
