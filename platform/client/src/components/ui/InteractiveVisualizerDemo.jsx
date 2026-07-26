@@ -162,12 +162,12 @@ export default function InteractiveVisualizerDemo() {
             return (
               <div 
                 key={idx} 
-                className={`py-1 px-2 rounded whitespace-pre transition-all duration-200 ${
+                className={`py-1 px-2.5 rounded whitespace-pre transition-all duration-200 border-l-2 ${
                   isHighlighted 
-                    ? 'text-theme-accent font-bold border-l-2 border-theme-accent shadow-sm' 
-                    : 'text-theme-text opacity-50'
+                    ? 'text-theme-accent font-bold border-theme-accent shadow-sm' 
+                    : 'text-theme-text border-transparent opacity-55'
                 }`}
-                style={isHighlighted ? { backgroundColor: 'color-mix(in srgb, var(--color-theme-accent) 15%, transparent)' } : {}}
+                style={isHighlighted ? { backgroundColor: 'color-mix(in srgb, var(--color-theme-accent) 12%, transparent)' } : {}}
               >
                 {line}
               </div>
