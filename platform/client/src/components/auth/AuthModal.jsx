@@ -5,6 +5,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import api from '../../utils/api';
 import { useToast } from '../ui/ToastProvider';
 import { validateEmail, validatePassword } from '../../utils/validation';
+import { OAUTH_LOGIN_URL } from '../../config/env';
 import './AuthModal.css';
 
 // ── Phase state machine ─────────────────────────────────────────────────────
@@ -123,7 +124,7 @@ export function AuthModal({ isOpen, onClose, onAuthSuccess }) {
 
   // ── Google auth redirection ──────────────────────────────────────────
   const handleGoogleLogin = () => {
-    window.location.href = 'http://localhost:8000/api/v1/auth/google/login';
+    window.location.href = OAUTH_LOGIN_URL;
   };
 
   // ── Login submit ──────────────────────────────────────────────────────

@@ -22,7 +22,7 @@ export default function AppLayout() {
   }, [toggleCommandPalette]);
 
   return (
-    <div className="flex-1 flex w-full relative pt-16">
+    <div className="flex-1 flex w-full relative pt-[var(--header-height)]">
       {/* Search overlay Command Palette */}
       <CommandPalette />
 

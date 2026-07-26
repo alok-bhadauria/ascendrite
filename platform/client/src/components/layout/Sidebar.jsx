@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { BookOpen, Cpu, PenTool, Users, Shield, Command } from 'lucide-react';
 import { useAuthStore } from '../../store/authStore';
 import { useLayoutStore } from '../../store/layoutStore';
+import { getAppUrl } from '../../utils/navigation';
 
 export default function Sidebar() {
   const { user } = useAuthStore();
@@ -15,24 +16,59 @@ export default function Sidebar() {
     }
   };
 
-  // Compile navigation links dynamically based on user capabilities
+  // Compile navigation links dynamically based on user capabilities and target applications
   const mainLinks = [
-    { to: '/learn', label: 'Learning Paths', icon: BookOpen },
-    { to: '/workspace', label: 'Workspace Sandbox', icon: Cpu }
+    { toApp: 'learner', toPath: '/learn', label: 'Learning Paths', icon: BookOpen },
+    { toApp: 'learner', toPath: '/workspace', label: 'Workspace Sandbox', icon: Cpu }
   ];
 
   const operationalLinks = [];
   if (user?.capabilities?.includes('knowledge:write') || user?.role === 'Admin') {
-    operationalLinks.push({ to: '/creator', label: 'Creator platform', icon: PenTool });
+    operationalLinks.push({ toApp: 'creator', toPath: '/', label: 'Creator platform', icon: PenTool });
   }
   if (user?.capabilities?.includes('learning:read') || user?.role === 'Admin') {
-    operationalLinks.push({ to: '/collaboration', label: 'Collaboration', icon: Users });
+    operationalLinks.push({ toApp: 'learner', toPath: '/collaboration', label: 'Collaboration', icon: Users });
   }
   if (user?.capabilities?.includes('system:admin') || user?.role === 'Admin') {
-    operationalLinks.push({ to: '/admin', label: 'Admin OS', icon: Shield });
+    operationalLinks.push({ toApp: 'admin', toPath: '/', label: 'Admin OS', icon: Shield });
   }
 
   const baseLinkStyle = "flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-theme-accent";
+
+  const AppNavLink = ({ toApp, toPath, label, icon: Icon }) => {
+    const url = getAppUrl(toApp, toPath);
+    const isExternal = url.startsWith('http');
+
+    if (isExternal) {
+      return (
+        <a
+          href={url}
+          onClick={handleLinkClick}
+          className={`${baseLinkStyle} text-theme-subtle hover:text-theme-text hover:bg-theme-border/20`}
+        >
+          <Icon className="h-4 w-4 shrink-0" aria-hidden="true" />
+          <span>{label}</span>
+        </a>
+      );
+    }
+
+    return (
+      <NavLink
+        to={url}
+        onClick={handleLinkClick}
+        className={({ isActive }) =>
+          `${baseLinkStyle} ${
+            isActive 
+              ? 'bg-theme-bg text-theme-text shadow-sm' 
+              : 'text-theme-subtle hover:text-theme-text hover:bg-theme-border/20'
+          }`
+        }
+      >
+        <Icon className="h-4 w-4 shrink-0" aria-hidden="true" />
+        <span>{label}</span>
+      </NavLink>
+    );
+  };
 
   return (
     <aside
@@ -48,21 +84,13 @@ export default function Sidebar() {
             Core Environment
           </span>
           {mainLinks.map((link) => (
-            <NavLink
-              key={link.to}
-              to={link.to}
-              onClick={handleLinkClick}
-              className={({ isActive }) =>
-                `${baseLinkStyle} ${
-                  isActive 
-                    ? 'bg-theme-bg text-theme-text shadow-sm' 
-                    : 'text-theme-subtle hover:text-theme-text hover:bg-theme-border/20'
-                }`
-              }
-            >
-              <link.icon className="h-4 w-4 shrink-0" aria-hidden="true" />
-              <span>{link.label}</span>
-            </NavLink>
+            <AppNavLink
+              key={link.toPath}
+              toApp={link.toApp}
+              toPath={link.toPath}
+              label={link.label}
+              icon={link.icon}
+            />
           ))}
         </div>
 
@@ -73,21 +101,13 @@ export default function Sidebar() {
               Operations Control
             </span>
             {operationalLinks.map((link) => (
-              <NavLink
-                key={link.to}
-                to={link.to}
-                onClick={handleLinkClick}
-                className={({ isActive }) =>
-                  `${baseLinkStyle} ${
-                    isActive 
-                      ? 'bg-theme-bg text-theme-text shadow-sm' 
-                      : 'text-theme-subtle hover:text-theme-text hover:bg-theme-border/20'
-                  }`
-                }
-              >
-                <link.icon className="h-4 w-4 shrink-0" aria-hidden="true" />
-                <span>{link.label}</span>
-              </NavLink>
+              <AppNavLink
+                key={link.toPath}
+                toApp={link.toApp}
+                toPath={link.toPath}
+                label={link.label}
+                icon={link.icon}
+              />
             ))}
           </div>
         )}

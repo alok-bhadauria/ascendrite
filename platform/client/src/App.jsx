@@ -55,7 +55,9 @@ function App() {
                 </div>
               }>
                 <Routes>
-                  {/* Public and Auth overlay entry routes */}
+                  {/* ==============================================================================
+                     1. PUBLIC DOMAIN ROUTE SCOPE (ascendrite.com)
+                     ============================================================================== */}
                   <Route path="/" element={<LandingPage />} />
                   <Route path="/login" element={<LandingPage />} />
                   <Route path="/forbidden" element={<ForbiddenPage />} />
@@ -64,19 +66,26 @@ function App() {
                   <Route element={<ProtectedRoute />}>
                     <Route path="/onboarding" element={<OnboardingPage />} />
                     <Route element={<AppLayout />}>
+                      {/* ==============================================================================
+                         2. LEARNER HOST ROUTE SCOPE (ascendrite.com / dashboard)
+                         ============================================================================== */}
                       <Route path="/learn" element={<LearnPage />} />
                       <Route path="/learn/:topicId" element={<TopicPage />} />
                       <Route path="/workspace" element={<WorkspacePage />} />
                       <Route path="/profile" element={<ProfilePage />} />
                       <Route path="/collaboration" element={<CollaborationPage />} />
                       
-                      {/* Creator authoring channel */}
+                      {/* ==============================================================================
+                         3. CREATOR PLATFORM ROUTE SCOPE (studio.ascendrite.com)
+                         ============================================================================== */}
                       <Route element={<CapabilityGate requiredCapability="knowledge:write" />}>
                         <Route path="/creator" element={<CreatorPage />} />
                         <Route path="/creator/edit/:draftId" element={<AuthoringPage />} />
                       </Route>
 
-                      {/* Governance admin channel */}
+                      {/* ==============================================================================
+                         4. GOVERNANCE ADMIN ROUTE SCOPE (admin.ascendrite.com)
+                         ============================================================================== */}
                       <Route element={<CapabilityGate requiredCapability="system:admin" />}>
                         <Route path="/admin" element={<AdminPage />} />
                       </Route>

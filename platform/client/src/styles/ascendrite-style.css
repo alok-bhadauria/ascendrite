@@ -3,7 +3,12 @@
    ============================================================================== */
 
 :root {
-  /* 1. Spacing Tokens (Calm, precise padding & layout gaps) */
+  /* 1. Layout Dimensions */
+  --header-height: 64px;
+  --sidebar-width: 256px;
+  --content-max-width: 1440px;
+
+  /* 2. Spacing Tokens (Calm, precise padding & layout gaps) */
   --spacing-xs: 4px;
   --spacing-sm: 8px;
   --spacing-md: 16px;
@@ -12,7 +17,7 @@
   --spacing-2xl: 48px;
   --spacing-3xl: 64px;
 
-  /* 2. Border Radius System (Technical, textbook-grade curves) */
+  /* 3. Border Radius System (Technical, textbook-grade curves) */
   --radius-xs: 4px;
   --radius-sm: 8px;
   --radius-md: 12px;
@@ -20,11 +25,11 @@
   --radius-xl: 24px;
   --radius-2xl: 32px;
 
-  /* 3. Centralized Transition & Motion Tokens (Precisely timed transitions) */
+  /* 4. Centralized Transition & Motion Tokens (Precisely timed transitions) */
   --transition-time: 250ms;
   --transition-curve: cubic-bezier(0.4, 0, 0.2, 1);
 
-  /* 4. Centralized Shadow & Glow Configurations */
+  /* 5. Centralized Shadow & Glow Configurations */
   --shadow-inner-soft: inset 0 2px 8px rgba(0, 0, 0, 0.05);
   --shadow-flat: 0 4px 12px rgba(0, 0, 0, 0.08);
   --shadow-elevated: 0 10px 30px rgba(0, 0, 0, 0.12);
@@ -33,9 +38,18 @@
   /* Glow responses */
   --glow-subtle: 0 0 12px var(--color-theme-border);
   --glow-accent: 0 0 20px var(--color-theme-accent);
+
+  /* 6. Typography Scale (Fluid responsive design mappings) */
+  --font-size-xs: clamp(0.7rem, 0.65rem + 0.25vw, 0.8rem);
+  --font-size-sm: clamp(0.8rem, 0.75rem + 0.25vw, 0.9rem);
+  --font-size-base: clamp(0.9rem, 0.85rem + 0.25vw, 1.05rem);
+  --font-size-lg: clamp(1.05rem, 0.95rem + 0.5vw, 1.25rem);
+  --font-size-xl: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
+  --font-size-2xl: clamp(1.5rem, 1.35rem + 0.75vw, 1.85rem);
+  --font-size-3xl: clamp(1.85rem, 1.6rem + 1.25vw, 2.5rem);
 }
 
-/* 5. Centralized Theme Transition Strategy class helper */
+/* 7. Centralized Theme Transition Strategy class helper */
 .transition-theme,
 body, 
 button, 
@@ -55,10 +69,20 @@ textarea {
   transition-timing-function: var(--transition-curve);
 }
 
-/* 6. Textbook Style Page Container (Asymmetric padding support) */
+/* 8. Accessibility Focus Ring Indicator */
+.focus-ring:focus-visible,
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--color-theme-accent);
+  outline-offset: 2px;
+}
+
+/* 9. Textbook Style Page Container (Asymmetric padding support) */
 .page-container {
   width: 100%;
-  max-width: 90rem; /* Expanded to 1440px for larger screens */
+  max-width: var(--content-max-width);
   margin-left: auto;
   margin-right: auto;
   padding-left: var(--spacing-md);
@@ -79,14 +103,14 @@ textarea {
   }
 }
 
-/* 7. Premium CSS-based Background Patterns */
+/* 10. Premium CSS-based Background Patterns */
 .bg-grid-pattern {
   background-size: 32px 32px;
   background-image: linear-gradient(to right, var(--color-theme-border) 1px, transparent 1px),
                     linear-gradient(to bottom, var(--color-theme-border) 1px, transparent 1px);
 }
 
-/* 8. Technical Motion Design Keyframes (Curriculum Atlas interactive visualizers) */
+/* 11. Technical Motion Design Keyframes (Curriculum Atlas interactive visualizers) */
 @keyframes signalFlow {
   0% {
     stroke-dashoffset: 24;
@@ -166,7 +190,7 @@ textarea {
   animation: nodeHighlightSeq 3s ease-in-out infinite;
 }
 
-/* 9. Toast Notification Animations */
+/* 12. Toast Notification Animations */
 @keyframes slideIn {
   from {
     transform: translateY(1rem);
@@ -182,7 +206,7 @@ textarea {
   animation: slideIn var(--transition-time) var(--transition-curve) forwards;
 }
 
-/* 10. Centralized Custom Webkit Scrollbars styling */
+/* 13. Centralized Custom Webkit Scrollbars styling */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -198,4 +222,15 @@ textarea {
   background: var(--color-theme-accent);
 }
 
-
+/* 14. Accessibilities: Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-delay: -1ms !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    background-attachment: scroll !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+  }
+}

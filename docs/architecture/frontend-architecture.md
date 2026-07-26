@@ -12,75 +12,57 @@
 
 ---
 
-## 1. Single Page Application (SPA) Structure
-The frontend application shall be built using React and compiled via Vite. The project directory layout is structured to maintain clean component boundaries:
+## 1. Single Page Application (SPA) Structure & Subdomain Readiness
+The frontend is constructed using React, Vite, and Tailwind CSS. The project directory layout is structured to maintain clean component boundaries and isolate routes by subdomain zones:
 
 ```
 platform/client/
 ├── src/
+│   ├── config/             # Config hubs (env.js settings)
 │   ├── components/         # Modular visual UI components
-│   │   ├── ui/             # Standard design primitives (Buttons, Inputs)
-│   │   ├── layout/         # Shell containers (Sidebar, Header)
-│   │   └── visualizers/    # Interactive simulator canvases
-│   ├── hooks/              # Global state loaders and API fetch hooks
-│   ├── pages/              # Primary route containers
+│   │   ├── ui/             # Dynamic overlays (CommandPalette, ToastProvider)
+│   │   ├── layout/         # Shell containers (Sidebar, Header, AppLayout)
+│   │   └── primitives/     # Core reusable components (Button, Modal, EmptyState)
+│   ├── pages/              # Primary route containers (Dashboard, Profile)
+│   ├── router/             # Route Guards and capability gates
 │   ├── store/              # State management stores (Zustand)
-│   └── utils/              # Parsers, KaTeX wrappers, and API clients
+│   └── utils/              # Parsers, navigators, and Axios clients
 ```
 
----
-
-## 2. Workspace-First Experience & Component Composition
-The frontend layout shall implement a single, unified workspace rather than independent, isolated pages:
-*   **Navigation Shell (Left)**: Renders dynamic curriculum indexes and progress indicators from metadata configurations.
-*   **Workspace Canvas (Center)**: Displays active lesson details, LaTeX math formulations, and code interfaces.
-*   **Contextual Panel (Right)**: Slides open to present context-aware widgets (AI assistants, glossary words, code execution outputs) without reloading the main workspace.
-*   **Persistent Context**: The persistent AI assistant and code compilation runtimes must remain mounted across topics, maintaining their state variables in memory.
+### Future-Proofing for V2 Subdomains
+To support migrating routes to separate subdomains (e.g., `studio.ascendrite.com` or `admin.ascendrite.com`) in V2, client routing is decoupled:
+1.  **Dynamic Navigation Helper (`src/utils/navigation.js`)**: All navigation links call `getAppUrl(appName, path)` or `navigateToApp(navigate, appName, path)`. In V1, this maps onto local path prefixes; in V2, it automatically resolves to cross-origin subdomain domains.
+2.  **Environment Config Registry (`src/config/env.js`)**: Manages base API paths, Google OAuth URLs, cookie parameters, and hosts. Allows changing environments dynamically using `.env` configurations without modifying components code.
+3.  **Modular Router Boundaries (`src/App.jsx`)**: Routes are separated using explicit layout zones, matching Public, Learner, Creator, and Admin capability limits. Each block can easily be extracted into its own SPA project repository in the future.
 
 ---
 
-## 3. Context-Aware UI & Right-Panel Coordination
-The right-side contextual panel must adapt dynamically to the active state of the center workspace:
-*   **Active Node Binding**: The client routing controller shall maintain an active state object tracking the visible curriculum node ID.
-*   **Context Extraction**: Custom hooks (`useActiveContext`) must listen to active node changes, load associated JSON metadata, and automatically instantiate corresponding tools:
-    *   *Conceptual Note*: Mounts the Learning Assistant chatbot pre-primed with the topic's notes text.
-    *   *Coding Exercise*: Mounts the Code Compiler widget and Execution Trace view.
-    *   *Math Derivation*: Mounts step-by-step interactive sliders to trace calculations.
+## 2. Reusable UI Components & Primitive Foundations
+To enforce visual consistency and prevent duplicate ad-hoc styling hacks, developers must build pages strictly using reusable primitives from `src/components/primitives/`:
+
+*   **Buttons (`Button.jsx`)**: Unified triggers handling primary, secondary, and disabled UI interaction patterns.
+*   **Cards (`Card.jsx`)**: Standard containers for content blocks, supporting standard headers, content wrappers, and shadow elevations.
+*   **Inputs & TextAreas (`Input.jsx`, `TextArea.jsx`)**: Accessible text boxes with custom focus outlines.
+*   **Modals (`Modal.jsx`)**: Standard portals managing overlays backdrop clicks, ESC event listeners, and focus traps.
+*   **Empty State (`EmptyState.jsx`)**: Placeholder panel with inline illustration icons and helper buttons.
+*   **Error State (`ErrorState.jsx`)**: Connection failure fallbacks with optional "Retry" action hooks.
+*   **Indicators (`Spinner.jsx`, `Badge.jsx`)**: Loading animations and status banners consuming standard design tokens.
 
 ---
 
-## 4. Adaptive Dashboard & Spaced Repetition
-The User Dashboard shall adapt its visual cards and recommended next-steps using progress data:
-*   **Telemetry Integration**: The dashboard retrieves user telemetry progress (score metrics, completions, durations) from backend endpoints.
+## 3. Styling Token Foundation
+The styling system uses unified design tokens declared in `src/styles/ascendrite-style.css`. Component styling consumes these variables to ensure changes to the design system propagate globally.
+
+### Design Tokens Catalog
+*   **Typography Scaling**: Fluid typography scales mapped to CSS variables (e.g. `--font-size-base`, `--font-size-2xl`) using CSS `clamp()` rules to scale naturally between mobile and ultrawide screens.
+*   **Responsive Breakpoints**: Breakpoint rules align with Tailwind CSS (640px, 1024px, 1536px) and handle margins/paddings dynamically using `.page-container`.
+*   **Accessibility Focus Outline (`.focus-ring`)**: Focusable elements declare custom ring styles using `--color-theme-accent` with a clear 2px offset.
+*   **Reduced-Motion Override**: Media queries detect `prefers-reduced-motion: reduce` and disable long fade/scale animations globally.
+*   **Layout Dimensions**: Central variables (Navbar height: `--header-height`, Sidebar width: `--sidebar-width`) coordinate layout margins to prevent component overlaps and collisions.
+
+---
+
+## 4. State Synchronization & Offline Resilience
+*   **Hydration Sync Guards**: Component state variables loading from namespaced local storage (such as notes or study planner tasks) use `isHydrated` checks. This prevents React from overwriting stored user data with empty defaults during mount.
+*   **Telemetry Integration**: User progress telemetries (completions, assessment scores, timeline milestones) retrieve data from backend APIs.
 *   **Spaced Repetition Schedule**: Using client-side state engines, the dashboard calculates memory decay variables (based on diagnostic scores and study time gaps) to highlight review suggestions.
-*   **Adaptive Pathing**: The next-steps widget dynamically shows nodes matching prerequisites from `subject-map.json` that are unlocked but not completed.
-
----
-
-## 5. Dynamic Theme Engine
-The interface styling system must not use static, hardcoded stylesheets or simple dark/light modes.
-*   **Metadata Integration**: The theme configurations shall be parsed dynamically from subject metadata files (`theme` containing `primary`, `secondary`, `accent`, `surface`, `text`, `graph`).
-*   **Dynamic CSS Custom Properties**: Theme values must be injected into the root HTML context as CSS custom properties (e.g. `--color-primary`, `--color-graph`). Core components shall use these variables to dynamically adapt their accents.
-
----
-
-## 6. Universal Search & Command Palette
-*   **Route Code Splitting**: All primary pages (Dashboard, Profile, Settings) must be lazy-loaded using `React.lazy` and `Suspense` to minimize the initial download footprint.
-*   **Command Palette**: The client must bind `Ctrl+K` to mount a global Command Palette modal, allowing users to search concepts, jump to topics, and toggle AI assistants using keyboard shortcuts.
-
----
-
-## 7. Accessibility (WAI-ARIA) and Focus Governance
-All user interfaces must comply with WCAG 2.1 Level AA accessibility criteria:
-*   **Semantic Elements**: Layout definitions must utilize HTML5 semantic tags (`<header>`, `<main>`, `<nav>`, `<section>`).
-*   **ARIA Attributes**: Interactive widgets must declare explicit ARIA roles (e.g., `role="dialog"`, `aria-expanded`, `aria-label`).
-*   **Keyboard Navigation**: Viewports must support standard keyboard tab progression. Focus traps must be enforced on open modal layers (such as the Command Palette) to keep tab navigation restricted to the modal boundaries.
-*   **Focus Ring Indicator**: All focusable inputs, selectors, and buttons must display high-contrast outline focus rings when active (`focus-visible:ring-2`).
-
----
-
-## 8. Offline-First Client Architecture
-*   **Local Caching**: The application shall cache current progress updates and quiz inputs in local client stores.
-*   **Status Indicators**: If network connectivity is lost, the client must display an offline warning in the header.
-*   **State Syncing**: Progress updates must queue locally and synchronize with the backend automatically once connection is restored.
-*   **Assets Fallback**: If dynamic rendering libraries (Mermaid.js, LaTeX packages) fail to load, the visualizers must degrade to render raw text codes within code blocks.
