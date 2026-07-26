@@ -234,3 +234,15 @@ textarea:focus-visible {
     transition-delay: 0s !important;
   }
 }
+
+/* 15. Semantic Feedback Colors Utility Classes */
+.text-success-semantic {
+  color: #10b981; /* standard emerald-500 semantic green */
+}
+.text-error-semantic {
+  color: #f43f5e; /* standard rose-500 semantic red */
+}
+.bg-error-soft-semantic {
+  background-color: rgba(244, 63, 94, 0.08);
+  border-color: rgba(244, 63, 94, 0.15);
+}

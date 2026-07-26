@@ -178,7 +178,7 @@ export default function CreatorPage() {
                     </button>
                     <button
                       onClick={(e) => handleDeleteDraft(d.id, e)}
-                      className="p-2 rounded-lg border border-theme-border hover:bg-red-500/10 hover:border-red-500/30 text-theme-subtle hover:text-red-500 cursor-pointer transition-colors focus:outline-none"
+                      className="p-2 rounded-lg border border-theme-border hover:bg-theme-accent/10 hover:border-theme-accent/30 text-theme-subtle hover:text-theme-accent cursor-pointer transition-colors focus:outline-none"
                       aria-label="Delete draft"
                     >
                       <Trash2 className="h-4 w-4" />

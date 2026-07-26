@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
-import { ChevronLeft, BookOpen, Download, Bookmark, FileText, CheckCircle2, ArrowRight, AlertTriangle, MessageSquare, Send, Sparkles } from 'lucide-react';
+import { ChevronLeft, BookOpen, Download, Bookmark, FileText, CheckCircle2, ArrowRight, MessageSquare, Send, Sparkles } from 'lucide-react';
 import { Button } from '../components/primitives/Button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../components/primitives/Card';
 import { Badge } from '../components/primitives/Badge';
 import { Input } from '../components/primitives/Input';
 import { TextArea } from '../components/primitives/TextArea';
 import { Spinner } from '../components/primitives/Spinner';
+import { ErrorState } from '../components/primitives/ErrorState';
 import { useAuthStore } from '../store/authStore';
 import api from '../utils/api';
 import { userStorage } from '../utils/userStorage';
@@ -226,20 +227,11 @@ export default function TopicPage() {
 
   if (error) {
     return (
-      <div className="flex-1 flex flex-col items-center justify-center text-center p-8 select-none">
-        <AlertTriangle className="h-12 w-12 text-theme-accent mb-4 animate-pulse-soft" />
-        <h3 className="font-display font-bold text-xl text-theme-text mb-2">Service Temporarily Unavailable</h3>
-        <p className="text-theme-subtle text-sm max-w-sm mb-6 leading-relaxed">
-          {errorMessage || 'Failed to fetch syllabus topic data from the Knowledge Platform engine.'}
-        </p>
-        <div className="flex gap-3">
-          <Button variant="secondary" onClick={() => setRetryCount(prev => prev + 1)}>
-            Retry Connection
-          </Button>
-          <Button variant="subtle" onClick={() => navigate('/learn')}>
-            Return to Index
-          </Button>
-        </div>
+      <div className="flex-1 flex items-center justify-center p-8 pt-24">
+        <ErrorState
+          message={errorMessage || 'Failed to fetch syllabus topic data from the Knowledge Platform engine.'}
+          onRetry={() => setRetryCount(prev => prev + 1)}
+        />
       </div>
     );
   }

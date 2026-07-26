@@ -330,13 +330,13 @@ export default function AuthoringPage() {
               {/* Errors check list */}
               <div className="flex flex-col gap-2">
                 <div className="flex items-center gap-2 text-xs font-semibold">
-                  <span className={title.trim().length > 3 && title !== 'Untitled Subject Draft' ? 'text-green-500' : 'text-red-500'}>
+                  <span className={title.trim().length > 3 && title !== 'Untitled Subject Draft' ? 'text-success-semantic' : 'text-error-semantic'}>
                     {title.trim().length > 3 && title !== 'Untitled Subject Draft' ? '✓' : '✗'}
                   </span>
                   <span className="text-theme-text">Descriptive Topic Title</span>
                 </div>
                 <div className="flex items-center gap-2 text-xs font-semibold">
-                  <span className={content.length >= 20 ? 'text-green-500' : 'text-red-500'}>
+                  <span className={content.length >= 20 ? 'text-success-semantic' : 'text-error-semantic'}>
                     {content.length >= 20 ? '✓' : '✗'}
                   </span>
                   <span className="text-theme-text">Minimum Content Body length</span>
@@ -344,10 +344,10 @@ export default function AuthoringPage() {
               </div>
 
               {validationErrors.length > 0 && (
-                <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-3 flex gap-2 animate-fade-in">
-                  <AlertTriangle className="h-4.5 w-4.5 text-red-500 shrink-0 mt-0.5" />
+                <div className="bg-error-soft-semantic border rounded-xl p-3 flex gap-2 animate-fade-in">
+                  <AlertTriangle className="h-4.5 w-4.5 text-error-semantic shrink-0 mt-0.5" />
                   <div className="flex flex-col gap-1">
-                    <span className="text-[10px] font-bold text-red-500 uppercase tracking-wider">Publishing Blocked</span>
+                    <span className="text-[10px] font-bold text-error-semantic uppercase tracking-wider">Publishing Blocked</span>
                     {validationErrors.map((err, idx) => (
                       <p key={idx} className="text-[11px] text-theme-text leading-tight">{err}</p>
                     ))}
