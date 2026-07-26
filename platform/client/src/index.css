@@ -1,4 +1,5 @@
 @import "./styles/typography.css";
+@import "./styles/ascendrite-style.css";
 @import "tailwindcss";
 
 @theme {
@@ -94,22 +95,7 @@
     @apply font-sans antialiased;
   }
 
-  /* Centralized theme transition strategy */
-  body, 
-  button, 
-  a, 
-  div, 
-  section, 
-  span, 
-  svg, 
-  circle, 
-  line, 
-  path,
-  nav {
-    transition-property: background-color, border-color, color, fill, stroke, box-shadow;
-    transition-duration: 250ms;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  }
+
 
   /* ── Theme-aware text selection ─────────────────────────────────────────
      Uses CSS custom properties so it instantly adopts the active theme

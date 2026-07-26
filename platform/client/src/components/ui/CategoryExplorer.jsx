@@ -2,14 +2,276 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Play, Compass, GitCommit } from 'lucide-react';
 
-/**
- * CategoryExplorer renders the interactive curriculum roadmap.
- * Layout matches previous visual identity:
- * - Left column: Tracks Sidebar (Domain selection)
- * - Right column: Double-column layout containing:
- *   - Timeline of Subjects under active Category (Subject selection)
- *   - Interactive Modules and Concepts Tree mapping to start learning (Modules & Concepts selection)
- */
+// ==============================================================================
+// Subject-specific curiosity-driven process visualizers
+// ==============================================================================
+function SubjectPreviewVisualizer({ subjectId }) {
+  const normalizedId = subjectId?.toLowerCase() || '';
+
+  // 1. Machine Learning / Deep Learning / NLP
+  if (normalizedId.includes('machine-learning') || normalizedId.includes('deep-learning') || normalizedId.includes('nlp') || normalizedId.includes('genai') || normalizedId.includes('ai-agents')) {
+    return (
+      <div className="flex flex-col h-full justify-between space-y-4">
+        <div>
+          <span className="text-[9px] font-mono text-theme-accent uppercase font-bold tracking-wider">// neural_forward_prop</span>
+          <h5 className="font-display font-bold text-xs text-theme-text mt-1">Activation Propagation Flow</h5>
+          <p className="text-[10px] text-theme-subtle mt-1 leading-normal">
+            Traces how vectors feed forward through weight matrices. Input cells map signals to hidden nodes, firing non-linear threshold values.
+          </p>
+        </div>
+        
+        {/* Animated Network SVG */}
+        <div className="flex-1 flex items-center justify-center p-2 bg-theme-bg/50 border border-theme-border/60 rounded-xl relative overflow-hidden h-40">
+          <svg className="w-full h-full max-h-[140px]" viewBox="0 0 200 100">
+            {/* Connection Lines with flow animations */}
+            <line x1="20" y1="20" x2="100" y2="20" stroke="var(--color-theme-border)" strokeWidth="1" />
+            <line x1="20" y1="20" x2="100" y2="50" stroke="var(--color-theme-border)" strokeWidth="1" />
+            <line x1="20" y1="50" x2="100" y2="20" stroke="var(--color-theme-border)" strokeWidth="1" />
+            <line x1="20" y1="50" x2="100" y2="50" stroke="var(--color-theme-border)" strokeWidth="1" />
+            <line x1="20" y1="50" x2="100" y2="80" stroke="var(--color-theme-border)" strokeWidth="1" />
+            <line x1="20" y1="80" x2="100" y2="50" stroke="var(--color-theme-border)" strokeWidth="1" />
+            <line x1="20" y1="80" x2="100" y2="80" stroke="var(--color-theme-border)" strokeWidth="1" />
+            
+            <line x1="100" y1="20" x2="180" y2="50" stroke="var(--color-theme-border)" strokeWidth="1" />
+            <line x1="100" y1="50" x2="180" y2="50" stroke="var(--color-theme-border)" strokeWidth="1" />
+            <line x1="100" y1="80" x2="180" y2="50" stroke="var(--color-theme-border)" strokeWidth="1" />
+
+            {/* Active pulsing lines */}
+            <line x1="20" y1="20" x2="100" y2="50" stroke="var(--color-theme-accent)" strokeWidth="1.5" className="animate-signal-flow" />
+            <line x1="20" y1="50" x2="100" y2="20" stroke="var(--color-theme-accent)" strokeWidth="1.5" className="animate-signal-flow" />
+            <line x1="100" y1="20" x2="180" y2="50" stroke="var(--color-theme-accent)" strokeWidth="1.5" className="animate-signal-flow" />
+            <line x1="100" y1="80" x2="180" y2="50" stroke="var(--color-theme-accent)" strokeWidth="1.5" className="animate-signal-flow" />
+
+            {/* Nodes */}
+            <circle cx="20" cy="20" r="5" fill="var(--color-theme-surface)" stroke="var(--color-theme-border)" strokeWidth="1.5" />
+            <circle cx="20" cy="50" r="5" fill="var(--color-theme-surface)" stroke="var(--color-theme-border)" strokeWidth="1.5" />
+            <circle cx="20" cy="80" r="5" fill="var(--color-theme-surface)" stroke="var(--color-theme-border)" strokeWidth="1.5" />
+            
+            <circle cx="100" cy="20" r="5" fill="var(--color-theme-surface)" stroke="var(--color-theme-accent)" strokeWidth="1.5" className="animate-signal-pulse" />
+            <circle cx="100" cy="50" r="5" fill="var(--color-theme-surface)" stroke="var(--color-theme-border)" strokeWidth="1.5" />
+            <circle cx="100" cy="80" r="5" fill="var(--color-theme-surface)" stroke="var(--color-theme-accent)" strokeWidth="1.5" className="animate-signal-pulse" />
+            
+            <circle cx="180" cy="50" r="6" fill="var(--color-theme-accent)" stroke="var(--color-theme-bg)" strokeWidth="1.5" />
+          </svg>
+          <div className="absolute bottom-1 right-2 text-[8px] font-mono text-theme-subtle">Loss: 0.042</div>
+        </div>
+      </div>
+    );
+  }
+
+  // 2. Operating Systems
+  if (normalizedId.includes('os') || normalizedId.includes('operating-systems') || normalizedId.includes('thread')) {
+    return (
+      <div className="flex flex-col h-full justify-between space-y-4">
+        <div>
+          <span className="text-[9px] font-mono text-theme-accent uppercase font-bold tracking-wider">// cpu_context_switch</span>
+          <h5 className="font-display font-bold text-xs text-theme-text mt-1">CPU Scheduler Switcher</h5>
+          <p className="text-[10px] text-theme-subtle mt-1 leading-normal">
+            Traces context switching intervals. CPU registers push and pop active execution stacks between kernel and user modes.
+          </p>
+        </div>
+
+        {/* Dynamic Gantt queue */}
+        <div className="flex-1 flex flex-col justify-center p-3 bg-theme-bg/50 border border-theme-border/60 rounded-xl relative overflow-hidden h-40 space-y-3">
+          <div className="flex items-center space-x-2 text-[9px] font-mono">
+            <span className="text-theme-subtle">Core 0:</span>
+            <div className="flex-1 h-6 bg-theme-surface border border-theme-border rounded overflow-hidden relative flex items-center">
+              <div className="absolute left-0 top-0 bottom-0 w-24 bg-theme-accent/25 border-r border-theme-accent flex items-center justify-center font-bold text-[8px] text-theme-accent animate-pulse-soft">
+                Thread_A (Running)
+              </div>
+              <div className="absolute left-24 top-0 bottom-0 w-16 bg-theme-border/40 border-r border-theme-border flex items-center justify-center font-bold text-[8px] text-theme-subtle">
+                Idle
+              </div>
+              <div className="absolute left-40 top-0 bottom-0 w-28 bg-emerald-500/20 border-r border-emerald-500 flex items-center justify-center font-bold text-[8px] text-emerald-500">
+                Thread_B (Ready)
+              </div>
+            </div>
+          </div>
+
+          <div className="flex items-center space-x-2 text-[9px] font-mono select-none">
+            <span className="text-theme-subtle">Queue:</span>
+            <div className="flex-1 flex gap-1.5 overflow-hidden">
+              <span className="px-1.5 py-0.5 rounded bg-theme-surface border border-theme-border text-[8px]">T_C</span>
+              <span className="px-1.5 py-0.5 rounded bg-theme-surface border border-theme-border text-[8px]">T_D</span>
+              <span className="px-1.5 py-0.5 rounded bg-theme-surface border border-theme-border text-[8px] opacity-60">T_E</span>
+            </div>
+          </div>
+          <div className="text-[8px] font-mono text-theme-accent select-none block">
+            &gt; syscall_yield() -&gt; switched context in 0.04μs
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // 3. DBMS / SQL
+  if (normalizedId.includes('dbms') || normalizedId.includes('sql') || normalizedId.includes('database')) {
+    return (
+      <div className="flex flex-col h-full justify-between space-y-4">
+        <div>
+          <span className="text-[9px] font-mono text-theme-accent uppercase font-bold tracking-wider">// b_tree_index_traverse</span>
+          <h5 className="font-display font-bold text-xs text-theme-text mt-1">B-Tree Search Index</h5>
+          <p className="text-[10px] text-theme-subtle mt-1 leading-normal">
+            Visualizes search path traverses inside an index page root. Node pointers comparison routes lookups to appropriate leaf nodes.
+          </p>
+        </div>
+
+        {/* Search path visualization */}
+        <div className="flex-1 flex items-center justify-center p-2 bg-theme-bg/50 border border-theme-border/60 rounded-xl relative overflow-hidden h-40">
+          <svg className="w-full h-full max-h-[140px]" viewBox="0 0 200 100">
+            <line x1="100" y1="15" x2="60" y2="45" stroke="var(--color-theme-border)" strokeWidth="1" />
+            <line x1="100" y1="15" x2="140" y2="45" stroke="var(--color-theme-border)" strokeWidth="1" />
+            <line x1="60" y1="45" x2="40" y2="75" stroke="var(--color-theme-border)" strokeWidth="1" />
+            <line x1="60" y1="45" x2="80" y2="75" stroke="var(--color-theme-border)" strokeWidth="1" />
+
+            <line x1="100" y1="15" x2="60" y2="45" stroke="var(--color-theme-accent)" strokeWidth="1.5" className="animate-signal-flow" />
+            <line x1="60" y1="45" x2="80" y2="75" stroke="var(--color-theme-accent)" strokeWidth="1.5" className="animate-signal-flow" />
+
+            <rect x="80" y="8" width="40" height="14" rx="3" fill="var(--color-theme-surface)" stroke="var(--color-theme-border)" strokeWidth="1" />
+            <text x="100" y="18" fill="var(--color-theme-text)" fontSize="7" fontWeight="bold" textAnchor="middle">[ 30 | 70 ]</text>
+            
+            <rect x="42" y="38" width="36" height="14" rx="3" fill="var(--color-theme-surface)" stroke="var(--color-theme-accent)" strokeWidth="1" className="animate-signal-pulse" />
+            <text x="60" y="48" fill="var(--color-theme-text)" fontSize="7" fontWeight="bold" textAnchor="middle">[ 10 | 25 ]</text>
+            <rect x="122" y="38" width="36" height="14" rx="3" fill="var(--color-theme-surface)" stroke="var(--color-theme-border)" strokeWidth="1" />
+            <text x="140" y="48" fill="var(--color-theme-subtle)" fontSize="7" textAnchor="middle">[ 80 | 95 ]</text>
+
+            <circle cx="40" cy="75" r="4.5" fill="var(--color-theme-surface)" stroke="var(--color-theme-border)" strokeWidth="1" />
+            <circle cx="80" cy="75" r="4.5" fill="var(--color-theme-accent)" stroke="var(--color-theme-bg)" strokeWidth="1" />
+          </svg>
+          <div className="absolute bottom-1 right-2 text-[8px] font-mono text-theme-accent">Query: Key = 28</div>
+        </div>
+      </div>
+    );
+  }
+
+  // 4. Computer Networks
+  if (normalizedId.includes('cn') || normalizedId.includes('networking') || normalizedId.includes('socket')) {
+    return (
+      <div className="flex flex-col h-full justify-between space-y-4">
+        <div>
+          <span className="text-[9px] font-mono text-theme-accent uppercase font-bold tracking-wider">// tcp_socket_handshake</span>
+          <h5 className="font-display font-bold text-xs text-theme-text mt-1">TCP Socket Handshake</h5>
+          <p className="text-[10px] text-theme-subtle mt-1 leading-normal">
+            Traces network layer socket messages negotiation. Packet buffers sync SYN, SYN-ACK, and ACK session flags.
+          </p>
+        </div>
+
+        {/* Handshake timeline */}
+        <div className="flex-1 flex flex-col justify-between p-3 bg-theme-bg/50 border border-theme-border/60 rounded-xl relative overflow-hidden h-40 font-mono text-[9px]">
+          <div className="flex justify-between text-theme-subtle">
+            <span>Client</span>
+            <span>Server</span>
+          </div>
+
+          <div className="relative h-16 border-x border-theme-border/60">
+            <div className="absolute top-2 w-[80%] h-0.5 bg-dashed border-t border-theme-accent/60 animate-packet" />
+            <div className="absolute top-8 right-2 w-[80%] h-0.5 bg-dashed border-t border-emerald-500/60" style={{ transform: 'rotate(180deg)' }} />
+            
+            <div className="absolute top-1 left-2 text-[8px] text-theme-accent">SYN ➔</div>
+            <div className="absolute top-7 right-2 text-[8px] text-emerald-500">&lt; SYN-ACK</div>
+          </div>
+
+          <div className="flex justify-between items-center text-[8px]">
+            <span className="text-theme-subtle">Status:</span>
+            <span className="text-theme-accent font-bold">ESTABLISHED</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // 5. DSA / Algorithms
+  if (normalizedId.includes('dsa') || normalizedId.includes('tree') || normalizedId.includes('algorithm') || normalizedId.includes('oop')) {
+    return (
+      <div className="flex flex-col h-full justify-between space-y-4">
+        <div>
+          <span className="text-[9px] font-mono text-theme-accent uppercase font-bold tracking-wider">// tree_node_traverse</span>
+          <h5 className="font-display font-bold text-xs text-theme-text mt-1">Binary Node Traversal</h5>
+          <p className="text-[10px] text-theme-subtle mt-1 leading-normal">
+            Visualizes dynamic depth recursion algorithms. Tree nodes comparison pathways are color highlights dynamically.
+          </p>
+        </div>
+
+        {/* Tree Traverse animated */}
+        <div className="flex-1 flex items-center justify-center p-2 bg-theme-bg/50 border border-theme-border/60 rounded-xl relative overflow-hidden h-40">
+          <svg className="w-full h-full max-h-[140px]" viewBox="0 0 200 100">
+            <line x1="100" y1="20" x2="60" y2="50" stroke="var(--color-theme-border)" strokeWidth="1.5" />
+            <line x1="100" y1="20" x2="140" y2="50" stroke="var(--color-theme-border)" strokeWidth="1.5" />
+            <line x1="60" y1="50" x2="40" y2="80" stroke="var(--color-theme-border)" strokeWidth="1.5" />
+            <line x1="60" y1="50" x2="80" y2="80" stroke="var(--color-theme-border)" strokeWidth="1.5" />
+
+            <circle cx="100" cy="20" r="6" fill="var(--color-theme-accent)" stroke="var(--color-theme-bg)" strokeWidth="1.5" />
+            <circle cx="60" cy="50" r="5" fill="var(--color-theme-surface)" stroke="var(--color-theme-border)" strokeWidth="1.5" className="animate-node-seq" />
+            <circle cx="140" cy="50" r="5" fill="var(--color-theme-surface)" stroke="var(--color-theme-border)" strokeWidth="1.5" />
+            <circle cx="40" cy="80" r="5" fill="var(--color-theme-surface)" stroke="var(--color-theme-border)" strokeWidth="1.5" />
+            <circle cx="80" cy="80" r="5" fill="var(--color-theme-accent)" stroke="var(--color-theme-bg)" strokeWidth="1.5" />
+          </svg>
+          <div className="absolute bottom-1 right-2 text-[8px] font-mono text-theme-subtle">DFS Traversal</div>
+        </div>
+      </div>
+    );
+  }
+
+  // 6. Web Development / Javascript / ReactJS
+  if (normalizedId.includes('react') || normalizedId.includes('next') || normalizedId.includes('javascript') || normalizedId.includes('typescript') || normalizedId.includes('framework')) {
+    return (
+      <div className="flex flex-col h-full justify-between space-y-4">
+        <div>
+          <span className="text-[9px] font-mono text-theme-accent uppercase font-bold tracking-wider">// virtual_dom_reconcile</span>
+          <h5 className="font-display font-bold text-xs text-theme-text mt-1">Virtual DOM Diff Ticks</h5>
+          <p className="text-[10px] text-theme-subtle mt-1 leading-normal">
+            Traces component tree state updates. Reconciler matches changes in virtual nodes to repaint delta layout sectors.
+          </p>
+        </div>
+
+        <div className="flex-1 flex justify-around items-center p-2 bg-theme-bg/50 border border-theme-border/60 rounded-xl relative overflow-hidden h-40 text-[8px] font-mono">
+          <div className="flex flex-col items-center space-y-1.5">
+            <span className="text-theme-accent">Virtual DOM</span>
+            <div className="w-12 h-12 border border-theme-border rounded flex flex-col justify-around p-1 bg-theme-surface">
+              <div className="w-full h-2 bg-theme-accent/20 rounded animate-pulse" />
+              <div className="w-8 h-2 bg-theme-border rounded" />
+            </div>
+          </div>
+          
+          <div className="h-0.5 w-8 bg-dashed border-t border-theme-border" />
+
+          <div className="flex flex-col items-center space-y-1.5">
+            <span className="text-emerald-500">Real DOM</span>
+            <div className="w-12 h-12 border border-theme-border rounded flex flex-col justify-around p-1 bg-theme-surface">
+              <div className="w-full h-2 bg-emerald-500/20 rounded" />
+              <div className="w-8 h-2 bg-theme-border rounded" />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // 7. Default concentric orbits
+  return (
+    <div className="flex flex-col h-full justify-between space-y-4">
+      <div>
+        <span className="text-[9px] font-mono text-theme-accent uppercase font-bold tracking-wider">// active_domain_taxonomy</span>
+        <h5 className="font-display font-bold text-xs text-theme-text mt-1">Curriculum Core Taxonomy</h5>
+        <p className="text-[10px] text-theme-subtle mt-1 leading-normal">
+          Illustrates core concepts dependency tree mapping categories, subjects, and study progress logs.
+        </p>
+      </div>
+
+      <div className="flex-1 flex items-center justify-center p-2 bg-theme-bg/50 border border-theme-border/60 rounded-xl relative overflow-hidden h-40">
+        <svg className="w-full h-full max-h-[140px]" viewBox="0 0 200 100">
+          <circle cx="100" cy="50" r="36" fill="none" stroke="var(--color-theme-border)" strokeWidth="0.75" strokeDasharray="3" />
+          <circle cx="100" cy="50" r="22" fill="none" stroke="var(--color-theme-border)" strokeWidth="0.75" />
+          <circle cx="100" cy="50" r="8" fill="var(--color-theme-accent)" stroke="var(--color-theme-bg)" strokeWidth="1.5" />
+          
+          <circle cx="122" cy="35" r="3" fill="var(--color-theme-accent)" className="animate-signal-pulse" />
+          <circle cx="64" cy="50" r="3" fill="var(--color-theme-border)" />
+        </svg>
+      </div>
+    </div>
+  );
+}
+
 export default function CategoryExplorer({
   tracks,
   subjects,
@@ -59,10 +321,10 @@ export default function CategoryExplorer({
             <p className="text-xs text-theme-subtle font-mono">Loading dynamic curriculum maps...</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start max-w-7xl mx-auto">
             
             {/* 1. Left Nav: Category Selection Sidebar (Domain level) */}
-            <div className="lg:col-span-3 flex flex-col gap-2">
+            <div className="lg:col-span-3 flex flex-col gap-2 w-full">
               <h4 className="font-display font-bold text-[10px] text-theme-subtle uppercase tracking-wider mb-2 px-1">
                 Syllabus Domains
               </h4>
@@ -92,7 +354,7 @@ export default function CategoryExplorer({
 
             {/* 2. Right Display: Re-designed Dual Panel Map */}
             {activeCategory === 'others' || currentCategorySubjects.length === 0 ? (
-              <div className="lg:col-span-9 bg-theme-surface border border-theme-border rounded-3xl p-6 sm:p-8 shadow-xl grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch min-h-[440px] animate-fade-in">
+              <div className="lg:col-span-9 bg-theme-surface border border-theme-border rounded-3xl p-6 sm:p-8 shadow-xl grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch min-h-[440px] animate-fade-in w-full">
                 
                 {/* Left side: descriptions */}
                 <div className="flex flex-col justify-between space-y-6">
@@ -141,10 +403,10 @@ export default function CategoryExplorer({
 
               </div>
             ) : (
-              <div className="lg:col-span-9 bg-theme-surface border border-theme-border rounded-3xl p-6 sm:p-8 shadow-xl grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch min-h-[460px] animate-fade-in">
+              <div className="lg:col-span-9 bg-theme-surface border border-theme-border rounded-3xl p-6 sm:p-8 shadow-xl grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch min-h-[460px] animate-fade-in w-full">
                 
                 {/* 2.1 Timeline of Subjects under Category (Left panel inside Card) */}
-                <div className="md:col-span-5 flex flex-col justify-between border-b md:border-b-0 md:border-r border-theme-border/60 pb-6 md:pb-0 md:pr-6">
+                <div className="md:col-span-4 flex flex-col justify-between border-b md:border-b-0 md:border-r border-theme-border/60 pb-6 md:pb-0 md:pr-6">
                   <div>
                     <span className="text-[10px] font-mono font-bold text-theme-accent uppercase tracking-wider bg-theme-accent/15 px-2.5 py-1 rounded-full select-none">
                       {activeCategory.replace("-", " ")} Pipeline
@@ -197,62 +459,68 @@ export default function CategoryExplorer({
                 </div>
 
                 {/* 2.2 Interactive Syllabus Modules & Concepts (Right panel inside Card) */}
-                <div className="md:col-span-7 flex flex-col justify-between">
+                <div className="md:col-span-8 grid grid-cols-1 xl:grid-cols-2 gap-8 items-stretch">
                   {selectedSubject ? (
-                    <div className="space-y-6">
-                      <div className="flex justify-between items-center pb-3 border-b border-theme-border/50">
-                        <span className="text-[10px] font-mono font-bold text-theme-subtle uppercase tracking-wider">
-                          Syllabus Structure Nodes
-                        </span>
-                        <span className="text-[10px] font-mono text-theme-accent">
-                          {selectedSubject.modules?.length || 0} Modules loaded
-                        </span>
-                      </div>
-
-                      {/* Vertically scrolling Modules list */}
-                      <div className="space-y-5 max-h-[300px] overflow-y-auto pr-2 relative">
-                        {selectedSubject.modules?.map((mod, idx) => (
-                          <div key={mod.id} className="space-y-2 border-l border-theme-border/50 pl-3 relative group">
-                            <div className="absolute -left-[4.5px] top-1.5 w-2 h-2 rounded-full bg-theme-border group-hover:bg-theme-accent transition-colors" />
-                            
-                            <div className="flex items-center gap-2 text-[9px] font-mono">
-                              <span className="text-theme-accent font-semibold">M0{idx + 1}</span>
-                              <span className="text-theme-subtle">({mod.duration || '40m'})</span>
-                            </div>
-                            <h6 className="font-display font-bold text-xs text-theme-text leading-snug">
-                              {mod.title}
-                            </h6>
-                            <p className="text-[11px] text-theme-subtle leading-relaxed">
-                              {mod.description}
-                            </p>
-
-                            {/* Topics/Concepts mapping */}
-                            <div className="flex flex-wrap gap-1.5 pt-1">
-                              {mod.topics?.map(topic => (
-                                <Link
-                                  key={topic}
-                                  to={`/learn/${mod.id}`}
-                                  className="flex items-center gap-1 px-2 py-0.5 rounded bg-theme-bg/60 border border-theme-border hover:border-theme-accent/50 text-[9px] text-theme-text hover:text-theme-accent transition-colors"
-                                >
-                                  <GitCommit size={8} className="text-theme-accent" />
-                                  <span>{topic}</span>
-                                </Link>
-                              ))}
-                            </div>
+                    <>
+                      {/* Left: Scrollable Modules Timeline */}
+                      <div className="flex flex-col justify-between space-y-4">
+                        <div>
+                          <div className="flex justify-between items-center pb-3 border-b border-theme-border/50 mb-4">
+                            <span className="text-[10px] font-mono font-bold text-theme-subtle uppercase tracking-wider">
+                              Syllabus Nodes
+                            </span>
+                            <span className="text-[10px] font-mono text-theme-accent">
+                              {selectedSubject.modules?.length || 0} Modules
+                            </span>
                           </div>
-                        ))}
+
+                          <div className="space-y-5 max-h-[300px] overflow-y-auto pr-2 relative">
+                            {selectedSubject.modules?.map((mod, idx) => (
+                              <div key={mod.id} className="space-y-2 border-l border-theme-border/50 pl-3 relative group">
+                                <div className="absolute -left-[4.5px] top-1.5 w-2 h-2 rounded-full bg-theme-border group-hover:bg-theme-accent transition-colors" />
+                                
+                                <div className="flex items-center gap-2 text-[9px] font-mono">
+                                  <span className="text-theme-accent font-semibold">M0{idx + 1}</span>
+                                  <span className="text-theme-subtle">({mod.duration || '40m'})</span>
+                                </div>
+                                <h6 className="font-display font-bold text-xs text-theme-text leading-snug">
+                                  {mod.title}
+                                </h6>
+                                <p className="text-[11px] text-theme-subtle leading-relaxed">
+                                  {mod.description}
+                                </p>
+
+                                <div className="flex flex-wrap gap-1.5 pt-1">
+                                  {mod.topics?.map(topic => (
+                                    <Link
+                                      key={topic}
+                                      to={`/learn/${mod.id}`}
+                                      className="flex items-center gap-1 px-2 py-0.5 rounded bg-theme-bg/60 border border-theme-border hover:border-theme-accent/50 text-[9px] text-theme-text hover:text-theme-accent transition-colors"
+                                    >
+                                      <GitCommit size={8} className="text-theme-accent" />
+                                      <span>{topic}</span>
+                                    </Link>
+                                  ))}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div className="text-[9px] font-mono text-theme-subtle text-right border-t border-theme-border/30 pt-3">
+                          Path: {selectedSubject.subject_id} &gt; active_modules
+                        </div>
                       </div>
-                    </div>
+
+                      {/* Right: Technical Curiosity Preview Visualizer */}
+                      <div className="flex flex-col justify-between bg-theme-bg/30 border border-theme-border/50 rounded-2xl p-4.5 min-h-[280px]">
+                        <SubjectPreviewVisualizer subjectId={selectedSubject.subject_id} />
+                      </div>
+                    </>
                   ) : (
-                    <div className="flex flex-col items-center justify-center h-full text-center p-4">
+                    <div className="xl:col-span-2 flex flex-col items-center justify-center h-full text-center p-4">
                       <Compass size={24} className="text-theme-subtle/40 animate-spin-slow" />
                       <p className="text-xs text-theme-subtle font-mono mt-2">Select a subject pathway node</p>
-                    </div>
-                  )}
-
-                  {selectedSubject && (
-                    <div className="text-[9px] font-mono text-theme-subtle text-right border-t border-theme-border/30 pt-3 mt-4">
-                      Path: Domain &gt; {selectedSubject.subject_id} &gt; active_modules
                     </div>
                   )}
                 </div>

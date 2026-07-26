@@ -1,0 +1,168 @@
+/* ==============================================================================
+   ASCENDRITE GLOBAL DESIGN SYSTEM TOKENS (ascendrite-style.css)
+   ============================================================================== */
+
+:root {
+  /* 1. Spacing Tokens (Calm, precise padding & layout gaps) */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+  --spacing-3xl: 64px;
+
+  /* 2. Border Radius System (Technical, textbook-grade curves) */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-2xl: 32px;
+
+  /* 3. Centralized Transition & Motion Tokens (Precisely timed transitions) */
+  --transition-time: 250ms;
+  --transition-curve: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* 4. Centralized Shadow & Glow Configurations */
+  --shadow-inner-soft: inset 0 2px 8px rgba(0, 0, 0, 0.05);
+  --shadow-flat: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-elevated: 0 10px 30px rgba(0, 0, 0, 0.12);
+  --shadow-active: 0 12px 35px rgba(0, 0, 0, 0.16);
+
+  /* Glow responses */
+  --glow-subtle: 0 0 12px var(--color-theme-border);
+  --glow-accent: 0 0 20px var(--color-theme-accent);
+}
+
+/* 5. Centralized Theme Transition Strategy class helper */
+.transition-theme,
+body, 
+button, 
+a, 
+div, 
+section, 
+span, 
+svg, 
+circle, 
+line, 
+path,
+nav,
+input,
+textarea {
+  transition-property: background-color, border-color, color, fill, stroke, box-shadow, transform, opacity;
+  transition-duration: var(--transition-time);
+  transition-timing-function: var(--transition-curve);
+}
+
+/* 6. Textbook Style Page Container (Asymmetric padding support) */
+.page-container {
+  width: 100%;
+  max-width: 90rem; /* Expanded to 1440px for larger screens */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--spacing-md);
+  padding-right: var(--spacing-md);
+}
+
+@media (min-width: 640px) {
+  .page-container {
+    padding-left: var(--spacing-lg);
+    padding-right: var(--spacing-lg);
+  }
+}
+
+@media (min-width: 1024px) {
+  .page-container {
+    padding-left: var(--spacing-xl);
+    padding-right: var(--spacing-xl);
+  }
+}
+
+/* 7. Premium CSS-based Background Patterns */
+.bg-grid-pattern {
+  background-size: 32px 32px;
+  background-image: linear-gradient(to right, var(--color-theme-border) 1px, transparent 1px),
+                    linear-gradient(to bottom, var(--color-theme-border) 1px, transparent 1px);
+}
+
+/* 8. Technical Motion Design Keyframes (Curriculum Atlas interactive visualizers) */
+@keyframes signalFlow {
+  0% {
+    stroke-dashoffset: 24;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes signalPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+    filter: drop-shadow(0 0 4px var(--color-theme-accent));
+  }
+}
+
+@keyframes schedulerQueue {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-40px);
+  }
+}
+
+@keyframes packetRoute {
+  0% {
+    left: 10%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    left: 90%;
+    opacity: 0;
+  }
+}
+
+@keyframes nodeHighlightSeq {
+  0%, 100% {
+    fill: var(--color-theme-surface);
+    stroke: var(--color-theme-border);
+  }
+  33% {
+    fill: var(--color-theme-accent);
+    stroke: var(--color-theme-accent);
+  }
+}
+
+.animate-signal-flow {
+  stroke-dasharray: 6 3;
+  animation: signalFlow 1s linear infinite;
+}
+
+.animate-signal-pulse {
+  animation: signalPulse 2s ease-in-out infinite;
+}
+
+.animate-scheduler {
+  animation: schedulerQueue 3s linear infinite;
+}
+
+.animate-packet {
+  animation: packetRoute 2.5s ease-in-out infinite;
+}
+
+.animate-node-seq {
+  animation: nodeHighlightSeq 3s ease-in-out infinite;
+}
+

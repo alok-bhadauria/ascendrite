@@ -2,12 +2,13 @@ import os
 import json
 import logging
 from typing import Dict, Any, List, Optional
+from app.core.config import settings
 
 logger = logging.getLogger(__name__)
 
 class CurriculumService:
     def __init__(self):
-        self.kb_path = os.path.join(
+        self.kb_path = settings.KNOWLEDGE_BASE_PATH or os.path.join(
             os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))),
             "knowledge-base"
         )
