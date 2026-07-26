@@ -9,10 +9,13 @@ import { Switch } from '../components/primitives/Switch';
 import { Badge } from '../components/primitives/Badge';
 import { Spinner } from '../components/primitives/Spinner';
 import api from '../utils/api';
+import { useAuthStore } from '../store/authStore';
+import { userStorage } from '../utils/userStorage';
 
 export default function AuthoringPage() {
   const { draftId } = useParams();
   const navigate = useNavigate();
+  const { user } = useAuthStore();
 
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('ai');
@@ -49,7 +52,7 @@ export default function AuthoringPage() {
       } catch (err) {
         console.error('Failed to load draft from server:', err);
         // Try local storage fallback
-        const savedDrafts = JSON.parse(localStorage.getItem('ascendrite-creator-drafts') || '[]');
+        const savedDrafts = userStorage.getItem(user, 'ascendrite-creator-drafts', []);
         const draft = savedDrafts.find(d => d.id === draftId);
         if (draft) {
           setTitle(draft.title);
@@ -66,8 +69,10 @@ export default function AuthoringPage() {
         setLoading(false);
       }
     }
-    loadDraft();
-  }, [draftId]);
+    if (user) {
+      loadDraft();
+    }
+  }, [draftId, user]);
 
   // ── Debounced Auto-save to server ─────────────────────────────────────────
   useEffect(() => {
@@ -78,12 +83,12 @@ export default function AuthoringPage() {
       
       if (draftId.startsWith('draft-')) {
         // Local storage mock save
-        const savedDrafts = JSON.parse(localStorage.getItem('ascendrite-creator-drafts') || '[]');
+        const savedDrafts = userStorage.getItem(user, 'ascendrite-creator-drafts', []);
         const index = savedDrafts.findIndex(d => d.id === draftId);
         const updatedDraft = { id: draftId, title, category, content, status, lastModified: 'Just now' };
         if (index > -1) savedDrafts[index] = updatedDraft;
         else savedDrafts.unshift(updatedDraft);
-        localStorage.setItem('ascendrite-creator-drafts', JSON.stringify(savedDrafts));
+        userStorage.setItem(user, 'ascendrite-creator-drafts', savedDrafts);
         setSaving(false);
         return;
       }

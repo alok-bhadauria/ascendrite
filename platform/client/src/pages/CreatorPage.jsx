@@ -6,9 +6,12 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../co
 import { Badge } from '../components/primitives/Badge';
 import { Spinner } from '../components/primitives/Spinner';
 import api from '../utils/api';
+import { useAuthStore } from '../store/authStore';
+import { userStorage } from '../utils/userStorage';
 
 export default function CreatorPage() {
   const navigate = useNavigate();
+  const { user } = useAuthStore();
 
   const [drafts, setDrafts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -28,22 +31,23 @@ export default function CreatorPage() {
       setDrafts(mapped);
     } catch (err) {
       console.error('Failed to load drafts from server:', err);
-      // fallback
-      const saved = localStorage.getItem('ascendrite-creator-drafts');
-      setDrafts(saved ? JSON.parse(saved) : []);
+      // fallback to user namespaced drafts
+      const saved = userStorage.getItem(user, 'ascendrite-creator-drafts', []);
+      setDrafts(saved);
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    loadDrafts();
-  }, []);
+    if (user) {
+      loadDrafts();
+    }
+  }, [user]);
 
   const handleCreateDraft = async () => {
     try {
       const res = await api.post('/creator/drafts', {
-        resource_type: 'topic',
         content: {
           title: 'Untitled Subject Draft',
           category: 'ai',
@@ -64,7 +68,7 @@ export default function CreatorPage() {
       };
       const updated = [newDraft, ...drafts];
       setDrafts(updated);
-      localStorage.setItem('ascendrite-creator-drafts', JSON.stringify(updated));
+      userStorage.setItem(user, 'ascendrite-creator-drafts', updated);
       navigate(`/creator/edit/${newDraft.id}`);
     }
   };
@@ -78,7 +82,7 @@ export default function CreatorPage() {
       console.error('Failed to delete backend draft:', err);
       const updated = drafts.filter(d => d.id !== id);
       setDrafts(updated);
-      localStorage.setItem('ascendrite-creator-drafts', JSON.stringify(updated));
+      userStorage.setItem(user, 'ascendrite-creator-drafts', updated);
     }
   };
 

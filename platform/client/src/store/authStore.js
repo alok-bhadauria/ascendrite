@@ -1,14 +1,9 @@
 import { create } from 'zustand';
 import api from '../utils/api';
+import { userStorage } from '../utils/userStorage';
 
 const getLocalPreferences = (userId) => {
-  if (!userId) return null;
-  try {
-    const saved = localStorage.getItem(`ascendrite-preferences-${userId}`);
-    return saved ? JSON.parse(saved) : null;
-  } catch {
-    return null;
-  }
+  return userStorage.getItem({ id: userId }, 'ascendrite-preferences');
 };
 
 export const useAuthStore = create((set) => ({
@@ -32,18 +27,13 @@ export const useAuthStore = create((set) => ({
   
   login: (userData) => {
     if (userData && userData.id) {
-      // If the incoming user data already has onboarding preferences (or if we merge them)
       if (userData.preferences?.interest) {
-        localStorage.setItem(
-          `ascendrite-preferences-${userData.id}`,
-          JSON.stringify({
-            interest: userData.preferences.interest,
-            objective: userData.preferences.objective,
-            onboarded: true
-          })
-        );
+        userStorage.setItem(userData, 'ascendrite-preferences', {
+          interest: userData.preferences.interest,
+          objective: userData.preferences.objective,
+          onboarded: true
+        });
       } else {
-        // Retrieve existing preferences for this user if they exist in localStorage
         const prefs = getLocalPreferences(userData.id);
         if (prefs) {
           userData.preferences = { ...userData.preferences, ...prefs };

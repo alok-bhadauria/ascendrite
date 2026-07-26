@@ -7,42 +7,49 @@ import { Input } from '../components/primitives/Input';
 import { TextArea } from '../components/primitives/TextArea';
 import { useAuthStore } from '../store/authStore';
 import api from '../utils/api';
+import { userStorage } from '../utils/userStorage';
 
 export default function WorkspacePage() {
   const { user } = useAuthStore();
   const navigate = useNavigate();
 
   // ── Study Planner / Tasks State ──────────────────────────────────────────
-  const [tasks, setTasks] = useState(() => {
-    const saved = localStorage.getItem('ascendrite-workspace-tasks');
-    return saved ? JSON.parse(saved) : [
-      { id: 1, text: 'Review linear regression mathematical derivation rules', completed: false },
-      { id: 2, text: 'Test interactive sorting simulator with custom arrays', completed: true },
-      { id: 3, text: 'Analyze database query indexes and execution plan schemas', completed: false }
-    ];
-  });
-
+  const [tasks, setTasks] = useState([]);
   const [newTaskText, setNewTaskText] = useState('');
 
   // ── Personal Notes State ────────────────────────────────────────────────
-  const [notes, setNotes] = useState(() => {
-    return localStorage.getItem('ascendrite-workspace-notes') || 
-      "## Study Notes\nJot down thoughts, derivations, or loop state mappings here. This workspace is persisted automatically.";
-  });
+  const [notes, setNotes] = useState('');
 
   const [recentMilestones, setRecentMilestones] = useState([
     { title: 'Enriched learning direction setup', desc: 'Onboarding objectives parsed successfully.', date: 'Today' },
     { title: 'Signed up for Ascendrite ecosystem', desc: 'Welcome user account created.', date: '3 days ago' }
   ]);
 
+  // Load state when user changes
+  useEffect(() => {
+    if (user) {
+      setTasks(userStorage.getItem(user, 'ascendrite-workspace-tasks', [
+        { id: 1, text: 'Review linear regression mathematical derivation rules', completed: false },
+        { id: 2, text: 'Test interactive sorting simulator with custom arrays', completed: true },
+        { id: 3, text: 'Analyze database query indexes and execution plan schemas', completed: false }
+      ]));
+      setNotes(userStorage.getRawItem(user, 'ascendrite-workspace-notes', 
+        "## Study Notes\nJot down thoughts, derivations, or loop state mappings here. This workspace is persisted automatically."));
+    }
+  }, [user]);
+
   // Sync state helpers
   useEffect(() => {
-    localStorage.setItem('ascendrite-workspace-tasks', JSON.stringify(tasks));
-  }, [tasks]);
+    if (user) {
+      userStorage.setItem(user, 'ascendrite-workspace-tasks', tasks);
+    }
+  }, [tasks, user]);
 
   useEffect(() => {
-    localStorage.setItem('ascendrite-workspace-notes', notes);
-  }, [notes]);
+    if (user) {
+      userStorage.setRawItem(user, 'ascendrite-workspace-notes', notes);
+    }
+  }, [notes, user]);
 
   useEffect(() => {
     async function loadRecentAccessed() {

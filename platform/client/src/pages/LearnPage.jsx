@@ -1,160 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { BookOpen, Lock, Unlock, CheckCircle2, Clock, ArrowRight, Sparkles, ChevronRight } from 'lucide-react';
+import { BookOpen, Lock, Unlock, CheckCircle2, Clock, ArrowRight, Sparkles, ChevronRight, AlertTriangle } from 'lucide-react';
 import { Button } from '../components/primitives/Button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../components/primitives/Card';
 import { Badge } from '../components/primitives/Badge';
 import { Spinner } from '../components/primitives/Spinner';
 import { useAuthStore } from '../store/authStore';
 import api from '../utils/api';
-
-// Mock curriculum roadmap pipelines for each primary interest track
-const curriculumData = {
-  'ai': {
-    title: 'Artificial Intelligence Pathway',
-    description: 'Master convolutional networks, deep learning layers, and agent optimization parameters.',
-    modules: [
-      {
-        id: 'ml-foundations',
-        title: 'Machine Learning Foundations',
-        description: 'Linear regressions, gradient descents, loss parameters, and error fitting calculations.',
-        unlocked: true,
-        completed: true,
-        duration: '45m',
-        difficulty: 'Medium',
-        topics: ['Gradient Descent Derivations', 'MSE Cost Fit', 'Overfitting Optimization']
-      },
-      {
-        id: 'deep-learning',
-        title: 'Deep Learning Networks',
-        description: 'Multi-layer feed-forward networks, backpropagation calculus, and weights updates.',
-        unlocked: true,
-        completed: false,
-        duration: '60m',
-        difficulty: 'Hard',
-        topics: ['Backpropagation Chain Rule', 'Activation Functions (ReLU, Sigmoid)', 'Weights & Biases Mapping']
-      },
-      {
-        id: 'multi-agents',
-        title: 'Multi-Agent Architectures',
-        description: 'Orchestrating autonomous agents, communication paradigms, and tool capabilities.',
-        unlocked: false,
-        completed: false,
-        duration: '75m',
-        difficulty: 'Expert',
-        topics: ['Agent Coordination Protocols', 'Execution Tree Planning', 'Context Allocation Limits']
-      }
-    ]
-  },
-  'core-cs': {
-    title: 'Core Computer Science Pathway',
-    description: 'Build low-level systems, thread executors, database index parameters, and networks.',
-    modules: [
-      {
-        id: 'dbms-engines',
-        title: 'DBMS Database Engines',
-        description: 'Relational storage engines, locking schemas, and index tree traversals.',
-        unlocked: true,
-        completed: true,
-        duration: '40m',
-        difficulty: 'Medium',
-        topics: ['B-Tree Index Traversals', 'ACID Transactions Isolation', 'Query Execution Planners']
-      },
-      {
-        id: 'os-threads',
-        title: 'Operating Systems & Threads',
-        description: 'Thread scheduling, CPU registers, process execution bounds, and locks.',
-        unlocked: true,
-        completed: false,
-        duration: '50m',
-        difficulty: 'Hard',
-        topics: ['Mutex & Semaphores', 'CPU Thread Context Switching', 'Memory Mappings']
-      },
-      {
-        id: 'computer-networking',
-        title: 'Computer Networking Protocols',
-        description: 'TCP handshakes, UDP framing, multiplexing, and routing logic.',
-        unlocked: false,
-        completed: false,
-        duration: '60m',
-        difficulty: 'Medium',
-        topics: ['TCP Congestion Controls', 'Multiplexing HTTP/3', 'Routing Gateways Mappings']
-      }
-    ]
-  },
-  'software-engineering': {
-    title: 'Software Engineering Pathway',
-    description: 'Object-oriented structures, robust architectural components, and system design layouts.',
-    modules: [
-      {
-        id: 'oop-design',
-        title: 'Object-Oriented System Design',
-        description: 'SOLID patterns, separation of domain rules, and class encapsulation.',
-        unlocked: true,
-        completed: true,
-        duration: '35m',
-        difficulty: 'Medium',
-        topics: ['SOLID Code Design', 'Dependency Injections', 'Encapsulation Limits']
-      },
-      {
-        id: 'scalable-architecture',
-        title: 'Scalable System Architecture',
-        description: 'Microservices configuration, load balancers, caching, and backups.',
-        unlocked: true,
-        completed: false,
-        duration: '55m',
-        difficulty: 'Hard',
-        topics: ['Load Balancer Rules', 'Write-Through Caching', 'Database Sharding Patterns']
-      },
-      {
-        id: 'clean-code-refactoring',
-        title: 'Clean Code & Refactoring',
-        description: 'Code smell analysis, test-driven development, and modular architecture validation.',
-        unlocked: false,
-        completed: false,
-        duration: '45m',
-        difficulty: 'Medium',
-        topics: ['Unit Testing Mocking', 'Refactoring Code Smells', 'Integration Verification Gates']
-      }
-    ]
-  },
-  'web-development': {
-    title: 'Web Development Pathway',
-    description: 'Full-stack client configurations, state synchronizers, and REST API frameworks.',
-    modules: [
-      {
-        id: 'html-css-git',
-        title: 'Web Core Layouts & Git',
-        description: 'Semantic HTML structures, flexbox alignments, responsive layout models, and branches.',
-        unlocked: true,
-        completed: true,
-        duration: '30m',
-        difficulty: 'Easy',
-        topics: ['Semantic Document Landmarks', 'Responsive Media Queries', 'Git Branches & Tags Merges']
-      },
-      {
-        id: 'reactjs-vite',
-        title: 'Component State & Vite Bundler',
-        description: 'React dynamic properties, hooks, state lifecycle, and bundler compiling.',
-        unlocked: true,
-        completed: false,
-        duration: '50m',
-        difficulty: 'Medium',
-        topics: ['React hooks states rules', 'Vite configuration targets', 'Single page routing layouts']
-      },
-      {
-        id: 'expressjs-mongodb',
-        title: 'Backend API Frameworks',
-        description: 'Express controllers, dynamic route parameters, and MongoDB data mapping.',
-        unlocked: false,
-        completed: false,
-        duration: '60m',
-        difficulty: 'Hard',
-        topics: ['REST endpoint routing parameters', 'Database document storage mapping', 'Capabilities token authorization']
-      }
-    ]
-  }
-};
+import { userStorage } from '../utils/userStorage';
 
 export default function LearnPage() {
   const { user } = useAuthStore();
@@ -162,6 +15,7 @@ export default function LearnPage() {
 
   const [pathway, setPathway] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   const trackInterest = user?.preferences?.interest || 'web-development';
 
@@ -177,27 +31,67 @@ export default function LearnPage() {
       
       try {
         setLoading(true);
+        setError(false);
         const res = await api.get(`/curriculum/subject/${subjectId}`);
+        
+        // Fetch namespaced completed topics history
+        const completedHistory = userStorage.getItem(user, 'ascendrite-completed-topics', []);
+        
+        // Enrich dynamic backend modules with local completion state namespaces
+        const enrichedModules = res.data.modules.map(mod => {
+          const isCompleted = mod.topics ? mod.topics.some(t => {
+            const tid = t.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+            return completedHistory.includes(tid) || completedHistory.includes(mod.id);
+          }) : completedHistory.includes(mod.id);
+
+          return {
+            ...mod,
+            completed: isCompleted,
+            unlocked: mod.unlocked || isCompleted
+          };
+        });
+
         setPathway({
           title: res.data.name + ' Pathway',
           description: res.data.metadata.description || 'Master structured conceptual pipelines.',
-          modules: res.data.modules
+          modules: enrichedModules
         });
       } catch (err) {
         console.error('Failed to load dynamic subject pathway:', err);
-        const local = curriculumData[trackInterest] || curriculumData['web-development'];
-        setPathway(local);
+        setError(true);
       } finally {
         setLoading(false);
       }
     }
-    loadPathway();
-  }, [trackInterest]);
+    if (user) {
+      loadPathway();
+    }
+  }, [trackInterest, user]);
 
-  if (loading || !pathway) {
+  if (loading) {
     return (
       <div className="flex-1 flex items-center justify-center min-h-[50vh]">
         <Spinner size="lg" />
+      </div>
+    );
+  }
+
+  if (error || !pathway) {
+    return (
+      <div className="flex-1 flex flex-col items-center justify-center text-center p-8 select-none">
+        <AlertTriangle className="h-12 w-12 text-theme-accent mb-4 animate-pulse-soft" />
+        <h3 className="font-display font-bold text-xl text-theme-text mb-2">Subject Pathway Offline</h3>
+        <p className="text-theme-subtle text-sm max-w-sm mb-6 leading-relaxed">
+          Failed to load curriculum subjects from the database. Please verify backend database seeds are loaded.
+        </p>
+        <div className="flex gap-3">
+          <Button variant="secondary" onClick={() => { setError(false); setLoading(true); }}>
+            Retry Connection
+          </Button>
+          <Button variant="subtle" onClick={() => navigate('/')}>
+            Back to Home
+          </Button>
+        </div>
       </div>
     );
   }

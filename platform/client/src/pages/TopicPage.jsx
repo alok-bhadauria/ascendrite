@@ -9,46 +9,7 @@ import { TextArea } from '../components/primitives/TextArea';
 import { Spinner } from '../components/primitives/Spinner';
 import { useAuthStore } from '../store/authStore';
 import api from '../utils/api';
-
-// Dynamic mock topics content mapped by ID
-const topicsContent = {
-  'ml-foundations': {
-    title: 'Linear Regressions & Gradient Fit',
-    duration: '45m',
-    difficulty: 'Medium',
-    content: `Linear regression maps a scalar response to one or more explanatory variables using linear predictor functions. The weights are updated iteratively using the **Gradient Descent** optimization algorithm:
-
-$$ \theta_j := \theta_j - \alpha \frac{\partial}{\partial \theta_j} J(\theta) $$
-
-Where $J(\theta)$ represents the Mean Squared Error (MSE) cost function:
-
-$$ J(\theta) = \frac{1}{2m} \sum_{i=1}^{m} (h_\theta(x^{(i)}) - y^{(i)})^2 $$
-
-By minimizing this loss matrix, the model aligns the regression predictor line to the training coordinate parameters.`,
-    attachments: [
-      { name: 'regression_gradient_descent_proof.pdf', size: '1.4 MB' },
-      { name: 'mse_loss_matrix_derivation.pdf', size: '890 KB' }
-    ],
-    nextId: 'deep-learning',
-    nextTitle: 'Deep Learning Networks'
-  },
-  'deep-learning': {
-    title: 'Backpropagation Calculus & Network Layers',
-    duration: '60m',
-    difficulty: 'Hard',
-    content: `Backpropagation calculates the gradient of the error function with respect to the neural network's weights. It applies the multi-variable **Chain Rule** calculus layer by layer:
-
-$$ \frac{\partial E}{\partial w_{ij}} = \frac{\partial E}{\partial a_{j}} \cdot \frac{\partial a_j}{\partial w_{ij}} $$
-
-By propagating error derivatives backward from the output layer, weights are fine-tuned to match expected values.`,
-    attachments: [
-      { name: 'backprop_chain_rule_calculus.pdf', size: '2.1 MB' },
-      { name: 'neural_weights_matrix_ref.xlsx', size: '420 KB' }
-    ],
-    nextId: 'multi-agents',
-    nextTitle: 'Multi-Agent Architectures'
-  }
-};
+import { userStorage } from '../utils/userStorage';
 
 export default function TopicPage() {
   const { topicId } = useParams();
@@ -86,56 +47,60 @@ export default function TopicPage() {
         setTopicData(res.data);
       } catch (err) {
         console.error('Failed to load dynamic topic notes:', err);
-        const local = topicsContent[topicId] || topicsContent['ml-foundations'];
-        setTopicData(local);
+        setError(true);
       } finally {
         setLoading(false);
       }
     }
 
-    loadTopicData();
+    if (user) {
+      loadTopicData();
 
-    // Hydrate bookmarks
-    const savedBookmarks = JSON.parse(localStorage.getItem('ascendrite-bookmarks') || '[]');
-    setIsBookmarked(savedBookmarks.includes(topicId));
+      // Hydrate bookmarks
+      const savedBookmarks = userStorage.getItem(user, 'ascendrite-bookmarks', []);
+      setIsBookmarked(savedBookmarks.includes(topicId));
 
-    // Hydrate local notes
-    const savedNotes = localStorage.getItem(`ascendrite-notes-${topicId}`) || '';
-    setLocalNotes(savedNotes);
+      // Hydrate local notes
+      const savedNotes = userStorage.getRawItem(user, `ascendrite-notes-${topicId}`, '');
+      setLocalNotes(savedNotes);
 
-    // Hydrate comments
-    async function loadComments() {
-      try {
-        const res = await api.get(`/collaboration/comments?resource_id=${topicId}`);
-        if (res.data && res.data.length > 0) {
-          const mapped = res.data.map(c => ({
-            id: c.id || c._id,
-            author: c.author_id || 'User',
-            text: c.content,
-            timestamp: c.created_at ? new Date(c.created_at).toLocaleTimeString() : 'Recent'
-          }));
-          setComments(mapped);
-        } else {
-          setComments([
-            { id: 'c-1', author: 'Alok Bhadauria', text: 'The mathematical step for Mean Squared Error minimization outlines regression weights clearly.', timestamp: '2h ago' }
-          ]);
-        }
-      } catch (err) {
-        console.error('Failed to load comments from server:', err);
-        const savedComments = JSON.parse(localStorage.getItem(`ascendrite-comments-${topicId}`) || '[]');
-        if (savedComments.length > 0) {
-          setComments(savedComments);
-        } else {
-          setComments([
-            { id: 'c-1', author: 'Alok Bhadauria', text: 'The mathematical step for Mean Squared Error minimization outlines regression weights clearly.', timestamp: '2h ago' }
-          ]);
+      // Hydrate completed status
+      const completedHistory = userStorage.getItem(user, 'ascendrite-completed-topics', []);
+      setCompleted(completedHistory.includes(topicId));
+
+      // Hydrate comments
+      async function loadComments() {
+        try {
+          const res = await api.get(`/collaboration/comments?resource_id=${topicId}`);
+          if (res.data && res.data.length > 0) {
+            const mapped = res.data.map(c => ({
+              id: c.id || c._id,
+              author: c.author_id || 'User',
+              text: c.content,
+              timestamp: c.created_at ? new Date(c.created_at).toLocaleTimeString() : 'Recent'
+            }));
+            setComments(mapped);
+          } else {
+            setComments([
+              { id: 'c-1', author: 'Alok Bhadauria', text: 'The mathematical step for Mean Squared Error minimization outlines regression weights clearly.', timestamp: '2h ago' }
+            ]);
+          }
+        } catch (err) {
+          console.error('Failed to load comments from server:', err);
+          const savedComments = userStorage.getItem(user, `ascendrite-comments-${topicId}`, []);
+          if (savedComments.length > 0) {
+            setComments(savedComments);
+          } else {
+            setComments([
+              { id: 'c-1', author: 'Alok Bhadauria', text: 'The mathematical step for Mean Squared Error minimization outlines regression weights clearly.', timestamp: '2h ago' }
+            ]);
+          }
         }
       }
+      loadComments();
     }
-    loadComments();
 
     // Reset status
-    setCompleted(false);
     setError(false);
   }, [topicId, user]);
 
@@ -164,34 +129,34 @@ export default function TopicPage() {
       };
       const updatedComments = [...comments, newComment];
       setComments(updatedComments);
-      localStorage.setItem(`ascendrite-comments-${topicId}`, JSON.stringify(updatedComments));
+      userStorage.setItem(user, `ascendrite-comments-${topicId}`, updatedComments);
       setNewCommentText('');
     }
   };
 
   const toggleBookmark = () => {
-    const savedBookmarks = JSON.parse(localStorage.getItem('ascendrite-bookmarks') || '[]');
+    const savedBookmarks = userStorage.getItem(user, 'ascendrite-bookmarks', []);
     let updated;
     if (isBookmarked) {
       updated = savedBookmarks.filter(id => id !== topicId);
     } else {
       updated = [...savedBookmarks, topicId];
     }
-    localStorage.setItem('ascendrite-bookmarks', JSON.stringify(updated));
+    userStorage.setItem(user, 'ascendrite-bookmarks', updated);
     setIsBookmarked(!isBookmarked);
   };
 
   const handleNotesChange = (val) => {
     setLocalNotes(val);
-    localStorage.setItem(`ascendrite-notes-${topicId}`, val);
+    userStorage.setRawItem(user, `ascendrite-notes-${topicId}`, val);
   };
 
   const handleMarkMastered = async () => {
     setCompleted(true);
     // Mark as completed in learning history
-    const completedHistory = JSON.parse(localStorage.getItem('ascendrite-completed-topics') || '[]');
+    const completedHistory = userStorage.getItem(user, 'ascendrite-completed-topics', []);
     if (!completedHistory.includes(topicId)) {
-      localStorage.setItem('ascendrite-completed-topics', JSON.stringify([...completedHistory, topicId]));
+      userStorage.setItem(user, 'ascendrite-completed-topics', [...completedHistory, topicId]);
     }
 
     const trackInterest = user?.preferences?.interest || 'web-development';

@@ -4,8 +4,11 @@ import { Button } from '../components/primitives/Button';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../components/primitives/Card';
 import { Switch } from '../components/primitives/Switch';
 import api from '../utils/api';
+import { useAuthStore } from '../store/authStore';
+import { userStorage } from '../utils/userStorage';
 
 export default function AdminPage() {
+  const { user } = useAuthStore();
   // ── platform configuration states ───────────────────────────────────────
   const [maintenanceMode, setMaintenanceMode] = useState(false);
   const [debugLogs, setDebugLogs] = useState(true);
@@ -53,10 +56,12 @@ export default function AdminPage() {
   };
 
   useEffect(() => {
-    const completed = JSON.parse(localStorage.getItem('ascendrite-completed-topics') || '[]');
-    setCompletedCount(completed.length);
-    loadAdminData();
-  }, []);
+    if (user) {
+      const completed = userStorage.getItem(user, 'ascendrite-completed-topics', []);
+      setCompletedCount(completed.length);
+      loadAdminData();
+    }
+  }, [user]);
 
   const handleMaintenanceToggle = async (checked) => {
     setMaintenanceMode(checked);
