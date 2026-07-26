@@ -4,7 +4,7 @@ import { useAuthStore } from '../store/authStore';
 import { Spinner } from '../components/primitives/Spinner';
 
 export function ProtectedRoute() {
-  const { isAuthenticated, isCheckingSession } = useAuthStore();
+  const { isAuthenticated, isCheckingSession, user } = useAuthStore();
   const location = useLocation();
 
   if (isCheckingSession) {
@@ -18,6 +18,12 @@ export function ProtectedRoute() {
   if (!isAuthenticated) {
     // Redirect to root page but open login modal state or navigate to /login
     return <Navigate to="/login" state={{ from: location }} replace />;
+  }
+
+  // Force onboarding if preferences are missing, unless they are already on /onboarding
+  const needsOnboarding = user && !user.preferences?.interest;
+  if (needsOnboarding && location.pathname !== '/onboarding') {
+    return <Navigate to="/onboarding" replace />;
   }
 
   return <Outlet />;

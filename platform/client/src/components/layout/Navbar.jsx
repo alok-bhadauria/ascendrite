@@ -186,36 +186,49 @@ export default function Navbar() {
           </div>
 
           {/* User Section / Login Portal Triggers */}
-          {!isAuthenticated ? (
-            <button 
-              id="btn-header-login"
-              onClick={() => {
-                setShowAuthModal(true);
-                if (location.pathname !== '/login') {
-                  navigate('/login', { preventScrollReset: true });
-                }
-              }}
-              className="bg-theme-accent hover:opacity-90 hover:scale-[1.03] hover:shadow-lg hover:shadow-theme-accent/15 text-white text-sm font-bold px-4 py-2 rounded-lg transition-all active:scale-[0.97] duration-200 flex items-center gap-2 cursor-pointer"
-            >
-              <LogIn size={15} />
-              <span>Login</span>
-            </button>
-          ) : (
-            <div className="flex items-center gap-4">
-              <div className="hidden sm:flex flex-col text-right">
-                <span className="text-xs font-bold text-theme-text leading-tight">{user.first_name} {user.last_name}</span>
-                <span className="text-[10px] text-theme-subtle">{user.email}</span>
-              </div>
-              
+          {(location.pathname === '/' || location.pathname === '/login') ? (
+            !isAuthenticated ? (
               <button 
-                id="btn-header-logout"
-                onClick={handleLogoutClick}
-                className="border border-theme-border text-theme-text hover:bg-theme-accent hover:text-white px-3 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-1.5 cursor-pointer"
+                id="btn-header-login"
+                onClick={() => {
+                  setShowAuthModal(true);
+                  if (location.pathname !== '/login') {
+                    navigate('/login', { preventScrollReset: true });
+                  }
+                }}
+                className="bg-theme-accent hover:opacity-90 hover:scale-[1.03] hover:shadow-lg hover:shadow-theme-accent/15 text-white text-sm font-bold px-4 py-2 rounded-lg transition-all active:scale-[0.97] duration-200 flex items-center gap-2 cursor-pointer"
               >
-                <LogOut size={14} />
-                <span className="hidden sm:inline">Logout</span>
+                <LogIn size={15} />
+                <span>Login</span>
               </button>
-            </div>
+            ) : (
+              <Link 
+                id="btn-header-enter"
+                to="/learn"
+                className="bg-theme-accent hover:opacity-90 hover:scale-[1.03] hover:shadow-lg hover:shadow-theme-accent/15 text-white text-sm font-bold px-4 py-2.5 rounded-lg transition-all active:scale-[0.97] duration-200 flex items-center gap-2 cursor-pointer"
+              >
+                <LogIn size={15} />
+                <span>Enter Dashboard</span>
+              </Link>
+            )
+          ) : (
+            isAuthenticated && (
+              <div className="flex items-center gap-4">
+                <div className="hidden sm:flex flex-col text-right">
+                  <span className="text-xs font-bold text-theme-text leading-tight">{user?.first_name} {user?.last_name}</span>
+                  <span className="text-[10px] text-theme-subtle">{user?.email}</span>
+                </div>
+                
+                <button 
+                  id="btn-header-logout"
+                  onClick={handleLogoutClick}
+                  className="border border-theme-border text-theme-text hover:bg-theme-accent hover:text-white px-3 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-1.5 cursor-pointer"
+                >
+                  <LogOut size={14} />
+                  <span className="hidden sm:inline">Logout</span>
+                </button>
+              </div>
+            )
           )}
         </div>
       </div>
