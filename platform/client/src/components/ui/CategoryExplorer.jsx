@@ -491,16 +491,22 @@ export default function CategoryExplorer({
                                 </p>
 
                                 <div className="flex flex-wrap gap-1.5 pt-1">
-                                  {mod.topics?.map(topic => (
-                                    <Link
-                                      key={topic}
-                                      to={`/learn/${mod.id}`}
-                                      className="flex items-center gap-1 px-2 py-0.5 rounded bg-theme-bg/60 border border-theme-border hover:border-theme-accent/50 text-[9px] text-theme-text hover:text-theme-accent transition-colors"
-                                    >
-                                      <GitCommit size={8} className="text-theme-accent" />
-                                      <span>{topic}</span>
-                                    </Link>
-                                  ))}
+                                  {mod.topics?.map(topic => {
+                                    const isObj = typeof topic === 'object' && topic !== null;
+                                    const topicKey = isObj ? (topic.id || topic.title) : topic;
+                                    const topicLabel = isObj ? (topic.title || topic.id) : topic;
+                                    const topicLink = isObj ? `/learn/${topic.id || mod.id}` : `/learn/${mod.id}`;
+                                    return (
+                                      <Link
+                                        key={topicKey}
+                                        to={topicLink}
+                                        className="flex items-center gap-1 px-2 py-0.5 rounded bg-theme-bg/60 border border-theme-border hover:border-theme-accent/50 text-[9px] text-theme-text hover:text-theme-accent transition-colors"
+                                      >
+                                        <GitCommit size={8} className="text-theme-accent" />
+                                        <span>{topicLabel}</span>
+                                      </Link>
+                                    );
+                                  })}
                                 </div>
                               </div>
                             ))}
