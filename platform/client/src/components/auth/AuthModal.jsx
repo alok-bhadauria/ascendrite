@@ -120,7 +120,7 @@ export function AuthModal({ isOpen, onClose, onAuthSuccess }) {
 
   // ── Google auth redirection ──────────────────────────────────────────
   const handleGoogleLogin = () => {
-    window.location.href = 'http://127.0.0.1:8000/api/v1/auth/google/login';
+    window.location.href = 'http://localhost:8000/api/v1/auth/google/login';
   };
 
   // ── Login submit ──────────────────────────────────────────────────────
