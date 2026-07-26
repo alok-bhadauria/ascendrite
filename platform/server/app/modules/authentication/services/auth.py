@@ -280,3 +280,85 @@ class AuthService:
             s.is_revoked = True
             s.revoked_reason = "password_changed"
             await self.session_repo.update(s.id, s)
+
+    async def login_or_register_oauth(
+        self,
+        provider: str,
+        provider_user_id: str,
+        email: str,
+        first_name: str,
+        last_name: str,
+        user_agent: Optional[str] = None,
+        ip_address: Optional[str] = None
+    ) -> Tuple[UserModel, str, str]:
+        normalized_email = email.lower().strip()
+        now = datetime.now(timezone.utc)
+
+        # 1. Look up identity by provider and provider_user_id
+        identity = await self.identity_repo.get_by_provider_id(provider, provider_user_id)
+        
+        user = None
+        if identity:
+            user = await self.user_repo.get_by_id(identity.user_id)
+            if not user:
+                await self.identity_repo.delete(identity.id)
+                identity = None
+            else:
+                identity.last_login_at = now
+                await self.identity_repo.update(identity.id, identity)
+        
+        if not identity:
+            # Check if user already exists by email
+            user = await self.user_repo.get_by_email(normalized_email)
+            if not user:
+                user = UserModel(
+                    email=normalized_email,
+                    first_name=first_name,
+                    last_name=last_name,
+                    role="Student"
+                )
+                user = await self.user_repo.create(user)
+            
+            # Create link identity
+            new_identity = UserIdentityModel(
+                user_id=str(user.id),
+                provider=provider,
+                provider_user_id=provider_user_id,
+                password_hash=""
+            )
+            await self.identity_repo.create(new_identity)
+            
+        if not user or not user.is_active:
+            raise UnauthorizedException("Account is inactive or disabled.")
+
+        # Create session tokens
+        token_family_id = str(uuid.uuid4())
+        refresh_token_id = str(uuid.uuid4())
+        
+        access_exp = now + timedelta(minutes=settings.JWT_EXPIRE_MINUTES)
+        refresh_exp = now + timedelta(days=settings.JWT_REFRESH_TOKEN_EXPIRE_DAYS)
+
+        access_payload = {"exp": access_exp, "sub": str(user.id), "type": "access"}
+        refresh_payload = {
+            "exp": refresh_exp,
+            "sub": str(user.id),
+            "jti": refresh_token_id,
+            "family": token_family_id,
+            "type": "refresh"
+        }
+
+        access_token = jwt.encode(access_payload, settings.JWT_SECRET, algorithm=settings.JWT_ALGORITHM)
+        refresh_token = jwt.encode(refresh_payload, settings.JWT_SECRET, algorithm=settings.JWT_ALGORITHM)
+
+        session = SessionModel(
+            user_id=str(user.id),
+            token_family_id=token_family_id,
+            refresh_token_id=refresh_token_id,
+            device_name=user_agent,
+            ip_address=ip_address,
+            expires_at=refresh_exp,
+            last_seen_at=now
+        )
+        await self.session_repo.create(session)
+
+        return user, access_token, refresh_token

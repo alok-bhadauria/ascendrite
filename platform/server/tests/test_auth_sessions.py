@@ -118,3 +118,20 @@ def test_password_change_flow(client):
     # Login with new password should succeed
     response = client.post("/api/v1/auth/login", json={"email": email, "password": "brandNewPassword321"})
     assert response.status_code == status.HTTP_200_OK
+
+def test_google_oauth_endpoints(client):
+    # Set client config temporarily
+    settings.GOOGLE_CLIENT_ID = "test-client-id"
+    settings.GOOGLE_CLIENT_SECRET = "test-client-secret"
+
+    # Test Google Redirect Login URL
+    response = client.get("/api/v1/auth/google/login", follow_redirects=False)
+    assert response.status_code == status.HTTP_307_TEMPORARY_REDIRECT
+    redirect_url = response.headers.get("Location")
+    assert "accounts.google.com" in redirect_url
+    assert "client_id=test-client-id" in redirect_url
+
+    # Test Google Callback (Missing Code returns 400)
+    response = client.get("/api/v1/auth/google/callback")
+    assert response.status_code == status.HTTP_400_BAD_REQUEST
+    assert "Missing OAuth verification code" in response.json()["detail"]

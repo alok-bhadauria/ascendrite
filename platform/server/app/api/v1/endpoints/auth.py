@@ -1,6 +1,9 @@
 from fastapi import Depends, HTTPException, Request, Response, status
+from fastapi.responses import RedirectResponse
 from pydantic import BaseModel, Field
 from typing import List
+from jose import jwt
+import httpx
 
 from app.core.routing import APIRouter
 from app.core.config import settings
@@ -208,3 +211,132 @@ async def change_password(
 ):
     """Update current user account password"""
     await auth_service.change_password(str(current_user.id), data.current_password, data.new_password)
+
+@router.get("/google/login", tags=["OAuth"])
+async def google_login():
+    """Redirect user to Google's OAuth consent screen"""
+    if not settings.GOOGLE_CLIENT_ID or not settings.GOOGLE_CLIENT_SECRET:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Google OAuth settings are not configured on the server."
+        )
+    
+    google_auth_url = (
+        "https://accounts.google.com/o/oauth2/v2/auth?"
+        "response_type=code"
+        f"&client_id={settings.GOOGLE_CLIENT_ID}"
+        f"&redirect_uri={settings.GOOGLE_REDIRECT_URI}"
+        "&scope=openid%20email%20profile"
+        "&access_type=offline"
+        "&prompt=consent"
+    )
+    return RedirectResponse(url=google_auth_url)
+
+@router.get("/google/callback", tags=["OAuth"])
+async def google_callback(
+    request: Request,
+    response: Response,
+    code: str = None,
+    error: str = None,
+    auth_service: AuthService = Depends(get_auth_service)
+):
+    """Receive code redirect from Google, verify profile, and set authorization cookies"""
+    if error:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Google OAuth authorization failed: {error}"
+        )
+    if not code:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Missing OAuth verification code from Google."
+        )
+
+    # 1. Exchange authorization code for ID/access tokens
+    async with httpx.AsyncClient() as client:
+        token_res = await client.post(
+            "https://oauth2.googleapis.com/token",
+            data={
+                "code": code,
+                "client_id": settings.GOOGLE_CLIENT_ID,
+                "client_secret": settings.GOOGLE_CLIENT_SECRET,
+                "redirect_uri": settings.GOOGLE_REDIRECT_URI,
+                "grant_type": "authorization_code"
+            }
+        )
+        if token_res.status_code != 200:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=f"Google token exchange failed: {token_res.text}"
+            )
+        
+        token_data = token_res.json()
+        id_token = token_data.get("id_token")
+        if not id_token:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Google OAuth response did not include a valid id_token."
+            )
+
+    # 2. Decode Google ID Token (which is a JWT)
+    try:
+        user_info = jwt.get_unverified_claims(id_token)
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Failed to decode Google user profile info: {str(e)}"
+        )
+
+    email = user_info.get("email")
+    sub = user_info.get("sub")
+    first_name = user_info.get("given_name", "OAuth")
+    last_name = user_info.get("family_name", "User")
+
+    if not email or not sub:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Google profile payload is missing mandatory email or unique subject identifier."
+        )
+
+    # 3. Authenticate or register the user profile
+    user_agent = request.headers.get("User-Agent", "Unknown")
+    ip_address = request.client.host if request.client else "Unknown"
+
+    try:
+        user, access_token, refresh_token = await auth_service.login_or_register_oauth(
+            provider="google",
+            provider_user_id=sub,
+            email=email,
+            first_name=first_name,
+            last_name=last_name,
+            user_agent=user_agent,
+            ip_address=ip_address
+        )
+    except Exception as ex:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail=f"Authentication pipeline registration failure: {str(ex)}"
+        )
+
+    # 4. Set HttpOnly Cookies
+    response.set_cookie(
+        key="access_token",
+        value=access_token,
+        httponly=settings.SECURITY_COOKIE_HTTPONLY,
+        secure=settings.SECURITY_COOKIE_SECURE,
+        samesite=settings.SECURITY_COOKIE_SAMESITE
+    )
+    response.set_cookie(
+        key="refresh_token",
+        value=refresh_token,
+        httponly=settings.SECURITY_COOKIE_HTTPONLY,
+        secure=settings.SECURITY_COOKIE_SECURE,
+        samesite=settings.SECURITY_COOKIE_SAMESITE
+    )
+
+    # 5. Redirect back to frontend portal homepage
+    frontend_host = request.headers.get("Origin") or "http://localhost:5173"
+    if "localhost:5173" not in frontend_host and "127.0.0.1:5173" not in frontend_host:
+        frontend_host = "http://localhost:5173"
+    
+    return RedirectResponse(url=f"{frontend_host}/")
