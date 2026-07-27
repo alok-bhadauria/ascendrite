@@ -177,7 +177,7 @@ async def seed_database_from_knowledge_base():
             existing_user = await db["users"].find_one({"email": u["email"]})
             if not existing_user:
                 # 1. Clean up any duplicate/orphaned identities just in case
-                await db["identities"].delete_many({"provider_user_id": u["email"]})
+                await db["user_identities"].delete_many({"provider_user_id": u["email"]})
                 
                 user_id = ObjectId()
                 user_doc = {
@@ -213,15 +213,15 @@ async def seed_database_from_knowledge_base():
                     "updated_at": current_time,
                     "is_deleted": False
                 }
-                await db["identities"].insert_one(identity_doc)
+                await db["user_identities"].insert_one(identity_doc)
                 logger.info(f"Seeded user profile & local identity for: {u['email']} (Role: {u['role']})")
             else:
                 # Make sure a valid identity exists for the user and delete duplicate identities
-                identities_cursor = db["identities"].find({"provider_user_id": u["email"]})
+                identities_cursor = db["user_identities"].find({"provider_user_id": u["email"]})
                 identities_list = await identities_cursor.to_list(length=100)
                 if len(identities_list) != 1 or identities_list[0]["password_hash"] != pwd_hash:
                     # Clean up all mismatched/duplicate identities
-                    await db["identities"].delete_many({"provider_user_id": u["email"]})
+                    await db["user_identities"].delete_many({"provider_user_id": u["email"]})
                     
                     identity_doc = {
                         "_id": ObjectId(),
@@ -237,7 +237,7 @@ async def seed_database_from_knowledge_base():
                         "updated_at": current_time,
                         "is_deleted": False
                     }
-                    await db["identities"].insert_one(identity_doc)
+                    await db["user_identities"].insert_one(identity_doc)
                     logger.info(f"Re-aligned/fixed missing local identity for existing user: {u['email']}")
         except Exception as e:
             logger.error(f"Failed to verify/seed user '{u['email']}': {e}")
