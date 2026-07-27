@@ -147,35 +147,38 @@ async def seed_database_from_knowledge_base():
         logger.info(f"Database subjects collection is populated (Count: {count}). Skipping curriculum auto-seeding.")
 
     # 2. Seed Test Users and Local Identities
-    user_count = await db["users"].count_documents({})
-    if user_count == 0:
-        logger.info("Database users collection is empty. Seeding student, creator, and admin test accounts...")
-        current_time = datetime.now(timezone.utc)
-        pwd_hash = get_password_hash("Password@123")
+    logger.info("Verifying test profiles & local identities for student, creator, and admin accounts...")
+    current_time = datetime.now(timezone.utc)
+    pwd_hash = get_password_hash("Password@123")
 
-        test_users = [
-            {
-                "email": "student@ascendrite.com",
-                "first_name": "Test",
-                "last_name": "Student",
-                "role": "Student",
-            },
-            {
-                "email": "creator@ascendrite.com",
-                "first_name": "Test",
-                "last_name": "Creator",
-                "role": "Contributor",
-            },
-            {
-                "email": "admin@ascendrite.com",
-                "first_name": "Test",
-                "last_name": "Admin",
-                "role": "Admin",
-            }
-        ]
+    test_users = [
+        {
+            "email": "student@ascendrite.com",
+            "first_name": "Test",
+            "last_name": "Student",
+            "role": "Student",
+        },
+        {
+            "email": "creator@ascendrite.com",
+            "first_name": "Test",
+            "last_name": "Creator",
+            "role": "Contributor",
+        },
+        {
+            "email": "admin@ascendrite.com",
+            "first_name": "Test",
+            "last_name": "Admin",
+            "role": "Admin",
+        }
+    ]
 
-        for u in test_users:
-            try:
+    for u in test_users:
+        try:
+            existing_user = await db["users"].find_one({"email": u["email"]})
+            if not existing_user:
+                # 1. Clean up any duplicate/orphaned identities just in case
+                await db["identities"].delete_many({"provider_user_id": u["email"]})
+                
                 user_id = ObjectId()
                 user_doc = {
                     "_id": user_id,
@@ -212,7 +215,29 @@ async def seed_database_from_knowledge_base():
                 }
                 await db["identities"].insert_one(identity_doc)
                 logger.info(f"Seeded user profile & local identity for: {u['email']} (Role: {u['role']})")
-            except Exception as e:
-                logger.error(f"Failed to seed user '{u['email']}': {e}")
-    else:
-        logger.info(f"Database users collection is populated (Count: {user_count}). Skipping user seeding.")
+            else:
+                # Make sure a valid identity exists for the user and delete duplicate identities
+                identities_cursor = db["identities"].find({"provider_user_id": u["email"]})
+                identities_list = await identities_cursor.to_list(length=100)
+                if len(identities_list) != 1 or identities_list[0]["password_hash"] != pwd_hash:
+                    # Clean up all mismatched/duplicate identities
+                    await db["identities"].delete_many({"provider_user_id": u["email"]})
+                    
+                    identity_doc = {
+                        "_id": ObjectId(),
+                        "user_id": str(existing_user["_id"]),
+                        "provider": "local",
+                        "provider_user_id": u["email"],
+                        "password_hash": pwd_hash,
+                        "mfa_enabled": False,
+                        "failed_login_attempts": 0,
+                        "locked_until": None,
+                        "last_login_at": None,
+                        "created_at": current_time,
+                        "updated_at": current_time,
+                        "is_deleted": False
+                    }
+                    await db["identities"].insert_one(identity_doc)
+                    logger.info(f"Re-aligned/fixed missing local identity for existing user: {u['email']}")
+        except Exception as e:
+            logger.error(f"Failed to verify/seed user '{u['email']}': {e}")
