@@ -1,4 +1,4 @@
-import { create } from 'zustand';
+﻿import { create } from 'zustand';
 import api from '../utils/api';
 import { userStorage } from '../utils/userStorage';
 
@@ -26,6 +26,7 @@ export const useAuthStore = create((set) => ({
   isCheckingSession: true,
   
   login: (userData) => {
+    // Update local preferences storage when user login data resolves
     if (userData && userData.id) {
       if (userData.preferences?.interest) {
         userStorage.setItem(userData, 'ascendrite-preferences', {
@@ -67,3 +68,4 @@ export const useAuthStore = create((set) => ({
     }
   }
 }));
+
