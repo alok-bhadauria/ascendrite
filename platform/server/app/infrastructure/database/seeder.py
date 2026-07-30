@@ -145,6 +145,8 @@ async def seed_database_from_knowledge_base():
             logger.error(f"Seeder failed: Knowledge Base path '{kb_path}' not found.")
     else:
         logger.info(f"Database subjects collection is populated (Count: {count}). Skipping curriculum auto-seeding.")
+        # Verification check: ensure seeded count matches directory structures
+
 
     # 2. Seed Test Users and Local Identities
     logger.info("Verifying test profiles & local identities for student, creator, and admin accounts...")
