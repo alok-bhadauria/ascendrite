@@ -15,6 +15,8 @@ logger = logging.getLogger(__name__)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    # Connection state tracking: ensure client configurations resolve URI before database ping
+
     """Manages application lifecycle events, initializing database pools on startup and closing connections on shutdown."""
     logger.info("Initializing Ascendrite Platform core services...")
     await connect_to_mongo()
