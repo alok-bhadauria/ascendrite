@@ -66,3 +66,10 @@ The styling system uses unified design tokens declared in `src/styles/ascendrite
 *   **Hydration Sync Guards**: Component state variables loading from namespaced local storage (such as notes or study planner tasks) use `isHydrated` checks. This prevents React from overwriting stored user data with empty defaults during mount.
 *   **Telemetry Integration**: User progress telemetries (completions, assessment scores, timeline milestones) retrieve data from backend APIs.
 *   **Spaced Repetition Schedule**: Using client-side state engines, the dashboard calculates memory decay variables (based on diagnostic scores and study time gaps) to highlight review suggestions.
+
+
+## Troubleshooting & Local Database Reseeding
+If test authentication credentials fail or local session records mismatch:
+1. Stop the local FastAPI server.
+2. Clean matching email documents from the `users` and `user_identities` MongoDB collections.
+3. Restart the server to trigger the automated per-user database seeder.
