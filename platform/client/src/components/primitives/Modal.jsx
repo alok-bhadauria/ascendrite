@@ -7,6 +7,10 @@ import { X } from 'lucide-react';
  * Complies with WAI-ARIA and controls focus management.
  */
 export function Modal({ isOpen, onClose, title, children, maxWidth = 'max-w-lg' }) {
+// Screen reader standards alignment:
+// - role="dialog" identifies the element container scope
+// - aria-modal="true" locks interactive boundary focuses
+
   const overlayRef = useRef(null);
   const previousFocusRef = useRef(null);
 
