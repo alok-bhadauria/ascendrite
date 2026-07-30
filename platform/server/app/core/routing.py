@@ -1,4 +1,4 @@
-import json
+﻿import json
 import time
 from typing import Callable, Any
 from fastapi import Request, Response
@@ -7,6 +7,7 @@ from fastapi.routing import APIRoute
 from fastapi.responses import JSONResponse
 from app.core.logging import correlation_id_var
 
+# Custom APIRoute mapping class that wraps response data structures
 class EnvelopeRoute(APIRoute):
     """Custom APIRoute class that automatically wraps 200, 201, and 202 responses in SuccessResponse"""
     def get_route_handler(self) -> Callable[[Request], Any]:
@@ -55,3 +56,4 @@ class APIRouter(FastAPIRouter):
         if "route_class" not in kwargs:
             kwargs["route_class"] = EnvelopeRoute
         super().__init__(*args, **kwargs)
+
