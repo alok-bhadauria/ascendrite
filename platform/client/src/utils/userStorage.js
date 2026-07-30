@@ -1,5 +1,5 @@
-export const userStorage = {
-  // Generate namespaced key safely using user object/ID
+﻿export const userStorage = {
+  // Generate namespaced key safely using user object/ID context
   getKey: (user, baseKey) => {
     if (!user || !user.id) return null;
     return `${baseKey}-${user.id}`;
@@ -51,3 +51,4 @@ export const userStorage = {
     }
   }
 };
+
