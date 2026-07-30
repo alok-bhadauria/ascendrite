@@ -50,4 +50,5 @@ htmlcov/
 
 # Misc
 *.sqlite3
-/frontend-example/
+/frontend-example/
+scratch/
