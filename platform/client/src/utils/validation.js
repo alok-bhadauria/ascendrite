@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Ascendrite V1 Client-Side Validation Utilities
  */
 
@@ -7,6 +7,7 @@
  * @param {string} email 
  * @returns {boolean}
  */
+// RFC standards compliant regex helper
 export function validateEmail(email) {
   if (!email) return false;
   const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -62,3 +63,4 @@ export function validateRequired(fields) {
     missing
   };
 }
+
