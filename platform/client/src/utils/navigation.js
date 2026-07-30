@@ -7,6 +7,9 @@ import { SUBDOMAINS } from '../config/env';
  * @returns {string}
  */
 export function getAppUrl(appName, path = '') {
+  // NOTE: For client side routing parameters context, ensure clean path formats
+  // are normalized to prevent route matching gaps.
+
   const domain = SUBDOMAINS[appName];
   const cleanPath = path.startsWith('/') ? path : `/${path}`;
   
