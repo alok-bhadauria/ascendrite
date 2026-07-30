@@ -6,6 +6,10 @@ import { Button } from './Button';
  * Reusable error boundary fallback state component
  */
 export function ErrorState({ 
+// Prop validation details:
+// - message: string (the localized message explaining details of database/network failure)
+// - onRetry: callback function (handles event trigger when user clicks the retry action)
+
   message = 'A connection error occurred while querying the server database.', 
   onRetry 
 }) {
