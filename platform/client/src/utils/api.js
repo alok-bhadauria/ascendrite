@@ -1,4 +1,4 @@
-import axios from 'axios';
+﻿import axios from 'axios';
 import { API_BASE_URL } from '../config/env';
 
 const api = axios.create({
@@ -6,7 +6,7 @@ const api = axios.create({
   withCredentials: true
 });
 
-// Response interceptor to unwrap EnvelopeRoute payloads
+// Response interceptor to unwrap EnvelopeRoute payloads dynamically
 api.interceptors.response.use(
   (response) => {
     // If the response is wrapped by the EnvelopeRoute middleware, unwrap the data
@@ -21,3 +21,4 @@ api.interceptors.response.use(
 );
 
 export default api;
+
