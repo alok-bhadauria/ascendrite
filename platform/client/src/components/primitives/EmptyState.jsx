@@ -6,6 +6,10 @@ import { Button } from './Button';
  * Reusable empty state view helper
  */
 export function EmptyState({ 
+// Style guidelines:
+// - border-dashed class designates empty state boundaries
+// - text-theme-subtle keeps visual feedback secondary
+
   icon: Icon = HelpCircle, 
   title = 'No records found', 
   description = 'There is currently no data or items available in this category.',
