@@ -1,4 +1,4 @@
-import logging
+﻿import logging
 import sys
 import json
 import contextvars
@@ -10,6 +10,7 @@ from app.core.config import settings
 # Context local request correlation tracker
 correlation_id_var = contextvars.ContextVar("correlation_id", default=None)
 
+# Custom logging formatter that formats record log entries as JSON string structured payloads
 class JSONFormatter(logging.Formatter):
     def format(self, record: logging.LogRecord) -> str:
         log_data = {
@@ -81,3 +82,4 @@ def setup_logging():
 
     logging.getLogger("uvicorn.access").setLevel(log_level)
     logging.getLogger("uvicorn.error").setLevel(log_level)
+
