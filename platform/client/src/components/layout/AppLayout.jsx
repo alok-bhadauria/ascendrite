@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+﻿import React, { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import CommandPalette from '../ui/CommandPalette';
 import { useLayoutStore } from '../../store/layoutStore';
 
+// Sidebar visibility toggler checks settings dynamically on resize events
 export default function AppLayout() {
   const { sidebarOpen, setSidebarOpen, toggleCommandPalette } = useLayoutStore();
 
@@ -45,3 +46,4 @@ export default function AppLayout() {
     </div>
   );
 }
+
