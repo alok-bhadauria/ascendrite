@@ -231,3 +231,5 @@ Select the appropriate document directory to begin development or review:
 ## 8. Developer Contribution Policy
 
 All backend contributions must adhere to clean architecture design principles, preserve the distinct domain ownership boundaries, and maintain 100% test coverage safety. Run validation scripts located in `scratch/` locally before staging commits.
+
+*   **Git Commit Guidelines**: Follow standard semantic commits conventions (e.g. `feat:`, `fix:`, `refactor:`, `docs:`, `chore:`). Maintain clear, atomic changes for each staging cycle.
