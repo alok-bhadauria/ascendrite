@@ -30,3 +30,8 @@ export const SUBDOMAINS = {
 // - V1 Dev: SameSite=Lax, Secure=False, Domain=localhost
 // - V2 Production: SameSite=Lax, Secure=True, Domain=.ascendrite.com (allows cross-subdomain sessions)
 export const AUTH_COOKIE_DOMAIN = import.meta.env.VITE_AUTH_COOKIE_DOMAIN || 'localhost';
+
+// Local dev settings checklist:
+// For testing subdomains locally, update hosts mapping in Windows:
+// 127.0.0.1  ascendrite.local studio.ascendrite.local admin.ascendrite.local
+
