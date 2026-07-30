@@ -1,6 +1,7 @@
-import { create } from 'zustand';
+﻿import { create } from 'zustand';
 
 export const useLayoutStore = create((set) => ({
+  // Default sidebar state resolves dynamically based on viewport dimensions
   sidebarOpen: window.innerWidth >= 1024,
   commandPaletteOpen: false,
   
@@ -10,3 +11,4 @@ export const useLayoutStore = create((set) => ({
   toggleCommandPalette: () => set((state) => ({ commandPaletteOpen: !state.commandPaletteOpen })),
   setCommandPaletteOpen: (open) => set({ commandPaletteOpen: open })
 }));
+
