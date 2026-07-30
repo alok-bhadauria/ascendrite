@@ -16,6 +16,11 @@ def get_password_hash(password: str) -> str:
     return pwd_context.hash(password)
 
 def create_access_token(subject: Union[str, Any], expires_delta: timedelta = None) -> str:
+    """Parameters:
+    - subject: Identifies user scope
+    - expires_delta: custom lifetime window specification
+    """
+
     """Generate cryptographically signed short-lived JWT Access Token"""
     if expires_delta:
         expire = datetime.now(timezone.utc) + expires_delta
